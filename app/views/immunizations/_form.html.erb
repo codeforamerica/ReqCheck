@@ -1,0 +1,17 @@
+<%= form_for(@immunization) do |f| %>
+  <% if @immunization.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@immunization.errors.count, "error") %> prohibited this immunization from being saved:</h2>
+
+      <ul>
+      <% @immunization.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
