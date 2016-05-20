@@ -7,7 +7,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -37,6 +37,13 @@
       </div>
     </div>
     <%= yield %>
-
+    <footer class="footer">
+      <row class="small-12 medium-4 columns">
+        <div class="margin-top-20 small-12 medium-4 columns">
+          A project of
+          <a href='https://www.codeforamerica.org/why-government/our-partners/long-beach-ca/'>Code for America</a>
+        </div>
+      </row>
+    </footer>
   </body>
 </html>
