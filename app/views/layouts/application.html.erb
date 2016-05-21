@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "ShotBot" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
@@ -23,15 +23,8 @@
         <div class="top-bar-right">
           <ul class="dropdown menu" data-dropdown-menu>
             <li>
-              <a href="#">One</a>
-              <ul class="menu vertical">
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-                <li><a href="#">Three</a></li>
-              </ul>
+              <a href="#">Sign In</a>
             </li>
-            <li><a href="#">Two</a></li>
-            <li><a href="#">Three</a></li>
           </ul>
         </div>
       </div>
