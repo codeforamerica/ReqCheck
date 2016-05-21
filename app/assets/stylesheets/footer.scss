@@ -1,15 +1,19 @@
 .footer {
   margin-top: 30px;
   padding: 30px;
-  background-color: $color-extradarkblue;
-  color: $white;
-
+  background-color: $kc-grey;
+  color: $kc-teal;
+  div {
+    div {
+      text-align: center;
+    }
+  }
   a {
     text-decoration: underline;
-    color: $white;
+    color: $kc-teal;
 
     &:hover {
-      color: $color-mediumgray;
+      color: $kc-grey;
     }
   }
 }

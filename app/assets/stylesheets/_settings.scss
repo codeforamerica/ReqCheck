@@ -72,8 +72,6 @@ $global-radius: 0;
 $global-text-direction: ltr;
 $global-flexbox: false;
 $print-transparent-backgrounds: true;
-$kc-grey: #3a3a3c;
-$kc-teal: #44c0c1;
 
 @include add-foundation-colors;
 
@@ -566,4 +564,8 @@ $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;
+
+
+$kc-grey: #3a3a3c;
+$kc-teal: #44c0c1;
 
