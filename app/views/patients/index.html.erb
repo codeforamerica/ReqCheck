@@ -3,8 +3,15 @@
 <h1>Search Patients</h1>
 <%= render 'search' %>
 
-<% if @patient %>
-  <%= @patient.name %>
+<% if @patients.length != 0 %>
+  <% @patients.each_with_index do |patient, x|%>
+    <%= link_to(patient) do %>
+      <strong><%= x + 1 %>. <%= patient.first_name%>, <%=patient.last_name %></strong>
+    <% end %>
+
+
+  <a href=></a>
+  <% end %>
 <% else %>
   <p>No Patients</p>
 <% end %>
