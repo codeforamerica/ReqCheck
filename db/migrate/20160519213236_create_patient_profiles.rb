@@ -1,7 +1,7 @@
 class CreatePatientProfiles < ActiveRecord::Migration
   def change
     create_table :patient_profiles do |t|
-      t.integer   :patient_id, null: false
+      t.uuid      :patient_id, null: false
       t.integer   :record_number, null: false
       t.date      :dob, null: false
       t.string    :address
