@@ -25,6 +25,7 @@ RSpec.describe Patient, type: :model do
       )
       expect(patient.dob).to eq(dob)
       expect(patient.record_number).to eq(123)
+      expect(patient.patient_profile.id).not_to eq(nil)
       expect(Patient.all.length).to eq(1)
     end
 
@@ -38,9 +39,23 @@ RSpec.describe Patient, type: :model do
     end
   end
   describe "#find_by_record_number" do
-    it "takes a string or integer" do
-      pat2 = FactoryGirl.create(:patient)
-      expect(pat2.type).to eq('Patient')
+    before(:each) do
+      @patient = FactoryGirl.create(:patient)
+    end
+
+    it "takes a string" do
+      record_number = @patient.record_number.to_s
+      result = Patient.find_by_record_number(record_number)
+      expect(result.id).to eq(@patient.id)
+    end
+    it "takes an integer" do
+      record_number = @patient.record_number.to_i
+      result = Patient.find_by_record_number(record_number)
+      expect(result.id).to eq(@patient.id)
+    end
+    it "returns nil when no patient is found" do
+      result = Patient.find_by_record_number('9876')
+      expect(result).to eq(nil)
     end
   end
 

@@ -5,6 +5,13 @@ class Patient < User
     :home_phone, :race, :ethnicity, :immunizations, to: :patient_profile
 
   accepts_nested_attributes_for :patient_profile
+
+  def self.find_by_record_number(record_number)
+    return self.joins(:patient_profile)
+      .where(patient_profiles: {record_number: record_number})
+      .order("created_at DESC").first
+  end
+
 end
 
       

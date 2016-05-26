@@ -1,11 +1,9 @@
 class PatientsController < InheritedResources::Base
 
   def index
-    @patients = Patient.all
-    if params[:search] != ''
-      @patients = Patient.joins(:patient_profile).where(patient_profiles: {record_number: params[:search]}).order("created_at DESC")
-    else
-      @patients = Patient.all.order('created_at DESC')
+    @patients = Patient.all.order('created_at DESC')
+    if params[:search]
+      @patients = [Patient.find_by_record_number(params[:search])]
     end
   end
 
