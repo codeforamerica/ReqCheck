@@ -1,10 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Search Patients</h1>
+<h1>Insight Patient Number</h1>
 <%= render 'search' %>
 
 <% if @patient %>
   <%= @patient.name %>
 <% else %>
-  <p>No Patients</p>
+  <p>We couldn’t find that record. Please try again.</p>
 <% end %>
