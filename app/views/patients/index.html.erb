@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
 <div class="card columns small-8 small-centered">
-	<h1>Search</h1>
-	<%= render 'search' %>
 	<% if @patient %>
 	  <%= @patient.name %>
 	<% else %>
-	  <p>We couldn’t find that record. Please try again.</p>
+	  <p class="callout alert">We couldn’t find that record. Please try again.</p>
 	<% end %>
+	<h1>Search</h1>
+	<%= render 'search' %>
+
 </div>
 </div>
