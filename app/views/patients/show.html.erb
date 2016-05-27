@@ -1,4 +1,23 @@
 <p id="notice"><%= notice %></p>
 
+<div class="card">
+    <h3><%= @patient.first_name%> <%= @patient.last_name %></h3>
+    <ul>
+        <li>Ethnicity: <%= @patient.ethnicity %></li>
+        <li>Race: <%= @patient.race %></li>
+        <li>Date of Birth: <%= @patient.dob.strftime("%m-%d-%Y") %></li>
+        <li>Insight ID: <%= @patient.record_number %></li>
+        <li>Address: <%= @patient.address %></li>
+        <li>City: <%= @patient.city %></li>
+        <li>State: <%= @patient.state %></li>
+        <li>Zip: <%= @patient.zip_code %></li>
+        <li>Cell Phone: <%= @patient.cell_phone %></li>
+    </ul>
+</div>
+<%=%>
+<%=%>
+<%=%>
+<%=%>
+
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
 <%= link_to 'Back', patients_path %>

@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 ruby "2.3.0"
 
-# rachel was here B-)
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 gem 'rails_12factor'
@@ -31,6 +30,7 @@ gem 'sitemap_generator'
 
 group :development, :test do
  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+ gem 'factory_girl_rails'
  gem 'byebug'
 end
 
