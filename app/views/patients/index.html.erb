@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+<div class="card columns small-8 small-centered">
 
 <h1>Search Patients</h1>
 <%= render 'search' %>
@@ -10,6 +12,8 @@
     <% end %>
     <br />
   <% end %>
-<% else %>
-  <p>No Patients</p>
-<% end %>
+	<% else %>
+	  <p class="callout alert">We couldn’t find that record. Please try again.</p>
+	<% end %>
+</div>
+</div>
