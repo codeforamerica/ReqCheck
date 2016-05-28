@@ -58,6 +58,25 @@ RSpec.describe Patient, type: :model do
       expect(result).to eq(nil)
     end
   end
+  describe "#check_immunizations" do
+    before(:each) do
+      @patients = FactoryGirl.create_list(:patient, 10)
+    end
+
+    it "returns true if valid" do
+      valid_imm = @patients[0].check_immunizations
+      expect(valid_imm).to eq(true)
+    end
+    it "takes an integer" do
+      record_number = @patient.record_number.to_i
+      result = Patient.find_by_record_number(record_number)
+      expect(result.id).to eq(@patient.id)
+    end
+    it "returns nil when no patient is found" do
+      result = Patient.find_by_record_number('9876')
+      expect(result).to eq(nil)
+    end
+  end
 
 
 end
