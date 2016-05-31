@@ -30,3 +30,4 @@ patients_list.each_with_index do |value, index|
     }
   )
 end
+
