@@ -6,10 +6,11 @@ class WelcomeController < ApplicationController
   end
 
   def go
-    if false
-      render :index
+    if params[:email] == 'admin' and params['password'] == 'admin'
+      redirect_to controller: 'patients', action: 'index'
     else
-      render :error
+      flash[:notice] = "Badness"
+      render :login
     end
   end
 end

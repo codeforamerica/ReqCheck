@@ -5,15 +5,17 @@
 <h1 class="">Search Patients</h1>
 <%= render 'search' %>
 
-<% if @patients.length != 0 && !@patients[0].nil? %>
-  <% @patients.each_with_index do |patient, index|%>
-    <%= link_to(patient) do %>
+<% if @patients.length != 0 %>
+  <% if !@patients[0].nil? %>
+    <% @patients.each_with_index do |patient, index|%>
+      <%= link_to(patient) do %>
       <strong><%= patient.first_name%> <%=patient.last_name %></strong>
-    <% end %>
+      <% end %>
     <br />
-  <% end %>
-<% else %>
+    <% end %>
+  <% else %>
     <p class="callout alert">We couldn’t find that record. Please try again.</p>
+  <% end %>
 <% end %>
 </div>
 </div>
