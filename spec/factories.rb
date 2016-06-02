@@ -1,5 +1,6 @@
 # This will guess the User class
 require 'faker'
+require_relative 'support/vax_codes'
 
 FactoryGirl.define do
   factory :patient do
@@ -20,21 +21,20 @@ FactoryGirl.define do
   end
 
   factory :immunization do
-    vaccine_code { vax_codes.keys.sample.to_s }
-    # patient_profile_id
-    # imm_date { Date.today }
-    # send_flag false
-    # history_flag false
-    # provider_code "432"
+    vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
+    imm_date { Date.today }
+    send_flag false
+    history_flag false
+    provider_code "432"
     
-    manufacturer { vax_codes[self.vaccine_code.to_sym][0] }
-    # lot_number
+    sequence(:manufacturer, 0) { |n| TextVax::VAXCODES[vaccine_code.to_sym][n][0] }
+    sequence(:lot_number, 0) { |n| TextVax::VAXCODES[vaccine_code.to_sym][n][2] }
     expiration_date { 2.months.since }
     dose_number 1
     facility_id 19
 
 
-    association :patient, factory: :patient
+    association :patient_profile, factory: :patient_profile
   end
 
 end

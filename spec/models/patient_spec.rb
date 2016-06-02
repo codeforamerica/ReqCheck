@@ -89,6 +89,18 @@ RSpec.describe Patient, type: :model do
       expect(result.id).to eq(@patient.id)
     end
   end
+  describe "#age_in_days" do
+    it "returns true if valid" do
+      @patient = FactoryGirl.create(:patient, dob: 5.years.ago)
+      valid_imm = @patients[0].check_record
+      expect(valid_imm).to eq(true)
+    end
+
+    it "returns false if invalid" do
+      patient = FactoryGirl.create(:patient)
+      expect(result.id).to eq(@patient.id)
+    end
+  end
 
 
 end

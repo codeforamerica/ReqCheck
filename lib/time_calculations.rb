@@ -1,5 +1,4 @@
-class ImmunizationChecker
-  
+module BaseTimeCalc
 
   def date_diff_in_days(first_date, second_date=Date.today)
     first_date  = Date.parse(first_date) if first_date.instance_of? String
@@ -9,12 +8,13 @@ class ImmunizationChecker
     (((second_date - first_date) / 365).to_i * 365)
   end
 
-  def validate_day_diff(date_diff, required_days)
-    date_diff > required_days
+  def validate_day_diff(days_diff, required_days)
+    days_diff > required_days
   end
 
-  def check_record(vaccines)
-    return true
-  end
+end
+
+module TimeCalc
+  include BaseTimeCalc
 
 end
