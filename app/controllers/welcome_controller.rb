@@ -6,6 +6,10 @@ class WelcomeController < ApplicationController
   end
 
   def go
-
+    if false
+      render :index
+    else
+      render :error
+    end
   end
 end
