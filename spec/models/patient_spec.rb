@@ -37,6 +37,22 @@ RSpec.describe Patient, type: :model do
       )
       expect(patient.patient_profile.patient_id).to eq(patient.id)
     end
+    it "has an immunization_checker attribute which is an ImmunizationChecker object" do
+      dob     = Date.today
+      patient = Patient.create(
+        first_name: 'Test', last_name: 'Tester',
+        patient_profile_attributes: {dob: dob, record_number: 123}
+      )
+      expect(patient.immunization_checker.class.name).to eq("ImmunizationChecker")
+    end
+    it "has an immunizations attribute" do
+      dob     = Date.today
+      patient = Patient.create(
+        first_name: 'Test', last_name: 'Tester',
+        patient_profile_attributes: {dob: dob, record_number: 123}
+      )
+      expect(patient.immunization_checker.class.name).to eq("ImmunizationChecker")
+    end
   end
   describe "#find_by_record_number" do
     before(:each) do
@@ -58,23 +74,19 @@ RSpec.describe Patient, type: :model do
       expect(result).to eq(nil)
     end
   end
-  describe "#check_immunizations" do
+  describe "#check_record" do
     before(:each) do
       @patients = FactoryGirl.create_list(:patient, 10)
     end
 
     it "returns true if valid" do
-      valid_imm = @patients[0].check_immunizations
+      valid_imm = @patients[0].check_record
       expect(valid_imm).to eq(true)
     end
-    it "takes an integer" do
-      record_number = @patient.record_number.to_i
-      result = Patient.find_by_record_number(record_number)
+
+    it "returns false if invalid" do
+      patient = FactoryGirl.create(:patient)
       expect(result.id).to eq(@patient.id)
-    end
-    it "returns nil when no patient is found" do
-      result = Patient.find_by_record_number('9876')
-      expect(result).to eq(nil)
     end
   end
 

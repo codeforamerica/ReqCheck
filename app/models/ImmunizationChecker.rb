@@ -13,7 +13,8 @@ class ImmunizationChecker
     date_diff > required_days
   end
 
-
-
+  def check_record(vaccines)
+    return true
+  end
 
 end
