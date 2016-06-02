@@ -1,4 +1,16 @@
-<%= form_tag(patients_path, method: "get", id: "search-form") do %>
-<%= text_field_tag :search, params[:search], placeholder: "Search Patients" %>
-<%= submit_tag "Search" %>
+<%= form_tag(patients_path, method: "post", id: "search-form") do %>
+<div class="row">
+
+	<div class="columns small-12">	
+	<%= label_tag "Insight Patient Number" %>
+	</div>
+	<div class="columns small-12 large-8 medium-8">
+	<%= text_field_tag :search, params[:search], placeholder: "Search Patients" %>
+	</div>
+
+	<div class="columns small-12 large-4 medium-4 large-4">
+	<button><%= submit_tag "Search", class:"button radius" %></button>
+	</div>
+
+</div>
 <% end %>

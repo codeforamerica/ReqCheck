@@ -1,10 +1,9 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+<div class="card columns small-8 small-centered">
 
-<h1>Search Patients</h1>
+<h1 class="">Search Patients</h1>
 <%= render 'search' %>
-<% if flash[:notice] %>
-    <div class="callout success"><%= flash[:notice] %></div>
-<% end %>
 
 <% if @patients.length != 0 && !@patients[0].nil? %>
   <% @patients.each_with_index do |patient, index|%>
@@ -13,4 +12,8 @@
     <% end %>
     <br />
   <% end %>
+<% else %>
+    <p class="callout alert">We couldn’t find that record. Please try again.</p>
 <% end %>
+</div>
+</div>
