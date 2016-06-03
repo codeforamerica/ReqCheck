@@ -12,7 +12,9 @@ class PatientsController < InheritedResources::Base
   private
 
     def patient_params
-      params.require(:patient).permit()
+      if !params[:search]
+        params.require(:patient).permit()
+      end
     end
 end
 
