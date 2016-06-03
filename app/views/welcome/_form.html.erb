@@ -1,0 +1,8 @@
+
+<%= form_tag("/login/go", method: "get") do %>
+  <%= label_tag(:email, "Email:") %>
+  <%= text_field_tag(:email) %>
+  <%= label_tag(:password, "Password:") %>
+  <%= text_field_tag(:password) %>
+  <%= submit_tag("Login") %>
+<% end %>

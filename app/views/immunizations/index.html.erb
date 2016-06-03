@@ -9,15 +9,15 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @immunizations.each do |immunization| %>
-      <tr>
-        <td><%= link_to 'Show', immunization %></td>
-        <td><%= link_to 'Edit', edit_immunization_path(immunization) %></td>
-        <td><%= link_to 'Destroy', immunization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+<tbody>
+  <% @immunizations.each do |immunization| %>
+  <tr>
+<td><%= link_to 'Show', immunization %></td>
+<td><%= link_to 'Edit', edit_immunization_path(immunization) %></td>
+<td><%= link_to 'Destroy', immunization, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</tbody>
 </table>
 
 <br>
