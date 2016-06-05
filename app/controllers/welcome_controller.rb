@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
   end
 
   def login
+    flash[:notice] = nil
   end
 
   def go
