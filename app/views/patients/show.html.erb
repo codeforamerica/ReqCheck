@@ -1,23 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<div class="card">
-    <h3><%= @patient.first_name%> <%= @patient.last_name %></h3>
-    <ul>
-        <li>Ethnicity: <%= @patient.ethnicity %></li>
-        <li>Race: <%= @patient.race %></li>
-        <li>Date of Birth: <%= @patient.dob.strftime("%m-%d-%Y") %></li>
-        <li>Insight ID: <%= @patient.record_number %></li>
-        <li>Address: <%= @patient.address %></li>
-        <li>City: <%= @patient.city %></li>
-        <li>State: <%= @patient.state %></li>
-        <li>Zip: <%= @patient.zip_code %></li>
-        <li>Cell Phone: <%= @patient.cell_phone %></li>
-    </ul>
+<div class="row">
+<div class="card columns small-8 small-centered">
+<% if @patient.record_number < 5 %>
+    <div class="callout success">
+        <h3>Next Vaccine: January 2017</h3>
+        <p>The patient is up to date</p>
+    </div>
+<% elsif @patient.record_number < 10 %>
+    <div class="callout warning">
+        <h3>Review Needed<h3>
+        <p>Please have a nurse review the record</p>
+    </div>
+<% else %>
+    <div class="callout alert">
+    <h3>Vaccine Due!</h3>
+    <p>The patient requires additional vaccines</p>
+    </div>
+<% end %>
 </div>
-<%=%>
-<%=%>
-<%=%>
-<%=%>
+</div>
+<div class="row">
+<div class="card columns small-8 small-centered">
+    <h3></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Patient #</th>
+                <th>Date of Birth</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= @patient.first_name%> <%= @patient.last_name %></td>
+                <td><%= @patient.record_number %></td>
+                <td><%= @patient.dob%> </td>
+                <td><%= @patient.age%></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
 
-<%= link_to 'Edit', edit_patient_path(@patient) %> |
-<%= link_to 'Back', patients_path %>

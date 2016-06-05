@@ -22,9 +22,10 @@
       <div id="responsive-menu">
         <div class="top-bar-right">
           <ul class="dropdown menu" data-dropdown-menu>
-            <li>
-              <a href="#">Sign In</a>
-            </li>
+            <% if @patient || @patients %>
+              <li><%= link_to "New Search", patients_path %></li>
+              <li><%= link_to "Log Out", controller: "welcome", action: "index" %></li>
+            <% end %>
           </ul>
         </div>
       </div>

@@ -1,2 +1,9 @@
-<h1>Login Screen</h1>
-<%= render 'form' %>
+<div class="row">
+	<div class="card small-8 small-centered">
+		<h1>Login Screen</h1>
+		<% if notice %>
+		<p class="callout alert"><%= notice %></p>
+		<% end %>
+		<%= render 'form' %>
+	</div>
+</div>
