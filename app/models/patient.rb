@@ -17,8 +17,26 @@ class Patient < User
     # @immuniation_checker = ImmunizationChecker.new
   end
 
+  # def check_record
+  #   @immuniation_checker.check_record(self.immunizations)
+  # end
   def check_record
-    @immuniation_checker.check_record(self.immunizations)
+    if self.record_number < 10
+      true
+    end
+    false
+  end
+
+  def age
+    if self.dob
+      convert_to_age(self.dob)
+    end
+  end
+
+  private
+
+  def convert_to_age(birthday)
+    (Time.now.to_s(:number).to_i - birthday.to_time.to_s(:number).to_i)/10e9.to_i
   end
 
 
