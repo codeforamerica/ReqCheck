@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y install libpq-dev
 ADD Gemfile /app/
 ADD Gemfile.lock /app/
 WORKDIR /app
-RUN bundle install
+RUN bundle install --without development test
 
 ADD . /app
 RUN bundle exec rake assets:precompile
