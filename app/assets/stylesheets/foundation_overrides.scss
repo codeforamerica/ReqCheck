@@ -6,13 +6,24 @@
     margin-right: -15px;
 }
 
-$foundation-palette: (
-  warning: #ffae00,
-  alert: #D0021B, 
-);
-
 .pink {background-color: pink;}
 
-.card {margin-top:1rem;}
-
 h1, h2, h3, h4, h5, h6 {font-weight: bold;}
+
+.callout {color: white;}
+.callout.success {background-color: #59A501;} 
+.callout.warning {background-color: #ED9A12;} 
+.callout.alert {background-color: #D0021B;}
+
+.patient-info table tbody {border:none;}
+.patient-info  thread {border:none;}
+
+.p1 {padding: 1rem;}
+
+.card {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 2px;
+	background-color: white;
+}
+
+.top-bar {margin-bottom: 1rem; background-color: $kc-grey; color:white;}
