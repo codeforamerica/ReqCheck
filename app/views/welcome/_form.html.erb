@@ -1,8 +1,11 @@
-
+<div class="row">
+<div class="columns small-12 large-8 medium-8 xsmall-centered">
 <%= form_tag("/login/go", method: "get") do %>
   <%= label_tag(:email, "Email:") %>
   <%= text_field_tag(:email) %>
   <%= label_tag(:password, "Password:") %>
   <%= text_field_tag(:password) %>
-  <%= submit_tag("Login") %>
+  <button><%= submit_tag "Login", class:"button radius" %></button>
 <% end %>
+</div>
+</div>
