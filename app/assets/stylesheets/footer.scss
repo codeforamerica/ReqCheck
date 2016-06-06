@@ -1,4 +1,7 @@
 .footer {
+  position: absolute;
+  bottom:0;
+  width: 100%;
   margin-top: 30px;
   padding: 30px;
   background-color: $kc-grey;
@@ -12,9 +15,11 @@
   a {
     text-decoration: underline;
     color: $kc-teal;
-
+    &:visited {
+      color: white;
+    }
     &:hover {
-      color: $kc-grey;
+      color: white;
     }
   }
 }
