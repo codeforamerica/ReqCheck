@@ -24,7 +24,9 @@
         <div class="top-bar-right">
           <ul class="dropdown menu" data-dropdown-menu>
             <% if @patient || @patients %>
-              <li><%= link_to "New Search", patients_path %></li>
+              <% if @patient %>
+                <li><%= link_to "New Search", patients_path %></li>
+              <% end %>
               <li><%= link_to "Log Out", controller: "welcome", action: "index" %></li>
             <% end %>
           </ul>
