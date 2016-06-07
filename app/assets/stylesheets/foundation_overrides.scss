@@ -2,13 +2,19 @@
 	border:none;
 	border-top-right-radius: 2px;
 	border-top-left-radius: 2px;
-	margin-left: -15px;
-    margin-right: -15px;
+    margin: 0 -15px;
 }
 
-.pink {background-color: pink;}
+.card.callout {padding:0px;}
 
-h1, h2, h3, h4, h5, h6 {font-weight: bold;}
+.card {
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 2px;
+	background-color: white;
+	overflow: hidden;
+	margin-bottom: 1rem;
+	padding: 1rem;
+}
 
 .callout {color: white;}
 .callout.success {background-color: #59A501;} 
@@ -18,12 +24,9 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 .patient-info table tbody {border:none;}
 .patient-info  thread {border:none;}
 
-.p1 {padding: 1rem;}
+.pink {background-color: pink;}
 
-.card {
-	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	border-radius: 2px;
-	background-color: white;
-}
+h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
-.top-bar {margin-bottom: 1rem; background-color: $kc-grey; color:white;}
+.top-bar {margin-bottom: 1rem; background-color: $kc-grey; color:white; min-height: 72px;}
+.top-bar .button {margin-bottom: 0px;}
