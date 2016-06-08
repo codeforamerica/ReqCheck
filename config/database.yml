@@ -81,4 +81,4 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  database: kcmo-2016-prod
+  database: kcmo-record-check-prod
