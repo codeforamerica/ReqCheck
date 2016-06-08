@@ -15,23 +15,16 @@
   <body>
     <div class="top-bar">
       <div class="top-bar-title">
-        <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
-          <button class="menu-icon dark" type="button" data-toggle></button>
-        </span>
         <strong>RecordCheck</strong>
       </div>
-      <div id="responsive-menu">
         <div class="top-bar-right">
-          <ul class="dropdown menu" data-dropdown-menu>
             <% if @patient || @patients %>
               <% if @patient %>
-                <li><%= link_to "New Search", patients_path %></li>
+              <%= link_to "New Search", patients_path, class: "button"  %>
               <% end %>
-              <li><%= link_to "Log Out", controller: "welcome", action: "index" %></li>
+              <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button" %>
             <% end %>
-          </ul>
         </div>
-      </div>
     </div>
     <div class="container">
       <%= yield %>
