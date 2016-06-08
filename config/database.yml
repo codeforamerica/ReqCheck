@@ -80,6 +80,5 @@ test:
 #
 production:
   <<: *default
-  database: shotbot_production
-  username: shotbot
-  password: <%= ENV['SHOTBOT_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  database: kcmo-2016-prod
