@@ -37,7 +37,7 @@ RSpec.describe Patient, type: :model do
       )
       expect(patient.patient_profile.patient_id).to eq(patient.id)
     end
-    it "has an immunization_checker attribute which is an ImmunizationChecker object" do
+    xit "has an immunization_checker attribute which is an ImmunizationChecker object" do
       dob     = Date.today
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
@@ -51,7 +51,8 @@ RSpec.describe Patient, type: :model do
         first_name: 'Test', last_name: 'Tester',
         patient_profile_attributes: {dob: dob, record_number: 123}
       )
-      expect(patient.immunization_checker.class.name).to eq("ImmunizationChecker")
+      immunization = FactoryGirl.create(:immunization, patient: patient)
+      expect(patient.immunizations.length).to eq(1)
     end
   end
   describe "#find_by_record_number" do
@@ -74,7 +75,7 @@ RSpec.describe Patient, type: :model do
       expect(result).to eq(nil)
     end
   end
-  describe "#check_record" do
+  xdescribe "#check_record" do
     before(:each) do
       @patients = FactoryGirl.create_list(:patient, 10)
     end
@@ -85,20 +86,33 @@ RSpec.describe Patient, type: :model do
     end
 
     it "returns false if invalid" do
-      patient = FactoryGirl.create(:patient)
-      expect(result.id).to eq(@patient.id)
+      invalid_patient = FactoryGirl.create(:patient)
+      invalid_imm = invalid_patient.check_record
+      expect(invalid_imm).to eq(false)
     end
   end
   describe "#age_in_days" do
-    it "returns true if valid" do
-      @patient = FactoryGirl.create(:patient, dob: 5.years.ago)
-      valid_imm = @patients[0].check_record
-      expect(valid_imm).to eq(true)
+    it "returns the patients age in days" do
+      patient = FactoryGirl.create(:patient,
+        patient_profile_attributes: {dob: 5.years.ago, record_number: 123}
+      )
+      days_age = patient.age_in_days
+      expect(days_age).to eq((365 * 5) + 1)
     end
-
-    it "returns false if invalid" do
-      patient = FactoryGirl.create(:patient)
-      expect(result.id).to eq(@patient.id)
+  end
+  describe "#age" do
+    it "has a dob attribute" do
+      patient = FactoryGirl.create(:patient,
+        patient_profile_attributes: {dob: 5.years.ago, record_number: 123}
+      )
+      expect(patient.dob.class.name).to eq('Date')
+    end
+    it "returns the patients age in years" do
+      patient = FactoryGirl.create(:patient,
+        patient_profile_attributes: {dob: 5.years.ago, record_number: 123}
+      )
+      pat_age = patient.age
+      expect(pat_age).to eq(5)
     end
   end
 

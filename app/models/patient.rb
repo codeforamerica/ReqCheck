@@ -6,6 +6,7 @@ class Patient < User
     :home_phone, :race, :ethnicity, :immunizations, to: :patient_profile
 
   accepts_nested_attributes_for :patient_profile
+  include TimeCalc
 
   def self.find_by_record_number(record_number)
     return self.joins(:patient_profile)
@@ -29,16 +30,15 @@ class Patient < User
 
   def age
     if self.dob
-      convert_to_age(self.dob)
+      TimeCalc.date_diff_in_years(self.dob)
     end
   end
 
-  private
-
-  def convert_to_age(birthday)
-    (Time.now.to_s(:number).to_i - birthday.to_time.to_s(:number).to_i)/10e9.to_i
+  def age_in_days
+    if self.dob
+      TimeCalc.date_diff_in_days(self.dob)
+    end
   end
-
 
 end
 
