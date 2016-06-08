@@ -1,21 +1,14 @@
 <p id="notice"><%= notice %></p>
-<div class="row">
-<div class="card columns small-8 small-centered">
-
-<h1 class="">Search Patients</h1>
-<%= render 'search' %>
+<div class="row align-center">
+<div class="card columns small-8">
 
 <% if @patients.length != 0 %>
-  <% if !@patients[0].nil? %>
-    <% @patients.each_with_index do |patient, index|%>
-      <%= link_to(patient) do %>
-      <strong><%= patient.first_name%> <%=patient.last_name %></strong>
-      <% end %>
-    <br />
-    <% end %>
-  <% else %>
+  <% if @patients[0].nil? %>
     <p class="callout alert">We couldn’t find that record. Please try again.</p>
   <% end %>
 <% end %>
+<h1 class="">Search Patients</h1>
+<%= render 'search' %>
+
 </div>
 </div>

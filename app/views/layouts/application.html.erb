@@ -19,15 +19,19 @@
       </div>
         <div class="top-bar-right">
             <% if @patient || @patients %>
-              <%= link_to "New Search", patients_path, class: "button" %>
+              <% if @patient %>
+              <%= link_to "New Search", patients_path, class: "button"  %>
+              <% end %>
               <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button" %>
             <% end %>
         </div>
     </div>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
     <footer class="footer">
-      <div class="row">
-        <div class="columns small-8 small-centered ">
+      <div class="row align-center">
+        <div class="columns small-8">
           A project of <a href='https://www.codeforamerica.org/why-government/our-partners/kansas-city-mo'>Code for America</a> for the <a href="http://kcmo.gov/health/">KCMO</a> Health Department
         </div>
       </div>
