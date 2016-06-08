@@ -1,8 +1,10 @@
 # This will guess the User class
 require 'faker'
 require_relative 'support/vax_codes'
+require_relative 'support/time_help'
 
 FactoryGirl.define do
+  extend TimeHelp
   factory :patient do
     sequence(:first_name, 1) { |n| "Test#{n}" }
     sequence(:last_name, 1) { |n| "Tester#{n}" }
@@ -14,7 +16,7 @@ FactoryGirl.define do
   end
 
   factory :patient_profile do
-    dob { 21.years.ago }
+    dob { in_pst(21.years.ago) }
     sequence(:record_number, 1000)
 
     association :patient, factory: :patient
@@ -29,7 +31,7 @@ FactoryGirl.define do
     
     sequence(:manufacturer, 0) { |n| TextVax::VAXCODES[vaccine_code.to_sym][n][0] }
     sequence(:lot_number, 0) { |n| TextVax::VAXCODES[vaccine_code.to_sym][n][2] }
-    expiration_date { 2.months.since }
+    expiration_date { in_pst(2.months.since) }
     dose_number 1
     facility_id 19
 

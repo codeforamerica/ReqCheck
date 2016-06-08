@@ -18,7 +18,7 @@ RSpec.describe Patient, type: :model do
     end
 
     it "allows for patient_profile_attributes to be included in instantiation" do
-      dob     = Date.today
+      dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         patient_profile_attributes: {dob: dob, record_number: 123}
@@ -30,7 +30,7 @@ RSpec.describe Patient, type: :model do
     end
 
     it "has a patient profile with the join on its uuid" do
-      dob     = Date.today
+      dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         patient_profile_attributes: {dob: dob, record_number: 123}
@@ -38,7 +38,7 @@ RSpec.describe Patient, type: :model do
       expect(patient.patient_profile.patient_id).to eq(patient.id)
     end
     xit "has an immunization_checker attribute which is an ImmunizationChecker object" do
-      dob     = Date.today
+      dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         patient_profile_attributes: {dob: dob, record_number: 123}
@@ -46,7 +46,7 @@ RSpec.describe Patient, type: :model do
       expect(patient.immunization_checker.class.name).to eq("ImmunizationChecker")
     end
     it "has an immunizations attribute" do
-      dob     = Date.today
+      dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         patient_profile_attributes: {dob: dob, record_number: 123}
@@ -94,25 +94,43 @@ RSpec.describe Patient, type: :model do
   describe "#age_in_days" do
     it "returns the patients age in days" do
       patient = FactoryGirl.create(:patient,
-        patient_profile_attributes: {dob: 5.years.ago, record_number: 123}
+        patient_profile_attributes: {dob: in_pst(5.years.ago), record_number: 123}
       )
       days_age = patient.age_in_days
       expect(days_age).to eq((365 * 5) + 1)
     end
   end
   describe "#age" do
-    it "has a dob attribute" do
-      patient = FactoryGirl.create(:patient,
-        patient_profile_attributes: {dob: 5.years.ago, record_number: 123}
+    let(:age_patient) do
+      FactoryGirl.create(:patient,
+        patient_profile_attributes: {dob: in_pst(5.years.ago), record_number: 123}
       )
-      expect(patient.dob.class.name).to eq('Date')
+    end
+    it "has a dob attribute" do
+      expect(age_patient.dob.class.name).to eq('Date')
     end
     it "returns the patients age in years" do
+      pat_age = age_patient.age
+      expect(pat_age).to eq(5)
+      expect(pat_age.is_a? Integer).to be(true)
+    end
+    it "is exact to the day if the birthday is a day earlier" do
       patient = FactoryGirl.create(:patient,
-        patient_profile_attributes: {dob: 5.years.ago, record_number: 123}
+        patient_profile_attributes: {dob: in_pst(5.years.ago), record_number: 123}
       )
+      new_date = patient.patient_profile.dob - 1
+      patient.patient_profile.update(dob: new_date)
       pat_age = patient.age
       expect(pat_age).to eq(5)
+    end
+    it "is exact to the day if the birthday is a day earlier" do
+      patient = FactoryGirl.create(:patient,
+        patient_profile_attributes: {dob: in_pst(5.years.ago), record_number: 123}
+      )
+      new_date = patient.patient_profile.dob + 1
+      patient.patient_profile.update(dob: new_date)
+      pat_age = patient.age
+      expect(pat_age).to eq(4)
     end
   end
 
