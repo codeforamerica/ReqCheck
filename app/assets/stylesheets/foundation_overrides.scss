@@ -30,3 +30,21 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
 .top-bar {margin-bottom: 1rem; background-color: $kc-grey; color:white; min-height: 72px;}
 .top-bar .button {margin-bottom: 0px;}
+
+.top-bar-title a {
+	color: white;
+	background-color: inherit;
+	&:hover {
+		color: white;
+		background-color: inherit;
+	}
+	&:visited {
+		color: white;
+	}
+}
+
+
+
+
+
+
