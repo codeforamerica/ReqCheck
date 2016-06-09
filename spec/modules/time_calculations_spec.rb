@@ -212,27 +212,34 @@ RSpec.describe TimeCalc do
     end
     it "can take one date and a collection of different time units" do
       years, months, weeks = 0, 6, 0
-      target_date          = Date.new(2015, 5, 15)
+      past_date          = Date.new(2015, 5, 15)
       expect(
-        TimeCalc.validate_time_period_diff(target_date, years: years, months: months, weeks: weeks)
+        TimeCalc.validate_time_period_diff(past_date, years: years, months: months, weeks: weeks)
       ).to eq(false)
     end
 
     it "can take two dates and a collection of different time units" do
       years, months, weeks   = 0, 6, 0
-      target_date            = Date.new(2015, 1, 15)
-      original_date          = Date.new(2015, 8, 15)
+      past_date            = Date.new(2015, 1, 15)
+      future_date          = Date.new(2015, 8, 15)
       expect(
         TimeCalc.validate_time_period_diff(
-          target_date, original_date, years: years, months: months, weeks: weeks
+          past_date, future_date, years: years, months: months, weeks: weeks
         )
       ).to eq(true)
     end
     
-    xit "returns false when the day_diff is lower than required days" do
-      day_diff = 60
-      required_days = 80
-      expect(TimeCalc.validate_day_diff(day_diff, required_days)).to be(false)
+# => EXACT DATES, TRUE OR FALSE?
+# => What about     
+    it "returns true when a date is exactly on the day differential" do
+      years, months, weeks   = 0, 1, 0
+      past_date            = Date.new(2015, 1, 15)
+      future_date          = Date.new(2015, 2, 15)
+      expect(
+        TimeCalc.validate_time_period_diff(
+          past_date, future_date, years: years, months: months, weeks: weeks
+        )
+      ).to eq(true)
     end
   end
 

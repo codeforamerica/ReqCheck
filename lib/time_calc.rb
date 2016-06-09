@@ -15,13 +15,11 @@ module TimeCalc
     days_diff > required_days
   end
 
-  def validate_time_period_diff(target_date, original_date=Date.today, years: 0, months: 0, weeks: 0)
+  def validate_time_period_diff(past_date, future_date=Date.today, years: 0, months: 0, weeks: 0)
     comparison_date = date_minus_time_period(
-      original_date, years: years, months: months, weeks: weeks
+      future_date, years: years, months: months, weeks: weeks
     )
-    puts comparison_date
-    puts target_date
-    target_date < comparison_date  
+    past_date <= comparison_date  
   end
 
   module_function :date_diff_in_days, :date_diff_in_years,
