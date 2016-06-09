@@ -165,26 +165,71 @@ RSpec.describe TimeCalc do
     end
   end
 
-  describe "#validate_dates_with_diff" do
-    # February 
-    # july, august
-    # Jan, Feb, Mar
-    # Dec, Jan
-    # Leap year
-    # Dec - Mar
-    it "takes two dates and a day diff" do
-      day_diff = 100
-      required_days = 80
-      expect(TimeCalc.validate_day_diff(day_diff, required_days)).to be(true)
+  describe "#date_minus_time_period" do
+    before(:each) do
+      new_time = Time.local(2015, 7, 15, 10, 0, 0)
+      Timecop.freeze(new_time)
+    end
+    after(:each) do
+      Timecop.return
+    end
+    it "takes an input date and a collection of different time units" do
+      years, months, weeks = 1, 2, 2
+      start_date    = Date.today
+      expected_date = Date.new(2014, 5, 1)
+      expect(TimeCalc.date_minus_time_period(
+        start_date, {years: years, months: months, weeks: weeks}
+      )).to eq(expected_date)
+    end
+    it "accounts for the leap year" do
+      new_time = Time.local(2016, 3, 3, 10, 0, 0)
+      Timecop.freeze(new_time) do
+        years, months, weeks = 1, 0, 2
+        start_date    = Date.today
+        expected_date = Date.new(2015, 2, 17)
+        expect(TimeCalc.date_minus_time_period(
+          start_date, {years: years, months: months, weeks: weeks}
+        )).to eq(expected_date)
+      end
+    end
+    it "calculates months differently than just 4 weeks" do
+      months, weeks = 2, 8
+      start_date    = Date.today
+      expected_date1 = Date.new(2015, 5, 15)
+      expected_date2 = Date.new(2015, 5, 20)
+      expect(TimeCalc.date_minus_time_period(start_date, months: months)).to eq(expected_date1)
+      expect(TimeCalc.date_minus_time_period(start_date, weeks: weeks)).to eq(expected_date2)
+    end
+  end
+
+  describe "#validate_time_period_diff" do
+    before(:each) do
+      new_time = Time.local(2015, 7, 15, 10, 0, 0)
+      Timecop.freeze(new_time)
+    end
+    after(:each) do
+      Timecop.return
+    end
+    it "can take one date and a collection of different time units" do
+      years, months, weeks = 0, 6, 0
+      target_date          = Date.new(2015, 5, 15)
+      expect(
+        TimeCalc.validate_time_period_diff(target_date, years: years, months: months, weeks: weeks)
+      ).to eq(false)
     end
 
-    it "returns true when the day_diff is higher than required days" do
-      day_diff = 100
-      required_days = 80
-      expect(TimeCalc.validate_day_diff(day_diff, required_days)).to be(true)
+    it "can take two dates and a collection of different time units" do
+      years, months, weeks   = 0, 6, 0
+      target_date            = Date.new(2015, 1, 15)
+      original_date          = Date.new(2015, 8, 15)
+      expect(
+        TimeCalc.validate_time_period_diff(
+          target_date, original_date, years: years, months: months, weeks: weeks
+        )
+      ).to eq(true)
     end
     
-    it "returns false when the day_diff is lower than required days" do
+    xit "returns false when the day_diff is lower than required days" do
       day_diff = 60
       required_days = 80
       expect(TimeCalc.validate_day_diff(day_diff, required_days)).to be(false)

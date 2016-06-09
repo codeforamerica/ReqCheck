@@ -15,7 +15,21 @@ module TimeCalc
     days_diff > required_days
   end
 
-  module_function :date_diff_in_days, :date_diff_in_years, :validate_day_diff
+  def validate_time_period_diff(target_date, original_date=Date.today, years: 0, months: 0, weeks: 0)
+    comparison_date = date_minus_time_period(
+      original_date, years: years, months: months, weeks: weeks
+    )
+    puts comparison_date
+    puts target_date
+    target_date < comparison_date  
+  end
+
+  module_function :date_diff_in_days, :date_diff_in_years,
+    :validate_day_diff, :validate_time_period_diff
+
+  def self.date_minus_time_period(input_date=Date.today, years: 0, months: 0, weeks: 0)
+    input_date.years_ago(years).months_ago(months).weeks_ago(weeks)
+  end
   
   def self.convert_to_date(input_date)
     input_date = Date.parse(input_date) if input_date.instance_of? String
