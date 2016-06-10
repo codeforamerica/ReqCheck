@@ -39,4 +39,9 @@ FactoryGirl.define do
     association :patient_profile, factory: :patient_profile
   end
 
+  factory :vaccine_requirement do
+    vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
+    dosage_number 1
+    min_age_years 1
+  end
 end

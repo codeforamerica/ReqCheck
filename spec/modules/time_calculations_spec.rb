@@ -228,9 +228,7 @@ RSpec.describe TimeCalc do
         )
       ).to eq(true)
     end
-    
-# => EXACT DATES, TRUE OR FALSE?
-# => What about     
+       
     it "returns true when a date is exactly on the day differential" do
       years, months, weeks   = 0, 1, 0
       past_date            = Date.new(2015, 1, 15)
