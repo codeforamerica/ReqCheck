@@ -29,8 +29,14 @@ FactoryGirl.define do
     history_flag false
     provider_code "432"
     
-    sequence(:manufacturer, 0) { |n| TextVax::VAXCODES[vaccine_code.to_sym][n][0] }
-    sequence(:lot_number, 0) { |n| TextVax::VAXCODES[vaccine_code.to_sym][n][2] }
+    sequence(:manufacturer) do |num|
+      vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
+      vax_array[(num % vax_array.length)][1]
+    end
+    sequence(:lot_number) do |num|
+      vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
+      vax_array[(num % vax_array.length)][2]
+    end
     expiration_date { in_pst(2.months.since) }
     dose_number 1
     facility_id 19
@@ -43,5 +49,13 @@ FactoryGirl.define do
     vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
     dosage_number 1
     min_age_years 1
+  end
+
+  factory :dependency do
+    requirer_id 1
+    requirement_id 2
+    required_years 0
+    required_months 1
+    required_weeks 0
   end
 end

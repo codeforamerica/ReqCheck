@@ -25,5 +25,10 @@ module RecordCheck
 
     # Adding modules from lib
     config.autoload_paths += %W(#{config.root}/lib) # add this line
+
+    # using rspec and not unittest
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end
