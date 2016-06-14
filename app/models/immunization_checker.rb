@@ -14,8 +14,9 @@ class ImmunizationChecker
   def eligible_vaccinations
     eligible_requirements = @requirements.reject do |requirement|
       @immunizations.find do |immunization|
-        ( immunization.vaccine_code == requirement.vaccine_code 
-          && )
+        immunization.vaccine_code == requirement.vaccine_code 
+# ( immunization.vaccine_code == requirement.vaccine_code 
+#           && )
 
       end
     end
