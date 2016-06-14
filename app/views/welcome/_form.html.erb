@@ -4,8 +4,8 @@
 <%= form_tag("/login/go", method: "get") do %>
   <%= label_tag(:email, "Email:") %>
   <%= text_field_tag(:email) %>
-  <%= label_tag(:password, "Password:") %>
-  <%= text_field_tag(:password) %>
+  <%= label_tag(:account, "Password:") %>
+  <%= password_field(:account, :password) %>
   <button><%= submit_tag "Login", class:"button radius" %></button>
 <% end %>
 </div>
