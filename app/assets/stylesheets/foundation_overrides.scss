@@ -43,8 +43,9 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	}
 }
 
-
-
-
-
+.vaccine-record .vax-name {background-color:#3a3a3c; color:white; border-color: #3a3a3c;}
+.vaccine-record tr {min-height:36px;}
+.vaccine-record tbody {border-color: #3a3a3c;}
+.vaccine-record thead {border-bottom-color: #3a3a3c; border-left-color: #3a3a3c; }
+.vaccine-record thead th {min-height: 60px;}
 
