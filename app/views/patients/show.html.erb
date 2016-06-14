@@ -2,18 +2,20 @@
 <div class="card columns small-8">
 <% if @patient.record_number < 5 %>
     <div class="callout success">
-        <h3><i class="fa fa-check-circle" aria-hidden="true"></i> Up To Date</h3>
+        <i class="fa fa-check-circle float-left" aria-hidden="true"></i>
+        <h3> Up To Date</h3>
         <p>The patient is up to date</p>
     </div>
 <% elsif @patient.record_number < 10 %>
     <div class="callout warning">
-        <h3><i class="fa fa-question-circle" aria-hidden="true"></i>
- Review Needed</h3>
+        <i class="fa fa-question-circle float-left" aria-hidden="true"></i>
+        <h3>Review Needed</h3>
         <p>Please have a nurse review the record</p>
     </div>
 <% else %>
     <div class="callout alert">
-    <h3><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vaccine Due</h3>
+    <i class="fa fa-exclamation-circle float-left" aria-hidden="true"></i>
+    <h3>Vaccine Due</h3>
     <p>The patient requires additional vaccines</p>
     </div>
 <% end %>
