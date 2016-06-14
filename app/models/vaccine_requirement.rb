@@ -1,7 +1,10 @@
 class VaccineRequirement < ActiveRecord::Base
-  has_many :dependencies, class_name: 'Dependency', foreign_key: :requirement_id
-  has_many :depending, class_name: 'Dependency', foreign_key: :requirer_id
+  # depends_on
 
-  has_many :requirements, through: :dependencies
-  has_many :requirers, through: :dependencies
+
+  has_many :requirements, through: :dependencies, source: 'requirement'
+  has_many :requirements_details, class_name: 'Dependency', foreign_key: :requirer_id
+
+  has_many :requirers, through: :dependencies, source: 'requirer'
+  has_many :requirers_details, class_name: 'Dependency', foreign_key: :requirement_id
 end
