@@ -11,11 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519213537) do
+ActiveRecord::Schema.define(version: 20160616133049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "dependencies", force: :cascade do |t|
+    t.integer  "requirer_id"
+    t.integer  "requirement_id"
+    t.integer  "required_years",  default: 0
+    t.integer  "required_months", default: 0
+    t.integer  "required_weeks",  default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "immunizations", force: :cascade do |t|
     t.string   "vaccine_code",                       null: false
@@ -37,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160519213537) do
     t.integer  "facility_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.string   "description"
   end
 
   create_table "patient_profiles", force: :cascade do |t|
@@ -63,6 +74,16 @@ ActiveRecord::Schema.define(version: 20160519213537) do
     t.string   "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "vaccine_requirements", force: :cascade do |t|
+    t.string   "vaccine_code",               null: false
+    t.integer  "dosage_number"
+    t.integer  "min_age_years",  default: 0, null: false
+    t.integer  "min_age_months", default: 0, null: false
+    t.integer  "min_age_weeks",  default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_foreign_key "immunizations", "patient_profiles"

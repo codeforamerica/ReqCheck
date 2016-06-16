@@ -101,4 +101,5 @@ module TextVax
     HBIG: [["Hepatitis B Immune Globulin", nil, nil]],
     ROT2: [["Rotavirus, unspecified", "UNK", nil]]
   }
+  public_constant(:VAXCODES)
 end
