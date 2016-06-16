@@ -40,6 +40,11 @@ class Patient < User
     end
   end
 
+  def get_vaccines(vaccine_array)
+    vax = self.immunizations.select { |vaccine| vaccine_array.include? vaccine.vaccine_code }
+      .sort_by { |immunization| immunization.imm_date }
+  end
+
 end
 
       
