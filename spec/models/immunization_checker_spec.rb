@@ -125,7 +125,6 @@ RSpec.describe ImmunizationChecker, type: :model do
         ),
         create(:vaccine_requirement,
           min_age_weeks: second_age_min_weeks,
-          min_time_window_weeks: second_time_min_weeks,
           dosage_number: 2,
           vaccine_code: vaccine_code
         )
