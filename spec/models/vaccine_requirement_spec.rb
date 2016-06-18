@@ -19,7 +19,8 @@ RSpec.describe VaccineRequirement, type: :model do
       expect(vax_req2.requirement_details.length).to eq(1)
       expect(vax_req2.requirement_details.first.requirement_id).to eq(vax_req1.id)
     end
-    it 'has many requiring it' do
+    it 'has many requirer_details it' do
+      # These are the details regarding the requirers of the requirement
       vax_req1  = create(:vaccine_requirement)
       vax_req2 = create(:vaccine_requirement,
         vaccine_code: vax_req1.vaccine_code,

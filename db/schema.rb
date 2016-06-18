@@ -11,21 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610234405) do
+ActiveRecord::Schema.define(version: 20160616133049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
-
-  create_table "dependencies", force: :cascade do |t|
-    t.integer  "requirer_id"
-    t.integer  "requirement_id"
-    t.integer  "required_years",  default: 0
-    t.integer  "required_months", default: 0
-    t.integer  "required_weeks",  default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-  end
 
   create_table "immunizations", force: :cascade do |t|
     t.string   "vaccine_code",                       null: false
