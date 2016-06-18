@@ -1,6 +1,6 @@
-class CreateVaccineRequirementDependencies < ActiveRecord::Migration
+class CreateVaccineRequirementDetails < ActiveRecord::Migration
   def change
-    create_table :vaccine_requirements_dependencies do |t|
+    create_table :vaccine_requirement_details do |t|
       t.integer :requirer_id
       t.integer :requirement_id
       t.integer :required_years, default: 0
