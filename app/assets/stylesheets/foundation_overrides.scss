@@ -20,6 +20,7 @@
 .callout.success {background-color: #59A501;} 
 .callout.warning {background-color: #ED9A12;} 
 .callout.alert {background-color: #D0021B;}
+.callout i {font-size: 4rem; padding-right:1rem;}
 
 .patient-info table tbody {border:none;}
 .patient-info  thread {border:none;}
@@ -43,8 +44,27 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	}
 }
 
+.button {
+	color: white;
+	&:hover {
+		color: white;
+	}
+	&:visited {
+		color: white;
+	}
+}
+
+.vaccine-record .vax-name {background-color:#3a3a3c; color:white; border-color: #3a3a3c;}
+.vaccine-record tbody {border-color: #3a3a3c;}
+.vaccine-record thead {border-bottom-color: #3a3a3c; border-left-color: #3a3a3c; border: none;}
+.vaccine-record thead th {min-height: 60px;}
 
 
-
+#callout-patient {
+	padding-bottom: 0;
+	padding-top: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 
 

@@ -1,19 +1,21 @@
 <div class="row align-center">
-<div class="card columns small-8">
+<div id="callout-patient" class="card columns small-8">
 <% if @patient.record_number < 5 %>
     <div class="callout success">
-        <h3><i class="fa fa-check-circle" aria-hidden="true"></i> Up To Date</h3>
+        <i class="fa fa-check-circle float-left" aria-hidden="true"></i>
+        <h3> Up To Date</h3>
         <p>The patient is up to date</p>
     </div>
 <% elsif @patient.record_number < 10 %>
     <div class="callout warning">
-        <h3><i class="fa fa-question-circle" aria-hidden="true"></i>
- Review Needed</h3>
+        <i class="fa fa-question-circle float-left" aria-hidden="true"></i>
+        <h3>Review Needed</h3>
         <p>Please have a nurse review the record</p>
     </div>
 <% else %>
     <div class="callout alert">
-    <h3><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Vaccine Due</h3>
+    <i class="fa fa-exclamation-circle float-left" aria-hidden="true"></i>
+    <h3>Vaccine Due</h3>
     <p>The patient requires additional vaccines</p>
     </div>
 <% end %>
@@ -45,7 +47,547 @@
 
 <!-- temp for demo -->
 <div class="row align-center">
-<div class="card columns small-8 small-centered">
-    <p>Vaccine Record Details</p>
+<div class="card columns small-8 small-centered vaccine-record">
+    <h3>Vaccine Record</h3>
+<table>
+  <thead>      
+      <tr>
+        <th class="vax-name">Hepatitis B</th>
+        <th>Trade Name</th>
+        <th>Date Given</th>
+        <th>Age</th>
+        <th>Time Past</th>
+        <th>Provider</th>
+      </tr>
+  </thead>
+  <tbody>
+  <% @patient.get_vaccines(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).each do |individual_vaccine| %>
+    <tr>
+      <td><%= individual_vaccine.vaccine_code %></td>
+      <td><%= individual_vaccine.manufacturer %></td>
+      <td><%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+      <td><%= individual_vaccine.patient_age_at_immunization %></td>
+      <td><%= individual_vaccine.time_since_immunization %></td>
+      <td>HD</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th class="vax-name">Diptheria, Tetanus, Pertussis</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>DTaP-IPV-HepB</td>
+    <td>Pediarix</td>
+    <td>8/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>DTaP-IPV-HepB</td>
+    <td>Pediarix</td>
+    <td>10/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>DTaP-IPV-HepB</td>
+    <td>Pediarix</td>
+    <td>12/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>DTaP</td>
+    <td>NOS</td>
+    <td>9/2/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>DTap</td>
+    <td>NOS</td>
+    <td>8/2/2015</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  </table>
+
+  <table>
+ <thead>
+  <tr>
+    <th class="vax-name">Haemophilius influenzae type b</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>Hib</td>
+    <td>NOS</td>
+    <td>8/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Hib</td>
+    <td>NOS</td>
+    <td>10/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Hib</td>
+    <td>NOS</td>
+    <td>12/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Hib</td>
+    <td>NOS</td>
+    <td>9/2/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  </table>
+
+  <table>
+ <thead>
+  <tr>
+    <th class="vax-name">Polio</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>DTaP-IPV-HepB</td>
+    <td>Pediarix</td>
+    <td>8/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>DTaP-IPV-HepB</td>
+    <td>Pediarix</td>
+    <td>10/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>DTaP-IPV-HepB</td>
+    <td>Pediarix</td>
+    <td>12/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>IPV</td>
+    <td>NOS</td>
+    <td>8/2/2015</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  </table>
+
+  <table>
+ <thead>
+  <tr>
+    <th class="vax-name">Pneumococcal</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>PCV13</td>
+    <td>NOS</td>
+    <td>8/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>PCV13</td>
+    <td>NOS</td>
+    <td>10/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>PCV13</td>
+    <td>NOS</td>
+    <td>12/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>PCV13</td>
+    <td>NOS</td>
+    <td>9/2/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  </table>
+
+  <table>
+ <thead>
+  <tr>
+    <th class="vax-name">Rotavirus</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>RV5</td>
+    <td>RotaTeq</td>
+    <td>8/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>RV5</td>
+    <td>RotaTeq</td>
+    <td>10/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>RV5</td>
+    <td>RotaTeq</td>
+    <td>12/2/2010</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  </table>
+
+<table>
+<thead>
+  <tr>
+    <th class="vax-name">Measles, Mumps, Rubella</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>MMRV</td>
+    <td>NOS</td>
+    <td>7/2/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>MMRV</td>
+    <td>NOS</td>
+    <td>8/2/2015</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  </table>
+
+  <table>
+ <thead>
+  <tr>
+    <th class="vax-name">Varicella</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>MMRV</td>
+    <td>NOS</td>
+    <td>7/2/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>MMRV</td>
+    <td>NOS</td>
+    <td>8/2/2015</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  </table>
+
+  <table>
+ <thead>
+  <tr>
+    <th class="vax-name">Hepatitis A</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>HepA</td>
+    <td>Havrix</td>
+    <td>7/2/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>HepA</td>
+    <td>Vaqta</td>
+    <td>1/5/2012</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  </table>
+
+<table>
+<thead>
+  <tr>
+    <th class="vax-name">Meningococcal</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Time Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th class="vax-name">Meningococcal B</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Days Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
+<table>
+<thead>
+  <tr>
+    <th class="vax-name">Human Papillomavirus</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Days Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  </table>
+
+  <table>
+ <thead>
+  <tr>
+    <th class="vax-name">Influenza</th>
+    <th>Trade Name</th>
+    <th>Date Given</th>
+    <th>Age</th>
+    <th>Days Past</th>
+    <th>Provider</th>
+  </tr>
+</thead>
+  <tr>
+    <td>IIV3</td>
+    <td>Fluzone</td>
+    <td>12/2/10</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>IIV3</td>
+    <td>Fluzone</td>
+    <td>1/5/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td>HD</td>
+  </tr>
+  <tr>
+    <td>IIV3</td>
+    <td>NOS</td>
+    <td>9/15/2011</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td>HD</td>
+  </tr>
+  <tr>
+    <td>LAIV3</td>
+    <td>NOS</td>
+    <td>9/2/2012</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td>HD</td>
+  </tr>
+  <tr>
+    <td>LAIV</td>
+    <td>FluMist</td>
+    <td>9/15/2013</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td>HD</td>
+  </tr>
+  <tr>
+    <td>IIV4</td>
+    <td>Fluarix</td>
+    <td>10/1/2014</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>LAIV4</td>
+    <td>NOS</td>
+    <td>9/10/2015</td>
+    <td>0y 2m 1d</td>
+    <td>5y 8m 12d</td>
+    <td>HD</td>
+  </tr>
+</table>
 </div>
 </div>

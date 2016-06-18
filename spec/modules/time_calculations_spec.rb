@@ -96,7 +96,7 @@ RSpec.describe TimeCalc do
       end
       it "can accept time object" do
         string_date  = in_pst(5.years.ago)
-        string_date2 = 4.years.ago
+        string_date2 = 4.years.ago.to_time
         age_days = TimeCalc.date_diff_in_days(string_date, string_date2)
         expect(age_days).to be(365)
       end
@@ -118,7 +118,7 @@ RSpec.describe TimeCalc do
     end
 
     context "with multiple dates" do
-      it "returns the difference between the two dates in days" do
+      it "returns the difference between the two dates in years" do
         input_date  = in_pst(5.years.ago).to_date
         input_date2 = 4.years.ago.to_date
         age_in_years    = TimeCalc.date_diff_in_years(input_date, input_date2)
@@ -138,9 +138,268 @@ RSpec.describe TimeCalc do
       end
       it "can accept time object" do
         string_date  = in_pst(5.years.ago)
-        string_date2 = 4.years.ago
+        string_date2 = 4.years.ago.to_time
         age_in_years = TimeCalc.date_diff_in_years(string_date, string_date2)
         expect(age_in_years).to be(1)
+      end
+    end
+  end
+  describe "#date_diff_in_months" do
+    context "with only one input date" do
+      it "defaults date 2 to Date.today" do
+        input_date = in_pst(2.months.ago.to_date)
+        age_in_months = TimeCalc.date_diff_in_months(input_date)
+        expect(age_in_months).to be(2)
+      end
+      it "can accept a string date" do
+        string_date = 1.month.ago.to_s
+        diff_in_months = TimeCalc.date_diff_in_months(string_date)
+        expect(diff_in_months).to be(1)
+      end
+      it "will return more than 12 months" do
+        input_date = 2.years.ago.to_date
+        diff_in_months = TimeCalc.date_diff_in_months(input_date)
+        expect(diff_in_months).to be(24)
+      end
+    end
+
+    context "with multiple dates" do
+      it "returns the difference between the two dates in months" do
+        input_date  = 5.years.ago.to_date
+        input_date2 = 4.years.ago.to_date
+        diff_in_months    = TimeCalc.date_diff_in_months(input_date, input_date2)
+        expect(diff_in_months).to be(12)
+      end
+      it "can accept a string date" do
+        string_date  = 5.months.ago.to_s
+        string_date2 = 4.months.ago.to_s
+        diff_in_months = TimeCalc.date_diff_in_months(string_date, string_date2)
+        expect(diff_in_months).to be(1)
+      end
+      it "can accept date_time object" do
+        string_date  = 5.years.ago.to_datetime
+        string_date2 = 4.years.ago.to_datetime
+        diff_in_months = TimeCalc.date_diff_in_months(string_date, string_date2)
+        expect(diff_in_months).to be(12)
+      end
+      it "can accept time object" do
+        time_object  = 6.months.ago.to_time
+        time_object2 = 4.months.ago.to_time
+        diff_in_months = TimeCalc.date_diff_in_months(time_object, time_object2)
+        expect(diff_in_months).to be(2)
+      end
+      it "will return more than 12 months with two dates" do
+        date1 = 5.years.ago.to_date
+        date2 = 2.years.ago.to_date
+        diff_in_months = TimeCalc.date_diff_in_months(date1, date2)
+        expect(diff_in_months).to be(36)
+      end
+      it "will return 0 months with less than 1 month" do
+        date1 = 1.month.ago.to_date
+        date2 = 2.weeks.ago.to_date
+        diff_in_months = TimeCalc.date_diff_in_months(date1, date2)
+        expect(diff_in_months).to be(0)
+      end
+      it "will return 0 months with 29 days" do
+        date1 = 1.month.ago.to_date
+        date2 = 1.day.ago.to_date
+        diff_in_months = TimeCalc.date_diff_in_months(date1, date2)
+        expect(diff_in_months).to be(0)
+      end
+      it "will return the months between two dates" do
+        date1 = 3.months.ago.to_date
+        date2 = 2.weeks.ago.to_date
+        diff_in_months = TimeCalc.date_diff_in_months(date1, date2)
+        expect(diff_in_months).to be(2)
+      end
+      it "will be exact to the date with 2 months and 30 days" do
+        date1 = 5.months.ago.to_date
+        date2 = 2.months.ago.to_date.ago(1.day).to_date
+        diff_in_months = TimeCalc.date_diff_in_months(date1, date2)
+        expect(diff_in_months).to be(2)
+      end
+      it "will be exact to the date with 3 months and 1 days" do
+        date1 = 5.months.ago.to_date
+        date2 = 2.months.ago.to_date.since(1.day).to_date
+        diff_in_months = TimeCalc.date_diff_in_months(date1, date2)
+        expect(diff_in_months).to be(3)
+      end
+    end
+  end
+
+  describe "#date_diff_in_weeks" do
+    context "with only one input date" do
+      it "defaults date 2 to Date.today" do
+        input_date = in_pst(1.month.ago)
+        diff_in_weeks = TimeCalc.date_diff_in_weeks(input_date)
+        expect(diff_in_weeks).to be(4)
+      end
+      it "can accept a string date" do
+        string_date = 1.month.ago.to_s
+        diff_in_weeks = TimeCalc.date_diff_in_weeks(string_date)
+        expect(diff_in_weeks).to be(4)
+      end
+      it "will return more than 4 weeks" do
+        input_date = 2.months.ago.to_date
+        diff_in_weeks = TimeCalc.date_diff_in_weeks(input_date)
+        expect(diff_in_weeks).to be(8)
+      end
+    end
+
+    context "with multiple dates" do
+      it "returns the difference between the two dates in weeks" do
+        input_date  = 4.months.ago.to_date
+        input_date2 = 3.months.ago.to_date
+        diff_in_weeks    = TimeCalc.date_diff_in_weeks(input_date, input_date2)
+        expect(diff_in_weeks).to be(4)
+      end
+      it "can accept a string date" do
+        string_date  = 5.years.ago.to_s
+        string_date2 = 4.years.ago.to_s
+        diff_in_weeks = TimeCalc.date_diff_in_weeks(string_date, string_date2)
+        expect(diff_in_weeks).to be(52)
+      end
+      it "can accept date_time object" do
+        string_date  = 5.months.ago.to_datetime
+        string_date2 = 4.months.ago.to_datetime
+        diff_in_weeks = TimeCalc.date_diff_in_weeks(string_date, string_date2)
+        expect(diff_in_weeks).to be(4)
+      end
+      it "can accept time object" do
+        time_object  = 5.months.ago.to_time
+        time_object2 = 4.months.ago.to_time
+        diff_in_weeks = TimeCalc.date_diff_in_weeks(time_object, time_object2)
+        expect(diff_in_weeks).to be(4)
+      end
+      it "will return more than 4 weeks with two dates" do
+        date1 = 4.years.ago.to_date
+        date2 = 2.years.ago.to_date
+        diff_in_weeks = TimeCalc.date_diff_in_weeks(date1, date2)
+        expect(diff_in_weeks).to be(104)
+      end
+    end
+  end
+
+  describe "#detailed_date_diff" do
+    context "with 2 year/month/week, returns string with multiple year/month/week" do
+      # it "returns 1 year for 1 year difference" do
+      #   input_date         = 3.years.ago.to_date
+      #   input_date2        = 1.year.ago.to_date
+      #   detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+      #   expect(detailed_date_diff).to include("years")
+      #   expect(detailed_date_diff).to_not include("year,")
+      # end
+
+      # it "returns 1 month for 1 month difference" do
+      #   input_date         = 3.months.ago.to_date
+      #   input_date2        = 1.month.ago.to_date
+      #   detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+      #   expect(detailed_date_diff).to include("months")
+      #   expect(detailed_date_diff).to_not include("month,")
+      # end
+
+      # it "returns 1 week for 1 week difference" do
+      #   input_date         = 3.weeks.ago.to_date
+      #   input_date2        = 1.weeks.ago.to_date
+      #   detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+      #   expect(detailed_date_diff).to include("weeks")
+      #   expect(detailed_date_diff).to_not include("week,")
+      # end
+    end
+    context "with 1 year/month/week, returns string with singular year/month/week" do
+      # it "returns 1 year for 1 year difference" do
+      #   input_date         = 2.years.ago.to_date
+      #   input_date2        = 1.year.ago.to_date
+      #   detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+      #   expect(detailed_date_diff).to_not include("years")
+      #   expect(detailed_date_diff).to include("year")
+      # end
+
+      # it "returns 1 month for 1 month difference" do
+      #   input_date         = 2.months.ago.to_date
+      #   input_date2        = 1.month.ago.to_date
+      #   detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+      #   expect(detailed_date_diff).to_not include("months")
+      #   expect(detailed_date_diff).to include("month")
+      # end
+
+      # it "returns 1 week for 1 week difference" do
+      #   input_date         = 2.weeks.ago.to_date
+      #   input_date2        = 1.weeks.ago.to_date
+      #   detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+      #   expect(detailed_date_diff).to_not include("weeks")
+      #   expect(detailed_date_diff).to include("week")
+      # end
+    end
+    context "with only one input date" do
+      it "defaults date 2 to Date.today" do
+        input_date = in_pst(1.month.ago)
+        detailed_date_diff = TimeCalc.detailed_date_diff(input_date)
+        expect(detailed_date_diff).to eq("0y, 1m, 0w")
+      end
+      it "can accept a string date" do
+        string_date = 1.month.ago.to_s
+        detailed_date_diff = TimeCalc.detailed_date_diff(string_date)
+        expect(detailed_date_diff).to eq("0y, 1m, 0w")
+      end
+      it "can accept date_time object" do
+        string_date = 1.months.ago.to_datetime
+        detailed_date_diff = TimeCalc.detailed_date_diff(string_date)
+        expect(detailed_date_diff).to eq("0y, 1m, 0w")
+      end
+      it "can accept time object" do
+        time_date = 1.months.ago.to_time
+        detailed_date_diff = TimeCalc.detailed_date_diff(time_date)
+        expect(detailed_date_diff).to eq("0y, 1m, 0w")
+      end
+    end
+
+    context "with multiple dates" do
+      context "with exact differences" do
+        it "will return only weeks for under 1 month" do
+          input_date  = 1.months.ago.to_date
+          input_date2 = 2.weeks.ago.to_date
+          detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+          expect(detailed_date_diff).to eq("0y, 0m, 2w")
+        end
+        it "will return only months for exact months" do
+          input_date  = 3.months.ago.to_date
+          input_date2 = 1.month.ago.to_date
+          detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+          expect(detailed_date_diff).to eq("0y, 2m, 0w")
+        end
+        it "will return only years for exact years" do
+          input_date  = 5.years.ago.to_date
+          input_date2 = 2.years.ago.to_date
+          detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+          expect(detailed_date_diff).to eq("3y, 0m, 0w")
+        end
+      end
+      context "with multiple differences" do
+        it "will return years, months and weeks multi year" do
+          input_date  = (5.years.ago.to_date).ago(1.month).ago(2.weeks)
+          input_date2 = 1.year.ago.to_date
+          detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+          expect(detailed_date_diff).to eq("4y, 1m, 2w")
+        end
+        it "will return months and weeks for multi month" do
+          input_date  = (5.months.ago.to_date).ago(3.weeks)
+          input_date2 = 1.month.ago.to_date
+          detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+          expect(detailed_date_diff).to eq("0y, 4m, 3w")
+        end
+        it "will return years and weeks for exact year/week" do
+          input_date  = (5.years.ago.to_date).ago(1.week)
+          input_date2 = 3.year.ago.to_date
+          detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+          expect(detailed_date_diff).to eq("2y, 0m, 1w")
+        end
+        it "will return years and months for exact year/months" do
+          input_date  = (5.years.ago.to_date).ago(5.month)
+          input_date2 = 1.year.ago.to_date
+          detailed_date_diff = TimeCalc.detailed_date_diff(input_date, input_date2)
+          expect(detailed_date_diff).to eq("4y, 5m, 0w")
+        end
       end
     end
   end
@@ -240,5 +499,4 @@ RSpec.describe TimeCalc do
       ).to eq(true)
     end
   end
-
 end

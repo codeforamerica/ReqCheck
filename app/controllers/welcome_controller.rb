@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   end
 
   def go
-    if params[:email] == 'admin' and params['password'] == 'admin'
+    if params[:email] == 'admin' and params[:account][:password] == 'admin'
       flash[:notice] = nil
       redirect_to controller: 'patients', action: 'index'
     else

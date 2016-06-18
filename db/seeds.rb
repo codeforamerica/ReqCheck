@@ -5,8 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-
+require_relative '../spec/support/vax_codes'
 
 patients_list = [
   [ "Kevin", "Berry", "02/08/1990"],
@@ -23,11 +22,38 @@ patients_list = [
 ]
 
 patients_list.each_with_index do |value, index|
-  Patient.create( first_name: value[0], last_name: value[1],
+  patient = Patient.create( first_name: value[0], last_name: value[1],
     email: "#{value[1]}#{index.to_s}@example.com",
     patient_profile_attributes: {
       dob: Date.strptime(value[2], '%m/%d/%Y'), record_number: (index + 1)
     }
   )
+  vaccine_types = ["MCV6", "DTaP", "MMR9", "HepB"]
+  vaccine_types.each do |vax_code|
+    Immunization.create(
+      patient_profile: patient.patient_profile,
+      vaccine_code: vax_code,
+      description: TextVax::VAXCODES[vax_code.to_sym][0][0],
+      imm_date: 2.years.ago.to_date,
+      manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
+      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
+    )
+    Immunization.create(
+      patient_profile: patient.patient_profile,
+      vaccine_code: vax_code,
+      description: TextVax::VAXCODES[vax_code.to_sym][0][0],
+      imm_date: 1.years.ago.to_date,
+      manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
+      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
+    )
+    Immunization.create(
+      patient_profile: patient.patient_profile,
+      vaccine_code: vax_code,
+      description: TextVax::VAXCODES[vax_code.to_sym][0][0],
+      imm_date: Date.today,
+      manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
+      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
+    )
+  end
 end
 

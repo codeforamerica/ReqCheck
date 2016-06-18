@@ -17,7 +17,6 @@
         immunization.vaccine_code == requirement.vaccine_code 
         # ( immunization.vaccine_code == requirement.vaccine_code 
           # && )
-
       end
     end
     eligible_requirements.reject do |requirement|
