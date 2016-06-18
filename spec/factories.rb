@@ -51,7 +51,7 @@ FactoryGirl.define do
     min_age_years 1
   end
 
-  factory :dependency do
+  factory :vaccine_requirement_detail do
     requirer_id 1
     requirement_id 2
     required_years 0

@@ -129,6 +129,11 @@ RSpec.describe ImmunizationChecker, type: :model do
           vaccine_code: vaccine_code
         )
       ]
+      create(:vaccine_requirement_detail,
+        required_weeks: second_time_min_weeks,
+        requirer_id: requirements[1].id,
+        requirement_id: requirements[0].id
+      )
 
       checker = ImmunizationChecker.new(
         requirements: requirements,

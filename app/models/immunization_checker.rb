@@ -1,4 +1,4 @@
-class ImmunizationChecker
+ class ImmunizationChecker
   def initialize(immunizations:, requirements:, patient:)
     @immunizations = immunizations
     @requirements  = requirements
@@ -15,9 +15,8 @@ class ImmunizationChecker
     eligible_requirements = @requirements.reject do |requirement|
       @immunizations.find do |immunization|
         immunization.vaccine_code == requirement.vaccine_code 
-# ( immunization.vaccine_code == requirement.vaccine_code 
-#           && )
-
+        # ( immunization.vaccine_code == requirement.vaccine_code 
+          # && )
       end
     end
     eligible_requirements.reject do |requirement|
