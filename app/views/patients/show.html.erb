@@ -1,27 +1,4 @@
 <div class="row align-center">
-<div id="callout-patient" class="card columns small-8">
-<% if @patient.record_number < 5 %>
-    <div class="callout success">
-        <i class="fa fa-check-circle float-left" aria-hidden="true"></i>
-        <h3> Up To Date</h3>
-        <p>The patient is up to date</p>
-    </div>
-<% elsif @patient.record_number < 10 %>
-    <div class="callout warning">
-        <i class="fa fa-question-circle float-left" aria-hidden="true"></i>
-        <h3>Review Needed</h3>
-        <p>Please have a nurse review the record</p>
-    </div>
-<% else %>
-    <div class="callout alert">
-    <i class="fa fa-exclamation-circle float-left" aria-hidden="true"></i>
-    <h3>Vaccine Due</h3>
-    <p>The patient requires additional vaccines</p>
-    </div>
-<% end %>
-</div>
-</div>
-<div class="row align-center">
 <div class="card columns small-8 patient-info">
     <h3></h3>
     <table>
@@ -42,6 +19,30 @@
             </tr>
         </tbody>
     </table>
+</div>
+</div>
+
+<div class="row align-center">
+<div id="callout-patient" class="card columns small-8">
+<% if @patient.record_number < 5 %>
+    <div class="callout success">
+        <i class="fa fa-check-circle float-left" aria-hidden="true"></i>
+        <h3> Up To Date</h3>
+        <p>The patient is up to date</p>
+    </div>
+<% elsif @patient.record_number < 10 %>
+    <div class="callout warning">
+        <i class="fa fa-question-circle float-left" aria-hidden="true"></i>
+        <h3>Review Needed</h3>
+        <p>Please have a nurse review the record</p>
+    </div>
+<% else %>
+    <div class="callout alert">
+    <i class="fa fa-exclamation-circle float-left" aria-hidden="true"></i>
+    <h3>Vaccine Due</h3>
+    <p>The patient requires additional vaccines</p>
+    </div>
+<% end %>
 </div>
 </div>
 
