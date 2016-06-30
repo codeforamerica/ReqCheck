@@ -4,6 +4,18 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :varied_time_object do
+    
+  end
+  factory :series_dose do
+    
+  end
+  factory :series do
+    
+  end
+  factory :antigen do
+    
+  end
   extend TimeHelp
   factory :patient do
     sequence(:first_name, 1) { |n| "Test#{n}" }
