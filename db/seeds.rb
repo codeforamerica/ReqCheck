@@ -34,7 +34,7 @@ patients_list.each_with_index do |value, index|
       patient_profile: patient.patient_profile,
       vaccine_code: vax_code,
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
-      imm_date: 2.years.ago.to_date,
+      administered_date: 2.years.ago.to_date,
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
       lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
     )
@@ -42,7 +42,7 @@ patients_list.each_with_index do |value, index|
       patient_profile: patient.patient_profile,
       vaccine_code: vax_code,
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
-      imm_date: 1.years.ago.to_date,
+      administered_date: 1.years.ago.to_date,
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
       lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
     )
@@ -50,7 +50,7 @@ patients_list.each_with_index do |value, index|
       patient_profile: patient.patient_profile,
       vaccine_code: vax_code,
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
-      imm_date: Date.today,
+      administered_date: Date.today,
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
       lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
     )
