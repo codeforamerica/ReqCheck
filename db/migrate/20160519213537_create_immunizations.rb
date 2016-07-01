@@ -1,6 +1,6 @@
-class CreateImmunizations < ActiveRecord::Migration
+class CreateVaccineDoses < ActiveRecord::Migration
   def change
-    create_table :immunizations do |t|
+    create_table :vaccine_doses do |t|
       t.string  :vaccine_code, null: false
       t.integer :patient_profile_id
       t.date    :imm_date, null: false
@@ -21,6 +21,6 @@ class CreateImmunizations < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :immunizations, :patient_profiles, index: true
+    add_foreign_key :vaccine_doses, :patient_profiles, index: true
   end
 end

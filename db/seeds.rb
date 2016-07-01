@@ -30,7 +30,7 @@ patients_list.each_with_index do |value, index|
   )
   vaccine_types = ["MCV6", "DTaP", "MMR9", "HepB"]
   vaccine_types.each do |vax_code|
-    Immunization.create(
+    VaccineDose.create(
       patient_profile: patient.patient_profile,
       vaccine_code: vax_code,
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
@@ -38,7 +38,7 @@ patients_list.each_with_index do |value, index|
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
       lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
     )
-    Immunization.create(
+    VaccineDose.create(
       patient_profile: patient.patient_profile,
       vaccine_code: vax_code,
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
@@ -46,7 +46,7 @@ patients_list.each_with_index do |value, index|
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
       lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
     )
-    Immunization.create(
+    VaccineDose.create(
       patient_profile: patient.patient_profile,
       vaccine_code: vax_code,
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],

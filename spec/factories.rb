@@ -4,6 +4,9 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :cvxmapper do
+    
+  end
   extend TimeHelp
   factory :patient do
     sequence(:first_name, 1) { |n| "Test#{n}" }
@@ -22,7 +25,7 @@ FactoryGirl.define do
     association :patient, factory: :patient
   end
 
-  factory :immunization do
+  factory :vaccine_dose do
     vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
     imm_date { Date.today }
     send_flag false

@@ -46,22 +46,14 @@ RSpec.describe Patient, type: :model do
       )
       expect(patient.patient_profile.patient_id).to eq(patient.id)
     end
-    xit "has an immunization_checker attribute which is an ImmunizationChecker object" do
+    it "has an vaccine_doses attribute" do
       dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         patient_profile_attributes: {dob: dob, record_number: 123}
       )
-      expect(patient.immunization_checker.class.name).to eq("ImmunizationChecker")
-    end
-    it "has an immunizations attribute" do
-      dob     = in_pst(Date.today)
-      patient = Patient.create(
-        first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: {dob: dob, record_number: 123}
-      )
-      immunization = FactoryGirl.create(:immunization, patient: patient)
-      expect(patient.immunizations.length).to eq(1)
+      vaccine_dose = FactoryGirl.create(:vaccine_dose, patient: patient)
+      expect(patient.vaccine_doses.length).to eq(1)
     end
   end
   describe "#find_by_record_number" do
@@ -149,17 +141,17 @@ RSpec.describe Patient, type: :model do
       )
       vaccine_types = ["MCV6", "DTaP", "MMR9"]
       vaccine_types.each do |vax_code|
-        create(:immunization,
+        create(:vaccine_dose,
           patient_profile: patient.patient_profile,
           vaccine_code: vax_code,
           imm_date: 2.years.ago.to_date
         )
-        create(:immunization,
+        create(:vaccine_dose,
           patient_profile: patient.patient_profile,
           vaccine_code: vax_code,
           imm_date: 1.years.ago.to_date
         )
-        create(:immunization,
+        create(:vaccine_dose,
           patient_profile: patient.patient_profile,
           vaccine_code: vax_code,
         )
@@ -170,7 +162,7 @@ RSpec.describe Patient, type: :model do
       expect(test_patient.get_vaccines(['DTaP', 'DTP']).length).to eq(3)
       expect(test_patient.get_vaccines(['DTaP', 'DTP'])[0].vaccine_code).to eq('DTaP')
     end
-    it "returns all vaccines in the order of immunization date" do
+    it "returns all vaccines in the order of vaccine_dose date" do
       first_vax, second_vax, third_vax = test_patient.get_vaccines(['DTaP', 'DTP'])
       expect(first_vax.imm_date < second_vax.imm_date).to be(true)
       expect(first_vax.imm_date < third_vax.imm_date).to be(true)

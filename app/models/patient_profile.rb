@@ -1,4 +1,4 @@
 class PatientProfile < ActiveRecord::Base
   belongs_to :patient
-  has_many :immunizations
+  has_many :vaccine_doses
 end

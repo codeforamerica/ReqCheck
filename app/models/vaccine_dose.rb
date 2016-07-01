@@ -1,8 +1,8 @@
-class Immunization < ActiveRecord::Base
+class VaccineDose < ActiveRecord::Base
   belongs_to :patient_profile
   has_one :patient, through: :patient_profile
 
-  def patient_age_at_immunization
+  def patient_age_at_vaccine_dose
     unless self.patient.nil?
       TimeCalc.detailed_date_diff(self.patient.dob, self.imm_date)
     else
@@ -10,7 +10,7 @@ class Immunization < ActiveRecord::Base
     end
   end
 
-  def time_since_immunization
+  def time_since_vaccine_dose
     TimeCalc.detailed_date_diff(self.imm_date)
   end
 end

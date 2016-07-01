@@ -1,5 +1,5 @@
-class AddDescriptionToImmunizations < ActiveRecord::Migration
+class AddDescriptionToVaccineDoses < ActiveRecord::Migration
   def change
-    add_column :immunizations, :description, :string
+    add_column :vaccine_doses, :description, :string
   end
 end

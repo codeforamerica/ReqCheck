@@ -1,9 +1,9 @@
 class Patient < User
   after_initialize :set_defaults, unless: :persisted?
   has_one :patient_profile
-  has_many :immunizations, through: :patient_profile
+  has_many :vaccine_doses, through: :patient_profile
   delegate :dob, :record_number, :address, :address2, :city, :state, :zip_code, :cell_phone,
-    :home_phone, :race, :ethnicity, :immunizations, to: :patient_profile
+    :home_phone, :race, :ethnicity, :vaccine_doses, to: :patient_profile
 
   accepts_nested_attributes_for :patient_profile
   include TimeCalc
@@ -15,12 +15,9 @@ class Patient < User
   end
 
   def set_defaults
-    # @immuniation_checker = ImmunizationChecker.new
+
   end
 
-  # def check_record
-  #   @immuniation_checker.check_record(self.immunizations)
-  # end
   def check_record
     if self.record_number < 10
       true
@@ -41,8 +38,8 @@ class Patient < User
   end
 
   def get_vaccines(vaccine_array)
-    vax = self.immunizations.select { |vaccine| vaccine_array.include? vaccine.vaccine_code }
-      .sort_by { |immunization| immunization.imm_date }
+    vax = self.vaccine_doses.select { |vaccine| vaccine_array.include? vaccine.vaccine_code }
+      .sort_by { |vaccine_dose| vaccine_dose.imm_date }
   end
 
 end
