@@ -1,0 +1,32 @@
+$table-borders:1px solid black;
+
+.top-bar,footer,.vaccine-record a {
+	display:none;
+}
+tr {
+	border:$table-borders;
+}
+td,th {
+	border-right:$table-borders;
+}
+th {
+	border-bottom: 3px solid black;
+}
+#callout-patient {
+	border:$table-borders;
+	margin:0 1rem;
+	i { font-size: 2rem }
+	p,h3 {display:inline;}
+}
+.patient-info {
+table,thead,tr,td {border:none;}
+th {border-right:none;}
+}
+.small-8 {
+	max-width:100%;
+	flex:100%;
+}
+ table { page-break-after:auto; }
+ tr    { page-break-inside:avoid; page-break-after:auto; }
+ td    { page-break-inside:avoid; page-break-after:auto; }
+ thead { display:table-header-group; }
