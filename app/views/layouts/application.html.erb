@@ -7,7 +7,8 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "RecordCheck" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= stylesheet_link_tag    "print", media: "print" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
@@ -23,7 +24,7 @@
               <% if @patient %>
               <%= link_to "New Search", patients_path, class: "button"  %>
               <% end %>
-              <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button" %>
+              <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button secondary" %>
             <% end %>
         </div>
       </div>

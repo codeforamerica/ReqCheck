@@ -49,8 +49,9 @@
 <!-- temp for demo -->
 <div class="row align-center">
 <div class="card columns small-8 small-centered vaccine-record">
-    <h3>Vaccine Record</h3>
-<table>
+    <h3 class="float-left">Vaccine Record</h3>
+    <%= link_to "Print Record", '#', :onclick => 'window.print();return false;', class: "button float-right"  %>
+<table class="hover">
   <thead>      
       <tr>
         <th class="vax-name">Hepatitis B</th>
@@ -75,7 +76,7 @@
   </tbody>
 </table>
 
-<table>
+<table class="hover">
 <thead>
   <tr>
     <th class="vax-name">Diptheria, Tetanus, Pertussis</th>
@@ -136,7 +137,7 @@
   </tr>
   </table>
 
-  <table>
+  <table class="hover">
  <thead>
   <tr>
     <th class="vax-name">Haemophilius influenzae type b</th>
@@ -181,7 +182,7 @@
   </tr>
   </table>
 
-  <table>
+  <table class="hover">
  <thead>
   <tr>
     <th class="vax-name">Polio</th>
@@ -226,7 +227,7 @@
   </tr>
   </table>
 
-  <table>
+  <table class="hover">
  <thead>
   <tr>
     <th class="vax-name">Pneumococcal</th>
@@ -279,7 +280,7 @@
   </tr>
   </table>
 
-  <table>
+  <table class="hover">
  <thead>
   <tr>
     <th class="vax-name">Rotavirus</th>
@@ -316,7 +317,7 @@
   </tr>
   </table>
 
-<table>
+<table class="hover">
 <thead>
   <tr>
     <th class="vax-name">Measles, Mumps, Rubella</th>
@@ -345,7 +346,7 @@
   </tr>
   </table>
 
-  <table>
+  <table class="hover">
  <thead>
   <tr>
     <th class="vax-name">Varicella</th>
@@ -374,7 +375,7 @@
   </tr>
   </table>
 
-  <table>
+  <table class="hover">
  <thead>
   <tr>
     <th class="vax-name">Hepatitis A</th>
@@ -403,7 +404,7 @@
   </tr>
   </table>
 
-<table>
+<table class="hover">
 <thead>
   <tr>
     <th class="vax-name">Meningococcal</th>
@@ -448,7 +449,7 @@
   </tr>
 </table>
 
-<table>
+<table class="hover">
 <thead>
   <tr>
     <th class="vax-name">Meningococcal B</th>
@@ -485,7 +486,7 @@
   </tr>
 </table>
 
-<table>
+<table class="hover">
 <thead>
   <tr>
     <th class="vax-name">Human Papillomavirus</th>
@@ -522,7 +523,7 @@
   </tr>
   </table>
 
-  <table>
+  <table class="hover">
  <thead>
   <tr>
     <th class="vax-name">Influenza</th>
