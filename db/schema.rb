@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20160616133049) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "immunizations", force: :cascade do |t|
+  create_table "vaccine_doses", force: :cascade do |t|
     t.string   "vaccine_code",                       null: false
     t.integer  "patient_profile_id"
     t.date     "imm_date",                           null: false
@@ -86,5 +86,5 @@ ActiveRecord::Schema.define(version: 20160616133049) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_foreign_key "immunizations", "patient_profiles"
+  add_foreign_key "vaccine_doses", "patient_profiles"
 end

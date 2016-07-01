@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe VaccineDose, type: :model do
   it "does not require a Patient to be instantiated" do
     vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-      imm_date: Date.today
+      administered_date: Date.today
     )
     expect(vaccine_dose.class.name).to eq('VaccineDose')
   end
@@ -14,7 +14,7 @@ RSpec.describe VaccineDose, type: :model do
         patient_profile_attributes: {dob: Date.today, record_number: 123}
       )
     vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-      imm_date: Date.today, patient_profile: patient.patient_profile
+      administered_date: Date.today, patient_profile: patient.patient_profile
     )
     expect(vaccine_dose.class.name).to eq('VaccineDose')
   end
@@ -25,7 +25,7 @@ RSpec.describe VaccineDose, type: :model do
         patient_profile_attributes: {dob: 6.years.ago.to_date, record_number: 123}
       )
       VaccineDose.create(vaccine_code: 'VAR1',
-        imm_date: Date.yesterday, patient_profile: patient.patient_profile
+        administered_date: Date.yesterday, patient_profile: patient.patient_profile
       )
     end
     it "gives the patients age at the date of the vaccine_dose" do

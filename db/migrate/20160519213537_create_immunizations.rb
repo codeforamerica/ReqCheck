@@ -3,7 +3,8 @@ class CreateVaccineDoses < ActiveRecord::Migration
     create_table :vaccine_doses do |t|
       t.string  :vaccine_code, null: false
       t.integer :patient_profile_id
-      t.date    :imm_date, null: false
+      t.date    :administered_date, null: false
+      t.string  :description
       t.boolean :send_flag
       t.boolean :history_flag, null: false, default: false
       t.string  :provider_code
