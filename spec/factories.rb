@@ -4,6 +4,12 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :vaccine do
+    
+  end
+  factory :antigen do
+    
+  end
   factory :antigen_importer do
     
   end
