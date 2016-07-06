@@ -4,7 +4,7 @@ require_relative '../support/antigen_xml'
 RSpec.describe AntigenImporter, type: :model do
   describe 'create' do
     it 'takes no arguments to instantiate and is stateless' do
-      antigen = AntigenImporter.new
+      antigen_importer = AntigenImporter.new
       expect(antigen.class.name).to eq('AntigenImporter')
     end
   end
@@ -44,9 +44,28 @@ RSpec.describe AntigenImporter, type: :model do
     end
   end
 
-  describe '#to_cvx_hash'
-    it 'takes no arguments to instantiate and is stateless' do
-      antigen = AntigenImporter.new
-      expect(antigen.class.name).to eq('AntigenImporter')
+  describe 'pulling data from the xml hash' do
+    let(:antigen_importer) { AntigenImporter.new }
+    let(:xml_string) { TestAntigen::ANTIGENSTRING } 
+    let(:xml_hash) { antigen_importer.xml_to_hash(xml_string) } 
+    
+    describe '#get_cvx_for_antigen' do
+      it 'takes an antigen xml and returns an array of the cvx codes' do
+        expect(antigen_importer.get_cvx_for_antigen(xml_hash).
+          to eq([10, 110, 120, 130, 132, 146, 2, 89])
+      end
+    end
+    
+    xdescribe '#to_cvx_hash' do
+      # before(:each) do
+      #   @xml_string = TestAntigen::ANTIGENSTRING
+      #   @xml_hash   = antigen_importer.xml_to_hash(xml_string)
+      # end
+      
+      it 'pulls every cvx from the xml and creates a hash with cvx as the key' do
+        cvx_hash   = antigen_importer.to_cvx_hash(xml_hash)
+        expect(cvx_hash.keys.length).to be(100)
+      end
+    end
   end
 end
