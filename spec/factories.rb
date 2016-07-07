@@ -4,19 +4,28 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
-  factory :vaccine do
-    
-  end
-  factory :antigen do
-    
-  end
-  factory :antigen_importer do
-    
-  end
-  factory :cvxmapper do
-    
-  end
   extend TimeHelp
+  
+  factory :vaccine do
+    short_description 'Polio'
+    full_name 'DTaP-HepB-IPV'
+    cvx_code 110
+    vaccine_group_cvx 89
+    vaccine_group_name 'Polio'
+    status 'Active'
+  end
+
+  factory :antigen do
+    name 'Polio'
+  end
+
+  factory :antigen_with_vaccine, parent: :antigen do
+    after_create do |antigen|
+      antigen.vaccines << FactoryGirl.create(:vaccine)
+    end
+  end
+
+  
   factory :patient do
     sequence(:first_name, 1) { |n| "Test#{n}" }
     sequence(:last_name, 1) { |n| "Tester#{n}" }

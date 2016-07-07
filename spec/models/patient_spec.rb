@@ -17,7 +17,7 @@ RSpec.describe Patient, type: :model do
       expect(patient.patient_profile.class.name).to eq('PatientProfile')
       expect(patient_profile.patient_id).to eq(patient.id)
     end
-0
+
   end
   describe "#create" do
     it "automatically creates a User with the type 'Patient'" do

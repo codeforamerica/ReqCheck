@@ -11,11 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701203023) do
+ActiveRecord::Schema.define(version: 20160706234745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "antigens", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "antigens_vaccines", id: false, force: :cascade do |t|
+    t.integer "antigen_id"
+    t.integer "vaccine_id"
+  end
+
+  add_index "antigens_vaccines", ["antigen_id"], name: "index_antigens_vaccines_on_antigen_id", using: :btree
+  add_index "antigens_vaccines", ["vaccine_id"], name: "index_antigens_vaccines_on_vaccine_id", using: :btree
 
   create_table "cvxmappers", force: :cascade do |t|
     t.string   "description"
@@ -74,7 +88,22 @@ ActiveRecord::Schema.define(version: 20160701203023) do
     t.integer  "facility_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "cvx_code"
   end
+
+  create_table "vaccines", force: :cascade do |t|
+    t.string   "short_description"
+    t.string   "full_name"
+    t.integer  "cvx_code",           null: false
+    t.integer  "vaccine_group_cvx"
+    t.integer  "vaccine_group_name"
+    t.string   "status"
+    t.text     "notes"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "vaccines", ["cvx_code"], name: "index_vaccines_on_cvx_code", using: :btree
 
   add_foreign_key "vaccine_doses", "patient_profiles"
 end

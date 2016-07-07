@@ -1,7 +1,7 @@
 class CreateVaccines < ActiveRecord::Migration
   def change
     create_table :vaccines do |t|
-      t.string :name
+      t.string :short_description
       t.string :full_name
       t.integer :cvx_code, null: false
       t.integer :vaccine_group_cvx
