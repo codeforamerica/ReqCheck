@@ -11,7 +11,7 @@ class WelcomeController < ApplicationController
       flash[:notice] = nil
       redirect_to controller: 'patients', action: 'index'
     else
-      flash[:notice] = "Invalid Email or Password"
+      flash.now[:notice] = "Invalid Email or Password"
       render :login
     end
   end

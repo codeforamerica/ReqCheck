@@ -16,6 +16,9 @@
 # users commonly want.
 require 'database_cleaner'
 require_relative './support/time_help'
+require 'capybara/rspec'
+
+Capybara.javascript_driver = :webkit
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -45,6 +48,9 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
+
+  # Use webkit and capybara
+  config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
 
   # Add the custom helpers
   config.include TimeHelp
