@@ -56,6 +56,47 @@ RSpec.describe AntigenImporter, type: :model do
       end
     end
     
+    describe '#find_or_create_all_vaccines' do
+      it 'will pull all vaccines if already in the database' do
+        cvx1, cvx2 = 10, 12
+        vaccine  = Vaccine.create(cvx_code: 10)
+        vaccine2 = Vaccine.create(cvx_code: 12)
+        expect(antigen_importer.find_or_create_all_vaccines([10, 12])).
+          to eq([vaccine, vaccine2])
+      end
+      it 'will create all vaccines if none are there' do
+        cvx1, cvx2 = 10, 12
+        expect(antigen_importer.find_or_create_all_vaccines([10, 12]).
+          map { |vaccine| vaccine.cvx_code }).
+          to eq([cvx1, cvx2])
+      end
+      it 'will create neccesary vaccines that are not in the database' do
+        cvx1, cvx2 = 10, 12
+        vaccine    = Vaccine.create(cvx_code: cvx1)
+        expect(Vaccine.all.length).to eq(1)
+        expect(antigen_importer.find_or_create_all_vaccines([10, 12]).
+          map { |vaccine| vaccine.cvx_code }).
+          to eq([cvx1, cvx2])
+        expect(Vaccine.all.length).to eq(2)
+      end
+    end
+
+    describe '#add_vaccines_to_antigen' do
+      it 'takes an array of vaccines and antigen name' do
+        vaccines = [FactoryGirl.create(:vaccine)]
+        antigen  = FactoryGirl.create(:antigen)
+        expect(antigen.vaccines).to eq([])
+        antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines)
+        antigen.reload
+        expect(antigen.vaccines).to eq(vaccines)
+      end
+      it 'will error if the antigen does not exist' do
+        vaccines = [FactoryGirl.create(:vaccine)]
+        expect {antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines)}.
+          to raise_exception
+      end
+    end
+
     xdescribe '#to_cvx_hash' do
       it 'pulls every cvx from the xml and creates a hash with cvx as the key' do
         cvx_hash   = antigen_importer.to_cvx_hash(xml_hash)
