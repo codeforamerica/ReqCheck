@@ -1,0 +1,4335 @@
+<scheduleSupportingData>
+    <liveVirusConflicts>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles-Rubella</vaccineType>
+                <cvx>04</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>26 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMR</vaccineType>
+                <cvx>03</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles- Rubella</vaccineType>
+                <cvx>04</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Measles</vaccineType>
+                <cvx>05</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella</vaccineType>
+                <cvx>06</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Mumps</vaccineType>
+                <cvx>07</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Varicella</vaccineType>
+                <cvx>21</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Yellow Fever</vaccineType>
+                <cvx>37</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>30 days</minConflictEndInterval>
+            <conflictEndInterval>30 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Rubella-Mumps</vaccineType>
+                <cvx>38</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Smallpox</vaccineType>
+                <cvx>75</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>MMRV</vaccineType>
+                <cvx>94</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV</vaccineType>
+                <cvx>111</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Zoster</vaccineType>
+                <cvx>121</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>H1N1 LAIV</vaccineType>
+                <cvx>125</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>28 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV4</vaccineType>
+                <cvx>149</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+        <liveVirusConflict>
+            <previous>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </previous>
+            <current>
+                <vaccineType>Influenza LAIV Unspecified</vaccineType>
+                <cvx>151</cvx>
+            </current>
+            <conflictBeginInterval>1 day</conflictBeginInterval>
+            <minConflictEndInterval>24 days</minConflictEndInterval>
+            <conflictEndInterval>28 days</conflictEndInterval>
+        </liveVirusConflict>
+    </liveVirusConflicts>
+    <contraindications>
+        <contraindication>
+            <antigen>Diphtheria</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>01, 09, 12, 20, 28, 106, 107, 113, 115, 120, 130, 132, 138, 146</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Tetanus</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>01, 09, 20, 28, 35, 106, 107, 112, 113, 115, 120, 130, 132, 138, 142, 146</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Pertussis</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>01, 11, 20, 106, 107, 115, 120, 130, 132, 146</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Pertussis</antigen>
+            <contraindicationLanguage>Encephalopathy (e.g., coma, decreased level of consciousness, or prolonged seizures), not attributable to another identifiable cause, within 7 days of administration of previous dose of DTP, DTaP, or Tdap</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC22</conceptCode>
+            <conceptText>encephalopathy within 7 days of previous dose of DTP or DTaP</conceptText>
+            <cvxList>01, 11, 20, 106, 107, 115, 120, 130, 132, 146</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Measles</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>03, 04, 05, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Measles</antigen>
+            <contraindicationLanguage>Pregnancy</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>77386006</conceptCode>
+            <conceptText>Patient currently pregnant (finding)</conceptText>
+            <cvxList>03, 04, 05, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Measles</antigen>
+            <contraindicationLanguage>Known severe immunodeficiency (e.g., from hematologic and solid tumors, receipt of chemotherapy, congential immunodeficiency, or long-term immunosuppressive therapy or patients with HIV infection who are severely immunocompromised)</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC27</conceptCode>
+            <conceptText>immunodeficiency due to any cause, including HIV (hematologic and solid tumors, congenital immunodeficiency, long-term immunosuppressive therapy, including steroids)</conceptText>
+            <cvxList>03, 04, 05, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Mumps</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>03, 07, 38, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Mumps</antigen>
+            <contraindicationLanguage>Pregnancy</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>77386006</conceptCode>
+            <conceptText>Patient currently pregnant (finding)</conceptText>
+            <cvxList>03, 07, 38, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Mumps</antigen>
+            <contraindicationLanguage>Known severe immunodeficiency (e.g., from hematologic and solid tumors, receipt of chemotherapy, congential immunodeficiency, or long-term immunosuppressive therapy or patients with HIV infection who are severely immunocompromised)</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC27</conceptCode>
+            <conceptText>immunodeficiency due to any cause, including HIV (hematologic and solid tumors, congenital immunodeficiency, long-term immunosuppressive therapy, including steroids)</conceptText>
+            <cvxList>03, 07, 38, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Rubella</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>03, 04, 06, 38, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Rubella</antigen>
+            <contraindicationLanguage>Pregnancy</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>77386006</conceptCode>
+            <conceptText>Patient currently pregnant (finding)</conceptText>
+            <cvxList>03, 04, 06, 38, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Rubella</antigen>
+            <contraindicationLanguage>Known severe immunodeficiency (e.g., from hematologic and solid tumors, receipt of chemotherapy, congential immunodeficiency, or long-term immunosuppressive therapy or patients with HIV infection who are severely immunocompromised)</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC27</conceptCode>
+            <conceptText>immunodeficiency due to any cause, including HIV (hematologic and solid tumors, congenital immunodeficiency, long-term immunosuppressive therapy, including steroids)</conceptText>
+            <cvxList>03, 04, 06, 38, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Hep A</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>31, 52, 83, 84, 85, 104</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Hep B</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>08, 30, 42, 43, 44, 45, 51, 102, 104, 110, 132, 146</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Polio</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>02, 10, 89, 110, 120, 130, 132, 146</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>MCV</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>32, 103, 108, 114, 136, 147, 148</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Hib</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>17, 22, 46, 47, 48, 49, 50, 51, 102, 120, 132, 146, 148</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>HPV</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>62, 118, 137, 165</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Pneumococcal</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose (of PCV7, PCV13, or any diphtheria toxoid-containing vaccine) or to a component of a vaccine (PCV7, PCV13, or any diphtheria toxoid-containing vaccine)</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>33, 100, 109, 133, 152</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Rotavirus</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>74, 116, 119, 122</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Rotavirus</antigen>
+            <contraindicationLanguage>Severe combined immunodeficiency (SCID)</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC27</conceptCode>
+            <conceptText>immunodeficiency due to any cause, including HIV (hematologic and solid tumors, congenital immunodeficiency, long-term immunosuppressive therapy, including steroids)</conceptText>
+            <cvxList>74, 116, 119, 122</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Rotavirus</antigen>
+            <contraindicationLanguage>Severe (anaphylactic) allergy to latex</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>300916003</conceptCode>
+            <conceptText>Latex allergy (disorder)</conceptText>
+            <cvxList>119</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Rotavirus</antigen>
+            <contraindicationLanguage>History of Intussusception</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>49723003</conceptCode>
+            <conceptText>Intussusception of intestine (disorder)</conceptText>
+            <cvxList>74, 116, 119, 122</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Varicella</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>21, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Varicella</antigen>
+            <contraindicationLanguage>Known severe immunodeficiency (e.g., from hematologic and solid tumors, receipt of chemotherapy, congential immunodeficiency, or long-term immunosuppressive therapy or patients with HIV infection who are severely immunocompromised)</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC27</conceptCode>
+            <conceptText>immunodeficiency due to any cause, including HIV (hematologic and solid tumors, congenital immunodeficiency, long-term immunosuppressive therapy, including steroids)</conceptText>
+            <cvxList>21, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Varicella</antigen>
+            <contraindicationLanguage>Pregnancy</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>77386006</conceptCode>
+            <conceptText>Patient currently pregnant (finding)</conceptText>
+            <cvxList>21, 94</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Influenza</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>15, 16, 88, 111, 135, 140, 141, 144, 149, 150, 151, 153, 155, 158</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Influenza</antigen>
+            <contraindicationLanguage>Allergy to eggs</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>91930004</conceptCode>
+            <conceptText>Allergy to eggs (disorder)</conceptText>
+            <cvxList>15, 16, 88, 111, 135, 140, 141, 144, 149, 150, 151, 153, 158</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Influenza</antigen>
+            <contraindicationLanguage>Pregnancy</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>77386006</conceptCode>
+            <conceptText>Patient currently pregnant (finding)</conceptText>
+            <cvxList>111, 149, 151</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Influenza</antigen>
+            <contraindicationLanguage>Immunosuppression</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC27</conceptCode>
+            <conceptText>immunodeficiency due to any cause, including HIV (hematologic and solid tumors, congenital immunodeficiency, long-term immunosuppressive therapy, including steroids)</conceptText>
+            <cvxList>111, 149, 151</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Zoster</antigen>
+            <contraindicationLanguage>Pregnancy</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>77386006</conceptCode>
+            <conceptText>Patient currently pregnant (finding)</conceptText>
+            <cvxList>121</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Zoster</antigen>
+            <contraindicationLanguage>Severe allergic reaction (e.g., anaphylaxis) after previous dose or to a vaccine component</contraindicationLanguage>
+            <concept>PHIN VS</concept>
+            <conceptCode>VXC20</conceptCode>
+            <conceptText>allergy to previous dose of this vaccine or to any of its unlisted vaccine components (anaphylactic)</conceptText>
+            <cvxList>121</cvxList>
+        </contraindication>
+        <contraindication>
+            <antigen>Zoster</antigen>
+            <contraindicationLanguage>Substantial suppression of cellular immunity</contraindicationLanguage>
+            <concept>SNOMED-CT</concept>
+            <conceptCode>398293003</conceptCode>
+            <conceptText>Cellular immune defect (finding)</conceptText>
+            <cvxList>121</cvxList>
+        </contraindication>
+    </contraindications>
+    <vaccineGroups>
+        <vaccineGroup>
+            <name>MMR</name>
+            <administerFullVaccineGroup>Yes</administerFullVaccineGroup>
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>DTaP/Tdap/Td</name>
+            <administerFullVaccineGroup>No</administerFullVaccineGroup>
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Hep A</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Hep B</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Hib</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>HPV</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Influenza</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>MCV</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Pneumococcal</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Polio</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Rotavirus</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Varicella</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+        <vaccineGroup>
+            <name>Zoster</name>
+            <administerFullVaccineGroup />
+        </vaccineGroup>
+    </vaccineGroups>
+    <vaccineGroupToAntigenMap>
+        <vaccineGroupMap>
+            <name>MMR</name>
+            <antigen>Measles</antigen>
+            <antigen>Mumps</antigen>
+            <antigen>Rubella</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>DTaP/Tdap/Td</name>
+            <antigen>Diphtheria</antigen>
+            <antigen>Tetanus</antigen>
+            <antigen>Pertussis</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Hep A</name>
+            <antigen>Hep A</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Hep B</name>
+            <antigen>Hep B</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Hib</name>
+            <antigen>Hib</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>HPV</name>
+            <antigen>HPV</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Influenza</name>
+            <antigen>Influenza</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>MCV</name>
+            <antigen>MCV</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Pneumococcal</name>
+            <antigen>Pneumococcal</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Polio</name>
+            <antigen>Polio</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Rotavirus</name>
+            <antigen>Rotavirus</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Varicella</name>
+            <antigen>Varicella</antigen>
+        </vaccineGroupMap>
+        <vaccineGroupMap>
+            <name>Zoster</name>
+            <antigen>Zoster</antigen>
+        </vaccineGroupMap>
+    </vaccineGroupToAntigenMap>
+    <cvxToAntigenMap>
+        <cvxMap>
+            <cvx>01</cvx>
+            <shortDescription>DTP</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>02</cvx>
+            <shortDescription>OPV</shortDescription>
+            <association>
+                <antigen>Polio</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>03</cvx>
+            <shortDescription>MMR</shortDescription>
+            <association>
+                <antigen>Measles</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Mumps</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Rubella</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>04</cvx>
+            <shortDescription>M/R</shortDescription>
+            <association>
+                <antigen>Measles</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Rubella</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>05</cvx>
+            <shortDescription>measles</shortDescription>
+            <association>
+                <antigen>Measles</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>06</cvx>
+            <shortDescription>rubella</shortDescription>
+            <association>
+                <antigen>Rubella</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>07</cvx>
+            <shortDescription>mumps</shortDescription>
+            <association>
+                <antigen>Mumps</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>08</cvx>
+            <shortDescription>Hep B, adolescent or pediatric</shortDescription>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>09</cvx>
+            <shortDescription>Td (adult), adsorbed</shortDescription>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>10</cvx>
+            <shortDescription>IPV</shortDescription>
+            <association>
+                <antigen>Polio</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>15</cvx>
+            <shortDescription>influenza, split (incl. purified surface antigen)</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>16</cvx>
+            <shortDescription>influenza, whole</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>17</cvx>
+            <shortDescription>Hib, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>20</cvx>
+            <shortDescription>DTaP</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>21</cvx>
+            <shortDescription>varicella</shortDescription>
+            <association>
+                <antigen>Varicella</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>22</cvx>
+            <shortDescription>DTP-Hib</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>28</cvx>
+            <shortDescription>DT (pediatric)</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>32</cvx>
+            <shortDescription>meningococcal MPSV4</shortDescription>
+            <association>
+                <antigen>MCV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>33</cvx>
+            <shortDescription>pneumococcal polysaccharide PPV23</shortDescription>
+            <association>
+                <antigen>Pneumococcal</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>35</cvx>
+            <shortDescription>tetanus toxoid, adsorbed</shortDescription>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>38</cvx>
+            <shortDescription>rubella/mumps</shortDescription>
+            <association>
+                <antigen>Rubella</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Mumps</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>42</cvx>
+            <shortDescription>Hep B, adolescent/high risk infant</shortDescription>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>43</cvx>
+            <shortDescription>Hep B, adult</shortDescription>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>44</cvx>
+            <shortDescription>Hep B, dialysis</shortDescription>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>45</cvx>
+            <shortDescription>Hep B, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>46</cvx>
+            <shortDescription>Hib (PRP-D)</shortDescription>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>47</cvx>
+            <shortDescription>Hib (HbOC)</shortDescription>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>48</cvx>
+            <shortDescription>Hib (PRP-T)</shortDescription>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>49</cvx>
+            <shortDescription>Hib (PRP-OMP)</shortDescription>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>50</cvx>
+            <shortDescription>DTaP-Hib</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>51</cvx>
+            <shortDescription>Hib-Hep B</shortDescription>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>52</cvx>
+            <shortDescription>Hep A, adult</shortDescription>
+            <association>
+                <antigen>Hep A</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>62</cvx>
+            <shortDescription>HPV, quadrivalent</shortDescription>
+            <association>
+                <antigen>HPV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>74</cvx>
+            <shortDescription>rotavirus, tetravalent</shortDescription>
+            <association>
+                <antigen>Rotavirus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>83</cvx>
+            <shortDescription>Hep A, ped/adol, 2 dose</shortDescription>
+            <association>
+                <antigen>Hep A</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>84</cvx>
+            <shortDescription>Hep A, ped/adol, 3 dose</shortDescription>
+            <association>
+                <antigen>Hep A</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>85</cvx>
+            <shortDescription>Hep A, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Hep A</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>88</cvx>
+            <shortDescription>influenza, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>89</cvx>
+            <shortDescription>polio, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Polio</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>94</cvx>
+            <shortDescription>MMRV</shortDescription>
+            <association>
+                <antigen>Measles</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Mumps</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Rubella</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Varicella</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>100</cvx>
+            <shortDescription>pneumococcal conjugate PCV 7</shortDescription>
+            <association>
+                <antigen>Pneumococcal</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>102</cvx>
+            <shortDescription>DTP-Hib-Hep B</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>104</cvx>
+            <shortDescription>Hep A-Hep B</shortDescription>
+            <association>
+                <antigen>Hep A</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>106</cvx>
+            <shortDescription>DTaP, 5 pertussis antigens</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>107</cvx>
+            <shortDescription>DTaP, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>108</cvx>
+            <shortDescription>meningococcal, unspecified formulation</shortDescription>
+            <association>
+                <antigen>MCV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>109</cvx>
+            <shortDescription>pneumococcal, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Pneumococcal</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>110</cvx>
+            <shortDescription>DTaP-Hep B-IPV</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Polio</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>111</cvx>
+            <shortDescription>influenza, live, intranasal</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>113</cvx>
+            <shortDescription>Td (adult) preservative free</shortDescription>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>114</cvx>
+            <shortDescription>meningococcal MCV4P</shortDescription>
+            <association>
+                <antigen>MCV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>115</cvx>
+            <shortDescription>Tdap</shortDescription>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>116</cvx>
+            <shortDescription>rotavirus, pentavalent</shortDescription>
+            <association>
+                <antigen>Rotavirus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>118</cvx>
+            <shortDescription>HPV, bivalent</shortDescription>
+            <association>
+                <antigen>HPV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>119</cvx>
+            <shortDescription>rotavirus, monovalent</shortDescription>
+            <association>
+                <antigen>Rotavirus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>120</cvx>
+            <shortDescription>DTaP-Hib-IPV</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Polio</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>121</cvx>
+            <shortDescription>Zoster</shortDescription>
+            <association>
+                <antigen>Varicella</antigen>
+                <associationBeginAge>0 days</associationBeginAge>
+                <associationEndAge>50 years</associationEndAge>
+            </association>
+            <association>
+                <antigen>Zoster</antigen>
+                <associationBeginAge>50 years</associationBeginAge>
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>122</cvx>
+            <shortDescription>rotavirus, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Rotavirus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>130</cvx>
+            <shortDescription>DTaP-IPV</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Polio</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>132</cvx>
+            <shortDescription>DTaP-IPV-HIB-HEP B, historical</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Polio</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>133</cvx>
+            <shortDescription>Pneumococcal conjugate PCV 13</shortDescription>
+            <association>
+                <antigen>Pneumococcal</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>135</cvx>
+            <shortDescription>Influenza, high dose seasonal</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>136</cvx>
+            <shortDescription>Meningococcal MCV4O</shortDescription>
+            <association>
+                <antigen>MCV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>137</cvx>
+            <shortDescription>HPV, unspecified formulation</shortDescription>
+            <association>
+                <antigen>HPV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>138</cvx>
+            <shortDescription>Td (adult)</shortDescription>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>139</cvx>
+            <shortDescription>Td(adult) unspecified formulation</shortDescription>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>140</cvx>
+            <shortDescription>Influenza, seasonal, injectable, preservative free</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>141</cvx>
+            <shortDescription>Influenza, seasonal, injectable</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>144</cvx>
+            <shortDescription>influenza, seasonal, intradermal, preservative free</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>146</cvx>
+            <shortDescription>DTaP,IPV,Hib,HepB</shortDescription>
+            <association>
+                <antigen>Diphtheria</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Tetanus</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Pertussis</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hep B</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>147</cvx>
+            <shortDescription>meningococcal MCV4, unspecified formulation</shortDescription>
+            <association>
+                <antigen>MCV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>148</cvx>
+            <shortDescription>Meningococcal C/Y-HIB PRP</shortDescription>
+            <association>
+                <antigen>MCV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+            <association>
+                <antigen>Hib</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>149</cvx>
+            <shortDescription>influenza, live, intranasal, quadrivalent</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>150</cvx>
+            <shortDescription>influenza, injectable, quadrivalent, preservative free</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>151</cvx>
+            <shortDescription>influenza, nasal, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>152</cvx>
+            <shortDescription>Pneumococcal Conjugate, unspecified formulation</shortDescription>
+            <association>
+                <antigen>Pneumococcal</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>153</cvx>
+            <shortDescription>Influenza, injectable, Madin Darby Canine Kidney, preservative free</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>155</cvx>
+            <shortDescription>influenza, recombinant, injectable, preservative free</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>158</cvx>
+            <shortDescription>influenza, injectable, quadrivalent</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>161</cvx>
+            <shortDescription>Influenza, injectable,quadrivalent, preservative free, pediatric</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>165</cvx>
+            <shortDescription>HPV9</shortDescription>
+            <association>
+                <antigen>HPV</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+        <cvxMap>
+            <cvx>166</cvx>
+            <shortDescription>influenza, intradermal, quadrivalent, preservative free</shortDescription>
+            <association>
+                <antigen>Influenza</antigen>
+                <associationBeginAge />
+                <associationEndAge />
+            </association>
+        </cvxMap>
+    </cvxToAntigenMap>
+</scheduleSupportingData>

@@ -1,7 +1,7 @@
 class AntigenImporter
   include ActiveModel::Model
 
-  def import_xml_file(xml_file)
+  def import_antigen_xml_file(xml_file)
 
   end
 

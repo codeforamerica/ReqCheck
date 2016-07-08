@@ -1,0 +1,1918 @@
+<antigenSupportingData>
+<immunity>
+</immunity>
+<series>
+<seriesName>Tetanus Standard Series</seriesName>
+<targetDisease>Tetanus</targetDisease>
+<vaccineGroup>DTaP/Tdap/Td</vaccineGroup>
+<selectBest>
+<defaultSeries>Yes</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>1</seriesPreference>
+<minAgeToStart>n/a</minAgeToStart>
+<maxAgeToStart>n/a</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>6 weeks - 4 days</absMinAge>
+<minAge>6 weeks</minAge>
+<earliestRecAge>2 months</earliestRecAge>
+<latestRecAge>3 months + 4 weeks</latestRecAge>
+<maxAge/>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>INFANRIX</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>TRIPEDIA</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 7 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>7 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 6 or more total doses to date</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>5</doseCount>
+<doseType>Total</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>01;09;20;22;28;35;50;102;106;107;110;120;130;132;138;139;146</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge>10 weeks - 4 days</absMinAge>
+<minAge>10 weeks</minAge>
+<earliestRecAge>4 months</earliestRecAge>
+<latestRecAge>5 months + 4 weeks</latestRecAge>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>13 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>INFANRIX</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>TRIPEDIA</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 7 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>7 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 6 or more total doses to date</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>5</doseCount>
+<doseType>Total</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>01;09;20;22;28;35;50;102;106;107;110;120;130;132;138;139;146</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 3</doseNumber>
+<age>
+<absMinAge>14 weeks - 4 days</absMinAge>
+<minAge>14 weeks</minAge>
+<earliestRecAge>6 months</earliestRecAge>
+<latestRecAge>7 months + 4 weeks</latestRecAge>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>13 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>INFANRIX</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>TRIPEDIA</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 7 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>7 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 6 or more total doses to date</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>5</doseCount>
+<doseType>Total</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>01;09;20;22;28;35;50;102;106;107;110;120;130;132;138;139;146</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 4</doseNumber>
+<age>
+<absMinAge>12 months - 4 days</absMinAge>
+<minAge>12 months</minAge>
+<earliestRecAge>15 months</earliestRecAge>
+<latestRecAge>19 months + 4 weeks</latestRecAge>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>6 months - 4 days</absMinInt>
+<minInt>6 months</minInt>
+<earliestRecInt>6 months</earliestRecInt>
+<latestRecInt>13 months + 4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<absMinInt>4 months</absMinInt>
+</allowableInterval>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>INFANRIX</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>TRIPEDIA</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult</vaccineType>
+<cvx>138</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Unspecified Formulation</vaccineType>
+<cvx>139</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 4 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>4 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 6 or more total doses to date</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>5</doseCount>
+<doseType>Total</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>01;09;20;22;28;35;50;102;106;107;110;120;130;132;138;139;146</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 5</doseNumber>
+<age>
+<absMinAge>4 years - 4 days</absMinAge>
+<minAge>4 years</minAge>
+<earliestRecAge>4 years</earliestRecAge>
+<latestRecAge>7 years</latestRecAge>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>6 months - 4 days</absMinInt>
+<minInt>6 months</minInt>
+<earliestRecInt>3 years</earliestRecInt>
+<latestRecInt>4 years + 4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>INFANRIX</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName>TRIPEDIA</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>4 years</beginAge>
+<endAge>7 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult</vaccineType>
+<cvx>138</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Unspecified Formulation</vaccineType>
+<cvx>139</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 7 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>7 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 6 or more total doses to date</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>5</doseCount>
+<doseType>Total</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>01;09;20;22;28;35;50;102;106;107;110;120;130;132;138;139;146</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 6</doseNumber>
+<age>
+<absMinAge>7 years</absMinAge>
+<minAge>7 Years</minAge>
+<earliestRecAge>7 Years</earliestRecAge>
+<latestRecAge>7 Years</latestRecAge>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>4 weeks</earliestRecInt>
+<latestRecInt>4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult</vaccineType>
+<cvx>138</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Unspecified Formulation</vaccineType>
+<cvx>139</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient has received 2 or more doses before the age of 7 years</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>7 years</endAge>
+<interval/>
+<doseCount>1</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has 1 or more doses between the ages of 1 and 7 years</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>1 years</beginAge>
+<endAge>7 years</endAge>
+<interval/>
+<doseCount>0</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 7</doseNumber>
+<age>
+<absMinAge>7 years</absMinAge>
+<minAge>7 Years</minAge>
+<earliestRecAge>7 Years</earliestRecAge>
+<latestRecAge>7 Years</latestRecAge>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>4 weeks</earliestRecInt>
+<latestRecInt>4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult</vaccineType>
+<cvx>138</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Unspecified Formulation</vaccineType>
+<cvx>139</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient has 3 or more doses before the age of 7 years</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>7 years</endAge>
+<interval/>
+<doseCount>2</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 2 or more doses between the ages of 1 and 7 years</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>1 years</beginAge>
+<endAge>7 years</endAge>
+<interval/>
+<doseCount>1</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 8</doseNumber>
+<age>
+<absMinAge>7 years</absMinAge>
+<minAge>7 Years</minAge>
+<earliestRecAge>7 Years</earliestRecAge>
+<latestRecAge>7 Years</latestRecAge>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>6 months - 4 days</absMinInt>
+<minInt>6 months</minInt>
+<earliestRecInt>6 months</earliestRecInt>
+<latestRecInt>6 months</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult</vaccineType>
+<cvx>138</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Unspecified Formulation</vaccineType>
+<cvx>139</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient has received 4 or more doses before the age of 7 years</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>7 years</endAge>
+<interval/>
+<doseCount>3</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 3 or more doses between the ages of 1 and 7 years</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>1 years</beginAge>
+<endAge>7 years</endAge>
+<interval/>
+<doseCount>2</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 9</doseNumber>
+<age>
+<absMinAge>7 years</absMinAge>
+<minAge>11 years</minAge>
+<earliestRecAge>11 years</earliestRecAge>
+<latestRecAge>13 years</latestRecAge>
+<maxAge/>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>DTP</vaccineType>
+<cvx>01</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP</vaccineType>
+<cvx>20</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib</vaccineType>
+<cvx>22</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DT</vaccineType>
+<cvx>28</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib</vaccineType>
+<cvx>50</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTP-Hib-HepB</vaccineType>
+<cvx>102</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, 5 pertussis antigens</vaccineType>
+<cvx>106</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP, Unspecified Formulation</vaccineType>
+<cvx>107</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-HepB-IPV</vaccineType>
+<cvx>110</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-Hib-IPV</vaccineType>
+<cvx>120</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV</vaccineType>
+<cvx>130</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB,historical</vaccineType>
+<cvx>132</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult</vaccineType>
+<cvx>138</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Unspecified Formulation</vaccineType>
+<cvx>139</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>DTaP-IPV-Hib-HepB</vaccineType>
+<cvx>146</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge>19 years</endAge>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient has received at least one dose after the age of 7 years</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>7 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount>0</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 10</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>2 years</absMinInt>
+<minInt>5 years</minInt>
+<earliestRecInt>10 years</earliestRecInt>
+<latestRecInt>10 years + 4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>7 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Adsorbed</vaccineType>
+<cvx>09</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td p-free</vaccineType>
+<cvx>113</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Tdap</vaccineType>
+<cvx>115</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult</vaccineType>
+<cvx>138</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Td - Adult Unspecified Formulation</vaccineType>
+<cvx>139</cvx>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>Yes</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+</antigenSupportingData>

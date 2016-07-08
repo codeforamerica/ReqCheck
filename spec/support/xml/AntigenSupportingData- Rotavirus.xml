@@ -1,0 +1,593 @@
+<antigenSupportingData>
+    <immunity></immunity>
+    <series>
+        <seriesName>Rotavirus 3-dose</seriesName>
+        <targetDisease>Rotavirus</targetDisease>
+        <vaccineGroup>Rotavirus</vaccineGroup>
+        <selectBest>
+            <defaultSeries>Yes</defaultSeries>
+            <productPath>No</productPath>
+            <seriesPreference>1</seriesPreference>
+            <minAgeToStart>n/a</minAgeToStart>
+            <maxAgeToStart>n/a</maxAgeToStart>
+        </selectBest>
+        <seriesDose>
+            <doseNumber>Dose 1</doseNumber>
+            <age>
+                <absMinAge>6 weeks - 4 days</absMinAge>
+                <minAge>6 weeks</minAge>
+                <earliestRecAge>2 Months</earliestRecAge>
+                <latestRecAge />
+                <maxAge>15 weeks</maxAge>
+            </age>
+            <interval />
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>2</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, tetravalent</vaccineType>
+                <cvx>74</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, unspecified formulation</vaccineType>
+                <cvx>122</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+        <seriesDose>
+            <doseNumber>Dose 2</doseNumber>
+            <age>
+                <absMinAge>10 weeks - 4 days</absMinAge>
+                <minAge>10 weeks</minAge>
+                <earliestRecAge>4 months</earliestRecAge>
+                <latestRecAge>5 months + 4 weeks</latestRecAge>
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval>
+                <fromPrevious>Y</fromPrevious>
+                <fromTargetDose />
+                <fromMostRecent />
+                <absMinInt>4 weeks - 4 days</absMinInt>
+                <minInt>4 weeks</minInt>
+                <earliestRecInt>8 weeks</earliestRecInt>
+                <latestRecInt>13 weeks</latestRecInt>
+                <intervalPriority />
+            </interval>
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>2</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, tetravalent</vaccineType>
+                <cvx>74</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, unspecified formulation</vaccineType>
+                <cvx>122</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+        <seriesDose>
+            <doseNumber>Dose 3</doseNumber>
+            <age>
+                <absMinAge>14 weeks - 4 days</absMinAge>
+                <minAge>14 weeks</minAge>
+                <earliestRecAge>6 months</earliestRecAge>
+                <latestRecAge>7 months + 4 weeks</latestRecAge>
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval>
+                <fromPrevious>Y</fromPrevious>
+                <fromTargetDose />
+                <fromMostRecent />
+                <absMinInt>4 weeks - 4 days</absMinInt>
+                <minInt>4 weeks</minInt>
+                <earliestRecInt>8 weeks</earliestRecInt>
+                <latestRecInt>13 weeks</latestRecInt>
+                <intervalPriority />
+            </interval>
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>2</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, tetravalent</vaccineType>
+                <cvx>74</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, unspecified formulation</vaccineType>
+                <cvx>122</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+    </series>
+    <series>
+        <seriesName>Rotavirus 3-dose late start</seriesName>
+        <targetDisease>Rotavirus</targetDisease>
+        <vaccineGroup>Rotavirus</vaccineGroup>
+        <selectBest>
+            <defaultSeries>No</defaultSeries>
+            <productPath>No</productPath>
+            <seriesPreference>3</seriesPreference>
+            <minAgeToStart>n/a</minAgeToStart>
+            <maxAgeToStart>n/a</maxAgeToStart>
+        </selectBest>
+        <seriesDose>
+            <doseNumber>Dose 1</doseNumber>
+            <age>
+                <absMinAge>15 weeks</absMinAge>
+                <minAge>15 weeks</minAge>
+                <earliestRecAge />
+                <latestRecAge />
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval />
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>2</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, tetravalent</vaccineType>
+                <cvx>74</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, unspecified formulation</vaccineType>
+                <cvx>122</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+        <seriesDose>
+            <doseNumber>Dose 2</doseNumber>
+            <age>
+                <absMinAge />
+                <minAge />
+                <earliestRecAge>4 months</earliestRecAge>
+                <latestRecAge>5 months + 4 weeks</latestRecAge>
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval>
+                <fromPrevious>Y</fromPrevious>
+                <fromTargetDose />
+                <fromMostRecent />
+                <absMinInt>4 weeks - 4 days</absMinInt>
+                <minInt>4 weeks</minInt>
+                <earliestRecInt>4 weeks</earliestRecInt>
+                <latestRecInt>13 weeks</latestRecInt>
+                <intervalPriority />
+            </interval>
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>2</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, tetravalent</vaccineType>
+                <cvx>74</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, unspecified formulation</vaccineType>
+                <cvx>122</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+        <seriesDose>
+            <doseNumber>Dose 3</doseNumber>
+            <age>
+                <absMinAge />
+                <minAge />
+                <earliestRecAge>6 months</earliestRecAge>
+                <latestRecAge>7 months + 4 weeks</latestRecAge>
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval>
+                <fromPrevious>Y</fromPrevious>
+                <fromTargetDose />
+                <fromMostRecent />
+                <absMinInt>4 weeks - 4 days</absMinInt>
+                <minInt>4 weeks</minInt>
+                <earliestRecInt>8 weeks</earliestRecInt>
+                <latestRecInt>13 weeks</latestRecInt>
+                <intervalPriority />
+            </interval>
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>2</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, tetravalent</vaccineType>
+                <cvx>74</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, pentavalent</vaccineType>
+                <cvx>116</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, unspecified formulation</vaccineType>
+                <cvx>122</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+    </series>
+    <series>
+        <seriesName>Rotavirus, monovalent 2-dose</seriesName>
+        <targetDisease>Rotavirus</targetDisease>
+        <vaccineGroup>Rotavirus</vaccineGroup>
+        <selectBest>
+            <defaultSeries>No</defaultSeries>
+            <productPath>Yes</productPath>
+            <seriesPreference>2</seriesPreference>
+            <minAgeToStart>n/a</minAgeToStart>
+            <maxAgeToStart>n/a</maxAgeToStart>
+        </selectBest>
+        <seriesDose>
+            <doseNumber>Dose 1</doseNumber>
+            <age>
+                <absMinAge>6 weeks - 4 days</absMinAge>
+                <minAge>6 weeks</minAge>
+                <earliestRecAge>2 months</earliestRecAge>
+                <latestRecAge />
+                <maxAge>15 weeks</maxAge>
+            </age>
+            <interval />
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+        <seriesDose>
+            <doseNumber>Dose 2</doseNumber>
+            <age>
+                <absMinAge>10 weeks - 4 days</absMinAge>
+                <minAge>10 weeks</minAge>
+                <earliestRecAge>4 months</earliestRecAge>
+                <latestRecAge>5 months + 4 weeks</latestRecAge>
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval>
+                <fromPrevious>Y</fromPrevious>
+                <fromTargetDose />
+                <fromMostRecent />
+                <absMinInt>4 weeks - 4 days</absMinInt>
+                <minInt>4 weeks</minInt>
+                <earliestRecInt>8 weeks</earliestRecInt>
+                <latestRecInt>13 weeks</latestRecInt>
+                <intervalPriority />
+            </interval>
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+    </series>
+    <series>
+        <seriesName>Rotavirus, monovalent 2-dose late start</seriesName>
+        <targetDisease>Rotavirus</targetDisease>
+        <vaccineGroup>Rotavirus</vaccineGroup>
+        <selectBest>
+            <defaultSeries>No</defaultSeries>
+            <productPath>Yes</productPath>
+            <seriesPreference>4</seriesPreference>
+            <minAgeToStart>n/a</minAgeToStart>
+            <maxAgeToStart>n/a</maxAgeToStart>
+        </selectBest>
+        <seriesDose>
+            <doseNumber>Dose 1</doseNumber>
+            <age>
+                <absMinAge>15 weeks</absMinAge>
+                <minAge>15 weeks</minAge>
+                <earliestRecAge />
+                <latestRecAge />
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval />
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+        <seriesDose>
+            <doseNumber>Dose 2</doseNumber>
+            <age>
+                <absMinAge />
+                <minAge />
+                <earliestRecAge>4 months</earliestRecAge>
+                <latestRecAge>5 months + 4 weeks</latestRecAge>
+                <maxAge>8 months + 1 day</maxAge>
+            </age>
+            <interval>
+                <fromPrevious>Y</fromPrevious>
+                <fromTargetDose />
+                <fromMostRecent />
+                <absMinInt>4 weeks - 4 days</absMinInt>
+                <minInt>4 weeks</minInt>
+                <earliestRecInt>8 weeks</earliestRecInt>
+                <latestRecInt>13 weeks</latestRecInt>
+                <intervalPriority />
+            </interval>
+            <allowableInterval />
+            <preferableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks</beginAge>
+                <endAge>8 Months + 1 day</endAge>
+                <tradeName />
+                <mvx />
+                <volume>1</volume>
+                <forecastVaccineType>Y</forecastVaccineType>
+            </preferableVaccine>
+            <allowableVaccine>
+                <vaccineType>Rotavirus, monovalent</vaccineType>
+                <cvx>119</cvx>
+                <beginAge>6 weeks - 4 days</beginAge>
+                <endAge />
+            </allowableVaccine>
+            <conditionalSkip />
+            <recurringDose>No</recurringDose>
+            <seasonalRecommendation />
+            <requiredGender />
+        </seriesDose>
+    </series>
+</antigenSupportingData>
