@@ -17,6 +17,9 @@ gem 'jquery-rails'
 # webserver, production
 gem 'puma'
 
+# paperclip to upload files
+# gem "paperclip", "~> 5.0.0"
+
 gem 'devise'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 
