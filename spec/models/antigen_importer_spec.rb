@@ -82,26 +82,49 @@ RSpec.describe AntigenImporter, type: :model do
     end
 
     describe '#add_vaccines_to_antigen' do
-      it 'takes an array of vaccines and antigen name' do
+      it 'takes an array of vaccines, antigen name and xml_hash' do
         vaccines = [FactoryGirl.create(:vaccine)]
         antigen  = FactoryGirl.create(:antigen)
         expect(antigen.vaccines).to eq([])
-        antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines)
+        antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines, xml_hash)
         antigen.reload
         expect(antigen.vaccines).to eq(vaccines)
       end
       it 'will error if the antigen does not exist' do
         vaccines = [FactoryGirl.create(:vaccine)]
-        expect {antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines)}.
+        expect {antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines, xml_hash)}.
           to raise_exception
+      end
+      it 'adds the raw xml_hash to the antigen database object' do
+        vaccines = [FactoryGirl.create(:vaccine)]
+        antigen  = FactoryGirl.create(:antigen)
+        expect(antigen.xml_hash).to eq(nil)
+        antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines, xml_hash)
+        antigen.reload
+        expect(antigen.xml_hash).to eq(xml_hash)
       end
     end
 
-    xdescribe '#to_cvx_hash' do
-      it 'pulls every cvx from the xml and creates a hash with cvx as the key' do
-        cvx_hash   = antigen_importer.to_cvx_hash(xml_hash)
-        expect(cvx_hash.keys.length).to be(100)
+    describe '#import_antigen_xml_files' do
+      it 'takes a directory of antigen xml files and imports them' do
+        expect(Antigen.all.length).to eq(0)
+        antigen_importer.import_antigen_xml_files('spec/support/xml')
+        expect(Antigen.all.length).to eq(17)
+        expect(Antigen.first.vaccines.length).to eq(18)
       end
     end
+
+    describe '#parse_and_hash' do
+      it 'takes a file path string and returns the hash of xml file' do
+        expect(
+          antigen_importer.parse_and_hash('spec/support/xml/AntigenSupportingData- Diphtheria.xml')
+        ).to eq(XMLHash::SAMPLEDIPHTHERIA)
+        expect(
+          antigen_importer.parse_and_hash('spec/support/xml/AntigenSupportingData- Diphtheria.xml').
+            class.name
+        ).to eq('Hash')
+      end
+    end
+
   end
 end

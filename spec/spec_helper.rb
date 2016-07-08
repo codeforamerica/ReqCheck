@@ -50,7 +50,7 @@ RSpec.configure do |config|
   end
 
   # Use webkit and capybara
-  config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
+  # config.include(Capybara::Webkit::RspecMatchers, :type => :feature)
 
   # Add the custom helpers
   config.include TimeHelp

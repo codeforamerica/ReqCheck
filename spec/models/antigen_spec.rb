@@ -6,6 +6,13 @@ RSpec.describe Antigen, type: :model do
       expect{ Antigen.create }.to raise_exception
       expect(Antigen.create(name: 'Test').class.name).to eq('Antigen')
     end
+    it 'has a json field named xml_hash' do
+      antigen = Antigen.create(name: 'Test')
+      xml_hash = {"hello": "world"}.stringify_keys
+      antigen.xml_hash = xml_hash
+      antigen.save
+      expect(Antigen.first.xml_hash).to eq(xml_hash)
+    end
   end
 
   describe 'its relationship with vaccines' do
