@@ -64,7 +64,7 @@
   <% @patient.get_vaccines(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).each do |individual_vaccine| %>
     <tr>
       <td><%= individual_vaccine.vaccine_code %></td>
-      <td><%= individual_vaccine.manufacturer %></td>
+      <td><%= individual_vaccine.mvx_code %></td>
       <td><%= individual_vaccine.administered_date.strftime("%m/%d/%Y") %></td>
       <td><%= individual_vaccine.patient_age_at_vaccine_dose %></td>
       <td><%= individual_vaccine.time_since_vaccine_dose %></td>

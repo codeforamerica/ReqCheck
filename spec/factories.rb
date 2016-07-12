@@ -49,7 +49,7 @@ FactoryGirl.define do
     history_flag false
     provider_code "432"
     
-    sequence(:manufacturer) do |num|
+    sequence(:mvx_code) do |num|
       vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
       vax_array[(num % vax_array.length)][1]
     end

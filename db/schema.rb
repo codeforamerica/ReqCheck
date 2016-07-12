@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708220641) do
+ActiveRecord::Schema.define(version: 20160712175004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20160708220641) do
     t.string   "cosite"
     t.string   "region"
     t.string   "dosage"
-    t.string   "manufacturer"
+    t.string   "mvx_code"
     t.string   "lot_number"
     t.date     "expiration_date"
     t.string   "dose_number"
