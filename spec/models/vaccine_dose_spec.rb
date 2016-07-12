@@ -45,5 +45,27 @@ RSpec.describe VaccineDose, type: :model do
         expect(test_vaccine_dose.patient_age_at_vaccine_dose).to eq('5y, 11m, 4w')
       end
     end
+    describe '#vaccine_info' do 
+      it 'has a vaccine_info object that is joined on the cvx code' do
+        vaccine_dose = FactoryGirl.create(:vaccine_dose)
+        vaccine_info = FactoryGirl.create(:vaccine, cvx_code: vaccine_dose.cvx_code)
+        vaccine_dose.reload
+        expect(vaccine_dose.vaccine_info).to eq(vaccine_info)
+      end
+    end
+    describe '#antigens' do 
+      it 'has a number of antigens through the vaccine_info' do
+        vaccine_dose = FactoryGirl.create(:vaccine_dose)
+        vaccine_info = FactoryGirl.create(:vaccine, cvx_code: vaccine_dose.cvx_code)
+        vaccine_dose.reload
+        expect(vaccine_dose.antigens).to eq(vaccine_info.antigens)
+      end
+      it 'returns nil if there is no vaccine_info' do
+        vaccine_dose = FactoryGirl.create(:vaccine_dose)
+        expect(vaccine_dose.vaccine_info).to eq(nil)
+        vaccine_dose.reload
+        expect(vaccine_dose.antigens).to eq(nil)
+      end
+    end
   end
 end

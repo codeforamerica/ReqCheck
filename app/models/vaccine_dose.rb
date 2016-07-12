@@ -13,4 +13,16 @@ class VaccineDose < ActiveRecord::Base
   def time_since_vaccine_dose
     TimeCalc.detailed_date_diff(self.administered_date)
   end
+
+  def vaccine_info
+    Vaccine.find_by(cvx_code: self.cvx_code) if self.cvx_code
+  end
+
+  def antigens
+    if self.vaccine_info && self.vaccine_info.antigens
+      return self.vaccine_info.antigens
+    else
+      raise 'Vaccine Dose is missing information regarding the vaccine or antigens'
+    end
+  end
 end

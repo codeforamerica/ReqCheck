@@ -20,11 +20,10 @@ FactoryGirl.define do
   end
 
   factory :antigen_with_vaccine, parent: :antigen do
-    after_create do |antigen|
+    after(:create) do |antigen|
       antigen.vaccines << FactoryGirl.create(:vaccine)
     end
   end
-
   
   factory :patient do
     sequence(:first_name, 1) { |n| "Test#{n}" }
@@ -45,7 +44,7 @@ FactoryGirl.define do
 
   factory :vaccine_dose do
     vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
-    imm_date { Date.today }
+    administered_date { Date.today }
     send_flag false
     history_flag false
     provider_code "432"
@@ -58,12 +57,24 @@ FactoryGirl.define do
       vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
       vax_array[(num % vax_array.length)][2]
     end
+    sequence(:cvx_code) do |num|
+      vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
+      vax_array[(num % vax_array.length)][3]
+    end
     expiration_date { in_pst(2.months.since) }
     dose_number 1
     facility_id 19
 
 
     association :patient_profile, factory: :patient_profile
+  end
+
+  factory :vaccine_dose_with_vaccine, parent: :vaccine_dose do
+    after(:create) do |vaccine_dose|
+      antigen = FactoryGirl.create(:antigen)
+      vaccine = FactoryGirl.create(:vaccine, cvx_code: vaccine_dose.cvx_code)
+      antigen.vaccines << vaccine
+    end
   end
 
   factory :vaccine_requirement do

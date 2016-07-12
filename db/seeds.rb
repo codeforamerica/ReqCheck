@@ -36,7 +36,8 @@ patients_list.each_with_index do |value, index|
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       administered_date: 2.years.ago.to_date,
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
-      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
+      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2],
+      cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
     )
     VaccineDose.create(
       patient_profile: patient.patient_profile,
@@ -44,7 +45,8 @@ patients_list.each_with_index do |value, index|
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       administered_date: 1.years.ago.to_date,
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
-      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
+      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2],
+      cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
     )
     VaccineDose.create(
       patient_profile: patient.patient_profile,
@@ -52,7 +54,8 @@ patients_list.each_with_index do |value, index|
       description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       administered_date: Date.today,
       manufacturer: TextVax::VAXCODES[vax_code.to_sym][0][1],
-      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2]
+      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2],
+      cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
     )
   end
 end
