@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712175004) do
+ActiveRecord::Schema.define(version: 20160712184642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "antigen_series", force: :cascade do |t|
+    t.integer  "antigen_id"
+    t.string   "name"
+    t.string   "target_disease"
+    t.string   "vaccine_group"
+    t.boolean  "default_series",    default: false
+    t.boolean  "product_path",      default: false
+    t.integer  "preference_number"
+    t.string   "min_start_age"
+    t.string   "max_start_age"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "antigen_series", ["antigen_id"], name: "index_antigen_series_on_antigen_id", using: :btree
 
   create_table "antigens", force: :cascade do |t|
     t.string   "name",       null: false
@@ -106,5 +122,6 @@ ActiveRecord::Schema.define(version: 20160712175004) do
 
   add_index "vaccines", ["cvx_code"], name: "index_vaccines_on_cvx_code", using: :btree
 
+  add_foreign_key "antigen_series", "antigens"
   add_foreign_key "vaccine_doses", "patient_profiles"
 end
