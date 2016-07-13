@@ -7,10 +7,12 @@ RSpec.describe AntigenSeriesDoseVaccine, type: :model do
     it { should validate_presence_of(:preferable) }
   end
   describe 'relationships' do
-    it 'has one series dose' do
-      antigen_series = FactoryGirl.create(:antigen_series)
-      antigen_series_dose = FactoryGirl.create(:antigen_series_dose)
-      antigen_series.doses << antigen_series_dose
+    it 'has one antigen_series_dose' do
+      asd_vaccine = FactoryGirl.create(:antigen_series_dose_vaccine)
+      as_dose = FactoryGirl.create(:antigen_series_dose,
+        antigen_series_dose_vaccines: [asd_vaccine]
+      )
+      expect(asd_vaccine.antigen_series_dose).to eq(as_dose)
     end
   end
 end

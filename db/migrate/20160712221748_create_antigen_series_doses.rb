@@ -12,6 +12,7 @@ class CreateAntigenSeriesDoses < ActiveRecord::Migration
       t.string :interval_min
       t.string :interval_earliest_recommended
       t.string :interval_latest_recommended
+      t.string :required_gender
       t.boolean :recurring_dose, default: false
       t.timestamps null: false
     end

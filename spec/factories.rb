@@ -4,6 +4,15 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :conditional_skip_set_condition do
+    
+  end
+  factory :conditional_skip_set do
+    
+  end
+  factory :conditional_skip do
+    
+  end
   extend TimeHelp
 
   factory :antigen_series_dose_vaccine do
