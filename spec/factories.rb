@@ -5,6 +5,54 @@ require_relative 'support/time_help'
 
 FactoryGirl.define do
   extend TimeHelp
+
+  factory :antigen_series_dose_vaccine do
+    vaccine_type 'IPV'
+    cvx_code 10
+    preferable true
+    begin_age '6 weeks'
+    volume '0.5'
+    forecast_vaccine_type false
+  end
+
+  factory :antigen_series_dose do
+    dose_number 1
+    absolute_min_age '6 weeks - 4 days'
+    min_age '6 weeks'
+    earliest_recommended_age '2 months'
+    latest_recommended_age '3 months + 4 weeks'
+    max_age '18 years'
+    interval_type 'None'
+    
+    association :prefered_vaccine, factory: :antigen_series_dose_vaccine
+  end
+
+  factory :antigen_series_dose_second do
+    dose_number 2
+    absolute_min_age '10 weeks - 4 days'
+    min_age '10 weeks'
+    earliest_recommended_age '4 months'
+    latest_recommended_age '5 months + 4 weeks'
+    max_age '18 years'
+    interval_type 'Previous'
+    interval_absolute_min '4 weeks - 4 days'
+    interval_min '4 weeks'
+    interval_earliest_recommended '8 weeks'
+    interval_latest_recommended '13 weeks'
+
+    association :prefered_vaccine, factory: :antigen_series_dose_vaccine
+  end
+  
+  factory :antigen_series do
+    name 'Polio - All IPV - 4 Dose'
+    target_disease 'Polio'
+    vaccine_group 'Polio'
+    default_series true
+    product_path true
+    preference_number 1
+    min_start_age 'n/a'
+    max_start_age 'n/a'
+  end
   
   factory :vaccine do
     short_description 'Polio'

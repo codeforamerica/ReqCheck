@@ -52,6 +52,7 @@ group :test do
  gem 'capybara-webkit'
  gem 'timecop'
  gem 'codeclimate-test-reporter', require: false
+ gem 'shoulda-matchers', '~> 3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
