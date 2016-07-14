@@ -4,16 +4,46 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
-  factory :conditional_skip_set_condition do
-    
-  end
-  factory :conditional_skip_set do
-    
-  end
-  factory :conditional_skip do
-    
-  end
   extend TimeHelp
+
+  factory :conditional_skip_set_condition do
+    condition_id 1
+    condition_type 'Age'
+
+    after(:create) do |condition|
+      if condition.condition_type == 'Age' && condition.start_age.nil?
+        condition.start_age = '4 years - 4 days'
+      elsif condition.condition_type == 'Interval' && condition.interval.nil?
+        condition.interval = '6 months - 4 days'
+      end
+    end
+  end
+
+  factory :conditional_skip_set do
+    set_id 1
+    set_description 'Dose is not required for those 4 years or older when the interval from the '\
+    'last dose is 6 months'
+    condition_logic 'AND'
+
+    after(:create) do |cond_skip_set|
+      cond_skip_set.conditions << FactoryGirl.create(:conditional_skip_set_condition)
+      cond_skip_set.conditions << FactoryGirl.create(:conditional_skip_set_condition,
+        condition_id: 2,
+        condition_type: 'Interval',
+        interval: '6 months - 4 days'
+      )
+    end
+  end
+
+  factory :conditional_skip do
+    set_logic 'n/a'
+
+    after(:create) do |cond_skip|
+      if !cond_skip.sets
+        FactoryGirl.create(:conditional_skip_set, conditional_skip: cond_skip)
+      end
+    end
+  end
 
   factory :antigen_series_dose_vaccine do
     vaccine_type 'IPV'
@@ -33,7 +63,9 @@ FactoryGirl.define do
     max_age '18 years'
     interval_type 'None'
     
-    association :prefered_vaccine, factory: :antigen_series_dose_vaccine
+    after(:create) do |dose|
+      dose.dose_vaccines << FactoryGirl.create(:antigen_series_dose_vaccine)
+    end
   end
 
   factory :antigen_series_dose_second do

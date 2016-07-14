@@ -4,14 +4,14 @@ class AntigenImporter
   def import_antigen_xml_files(xml_directory)
     file_names = Dir[xml_directory + "/*.xml" ]
     file_names.each do |file_name|
-      file_hash = parse_and_hash(file_name)
+      xml_file_hash = parse_and_hash(file_name)
       if file_name.include? 'Schedule'
 
       elsif file_name.include? 'Antigen'
-        cvx_codes = get_cvx_for_antigen(file_hash)
+        cvx_codes = get_cvx_for_antigen(xml_file_hash)
         vaccines = find_or_create_all_vaccines(cvx_codes)
-        antigen_name = file_hash.find_all_values_for('targetDisease').first
-        add_vaccines_to_antigen(antigen_name, vaccines)
+        antigen_name = xml_file_hash.find_all_values_for('targetDisease').first
+        add_vaccines_to_antigen(antigen_name, vaccines, xml_file_hash)
       end
     end
   end
