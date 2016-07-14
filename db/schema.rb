@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712184642) do
+ActiveRecord::Schema.define(version: 20160713231834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,49 @@ ActiveRecord::Schema.define(version: 20160712184642) do
 
   add_index "antigen_series", ["antigen_id"], name: "index_antigen_series_on_antigen_id", using: :btree
 
+  create_table "antigen_series_dose_vaccines", force: :cascade do |t|
+    t.string   "vaccine_type"
+    t.integer  "cvx_code"
+    t.boolean  "preferable",            default: false
+    t.string   "begin_age"
+    t.string   "end_age"
+    t.string   "trade_name"
+    t.integer  "mvx_code"
+    t.string   "volume"
+    t.boolean  "forecast_vaccine_type"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  create_table "antigen_series_doses", force: :cascade do |t|
+    t.integer  "dose_number"
+    t.string   "absolute_min_age"
+    t.string   "min_age"
+    t.string   "earliest_recommended_age"
+    t.string   "latest_recommended_age"
+    t.string   "max_age"
+    t.string   "interval_type"
+    t.string   "interval_absolute_min"
+    t.string   "interval_min"
+    t.string   "interval_earliest_recommended"
+    t.string   "interval_latest_recommended"
+    t.string   "required_gender"
+    t.boolean  "recurring_dose",                default: false
+    t.integer  "antigen_series_id"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  add_index "antigen_series_doses", ["antigen_series_id"], name: "index_antigen_series_doses_on_antigen_series_id", using: :btree
+
+  create_table "antigen_series_doses_to_vaccines", id: false, force: :cascade do |t|
+    t.integer "antigen_series_dose_id",         null: false
+    t.integer "antigen_series_dose_vaccine_id", null: false
+  end
+
+  add_index "antigen_series_doses_to_vaccines", ["antigen_series_dose_id", "antigen_series_dose_vaccine_id"], name: "index_series_doses_to_vaccines_on_series_dose_id", using: :btree
+  add_index "antigen_series_doses_to_vaccines", ["antigen_series_dose_vaccine_id", "antigen_series_dose_id"], name: "index_vaccines_to_series_doses_on_vaccine_id", using: :btree
+
   create_table "antigens", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at", null: false
@@ -47,6 +90,37 @@ ActiveRecord::Schema.define(version: 20160712184642) do
 
   add_index "antigens_vaccines", ["antigen_id"], name: "index_antigens_vaccines_on_antigen_id", using: :btree
   add_index "antigens_vaccines", ["vaccine_id"], name: "index_antigens_vaccines_on_vaccine_id", using: :btree
+
+  create_table "conditional_skip_set_conditions", force: :cascade do |t|
+    t.integer  "condition_id"
+    t.string   "condition_type"
+    t.string   "start_date"
+    t.string   "end_date"
+    t.string   "interval"
+    t.string   "dose_count"
+    t.string   "dose_type"
+    t.string   "dose_count_logic"
+    t.string   "vaccine_types"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "conditional_skip_sets", force: :cascade do |t|
+    t.integer  "set_id"
+    t.string   "set_description"
+    t.string   "condition_logic"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "conditional_skips", force: :cascade do |t|
+    t.string   "set_logic"
+    t.integer  "antigen_series_dose_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "conditional_skips", ["antigen_series_dose_id"], name: "index_conditional_skips_on_antigen_series_dose_id", using: :btree
 
   create_table "cvxmappers", force: :cascade do |t|
     t.string   "description"
@@ -123,5 +197,7 @@ ActiveRecord::Schema.define(version: 20160712184642) do
   add_index "vaccines", ["cvx_code"], name: "index_vaccines_on_cvx_code", using: :btree
 
   add_foreign_key "antigen_series", "antigens"
+  add_foreign_key "antigen_series_doses", "antigen_series"
+  add_foreign_key "conditional_skips", "antigen_series_doses"
   add_foreign_key "vaccine_doses", "patient_profiles"
 end

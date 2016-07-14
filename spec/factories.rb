@@ -4,16 +4,19 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  extend TimeHelp
+
   factory :conditional_skip_set_condition do
     
   end
+
   factory :conditional_skip_set do
     
   end
+
   factory :conditional_skip do
     
   end
-  extend TimeHelp
 
   factory :antigen_series_dose_vaccine do
     vaccine_type 'IPV'
@@ -33,7 +36,9 @@ FactoryGirl.define do
     max_age '18 years'
     interval_type 'None'
     
-    association :prefered_vaccine, factory: :antigen_series_dose_vaccine
+    after(:create) do |dose|
+      dose.dose_vaccines << FactoryGirl.create(:antigen_series_dose_vaccine)
+    end
   end
 
   factory :antigen_series_dose_second do

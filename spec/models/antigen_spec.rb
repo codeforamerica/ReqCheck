@@ -15,11 +15,18 @@ RSpec.describe Antigen, type: :model do
     end
   end
 
-  describe 'its relationship with vaccines' do
+  describe 'relationships' do
+    it 'has many series' do
+      antigen = FactoryGirl.create(:antigen)
+      antigen_series = FactoryGirl.create(:antigen_series)
+      antigen.series << antigen_series
+      expect(antigen.series).to eq([antigen_series])
+    end
     it 'has multiple vaccines' do
       antigen = Antigen.create(name: 'Polio')
       vaccine = FactoryGirl.create(:vaccine)
       antigen.vaccines << vaccine
+      expect(antigen.vaccines).to eq([vaccine])
     end
   end
 end

@@ -15,7 +15,7 @@ RSpec.describe ConditionalSkipSet, type: :model do
     it 'belongs to a conditional_skip' do
       conditional_skip_set = FactoryGirl.create(:conditional_skip_set)
       conditional_skip     = FactoryGirl.create(:conditional_skip, sets: [conditional_skip_set])
-      conditional_skip.sets = [conditional_skip_set]
+      expect(conditional_skip_set.conditional_skip).to eq(conditional_skip)
     end
   end
 end

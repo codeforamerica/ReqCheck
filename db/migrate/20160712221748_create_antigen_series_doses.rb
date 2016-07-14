@@ -14,6 +14,7 @@ class CreateAntigenSeriesDoses < ActiveRecord::Migration
       t.string :interval_latest_recommended
       t.string :required_gender
       t.boolean :recurring_dose, default: false
+      t.references :antigen_series, index: true, foreign_key: true
       t.timestamps null: false
     end
   end
