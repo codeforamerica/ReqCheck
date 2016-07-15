@@ -3,9 +3,10 @@ require_relative '../support/antigen_xml'
 
 RSpec.describe AntigenImporter, type: :model do
   describe '#create' do
-    it 'takes no arguments to instantiate and is stateless' do
+    it 'takes no arguments to instantiate' do
       antigen_importer = AntigenImporter.new
       expect(antigen_importer.class.name).to eq('AntigenImporter')
+      expect(antigen_importer.antigens).to eq([])
     end
   end
   
@@ -111,6 +112,7 @@ RSpec.describe AntigenImporter, type: :model do
         antigen_importer.import_antigen_xml_files('spec/support/xml')
         expect(Antigen.all.length).to eq(17)
         expect(Antigen.first.vaccines.length).to eq(18)
+        expect(antigen_importer.antigens.length).to eq(17)
       end
     end
 
@@ -123,6 +125,20 @@ RSpec.describe AntigenImporter, type: :model do
           antigen_importer.parse_and_hash('spec/support/xml/AntigenSupportingData- Diphtheria.xml').
             class.name
         ).to eq('Hash')
+      end
+    end
+
+    xdescribe '#create_antigen_series' do
+      it 'takes an antigen_series_hash and returns an antigen_series' do
+        antigen_series = antigen_importer.create_all_antigen_series(xml_hash)
+        expect(antigen_series.first.class.name).to eq('AntigenSeries')
+      end
+    end
+
+    xdescribe '#create_all_antigen_series' do
+      it 'takes an antigen_xml_hash and returns an array of antigen_series' do
+        antigen_series = antigen_importer.create_all_antigen_series(xml_hash)
+        expect(antigen_series.first.class.name).to eq('AntigenSeries')
       end
     end
 
