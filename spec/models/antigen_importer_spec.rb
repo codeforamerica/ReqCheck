@@ -142,5 +142,34 @@ RSpec.describe AntigenImporter, type: :model do
       end
     end
 
+    xdescribe '#create_all_antigen_series' do
+      # ensure it takes a hash and array
+    end
+    xdescribe '#create_antigen_series_doses' do
+
+    end
+    xdescribe '#create_antigen_series_dose_vaccines' do
+
+    end
+    xdescribe '#create_conditional_skips' do
+
+    end
+    xdescribe '#create_conditional_skip_sets' do
+
+    end
+    describe '#create_conditional_skip_set_conditions' do
+      it 'takes an conditiona_skip_set hash and returns an array of conditions' do
+        condition_hash = xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][0]["conditionalSkip"]
+        conditions = antigen_importer.create_conditional_skip_set_conditions(condition_hash)
+        expect(conditions.first.class.name).to eq('ConditionalSkipSetCondition')
+      end
+      xit 'takes an conditiona_skip_set hash with a hash of one condition' do
+        condition_hash = xml_hash[]
+      end
+      xit 'takes an conditiona_skip_set hash with an array with many conditions' do
+        condition_hash = xml_hash[]
+      end
+    end
+
   end
 end

@@ -71,27 +71,54 @@ class AntigenImporter
     end
   end
 
-  def create_antigen_series_doses(antigen_series_xml_hash, antigen_series)
-    angigen_series_xml_hash['doses'].map do |series_doses_hash|
-      antigen_series_dose = AntigenSeriesDose(
-        antigen_series: antigen_series,
-        dose_number: hash['doseNumber'],
-        absolute_min_age: hash['age']['absMinAge'],
-        min_age: hash['age']['minAge'],
-        earliest_recommended_age: hash['age']['earliestRecAge'],
-        latest_recommended_age: hash['age']['latestRecAge'],
-        max_age: hash['age']['maxAge'],
-        interval_type: hash['interval'],
-        interval_absolute_min: hash[''],
-        interval_min: hash[''],
-        interval_earliest_recommended: hash[''],
-        interval_latest_recommended: hash[''],
-        required_gender: hash[''],
-        recurring_dose: hash[''],
-      )
+  def get_interval_type(interval_hash)
+    interval_type = nil
+    if interval_hash['fromPrevious']
+      interval_type 'from_previous'
+    elsif interval_hash['fromTargetDose']
+      interval_type 'from_target_dose'
+    elsif interval_hash['fromMostRecent']
+      interval_type 'from_most_recent'
+    end
+    return interval_type
   end
 
-  def create_antigen_series_dose_vaccines(antigen_series_dose_xml_hash)
+  def create_antigen_series_doses(antigen_series_xml_hash, antigen_series)
+    angigen_series_xml_hash['doses'].map do |series_doses_hash|
+      series_doses_args = {}
+      if series_doses_hash['interval']
+        interval_type = get_interval_type(series_doses_hash['interval'])
+        series_doses_args = {
+          interval_type: interval_type,
+          interval_absolute_min: series_doses_hash['interval']['absMinInt'],
+          interval_min: series_doses_hash['interval']['minInt'],
+          interval_earliest_recommended: series_doses_hash['interval']['earliestRecInt'],
+          interval_latest_recommended: series_doses_hash['interval']['latestRecInt'],
+        }
+      end
+      if series_doses_hash['allowableInterval']
+        interval_type = get_interval_type(series_doses_hash['allowableInterval'])
+        interval_absolute_min = series_doses_hash['allowableInterval']['absMinInt']
+        series_doses_args[:allowble_interval_type] = interval_type
+        series_doses_args[:allowable_interval_absolute_min] = interval_absolute_min
+      end
+      series_doses_args = series_doses_args.merge({
+        antigen_series: antigen_series,
+        dose_number: series_doses_hash['doseNumber'],
+        absolute_min_age: series_doses_hash['age']['absMinAge'],
+        min_age: series_doses_hash['age']['minAge'],
+        earliest_recommended_age: series_doses_hash['age']['earliestRecAge'],
+        latest_recommended_age: series_doses_hash['age']['latestRecAge'],
+        max_age: series_doses_hash['age']['maxAge'],
+        required_gender: series_doses_hash['requiredGender'],
+        recurring_dose: series_doses_hash['recurringDose']
+      })
+      antigen_series_dose = AntigenSeriesDose(series_doses_args)
+      create_antigen_series_dose_vaccines(series_doses_hash, antigen_series_dose)
+    end
+  end
+
+  def create_antigen_series_dose_vaccines(antigen_series_dose_xml_hash, antigen_series_dose)
   end
 
   def create_conditional_skips(antigen_series_dose_xml_hash)
@@ -101,6 +128,7 @@ class AntigenImporter
   end
 
   def create_conditional_skip_set_conditions(conditional_skip_set_xml_hash)
+
   end
 
   def add_vaccines_to_antigen(antigen_string, vaccine_array, xml_hash)

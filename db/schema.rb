@@ -59,11 +59,14 @@ ActiveRecord::Schema.define(version: 20160713231834) do
     t.string   "interval_min"
     t.string   "interval_earliest_recommended"
     t.string   "interval_latest_recommended"
+    t.string   "interval_priority"
+    t.string   "allowable_interval_type"
+    t.string   "allowable_interval_absolute_min"
     t.string   "required_gender"
-    t.boolean  "recurring_dose",                default: false
+    t.boolean  "recurring_dose",                  default: false
     t.integer  "antigen_series_id"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "antigen_series_doses", ["antigen_series_id"], name: "index_antigen_series_doses_on_antigen_series_id", using: :btree
