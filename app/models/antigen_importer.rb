@@ -121,14 +121,53 @@ class AntigenImporter
   def create_antigen_series_dose_vaccines(antigen_series_dose_xml_hash, antigen_series_dose)
   end
 
-  def create_conditional_skips(antigen_series_dose_xml_hash)
+  def create_conditional_skips(antigen_series_dose_xml_hash, antigen_series_dose)
   end
 
-  def create_conditional_skip_sets(conditional_skip_xml_hash)
+  def create_conditional_skip_sets(conditional_skip_xml_hash, conditional_skip)
+    set_xml_data = conditional_skip_xml_hash['set']
+    sets = []
+    
+    # ensure the data is an array
+    if set_xml_data.is_a? Hash
+      set_xml_data = [set_xml_data]
+    end
+    set_xml_data.each do |set_hash|
+      set_arguments = {
+        conditional_skip: conditional_skip,
+        set_id: set_hash['setID'].to_i,
+        set_description: set_hash['setDescription'],
+        condition_logic: set_hash['conditionLogic']
+      }
+      sets << ConditionalSkipSet.create(set_arguments)
+    end
+    sets
   end
 
-  def create_conditional_skip_set_conditions(conditional_skip_set_xml_hash)
-
+  def create_conditional_skip_set_conditions(conditional_skip_set_xml_hash, conditional_skip_set)
+    condition_xml_data = conditional_skip_set_xml_hash['condition']
+    conditions = []
+    if condition_xml_data.is_a? Hash
+      condition_xml_data = [condition_xml_data]
+    end
+    condition_xml_data.each do |condition_hash|
+      condition_arguments = {
+        skip_set: conditional_skip_set,
+        condition_id: condition_hash['conditionID'].to_i,
+        condition_type: condition_hash['conditionType'],
+        start_date: condition_hash['startDate'],
+        end_date: condition_hash['endDate'],
+        start_age: condition_hash['beginAge'],
+        end_age: condition_hash['endAge'],
+        interval: condition_hash['interval'],
+        dose_count: condition_hash['doseCount'],
+        dose_type: condition_hash['doseType'],
+        dose_count_logic: condition_hash['doseCountLogic'],
+        vaccine_types: condition_hash['vaccineTypes']
+      }
+      conditions << ConditionalSkipSetCondition.create(condition_arguments)
+    end
+    conditions
   end
 
   def add_vaccines_to_antigen(antigen_string, vaccine_array, xml_hash)
