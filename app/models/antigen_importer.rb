@@ -118,10 +118,71 @@ class AntigenImporter
     end
   end
 
+
+  def y_n_bool(datum)
+    datum == 'Y'
+  end
+
+
   def create_antigen_series_dose_vaccines(antigen_series_dose_xml_hash, antigen_series_dose)
+    dose_vaccines = []
+
+    preferable_vaccine_data = antigen_series_dose_xml_hash['preferableVaccine']
+    preferable_vaccine_data = [preferable_vaccine_data] if preferable_vaccine_data.is_a? Hash
+
+    allowable_vaccine_data = antigen_series_dose_xml_hash['allowableVaccine']
+    if allowable_vaccine_data.is_a? Hash 
+      allowable_vaccine_data = [allowable_vaccine_data] 
+    elsif allowable_vaccine_data.nil?
+      allowable_vaccine_data = []
+    end
+
+    preferable_vaccine_data.each do |vaccine_hash|
+      forecast_vaccine_type = y_n_bool(vaccine_hash['forecastVaccineType'])
+      vaccine_args = {
+        preferable: true,
+        forecast_vaccine_type: forecast_vaccine_type,
+        vaccine_type: vaccine_hash['vaccineType'],
+        cvx_code: vaccine_hash['cvx'],
+        begin_age: vaccine_hash['beginAge'],
+        end_age: vaccine_hash['endAge'],
+        trade_name: vaccine_hash['tradeName'],
+        mvx_code: vaccine_hash['mvx'],
+        volume: vaccine_hash['volume']
+      }
+      dose_vaccines << AntigenSeriesDoseVaccine.create(vaccine_args)
+    end
+
+    allowable_vaccine_data.each do |vaccine_hash|
+      forecast_vaccine_type = y_n_bool(vaccine_hash['forecastVaccineType'])
+      vaccine_args = {
+        preferable: false,
+        forecast_vaccine_type: forecast_vaccine_type,
+        vaccine_type: vaccine_hash['vaccineType'],
+        cvx_code: vaccine_hash['cvx'],
+        begin_age: vaccine_hash['beginAge'],
+        end_age: vaccine_hash['endAge'],
+        trade_name: vaccine_hash['tradeName'],
+        mvx_code: vaccine_hash['mvx'],
+        volume: vaccine_hash['volume']
+      }
+      dose_vaccines << AntigenSeriesDoseVaccine.create(vaccine_args)
+    end
+    antigen_series_dose.dose_vaccines.push(*dose_vaccines)
+    dose_vaccines
   end
 
   def create_conditional_skips(antigen_series_dose_xml_hash, antigen_series_dose)
+    conditional_skip_hash = antigen_series_dose_xml_hash['conditionalSkip']
+    conditional_skip = nil
+    if !conditional_skip_hash.nil?
+      conditional_skip_arguments = {
+        antigen_series_dose: antigen_series_dose,
+        set_logic: conditional_skip_hash['setLogic']
+      }
+      conditional_skip = ConditionalSkip.create(conditional_skip_arguments)
+    end
+    return conditional_skip
   end
 
   def create_conditional_skip_sets(conditional_skip_xml_hash, conditional_skip)

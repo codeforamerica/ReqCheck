@@ -62,7 +62,9 @@ FactoryGirl.define do
     latest_recommended_age '3 months + 4 weeks'
     max_age '18 years'
     interval_type 'None'
-    
+  end
+
+  factory :antigen_series_dose_with_vaccine, parent: :antigen_series_dose do
     after(:create) do |dose|
       dose.dose_vaccines << FactoryGirl.create(:antigen_series_dose_vaccine)
     end
@@ -81,6 +83,7 @@ FactoryGirl.define do
     interval_earliest_recommended '8 weeks'
     interval_latest_recommended '13 weeks'
 
+    # This will probably fail - need to update as its one to many (or many to many)
     association :prefered_vaccine, factory: :antigen_series_dose_vaccine
   end
   

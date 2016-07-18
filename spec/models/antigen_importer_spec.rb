@@ -148,11 +148,153 @@ RSpec.describe AntigenImporter, type: :model do
     xdescribe '#create_antigen_series_doses' do
 
     end
-    xdescribe '#create_antigen_series_dose_vaccines' do
+    describe '#create_antigen_series_dose_vaccines' do
+      let(:antigen_series_dose) { FactoryGirl.create(:antigen_series_dose) }
+      let(:antigen_dose_hash) do
+        xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][2]
+      end
 
+      it 'antigen_dose_hash:hash, antigen_series_dose:object => array of antigen_series_dose_vaccine objects' do
+        expect(antigen_series_dose.dose_vaccines).to eq([])
+        antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_hash,
+            antigen_series_dose
+          )
+        expect(antigen_series_dose.dose_vaccines.first.class.name).to eq('AntigenSeriesDoseVaccine')
+      end
+
+      it 'returns both preferable and allowable dose_vaccine objects' do
+        expect(antigen_series_dose.dose_vaccines).to eq([])
+        antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_hash,
+            antigen_series_dose
+          )
+        num_total_vaccines = antigen_series_dose.preferable_vaccines.length +
+                             antigen_series_dose.allowable_vaccines.length
+        expect(antigen_series_dose.dose_vaccines.length).to eq(num_total_vaccines)
+      end
+
+      it 'adds dose_vaccines to the antigen_series_dose' do
+        expect(antigen_series_dose.dose_vaccines).to eq([])
+        antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_hash,
+            antigen_series_dose
+          )
+        antigen_series_dose_reloaded = AntigenSeriesDose.find(antigen_series_dose.id)
+        expect(antigen_series_dose.dose_vaccines.length).not_to eq([])
+      end
+
+      context 'creating preferedable vaccines' do
+        it 'will create preferedable_vaccines' do
+          antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_hash,
+            antigen_series_dose
+          )
+          expect(antigen_series_dose.preferable_vaccines.first.class.name).to eq('AntigenSeriesDoseVaccine')
+        end
+        it 'can process only one preferedable_vaccine' do
+          antigen_dose_single_prefered_hash = xml_hash["antigenSupportingData"]["series"][2]["seriesDose"][0]
+          antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_single_prefered_hash,
+            antigen_series_dose
+          )
+          expect(antigen_series_dose.preferable_vaccines.first.class.name).to eq('AntigenSeriesDoseVaccine')
+          expect(antigen_series_dose.preferable_vaccines.length).to eq(1)
+        end
+        it 'can process multiple preferedable_vaccines' do
+          antigen_dose_multiple_prefered_hash = xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][0]
+          antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_multiple_prefered_hash,
+            antigen_series_dose
+          )
+          expect(antigen_series_dose.preferable_vaccines.first.class.name).to eq('AntigenSeriesDoseVaccine')
+          expect(antigen_series_dose.preferable_vaccines.length > 1).to eq(true)
+        end
+      end
+      context 'creating allowable vaccines' do
+        it 'will create allowable_vaccines' do
+          antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_hash,
+            antigen_series_dose
+          )
+          expect(antigen_series_dose.allowable_vaccines.first.class.name).to eq('AntigenSeriesDoseVaccine')
+        end
+        it 'can process only one allowable_vaccine' do
+          antigen_dose_single_allowed_hash = xml_hash["antigenSupportingData"]["series"][2]["seriesDose"][0]
+          antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_single_allowed_hash,
+            antigen_series_dose
+          )
+          expect(antigen_series_dose.allowable_vaccines.first.class.name).to eq('AntigenSeriesDoseVaccine')
+          expect(antigen_series_dose.allowable_vaccines.length).to eq(1)
+        end
+        it 'can process many allowable_vaccines' do
+          antigen_dose_multiple_allowed_hash = xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][0]
+          antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_multiple_allowed_hash,
+            antigen_series_dose
+          )
+          expect(antigen_series_dose.allowable_vaccines.first.class.name).to eq('AntigenSeriesDoseVaccine')
+          expect(antigen_series_dose.allowable_vaccines.length > 1).to eq(true)
+        end
+        it 'can process no allowable vaccines and return an empty array' do
+          antigen_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGHEPA)
+          antigen_dose_without_allowable_hash = antigen_hash["antigenSupportingData"]["series"][1]["seriesDose"][0]
+          expect(antigen_dose_without_allowable_hash['allowableVaccine']).to eq(nil)
+
+          antigen_importer.create_antigen_series_dose_vaccines(
+            antigen_dose_without_allowable_hash,
+            antigen_series_dose
+          )
+          expect(antigen_series_dose.allowable_vaccines).to eq([])
+          expect(antigen_series_dose.preferable_vaccines).not_to eq([])
+        end
+      end
     end
-    xdescribe '#create_conditional_skips' do
 
+    describe '#create_conditional_skips' do
+      let(:antigen_dose_w_conditional_skip_hash) do
+        xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][2]
+      end
+      let(:antigen_dose_w_out_conditional_skip_hash) do
+        xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][0]
+      end
+      let(:series_dose) { FactoryGirl.create(:antigen_series_dose) }
+
+      context 'with conditional_skip data' do
+        it 'antigen_dose_hash:hash, antigen_dose:object => conditional_skip_object' do
+          conditional_skip = antigen_importer.create_conditional_skips(
+            antigen_dose_w_conditional_skip_hash,
+            series_dose
+          )
+          expect(conditional_skip.class.name).to eq('ConditionalSkip')
+        end
+
+        it 'has an antigen_series_dose object associated' do
+          conditional_skip = antigen_importer.create_conditional_skips(
+            antigen_dose_w_conditional_skip_hash,
+            series_dose
+          )
+          expect(conditional_skip.antigen_series_dose).to eq(series_dose)
+        end
+
+        it 'has set_logic assigned to it' do
+          conditional_skip = antigen_importer.create_conditional_skips(
+            antigen_dose_w_conditional_skip_hash,
+            series_dose
+          )
+          expect(conditional_skip.set_logic).to eq('n/a')
+        end
+      end
+      context 'without conditional_skip data' do
+        it 'antigen_dose_hash:hash, antigen_dose:object => nil (no conditional skip arguments passed in)' do
+          nil_value = antigen_importer.create_conditional_skips(
+            antigen_dose_w_out_conditional_skip_hash,
+            series_dose
+          )
+          expect(nil_value).to eq(nil)
+        end
+      end
     end
     
     describe '#create_conditional_skip_sets' do
@@ -222,7 +364,7 @@ RSpec.describe AntigenImporter, type: :model do
       end
       it 'takes an conditional_skip_set hash with an array with many conditions' do
         conditions = antigen_importer.create_conditional_skip_set_conditions(
-          single_condition_set_hash,
+          multiple_condition_set_hash,
           conditional_skip_set
         )
         expect(conditions.length).to eq(2)
