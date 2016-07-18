@@ -3,14 +3,14 @@ $table-borders:1px solid black;
 .top-bar,footer,.vaccine-record a {
 	display:none;
 }
-tr {
+table{
 	border:$table-borders;
-}
-td,th {
-	border-right:$table-borders;
 }
 th {
 	border-bottom: 3px solid black;
+}
+.vaccine-record .vax-name {
+	border-color:black;
 }
 #callout-patient {
 	border:$table-borders;
