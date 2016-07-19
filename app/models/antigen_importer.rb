@@ -71,7 +71,7 @@ class AntigenImporter
           target_disease: hash['targetDisease'],
           vaccine_group: hash['vaccineGroup']
         )
-      # create_antigen_series_doses(hash, antigen_series)
+      create_antigen_series_doses(hash, antigen_series)
       antigen_series_objects << antigen_series
     end
     antigen_series_objects
@@ -87,6 +87,10 @@ class AntigenImporter
       interval_type = 'from_most_recent'
     end
     return interval_type
+  end
+
+  def get_dose_number(dose_number_string)
+    dose_number_string.split(' ')[1].to_i
   end
 
   def create_antigen_series_doses(antigen_series_xml_hash, antigen_series)
@@ -113,9 +117,10 @@ class AntigenImporter
         series_doses_args[:allowble_interval_type] = interval_type
         series_doses_args[:allowable_interval_absolute_min] = interval_absolute_min
       end
+      series_dose_number = get_dose_number(series_doses_hash['doseNumber'])
       series_doses_args = series_doses_args.merge({
         antigen_series: antigen_series,
-        dose_number: series_doses_hash['doseNumber'],
+        dose_number: series_dose_number,
         absolute_min_age: series_doses_hash['age']['absMinAge'],
         min_age: series_doses_hash['age']['minAge'],
         earliest_recommended_age: series_doses_hash['age']['earliestRecAge'],
@@ -125,6 +130,8 @@ class AntigenImporter
         recurring_dose: series_doses_hash['recurringDose']
       })
       antigen_series_dose = AntigenSeriesDose.create(series_doses_args)
+      create_antigen_series_dose_vaccines(series_doses_hash, antigen_series_dose)
+      create_conditional_skips(series_doses_hash, antigen_series_dose)
       series_doses << antigen_series_dose
     end
     series_doses
@@ -192,6 +199,8 @@ class AntigenImporter
         set_logic: conditional_skip_hash['setLogic']
       }
       conditional_skip = ConditionalSkip.create(conditional_skip_arguments)
+      antigen_series_dose.update(conditional_skip: conditional_skip)
+      create_conditional_skip_sets(conditional_skip_hash, conditional_skip)
     end
     return conditional_skip
   end
@@ -211,7 +220,9 @@ class AntigenImporter
         set_description: set_hash['setDescription'],
         condition_logic: set_hash['conditionLogic']
       }
-      sets << ConditionalSkipSet.create(set_arguments)
+      conditional_skip_set = ConditionalSkipSet.create(set_arguments)
+      create_conditional_skip_set_conditions(set_hash, conditional_skip_set)
+      sets << conditional_skip_set
     end
     sets
   end

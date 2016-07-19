@@ -48,7 +48,7 @@ RSpec.describe AntigenImporter, type: :model do
   describe 'pulling data from the xml hash' do
     let(:antigen_importer) { AntigenImporter.new }
     let(:xml_string) { TestAntigen::ANTIGENSTRING } 
-    let(:xml_hash) { antigen_importer.xml_to_hash(xml_string) } 
+    let(:xml_hash) { antigen_importer.xml_to_hash(xml_string) }
 
     describe '#get_cvx_for_antigen' do
       it 'takes an antigen xml and returns an array of the cvx codes' do
@@ -128,13 +128,6 @@ RSpec.describe AntigenImporter, type: :model do
       end
     end
 
-    xdescribe '#create_antigen_series' do
-      it 'takes an antigen_series_hash and returns an antigen_series' do
-        antigen_series = antigen_importer.create_all_antigen_series(xml_hash)
-        expect(antigen_series.first.class.name).to eq('AntigenSeries')
-      end
-    end
-
     describe '#create_all_antigen_series' do
       let(:antigen_object) { FactoryGirl.create(:antigen) }
 
@@ -155,6 +148,44 @@ RSpec.describe AntigenImporter, type: :model do
         antigen_series = antigen_importer.create_all_antigen_series(xml_hash, antigen_object)
         expect(antigen_series.first.class.name).to eq('AntigenSeries')
         expect(antigen_series.length).to eq(3)
+      end
+
+      describe 'it creates all child objects' do
+        let(:antigen_series) { antigen_importer.create_all_antigen_series(xml_hash, antigen_object) }
+
+        it 'creates all child antigen_doses' do
+          expect(antigen_series.first.doses.length).to eq(4)
+          expect(antigen_series.first.doses.first.class.name).to eq('AntigenSeriesDose')
+        end
+
+        it 'creates all child antigen_dose_vaccines' do
+          expect(antigen_series.first.doses.first.dose_vaccines.length).to eq(9)
+          expect(
+            antigen_series.first.doses.first.dose_vaccines.first.class.name
+          ).to eq('AntigenSeriesDoseVaccine')
+        end
+
+        it 'creates no conditional_skip for none' do
+          expect(antigen_series.first.doses.first.conditional_skip).to eq(nil)
+        end
+
+        it 'creates all conditional_skips' do
+          expect(antigen_series.first.doses[2].conditional_skip.class.name).to eq('ConditionalSkip')
+        end
+
+        it 'creates all conditional_skip_sets' do
+          expect(antigen_series.first.doses[2].conditional_skip.sets.length).to eq(1)
+          expect(
+            antigen_series.first.doses[2].conditional_skip.sets.first.class.name
+          ).to eq('ConditionalSkipSet')
+        end
+
+        it 'creates all conditional_skip_set_conditions' do
+          expect(antigen_series.first.doses[2].conditional_skip.sets.first.conditions.length).to eq(2)
+          expect(
+            antigen_series.first.doses[2].conditional_skip.sets.first.conditions.first.class.name
+          ).to eq('ConditionalSkipSetCondition')
+        end
       end
     end
 
