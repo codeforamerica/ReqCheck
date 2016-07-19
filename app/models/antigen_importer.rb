@@ -52,39 +52,50 @@ class AntigenImporter
     datum == 'Yes'
   end
 
-  def create_all_antigen_series(antigen_xml_hash)
+  def create_all_antigen_series(antigen_xml_hash, antigen_object)
+    antigen_series_objects = []
     # it's possible, with one series, that we'll be handle
     # a single object instead of an array
-    antigen_serieses = antigen_xml_hash['antigenSupportingData']['series']
-    antigen_serieses.map do |hash|
-      antigen_series = AntigenSeries.find_or_create_by(
-        name: hash['seriesName'],
-        default_series: yes_bool(hash['defaultSeries']),
-        max_start_age: hash['maxAgeToStart'],
-        min_start_age: hash['minAgeToStart'] ,
-        preference_number: hash['seriesPreference'].to_i,
-        product_path: yes_bool(hash['productPath']),
-        target_disease: hash['targetDisease'],
-        vaccine_group: hash['vaccineGroup']
+    antigen_series_data = antigen_xml_hash['antigenSupportingData']['series']
+    antigen_series_data = [antigen_series_data] if antigen_series_data.is_a? Hash
+
+    antigen_series_data.map do |hash|
+      antigen_series = AntigenSeries.find_or_initialize_by(name: hash['seriesName'])
+      antigen_series.update_attributes(
+          antigen: antigen_object,
+          default_series: yes_bool(hash['defaultSeries']),
+          max_start_age: hash['maxAgeToStart'],
+          min_start_age: hash['minAgeToStart'] ,
+          preference_number: hash['seriesPreference'].to_i,
+          product_path: yes_bool(hash['productPath']),
+          target_disease: hash['targetDisease'],
+          vaccine_group: hash['vaccineGroup']
         )
-      create_antigen_series_doses(antigen_series_hash, antigen_series)
+      # create_antigen_series_doses(hash, antigen_series)
+      antigen_series_objects << antigen_series
     end
+    antigen_series_objects
   end
 
   def get_interval_type(interval_hash)
     interval_type = nil
     if interval_hash['fromPrevious']
-      interval_type 'from_previous'
+      interval_type = 'from_previous'
     elsif interval_hash['fromTargetDose']
-      interval_type 'from_target_dose'
+      interval_type = 'from_target_dose'
     elsif interval_hash['fromMostRecent']
-      interval_type 'from_most_recent'
+      interval_type = 'from_most_recent'
     end
     return interval_type
   end
 
   def create_antigen_series_doses(antigen_series_xml_hash, antigen_series)
-    angigen_series_xml_hash['doses'].map do |series_doses_hash|
+    series_doses_data = antigen_series_xml_hash['seriesDose']
+    series_doses_data = [series_doses_data] if series_doses_data.is_a? Hash
+
+    series_doses = []
+
+    series_doses_data.each do |series_doses_hash|
       series_doses_args = {}
       if series_doses_hash['interval']
         interval_type = get_interval_type(series_doses_hash['interval'])
@@ -113,11 +124,11 @@ class AntigenImporter
         required_gender: series_doses_hash['requiredGender'],
         recurring_dose: series_doses_hash['recurringDose']
       })
-      antigen_series_dose = AntigenSeriesDose(series_doses_args)
-      create_antigen_series_dose_vaccines(series_doses_hash, antigen_series_dose)
+      antigen_series_dose = AntigenSeriesDose.create(series_doses_args)
+      series_doses << antigen_series_dose
     end
+    series_doses
   end
-
 
   def y_n_bool(datum)
     datum == 'Y'

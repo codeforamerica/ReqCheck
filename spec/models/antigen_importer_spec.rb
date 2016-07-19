@@ -135,19 +135,69 @@ RSpec.describe AntigenImporter, type: :model do
       end
     end
 
-    xdescribe '#create_all_antigen_series' do
+    describe '#create_all_antigen_series' do
+      let(:antigen_object) { FactoryGirl.create(:antigen) }
+
       it 'takes an antigen_xml_hash and returns an array of antigen_series' do
-        antigen_series = antigen_importer.create_all_antigen_series(xml_hash)
+        antigen_series = antigen_importer.create_all_antigen_series(xml_hash, antigen_object)
         expect(antigen_series.first.class.name).to eq('AntigenSeries')
+      end
+
+      it 'can take a single antigen_series attribute' do
+        antigen_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGZOSTER)
+        
+        antigen_series = antigen_importer.create_all_antigen_series(antigen_hash, antigen_object)
+        expect(antigen_series.first.class.name).to eq('AntigenSeries')
+        expect(antigen_series.length).to eq(1)
+      end
+
+      it 'can take multiple antigen_series attributes' do
+        antigen_series = antigen_importer.create_all_antigen_series(xml_hash, antigen_object)
+        expect(antigen_series.first.class.name).to eq('AntigenSeries')
+        expect(antigen_series.length).to eq(3)
       end
     end
 
-    xdescribe '#create_all_antigen_series' do
-      # ensure it takes a hash and array
-    end
-    xdescribe '#create_antigen_series_doses' do
+    describe '#create_antigen_series_doses' do
+      let(:antigen_series) { FactoryGirl.create(:antigen_series) }
+      let(:series_xml_hash) { xml_hash["antigenSupportingData"]["series"][0] }
+    
+      it 'antigen_series_hash:hash, antigen_series:object => array of antigen_series_dose objects' do
+        expect(antigen_series.doses).to eq([])
+        antigen_importer.create_antigen_series_doses(
+            series_xml_hash,
+            antigen_series
+          )
+        antigen_series.reload
+        expect(antigen_series.doses.first.class.name).to eq('AntigenSeriesDose')
+      end
 
+      it 'can process only one dose' do
+        antigen_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGZOSTER)
+        antigen_series_with_one_dose_hash = antigen_hash["antigenSupportingData"]["series"]
+
+        expect(antigen_series.doses).to eq([])
+        antigen_importer.create_antigen_series_doses(
+            antigen_series_with_one_dose_hash,
+            antigen_series
+          )
+        antigen_series.reload
+        expect(antigen_series.doses.first.class.name).to eq('AntigenSeriesDose')
+        expect(antigen_series.doses.length).to eq(1)
+      end
+
+      it 'can process many doses' do
+        expect(antigen_series.doses).to eq([])
+        antigen_importer.create_antigen_series_doses(
+          series_xml_hash,
+          antigen_series
+        )
+        antigen_series.reload
+        expect(antigen_series.doses.first.class.name).to eq('AntigenSeriesDose')
+        expect(antigen_series.doses.length > 1).to eq(true)
+      end
     end
+
     describe '#create_antigen_series_dose_vaccines' do
       let(:antigen_series_dose) { FactoryGirl.create(:antigen_series_dose) }
       let(:antigen_dose_hash) do
@@ -331,7 +381,6 @@ RSpec.describe AntigenImporter, type: :model do
         )
         expect(sets.length).to eq(2)
       end
-
     end
 
 
