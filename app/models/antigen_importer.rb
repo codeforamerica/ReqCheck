@@ -1,16 +1,5 @@
 class AntigenImporter
   include ActiveModel::Model
-  attr_accessor :antigens
-
-  def initialize
-    @antigens = []
-    @antigen_series = []
-    @antigen_series_doses = []
-    @antigen_series_dose_vaccines = []
-    @conditional_skips = []
-    @conditional_skip_sets = []
-    @conditional_skip_set_conditions = []
-  end
 
   def import_antigen_xml_files(xml_directory)
     file_names = Dir[xml_directory + "/*.xml" ]
@@ -19,10 +8,7 @@ class AntigenImporter
       if file_name.include? 'Schedule'
 
       elsif file_name.include? 'Antigen'
-        cvx_codes = get_cvx_for_antigen(xml_file_hash)
-        vaccines = find_or_create_all_vaccines(cvx_codes)
-        antigen_name = xml_file_hash.find_all_values_for('targetDisease').first
-        add_vaccines_to_antigen(antigen_name, vaccines, xml_file_hash)
+        parse_antigen_data_and_create_subobjects(xml_file_hash)
       end
     end
   end
@@ -38,24 +24,39 @@ class AntigenImporter
     Hash.from_xml(xml_string)
   end
 
-  def get_cvx_for_antigen(xml_hash)
-    xml_hash.find_all_values_for('cvx', numeric=true)
+  def parse_antigen_data_and_create_subobjects(xml_file_hash)
+    antigen_name   = xml_file_hash.find_all_values_for('targetDisease').first.downcase
+    antigen_object = Antigen.find_or_create_by(name: antigen_name)
+    create_all_antigen_series(xml_file_hash, antigen_object)
   end
 
-  def find_or_create_all_vaccines(cvx_array)
-    cvx_array.map do |cvx_code|
-      Vaccine.find_or_create_by(cvx_code: cvx_code)
+  def get_interval_type(interval_hash)
+    interval_type = nil
+    if interval_hash['fromPrevious'] == 'Y'
+      interval_type = 'from_previous'
+    elsif interval_hash['fromTargetDose']
+      interval_type = 'from_target_dose'
+    elsif interval_hash['fromMostRecent']
+      interval_type = 'from_most_recent'
     end
+    return interval_type
+  end
+
+  def get_dose_number(dose_number_string)
+    dose_number_string.split(' ')[1].to_i
   end
 
   def yes_bool(datum)
     datum == 'Yes'
   end
 
+  def y_n_bool(datum)
+    datum == 'Y'
+  end
+
   def create_all_antigen_series(antigen_xml_hash, antigen_object)
     antigen_series_objects = []
-    # it's possible, with one series, that we'll be handle
-    # a single object instead of an array
+
     antigen_series_data = antigen_xml_hash['antigenSupportingData']['series']
     antigen_series_data = [antigen_series_data] if antigen_series_data.is_a? Hash
 
@@ -77,22 +78,6 @@ class AntigenImporter
     antigen_series_objects
   end
 
-  def get_interval_type(interval_hash)
-    interval_type = nil
-    if interval_hash['fromPrevious']
-      interval_type = 'from_previous'
-    elsif interval_hash['fromTargetDose']
-      interval_type = 'from_target_dose'
-    elsif interval_hash['fromMostRecent']
-      interval_type = 'from_most_recent'
-    end
-    return interval_type
-  end
-
-  def get_dose_number(dose_number_string)
-    dose_number_string.split(' ')[1].to_i
-  end
-
   def create_antigen_series_doses(antigen_series_xml_hash, antigen_series)
     series_doses_data = antigen_series_xml_hash['seriesDose']
     series_doses_data = [series_doses_data] if series_doses_data.is_a? Hash
@@ -100,25 +85,8 @@ class AntigenImporter
     series_doses = []
 
     series_doses_data.each do |series_doses_hash|
-      series_doses_args = {}
-      if series_doses_hash['interval']
-        interval_type = get_interval_type(series_doses_hash['interval'])
-        series_doses_args = {
-          interval_type: interval_type,
-          interval_absolute_min: series_doses_hash['interval']['absMinInt'],
-          interval_min: series_doses_hash['interval']['minInt'],
-          interval_earliest_recommended: series_doses_hash['interval']['earliestRecInt'],
-          interval_latest_recommended: series_doses_hash['interval']['latestRecInt'],
-        }
-      end
-      if series_doses_hash['allowableInterval']
-        interval_type = get_interval_type(series_doses_hash['allowableInterval'])
-        interval_absolute_min = series_doses_hash['allowableInterval']['absMinInt']
-        series_doses_args[:allowble_interval_type] = interval_type
-        series_doses_args[:allowable_interval_absolute_min] = interval_absolute_min
-      end
       series_dose_number = get_dose_number(series_doses_hash['doseNumber'])
-      series_doses_args = series_doses_args.merge({
+      series_doses_args = {
         antigen_series: antigen_series,
         dose_number: series_dose_number,
         absolute_min_age: series_doses_hash['age']['absMinAge'],
@@ -128,19 +96,55 @@ class AntigenImporter
         max_age: series_doses_hash['age']['maxAge'],
         required_gender: series_doses_hash['requiredGender'],
         recurring_dose: series_doses_hash['recurringDose']
-      })
+      }
       antigen_series_dose = AntigenSeriesDose.create(series_doses_args)
       create_antigen_series_dose_vaccines(series_doses_hash, antigen_series_dose)
       create_conditional_skips(series_doses_hash, antigen_series_dose)
+      create_dose_intervals(series_doses_hash, antigen_series_dose)
       series_doses << antigen_series_dose
     end
     series_doses
   end
 
-  def y_n_bool(datum)
-    datum == 'Y'
-  end
+  def create_dose_intervals(antigen_series_dose_xml_hash, antigen_series_dose)
+    interval_data = antigen_series_dose_xml_hash['interval']
+    interval_data = [interval_data] if interval_data.is_a? Hash
+    interval_data = [] if interval_data.nil?
+    
+    allowable_interval_data = antigen_series_dose_xml_hash['allowableInterval']
+    allowable_interval_data = [allowable_interval_data] if allowable_interval_data.is_a? Hash
+    allowable_interval_data = [] if allowable_interval_data.nil?
 
+    interval_objects = []
+
+    interval_data.each do |interval_hash|
+      interval_type = get_interval_type(interval_hash)
+      interval_args = {
+        antigen_series_dose: antigen_series_dose,
+        interval_type: interval_type,
+        interval_absolute_min: interval_hash['absMinInt'],
+        interval_min: interval_hash['minInt'],
+        interval_earliest_recommended: interval_hash['earliestRecInt'],
+        interval_latest_recommended: interval_hash['latestRecInt']
+      }
+      interval_objects << Interval.create(interval_args)
+    end
+     
+    allowable_interval_data.each do |allowable_interval_hash|
+      interval_type = get_interval_type(allowable_interval_hash)
+      allowable_interval_args = {
+        antigen_series_dose: antigen_series_dose,
+        allowable: true,
+        interval_type: interval_type,
+        interval_absolute_min: allowable_interval_hash['absMinInt'],
+        interval_min: allowable_interval_hash['minInt'],
+        interval_earliest_recommended: allowable_interval_hash['earliestRecInt'],
+        interval_latest_recommended: allowable_interval_hash['latestRecInt']
+      }
+      interval_objects << Interval.create(allowable_interval_args)
+    end
+    return interval_objects
+  end
 
   def create_antigen_series_dose_vaccines(antigen_series_dose_xml_hash, antigen_series_dose)
     dose_vaccines = []

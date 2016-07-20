@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160713231834) do
+ActiveRecord::Schema.define(version: 20160719180821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,12 +54,6 @@ ActiveRecord::Schema.define(version: 20160713231834) do
     t.string   "earliest_recommended_age"
     t.string   "latest_recommended_age"
     t.string   "max_age"
-    t.string   "interval_type"
-    t.string   "interval_absolute_min"
-    t.string   "interval_min"
-    t.string   "interval_earliest_recommended"
-    t.string   "interval_latest_recommended"
-    t.string   "interval_priority"
     t.string   "allowable_interval_type"
     t.string   "allowable_interval_absolute_min"
     t.string   "required_gender"
@@ -76,8 +70,8 @@ ActiveRecord::Schema.define(version: 20160713231834) do
     t.integer "antigen_series_dose_vaccine_id", null: false
   end
 
-  add_index "antigen_series_doses_to_vaccines", ["antigen_series_dose_id", "antigen_series_dose_vaccine_id"], name: "index_series_doses_to_vaccines_on_series_dose_id", using: :btree
-  add_index "antigen_series_doses_to_vaccines", ["antigen_series_dose_vaccine_id", "antigen_series_dose_id"], name: "index_vaccines_to_series_doses_on_vaccine_id", using: :btree
+  add_index "antigen_series_doses_to_vaccines", ["antigen_series_dose_id", "antigen_series_dose_vaccine_id"], name: "index_series_doses_to_vaccines_on_series_dose_id", unique: true, using: :btree
+  add_index "antigen_series_doses_to_vaccines", ["antigen_series_dose_vaccine_id", "antigen_series_dose_id"], name: "index_vaccines_to_series_doses_on_vaccine_id", unique: true, using: :btree
 
   create_table "antigens", force: :cascade do |t|
     t.string   "name",       null: false
@@ -141,6 +135,19 @@ ActiveRecord::Schema.define(version: 20160713231834) do
     t.integer  "vaccine_group_cvx"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+  end
+
+  create_table "intervals", force: :cascade do |t|
+    t.integer  "antigen_series_dose_id"
+    t.string   "interval_type"
+    t.string   "interval_absolute_min"
+    t.string   "interval_min"
+    t.string   "interval_earliest_recommended"
+    t.string   "interval_latest_recommended"
+    t.string   "interval_priority"
+    t.boolean  "allowable",                     default: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   create_table "patient_profiles", force: :cascade do |t|

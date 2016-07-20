@@ -6,7 +6,6 @@ RSpec.describe AntigenImporter, type: :model do
     it 'takes no arguments to instantiate' do
       antigen_importer = AntigenImporter.new
       expect(antigen_importer.class.name).to eq('AntigenImporter')
-      expect(antigen_importer.antigens).to eq([])
     end
   end
   
@@ -50,69 +49,15 @@ RSpec.describe AntigenImporter, type: :model do
     let(:xml_string) { TestAntigen::ANTIGENSTRING } 
     let(:xml_hash) { antigen_importer.xml_to_hash(xml_string) }
 
-    describe '#get_cvx_for_antigen' do
-      it 'takes an antigen xml and returns an array of the cvx codes' do
-        expect(antigen_importer.get_cvx_for_antigen(xml_hash)).
-          to eq([10, 110, 120, 130, 132, 146, 2, 89])
-      end
-    end
-    
-    describe '#find_or_create_all_vaccines' do
-      it 'will pull all vaccines if already in the database' do
-        cvx1, cvx2 = 10, 12
-        vaccine  = Vaccine.create(cvx_code: 10)
-        vaccine2 = Vaccine.create(cvx_code: 12)
-        expect(antigen_importer.find_or_create_all_vaccines([10, 12])).
-          to eq([vaccine, vaccine2])
-      end
-      it 'will create all vaccines if none are there' do
-        cvx1, cvx2 = 10, 12
-        expect(antigen_importer.find_or_create_all_vaccines([10, 12]).
-          map { |vaccine| vaccine.cvx_code }).
-          to eq([cvx1, cvx2])
-      end
-      it 'will create neccesary vaccines that are not in the database' do
-        cvx1, cvx2 = 10, 12
-        vaccine    = Vaccine.create(cvx_code: cvx1)
-        expect(Vaccine.all.length).to eq(1)
-        expect(antigen_importer.find_or_create_all_vaccines([10, 12]).
-          map { |vaccine| vaccine.cvx_code }).
-          to eq([cvx1, cvx2])
-        expect(Vaccine.all.length).to eq(2)
-      end
-    end
-
-    describe '#add_vaccines_to_antigen' do
-      it 'takes an array of vaccines, antigen name and xml_hash' do
-        vaccines = [FactoryGirl.create(:vaccine)]
-        antigen  = FactoryGirl.create(:antigen)
-        expect(antigen.vaccines).to eq([])
-        antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines, xml_hash)
-        antigen.reload
-        expect(antigen.vaccines).to eq(vaccines)
-      end
-      it 'will error if the antigen does not exist' do
-        vaccines = [FactoryGirl.create(:vaccine)]
-        expect {antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines, xml_hash)}.
-          to raise_exception
-      end
-      it 'adds the raw xml_hash to the antigen database object' do
-        vaccines = [FactoryGirl.create(:vaccine)]
-        antigen  = FactoryGirl.create(:antigen)
-        expect(antigen.xml_hash).to eq(nil)
-        antigen_importer.add_vaccines_to_antigen(antigen.name, vaccines, xml_hash)
-        antigen.reload
-        expect(antigen.xml_hash).to eq(xml_hash)
-      end
-    end
-
     describe '#import_antigen_xml_files' do
       it 'takes a directory of antigen xml files and imports them' do
         expect(Antigen.all.length).to eq(0)
         antigen_importer.import_antigen_xml_files('spec/support/xml')
         expect(Antigen.all.length).to eq(17)
-        expect(Antigen.first.vaccines.length).to eq(18)
-        expect(antigen_importer.antigens.length).to eq(17)
+        expect(Antigen.find_by(name: 'diphtheria').series.length).to eq(1)
+        expect(Antigen.find_by(name: 'polio').series.length).to eq(3)
+        expect(Antigen.find_by(name: 'hepb').series.length).to eq(5)
+        expect(Antigen.find_by(name: 'pneumococcal').series.length).to eq(6)
       end
     end
 
@@ -125,6 +70,19 @@ RSpec.describe AntigenImporter, type: :model do
           antigen_importer.parse_and_hash('spec/support/xml/AntigenSupportingData- Diphtheria.xml').
             class.name
         ).to eq('Hash')
+      end
+    end
+
+    describe '#parse_antigen_data_and_create_subobjects' do
+      it 'takes an xml_file_hash and creates all antigen series for the antigen' do
+        antigen_importer.parse_antigen_data_and_create_subobjects(xml_hash)
+        antigen = Antigen.find_by(name: 'polio')
+        expect(antigen.series.length).to eq(3)
+        expect(antigen.class.name).to eq('Antigen')
+      end
+      it 'saves the antigens by lowercase name' do
+        antigen_importer.parse_antigen_data_and_create_subobjects(xml_hash)
+        expect(Antigen.find_by(name: 'polio').class.name).to eq('Antigen')
       end
     end
 
@@ -156,6 +114,37 @@ RSpec.describe AntigenImporter, type: :model do
         it 'creates all child antigen_doses' do
           expect(antigen_series.first.doses.length).to eq(4)
           expect(antigen_series.first.doses.first.class.name).to eq('AntigenSeriesDose')
+        end
+
+        it 'creates all intervals for antigen_series_doses' do
+          expect(antigen_series.first.doses[1].intervals.length).to eq(1)
+          expect(
+            antigen_series.first.doses[1].intervals.first.class.name
+          ).to eq('Interval')
+        end
+
+        it 'creates all preferable_intervals for antigen_series_doses' do
+          expect(antigen_series.first.doses[1].preferable_intervals.length).to eq(1)
+          expect(
+            antigen_series.first.doses[1].preferable_intervals.first.class.name
+          ).to eq('Interval')
+          expect(
+            antigen_series.first.doses[1].preferable_intervals.first.allowable
+          ).to eq(false)
+        end
+
+        it 'creates all allowable_intervals for antigen_series_doses' do
+          # ["antigenSupportingData"]["series"][0]["seriesDose"][1]
+          antigen_series_xml_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGHEPA)
+          a_series = antigen_importer.create_all_antigen_series(antigen_series_xml_hash,
+                                                                antigen_object)
+          expect(a_series.first.doses[1].intervals.length).to eq(2)
+          expect(
+            a_series.first.doses[1].allowable_intervals.first.class.name
+          ).to eq('Interval')
+          expect(
+            a_series.first.doses[1].allowable_intervals.first.allowable
+          ).to eq(true)
         end
 
         it 'creates all child antigen_dose_vaccines' do
@@ -226,6 +215,63 @@ RSpec.describe AntigenImporter, type: :model do
         antigen_series.reload
         expect(antigen_series.doses.first.class.name).to eq('AntigenSeriesDose')
         expect(antigen_series.doses.length > 1).to eq(true)
+      end
+    end
+
+    describe '#create_dose_intervals' do
+      let(:antigen_series_dose) { FactoryGirl.create(:antigen_series_dose) }
+      let(:antigen_series_xml_hash) { antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGHEPA) }
+
+      it 'can process only one interval' do
+        one_interval_hash = antigen_series_xml_hash["antigenSupportingData"]["series"][1]["seriesDose"][1]
+        dose_intervals = antigen_importer.create_dose_intervals(
+          one_interval_hash,
+          antigen_series_dose
+        )
+        expect(dose_intervals.first.class.name).to eq('Interval')
+        expect(dose_intervals.length).to eq(1)
+        expect(antigen_series_dose.intervals).to eq(dose_intervals)
+      end
+
+      context 'with multiple intervals' do
+        it 'can process many intervals' do
+          many_intervals_hash = antigen_series_xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][1]
+          dose_intervals = antigen_importer.create_dose_intervals(many_intervals_hash,
+                                                                  antigen_series_dose)
+          expect(dose_intervals.first.class.name).to eq('Interval')
+          expect(dose_intervals.length).to eq(2)
+          expect(antigen_series_dose.intervals).to eq(dose_intervals)
+        end
+        it 'creates the intervals based by type (allowable or not)' do
+          many_intervals_hash = antigen_series_xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][1]
+          dose_intervals = antigen_importer.create_dose_intervals(
+            many_intervals_hash,
+            antigen_series_dose
+          )
+          expect(dose_intervals.first.allowable).to eq(false)
+          expect(dose_intervals.last.allowable).to eq(true)
+        end
+      end
+      it 'can process no intervals' do
+        no_interval_hash = antigen_series_xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][0]
+        dose_intervals = antigen_importer.create_dose_intervals(
+          no_interval_hash,
+          antigen_series_dose
+        )
+        expect(dose_intervals).to eq([])
+        antigen_series_dose.reload
+        expect(antigen_series_dose.intervals).to eq([])
+      end
+      it 'will not error but instead give nil if the xml subkey (for attribute) is not there' do
+        many_intervals_hash = antigen_series_xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][1]
+        dose_intervals = antigen_importer.create_dose_intervals(
+          many_intervals_hash,
+          antigen_series_dose
+        )
+        allowable_interval = dose_intervals.find {|i| i.allowable == true }
+        expect(allowable_interval.allowable).to eq(true)
+        expect(allowable_interval.interval_min.nil?).to eq(true)
+        expect(allowable_interval.interval_absolute_min).to eq('6 months')
       end
     end
 

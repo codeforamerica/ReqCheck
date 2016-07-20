@@ -5,6 +5,14 @@ require_relative 'support/time_help'
 
 FactoryGirl.define do
   extend TimeHelp
+  factory :interval do
+    interval_type 'Previous'
+    interval_absolute_min '4 weeks - 4 days'
+    interval_min '4 weeks'
+    interval_earliest_recommended '8 weeks'
+    interval_latest_recommended '13 weeks'
+    allowable false
+  end
 
   factory :conditional_skip_set_condition do
     condition_id 1
@@ -61,7 +69,6 @@ FactoryGirl.define do
     earliest_recommended_age '2 months'
     latest_recommended_age '3 months + 4 weeks'
     max_age '18 years'
-    interval_type 'None'
   end
 
   factory :antigen_series_dose_with_vaccine, parent: :antigen_series_dose do
@@ -77,14 +84,10 @@ FactoryGirl.define do
     earliest_recommended_age '4 months'
     latest_recommended_age '5 months + 4 weeks'
     max_age '18 years'
-    interval_type 'Previous'
-    interval_absolute_min '4 weeks - 4 days'
-    interval_min '4 weeks'
-    interval_earliest_recommended '8 weeks'
-    interval_latest_recommended '13 weeks'
-
+    
     # This will probably fail - need to update as its one to many (or many to many)
     association :prefered_vaccine, factory: :antigen_series_dose_vaccine
+    association :iinterval, factory: :interval
   end
   
   factory :antigen_series do
