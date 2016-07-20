@@ -2,7 +2,7 @@ class CreateAntigenSeriesDoseVaccines < ActiveRecord::Migration
   def change
     create_table :antigen_series_dose_vaccines do |t|
       t.string :vaccine_type
-      t.integer :cvx_code
+      t.integer :cvx_code, index: true
       t.boolean :preferable, default: false
       t.string :begin_age
       t.string :end_age

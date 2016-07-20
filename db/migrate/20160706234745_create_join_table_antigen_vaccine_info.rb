@@ -4,6 +4,5 @@ class CreateJoinTableAntigenVaccineInfo < ActiveRecord::Migration
       t.belongs_to :antigen, index: true
       t.belongs_to :vaccine_info, index: true
     end
-    add_index :vaccine_infos, :cvx_code
   end
 end

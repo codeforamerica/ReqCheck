@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20160719180821) do
     t.datetime "updated_at",                            null: false
   end
 
+  add_index "antigen_series_dose_vaccines", ["cvx_code"], name: "index_antigen_series_dose_vaccines_on_cvx_code", using: :btree
+
   create_table "antigen_series_doses", force: :cascade do |t|
     t.integer  "dose_number"
     t.string   "absolute_min_age"
@@ -80,13 +82,13 @@ ActiveRecord::Schema.define(version: 20160719180821) do
     t.json     "xml_hash"
   end
 
-  create_table "antigens_vaccines", id: false, force: :cascade do |t|
+  create_table "antigens_vaccine_infos", id: false, force: :cascade do |t|
     t.integer "antigen_id"
-    t.integer "vaccine_id"
+    t.integer "vaccine_info_id"
   end
 
-  add_index "antigens_vaccines", ["antigen_id"], name: "index_antigens_vaccines_on_antigen_id", using: :btree
-  add_index "antigens_vaccines", ["vaccine_id"], name: "index_antigens_vaccines_on_vaccine_id", using: :btree
+  add_index "antigens_vaccine_infos", ["antigen_id"], name: "index_antigens_vaccine_infos_on_antigen_id", using: :btree
+  add_index "antigens_vaccine_infos", ["vaccine_info_id"], name: "index_antigens_vaccine_infos_on_vaccine_info_id", using: :btree
 
   create_table "conditional_skip_set_conditions", force: :cascade do |t|
     t.integer  "conditional_skip_set_id"
@@ -200,7 +202,7 @@ ActiveRecord::Schema.define(version: 20160719180821) do
     t.integer  "cvx_code"
   end
 
-  create_table "vaccines", force: :cascade do |t|
+  create_table "vaccine_infos", force: :cascade do |t|
     t.string   "short_description"
     t.string   "full_name"
     t.integer  "cvx_code",           null: false
@@ -212,7 +214,7 @@ ActiveRecord::Schema.define(version: 20160719180821) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "vaccines", ["cvx_code"], name: "index_vaccines_on_cvx_code", using: :btree
+  add_index "vaccine_infos", ["cvx_code"], name: "index_vaccine_infos_on_cvx_code", using: :btree
 
   add_foreign_key "antigen_series", "antigens"
   add_foreign_key "antigen_series_doses", "antigen_series"

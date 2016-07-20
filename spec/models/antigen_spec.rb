@@ -16,17 +16,75 @@ RSpec.describe Antigen, type: :model do
   end
 
   describe 'relationships' do
-    it 'has many series' do
-      antigen = FactoryGirl.create(:antigen)
-      antigen_series = FactoryGirl.create(:antigen_series)
-      antigen.series << antigen_series
-      expect(antigen.series).to eq([antigen_series])
+    context 'new import method' do
+      it 'has many series' do
+        antigen = FactoryGirl.create(:antigen)
+        antigen_series = FactoryGirl.create(:antigen_series)
+        antigen.series << antigen_series
+        expect(antigen.series).to eq([antigen_series])
+      end
+      it 'has many doses' do
+        antigen               = FactoryGirl.create(:antigen)
+        expect(antigen.doses.length).to eq(0)
+        antigen_series        = FactoryGirl.create(:antigen_series, antigen: antigen)
+        antigen_series2       = FactoryGirl.create(:antigen_series, antigen: antigen)
+        antigen_series_dose1 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series)
+        antigen_series_dose2 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series)
+        antigen_series_dose3 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series2)
+        antigen_series_dose4 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series2)
+        antigen.reload
+        expect(antigen.doses.length).to eq(4)
+      end
+      it 'has many dose_vaccines' do
+        antigen               = FactoryGirl.create(:antigen)
+        expect(antigen.dose_vaccines.length).to eq(0)
+        antigen_series        = FactoryGirl.create(:antigen_series, antigen: antigen)
+        antigen_series2       = FactoryGirl.create(:antigen_series, antigen: antigen)
+        antigen_series_dose1 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series)
+        antigen_series_dose2 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series)
+        antigen_series_dose3 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series2)
+        antigen_series_dose4 = FactoryGirl.create(:antigen_series_dose,
+                                                   antigen_series: antigen_series2)
+        antigen_series_doses = [antigen_series_dose1, antigen_series_dose2,
+                                antigen_series_dose3, antigen_series_dose4]
+        antigen_series_doses.each do |as_dose|
+          as_dose.dose_vaccines << FactoryGirl.create(:antigen_series_dose_vaccine)
+          as_dose.dose_vaccines << FactoryGirl.create(:antigen_series_dose_vaccine)
+        end
+        antigen.reload
+        expect(antigen.dose_vaccines.length).to eq(8)
+      end
     end
-    it 'has multiple vaccines' do
-      antigen = Antigen.create(name: 'Polio')
-      vaccine = FactoryGirl.create(:vaccine)
-      antigen.vaccines << vaccine
-      expect(antigen.vaccines).to eq([vaccine])
+    context 'old import method' do
+      it 'has multiple vaccines' do
+        antigen = Antigen.create(name: 'Polio')
+        vaccine_info = FactoryGirl.create(:vaccine_info)
+        antigen.vaccine_infos << vaccine_info
+        expect(antigen.vaccine_infos).to eq([vaccine_info])
+      end
+    end
+  end
+
+  describe '#all_antigen_cvx_codes' do
+    let(:antigen) do
+      antigen_importer = AntigenImporter.new
+      antigen_xml_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRING)
+      antigen_importer.parse_antigen_data_and_create_subobjects(antigen_xml_hash)
+    end
+
+    it 'pulls all cvx codes from the antigen\'s series\'s dose\'s vaccines' do
+      a_vaccines  = antigen.series.map {|series| series.doses }
+                      .flatten!.map {|dose| dose.dose_vaccines }.flatten!
+      
+      expect(antigen.dose_vaccines.uniq.sort).to eq(a_vaccines.uniq.sort)
+      expect(antigen.all_antigen_cvx_codes).to eq(a_vaccines.map(&:cvx_code).uniq.sort)
     end
   end
 end

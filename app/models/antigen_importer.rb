@@ -28,6 +28,7 @@ class AntigenImporter
     antigen_name   = xml_file_hash.find_all_values_for('targetDisease').first.downcase
     antigen_object = Antigen.find_or_create_by(name: antigen_name)
     create_all_antigen_series(xml_file_hash, antigen_object)
+    antigen_object
   end
 
   def get_interval_type(interval_hash)

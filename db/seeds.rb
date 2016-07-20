@@ -60,3 +60,6 @@ patients_list.each_with_index do |value, index|
   end
 end
 
+antigen_importer = AntigenImporter.new
+antigen_importer.import_antigen_xml_files('spec/support/xml')
+

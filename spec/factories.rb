@@ -101,7 +101,7 @@ FactoryGirl.define do
     max_start_age 'n/a'
   end
   
-  factory :vaccine do
+  factory :vaccine_info do
     short_description 'Polio'
     full_name 'DTaP-HepB-IPV'
     cvx_code 110
@@ -114,9 +114,9 @@ FactoryGirl.define do
     name 'Polio'
   end
 
-  factory :antigen_with_vaccine, parent: :antigen do
+  factory :antigen_with_vaccine_info, parent: :antigen do
     after(:create) do |antigen|
-      antigen.vaccines << FactoryGirl.create(:vaccine)
+      antigen.vaccines << FactoryGirl.create(:vaccine_info)
     end
   end
   
@@ -164,25 +164,11 @@ FactoryGirl.define do
     association :patient_profile, factory: :patient_profile
   end
 
-  factory :vaccine_dose_with_vaccine, parent: :vaccine_dose do
+  factory :vaccine_dose_with_vaccine_info, parent: :vaccine_dose do
     after(:create) do |vaccine_dose|
       antigen = FactoryGirl.create(:antigen)
-      vaccine = FactoryGirl.create(:vaccine, cvx_code: vaccine_dose.cvx_code)
+      vaccine = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)
       antigen.vaccines << vaccine
     end
-  end
-
-  factory :vaccine_requirement do
-    vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
-    dosage_number 1
-    min_age_years 1
-  end
-
-  factory :vaccine_requirement_detail do
-    requirer_id 1
-    requirement_id 2
-    required_years 0
-    required_months 1
-    required_weeks 0
   end
 end
