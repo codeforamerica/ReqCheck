@@ -1,6 +1,6 @@
-class CreateVaccines < ActiveRecord::Migration
+class CreateVaccineInfos < ActiveRecord::Migration
   def change
-    create_table :vaccines do |t|
+    create_table :vaccine_infos do |t|
       t.string :short_description
       t.string :full_name
       t.integer :cvx_code, null: false

@@ -61,7 +61,7 @@
       </tr>
   </thead>
   <tbody>
-  <% @patient.get_vaccines(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).each do |individual_vaccine| %>
+  <% @patient.get_vaccine_doses(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).each do |individual_vaccine| %>
     <tr>
       <td><%= individual_vaccine.vaccine_code %></td>
       <td><%= individual_vaccine.mvx_code %></td>

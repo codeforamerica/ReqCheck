@@ -134,7 +134,7 @@ RSpec.describe Patient, type: :model do
       expect(pat_age).to eq(4)
     end
   end
-  describe "#get_vaccines" do
+  describe "#get_vaccine_doses" do
     let(:test_patient) do
       patient = FactoryGirl.create(:patient,
         patient_profile_attributes: {dob: in_pst(5.years.ago), record_number: 123}
@@ -159,17 +159,17 @@ RSpec.describe Patient, type: :model do
       patient
     end
     it "returns all vaccines of the types passed in" do
-      expect(test_patient.get_vaccines(['DTaP', 'DTP']).length).to eq(3)
-      expect(test_patient.get_vaccines(['DTaP', 'DTP'])[0].vaccine_code).to eq('DTaP')
+      expect(test_patient.get_vaccine_doses(['DTaP', 'DTP']).length).to eq(3)
+      expect(test_patient.get_vaccine_doses(['DTaP', 'DTP'])[0].vaccine_code).to eq('DTaP')
     end
     it "returns all vaccines in the order of vaccine_dose date" do
-      first_vax, second_vax, third_vax = test_patient.get_vaccines(['DTaP', 'DTP'])
+      first_vax, second_vax, third_vax = test_patient.get_vaccine_doses(['DTaP', 'DTP'])
       expect(first_vax.administered_date < second_vax.administered_date).to be(true)
       expect(first_vax.administered_date < third_vax.administered_date).to be(true)
       expect(second_vax.administered_date < third_vax.administered_date).to be(true)
     end
     it "returns a blank array if no vaccines are present" do
-      expect(test_patient.get_vaccines(['DTP']).length).to eq(0)
+      expect(test_patient.get_vaccine_doses(['DTP']).length).to eq(0)
     end
   end
 end
