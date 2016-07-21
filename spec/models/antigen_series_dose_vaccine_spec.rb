@@ -12,5 +12,12 @@ RSpec.describe AntigenSeriesDoseVaccine, type: :model do
       asd_vaccine.antigen_series_doses << as_dose
       expect(asd_vaccine.antigen_series_doses).to eq([as_dose])
     end
+    it 'has many antigens' do
+      asd_vaccine = FactoryGirl.create(:antigen_series_dose_vaccine)
+      as_dose = FactoryGirl.create(:antigen_series_dose)
+      asd_vaccine.antigen_series_doses << as_dose
+      expect(asd_vaccine.antigens.first.class.name).to eq('Antigen')
+      expect(asd_vaccine.antigens.length).to eq(3)
+    end
   end
 end

@@ -87,4 +87,17 @@ RSpec.describe Antigen, type: :model do
       expect(antigen.all_antigen_cvx_codes).to eq(a_vaccines.map(&:cvx_code).uniq.sort)
     end
   end
+
+  describe '#find_antigens_by_cvx' do
+    before(:each) do
+      antigen_importer = AntigenImporter.new
+      antigen_importer.import_antigen_xml_files('spec/support/xml')
+    end
+
+    it 'finds all antigens per the cvx code' do
+      cvx_code = AntigenSeriesDoseVaccine.first.cvx_code
+      antigens = Antigen.find_antigens_by_cvx(cvx_code)
+      expect(antigens.length).to eq(4)
+    end
+  end
 end

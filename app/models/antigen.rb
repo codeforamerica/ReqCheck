@@ -8,4 +8,9 @@ class Antigen < ActiveRecord::Base
   def all_antigen_cvx_codes
     self.dose_vaccines.map(&:cvx_code).uniq.sort
   end
+
+  def find_antigens_by_cvx(cvx_code)
+    all_vaccines = AntigenSeriesDoseVaccine.where(cvx_code: cvx_code).uniq
+    all_vaccines.map { |vaccine| vaccine.antigen }.uniq
+  end
 end
