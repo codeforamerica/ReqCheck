@@ -15,7 +15,7 @@ class VaccineDose < ActiveRecord::Base
   end
 
   def vaccine_info
-    Vaccine.find_by(cvx_code: self.cvx_code) if self.cvx_code
+    VaccineInfo.find_by(cvx_code: self.cvx_code) if self.cvx_code
   end
 
   def antigens

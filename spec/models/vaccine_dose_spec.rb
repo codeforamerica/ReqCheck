@@ -49,7 +49,7 @@ RSpec.describe VaccineDose, type: :model do
   describe '#vaccine_info' do 
     it 'has a vaccine_info object that is joined on the cvx code' do
       vaccine_dose = FactoryGirl.create(:vaccine_dose)
-      vaccine_info = FactoryGirl.create(:vaccine, cvx_code: vaccine_dose.cvx_code)
+      vaccine_info = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)
       vaccine_dose.reload
       expect(vaccine_dose.vaccine_info).to eq(vaccine_info)
     end
@@ -57,7 +57,7 @@ RSpec.describe VaccineDose, type: :model do
   describe '#antigens' do 
     it 'has a number of antigens through the vaccine_info' do
       vaccine_dose = FactoryGirl.create(:vaccine_dose)
-      vaccine_info = FactoryGirl.create(:vaccine, cvx_code: vaccine_dose.cvx_code)
+      vaccine_info = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)
       vaccine_dose.reload
       expect(vaccine_dose.antigens).to eq(vaccine_info.antigens)
     end

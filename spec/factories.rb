@@ -14,6 +14,16 @@ FactoryGirl.define do
     allowable false
   end
 
+  factory :seed_antigen_xml, class: Hash do
+    skip_create
+
+    before(:create) do
+      antigen_importer = AntigenImporter.new
+      antigen_importer.import_antigen_xml_files('spec/support/xml')
+    end
+  end
+
+
   factory :conditional_skip_set_condition do
     condition_id 1
     condition_type 'Age'
@@ -164,11 +174,11 @@ FactoryGirl.define do
     association :patient_profile, factory: :patient_profile
   end
 
-  factory :vaccine_dose_with_vaccine_info, parent: :vaccine_dose do
-    after(:create) do |vaccine_dose|
-      antigen = FactoryGirl.create(:antigen)
-      vaccine = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)
-      antigen.vaccines << vaccine
-    end
-  end
+  # factory :vaccine_dose_with_vaccine_info, parent: :vaccine_dose do
+  #   after(:create) do |vaccine_dose|
+  #     antigen = FactoryGirl.create(:antigen)
+  #     vaccine = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)
+  #     antigen.vaccines << vaccine
+  #   end
+  # end
 end

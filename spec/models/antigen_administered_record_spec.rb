@@ -27,25 +27,28 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
     # it 'requires the dose condition' {  }
   end
   describe '.create_records_from_vaccine_doses' do
+    before(:each) do
+      FactoryGirl.create(:seed_antigen_xml)
+    end
     it 'takes a list of vaccine_doses and returns a list of AntigenAdministeredRecords' do
-      vaccine_doses = [FactoryGirl.create(:vaccine_dose_with_vaccine)]
-      vaccine_doses << FactoryGirl.create(:vaccine_dose_with_vaccine)
+      vaccine_doses = [FactoryGirl.create(:vaccine_dose)]
+      vaccine_doses << FactoryGirl.create(:vaccine_dose)
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(vaccine_doses)
       expect(aars.first.class.name).to eq('AntigenAdministeredRecord')
     end
     it 'returns a larger number of AntigenAdministeredRecords' do
-      vaccine_doses = [FactoryGirl.create(:vaccine_dose_with_vaccine)]
-      vaccine_doses << FactoryGirl.create(:vaccine_dose_with_vaccine)
-      vaccine_doses.first.vaccine_info.antigens << FactoryGirl.create(:antigen)
+      vaccine_doses = [FactoryGirl.create(:vaccine_dose, cvx_code: 120)]
+      vaccine_doses << FactoryGirl.create(:vaccine_dose, cvx_code: 120)
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(vaccine_doses)
       expect(aars.length > 2).to eq(true)
     end
-    it 'flags if there are not any antigens for the vaccine_info' do
-      vaccine_doses = [FactoryGirl.create(:vaccine_dose)]
-      vaccine_doses << FactoryGirl.create(:vaccine_dose)
+    it 'flags if there are not any antigens for the cvx_code' do
+      cvx_code = 1000
+      vaccine_doses = [FactoryGirl.create(:vaccine_dose, cvx_code: cvx_code)]
+      vaccine_doses << FactoryGirl.create(:vaccine_dose, cvx_code: cvx_code)
       expect{
         AntigenAdministeredRecord.create_records_from_vaccine_doses(vaccine_doses)
-      }.to raise_exception
+      }.to raise_exception(Exceptions::MissingCVX)
     end
   end
   describe '#cdc_attributes' do

@@ -95,9 +95,14 @@ RSpec.describe Antigen, type: :model do
     end
 
     it 'finds all antigens per the cvx code' do
-      cvx_code = AntigenSeriesDoseVaccine.first.cvx_code
+      cvx_code = 110
       antigens = Antigen.find_antigens_by_cvx(cvx_code)
-      expect(antigens.length).to eq(4)
+      expect(antigens.length).to eq(5)
+      ["tetanus", "polio", "pertussis", "hepb", "diphtheria"].each do |antigen_name|
+        antigen_index = antigens.index{ |antigen_obj| antigen_obj.name == antigen_name }
+        antigens.delete_at(antigen_index)
+      end
+      expect(antigens).to eq([])
     end
   end
 end

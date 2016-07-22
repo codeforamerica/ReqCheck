@@ -14,10 +14,11 @@ RSpec.describe AntigenSeriesDoseVaccine, type: :model do
     end
     it 'has many antigens' do
       asd_vaccine = FactoryGirl.create(:antigen_series_dose_vaccine)
-      as_dose = FactoryGirl.create(:antigen_series_dose)
-      asd_vaccine.antigen_series_doses << as_dose
+      as_dose     = FactoryGirl.create(:antigen_series_dose, dose_vaccines: [asd_vaccine])
+      as_series   = FactoryGirl.create(:antigen_series, doses: [as_dose])
+      FactoryGirl.create(:antigen, series: [as_series])
       expect(asd_vaccine.antigens.first.class.name).to eq('Antigen')
-      expect(asd_vaccine.antigens.length).to eq(3)
+      expect(asd_vaccine.antigens.length).to eq(1)
     end
   end
 end
