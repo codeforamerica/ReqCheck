@@ -1,4 +1,4 @@
- require 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe AntigenAdministeredRecord, type: :model do
   describe '#create' do
@@ -27,8 +27,11 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
     # it 'requires the dose condition' {  }
   end
   describe '.create_records_from_vaccine_doses' do
-    before(:each) do
+    before(:all) do
       FactoryGirl.create(:seed_antigen_xml)
+    end
+    after(:all) do
+      DatabaseCleaner.clean_with(:truncation)
     end
     it 'takes a list of vaccine_doses and returns a list of AntigenAdministeredRecords' do
       vaccine_doses = [FactoryGirl.create(:vaccine_dose, cvx_code: 110)]

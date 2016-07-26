@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20160726003459) do
     t.string   "target_disease", null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.json     "xml_hash"
+    t.jsonb    "xml_hash"
   end
 
   create_table "antigens_vaccine_infos", id: false, force: :cascade do |t|

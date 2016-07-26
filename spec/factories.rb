@@ -5,6 +5,8 @@ require_relative 'support/time_help'
 
 FactoryGirl.define do
   extend TimeHelp
+
+
   factory :interval do
     interval_type 'Previous'
     interval_absolute_min '4 weeks - 4 days'
