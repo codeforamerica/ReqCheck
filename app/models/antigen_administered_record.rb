@@ -27,7 +27,7 @@ class AntigenAdministeredRecord
   def cdc_attributes
     full_name = self.vaccine_info.nil? ? nil : self.vaccine_info.full_name
     {
-      antigen: self.antigen.name,
+      antigen: self.antigen.target_disease,
       date_administered: self.vaccine_dose.administered_date,
       cvx_code: self.vaccine_dose.cvx_code,
       mvx_code: self.vaccine_dose.mvx_code,

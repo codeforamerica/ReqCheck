@@ -4,10 +4,10 @@ RSpec.describe Antigen, type: :model do
   describe '#create' do
     it 'requires a name' do
       expect{ Antigen.create }.to raise_exception
-      expect(Antigen.create(name: 'Test').class.name).to eq('Antigen')
+      expect(Antigen.create(target_disease: 'Test').class.name).to eq('Antigen')
     end
     it 'has a json field named xml_hash' do
-      antigen = Antigen.create(name: 'Test')
+      antigen = Antigen.create(target_disease: 'Test')
       xml_hash = {"hello": "world"}.stringify_keys
       antigen.xml_hash = xml_hash
       antigen.save
@@ -64,7 +64,7 @@ RSpec.describe Antigen, type: :model do
     end
     context 'old import method' do
       it 'has multiple vaccines' do
-        antigen = Antigen.create(name: 'Polio')
+        antigen = Antigen.create(target_disease: 'Polio')
         vaccine_info = FactoryGirl.create(:vaccine_info)
         antigen.vaccine_infos << vaccine_info
         expect(antigen.vaccine_infos).to eq([vaccine_info])
@@ -98,8 +98,8 @@ RSpec.describe Antigen, type: :model do
       cvx_code = 110
       antigens = Antigen.find_antigens_by_cvx(cvx_code)
       expect(antigens.length).to eq(5)
-      ["tetanus", "polio", "pertussis", "hepb", "diphtheria"].each do |antigen_name|
-        antigen_index = antigens.index{ |antigen_obj| antigen_obj.name == antigen_name }
+      ["tetanus", "polio", "pertussis", "hepb", "diphtheria"].each do |target_disease|
+        antigen_index = antigens.index{ |antigen_obj| antigen_obj.target_disease == target_disease }
         antigens.delete_at(antigen_index)
       end
       expect(antigens).to eq([])

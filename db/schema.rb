@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719180821) do
+ActiveRecord::Schema.define(version: 20160726003459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 20160719180821) do
   add_index "antigen_series_doses_to_vaccines", ["antigen_series_dose_vaccine_id", "antigen_series_dose_id"], name: "index_vaccines_to_series_doses_on_vaccine_id", unique: true, using: :btree
 
   create_table "antigens", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "target_disease", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.json     "xml_hash"
   end
 

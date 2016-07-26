@@ -58,7 +58,7 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
         antigen: FactoryGirl.create(:antigen)
       )
       expected_values = {
-        antigen: aar.antigen.name,
+        antigen: aar.antigen.target_disease,
         date_administered: aar.vaccine_dose.administered_date,
         cvx_code: aar.vaccine_dose.cvx_code,
         mvx_code: aar.vaccine_dose.mvx_code,

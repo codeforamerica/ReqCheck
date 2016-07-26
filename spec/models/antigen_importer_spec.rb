@@ -54,10 +54,10 @@ RSpec.describe AntigenImporter, type: :model do
         expect(Antigen.all.length).to eq(0)
         antigen_importer.import_antigen_xml_files('spec/support/xml')
         expect(Antigen.all.length).to eq(17)
-        expect(Antigen.find_by(name: 'diphtheria').series.length).to eq(1)
-        expect(Antigen.find_by(name: 'polio').series.length).to eq(3)
-        expect(Antigen.find_by(name: 'hepb').series.length).to eq(5)
-        expect(Antigen.find_by(name: 'pneumococcal').series.length).to eq(6)
+        expect(Antigen.find_by(target_disease: 'diphtheria').series.length).to eq(1)
+        expect(Antigen.find_by(target_disease: 'polio').series.length).to eq(3)
+        expect(Antigen.find_by(target_disease: 'hepb').series.length).to eq(5)
+        expect(Antigen.find_by(target_disease: 'pneumococcal').series.length).to eq(6)
       end
     end
 
@@ -76,13 +76,13 @@ RSpec.describe AntigenImporter, type: :model do
     describe '#parse_antigen_data_and_create_subobjects' do
       it 'takes an xml_file_hash and creates all antigen series for the antigen' do
         antigen_importer.parse_antigen_data_and_create_subobjects(xml_hash)
-        antigen = Antigen.find_by(name: 'polio')
+        antigen = Antigen.find_by(target_disease: 'polio')
         expect(antigen.series.length).to eq(3)
         expect(antigen.class.name).to eq('Antigen')
       end
       it 'saves the antigens by lowercase name' do
         antigen_importer.parse_antigen_data_and_create_subobjects(xml_hash)
-        expect(Antigen.find_by(name: 'polio').class.name).to eq('Antigen')
+        expect(Antigen.find_by(target_disease: 'polio').class.name).to eq('Antigen')
       end
     end
 

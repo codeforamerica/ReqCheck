@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Patient', type: :model do
+RSpec.describe 'CDC Tests' do
   before do
     new_time = Time.local(2016, 1, 3, 10, 0, 0)
     Timecop.freeze(new_time)

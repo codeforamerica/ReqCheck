@@ -25,8 +25,8 @@ class AntigenImporter
   end
 
   def parse_antigen_data_and_create_subobjects(xml_file_hash)
-    antigen_name   = xml_file_hash.find_all_values_for('targetDisease').first.downcase
-    antigen_object = Antigen.find_or_create_by(name: antigen_name)
+    target_disease = xml_file_hash.find_all_values_for('targetDisease').first.downcase
+    antigen_object = Antigen.find_or_create_by(target_disease: target_disease)
     create_all_antigen_series(xml_file_hash, antigen_object)
     antigen_object
   end
@@ -256,13 +256,5 @@ class AntigenImporter
       conditions << ConditionalSkipSetCondition.create(condition_arguments)
     end
     conditions
-  end
-
-  def add_vaccines_to_antigen(antigen_string, vaccine_array, xml_hash)
-    antigen = Antigen.find_or_create_by(name: antigen_string)
-    antigen.xml_hash = xml_hash
-    antigen.save
-    antigen.vaccines << vaccine_array
-    @antigens << antigen
   end
 end

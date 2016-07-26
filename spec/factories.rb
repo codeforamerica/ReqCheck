@@ -121,7 +121,7 @@ FactoryGirl.define do
   end
 
   factory :antigen do
-    name 'Polio'
+    target_disease 'Polio'
   end
 
   factory :antigen_with_vaccine_info, parent: :antigen do
