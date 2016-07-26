@@ -1,22 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe VaccineDose, type: :model do
-  it "does not require a Patient to be instantiated" do
-    vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-      administered_date: Date.today
-    )
-    expect(vaccine_dose.class.name).to eq('VaccineDose')
-  end
-
-  it "can take a Patient object as a parameter" do
-    patient = Patient.create(
-        first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: {dob: Date.today, record_number: 123}
+  describe '#create' do
+    it "does not require a Patient to be instantiated" do
+      vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
+        administered_date: Date.today,
+        cvx_code: 21
       )
-    vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-      administered_date: Date.today, patient_profile: patient.patient_profile
-    )
-    expect(vaccine_dose.class.name).to eq('VaccineDose')
+      expect(vaccine_dose.class.name).to eq('VaccineDose')
+    end
+    it "can take a Patient object as a parameter" do
+      patient = Patient.create(
+          first_name: 'Test', last_name: 'Tester',
+          patient_profile_attributes: {dob: Date.today, record_number: 123}
+        )
+      vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
+        administered_date: Date.today,
+        patient_profile: patient.patient_profile,
+        cvx_code: 21
+      )
+      expect(vaccine_dose.class.name).to eq('VaccineDose')
+    end
+    it "can take string dates and convert them to the database date object" do
+      administered_date_string = "01/01/2010"
+      vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
+        administered_date: administered_date_string,
+        cvx_code: 21
+      )
+      administered_date_object = DateTime.parse(administered_date_string).to_date
+      expect(vaccine_dose.administered_date).to eq(administered_date_object)
+    end
   end
   describe '#patient_age_at_vaccine_dose' do
     let(:test_vaccine_dose) do
@@ -25,7 +38,9 @@ RSpec.describe VaccineDose, type: :model do
         patient_profile_attributes: {dob: 6.years.ago.to_date, record_number: 123}
       )
       VaccineDose.create(vaccine_code: 'VAR1',
-        administered_date: Date.yesterday, patient_profile: patient.patient_profile
+        administered_date: Date.yesterday,
+        patient_profile: patient.patient_profile,
+        cvx_code: 21
       )
     end
     it "gives the patients age at the date of the vaccine_dose" do

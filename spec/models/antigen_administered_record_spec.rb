@@ -31,8 +31,8 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
       FactoryGirl.create(:seed_antigen_xml)
     end
     it 'takes a list of vaccine_doses and returns a list of AntigenAdministeredRecords' do
-      vaccine_doses = [FactoryGirl.create(:vaccine_dose)]
-      vaccine_doses << FactoryGirl.create(:vaccine_dose)
+      vaccine_doses = [FactoryGirl.create(:vaccine_dose, cvx_code: 110)]
+      vaccine_doses << FactoryGirl.create(:vaccine_dose, cvx_code: 110)
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(vaccine_doses)
       expect(aars.first.class.name).to eq('AntigenAdministeredRecord')
     end

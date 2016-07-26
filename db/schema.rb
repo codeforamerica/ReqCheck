@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20160726003459) do
   end
 
   create_table "vaccine_doses", force: :cascade do |t|
-    t.string   "vaccine_code",                       null: false
+    t.string   "vaccine_code"
     t.integer  "patient_profile_id"
     t.date     "administered_date",                  null: false
     t.string   "description"
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(version: 20160726003459) do
     t.integer  "facility_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.integer  "cvx_code"
+    t.integer  "cvx_code",                           null: false
   end
 
   create_table "vaccine_infos", force: :cascade do |t|

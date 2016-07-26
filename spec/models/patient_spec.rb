@@ -55,6 +55,15 @@ RSpec.describe Patient, type: :model do
       vaccine_dose = FactoryGirl.create(:vaccine_dose, patient: patient)
       expect(patient.vaccine_doses.length).to eq(1)
     end
+    it "can take string dates and convert them to the database date object" do
+      dob_string     = "01/01/2010"
+      patient = Patient.create(
+        first_name: 'Test', last_name: 'Tester',
+        patient_profile_attributes: {dob: dob_string, record_number: 123}
+      )
+      dob_date_object = DateTime.parse(dob_string).to_date
+      expect(patient.dob).to eq(dob_date_object)
+    end
   end
   describe "#find_by_record_number" do
     before(:each) do
