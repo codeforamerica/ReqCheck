@@ -16,7 +16,7 @@ class Patient < User
 
   def self.create_full_profile(first_name:, last_name:, dob:, record_number:, email: '', **options)
     allowable_keys = [:record_number, :dob, :address, :address2, :city, :state,
-                      :zip_code, :cell_phone, :home_phone, :race, :ethnicity]
+                      :zip_code, :cell_phone, :home_phone, :race, :ethnicity, :gender]
     options.keys.each do |key_symbol|
       if !allowable_keys.include? key_symbol
         raise ArgumentError.new("unknown attribute #{key_symbol.to_s} for PatientProfile")
