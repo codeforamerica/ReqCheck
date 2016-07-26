@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20160726003459) do
     t.string  "home_phone"
     t.string  "race"
     t.string  "ethnicity"
+    t.string  "gender"
   end
 
   add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", using: :btree
