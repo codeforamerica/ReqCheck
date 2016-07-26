@@ -56,7 +56,7 @@ RSpec.describe Patient, type: :model do
       expect(patient.vaccine_doses.length).to eq(1)
     end
     it "can take string dates and convert them to the database date object" do
-      dob_string     = "01/01/2010"
+      dob_string     = "01/13/2010"
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         patient_profile_attributes: {dob: dob_string, record_number: 123}

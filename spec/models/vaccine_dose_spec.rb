@@ -30,6 +30,14 @@ RSpec.describe VaccineDose, type: :model do
       administered_date_object = DateTime.parse(administered_date_string).to_date
       expect(vaccine_dose.administered_date).to eq(administered_date_object)
     end
+    it "can take string cvx_code and convert it to integer" do
+      administered_date_string = "01/01/2010"
+      vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
+        administered_date: administered_date_string,
+        cvx_code: '21'
+      )
+      expect(vaccine_dose.cvx_code).to eq(21)
+    end
   end
   describe '#patient_age_at_vaccine_dose' do
     let(:test_vaccine_dose) do

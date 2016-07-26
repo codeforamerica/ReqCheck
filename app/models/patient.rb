@@ -24,6 +24,7 @@ class Patient < User
     end
     options[:dob]           = dob
     options[:record_number] = record_number
+    options = options.symbolize_keys
     self.create(first_name: first_name, last_name: last_name, email: email,
                 patient_profile_attributes: options)
   end

@@ -17,6 +17,9 @@ gem 'jquery-rails'
 # webserver, production
 gem 'puma'
 
+# Americanization of dates
+gem 'american_date'
+
 # paperclip to upload files
 # gem "paperclip", "~> 5.0.0"
 

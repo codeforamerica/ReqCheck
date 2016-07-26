@@ -29,14 +29,29 @@ RSpec.describe 'CDC Tests' do
   # => !!? Is this true?
       overall_evaluation_status    = ''
       
-      @test_patient_20130001 = Patient.create(
-        dob: dob, gender: gender, record_number: 1, address: "#{test} drive",
-        city: 'San Francisco', state: 'CA', zip_code: '94103', cell_phone: '555-555-5555',
-        first_name: 'Test', last_name: test_number
-      )
+      # patient_args = {
+      #   dob: dob, gender: gender, record_number: 1, address: "#{test_number} drive",
+      #   city: 'San Francisco', state: 'CA', zip_code: '94103', cell_phone: '555-555-5555',
+      #   first_name: 'Test', last_name: test_number
+      # }
+      patient_args = {
+        dob: '02/12/2011',
+        gender: 'f',
+        record_number: 1,
+        address: "#{test_number} CDC Street",
+        city: 'San Francisco',
+        state: 'CA',
+        zip_code: '94103',
+        cell_phone: '555-555-5555',
+        first_name: 'Test',
+        last_name: test_number
+      }
+
+
+      @test_patient_20130001 = Patient.create_full_profile(patient_args)
     end
     it 'returns \'valid\' for #check_record' do
-      expect(test_patient_20130001.check_record).to eq('valid')
+      expect(@test_patient_20130001.check_record).to eq('valid')
     end
   end
 
@@ -82,25 +97,27 @@ RSpec.describe 'CDC Tests' do
         evaulation_reason: 'Age: Too Young'
       }
 
-      @test_patient_20130002 = Patient.create(patient_args)
+      @test_patient_20130002 = Patient.create_full_profile(patient_args)
       
       vaccine_1_args = {
         patient_profile_id: @test_patient_20130002.patient_profile.id,
         administered_date: vaccine_1[:date_administered],
-        description: vaccine_1[:vaccine_name]      
+        description: vaccine_1[:vaccine_name],
+        cvx_code: vaccine_1[:cvx_code]
       }
 
       vaccine_2_args = {
         patient_profile_id: @test_patient_20130002.patient_profile.id,
         administered_date: vaccine_2[:date_administered],
-        description: vaccine_2[:vaccine_name]      
+        description: vaccine_2[:vaccine_name],
+        cvx_code: vaccine_1[:cvx_code]
       }
 
       @vaccine_dose_1        = VaccineDose.create(vaccine_1_args)
       @vaccine_dose_2        = VaccineDose.create(vaccine_2_args)
     end
     it 'returns \'valid\' for #check_record' do
-      expect(test_patient_20130002.check_record).to eq('valid')
+      expect(@test_patient_20130002.check_record).to eq('valid')
     end
   end
 

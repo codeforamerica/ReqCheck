@@ -56,6 +56,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    american_date (1.1.1)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -280,6 +281,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  american_date
   autoprefixer-rails
   better_errors
   binding_of_caller
