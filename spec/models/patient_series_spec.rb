@@ -21,11 +21,28 @@ RSpec.describe PatientSeries, type: :model do
   end
 
   describe '#create_target_doses' do
+    before(:all) { FactoryGirl.create(:seed_antigen_xml) }
+    after(:all) { DatabaseCleaner.clean_with(:truncation) }
+
+    let(:antigen_series) { Antigen.find_by(target_disease: 'polio') }
+
     it 'maps through the antigen_series_doses and creates a target_dose for each one' do
       patient_series = PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
-      antigen_series_length = antigen_series.length
-      patient_series.create_target_doses(antigen_series.doses)
+      antigen_series_length = antigen_series.doses.length
+      patient_series.create_target_doses
       expect(patient_series.target_doses.length).to eq(antigen_series_length)
+    end
+    it 'creates target_doses' do
+      patient_series = PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
+      patient_series.create_target_doses
+      expect(patient_series.target_doses.first.class.name).to eq('TargetDose')
+    end
+    it 'removes old objects' do
+      patient_series = PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
+      patient_series.create_target_doses
+      first_target_dose = patient_series.target_doses.first
+      patient_series.create_target_doses
+      expect(patient_series.target_doses.first).not_to eq(first_target_dose)
     end
   end
 end
