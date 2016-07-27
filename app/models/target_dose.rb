@@ -8,6 +8,10 @@ class TargetDose
     @antigen_series_dose = antigen_series_dose
   end
 
+  def required_for_patient
+
+  end
+
 
 
 end
