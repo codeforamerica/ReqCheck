@@ -26,7 +26,7 @@ class AntigenImporter
 
   def parse_antigen_data_and_create_subobjects(xml_file_hash)
     target_disease = xml_file_hash.find_all_values_for('targetDisease').first.downcase
-    antigen_object = Antigen.find_or_create_by(target_disease: target_disease)
+    antigen_object = Antigen.create(target_disease: target_disease)
     create_all_antigen_series(xml_file_hash, antigen_object)
     antigen_object
   end

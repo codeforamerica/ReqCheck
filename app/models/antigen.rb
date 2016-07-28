@@ -5,6 +5,10 @@ class Antigen < ActiveRecord::Base
   has_many :doses, through: :series
   has_many :dose_vaccines, through: :doses
 
+  def readonly?
+    new_record? ? false : true 
+  end
+
   def all_antigen_cvx_codes
     self.dose_vaccines.map(&:cvx_code).uniq.sort
   end

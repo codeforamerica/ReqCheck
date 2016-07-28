@@ -19,11 +19,17 @@ RSpec.describe Evaluator, type: :model do
       evaluator = Evaluator.new(patient: test_patient)
       expect(evaluator.antigens.length).to eq(17)
     end
+    it 'has access to all the antigens' do
+      evaluator = Evaluator.new(patient: test_patient)
+      expect(evaluator.antigens.length).to eq(17)
+    end
   end
 
-  describe '#create_target_doses' do
+  describe '#create_all_patient_series' do
     let(:test_patient) { FactoryGirl.create(:patient) }
     let(:evaluator) { Evaluator.new(patient: test_patient) }
+
+    
 
   end
 

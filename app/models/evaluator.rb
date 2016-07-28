@@ -5,9 +5,15 @@ class Evaluator
 
   def initialize(patient:)
     @patient      = patient
+    @antigens     = []
   end
 
   def antigens
-    Antigen.select("DISTINCT ON(target_disease) *").order("target_disease, created_at DESC")
+    if @antigens = []
+      @antigens = Antigen
+                    .select("DISTINCT ON(target_disease) *")
+                    .order("target_disease, created_at DESC")
+    end
+    @antigens
   end
 end
