@@ -39,8 +39,7 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.send(dose_attribute)).to eq(as_dose.send(dose_attribute))
       end
     end
-    # user.read_attribute(attribute_name)
- 
+
 
   end
 
