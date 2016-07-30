@@ -7,33 +7,35 @@ RSpec.describe Evaluator, type: :model do
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)
   end
+  let(:test_patient) { FactoryGirl.create(:patient) }
+  let(:evaluator) { Evaluator.new(patient: test_patient) }
 
   describe 'validations' do
     it 'requires a patient object' do
       expect{Evaluator.new}.to raise_exception
     end
   end
-  describe 'relationships' do
-    let(:test_patient) { FactoryGirl.create(:patient) }
-    it 'has access to all the antigens' do
-      evaluator = Evaluator.new(patient: test_patient)
-      expect(evaluator.antigens.length).to eq(17)
+  
+  describe '#get_antigens' do
+    it 'pulls all antigens from the database' do
+      expect(evaluator.get_antigens.length).to eq(17)
     end
-    it 'has access to all the antigens' do
-      evaluator = Evaluator.new(patient: test_patient)
-      expect(evaluator.antigens.length).to eq(17)
+    it 'pulls only unique antigens from the database' do
+      expect(evaluator.get_antigens.length).to eq(17)
+      FactoryGirl.create(:antigen, target_disease: 'polio')
+      expect(evaluator.get_antigens.length).to eq(17)
     end
   end
 
-  describe '#create_all_patient_series' do
-    let(:test_patient) { FactoryGirl.create(:patient) }
-    let(:evaluator) { Evaluator.new(patient: test_patient) }
-
-    
-
+  describe '#create_all_antigen_evaluators' do
+    it 'creates all patient series for each antigen' do
+      antigens = Antigen.all
+      evaluator.create_all_antigen_evaluators(test_patient, antigens)
+      expect(evaluator.antigen_evaluators.length).to eq(17)
+      expect(evaluator.antigen_evaluators.first.class.name).to eq('AntigenEvaluator')
+      expect(evaluator.antigen_evaluators.first.patient_serieses.first.class.name).to eq('PatientSeries')
+    end
   end
-
-
 
 
   describe '#build_patient_series' do

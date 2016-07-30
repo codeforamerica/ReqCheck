@@ -4,6 +4,9 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :antigen_evaluator do
+    
+  end
   extend TimeHelp
 
 

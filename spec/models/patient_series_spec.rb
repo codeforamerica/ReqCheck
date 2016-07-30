@@ -29,7 +29,6 @@ RSpec.describe PatientSeries, type: :model do
   end
 
   describe '#create_target_doses' do
-
     it 'maps through the antigen_series_doses and creates a target_dose for each one' do
       patient_series = PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
       antigen_series_length = antigen_series.doses.length
@@ -59,12 +58,30 @@ RSpec.describe PatientSeries, type: :model do
       expect(second_target_dose.dose_number).to eq(2)
     end
   end
-  describe '.create_all_patient_series_for_antigen' do
+
+  
+  describe 'patient_series attributes from the antigen_series' do
+    let(:test_patient_series) do
+      PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
+    end
+    
+    dose_attributes = ['name', 'target_disease', 'vaccine_group', 'default_series', 'product_path',
+                       'preference_number', 'min_start_age', 'max_start_age']
+
+    dose_attributes.each do | dose_attribute |
+      it "has the attribute #{dose_attribute}" do
+        expect(test_patient_series.antigen_series).not_to eq(nil)
+        expect(test_patient_series.send(dose_attribute)).to eq(antigen_series.send(dose_attribute))
+      end
+    end
+  end
+
+  describe '.create_antigen_patient_serieses' do
     let(:antigen) { Antigen.find_by(target_disease: 'polio') }
 
     it 'takes a patient and antigen and creates an array of patient_series objects' do
-      patient_series = PatientSeries.create_all_patient_series_for_antigen(antigen: antigen,
-                                                                           patient: test_patient)
+      patient_series = PatientSeries.create_antigen_patient_serieses(antigen: antigen,
+                                                                     patient: test_patient)
       expect(patient_series.length).to eq(3)
       expect(patient_series.first.class.name).to eq('PatientSeries')
       expect(patient_series.length).to eq(antigen.series.length)

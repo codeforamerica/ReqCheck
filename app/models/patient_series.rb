@@ -13,6 +13,17 @@ class PatientSeries
     create_target_doses
   end
 
+  [
+    'name', 'target_disease', 'vaccine_group',
+    'default_series', 'preference_number',
+    'product_path', 'min_start_age', 'max_start_age'
+  ].each do |action|
+    define_method(action) do
+      return nil if @antigen_series.nil?
+      @antigen_series.send(action)
+    end
+  end
+
   def create_target_doses
     @target_doses = @antigen_series.doses.map do |antigen_series_dose|
       TargetDose.new(antigen_series_dose: antigen_series_dose, patient: @patient)
@@ -20,9 +31,10 @@ class PatientSeries
     @target_doses.sort_by!(&:dose_number)
   end
 
-  def self.create_all_patient_series_for_antigen(antigen:, patient:)
+  def self.create_antigen_patient_serieses(antigen:, patient:)
     antigen.series.map do |antigen_series|
       self.new(antigen_series: antigen_series, patient: patient)
     end
   end
+
 end

@@ -2,9 +2,13 @@ require 'rails_helper'
 
 RSpec.describe AntigenSeries, type: :model do
   describe "validations" do
-      it { should validate_presence_of(:name) }
-      it { should validate_presence_of(:target_disease) }
-      it { should validate_presence_of(:vaccine_group) }
+    subject { FactoryGirl.create(:antigen_series) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:target_disease) }
+    it { should validate_presence_of(:min_start_age).strict }
+    it { should validate_presence_of(:max_start_age).strict }
+    it { should validate_numericality_of(:preference_number).strict }
+
   end
   describe 'relationships' do
     it 'has many doses' do

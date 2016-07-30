@@ -55,6 +55,11 @@ class AntigenImporter
     datum == 'Y'
   end
 
+  def get_preference_number(preference_number_string)
+    return 1 if preference_number_string == 'n/a'
+    preference_number_string.to_i
+  end
+
   def create_all_antigen_series(antigen_xml_hash, antigen_object)
     antigen_series_objects = []
 
@@ -65,11 +70,11 @@ class AntigenImporter
       antigen_series = AntigenSeries.find_or_initialize_by(name: hash['seriesName'])
       antigen_series.update_attributes(
           antigen: antigen_object,
-          default_series: yes_bool(hash['defaultSeries']),
-          max_start_age: hash['maxAgeToStart'],
-          min_start_age: hash['minAgeToStart'] ,
-          preference_number: hash['seriesPreference'].to_i,
-          product_path: yes_bool(hash['productPath']),
+          default_series: yes_bool(hash['selectBest']['defaultSeries']),
+          max_start_age: hash['selectBest']['maxAgeToStart'],
+          min_start_age: hash['selectBest']['minAgeToStart'] ,
+          preference_number: get_preference_number(hash['selectBest']['seriesPreference']),
+          product_path: yes_bool(hash['selectBest']['productPath']),
           target_disease: hash['targetDisease'],
           vaccine_group: hash['vaccineGroup']
         )
