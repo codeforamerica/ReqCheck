@@ -7,10 +7,8 @@ RSpec.describe Antigen, type: :model do
       expect(Antigen.create(target_disease: 'Test').class.name).to eq('Antigen')
     end
     it 'has a json field named xml_hash' do
-      antigen = Antigen.create(target_disease: 'Test')
       xml_hash = {"hello": "world"}.stringify_keys
-      antigen.xml_hash = xml_hash
-      antigen.save
+      antigen = Antigen.create(target_disease: 'Test', xml_hash: xml_hash)
       expect(Antigen.first.xml_hash).to eq(xml_hash)
     end
   end
@@ -22,6 +20,13 @@ RSpec.describe Antigen, type: :model do
         antigen_series = FactoryGirl.create(:antigen_series)
         antigen.series << antigen_series
         expect(antigen.series).to eq([antigen_series])
+      end
+      it 'orders the series by preference_number' do
+        antigen = FactoryGirl.create(:antigen)
+        antigen_series1 = FactoryGirl.create(:antigen_series, preference_number: 3, antigen: antigen)
+        antigen_series3 = FactoryGirl.create(:antigen_series, antigen: antigen)
+        antigen_series2 = FactoryGirl.create(:antigen_series, preference_number: 2, antigen: antigen)
+        expect(antigen.series.map(&:preference_number)).to eq([1, 2, 3])
       end
       it 'has many doses' do
         antigen               = FactoryGirl.create(:antigen)

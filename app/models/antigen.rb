@@ -1,7 +1,7 @@
 class Antigen < ActiveRecord::Base
   validates :target_disease, presence: {strict: true}
   has_and_belongs_to_many :vaccine_infos
-  has_many :series, class_name: AntigenSeries
+  has_many :series, -> { order(:preference_number) }, class_name: AntigenSeries
   has_many :doses, through: :series
   has_many :dose_vaccines, through: :doses
 

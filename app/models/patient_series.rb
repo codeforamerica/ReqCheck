@@ -32,9 +32,10 @@ class PatientSeries
   end
 
   def self.create_antigen_patient_serieses(antigen:, patient:)
-    antigen.series.map do |antigen_series|
+    patient_series = antigen.series.map do |antigen_series|
       self.new(antigen_series: antigen_series, patient: patient)
     end
+    patient_series.sort_by(&:preference_number)
   end
 
 end

@@ -7,7 +7,7 @@ class AntigenEvaluator
     @patient          = patient
     @antigen          = antigen
     @patient_serieses = PatientSeries.create_antigen_patient_serieses(patient: patient,
-                                                                            antigen: antigen)
+                                                                      antigen: antigen)
   end
 
 

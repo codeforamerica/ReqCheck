@@ -86,5 +86,10 @@ RSpec.describe PatientSeries, type: :model do
       expect(patient_series.first.class.name).to eq('PatientSeries')
       expect(patient_series.length).to eq(antigen.series.length)
     end
+    it 'returns the patient_serieses in the order of the preference_number' do
+      patient_series = PatientSeries.create_antigen_patient_serieses(antigen: antigen,
+                                                                     patient: test_patient)
+      expect(patient_series.map(&:preference_number)).to eq([1, 2, 3])
+    end
   end
 end
