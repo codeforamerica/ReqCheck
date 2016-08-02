@@ -10,7 +10,7 @@ class TargetDose
 
   [
     'dose_number', 'absolute_min_age', 'min_age', 'earliest_recommended_age',
-    'latest_recommended_age', 'max_age', 'allowable_interval_type',
+    'latest_recommended_age', 'max_age', 'allowable_interval_type', 'intervals',
     'allowable_interval_absolute_min', 'required_gender', 'recurring_dose'
   ].each do |action|
     define_method(action) do

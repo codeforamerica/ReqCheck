@@ -31,7 +31,8 @@ RSpec.describe TargetDose, type: :model do
 
     dose_attributes = ['dose_number', 'absolute_min_age', 'min_age', 'earliest_recommended_age',
                        'latest_recommended_age', 'max_age', 'allowable_interval_type',
-                       'allowable_interval_absolute_min', 'required_gender', 'recurring_dose']
+                       'allowable_interval_absolute_min', 'required_gender', 'recurring_dose',
+                       'intervals']
 
     dose_attributes.each do | dose_attribute |
       it "has the attribute #{dose_attribute}" do
