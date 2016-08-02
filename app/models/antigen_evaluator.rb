@@ -11,5 +11,4 @@ class AntigenEvaluator
   end
 
 
-
 end

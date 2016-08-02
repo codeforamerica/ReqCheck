@@ -76,6 +76,34 @@ RSpec.describe PatientSeries, type: :model do
     end
   end
 
+
+  describe '#pull_eligible_target_doses' do
+    let(:test_patient_2_years) { FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient }
+    let(:test_patient_series) do
+      PatientSeries.new(antigen_series: antigen_series, patient: test_patient_2_years)
+    end
+    
+    describe 'it checks min age requirements' do
+      it 'loops through the target doses and evaluates if the patient is eligible by birthday' do
+        expect(test_patient_series.eligible_target_doses).to eq([])
+        test_patient_series.pull_eligible_target_doses
+        expect(test_patient_series.eligible_target_doses).to eq(test_patient_series.target_doses[0...-1])
+        expect(test_patient_series.non_eligible_target_doses).to eq([test_patient_series.target_doses[-1]])
+      end
+    end
+    describe 'it checks max age requirements' do
+      it 'pulls inelgible target doses out' do
+        test_patient_20_years = FactoryGirl.create(:patient_profile, dob: 20.years.ago).patient
+        test_patient_series   = PatientSeries.new(antigen_series: antigen_series,
+                                                  patient: test_patient_20_years)
+        expect(test_patient_series.eligible_target_doses).to eq([])
+        test_patient_series.pull_eligible_target_doses
+        expect(test_patient_series.eligible_target_doses).to eq([])
+        expect(test_patient_series.non_eligible_target_doses).to eq(test_patient_series.target_doses)
+      end
+    end
+  end
+
   describe '.create_antigen_patient_serieses' do
     let(:antigen) { Antigen.find_by(target_disease: 'polio') }
 

@@ -26,5 +26,4 @@ RSpec.describe AntigenEvaluator, type: :model do
     end
   end
 
-  describe ""
 end
