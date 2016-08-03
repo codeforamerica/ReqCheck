@@ -30,7 +30,7 @@ RSpec.describe Evaluator, type: :model do
   describe '#create_all_antigen_evaluators' do
     it 'creates all patient series for each antigen' do
       antigens = Antigen.all
-      evaluator.create_all_antigen_evaluators(test_patient, antigens)
+      evaluator.create_all_antigen_evaluators(test_patient, antigens, test_aars)
       expect(evaluator.antigen_evaluators.length).to eq(17)
       expect(evaluator.antigen_evaluators.first.class.name).to eq('AntigenEvaluator')
       expect(evaluator.antigen_evaluators.first.patient_serieses.first.class.name).to eq('PatientSeries')
