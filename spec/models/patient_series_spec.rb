@@ -92,7 +92,7 @@ RSpec.describe PatientSeries, type: :model do
       end
     end
     describe 'it checks max age requirements' do
-      it 'pulls inelgible target doses out' do
+      it 'pulls ineligible target doses out' do
         test_patient_20_years = FactoryGirl.create(:patient_profile, dob: 20.years.ago).patient
         test_patient_series   = PatientSeries.new(antigen_series: antigen_series,
                                                   patient: test_patient_20_years)
@@ -101,6 +101,17 @@ RSpec.describe PatientSeries, type: :model do
         expect(test_patient_series.eligible_target_doses).to eq([])
         expect(test_patient_series.non_eligible_target_doses).to eq(test_patient_series.target_doses)
       end
+    end
+  end
+
+  describe '#evaluate_target_dose' do
+    it 'compares itself against the antigen_administered_record' do
+
+
+    end
+
+    it 'sets ineligible to true if the patient is not eligible for the target_dose' do
+
     end
   end
 

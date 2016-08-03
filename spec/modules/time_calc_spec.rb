@@ -535,6 +535,29 @@ RSpec.describe TimeCalc do
     end
   end
 
+  describe "#check_min_age" do
+    let(:min_time_string) { '2 years - 4 days' }
+    it 'returns false if the age (calculated by dob) is below the age string' do
+      expect(time_calc_obj.check_min_age(min_time_string, 1.year.ago.to_date)).to eq(false)
+    end
+    it 'returns true if the age (calculated by dob) is above the age string' do
+      expect(time_calc_obj.check_min_age(min_time_string, 2.years.ago.to_date)).to eq(true)
+    end
+  end
+
+  describe "#check_max_age" do
+    let(:max_time_string) { '18 years' }
+
+    it 'returns true if the age (calculated by dob) is below the age string' do
+      expect(time_calc_obj.check_max_age(max_time_string, 17.year.ago.to_date)).to eq(true)
+    end
+    it 'returns false if the age (calculated by dob) is above the age string' do
+      expect(time_calc_obj.check_max_age(max_time_string, 19.years.ago.to_date)).to eq(false)
+    end
+
+  end
+
+
   describe "#validate_day_diff" do
     it "takes an day_diff and required_days and returns boolean" do
       day_diff = 100

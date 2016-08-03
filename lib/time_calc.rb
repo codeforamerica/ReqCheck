@@ -89,6 +89,14 @@ module TimeCalc
     input_date.years_ago(years).months_ago(months).weeks_ago(weeks).days_ago(days)
   end
   
+  def check_max_age(max_age_string, dob)
+    !date_diff_vs_string_time_diff(past_date: dob, time_diff_string: max_age_string)
+  end
+
+  def check_min_age(min_age_string, dob)
+    date_diff_vs_string_time_diff(past_date: dob, time_diff_string: min_age_string)
+  end
+
   def convert_to_date(input_date)
     input_date = Date.parse(input_date) if input_date.instance_of? String
     input_date = input_date.to_date if input_date.instance_of? ActiveSupport::TimeWithZone

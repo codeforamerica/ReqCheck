@@ -19,7 +19,7 @@ RSpec.describe TargetDose, type: :model do
     end
   end
   
-  describe 'target dose attributes from the antigen_series_dose' do
+  describe 'tests needing the antigen_series database' do
     before(:all) { FactoryGirl.create(:seed_antigen_xml) }
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
@@ -29,20 +29,50 @@ RSpec.describe TargetDose, type: :model do
       TargetDose.new(antigen_series_dose: as_dose, patient: test_patient)
     end
 
-    dose_attributes = ['dose_number', 'absolute_min_age', 'min_age', 'earliest_recommended_age',
-                       'latest_recommended_age', 'max_age', 'allowable_interval_type',
-                       'allowable_interval_absolute_min', 'required_gender', 'recurring_dose',
-                       'intervals']
+    describe 'target dose attributes from the antigen_series_dose' do
+      dose_attributes = ['dose_number', 'absolute_min_age', 'min_age', 'earliest_recommended_age',
+                         'latest_recommended_age', 'max_age', 'allowable_interval_type',
+                         'allowable_interval_absolute_min', 'required_gender', 'recurring_dose',
+                         'intervals']
 
-    dose_attributes.each do | dose_attribute |
-      it "has the attribute #{dose_attribute}" do
-        expect(test_target_dose.antigen_series_dose).not_to eq(nil)
-        expect(test_target_dose.send(dose_attribute)).to eq(as_dose.send(dose_attribute))
+      dose_attributes.each do | dose_attribute |
+        it "has the attribute #{dose_attribute}" do
+          expect(test_target_dose.antigen_series_dose).not_to eq(nil)
+          expect(test_target_dose.send(dose_attribute)).to eq(as_dose.send(dose_attribute))
+        end
       end
     end
 
+    describe '#age_eligible?' do
+      it 'sets the @eligible? attribute to true if the target_dose is eligible' do
+        expect(test_target_dose.eligible).to eq(nil)
+        test_target_dose.age_eligible?(test_patient.dob)
+        expect(test_target_dose.eligible).to eq(true)
+      end
+      it 'sets the @eligible? attribute to false if the target_dose is ineligible' do
+        expect(test_target_dose.eligible).to eq(nil)
+        byebug
+        test_target_dose.age_eligible?(1.day.ago.to_date)
+        expect(test_target_dose.eligible).to eq(false)
+      end
+      it 'checks agains max age' do
+        test_target_dose.antigen_series_dose.max_age = '18 years'
+        expect(test_target_dose.max_age).to eq('18 years')
+        expect(test_target_dose.eligible).to eq(nil)
+        test_target_dose.age_eligible?(19.years.ago.to_date)
+        expect(test_target_dose.eligible).to eq(false)
+      end
+      it 'can handle the max age being nil' do
+        expect(test_target_dose.max_age).to eq(nil)
+        expect(test_target_dose.eligible).to eq(nil)
+        test_target_dose.age_eligible?(19.years.ago.to_date)
+        expect(test_target_dose.eligible).to eq(true)
+      end
+    end
 
-  end
+    describe '#evaluate_vs_antigen_administered_record' do
+
+    end
 
   # describe '#required_for_patient' do
   #   let(:test_patient) { FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient }
@@ -57,5 +87,5 @@ RSpec.describe TargetDose, type: :model do
   #     expect(target_dose.required_for_patient).to eq(true)
   #   end
   # end
-
+  end
 end

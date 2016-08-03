@@ -1,11 +1,14 @@
 class TargetDose
   include ActiveModel::Model
+  include TimeCalc
 
   attr_accessor :patient, :antigen_series_dose
+  attr_reader :eligible
 
   def initialize(patient:, antigen_series_dose:)
     @patient             = patient
     @antigen_series_dose = antigen_series_dose
+    @eligible            = nil
   end
 
   [
@@ -19,7 +22,21 @@ class TargetDose
     end
   end
 
+  def age_eligible?(dob)
+    @eligible = true
+    @eligible = check_min_age(self.absolute_min_age, dob)
+    if self.max_age
+      @eligible = check_max_age(self.max_age, dob)
+    end
+    @eligible
+  end
+
+  # def evaluate_vs_antigen_administered_record(antigen_administered_record)
+  #   age_eligible?(@patient.dob)
+  #   if !self.eligible
+  #     return
+  #   end
 
 
-
+  # end
 end
