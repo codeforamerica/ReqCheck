@@ -7,12 +7,28 @@ RSpec.describe Evaluator, type: :model do
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)
   end
-  let(:test_patient) { FactoryGirl.create(:patient) }
+  let(:test_patient) do
+    patient = FactoryGirl.create(:patient)
+    FactoryGirl.create(:vaccine_dose, vaccine_code: 'POL', patient_profile: patient.patient_profile)
+    FactoryGirl.create(:vaccine_dose, vaccine_code: 'POL', patient_profile: patient.patient_profile)
+    patient
+  end
+  let(:test_aars) do
+    AntigenAdministeredRecord.create_records_from_vaccine_doses(test_patient.vaccine_doses)
+  end
+
   let(:evaluator) { Evaluator.new(patient: test_patient) }
 
   describe 'validations' do
     it 'requires a patient object' do
       expect{Evaluator.new}.to raise_exception
+    end
+  end
+
+  describe 'relationships' do
+    it 'creates a patients antigen_administered_records' do
+      expect(evaluator.antigen_administered_records.length).to eq(2)
+      expect(evaluator.antigen_administered_records.first.class.name).to eq('AntigenAdministeredRecord')
     end
   end
   
