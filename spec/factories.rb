@@ -126,7 +126,7 @@ FactoryGirl.define do
   end
 
   factory :antigen do
-    target_disease 'Polio'
+    target_disease 'polio'
   end
 
   factory :antigen_with_vaccine_info, parent: :antigen do
@@ -153,7 +153,7 @@ FactoryGirl.define do
   end
 
   factory :vaccine_dose do
-    vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
+    vaccine_code 'POL'
     administered_date { Date.today }
     send_flag false
     history_flag false
@@ -179,11 +179,7 @@ FactoryGirl.define do
     association :patient_profile, factory: :patient_profile
   end
 
-  # factory :vaccine_dose_with_vaccine_info, parent: :vaccine_dose do
-  #   after(:create) do |vaccine_dose|
-  #     antigen = FactoryGirl.create(:antigen)
-  #     vaccine = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)
-  #     antigen.vaccines << vaccine
-  #   end
-  # end
+  factory :random_vaccine_dose, parent: :vaccine_dose do
+    vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
+  end
 end

@@ -104,16 +104,16 @@ RSpec.describe PatientSeries, type: :model do
     end
   end
 
-  describe '#evaluate_target_dose' do
-    it 'compares itself against the antigen_administered_record' do
+  # describe '#evaluate_target_dose' do
+  #   it 'compares itself against the antigen_administered_record' do
+      
 
+  #   end
 
-    end
+  #   it 'sets ineligible to true if the patient is not eligible for the target_dose' do
 
-    it 'sets ineligible to true if the patient is not eligible for the target_dose' do
-
-    end
-  end
+  #   end
+  # end
 
   describe '.create_antigen_patient_serieses' do
     let(:antigen) { Antigen.find_by(target_disease: 'polio') }

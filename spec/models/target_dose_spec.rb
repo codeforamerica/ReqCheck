@@ -24,7 +24,7 @@ RSpec.describe TargetDose, type: :model do
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) { FactoryGirl.create(:patient) }
-    let(:as_dose) { AntigenSeriesDose.first }
+    let(:as_dose) { AntigenSeriesDose.find_by() }
     let(:test_target_dose) do
       TargetDose.new(antigen_series_dose: as_dose, patient: test_patient)
     end
@@ -40,6 +40,10 @@ RSpec.describe TargetDose, type: :model do
           expect(test_target_dose.antigen_series_dose).not_to eq(nil)
           expect(test_target_dose.send(dose_attribute)).to eq(as_dose.send(dose_attribute))
         end
+      end
+
+      it 'has a dose number' do
+        expect(test_target_dose.dose_number).to eq(1)
       end
     end
 
@@ -70,7 +74,14 @@ RSpec.describe TargetDose, type: :model do
       end
     end
 
-    describe '#evaluate_vs_antigen_administered_record' do
+    describe '#evaluate_antigen_administered_record' do
+      # let(:vaccine_dose) { FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code:  }
+      # let(:aar) { AntigenAdministeredRecord.create_records_from_vaccine_doses() }
+      # expect(test_target_dose.evaluate_antigen_administered_record()
+      it 'is a test' do
+        asdose = antigen_series_dose
+        byebug
+      end
 
     end
 
