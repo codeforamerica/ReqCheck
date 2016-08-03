@@ -146,7 +146,7 @@ FactoryGirl.define do
   end
 
   factory :patient_profile do
-    dob { in_pst(21.years.ago) }
+    dob { 12.years.ago.to_date }
     sequence(:record_number, 1000)
 
     association :patient, factory: :patient
@@ -171,7 +171,7 @@ FactoryGirl.define do
       vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
       vax_array[(num % vax_array.length)][3]
     end
-    expiration_date { in_pst(2.months.since) }
+    expiration_date { 2.months.since.to_date }
     dose_number 1
     facility_id 19
 

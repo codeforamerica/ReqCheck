@@ -1,17 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe AntigenAdministeredRecord, type: :model do
-  describe '#create' do
+  let(:test_antigen) { FactoryGirl.create(:antigen) }
+  let(:test_vaccine_dose) { FactoryGirl.create(:vaccine_dose) }
+
+  describe 'validations' do
     it 'takes an antigen and vaccine_dose object' do
       expect(
         AntigenAdministeredRecord.new(
-          vaccine_dose: FactoryGirl.create(:vaccine_dose),
+          vaccine_dose: test_vaccine_dose,
           antigen: FactoryGirl.create(:antigen)
         ).class.name
       ).to eq('AntigenAdministeredRecord')
     end
     it 'requires the antigen object' do
-      vaccine_dose = FactoryGirl.create(:vaccine_dose)
+      vaccine_dose = test_vaccine_dose
       expect{AntigenAdministeredRecord.new(vaccine_dose: vaccine_dose)}.
         to raise_exception(ArgumentError)
     end
@@ -26,6 +29,14 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
     # it 'requires the lot expiration date' {  }
     # it 'requires the dose condition' {  }
   end
+  describe 'relationships' do
+    it 'has a patient' do
+      expect(
+        AntigenAdministeredRecord.new(vaccine_dose: test_vaccine_dose, antigen: test_antigen).patient
+      ).to eq(test_vaccine_dose.patient)
+    end
+  end
+
   describe '.create_records_from_vaccine_doses' do
     before(:all) do
       FactoryGirl.create(:seed_antigen_xml)
