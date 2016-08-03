@@ -4,16 +4,26 @@ namespace 'test' do
   desc 'load CDSI test cases from spreadsheet & save in DB'
   task load: :environment do
     CSV.foreach('./spec/cdsi-test-cases-subset.csv', headers: true) do |row|
-      puts row
-      puts row['CVX_1']
+      patient = create_patient row
+      puts "#{patient.first_name}, #{patient.record_number}, #{patient.dob}"
     end
   end
+end
+
+def create_patient(row)
+  Patient.new(first_name: "Test #{row['CDC_Test_ID']}",
+              last_name: 'Tester',
+              patient_profile_attributes: { 
+                dob: DateTime.strptime(row['DOB'], "%m/%d/%Y").to_date, 
+                record_number: $. }
+             )
 end
 
 # Headers:
 # CDC_Test_ID
 # Test_Case_Name
-# DOB Gender
+# DOB
+# Gender
 # Med_History_Text
 # Med_History_Code
 # Med_History_Code_Sys
