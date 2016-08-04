@@ -32,6 +32,10 @@ class AntigenAdministeredRecord
     @vaccine_dose.administered_date
   end
 
+  def evaluate_dose_condition
+    # page 33
+  end
+
   def cdc_attributes
     full_name = self.vaccine_info.nil? ? nil : self.vaccine_info.full_name
     {

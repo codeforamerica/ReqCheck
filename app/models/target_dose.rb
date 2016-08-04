@@ -33,6 +33,9 @@ class TargetDose
     @eligible
   end
 
+  def evaluate_antigen_administered_record(antigen_administered_record)
+  end
+
   # def evaluate_vs_antigen_administered_record(antigen_administered_record)
   #   age_eligible?(@patient.dob)
   #   if !self.eligible
