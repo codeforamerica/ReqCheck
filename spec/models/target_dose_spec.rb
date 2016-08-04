@@ -31,7 +31,13 @@ RSpec.describe TargetDose, type: :model do
     before(:all) { FactoryGirl.create(:seed_antigen_xml) }
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
-    let(:test_patient) { FactoryGirl.create(:patient) }
+    let(:test_patient) do
+      test_patient = FactoryGirl.create(:patient) 
+      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", administered_date: (test_patient.dob + 7.weeks))
+      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", administered_date: (test_patient.dob + 11.weeks))
+      test_patient.reload
+      test_patient
+    end
     
     let(:as_dose) do
       AntigenSeriesDose.joins(:antigen_series).joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"').where(antigens: {target_disease: 'polio'}).first
@@ -87,12 +93,21 @@ RSpec.describe TargetDose, type: :model do
     end
 
     describe '#evaluate_antigen_administered_record' do
-      let(:aar) { AntigenAdministeredRecord.create_records_from_vaccine_doses(test_patient.vaccine_doses) }
+      let(:aar) { AntigenAdministeredRecord.create_records_from_vaccine_doses(test_patient.vaccine_doses).first }
       # expect(test_target_dose.evaluate_antigen_administered_record()
-      it 'is a test' do
-        as_dose
-        byebug
+
+      # 'Extraneous'
+      # 'Not Valid'
+      # 'Valid'
+      # 'Sub-standard'
+
+      it 'returns an evaluation hash' do
+        evaluation_hash = test_target_dose.evaluate_antigen_administered_record(aar)
+        expect(evaluation_hash[:evaluation_status]).to eq('Valid')
+        expect(evaluation_hash[:target_dose_satisfied]).to eq(true)
       end
+
+
 
     end
 
