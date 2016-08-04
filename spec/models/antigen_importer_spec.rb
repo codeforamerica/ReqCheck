@@ -216,6 +216,27 @@ RSpec.describe AntigenImporter, type: :model do
         expect(antigen_series.doses.first.class.name).to eq('AntigenSeriesDose')
         expect(antigen_series.doses.length > 1).to eq(true)
       end
+
+      it 'sets the recurring dose to false if false' do
+        expect(antigen_series.doses).to eq([])
+        antigen_importer.create_antigen_series_doses(
+          series_xml_hash,
+          antigen_series
+        )
+        antigen_series.reload
+        expect(antigen_series.doses.map(&:recurring_dose)).to eq([false, false, false, false])
+      end
+
+      it 'sets the recurring dose to true if true' do
+        series_xml_hash['seriesDose'].first['recurringDose'] = 'Yes'
+        expect(antigen_series.doses).to eq([])
+        antigen_importer.create_antigen_series_doses(
+          series_xml_hash,
+          antigen_series
+        )
+        antigen_series.reload
+        expect(antigen_series.doses.map(&:recurring_dose)).to eq([true, false, false, false])
+      end
     end
 
     describe '#create_dose_intervals' do

@@ -101,7 +101,7 @@ class AntigenImporter
         latest_recommended_age: series_doses_hash['age']['latestRecAge'],
         max_age: series_doses_hash['age']['maxAge'],
         required_gender: series_doses_hash['requiredGender'],
-        recurring_dose: series_doses_hash['recurringDose']
+        recurring_dose: yes_bool(series_doses_hash['recurringDose'])
       }
       antigen_series_dose = AntigenSeriesDose.create(series_doses_args)
       create_antigen_series_dose_vaccines(series_doses_hash, antigen_series_dose)

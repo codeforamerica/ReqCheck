@@ -25,8 +25,10 @@ class TargetDose
   def age_eligible?(dob)
     @eligible = true
     @eligible = check_min_age(self.absolute_min_age, dob)
-    if self.max_age
-      @eligible = check_max_age(self.max_age, dob)
+    if @eligible
+      if self.max_age
+        @eligible = check_max_age(self.max_age, dob)
+      end
     end
     @eligible
   end
