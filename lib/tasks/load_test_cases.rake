@@ -1,38 +1,47 @@
 require 'csv'
 
-namespace 'cdsi' do
+namespace :cdsi do
   desc 'load CDSI test cases from spreadsheet & save in DB'
   task load: :environment do
-    Rails.logger.level = 1 # hides all the SQL for development
+    Rails.logger.level = 1 # info, hides all the SQL for development
+    if Patient.where('last_name LIKE ?', 'Tester %').any?
+      Rails.logger.warn 'WARN: there are previously imported CDSI test cases, consider running rake db:clear:patients'
+    end
 
+    row_count = 0
+    load_code = rand(36**6).to_s(36)
+
+    # CSV.foreach('./spec/cdsi-test-cases-results (1).csv', headers: true) do |row|
     CSV.foreach('./spec/cdsi-test-cases-subset.csv', headers: true) do |row|
-      patient = create_patient row
+      patient = create_patient row, load_code
       
       (1..7).each do |i|
         unless row["Date_Administered_#{i}"].nil?
           create_immunization(patient.patient_profile, row, i)
         end
       end
-      puts Patient.where(last_name: 'Tester').count
+      row_count += 1
     end
+    Rails.logger.info "#{row_count} nonheader rows resulted in #{Patient.where(last_name: 'Tester ' + load_code).count}" +
+                      " new patient records (find them by last_name = 'Tester #{load_code}'"
   end
 end
 
-def create_patient(row)
+def create_patient(row, load_code)
   Patient.create(first_name: "Test #{row['CDC_Test_ID']}",
-              last_name: 'Tester',
-              patient_profile_attributes: { 
-                dob: fix_date(row['DOB']), 
-                record_number: $. }
-             )
+                 last_name: "Tester #{load_code}",
+                 patient_profile_attributes: { 
+                   dob: fix_date(row['DOB']), 
+                   record_number: $. }
+                )
 end
 
 def create_immunization(patient_profile, row, series_num)
   Immunization.create(vaccine_code: row["CVX_#{series_num}"],
-                   description: row["Vaccine_Name_#{series_num}"],
-                   imm_date: fix_date(row["Date_Administered_#{series_num}"]), 
-                   patient_profile: patient_profile
-                  )
+                      description: row["Vaccine_Name_#{series_num}"],
+                      imm_date: fix_date(row["Date_Administered_#{series_num}"]), 
+                      patient_profile: patient_profile
+                     )
 end
 
 def fix_date date_string

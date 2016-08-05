@@ -12,4 +12,5 @@
 !/log/.keep
 /tmp
 .byebug_history
-*.DS_Store
+.DS_Store
+spec/cdsi-test-cases-results (1).csv
