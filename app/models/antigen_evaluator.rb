@@ -10,7 +10,7 @@ class AntigenEvaluator
 
     @antigen_administered_records = antigen_administered_records.select do |record|
       record.antigen == antigen
-    end.sort_by { |record| record.administered_date }
+    end.sort_by { |record| record.date_administered }
     @patient_serieses = PatientSeries.create_antigen_patient_serieses(patient: patient,
                                                                       antigen: antigen)
   end

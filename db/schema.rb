@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726003459) do
+ActiveRecord::Schema.define(version: 20160815191504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 20160726003459) do
   create_table "vaccine_doses", force: :cascade do |t|
     t.string   "vaccine_code"
     t.integer  "patient_profile_id"
-    t.date     "administered_date",                  null: false
+    t.date     "date_administered",                  null: false
     t.string   "description"
     t.boolean  "send_flag"
     t.boolean  "history_flag",       default: false, null: false

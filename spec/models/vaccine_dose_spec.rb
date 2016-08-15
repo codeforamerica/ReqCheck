@@ -4,7 +4,7 @@ RSpec.describe VaccineDose, type: :model do
   describe '#create' do
     it "does not require a Patient to be instantiated" do
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        administered_date: Date.today,
+        date_administered: Date.today,
         cvx_code: 21
       )
       expect(vaccine_dose.class.name).to eq('VaccineDose')
@@ -15,25 +15,25 @@ RSpec.describe VaccineDose, type: :model do
           patient_profile_attributes: {dob: Date.today, record_number: 123}
         )
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        administered_date: Date.today,
+        date_administered: Date.today,
         patient_profile: patient.patient_profile,
         cvx_code: 21
       )
       expect(vaccine_dose.class.name).to eq('VaccineDose')
     end
     it "can take string dates and convert them to the database date object" do
-      administered_date_string = "01/01/2010"
+      date_administered_string = "01/01/2010"
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        administered_date: administered_date_string,
+        date_administered: date_administered_string,
         cvx_code: 21
       )
-      administered_date_object = DateTime.parse(administered_date_string).to_date
-      expect(vaccine_dose.administered_date).to eq(administered_date_object)
+      date_administered_object = DateTime.parse(date_administered_string).to_date
+      expect(vaccine_dose.date_administered).to eq(date_administered_object)
     end
     it "can take string cvx_code and convert it to integer" do
-      administered_date_string = "01/01/2010"
+      date_administered_string = "01/01/2010"
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        administered_date: administered_date_string,
+        date_administered: date_administered_string,
         cvx_code: '21'
       )
       expect(vaccine_dose.cvx_code).to eq(21)
@@ -46,7 +46,7 @@ RSpec.describe VaccineDose, type: :model do
         patient_profile_attributes: {dob: 6.years.ago.to_date, record_number: 123}
       )
       VaccineDose.create(vaccine_code: 'VAR1',
-        administered_date: Date.yesterday,
+        date_administered: Date.yesterday,
         patient_profile: patient.patient_profile,
         cvx_code: 21
       )
