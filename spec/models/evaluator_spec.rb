@@ -21,7 +21,7 @@ RSpec.describe Evaluator, type: :model do
 
   describe 'validations' do
     it 'requires a patient object' do
-      expect{Evaluator.new}.to raise_exception
+      expect{Evaluator.new}.to raise_exception(ArgumentError)
     end
   end
 

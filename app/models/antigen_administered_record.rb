@@ -8,6 +8,26 @@ class AntigenAdministeredRecord
     @vaccine_dose = vaccine_dose
   end
 
+  [
+    'date_administered', 'cvx_code', 'mvx_code',
+    'dosage', 'expiration_date', 'patient', 'vaccine_info'
+  ].each do |action|
+    define_method(action) do
+      if @vaccine_dose.nil?
+        raise(ArgumentError('AntigenAdministeredRecord requires a vaccine_dose'))
+      end
+      @vaccine_dose.send(action)
+    end
+  end
+
+  def target_disease
+    @antigen.target_disease
+  end
+
+  def full_name
+    self.vaccine_info.nil? ? nil : self.vaccine_info.full_name
+  end
+  
   def self.create_records_from_vaccine_doses(vaccine_doses)
     antigen_records = []
     vaccine_doses.each do |vaccine_dose|
@@ -20,32 +40,19 @@ class AntigenAdministeredRecord
     antigen_records
   end
 
-  def vaccine_info
-    self.vaccine_dose.vaccine_info
-  end
-
-  def patient
-    @vaccine_dose.patient
-  end
-
-  def administered_date
-    @vaccine_dose.administered_date
-  end
-
   def evaluate_dose_condition
     # page 33
   end
 
   def cdc_attributes
-    full_name = self.vaccine_info.nil? ? nil : self.vaccine_info.full_name
     {
-      antigen: self.antigen.target_disease,
-      date_administered: self.vaccine_dose.administered_date,
-      cvx_code: self.vaccine_dose.cvx_code,
-      mvx_code: self.vaccine_dose.mvx_code,
-      trade_name: full_name,
-      amount: self.vaccine_dose.dosage,
-      lot_expiration_date: self.vaccine_dose.expiration_date
+      antigen: self.target_disease,
+      date_administered: self.date_administered,
+      cvx_code: self.cvx_code,
+      mvx_code: self.mvx_code,
+      trade_name: self.full_name,
+      amount: self.dosage,
+      lot_expiration_date: self.expiration_date
     }
   end
 end
