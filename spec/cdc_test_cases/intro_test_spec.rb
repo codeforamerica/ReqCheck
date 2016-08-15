@@ -101,14 +101,14 @@ RSpec.describe 'CDC Tests' do
       
       vaccine_1_args = {
         patient_profile_id: @test_patient_20130002.patient_profile.id,
-        administered_date: vaccine_1[:date_administered],
+        date_administered: vaccine_1[:date_administered],
         description: vaccine_1[:vaccine_name],
         cvx_code: vaccine_1[:cvx_code]
       }
 
       vaccine_2_args = {
         patient_profile_id: @test_patient_20130002.patient_profile.id,
-        administered_date: vaccine_2[:date_administered],
+        date_administered: vaccine_2[:date_administered],
         description: vaccine_2[:vaccine_name],
         cvx_code: vaccine_1[:cvx_code]
       }

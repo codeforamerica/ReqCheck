@@ -13,7 +13,7 @@ RSpec.describe AntigenEvaluator, type: :model do
     vax_dates.each do |vax_date|
       vax_doses << FactoryGirl.create(:vaccine_dose,
                                       vaccine_code: 'POL',
-                                      administered_date: vax_date,
+                                      date_administered: vax_date,
                                       patient_profile: test_patient.patient_profile)
     end
     vax_doses
@@ -55,9 +55,9 @@ RSpec.describe AntigenEvaluator, type: :model do
     it 'orders all patient series by preference number' do
       expect(antigen_evaluator.patient_serieses.map(&:preference_number)).to eq([1, 2, 3])
     end
-    it 'orders all antigen_administered_records by administered_date' do
+    it 'orders all antigen_administered_records by date_administered' do
       records = antigen_evaluator.antigen_administered_records
-      expect(records[0].administered_date < records[1].administered_date)
+      expect(records[0].date_administered < records[1].date_administered)
         .to eq(true)
     end
   end

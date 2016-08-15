@@ -157,7 +157,7 @@ FactoryGirl.define do
 
   factory :vaccine_dose do
     vaccine_code 'POL'
-    administered_date { Date.today }
+    date_administered { Date.today }
     send_flag false
     history_flag false
     provider_code "432"

@@ -153,12 +153,12 @@ RSpec.describe Patient, type: :model do
         create(:vaccine_dose,
           patient_profile: patient.patient_profile,
           vaccine_code: vax_code,
-          administered_date: 2.years.ago.to_date
+          date_administered: 2.years.ago.to_date
         )
         create(:vaccine_dose,
           patient_profile: patient.patient_profile,
           vaccine_code: vax_code,
-          administered_date: 1.years.ago.to_date
+          date_administered: 1.years.ago.to_date
         )
         create(:vaccine_dose,
           patient_profile: patient.patient_profile,
@@ -173,9 +173,9 @@ RSpec.describe Patient, type: :model do
     end
     it "returns all vaccines in the order of vaccine_dose date" do
       first_vax, second_vax, third_vax = test_patient.get_vaccine_doses(['DTaP', 'DTP'])
-      expect(first_vax.administered_date < second_vax.administered_date).to be(true)
-      expect(first_vax.administered_date < third_vax.administered_date).to be(true)
-      expect(second_vax.administered_date < third_vax.administered_date).to be(true)
+      expect(first_vax.date_administered < second_vax.date_administered).to be(true)
+      expect(first_vax.date_administered < third_vax.date_administered).to be(true)
+      expect(second_vax.date_administered < third_vax.date_administered).to be(true)
     end
     it "returns a blank array if no vaccines are present" do
       expect(test_patient.get_vaccine_doses(['DTP']).length).to eq(0)

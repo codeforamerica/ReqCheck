@@ -55,7 +55,7 @@ class Patient < User
 
   def get_vaccine_doses(vaccine_code_array)
     vax = self.vaccine_doses.select { |vaccine_dose| vaccine_code_array.include? vaccine_dose.vaccine_code }
-      .sort_by { |vaccine_dose| vaccine_dose.administered_date }
+      .sort_by { |vaccine_dose| vaccine_dose.date_administered }
   end
 
 end

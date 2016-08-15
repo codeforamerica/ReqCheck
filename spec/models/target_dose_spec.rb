@@ -5,8 +5,8 @@ RSpec.describe TargetDose, type: :model do
     # Test patient with two vaccine doses for polio, both of which should be valid
     let(:test_patient) do
       test_patient = FactoryGirl.create(:patient) 
-      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", administered_date: (test_patient.dob + 7.weeks))
-      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", administered_date: (test_patient.dob + 11.weeks))
+      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 7.weeks))
+      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 11.weeks))
       test_patient.reload
       test_patient
     end
@@ -33,8 +33,8 @@ RSpec.describe TargetDose, type: :model do
 
     let(:test_patient) do
       test_patient = FactoryGirl.create(:patient) 
-      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", administered_date: (test_patient.dob + 7.weeks))
-      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", administered_date: (test_patient.dob + 11.weeks))
+      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 7.weeks))
+      FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 11.weeks))
       test_patient.reload
       test_patient
     end

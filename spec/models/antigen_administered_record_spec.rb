@@ -73,12 +73,12 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
       )
       expected_values = {
         antigen: aar.antigen.target_disease,
-        date_administered: aar.vaccine_dose.administered_date,
+        date_administered: aar.vaccine_dose.date_administered,
         cvx_code: aar.vaccine_dose.cvx_code,
         mvx_code: aar.vaccine_dose.mvx_code,
         trade_name: nil,
         amount: aar.vaccine_dose.dosage,
-        lot_expiration_date: aar.vaccine_dose.expiration_date
+        lot_expiration_date: aar.vaccine_dose.expiration_date,
         # dose_condition: 
       }
       aar_hash = aar.cdc_attributes
