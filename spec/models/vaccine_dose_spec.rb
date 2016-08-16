@@ -80,6 +80,13 @@ RSpec.describe VaccineDose, type: :model do
       expect(no_expiration_vax_dose.validate_lot_expiration_date).to be(true)
     end
   end
+  describe '#validate_condition' do
+    let(:valid_vax_dose) { FactoryGirl.create(:vaccine_dose, vaccine_code: 'POL') }
+
+    it 'returns true when the condition is not recalled' do
+      expect(valid_vax_dose.validate_condition).to be(true)
+    end
+  end
 
 
   describe '#patient_age_at_vaccine_dose' do
@@ -112,6 +119,8 @@ RSpec.describe VaccineDose, type: :model do
       end
     end
   end
+
+
   describe '#vaccine_info' do 
     it 'has a vaccine_info object that is joined on the cvx code' do
       vaccine_dose = FactoryGirl.create(:vaccine_dose)
@@ -120,6 +129,8 @@ RSpec.describe VaccineDose, type: :model do
       expect(vaccine_dose.vaccine_info).to eq(vaccine_info)
     end
   end
+
+
   describe '#antigens' do 
     it 'has a number of antigens through the vaccine_info' do
       vaccine_dose = FactoryGirl.create(:vaccine_dose)

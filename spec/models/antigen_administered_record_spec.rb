@@ -92,27 +92,6 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
 
  
   describe 'validate if AntigenAdministeredRecord can be evaluated' do
-    # let(:valid_vax_dose) do
-    #   FactoryGirl.create(:vaccine_dose,
-    #                      vaccine_code: 'POL',
-    #                      date_administered: 10.days.ago.to_date,
-    #                      expiration_date: 5.days.ago.to_date
-    #                     ) 
-    # end
-    # let(:expired_vax_dose) do
-    #   FactoryGirl.create(:vaccine_dose,
-    #                      vaccine_code: 'POL',
-    #                      date_administered: 5.days.ago.to_date,
-    #                      expiration_date: 10.days.ago.to_date
-    #                     ) 
-    # end
-    # let(:no_expiration_vax_dose) do
-    #   FactoryGirl.create(:vaccine_dose,
-    #                      vaccine_code: 'POL',
-    #                      date_administered: 5.days.ago.to_date,
-    #                      expiration_date: nil
-    #                     ) 
-    # end
     describe '#validate_lot_expiration_date' do
       it 'calls the validate_lot_expiration_date on the vaccine_dose' do
         spy_vaccine_dose = instance_double('VaccineDose')
@@ -120,6 +99,15 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
         spy_aar = AntigenAdministeredRecord.new(vaccine_dose: spy_vaccine_dose,
                                                 antigen: polio_antigen)
         spy_aar.validate_lot_expiration_date
+      end
+    end
+    describe '#validate_condition' do
+      it 'calls the validate_condition on the vaccine_dose' do
+        spy_vaccine_dose = instance_double('VaccineDose')
+        expect(spy_vaccine_dose).to receive(:validate_condition)
+        spy_aar = AntigenAdministeredRecord.new(vaccine_dose: spy_vaccine_dose,
+                                                antigen: polio_antigen)
+        spy_aar.validate_condition
       end
     end
 
@@ -130,7 +118,6 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
         
 
       end
-
     end
   end
 end

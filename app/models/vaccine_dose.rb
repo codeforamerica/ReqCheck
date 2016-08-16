@@ -31,4 +31,8 @@ class VaccineDose < ActiveRecord::Base
   def validate_lot_expiration_date
     self.date_administered <= self.expiration_date
   end
+
+  def validate_condition
+    true
+  end
 end
