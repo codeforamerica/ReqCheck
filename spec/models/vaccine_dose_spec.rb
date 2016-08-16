@@ -4,47 +4,90 @@ RSpec.describe VaccineDose, type: :model do
   describe '#create' do
     it "does not require a Patient to be instantiated" do
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        date_administered: Date.today,
-        cvx_code: 21
-      )
+                                        date_administered: Date.today,
+                                        cvx_code: 21)
       expect(vaccine_dose.class.name).to eq('VaccineDose')
     end
+
     it "can take a Patient object as a parameter" do
-      patient = Patient.create(
-          first_name: 'Test', last_name: 'Tester',
-          patient_profile_attributes: {dob: Date.today, record_number: 123}
-        )
+      patient = Patient.create(first_name: 'Test', last_name: 'Tester',
+                               patient_profile_attributes: {dob: Date.today, record_number: 123})
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        date_administered: Date.today,
-        patient_profile: patient.patient_profile,
-        cvx_code: 21
-      )
+                                        date_administered: Date.today,
+                                        patient_profile: patient.patient_profile,
+                                        cvx_code: 21)
       expect(vaccine_dose.class.name).to eq('VaccineDose')
     end
+
     it "can take string dates and convert them to the database date object" do
       date_administered_string = "01/01/2010"
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        date_administered: date_administered_string,
-        cvx_code: 21
-      )
+                                        date_administered: date_administered_string,
+                                        cvx_code: 21)
       date_administered_object = DateTime.parse(date_administered_string).to_date
       expect(vaccine_dose.date_administered).to eq(date_administered_object)
     end
     it "can take string cvx_code and convert it to integer" do
       date_administered_string = "01/01/2010"
       vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-        date_administered: date_administered_string,
-        cvx_code: '21'
-      )
+                                        date_administered: date_administered_string,
+                                        cvx_code: '21')
       expect(vaccine_dose.cvx_code).to eq(21)
     end
+    it 'sets the default expiration date to 12/31/2999' do
+      date_administered_string = "01/01/2010"
+      vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
+                                        date_administered: date_administered_string,
+                                        cvx_code: '21')
+      expect(vaccine_dose.expiration_date).to eq('12/31/2999'.to_date)
+    end
   end
+
+  describe '#validate_lot_expiration_date' do
+    let(:valid_vax_dose) do
+      FactoryGirl.create(:vaccine_dose,
+                         vaccine_code: 'POL',
+                         date_administered: 10.days.ago.to_date,
+                         expiration_date: 5.days.ago.to_date) 
+    end
+    let(:expired_vax_dose) do
+      FactoryGirl.create(:vaccine_dose,
+                         vaccine_code: 'POL',
+                         date_administered: 5.days.ago.to_date,
+                         expiration_date: 10.days.ago.to_date)
+    end
+    let(:no_expiration_vax_dose) do
+      VaccineDose.create(vaccine_code: 'POL',
+                         date_administered: 5.days.ago.to_date,
+                         cvx_code: 10) 
+    end
+  
+    it 'returns true when the vaccine_dose was given before the lot_expiration_date' do
+      expect(valid_vax_dose.validate_lot_expiration_date).to be(true)
+    end
+    it 'returns false when the vaccine_dose was given after the lot_expiration_date' do
+      expect(expired_vax_dose.validate_lot_expiration_date).to be(false)
+    end
+    it 'returns true when the vaccine dose was given on the lot_expiration_date' do
+      exact_day_vax_dose = FactoryGirl.create(:vaccine_dose,
+                                              vaccine_code: 'POL',
+                                              date_administered: 5.days.ago.to_date,
+                                              expiration_date: 5.days.ago.to_date
+                                              )
+      expect(exact_day_vax_dose.validate_lot_expiration_date).to be(true)
+    end
+    it 'returns true if there is no lot_expiration_date (which has defaulted to 12/31/2999)' do
+      expect(no_expiration_vax_dose.validate_lot_expiration_date).to be(true)
+    end
+  end
+
+
   describe '#patient_age_at_vaccine_dose' do
     let(:test_vaccine_dose) do
-      patient = Patient.create(
-        first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: {dob: 6.years.ago.to_date, record_number: 123}
-      )
+      patient = Patient.create(first_name: 'Test',
+                               last_name: 'Tester',
+                               patient_profile_attributes: {dob: 6.years.ago.to_date,
+                                                            record_number: 123})
       VaccineDose.create(vaccine_code: 'VAR1',
         date_administered: Date.yesterday,
         patient_profile: patient.patient_profile,

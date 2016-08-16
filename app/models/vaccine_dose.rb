@@ -25,4 +25,8 @@ class VaccineDose < ActiveRecord::Base
       raise 'Vaccine Dose is missing information regarding the vaccine or antigens'
     end
   end
+
+  def validate_lot_expiration_date
+    self.date_administered <= self.expiration_date
+  end
 end

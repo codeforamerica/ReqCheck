@@ -40,6 +40,10 @@ class AntigenAdministeredRecord
     antigen_records
   end
 
+  def validate_lot_expiration_date
+    @vaccine_dose.validate_lot_expiration_date
+  end
+
   def evaluate_dose_condition
     # page 33
   end
