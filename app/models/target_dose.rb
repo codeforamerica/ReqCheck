@@ -36,6 +36,10 @@ class TargetDose
   def evaluate_antigen_administered_record(antigen_administered_record)
   end
 
+  def has_conditional_skip?
+    !self.antigen_series_dose.conditional_skip.nil?
+  end
+
   # def evaluate_vs_antigen_administered_record(antigen_administered_record)
   #   age_eligible?(@patient.dob)
   #   if !self.eligible
