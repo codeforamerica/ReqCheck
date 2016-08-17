@@ -130,27 +130,36 @@ RSpec.describe TargetDose, type: :model do
 
 
     describe 'evaluating the conditional skip' do
+      let(:target_dose_w_cond_skip) do
+        as_dose_w_cond_skip = AntigenSeriesDose.joins(:conditional_skip)
+                                .joins(:antigen_series)
+                                .joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"')
+                                .where(antigens: {target_disease: 'polio'})
+                                .where('conditional_skips.antigen_series_dose_id IS NOT NULL')
+                                .first
+        TargetDose.new(antigen_series_dose: as_dose_w_cond_skip, patient: test_patient)
+      end
+      let(:target_dose_no_cond_skip) do
+        as_dose_no_cond_skip = AntigenSeriesDose.joins(:antigen_series)
+                                .joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"')
+                                .where(antigens: {target_disease: 'polio'})
+                                .first
+        TargetDose.new(antigen_series_dose: as_dose_no_cond_skip, patient: test_patient)
+      end
+      
+
       describe '#has_conditional_skip?' do
         it 'returns true if there is a conditional skip' do
-          as_dose_w_cond_skip = AntigenSeriesDose.joins(:conditional_skip)
-                                  .joins(:antigen_series)
-                                  .joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"')
-                                  .where(antigens: {target_disease: 'polio'})
-                                  .where('conditional_skips.antigen_series_dose_id IS NOT NULL')
-                                  .first
-          target_dose_w_cond_skip = TargetDose.new(antigen_series_dose: as_dose_w_cond_skip,
-                                                   patient: test_patient)
           expect(target_dose_w_cond_skip.has_conditional_skip?).to be(true)
         end
         it 'returns false if there is no conditional skip' do
-          as_dose_no_cond_skip = AntigenSeriesDose.joins(:antigen_series)
-                                  .joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"')
-                                  .where(antigens: {target_disease: 'polio'})
-                                  .first
-          target_dose_no_cond_skip = TargetDose.new(antigen_series_dose: as_dose_no_cond_skip,
-                                                    patient: test_patient)
           expect(target_dose_no_cond_skip.has_conditional_skip?).to be(false)
         end
+      end
+
+
+      xdescribe '#evalutate_conditional_skip' do
+        # it ''
       end
 
     end
