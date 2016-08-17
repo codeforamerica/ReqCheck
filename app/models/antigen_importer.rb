@@ -2,7 +2,7 @@ class AntigenImporter
   include ActiveModel::Model
 
   def import_antigen_xml_files(xml_directory)
-    file_names = Dir[xml_directory + "/*.xml" ]
+    file_names = Dir[xml_directory + '/*.xml']
     file_names.each do |file_name|
       xml_file_hash = parse_and_hash(file_name)
       if file_name.include? 'Schedule'
@@ -14,7 +14,7 @@ class AntigenImporter
   end
 
   def parse_and_hash(xml_file_path)
-    file = File.open(xml_file_path, "r")
+    file = File.open(xml_file_path, 'r')
     data = file.read
     file.close
     xml_to_hash(data)
@@ -25,7 +25,8 @@ class AntigenImporter
   end
 
   def parse_antigen_data_and_create_subobjects(xml_file_hash)
-    target_disease = xml_file_hash.find_all_values_for('targetDisease').first.downcase
+    target_disease = xml_file_hash.find_all_values_for('targetDisease')
+                                  .first.downcase
     antigen_object = Antigen.create(target_disease: target_disease)
     create_all_antigen_series(xml_file_hash, antigen_object)
     antigen_object
@@ -40,7 +41,7 @@ class AntigenImporter
     elsif interval_hash['fromMostRecent']
       interval_type = 'from_most_recent'
     end
-    return interval_type
+    interval_type
   end
 
   def get_dose_number(dose_number_string)
@@ -64,20 +65,27 @@ class AntigenImporter
     antigen_series_objects = []
 
     antigen_series_data = antigen_xml_hash['antigenSupportingData']['series']
-    antigen_series_data = [antigen_series_data] if antigen_series_data.is_a? Hash
+    if antigen_series_data.is_a? Hash
+      antigen_series_data = [antigen_series_data]
+    end
 
     antigen_series_data.map do |hash|
       antigen_series = AntigenSeries.find_or_initialize_by(name: hash['seriesName'])
+
+      preference_number = get_preference_number(
+        hash['selectBest']['seriesPreference']
+      )
+
       antigen_series.update_attributes(
-          antigen: antigen_object,
-          default_series: yes_bool(hash['selectBest']['defaultSeries']),
-          max_start_age: hash['selectBest']['maxAgeToStart'],
-          min_start_age: hash['selectBest']['minAgeToStart'] ,
-          preference_number: get_preference_number(hash['selectBest']['seriesPreference']),
-          product_path: yes_bool(hash['selectBest']['productPath']),
-          target_disease: hash['targetDisease'],
-          vaccine_group: hash['vaccineGroup']
-        )
+        antigen: antigen_object,
+        default_series: yes_bool(hash['selectBest']['defaultSeries']),
+        max_start_age: hash['selectBest']['maxAgeToStart'],
+        min_start_age: hash['selectBest']['minAgeToStart'],
+        preference_number: preference_number,
+        product_path: yes_bool(hash['selectBest']['productPath']),
+        target_disease: hash['targetDisease'],
+        vaccine_group: hash['vaccineGroup']
+      )
       create_antigen_series_doses(hash, antigen_series)
       antigen_series_objects << antigen_series
     end
@@ -104,7 +112,8 @@ class AntigenImporter
         recurring_dose: yes_bool(series_doses_hash['recurringDose'])
       }
       antigen_series_dose = AntigenSeriesDose.create(series_doses_args)
-      create_antigen_series_dose_vaccines(series_doses_hash, antigen_series_dose)
+      create_antigen_series_dose_vaccines(series_doses_hash,
+                                          antigen_series_dose)
       create_conditional_skips(series_doses_hash, antigen_series_dose)
       create_dose_intervals(series_doses_hash, antigen_series_dose)
       series_doses << antigen_series_dose
@@ -116,9 +125,13 @@ class AntigenImporter
     interval_data = antigen_series_dose_xml_hash['interval']
     interval_data = [interval_data] if interval_data.is_a? Hash
     interval_data = [] if interval_data.nil?
-    
+
     allowable_interval_data = antigen_series_dose_xml_hash['allowableInterval']
-    allowable_interval_data = [allowable_interval_data] if allowable_interval_data.is_a? Hash
+
+    if allowable_interval_data.is_a? Hash
+      allowable_interval_data = [allowable_interval_data]
+    end
+
     allowable_interval_data = [] if allowable_interval_data.nil?
 
     interval_objects = []
@@ -135,7 +148,7 @@ class AntigenImporter
       }
       interval_objects << Interval.create(interval_args)
     end
-     
+
     allowable_interval_data.each do |allowable_interval_hash|
       interval_type = get_interval_type(allowable_interval_hash)
       allowable_interval_args = {
@@ -149,7 +162,7 @@ class AntigenImporter
       }
       interval_objects << Interval.create(allowable_interval_args)
     end
-    return interval_objects
+    interval_objects
   end
 
   def create_antigen_series_dose_vaccines(antigen_series_dose_xml_hash, antigen_series_dose)
@@ -212,17 +225,16 @@ class AntigenImporter
       antigen_series_dose.update(conditional_skip: conditional_skip)
       create_conditional_skip_sets(conditional_skip_hash, conditional_skip)
     end
-    return conditional_skip
+    conditional_skip
   end
 
   def create_conditional_skip_sets(conditional_skip_xml_hash, conditional_skip)
     set_xml_data = conditional_skip_xml_hash['set']
     sets = []
-    
+
     # ensure the data is an array
-    if set_xml_data.is_a? Hash
-      set_xml_data = [set_xml_data]
-    end
+    set_xml_data = [set_xml_data] if set_xml_data.is_a? Hash
+
     set_xml_data.each do |set_hash|
       set_arguments = {
         conditional_skip: conditional_skip,
@@ -237,12 +249,12 @@ class AntigenImporter
     sets
   end
 
-  def create_conditional_skip_set_conditions(conditional_skip_set_xml_hash, conditional_skip_set)
+  def create_conditional_skip_set_conditions(conditional_skip_set_xml_hash,
+                                             conditional_skip_set)
     condition_xml_data = conditional_skip_set_xml_hash['condition']
     conditions = []
-    if condition_xml_data.is_a? Hash
-      condition_xml_data = [condition_xml_data]
-    end
+    condition_xml_data = [condition_xml_data] if condition_xml_data.is_a? Hash
+
     condition_xml_data.each do |condition_hash|
       condition_arguments = {
         skip_set: conditional_skip_set,
