@@ -43,19 +43,27 @@ class Patient < User
 
   def age
     if self.dob
-      TimeCalc.date_diff_in_years(self.dob)
+      date_diff_in_years(self.dob)
     end
   end
 
   def age_in_days
     if self.dob
-      TimeCalc.date_diff_in_days(self.dob)
+      date_diff_in_days(self.dob)
     end
   end
 
   def get_vaccine_doses(vaccine_code_array)
-    vax = self.vaccine_doses.select { |vaccine_dose| vaccine_code_array.include? vaccine_dose.vaccine_code }
-      .sort_by { |vaccine_dose| vaccine_dose.date_administered }
+    self.vaccine_doses.select do |vaccine_dose|
+      vaccine_code_array.include? vaccine_dose.vaccine_code
+    end.sort_by { |vaccine_dose| vaccine_dose.date_administered }
+  end
+
+  def antigen_administered_records
+    @antigen_administered_records ||= AntigenAdministeredRecord
+                                        .create_records_from_vaccine_doses(
+                                          self.vaccine_doses
+                                        )
   end
 
 end
