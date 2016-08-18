@@ -1,9 +1,11 @@
 module AgeCalc
   include TimeCalc
-  def validate_date_equal_or_after(first_date, second_date)
+  def validate_date_equal_or_after(base_date, evaluated_date)
+    base_date <= evaluated_date
   end
 
-  def validate_date_equal_or_before(first_date, second_date)
+  def validate_date_equal_or_before(base_date, evaluated_date)
+    base_date >= evaluated_date
   end
 
   def time_string_to_time_hash(time_string)

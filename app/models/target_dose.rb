@@ -7,6 +7,7 @@ class TargetDose
 
   def initialize(patient_dob:, antigen_series_dose:)
     @antigen_series_dose         = antigen_series_dose
+    @patient_dob                 = patient_dob
     @eligible                    = nil
     @status_hash                 = nil
     @antigen_administered_record = nil
@@ -38,7 +39,7 @@ class TargetDose
   end
 
   def evaluate_antigen_administered_record(antigen_administered_record)
-    if !@status_hash.nil? && @status_hash[:status] == 'valid':
+    if !@status_hash.nil? && @status_hash[:status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
     end
     @antigen_administered_record = antigen_administered_record
