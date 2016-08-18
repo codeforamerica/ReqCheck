@@ -41,7 +41,10 @@ RSpec.describe TargetDose, type: :model do
     end
     
     let(:as_dose) do
-      AntigenSeriesDose.joins(:antigen_series).joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"').where(antigens: {target_disease: 'polio'}).first
+      AntigenSeriesDose.joins(:antigen_series)
+        .joins(
+          'INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"'
+        ).where(antigens: {target_disease: 'polio'}).first
     end
     let(:test_target_dose) do
       TargetDose.new(antigen_series_dose: as_dose, patient: test_patient)
@@ -161,9 +164,22 @@ RSpec.describe TargetDose, type: :model do
       xdescribe '#evalutate_conditional_skip' do
         # it ''
       end
-
     end
 
+    describe '#evaluate_dose_age' do
+      it 'returns a hash' do
+        age_attrs = {
+          absolute_min_age_date: 1.year.ago.to_date,
+          min_age_date: 10.months.ago.to_date,
+          earliest_recommended_age_date: 8.months.ago.to_date,
+          latest_recommended_age_date: 1.week.ago.to_date,
+          max_age_date: nil
+        }
+        dose_date = 6.months.ago.to_date
+        expect(test_target_dose.evaluate_dose_age(age_attrs, dose_date).class)
+          .to eq(Hash)
+      end
+    end
 
   # describe '#required_for_patient' do
   #   let(:test_patient) { FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient }

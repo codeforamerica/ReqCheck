@@ -47,6 +47,32 @@ class TargetDose
     result_hash = {}
   end
 
+  def evaluate_dose_age(age_attrs, date_of_dose)
+    evaluated_hash = {}
+    [
+      'absolute_min_age_date',
+      'min_age_date',
+      'earliest_recommended_age_date'
+    ].each do |age_attr|
+      result = validate_date_equal_or_after(self.send(age_attr), date_of_dose)
+      result_attr = age_attr.split('_')[0..-1].join('_')
+      evaluated_hash[result_attr.to_sym] = result
+    end
+    [
+      'latest_recommended_age',
+      'max_age'
+    ].each do |age_attr|
+      result = nil
+      if !self.send(age_attr).nil?
+        result = validate_date_equal_or_before(self.send(age_attr),
+                                               date_of_dose)
+      end
+      result_attr = age_attr.split('_')[0..-1].join('_')
+      evaluated_hash[result_attr.to_sym] = result
+    end
+    evaluated_hash
+  end
+
   def has_conditional_skip?
     !self.antigen_series_dose.conditional_skip.nil?
   end
