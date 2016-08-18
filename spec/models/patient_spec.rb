@@ -10,13 +10,27 @@ RSpec.describe Patient, type: :model do
     Timecop.return
   end
 
-  describe 'test the factory first' do
-    it 'has a patient profile automatically created' do
-      patient = FactoryGirl.create(:patient)
-      patient_profile = PatientProfile.first
-      expect(patient.patient_profile.class.name).to eq('PatientProfile')
-      expect(patient_profile.patient_id).to eq(patient.id)
+  let(:patient_w_vaccines) do
+    patient = FactoryGirl.create(:patient,
+                                 patient_profile_attributes: {
+                                   dob: in_pst(5.years.ago),
+                                   record_number: 123 
+                                 })
+    vaccine_types = %w(MCV6 DTaP MMR9)
+    vaccine_types.each do |vax_code|
+      create(:vaccine_dose,
+             patient_profile: patient.patient_profile,
+             vaccine_code: vax_code,
+             date_administered: 2.years.ago.to_date)
+      create(:vaccine_dose,
+             patient_profile: patient.patient_profile,
+             vaccine_code: vax_code,
+             date_administered: 1.years.ago.to_date)
+      create(:vaccine_dose,
+             patient_profile: patient.patient_profile,
+             vaccine_code: vax_code)
     end
+    patient
   end
 
   describe '#create' do
@@ -46,7 +60,20 @@ RSpec.describe Patient, type: :model do
       )
       expect(patient.patient_profile.patient_id).to eq(patient.id)
     end
-    it 'has an vaccine_doses attribute' do
+  end
+  describe '#validations' do
+    it 'can take string dates and convert them to the database date object' do
+      dob_string = '01/13/2010'
+      patient    = Patient.create(
+        first_name: 'Test', last_name: 'Tester',
+        patient_profile_attributes: { dob: dob_string, record_number: 123 }
+      )
+      dob_date_object = DateTime.parse(dob_string).to_date
+      expect(patient.dob).to eq(dob_date_object)
+    end
+  end
+  describe '#relationships' do
+    it 'has many vaccine_doses' do
       dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
@@ -56,43 +83,40 @@ RSpec.describe Patient, type: :model do
       FactoryGirl.create(:vaccine_dose, patient: patient)
       expect(patient.vaccine_doses.length).to eq(1)
     end
-    it 'can take string dates and convert them to the database date object' do
-      dob_string     = '01/13/2010'
-      patient = Patient.create(
-        first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob_string, record_number: 123 }
-      )
-      dob_date_object = DateTime.parse(dob_string).to_date
-      expect(patient.dob).to eq(dob_date_object)
+    it 'has a dob attribute in years' do
+      patient = FactoryGirl.create(:patient, patient_profile_attributes: {
+                                     dob: in_pst(5.years.ago),
+                                     record_number: 123
+                                   })
+      expect(patient.dob).to eq(5.years.ago.to_date)
     end
   end
+
   describe '#find_by_record_number' do
-    before(:each) do
-      @patient = FactoryGirl.create(:patient)
-    end
+    let(:test_patient) { FactoryGirl.create(:patient) }
 
     it 'takes a string' do
-      record_number = @patient.record_number.to_s
+      record_number = test_patient.record_number.to_s
       result = Patient.find_by_record_number(record_number)
-      expect(result.id).to eq(@patient.id)
+      expect(result.id).to eq(test_patient.id)
     end
+
     it 'takes an integer' do
-      record_number = @patient.record_number.to_i
+      record_number = test_patient.record_number.to_i
       result = Patient.find_by_record_number(record_number)
-      expect(result.id).to eq(@patient.id)
+      expect(result.id).to eq(test_patient.id)
     end
+
     it 'returns nil when no patient is found' do
       result = Patient.find_by_record_number('9876')
       expect(result).to eq(nil)
     end
   end
   xdescribe '#check_record' do
-    before(:each) do
-      @patients = FactoryGirl.create_list(:patient, 10)
-    end
+    let(:test_patients) { FactoryGirl.create_list(:patient, 10) }
 
     xit 'returns true if valid' do
-      valid_imm = @patients[0].check_record
+      valid_imm = test_patients[0].check_record
       expect(valid_imm).to eq(true)
     end
 
@@ -114,79 +138,87 @@ RSpec.describe Patient, type: :model do
     end
   end
   describe '#age' do
-    let(:age_patient) do
-      FactoryGirl.create(:patient,
-                         patient_profile_attributes: {
-                           dob: in_pst(5.years.ago), record_number: 123
-                         })
-    end
-    it 'has a dob attribute' do
-      expect(age_patient.dob.class.name).to eq('Date')
+    let(:patient_5_years) do
+      FactoryGirl.create(
+        :patient,
+        patient_profile_attributes: {
+          dob: in_pst(5.years.ago),
+          record_number: 123
+        }
+      )
     end
     it 'returns the patients age in years' do
-      pat_age = age_patient.age
-      expect(pat_age).to eq(5)
-      expect(pat_age.is_a?(Integer)).to be(true)
-    end
-    it 'is exact to the day if the birthday is a day earlier' do
-      patient = FactoryGirl.create(:patient,
-                                   patient_profile_attributes: {
-                                     dob: in_pst(5.years.ago),
-                                     record_number: 123
-                                   })
-      new_date = patient.patient_profile.dob - 1
-      patient.patient_profile.update(dob: new_date)
-      pat_age = patient.age
+      pat_age = patient_5_years.age
       expect(pat_age).to eq(5)
     end
-    it 'is exact to the day if the birthday is a day earlier' do
-      patient = FactoryGirl.create(:patient,
-                                   patient_profile_attributes: {
-                                     dob: in_pst(5.years.ago),
-                                     record_number: 123 
-                                   })
-      new_date = patient.patient_profile.dob + 1
-      patient.patient_profile.update(dob: new_date)
-      pat_age = patient.age
+
+    it 'is still 5 years if born one day earlier' do
+      new_date = patient_5_years.patient_profile.dob - 1
+      patient_5_years.patient_profile.update(dob: new_date)
+      pat_age = patient_5_years.age
+      expect(pat_age).to eq(5)
+    end
+
+    it 'is 4 years if born one day later' do
+      new_date = patient_5_years.patient_profile.dob + 1
+      patient_5_years.patient_profile.update(dob: new_date)
+      pat_age = patient_5_years.age
       expect(pat_age).to eq(4)
     end
   end
+
   describe '#get_vaccine_doses' do
+    it 'returns all vaccines of the types passed in' do
+      expect(patient_w_vaccines.get_vaccine_doses(%w(DTaP DTP)).length).to eq(3)
+      expect(patient_w_vaccines.get_vaccine_doses(%w(DTaP DTP))[0].vaccine_code)
+        .to eq('DTaP')
+    end
+
+    it 'returns all vaccines in the order of vaccine_dose date' do
+      vax1, vax2, vax3 = patient_w_vaccines.get_vaccine_doses(%w(DTaP DTP))
+      expect(vax1.date_administered < vax2.date_administered).to be(true)
+      expect(vax1.date_administered < vax3.date_administered).to be(true)
+      expect(vax2.date_administered < vax3.date_administered).to be(true)
+    end
+
+    it 'returns a blank array if no vaccines are present' do
+      expect(patient_w_vaccines.get_vaccine_doses(['DTP']).length).to eq(0)
+    end
+  end
+
+  describe '#antigen_administered_records' do
+    before(:all) { FactoryGirl.create(:seed_antigen_xml) }
+    after(:all) { DatabaseCleaner.clean_with(:truncation) }
+
     let(:test_patient) do
       patient = FactoryGirl.create(:patient,
                                    patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
                                      record_number: 123 
                                    })
-      vaccine_types = %w(MCV6 DTaP MMR9)
-      vaccine_types.each do |vax_code|
-        create(:vaccine_dose,
-               patient_profile: patient.patient_profile,
-               vaccine_code: vax_code,
-               date_administered: 2.years.ago.to_date)
-        create(:vaccine_dose,
-               patient_profile: patient.patient_profile,
-               vaccine_code: vax_code,
-               date_administered: 1.years.ago.to_date)
-        create(:vaccine_dose,
-               patient_profile: patient.patient_profile,
-               vaccine_code: vax_code)
-      end
+      create(:vaccine_dose,
+             patient_profile: patient.patient_profile,
+             vaccine_code: 'POL',
+             date_administered: 2.years.ago.to_date)
+      create(:vaccine_dose,
+             patient_profile: patient.patient_profile,
+             vaccine_code: 'POL',
+             date_administered: 1.years.ago.to_date)
+      create(:vaccine_dose,
+             patient_profile: patient.patient_profile,
+             vaccine_code: 'POL')
       patient
     end
-    it 'returns all vaccines of the types passed in' do
-      expect(test_patient.get_vaccine_doses(%w(DTaP DTP)).length).to eq(3)
-      expect(test_patient.get_vaccine_doses(%w(DTaP DTP))[0].vaccine_code)
-        .to eq('DTaP')
+
+    it 'creates antigen_administered_records when called' do
+      expect(test_patient.vaccine_doses).not_to eq([])
+      expect(test_patient.antigen_administered_records.first.class.name)
+        .to eq('AntigenAdministeredRecord')
     end
-    it 'returns all vaccines in the order of vaccine_dose date' do
-      vax1, vax2, vax3 = test_patient.get_vaccine_doses(%w(DTaP DTP))
-      expect(vax1.date_administered < vax2.date_administered).to be(true)
-      expect(vax1.date_administered < vax3.date_administered).to be(true)
-      expect(vax2.date_administered < vax3.date_administered).to be(true)
-    end
-    it 'returns a blank array if no vaccines are present' do
-      expect(test_patient.get_vaccine_doses(['DTP']).length).to eq(0)
+    it 'can access the objects multiple times' do
+      expect(test_patient.vaccine_doses).not_to eq([])
+      expect(test_patient.antigen_administered_records)
+        .to be(test_patient.antigen_administered_records)
     end
   end
 end

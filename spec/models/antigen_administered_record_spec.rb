@@ -60,12 +60,27 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
       cvx_code = 1000
       vaccine_doses = [FactoryGirl.create(:vaccine_dose, cvx_code: cvx_code)]
       vaccine_doses << FactoryGirl.create(:vaccine_dose, cvx_code: cvx_code)
-      expect{
-        AntigenAdministeredRecord.create_records_from_vaccine_doses(vaccine_doses)
-      }.to raise_exception(Exceptions::MissingCVX)
+      expect do
+        AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses
+        )
+      end.to raise_exception(Exceptions::MissingCVX)
+    end
+    it 'includes all possible cvx codes needed from the health dept' do
+      cvx_codes = TextVax::VAXCODES.map do |_, value|
+        value.map { |vax_array| vax_array[3] }
+      end.flatten.uniq
+
+      vaccine_doses = cvx_codes.map do |cvx_code|
+        FactoryGirl.create(:vaccine_dose, cvx_code: cvx_code)
+      end
+      expect do
+        AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses
+        )
+      end.not_to raise_exception(Exceptions::MissingCVX)
     end
   end
-
 
   describe '#cdc_attributes' do
     describe 'checking all keys' do
