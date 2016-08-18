@@ -43,7 +43,6 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
     end
   end
 
-
   describe '.create_records_from_vaccine_doses' do
     it 'takes a list of vaccine_doses and returns a list of AntigenAdministeredRecords' do
       vaccine_doses = [FactoryGirl.create(:vaccine_dose, cvx_code: 110)]

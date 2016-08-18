@@ -5,11 +5,11 @@ class TargetDose
   attr_accessor :patient, :antigen_series_dose
   attr_reader :eligible
 
-  def initialize(patient:, antigen_series_dose:)
-    @patient               = patient
-    @antigen_series_dose   = antigen_series_dose
-    set_target_dose_age_attributes(antigen_series_dose, patient.dob)
-    @eligible              = nil
+  def initialize(patient_dob:, antigen_series_dose:)
+    @antigen_series_dose         = antigen_series_dose
+    @eligible                    = nil
+    @status_hash                 = nil
+    @antigen_administered_record = nil
   end
 
   [
@@ -23,7 +23,8 @@ class TargetDose
     end
   end
 
-  def set_target_dose_age_attributes(antigen_series_dose, dob)
+  def target_dose_age_attributes(antigen_series_dose, dob)
+    age_attrs = {}
     [
       'absolute_min_age', 'min_age', 'earliest_recommended_age',
       'latest_recommended_age', 'max_age'
@@ -31,22 +32,18 @@ class TargetDose
       date_action  = action + '_date'
       age_string   = antigen_series_dose.read_attribute(action)
       patient_date = create_patient_age_date(age_string, dob)
-      instance_variable_set("@#{date_action}", patient_date)
+      age_attrs[date_action.to_sym] = patient_date
     end
+    age_attrs
   end
 
-  # def age_eligible?(dob)
-  #   @eligible = true
-  #   @eligible = check_min_age(self.absolute_min_age, dob)
-  #   if @eligible
-  #     if self.max_age
-  #       @eligible = check_max_age(self.max_age, dob)
-  #     end
-  #   end
-  #   @eligible
-  # end
-
   def evaluate_antigen_administered_record(antigen_administered_record)
+    if !@status_hash.nil? && @status_hash[:status] == 'valid':
+      raise Error('The TargetDose has already evaluated to True')
+    end
+    @antigen_administered_record = antigen_administered_record
+    age_attrs   = target_dose_age_attributes(antigen_series_dose, patient_dob)
+    result_hash = {}
   end
 
   def has_conditional_skip?

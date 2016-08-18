@@ -10,10 +10,7 @@ class PatientSeries
     CheckType.enforce_type(antigen_series, AntigenSeries)
     @patient                   = patient
     @antigen_series            = antigen_series
-    @target_doses              = []
-    @eligible_target_doses     = []
-    @non_eligible_target_doses = []
-    create_target_doses
+    @target_doses              = create_target_doses(antigen_series, patient)
   end
 
   [
@@ -27,11 +24,12 @@ class PatientSeries
     end
   end
 
-  def create_target_doses
-    @target_doses = @antigen_series.doses.map do |antigen_series_dose|
-      TargetDose.new(antigen_series_dose: antigen_series_dose, patient: @patient)
+  def create_target_doses(antigen_series, patient)
+    target_doses = antigen_series.doses.map do |antigen_series_dose|
+      TargetDose.new(antigen_series_dose: antigen_series_dose,
+                     patient_dob: patiend.dob)
     end
-    @target_doses.sort_by!(&:dose_number)
+    target_doses.sort_by!(&:dose_number)
   end
 
   def evaluate_target_dose(target_dose, antigen_administered_record)
