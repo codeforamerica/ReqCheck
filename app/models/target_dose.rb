@@ -35,6 +35,15 @@ class TargetDose
       patient_date = create_patient_age_date(age_string, dob)
       age_attrs[date_action.to_sym] = patient_date
     end
+    {
+      max_age_date: '12/31/2999'.to_date,
+      min_age_date: '01/01/1900'.to_date,
+      absolute_min_age_date: '01/01/1900'.to_date
+    }.each do |default_value_key, default_value|
+      if age_attrs[default_value_key].nil?
+        age_attrs[default_value_key] = default_value
+      end
+    end
     age_attrs
   end
 
@@ -44,7 +53,13 @@ class TargetDose
     end
     @antigen_administered_record = antigen_administered_record
     age_attrs   = create_age_attributes(antigen_series_dose, patient_dob)
-    result_hash = {}
+    result_hash = evaluate_dose_age(
+                    age_attrs,
+                    antigen_administered_record.date_administered
+                  )
+
+
+
   end
 
   def evaluate_dose_age(age_attrs, date_of_dose)
@@ -52,24 +67,19 @@ class TargetDose
     [
       'absolute_min_age_date',
       'min_age_date',
-      'earliest_recommended_age_date'
-    ].each do |age_attr|
-      result = nil
-      if !age_attrs[age_attr.to_sym].nil?
-        result = validate_date_equal_or_after(age_attrs[age_attr.to_sym],
-                                              date_of_dose)
-      end
-      result_attr = age_attr.split('_')[0..-1].join('_')
-      evaluated_hash[result_attr.to_sym] = result
-    end
-    [
+      'earliest_recommended_age_date',
       'latest_recommended_age_date',
       'max_age_date'
     ].each do |age_attr|
       result = nil
       if !age_attrs[age_attr.to_sym].nil?
-        result = validate_date_equal_or_before(age_attrs[age_attr.to_sym],
-                                               date_of_dose)
+        if ['latest_recommended_age_date', 'max_age_date'].include?(age_attr)
+          result = validate_date_equal_or_before(age_attrs[age_attr.to_sym],
+                                                 date_of_dose)
+        else
+          result = validate_date_equal_or_after(age_attrs[age_attr.to_sym],
+                                                date_of_dose)
+        end
       end
       result_attr = age_attr.split('_')[0..-1].join('_')
       evaluated_hash[result_attr.to_sym] = result
@@ -86,7 +96,5 @@ class TargetDose
   #   if !self.eligible
   #     return
   #   end
-
-
   # end
 end
