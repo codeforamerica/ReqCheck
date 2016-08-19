@@ -24,7 +24,7 @@ class TargetDose
     end
   end
 
-  def target_dose_age_attributes(antigen_series_dose, dob)
+  def create_age_attributes(antigen_series_dose, dob)
     age_attrs = {}
     [
       'absolute_min_age', 'min_age', 'earliest_recommended_age',
@@ -43,7 +43,7 @@ class TargetDose
       raise Error('The TargetDose has already evaluated to True')
     end
     @antigen_administered_record = antigen_administered_record
-    age_attrs   = target_dose_age_attributes(antigen_series_dose, patient_dob)
+    age_attrs   = create_age_attributes(antigen_series_dose, patient_dob)
     result_hash = {}
   end
 
@@ -54,17 +54,21 @@ class TargetDose
       'min_age_date',
       'earliest_recommended_age_date'
     ].each do |age_attr|
-      result = validate_date_equal_or_after(self.send(age_attr), date_of_dose)
+      result = nil
+      if !age_attrs[age_attr.to_sym].nil?
+        result = validate_date_equal_or_after(age_attrs[age_attr.to_sym],
+                                              date_of_dose)
+      end
       result_attr = age_attr.split('_')[0..-1].join('_')
       evaluated_hash[result_attr.to_sym] = result
     end
     [
-      'latest_recommended_age',
-      'max_age'
+      'latest_recommended_age_date',
+      'max_age_date'
     ].each do |age_attr|
       result = nil
-      if !self.send(age_attr).nil?
-        result = validate_date_equal_or_before(self.send(age_attr),
+      if !age_attrs[age_attr.to_sym].nil?
+        result = validate_date_equal_or_before(age_attrs[age_attr.to_sym],
                                                date_of_dose)
       end
       result_attr = age_attr.split('_')[0..-1].join('_')
