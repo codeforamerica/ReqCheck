@@ -47,6 +47,50 @@ class TargetDose
     age_attrs
   end
 
+  def get_age_status(age_evaluation_hash,
+                     antigen_administered_record,
+                     previous_dose_status_hash=nil)
+    # As described on page 38 (TABLE 4 - 12) in the CDC logic specifications
+    age_status = {record: antigen_administered_record}
+    if age_evaluation_hash[:absolute_min_age] == false
+      age_status[:status]  = 'invalid'
+      age_status[:reason]  = 'age'
+      age_status[:details] = 'too_young'
+    elsif age_evaluation_hash[:min_age] == false
+      has_previous_dose = !previous_dose_status_hash.nil?
+      is_valid = true
+
+      if has_previous_dose
+        previous_dose_invalid = previous_dose_status_hash[:status] == 'invalid'
+        previous_dose_reason  = previous_dose_status_hash[:reason]
+        age_or_interval = ['age', 'interval'].include?(previous_dose_reason)
+
+        if previous_dose_invalid && age_or_interval
+          is_valid = false
+        end
+      end
+
+      if is_valid
+        age_status[:status]  = 'valid'
+        age_status[:reason]  = 'grace_period'
+      else
+        age_status[:status]  = 'invalid'
+        age_status[:reason]  = 'age'
+        age_status[:details] = 'too_young'
+      end
+
+    elsif age_evaluation_hash[:max_age] == false
+      # Should we include extraneous on this as well? Where?
+      age_status[:status]  = 'invalid'
+      age_status[:reason]  = 'age'
+      age_status[:details] = 'too_old'
+    else
+      age_status[:status]  = 'valid'
+      age_status[:reason]  = 'on_schedule'
+    end
+    age_status
+  end
+
   def evaluate_antigen_administered_record(antigen_administered_record)
     if !@status_hash.nil? && @status_hash[:status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
