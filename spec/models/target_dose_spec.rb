@@ -285,6 +285,130 @@ RSpec.describe TargetDose, type: :model do
       end
     end
 
+    describe '#get_age_status' do
+      # This logic is defined on page 38 of the CDC logic spec
+      it 'returns invalid, too young for absolute_min_age false' do
+        prev_status_hash = nil
+        age_eval_hash = {
+          absolute_min_age: false,
+          min_age: false,
+          earliest_recommended_age: false,
+          latest_recommended_age: true,
+          max_age: true
+        }
+        expected_result = { status: 'invalid',
+                            reason: 'age',
+                            details: 'too_young',
+                            record: as_dose }
+        expect(
+          test_target_dose.get_age_status(age_eval_hash,
+                                          as_dose,
+                                          prev_status_hash)
+        ).to eq(expected_result)
+      end
+
+      it 'returns invalid, too young for before min_age and previous invalid' do
+        prev_status_hash = {
+          status: 'invalid',
+          reason: 'age',
+          details: 'too_young'
+        }
+        age_eval_hash = {
+          absolute_min_age: true,
+          min_age: false,
+          earliest_recommended_age: false,
+          latest_recommended_age: true,
+          max_age: true
+        }
+        expected_result = { status: 'invalid',
+                            reason: 'age',
+                            details: 'too_young',
+                            record: as_dose }
+        expect(
+          test_target_dose.get_age_status(age_eval_hash,
+                                          as_dose,
+                                          prev_status_hash)
+        ).to eq(expected_result)
+      end
+
+      it 'returns valid, grace_period for before min_age and previous valid' do
+        prev_status_hash = {
+          status: 'valid',
+          reason: 'grace_period'
+        }
+        age_eval_hash = {
+          absolute_min_age: true,
+          min_age: false,
+          earliest_recommended_age: false,
+          latest_recommended_age: true,
+          max_age: true
+        }
+        expected_result = { status: 'valid',
+                            reason: 'grace_period',
+                            record: as_dose }
+        expect(
+          test_target_dose.get_age_status(age_eval_hash,
+                                          as_dose,
+                                          prev_status_hash)
+        ).to eq(expected_result)
+      end
+      it 'returns valid, grace_period for before min_age yet first dose' do
+        prev_status_hash = nil
+        age_eval_hash = {
+          absolute_min_age: true,
+          min_age: false,
+          earliest_recommended_age: false,
+          latest_recommended_age: true,
+          max_age: true
+        }
+        expected_result = { status: 'valid',
+                            reason: 'grace_period',
+                            record: as_dose }
+        expect(
+          test_target_dose.get_age_status(age_eval_hash,
+                                          as_dose,
+                                          prev_status_hash)
+        ).to eq(expected_result)
+      end
+      it 'returns valid for after min_age and before max_age' do
+        prev_status_hash = nil
+        age_eval_hash = {
+          absolute_min_age: true,
+          min_age: true,
+          earliest_recommended_age: false,
+          latest_recommended_age: true,
+          max_age: true
+        }
+        expected_result = { status: 'valid',
+                            reason: 'on_schedule',
+                            record: as_dose }
+        expect(
+          test_target_dose.get_age_status(age_eval_hash,
+                                          as_dose,
+                                          prev_status_hash)
+        ).to eq(expected_result)
+      end
+      it 'returns invalid, too_old for after max_age' do
+        prev_status_hash = nil
+        age_eval_hash = {
+          absolute_min_age: true,
+          min_age: true,
+          earliest_recommended_age: true,
+          latest_recommended_age: false,
+          max_age: false
+        }
+        expected_result = { status: 'invalid',
+                            reason: 'age',
+                            details: 'too_old',
+                            record: as_dose }
+        expect(
+          test_target_dose.get_age_status(age_eval_hash,
+                                          as_dose,
+                                          prev_status_hash)
+        ).to eq(expected_result)
+      end
+    end
+
   # describe '#required_for_patient' do
   #   let(:test_patient) { FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient }
   #   let(:antigen_series_dose) { FactoryGirl.create(:antigen_series_dose) }
