@@ -24,7 +24,7 @@ class TargetDose
     end
   end
 
-  def create_age_attributes(antigen_series_dose, dob)
+  def create_age_date_attributes(antigen_series_dose, dob)
     age_attrs = {}
     [
       'absolute_min_age', 'min_age', 'earliest_recommended_age',
@@ -45,6 +45,34 @@ class TargetDose
       end
     end
     age_attrs
+  end
+
+  def set_default_values(return_hash, default_hash={})
+    default_hash.each do |default_value_key, default_value|
+      current_value = return_hash[default_value_key]
+      if current_value.nil? || current_value == ''
+        return_hash[default_value_key] = default_value
+      end
+    end
+    return_hash
+  end
+
+  def create_interval_date_attributes(interval_object, original_date)
+    interval_attrs = {}
+    default_values = {
+      interval_absolute_min_date: '01/01/1900'.to_date,
+      interval_min_date: '01/01/1900'.to_date
+    }
+
+    %w(interval_absolute_min interval_min interval_earliest_recommended
+    interval_latest_recommended).each do |action|
+      date_action                = action + '_date'
+      time_differential_string   = interval_object.read_attribute(action)
+      interval_date = create_patient_age_date(time_differential_string,
+                                              original_date)
+      interval_attrs[date_action.to_sym] = interval_date
+    end
+    set_default_values(interval_attrs, default_values)
   end
 
   def get_age_status(age_evaluation_hash,

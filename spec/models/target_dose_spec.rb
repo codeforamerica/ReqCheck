@@ -92,11 +92,11 @@ RSpec.describe TargetDose, type: :model do
       end
     end
 
-    describe '#create_age_attributes' do
+    describe '#create_age_date_attributes' do
       %w(absolute_min_age_date min_age_date earliest_recommended_age_date
          latest_recommended_age_date max_age_date).each do |age_attribute|
         it "sets the target_dose attribute #{age_attribute}" do
-          age_attrs = test_target_dose.create_age_attributes(
+          age_attrs = test_target_dose.create_age_date_attributes(
             as_dose,
             test_patient.dob
           )
@@ -116,7 +116,7 @@ RSpec.describe TargetDose, type: :model do
 
         it 'sets default value for max_age_date' do
           as_dose.max_age = nil
-          age_attrs = test_target_dose.create_age_attributes(
+          age_attrs = test_target_dose.create_age_date_attributes(
             as_dose,
             test_patient.dob
           )
@@ -124,7 +124,7 @@ RSpec.describe TargetDose, type: :model do
         end
         it 'sets default value for min_age_date' do
           as_dose.min_age = nil
-          age_attrs = test_target_dose.create_age_attributes(
+          age_attrs = test_target_dose.create_age_date_attributes(
             as_dose,
             test_patient.dob
           )
@@ -132,7 +132,7 @@ RSpec.describe TargetDose, type: :model do
         end
         it 'sets default value for absolute_min_age_date' do
           as_dose.absolute_min_age = nil
-          age_attrs = test_target_dose.create_age_attributes(
+          age_attrs = test_target_dose.create_age_date_attributes(
             as_dose,
             test_patient.dob
           )

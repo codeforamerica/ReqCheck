@@ -27,7 +27,7 @@ class PatientSeries
   def create_target_doses(antigen_series, patient)
     target_doses = antigen_series.doses.map do |antigen_series_dose|
       TargetDose.new(antigen_series_dose: antigen_series_dose,
-                     patient_dob: patiend.dob)
+                     patient_dob: patient.dob)
     end
     target_doses.sort_by!(&:dose_number)
   end
