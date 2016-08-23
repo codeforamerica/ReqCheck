@@ -498,7 +498,6 @@ RSpec.describe TargetDose, type: :model do
           expect(interval_attrs[:interval_latest_recommended_date])
             .to eq(latest_rec)
         end
-
         %w(
           interval_absolute_min_date interval_min_date
           interval_earliest_recommended_date interval_latest_recommended_date
