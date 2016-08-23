@@ -543,6 +543,76 @@ RSpec.describe TargetDose, type: :model do
           end
         end
       end
+
+      describe '#evaluate_interval_dates' do
+        let(:valid_interval_attrs) do
+          {
+            interval_absolute_min_date: 8.weeks.ago.to_date,
+            interval_min_date: 6.weeks.ago.to_date,
+            interval_earliest_recommended_date: 5.weeks.ago.to_date,
+            interval_latest_recommended_date: 2.weeks.ago.to_date,
+          }
+        end
+        it 'returns a hash' do
+          second_dose_date = 6.weeks.ago.to_date
+          expect(
+            test_target_dose.evaluate_interval_dates(
+              valid_interval_attrs,
+              second_dose_date
+            ).class
+          ).to eq(Hash)
+        end
+        describe 'for each minimum interval attribute' do
+          second_dose_date = 6.weeks.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [8.weeks.ago.to_date, true],
+            after_the_dose_date: [4.weeks.ago.to_date, false],
+            nil: [nil, nil]
+          }
+          %w(
+            interval_absolute_min_date
+            interval_min_date
+            interval_earliest_recommended_date
+          ).each do |attribute|
+            attribute_options.each do |descriptor, value|
+              descriptor_string = "returns #{value[1]} when the #{attribute}"\
+                                  " attribute is #{descriptor}"
+              it descriptor_string do
+                valid_interval_attrs[attribute.to_sym] = value[0]
+                eval_hash = test_target_dose.evaluate_interval_dates(
+                  valid_interval_attrs,
+                  second_dose_date
+                )
+                expect(eval_hash[attribute.to_sym]).to eq(value[1])
+              end
+            end
+          end
+        end
+        describe 'for each max interval attribute' do
+          second_dose_date = 3.weeks.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [4.weeks.ago.to_date, false],
+            after_the_dose_date: [2.weeks.ago.to_date, true],
+            nil: [nil, nil]
+          }
+          %w(
+            interval_latest_recommended_date
+          ).each do |attribute|
+            attribute_options.each do |descriptor, value|
+              descriptor_string = "returns #{value[1]} when the #{attribute}"\
+                                  " attribute is #{descriptor}"
+              it descriptor_string do
+                valid_interval_attrs[attribute.to_sym] = value[0]
+                eval_hash = test_target_dose.evaluate_interval_dates(
+                  valid_interval_attrs,
+                  second_dose_date
+                )
+                expect(eval_hash[attribute.to_sym]).to eq(value[1])
+              end
+            end
+          end
+        end
+      end
     end
   end
 end

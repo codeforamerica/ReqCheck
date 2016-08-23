@@ -24,8 +24,23 @@ class TargetDose
     end
   end
 
+  def set_default_values(return_hash, default_hash={})
+    default_hash.each do |default_value_key, default_value|
+      current_value = return_hash[default_value_key]
+      if current_value.nil? || current_value == ''
+        return_hash[default_value_key] = default_value
+      end
+    end
+    return_hash
+  end
+
   def create_age_date_attributes(antigen_series_dose, dob)
     age_attrs = {}
+    default_values = {
+      max_age_date: '12/31/2999'.to_date,
+      min_age_date: '01/01/1900'.to_date,
+      absolute_min_age_date: '01/01/1900'.to_date
+    }
     [
       'absolute_min_age', 'min_age', 'earliest_recommended_age',
       'latest_recommended_age', 'max_age'
@@ -35,26 +50,7 @@ class TargetDose
       patient_date = create_patient_age_date(age_string, dob)
       age_attrs[date_action.to_sym] = patient_date
     end
-    {
-      max_age_date: '12/31/2999'.to_date,
-      min_age_date: '01/01/1900'.to_date,
-      absolute_min_age_date: '01/01/1900'.to_date
-    }.each do |default_value_key, default_value|
-      if age_attrs[default_value_key].nil?
-        age_attrs[default_value_key] = default_value
-      end
-    end
-    age_attrs
-  end
-
-  def set_default_values(return_hash, default_hash={})
-    default_hash.each do |default_value_key, default_value|
-      current_value = return_hash[default_value_key]
-      if current_value.nil? || current_value == ''
-        return_hash[default_value_key] = default_value
-      end
-    end
-    return_hash
+    set_default_values(age_attrs, default_values)
   end
 
   def create_interval_date_attributes(interval_object, original_date)
@@ -141,7 +137,7 @@ class TargetDose
 # Valid” if from immediate previous dose administered is “Y”.
 
 
-  def evaluate_dose_age(age_attrs, date_of_dose)
+  def evaluate_dose_age(age_date_attrs, date_of_dose)
     evaluated_hash = {}
     [
       'absolute_min_age_date',
@@ -151,16 +147,47 @@ class TargetDose
       'max_age_date'
     ].each do |age_attr|
       result = nil
-      if !age_attrs[age_attr.to_sym].nil?
+      if !age_date_attrs[age_attr.to_sym].nil?
         if ['latest_recommended_age_date', 'max_age_date'].include?(age_attr)
-          result = validate_date_equal_or_before(age_attrs[age_attr.to_sym],
-                                                 date_of_dose)
+          result = validate_date_equal_or_before(
+                     age_date_attrs[age_attr.to_sym],
+                     date_of_dose
+                   )
         else
-          result = validate_date_equal_or_after(age_attrs[age_attr.to_sym],
+          result = validate_date_equal_or_after(age_date_attrs[age_attr.to_sym],
                                                 date_of_dose)
         end
       end
       result_attr = age_attr.split('_')[0..-1].join('_')
+      evaluated_hash[result_attr.to_sym] = result
+    end
+    evaluated_hash
+  end
+
+
+  def evaluate_interval_dates(interval_date_attrs, date_of_second_dose)
+    evaluated_hash = {}
+    %w(
+      interval_absolute_min_date
+      interval_min_date
+      interval_earliest_recommended_date
+      interval_latest_recommended_date
+    ).each do |interval_attr|
+      result = nil
+      if !interval_date_attrs[interval_attr.to_sym].nil?
+        if interval_attr == 'interval_latest_recommended_date'
+          result = validate_date_equal_or_before(
+                     interval_date_attrs[interval_attr.to_sym],
+                     date_of_second_dose
+                   )
+        else
+          result = validate_date_equal_or_after(
+                     interval_date_attrs[interval_attr.to_sym],
+                     date_of_second_dose
+                   )
+        end
+      end
+      result_attr = interval_attr.split('_')[0..-1].join('_')
       evaluated_hash[result_attr.to_sym] = result
     end
     evaluated_hash
