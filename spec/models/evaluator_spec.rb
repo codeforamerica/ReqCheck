@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Evaluator, type: :model do
   before(:all) do
-    FactoryGirl.create(:seed_antigen_xml)
+    FactoryGirl.create(:seed_full_antigen_xml)
   end
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)

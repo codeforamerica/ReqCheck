@@ -27,6 +27,18 @@ FactoryGirl.define do
 
     before(:create) do
       antigen_importer = AntigenImporter.new
+      # antigen_importer.import_antigen_xml_files('spec/support/xml')
+      antigen_importer.import_single_file(
+        'spec/support/xml/AntigenSupportingData- Polio.xml'
+      )
+    end
+  end
+
+  factory :seed_full_antigen_xml, class: Hash do
+    skip_create
+
+    before(:create) do
+      antigen_importer = AntigenImporter.new
       antigen_importer.import_antigen_xml_files('spec/support/xml')
     end
   end

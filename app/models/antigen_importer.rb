@@ -4,13 +4,18 @@ class AntigenImporter
   def import_antigen_xml_files(xml_directory)
     file_names = Dir[xml_directory + '/*.xml']
     file_names.each do |file_name|
-      xml_file_hash = parse_and_hash(file_name)
-      if file_name.include? 'Schedule'
-
-      elsif file_name.include? 'Antigen'
-        parse_antigen_data_and_create_subobjects(xml_file_hash)
-      end
+      import_single_file(file_name)
     end
+  end
+
+  def import_single_file(xml_file_name)
+    xml_file_hash = parse_and_hash(xml_file_name)
+    if xml_file_name.include? 'Schedule'
+
+    elsif xml_file_name.include? 'Antigen'
+      parse_antigen_data_and_create_subobjects(xml_file_hash)
+    end
+
   end
 
   def parse_and_hash(xml_file_path)
