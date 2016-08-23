@@ -13,14 +13,14 @@ module AgeCalc
     # ("6 months" or "5 years - 6 days") and converts
     # it into a hash with a represention of the time with key value pairs
     # ({months: 6} or {years: 5, days: -6})
-
-    math_type = time_string.include?('-') ? '-' : '+'
-    string_array = time_string.split(math_type)
+    second_operator = time_string.include?('-') ? '-' : '+'
+    string_array = time_string.split(second_operator)
     return_hash  = {}
-    string_array.each do |string_data|
-      data_array   = string_data.split(' ')
-      string_key   = data_array[1].to_sym
-      return_hash[string_key] = (math_type + data_array[0]).to_i
+    string_array.each_with_index do |string_data, index|
+      math_operator = index.zero? ? '+' : second_operator
+      data_array    = string_data.split(' ')
+      string_key    = data_array[1].to_sym
+      return_hash[string_key] = (math_operator + data_array[0]).to_i
     end
     return_hash
   end
@@ -48,6 +48,8 @@ module AgeCalc
   end
 
   def create_patient_age_date(cdc_age_string, dob)
+    # Need to add tests for age_calc or keep it in time_calc
+    # Especially with duplicate methods
     return nil if cdc_age_string == '' || cdc_age_string.nil?
     dob      = convert_to_date(dob)
     age_hash = time_string_to_time_hash(cdc_age_string)
