@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816002318) do
+ActiveRecord::Schema.define(version: 20160822192501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,13 +56,11 @@ ActiveRecord::Schema.define(version: 20160816002318) do
     t.string   "earliest_recommended_age"
     t.string   "latest_recommended_age"
     t.string   "max_age"
-    t.string   "allowable_interval_type"
-    t.string   "allowable_interval_absolute_min"
     t.string   "required_gender"
-    t.boolean  "recurring_dose",                  default: false
+    t.boolean  "recurring_dose",           default: false
     t.integer  "antigen_series_id"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   add_index "antigen_series_doses", ["antigen_series_id"], name: "index_antigen_series_doses_on_antigen_series_id", using: :btree
