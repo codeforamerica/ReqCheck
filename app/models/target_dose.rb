@@ -124,15 +124,22 @@ class TargetDose
       raise Error('The TargetDose has already evaluated to True')
     end
     @antigen_administered_record = antigen_administered_record
-    age_attrs   = create_age_attributes(antigen_series_dose, patient_dob)
+    age_attrs   = create_age_date_attributes(antigen_series_dose, patient_dob)
     result_hash = evaluate_dose_age(
                     age_attrs,
                     antigen_administered_record.date_administered
                   )
+    age_status = get_age_status(result_hash)
 
 
 
   end
+
+# A patient's reference dose date must be calculated as the
+# date administered of the most immediate previous vaccine
+# dose administered which has evaluation status “Valid” or “Not
+# Valid” if from immediate previous dose administered is “Y”.
+
 
   def evaluate_dose_age(age_attrs, date_of_dose)
     evaluated_hash = {}
@@ -161,6 +168,13 @@ class TargetDose
 
   def has_conditional_skip?
     !self.antigen_series_dose.conditional_skip.nil?
+  end
+
+  def evaluate_interval(first_administered_record, second_administered_record)
+    all_intervals = self.intervals
+    interval = all_intervals.first
+    # interval.
+
   end
 
   # def evaluate_vs_antigen_administered_record(antigen_administered_record)

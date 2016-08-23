@@ -65,11 +65,13 @@ RSpec.describe TargetDose, type: :model do
       AntigenSeriesDose
         .joins(:antigen_series)
         .joins(
-          'INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"'
+          'INNER JOIN "antigens" ON "antigens"."id" ' \
+          '= "antigen_series"."antigen_id"'
         ).where(antigens: { target_disease: 'polio' }).first
     end
     let(:test_target_dose) do
-      TargetDose.new(antigen_series_dose: as_dose, patient_dob: test_patient.dob)
+      TargetDose.new(antigen_series_dose: as_dose,
+                     patient_dob: test_patient.dob)
     end
 
     describe 'target dose attributes from the antigen_series_dose' do
@@ -409,18 +411,139 @@ RSpec.describe TargetDose, type: :model do
       end
     end
 
-  # describe '#required_for_patient' do
-  #   let(:test_patient) { FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient }
-  #   let(:antigen_series_dose) { FactoryGirl.create(:antigen_series_dose) }
+    describe 'implementation of interval logic' do
+      let(:test_patient) do
+        test_patient = FactoryGirl.create(:patient)
+        FactoryGirl.create(
+          :vaccine_dose,
+          patient_profile: test_patient.patient_profile,
+          vaccine_code: 'IPV',
+          date_administered: (test_patient.dob + 7.weeks)
+        )
+        FactoryGirl.create(
+          :vaccine_dose,
+          patient_profile: test_patient.patient_profile,
+          vaccine_code: 'IPV',
+          date_administered: (test_patient.dob + 11.weeks)
+        )
+        test_patient.reload
+        test_patient
+      end
 
-  #   it 'checks if the target_dose is required for the patient and returns boolean' do
-  #     target_dose = TargetDose.new(patient_dob: test_patient.dob, antigen_series_dose: antigen_series_dose)
-  #     expect(target_dose.required_for_patient).to eq(true)
-  #   end
-  #   it 'returns false if the antigen_series_dose dose not satisfy the ' do
-  #     target_dose = TargetDose.new(patient_dob: test_patient.dob, antigen_series_dose: antigen_series_dose)
-  #     expect(target_dose.required_for_patient).to eq(true)
-  #   end
-  # end
+      let(:test_interval) { FactoryGirl.create(:interval) }
+
+      let(:as_dose_w_interval) do
+        as_dose = FactoryGirl.create(:antigen_series_dose)
+        as_dose.intervals << test_interval
+        as_dose
+      end
+
+      let(:test_target_dose) do
+        TargetDose.new(antigen_series_dose: as_dose_w_interval,
+                       patient_dob: test_patient.dob)
+      end
+
+      let(:test_aars) do
+        vaccine_doses = []
+        vaccine_doses << FactoryGirl.create(
+          :vaccine_dose,
+          patient_profile: test_patient.patient_profile,
+          date_administered: 5.month.ago.to_date
+        )
+        vaccine_doses << FactoryGirl.create(
+          :vaccine_dose,
+          patient_profile: test_patient.patient_profile,
+          date_administered: 3.month.ago.to_date
+        )
+        AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses
+        )
+      end
+
+      describe '#evaluate_interval' do
+        # This logic is defined on page 39 of the CDC logic spec to evaluate the
+        # interval (or intervals) between two antigen_administered_records
+        # 
+        # HOW/WHAT IS ALLOWABLE INTERVAL EFFECTED?
+        # 
+
+        it 'takes two records and returns valid if the interval is valid' do
+          expect(as_dose_w_interval.intervals.first.interval_absolute_min)
+            .to eq('4 weeks - 4 days')
+          interval_eval = test_target_dose.evaluate_interval(test_aars[0],
+                                                             test_aars[1])
+          expect(interval_eval).to eq([{ status: 'valid', reason: 'whatever' }])
+        end
+      end
+
+      describe '#create_interval_date_attributes' do
+        it 'returns a hash with the original date plus the date string diff' do
+          origin_date = 1.year.ago.to_date
+          test_interval.interval_absolute_min = '5 weeks - 4 days'
+          abs_min = origin_date + 5.weeks - 4.days
+          test_interval.interval_min = '5 weeks'
+          min = origin_date + 5.weeks
+          test_interval.interval_earliest_recommended = '9 weeks'
+          earliest_rec = origin_date + 9.weeks
+          test_interval.interval_latest_recommended = '14 weeks'
+          latest_rec = origin_date + 14.weeks
+          interval_attrs = test_target_dose.create_interval_date_attributes(
+            test_interval,
+            origin_date
+          )
+          expect(interval_attrs[:interval_absolute_min_date]).to eq(abs_min)
+          expect(interval_attrs[:interval_min_date]).to eq(min)
+          expect(interval_attrs[:interval_earliest_recommended_date])
+            .to eq(earliest_rec)
+          expect(interval_attrs[:interval_latest_recommended_date])
+            .to eq(latest_rec)
+        end
+
+        %w(
+          interval_absolute_min_date interval_min_date
+          interval_earliest_recommended_date interval_latest_recommended_date
+        ).each do |interval_attribute|
+          it "sets the target_dose attribute #{interval_attribute}" do
+            interval_attrs = test_target_dose.create_interval_date_attributes(
+              test_interval,
+              test_aars[0].date_administered
+            )
+            abr_attribute = interval_attribute.split('_')[0...-1].join('_')
+            interval_time_string = test_interval.send(abr_attribute)
+            interval_date = test_target_dose.create_patient_age_date(
+              interval_time_string, test_aars[0].date_administered
+            )
+            expect(interval_attrs[interval_attribute.to_sym])
+              .to eq(interval_date)
+            expect(interval_attrs[interval_attribute.to_sym].class.name)
+              .to eq('Date')
+          end
+        end
+        describe 'default values' do
+          # As described on page 38 on CDC logic specs
+          # 'http://www.cdc.gov/vaccines/programs/iis/interop-proj/'\
+          #   'downloads/logic-spec-acip-rec.pdf'
+          it 'sets default value for interval_min_date' do
+            test_interval.interval_min = nil
+            interval_attrs = test_target_dose.create_interval_date_attributes(
+              test_interval,
+              test_aars[0].date_administered
+            )
+            expect(
+              interval_attrs[:interval_min_date]
+            ).to eq('01/01/1900'.to_date)
+          end
+          it 'sets default value for interval_absolute_min_date' do
+            test_interval.interval_absolute_min = nil
+            interval_attrs = test_target_dose.create_interval_date_attributes(
+              test_interval,
+              test_aars[0].date_administered
+            )
+            expect(interval_attrs[:interval_absolute_min_date])
+              .to eq('01/01/1900'.to_date)
+          end
+        end
+      end
+    end
   end
 end
