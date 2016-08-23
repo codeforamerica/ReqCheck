@@ -115,6 +115,42 @@ class TargetDose
     age_status
   end
 
+  def get_interval_status(interval_evaluation_hash,
+                          previous_dose_status_hash=nil)
+    interval_status = {}
+    if interval_evaluation_hash[:interval_absolute_min] == false
+      interval_status[:status]  = 'invalid'
+      interval_status[:reason]  = 'interval'
+      interval_status[:details] = 'too_soon'
+    elsif interval_evaluation_hash[:interval_min] == false
+      has_previous_dose = !previous_dose_status_hash.nil?
+      is_valid = true
+
+      if has_previous_dose
+        previous_dose_invalid = previous_dose_status_hash[:status] == 'invalid'
+        previous_dose_reason  = previous_dose_status_hash[:reason]
+        age_or_interval = ['age', 'interval'].include?(previous_dose_reason)
+
+        if previous_dose_invalid && age_or_interval
+          is_valid = false
+        end
+      end
+
+      if is_valid
+        interval_status[:status]  = 'valid'
+        interval_status[:reason]  = 'grace_period'
+      else
+        interval_status[:status]  = 'invalid'
+        interval_status[:reason]  = 'interval'
+        interval_status[:details] = 'too_soon'
+      end
+    else
+      interval_status[:status]  = 'valid'
+      interval_status[:reason]  = 'on_schedule'
+    end
+    interval_status
+  end
+
   def evaluate_antigen_administered_record(antigen_administered_record)
     if !@status_hash.nil? && @status_hash[:status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')

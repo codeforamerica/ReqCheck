@@ -237,11 +237,14 @@ RSpec.describe TargetDose, type: :model do
           max_age_date: 1.month.ago.to_date
         }
       end
-      it 'returns a hash' do
+      it 'returns a hash that includes \'_date\' in the keys' do
         dose_date = 6.months.ago.to_date
-        expect(
-          test_target_dose.evaluate_dose_age(valid_age_attrs, dose_date).class
-        ).to eq(Hash)
+        eval_hash = test_target_dose.evaluate_dose_age(valid_age_attrs,
+                                                       dose_date)
+        expect(eval_hash.class).to eq(Hash)
+        eval_hash.each do |key, value|
+          expect(key.to_s.include?('_date')).to eq(true)
+        end
       end
       describe 'for each minimum age attribute' do
         dose_date = 9.months.ago.to_date
@@ -553,14 +556,16 @@ RSpec.describe TargetDose, type: :model do
             interval_latest_recommended_date: 2.weeks.ago.to_date,
           }
         end
-        it 'returns a hash' do
+        it 'returns a hash with \'date\' in the key names' do
           second_dose_date = 6.weeks.ago.to_date
-          expect(
-            test_target_dose.evaluate_interval_dates(
-              valid_interval_attrs,
-              second_dose_date
-            ).class
-          ).to eq(Hash)
+          interval_eval = test_target_dose.evaluate_interval_dates(
+            valid_interval_attrs,
+            second_dose_date
+          )
+          expect(interval_eval.class).to eq(Hash)
+          interval_eval.each do |key, value|
+            expect(key.to_s.include?('_date')).to eq(true)
+          end
         end
         describe 'for each minimum interval attribute' do
           second_dose_date = 6.weeks.ago.to_date
@@ -611,6 +616,98 @@ RSpec.describe TargetDose, type: :model do
               end
             end
           end
+        end
+      end
+
+      describe '#get_interval_status' do
+        # This logic is defined on page 39 of the CDC logic spec
+        it 'returns invalid, too_soon for interval_absolute_min_date false' do
+          prev_status_hash = nil
+          interval_eval_hash = {
+            interval_absolute_min: false,
+            interval_min: false,
+            interval_earliest_recommended: false,
+            interval_latest_recommended: true
+          }
+          expected_result = { status: 'invalid',
+                              reason: 'interval',
+                              details: 'too_soon' }
+          expect(
+            test_target_dose.get_interval_status(interval_eval_hash,
+                                                 prev_status_hash)
+          ).to eq(expected_result)
+        end
+
+        it 'returns invalid, too_soon for before interval_min and ' \
+          'previous invalid' do
+          prev_status_hash = {
+            status: 'invalid',
+            reason: 'interval',
+            details: 'too_soon'
+          }
+          interval_eval_hash = {
+            interval_absolute_min: true,
+            interval_min: false,
+            interval_earliest_recommended: false,
+            interval_latest_recommended: true
+          }
+          expected_result = { status: 'invalid',
+                              reason: 'interval',
+                              details: 'too_soon' }
+          expect(
+            test_target_dose.get_interval_status(interval_eval_hash,
+                                                 prev_status_hash)
+          ).to eq(expected_result)
+        end
+
+        it 'returns valid, grace_period for before interval_min ' \
+          'and previous valid' do
+          prev_status_hash = {
+            status: 'valid',
+            reason: 'grace_period'
+          }
+          interval_eval_hash = {
+            interval_absolute_min: true,
+            interval_min: false,
+            interval_earliest_recommended: false,
+            interval_latest_recommended: true
+          }
+          expected_result = { status: 'valid',
+                              reason: 'grace_period' }
+          expect(
+            test_target_dose.get_interval_status(interval_eval_hash,
+                                                 prev_status_hash)
+          ).to eq(expected_result)
+        end
+        it 'returns valid, grace_period for before interval_min yet first dose' do
+          prev_status_hash = nil
+          interval_eval_hash = {
+            interval_absolute_min: true,
+            interval_min: false,
+            interval_earliest_recommended: false,
+            interval_latest_recommended: true
+          }
+          expected_result = { status: 'valid',
+                              reason: 'grace_period' }
+          expect(
+            test_target_dose.get_interval_status(interval_eval_hash,
+                                                 prev_status_hash)
+          ).to eq(expected_result)
+        end
+        it 'returns valid for after interval_min' do
+          prev_status_hash = nil
+          interval_eval_hash = {
+            interval_absolute_min: true,
+            interval_min: true,
+            interval_earliest_recommended: false,
+            interval_latest_recommended: true
+          }
+          expected_result = { status: 'valid',
+                              reason: 'on_schedule' }
+          expect(
+            test_target_dose.get_interval_status(interval_eval_hash,
+                                                 prev_status_hash)
+          ).to eq(expected_result)
         end
       end
     end
