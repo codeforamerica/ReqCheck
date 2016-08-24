@@ -187,7 +187,7 @@ RSpec.describe Patient, type: :model do
   end
 
   describe '#antigen_administered_records' do
-    before(:all) { FactoryGirl.create(:seed_antigen_xml) }
+    before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) do

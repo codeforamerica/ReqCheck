@@ -19,7 +19,7 @@ FactoryGirl.define do
     allowable false
   end
 
-  factory :seed_antigen_xml, class: Hash do
+  factory :seed_antigen_xml_polio, class: Hash do
     skip_create
 
     before(:create) do
@@ -27,6 +27,18 @@ FactoryGirl.define do
       # antigen_importer.import_antigen_xml_files('spec/support/xml')
       antigen_importer.import_single_file(
         'spec/support/xml/AntigenSupportingData- Polio.xml'
+      )
+    end
+  end
+
+  factory :seed_antigen_xml_hpv, class: Hash do
+    skip_create
+
+    before(:create) do
+      antigen_importer = AntigenImporter.new
+      # antigen_importer.import_antigen_xml_files('spec/support/xml')
+      antigen_importer.import_single_file(
+        'spec/support/xml/AntigenSupportingData- HPV.xml'
       )
     end
   end

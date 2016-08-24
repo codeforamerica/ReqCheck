@@ -40,7 +40,7 @@ RSpec.describe TargetDose, type: :model do
   end
 
   describe 'tests needing the antigen_series database' do
-    before(:all) { FactoryGirl.create(:seed_antigen_xml) }
+    before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) do
@@ -1077,68 +1077,17 @@ RSpec.describe TargetDose, type: :model do
         end
       end
 
-      # describe '#evaluate_vaccine_attributes' do
-      #   let(:valid_vaccine_attrs) do
-      #     {
-      #       begin_age_date: 10.months.ago.to_date,
-      #       end_age_date: 2.months.ago.to_date,
-      #       expected_trade_name: 'test',
-      #       expected_volume: '0.5'
-      #     }
-      #   end
-      #   describe 'for each minimum age attribute' do
-      #     administered_dose_date = 6.weeks.ago.to_date
-      #     attribute_options = {
-      #       before_the_dose_date: [8.weeks.ago.to_date, true],
-      #       after_the_dose_date: [4.weeks.ago.to_date, false],
-      #       nil: [nil, nil]
-      #     }
-      #     %w(
-      #       begin_age_date
-      #     ).each do |attribute|
-      #       attribute_options.each do |descriptor, value|
-      #         descriptor_string = "returns #{value[1]} when the #{attribute}"\
-      #                             " attribute is #{descriptor}"
-      #         it descriptor_string do
-      #           valid_vaccine_attrs[attribute.to_sym] = value[0]
-      #           eval_hash = test_target_dose.evaluate_vaccine_attributes(
-      #             valid_vaccine_attrs,
-      #             administered_dose_date,
-      #             'test',
-      #             '0.5'
-      #           )
-      #           expect(eval_hash[attribute.to_sym]).to eq(value[1])
-      #         end
-      #       end
-      #     end
-      #   end
-      #   describe 'for each max age attribute' do
-      #     administered_dose_date = 6.weeks.ago.to_date
-      #     attribute_options = {
-      #       before_the_dose_date: [8.weeks.ago.to_date, false],
-      #       after_the_dose_date: [4.weeks.ago.to_date, true],
-      #       nil: [nil, nil]
-      #     }
-      #     %w(
-      #       end_age_date
-      #     ).each do |attribute|
-      #       attribute_options.each do |descriptor, value|
-      #         descriptor_string = "returns #{value[1]} when the #{attribute}"\
-      #                             " attribute is #{descriptor}"
-      #         it descriptor_string do
-      #           valid_vaccine_attrs[attribute.to_sym] = value[0]
-      #           eval_hash = test_target_dose.evaluate_vaccine_attributes(
-      #             valid_vaccine_attrs,
-      #             administered_dose_date,
-      #             'test',
-      #             '0.5'
-      #           )
-      #           expect(eval_hash[attribute.to_sym]).to eq(value[1])
-      #         end
-      #       end
-      #     end
-      #   end
-      # end
+      describe '#evaluate_gender_attributes' do
+        describe 'with different combinations' do
+          patient_gender = ['female', 'male', nil]
+          result_hash = {
+            female: [true, false, false],
+            male: [false, true, false],
+            unknown: [true, true, ],
+            none: []
+          }
+        end
+      end
 
       # describe '#get_gender_status' do
       #   # This logic is defined on page 50 of the CDC logic spec

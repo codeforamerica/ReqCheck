@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20160822192501) do
     t.string   "earliest_recommended_age"
     t.string   "latest_recommended_age"
     t.string   "max_age"
-    t.string   "required_gender"
+    t.text     "required_gender",          default: [],                 array: true
     t.boolean  "recurring_dose",           default: false
     t.integer  "antigen_series_id"
     t.datetime "created_at",                               null: false

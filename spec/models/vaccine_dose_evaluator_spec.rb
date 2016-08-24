@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe VaccineDoseEvaluator, type: :model do
-  before(:all) { FactoryGirl.create(:seed_antigen_xml) }
+  before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
 

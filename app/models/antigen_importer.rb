@@ -1,5 +1,15 @@
 class AntigenImporter
   include ActiveModel::Model
+  ###########
+  # Use Hash#values_at when you need to retrieve several values consecutively from a hash. [link]
+
+  # # bad
+  # email = data['email']
+  # username = data['nickname']
+
+  # # good
+  # email, username = data.values_at('email', 'nickname')
+  ###########
 
   def import_antigen_xml_files(xml_directory)
     file_names = Dir[xml_directory + '/*.xml']
@@ -105,6 +115,14 @@ class AntigenImporter
 
     series_doses_data.each do |series_doses_hash|
       series_dose_number = get_dose_number(series_doses_hash['doseNumber'])
+      required_gender    = series_doses_hash['requiredGender']
+      unless required_gender.is_a? Array
+        required_gender = if required_gender.nil? || required_gender == ''
+                            []
+                          else
+                            [required_gender]
+                          end
+      end
       series_doses_args = {
         antigen_series: antigen_series,
         dose_number: series_dose_number,
@@ -113,7 +131,7 @@ class AntigenImporter
         earliest_recommended_age: series_doses_hash['age']['earliestRecAge'],
         latest_recommended_age: series_doses_hash['age']['latestRecAge'],
         max_age: series_doses_hash['age']['maxAge'],
-        required_gender: series_doses_hash['requiredGender'],
+        required_gender: required_gender,
         recurring_dose: yes_bool(series_doses_hash['recurringDose'])
       }
       antigen_series_dose = AntigenSeriesDose.create(series_doses_args)

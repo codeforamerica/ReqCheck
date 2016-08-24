@@ -9,7 +9,7 @@ class CreateAntigenSeriesDoses < ActiveRecord::Migration
       t.string :max_age
       t.string :allowable_interval_type #from_previous, from_target_dose
       t.string :allowable_interval_absolute_min #Is this extraneous?
-      t.string :required_gender
+      t.text :required_gender, array: true, default: []
       t.boolean :recurring_dose, default: false
       t.references :antigen_series, index: true, foreign_key: true
       t.timestamps null: false

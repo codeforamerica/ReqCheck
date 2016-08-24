@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PatientSeries, type: :model do
-  before(:all) { FactoryGirl.create(:seed_antigen_xml) }
+  before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
   let(:test_patient) { FactoryGirl.create(:patient) }
   let(:antigen_series) { Antigen.find_by(target_disease: 'polio').series.first }

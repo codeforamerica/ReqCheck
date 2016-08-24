@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AntigenAdministeredRecord, type: :model do
-  before(:all) { FactoryGirl.create(:seed_antigen_xml) }
+  before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
   let(:polio_antigen) { Antigen.find_by(target_disease: 'polio') }
@@ -20,12 +20,12 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
       ).to eq('AntigenAdministeredRecord')
     end
     it 'requires the antigen object' do
-      expect{AntigenAdministeredRecord.new(vaccine_dose: polio_vaccine_dose)}.
-        to raise_exception(ArgumentError)
+      expect { AntigenAdministeredRecord.new(vaccine_dose: polio_vaccine_dose) }
+        .to raise_exception(ArgumentError)
     end
     it 'requires the vaccine_dose' do
-      expect{AntigenAdministeredRecord.new(antigen: polio_antigen)}.
-        to raise_exception(ArgumentError)
+      expect { AntigenAdministeredRecord.new(antigen: polio_antigen) }
+        .to raise_exception(ArgumentError)
     end
     # it 'requires the mvx_code' {  }
     # it 'requires the trade name' {  }

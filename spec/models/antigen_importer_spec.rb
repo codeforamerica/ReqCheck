@@ -193,14 +193,15 @@ RSpec.describe AntigenImporter, type: :model do
       end
 
       it 'can process only one dose' do
-        antigen_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGZOSTER)
+        antigen_hash =
+          antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGZOSTER)
         antigen_series_with_one_dose_hash = antigen_hash["antigenSupportingData"]["series"]
 
         expect(antigen_series.doses).to eq([])
         antigen_importer.create_antigen_series_doses(
-            antigen_series_with_one_dose_hash,
-            antigen_series
-          )
+          antigen_series_with_one_dose_hash,
+          antigen_series
+        )
         antigen_series.reload
         expect(antigen_series.doses.first.class.name).to eq('AntigenSeriesDose')
         expect(antigen_series.doses.length).to eq(1)
@@ -237,14 +238,43 @@ RSpec.describe AntigenImporter, type: :model do
         antigen_series.reload
         expect(antigen_series.doses.map(&:recurring_dose)).to eq([true, false, false, false])
       end
+      describe 'with required_gender' do
+        before(:all) do
+          FactoryGirl.create(:seed_antigen_xml_polio)
+          FactoryGirl.create(:seed_antigen_xml_hpv)
+        end
+        after(:all) { DatabaseCleaner.clean_with(:truncation) }
+
+        it 'can process one gender with \'HPV Male 3 Dose\'' do
+          hpv_antigen_series =
+            AntigenSeries.where(name: 'HPV Male 3 Dose').first
+          required_gender = hpv_antigen_series.doses.first.required_gender
+          expect(required_gender).to eq(['Male'])
+        end
+        it 'can process two genders with \'HPV Women 3 Dose\'' do
+          hpv_antigen_series =
+            AntigenSeries.where(name: 'HPV Female 3 Dose').first
+          required_gender    = hpv_antigen_series.doses.first.required_gender
+          expect(required_gender).to eq(['Female', 'Unknown'])
+        end
+        it 'can process no genders with \'Polio - All IPV - 4 Dose\'' do
+          hpv_antigen_series =
+            AntigenSeries.where(name: 'Polio - All IPV - 4 Dose').first
+          required_gender    = hpv_antigen_series.doses.first.required_gender
+          expect(required_gender).to eq([])
+        end
+      end
     end
 
     describe '#create_dose_intervals' do
       let(:antigen_series_dose) { FactoryGirl.create(:antigen_series_dose) }
-      let(:antigen_series_xml_hash) { antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGHEPA) }
+      let(:antigen_series_xml_hash) do
+        antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGHEPA)
+      end
 
       it 'can process only one interval' do
-        one_interval_hash = antigen_series_xml_hash["antigenSupportingData"]["series"][1]["seriesDose"][1]
+        one_interval_hash =
+          antigen_series_xml_hash['antigenSupportingData']['series'][1]['seriesDose'][1]
         dose_intervals = antigen_importer.create_dose_intervals(
           one_interval_hash,
           antigen_series_dose
