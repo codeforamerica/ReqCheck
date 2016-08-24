@@ -861,7 +861,7 @@ RSpec.describe TargetDose, type: :model do
       end
 
       describe '#get_preferable_vaccine_status' do
-        # This logic is defined on page 39 of the CDC logic spec
+        # This logic is defined on page 50 of the CDC logic spec
         it 'returns invalid, preferable, not_preferable for preferable false' do
           prev_status_hash = nil
           vaccine_eval_hash = {
@@ -963,6 +963,77 @@ RSpec.describe TargetDose, type: :model do
           expect(
             test_target_dose.get_preferable_vaccine_status(vaccine_eval_hash,
                                                            prev_status_hash)
+          ).to eq(expected_result)
+        end
+      end
+
+      describe '#get_allowable_vaccine_status' do
+        # This logic is defined on page 52 of the CDC logic spec
+        it 'returns invalid, allowable, not_allowable for allowable false' do
+          prev_status_hash = nil
+          vaccine_eval_hash = {
+            begin_age: true,
+            end_age: true,
+            trade_name: true,
+            volume: true
+          }
+          expected_result = { status: 'invalid',
+                              reason: 'preferable',
+                              details: 'not_preferable' }
+          expect(
+            test_target_dose.get_allowable_vaccine_status(vaccine_eval_hash,
+                                                          prev_status_hash)
+          ).to eq(expected_result)
+        end
+
+        it 'returns invalid, allowable, out_of_age_range for '\
+        'begin_age false' do
+          prev_status_hash = nil
+          vaccine_eval_hash = {
+            begin_age: false,
+            end_age: true,
+            trade_name: true,
+            volume: true
+          }
+          expected_result = { status: 'invalid',
+                              reason: 'allowable',
+                              details: 'out_of_age_range' }
+          expect(
+            test_target_dose.get_allowable_vaccine_status(vaccine_eval_hash,
+                                                          prev_status_hash)
+          ).to eq(expected_result)
+        end
+
+        it 'returns invalid, allowable, out_of_age_range for '\
+        'end_age false' do
+          prev_status_hash = nil
+          vaccine_eval_hash = {
+            begin_age: true,
+            end_age: false,
+            trade_name: true,
+            volume: true
+          }
+          expected_result = { status: 'invalid',
+                              reason: 'allowable',
+                              details: 'out_of_age_range' }
+          expect(
+            test_target_dose.get_allowable_vaccine_status(vaccine_eval_hash,
+                                                          prev_status_hash)
+          ).to eq(expected_result)
+        end
+        it 'returns valid, allowable for all true' do
+          prev_status_hash = nil
+          vaccine_eval_hash = {
+            begin_age: true,
+            end_age: true,
+            trade_name: true,
+            volume: true
+          }
+          expected_result = { status: 'valid',
+                              reason: 'allowable' }
+          expect(
+            test_target_dose.get_allowable_vaccine_status(vaccine_eval_hash,
+                                                          prev_status_hash)
           ).to eq(expected_result)
         end
       end

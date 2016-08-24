@@ -175,6 +175,21 @@ class TargetDose
     vaccine_status
   end
 
+  def get_allowable_vaccine_status(vaccine_evaluation_hash,
+                                   previous_dose_status_hash=nil)
+    vaccine_status = {}
+    if vaccine_evaluation_hash[:begin_age] == false || 
+       vaccine_evaluation_hash[:end_age] == false
+        vaccine_status[:status] = 'invalid'
+        vaccine_status[:reason] = 'allowable'
+        vaccine_status[:details] = 'out_of_age_range'
+    else
+      vaccine_status[:status] = 'valid'
+      vaccine_status[:reason] = 'allowable'
+    end
+    vaccine_status
+  end
+
   def evaluate_antigen_administered_record(antigen_administered_record)
     if !@status_hash.nil? && @status_hash[:status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
