@@ -717,7 +717,7 @@ RSpec.describe TargetDose, type: :model do
         end
       end
     end
-    describe 'implementation of preferable_vaccines logic' do
+    describe 'implementation of evaluate preferable/allowable vaccines logic' do
       let(:as_dose_vaccine) { FactoryGirl.create(:antigen_series_dose_vaccine) }
       describe '#evaluate_preferable_vaccine' do
         # This logic is defined on page 48 of the CDC logic spec to evaluate the
@@ -1037,6 +1037,215 @@ RSpec.describe TargetDose, type: :model do
           ).to eq(expected_result)
         end
       end
+    end
+    describe 'implementation of evaluate gender logic' do
+      let(:as_dose) { FactoryGirl.create(:antigen_series_dose) }
+      describe '#evaluate_gender' do
+        # This logic is defined on page 48 of the CDC logic spec to evaluate the
+        # preferable vaccines and if they have been used (or if allowable has
+        # been used)
+      end
+
+      describe '#create_gender_attributes' do
+        it 'returns a hash with required_gender key' do
+          gender_attrs = test_target_dose.create_gender_attributes(as_dose)
+          expect(gender_attrs[:required_gender]).to eq(nil)
+        end
+        it 'returns female when Female' do
+          as_dose.required_gender = 'female'
+
+          gender_attrs = test_target_dose.create_gender_attributes(as_dose)
+          expect(gender_attrs[:required_gender]).to eq('female')
+        end
+        it 'returns male when Male' do
+          as_dose.required_gender = 'male'
+
+          gender_attrs = test_target_dose.create_gender_attributes(as_dose)
+          expect(gender_attrs[:required_gender]).to eq('male')
+        end
+        it 'returns unknown when Unknown' do
+          as_dose.required_gender = 'unknown'
+
+          gender_attrs = test_target_dose.create_gender_attributes(as_dose)
+          expect(gender_attrs[:required_gender]).to eq('unknown')
+        end
+        it 'returns nil when none specified' do
+          expect(as_dose.required_gender).to eq(nil)
+
+          gender_attrs = test_target_dose.create_gender_attributes(as_dose)
+          expect(gender_attrs[:required_gender]).to eq(nil)
+        end
+      end
+
+      # describe '#evaluate_vaccine_attributes' do
+      #   let(:valid_vaccine_attrs) do
+      #     {
+      #       begin_age_date: 10.months.ago.to_date,
+      #       end_age_date: 2.months.ago.to_date,
+      #       expected_trade_name: 'test',
+      #       expected_volume: '0.5'
+      #     }
+      #   end
+      #   describe 'for each minimum age attribute' do
+      #     administered_dose_date = 6.weeks.ago.to_date
+      #     attribute_options = {
+      #       before_the_dose_date: [8.weeks.ago.to_date, true],
+      #       after_the_dose_date: [4.weeks.ago.to_date, false],
+      #       nil: [nil, nil]
+      #     }
+      #     %w(
+      #       begin_age_date
+      #     ).each do |attribute|
+      #       attribute_options.each do |descriptor, value|
+      #         descriptor_string = "returns #{value[1]} when the #{attribute}"\
+      #                             " attribute is #{descriptor}"
+      #         it descriptor_string do
+      #           valid_vaccine_attrs[attribute.to_sym] = value[0]
+      #           eval_hash = test_target_dose.evaluate_vaccine_attributes(
+      #             valid_vaccine_attrs,
+      #             administered_dose_date,
+      #             'test',
+      #             '0.5'
+      #           )
+      #           expect(eval_hash[attribute.to_sym]).to eq(value[1])
+      #         end
+      #       end
+      #     end
+      #   end
+      #   describe 'for each max age attribute' do
+      #     administered_dose_date = 6.weeks.ago.to_date
+      #     attribute_options = {
+      #       before_the_dose_date: [8.weeks.ago.to_date, false],
+      #       after_the_dose_date: [4.weeks.ago.to_date, true],
+      #       nil: [nil, nil]
+      #     }
+      #     %w(
+      #       end_age_date
+      #     ).each do |attribute|
+      #       attribute_options.each do |descriptor, value|
+      #         descriptor_string = "returns #{value[1]} when the #{attribute}"\
+      #                             " attribute is #{descriptor}"
+      #         it descriptor_string do
+      #           valid_vaccine_attrs[attribute.to_sym] = value[0]
+      #           eval_hash = test_target_dose.evaluate_vaccine_attributes(
+      #             valid_vaccine_attrs,
+      #             administered_dose_date,
+      #             'test',
+      #             '0.5'
+      #           )
+      #           expect(eval_hash[attribute.to_sym]).to eq(value[1])
+      #         end
+      #       end
+      #     end
+      #   end
+      # end
+
+      # describe '#get_gender_status' do
+      #   # This logic is defined on page 50 of the CDC logic spec
+      #   it 'returns invalid, preferable, not_preferable for preferable false' do
+      #     prev_status_hash = nil
+      #     vaccine_eval_hash = {
+      #       begin_age: true,
+      #       end_age: true,
+      #       trade_name: true,
+      #       volume: true
+      #     }
+      #     expected_result = { status: 'invalid',
+      #                         reason: 'preferable',
+      #                         details: 'not_preferable' }
+      #     expect(
+      #       test_target_dose.get_gender_status(vaccine_eval_hash,
+      #                                                      prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+
+      #   it 'returns invalid, preferable, out_of_age_range for '\
+      #   'begin_age false' do
+      #     prev_status_hash = nil
+      #     vaccine_eval_hash = {
+      #       begin_age: false,
+      #       end_age: true,
+      #       trade_name: true,
+      #       volume: true
+      #     }
+      #     expected_result = { status: 'invalid',
+      #                         reason: 'preferable',
+      #                         details: 'out_of_age_range' }
+      #     expect(
+      #       test_target_dose.get_gender_status(vaccine_eval_hash,
+      #                                                      prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+
+      #   it 'returns invalid, preferable, out_of_age_range for '\
+      #   'end_age false' do
+      #     prev_status_hash = nil
+      #     vaccine_eval_hash = {
+      #       begin_age: true,
+      #       end_age: false,
+      #       trade_name: true,
+      #       volume: true
+      #     }
+      #     expected_result = { status: 'invalid',
+      #                         reason: 'preferable',
+      #                         details: 'out_of_age_range' }
+      #     expect(
+      #       test_target_dose.get_gender_status(vaccine_eval_hash,
+      #                                                      prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+
+      #   it 'returns invalid, preferable, wrong_trade_name for '\
+      #   'trade_name false' do
+      #     prev_status_hash = nil
+      #     vaccine_eval_hash = {
+      #       begin_age: true,
+      #       end_age: true,
+      #       trade_name: false,
+      #       volume: true
+      #     }
+      #     expected_result = { status: 'invalid',
+      #                         reason: 'preferable',
+      #                         details: 'wrong_trade_name' }
+      #     expect(
+      #       test_target_dose.get_gender_status(vaccine_eval_hash,
+      #                                                      prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+
+      #   it 'returns valid, preferable, less_than_recommended_volume for ' \
+      #     'volume false' do
+      #     prev_status_hash = nil
+      #     vaccine_eval_hash = {
+      #       begin_age: true,
+      #       end_age: true,
+      #       trade_name: true,
+      #       volume: false
+      #     }
+      #     expected_result = { status: 'valid',
+      #                         reason: 'preferable',
+      #                         details: 'less_than_recommended_volume' }
+      #     expect(
+      #       test_target_dose.get_gender_status(vaccine_eval_hash,
+      #                                                      prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+      #   it 'returns valid, preferable for all true' do
+      #     prev_status_hash = nil
+      #     vaccine_eval_hash = {
+      #       begin_age: true,
+      #       end_age: true,
+      #       trade_name: true,
+      #       volume: true
+      #     }
+      #     expected_result = { status: 'valid',
+      #                         reason: 'preferable' }
+      #     expect(
+      #       test_target_dose.get_gender_status(vaccine_eval_hash,
+      #                                                      prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+      # end
     end
   end
 end
