@@ -77,9 +77,8 @@ RSpec.describe TargetDose, type: :model do
     describe 'target dose attributes from the antigen_series_dose' do
       dose_attributes = %w(
         dose_number absolute_min_age min_age earliest_recommended_age
-        latest_recommended_age max_age allowable_interval_type
-        allowable_interval_absolute_min required_gender recurring_dose
-        intervals
+        latest_recommended_age max_age required_gender recurring_dose
+        intervals dose_vaccines preferable_vaccines allowable_vaccines
       )
       dose_attributes.each do |dose_attribute|
         it "has the attribute #{dose_attribute}" do
@@ -97,7 +96,7 @@ RSpec.describe TargetDose, type: :model do
     describe '#create_age_date_attributes' do
       %w(absolute_min_age_date min_age_date earliest_recommended_age_date
          latest_recommended_age_date max_age_date).each do |age_attribute|
-        it "sets the target_dose attribute #{age_attribute}" do
+        it "creates a hash with the attribute #{age_attribute}" do
           age_attrs = test_target_dose.create_age_date_attributes(
             as_dose,
             test_patient.dob
@@ -196,18 +195,24 @@ RSpec.describe TargetDose, type: :model do
         as_dose_w_cond_skip = AntigenSeriesDose
                               .joins(:conditional_skip)
                               .joins(:antigen_series)
-                              .joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"')
-                              .where(antigens: { target_disease: 'polio' })
-                              .where('conditional_skips.antigen_series_dose_id IS NOT NULL')
-                              .first
+                              .joins(
+                                'INNER JOIN "antigens" ON "antigens"."id"'\
+                                ' = "antigen_series"."antigen_id"'
+                              ).where(antigens: { target_disease: 'polio' })
+                              .where(
+                                'conditional_skips.antigen_series_dose_id'\
+                                ' IS NOT NULL'
+                              ).first
         TargetDose.new(antigen_series_dose: as_dose_w_cond_skip,
                        patient_dob: test_patient.dob)
       end
       let(:target_dose_no_cond_skip) do
         as_dose_no_cond_skip = AntigenSeriesDose
                                .joins(:antigen_series)
-                               .joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"')
-                               .where(antigens: { target_disease: 'polio' })
+                               .joins(
+                                 'INNER JOIN "antigens" ON "antigens"."id" = '\
+                                 '"antigen_series"."antigen_id"'
+                               ).where(antigens: { target_disease: 'polio' })
                                .first
         TargetDose.new(antigen_series_dose: as_dose_no_cond_skip,
                        patient_dob: test_patient.dob)
@@ -242,7 +247,7 @@ RSpec.describe TargetDose, type: :model do
         eval_hash = test_target_dose.evaluate_dose_age(valid_age_attrs,
                                                        dose_date)
         expect(eval_hash.class).to eq(Hash)
-        eval_hash.each do |key, value|
+        eval_hash.each do |key, _value|
           expect(key.to_s.include?('_date')).to eq(true)
         end
       end
@@ -505,7 +510,7 @@ RSpec.describe TargetDose, type: :model do
           interval_absolute_min_date interval_min_date
           interval_earliest_recommended_date interval_latest_recommended_date
         ).each do |interval_attribute|
-          it "sets the target_dose attribute #{interval_attribute}" do
+          it "creates a hash with the attribute #{interval_attribute}" do
             interval_attrs = test_target_dose.create_interval_date_attributes(
               test_interval,
               test_aars[0].date_administered
@@ -553,7 +558,7 @@ RSpec.describe TargetDose, type: :model do
             interval_absolute_min_date: 8.weeks.ago.to_date,
             interval_min_date: 6.weeks.ago.to_date,
             interval_earliest_recommended_date: 5.weeks.ago.to_date,
-            interval_latest_recommended_date: 2.weeks.ago.to_date,
+            interval_latest_recommended_date: 2.weeks.ago.to_date
           }
         end
         it 'returns a hash with \'date\' in the key names' do
@@ -563,7 +568,7 @@ RSpec.describe TargetDose, type: :model do
             second_dose_date
           )
           expect(interval_eval.class).to eq(Hash)
-          interval_eval.each do |key, value|
+          interval_eval.each do |key, _value|
             expect(key.to_s.include?('_date')).to eq(true)
           end
         end
@@ -679,7 +684,8 @@ RSpec.describe TargetDose, type: :model do
                                                  prev_status_hash)
           ).to eq(expected_result)
         end
-        it 'returns valid, grace_period for before interval_min yet first dose' do
+        it 'returns valid, grace_period for before interval_min ' \
+          'yet first dose' do
           prev_status_hash = nil
           interval_eval_hash = {
             interval_absolute_min: true,
@@ -710,6 +716,241 @@ RSpec.describe TargetDose, type: :model do
           ).to eq(expected_result)
         end
       end
+    end
+    describe 'implementation of preferable_vaccines logic' do
+      let(:as_dose_vaccine) { FactoryGirl.create(:antigen_series_dose_vaccine) }
+      describe '#evaluate_preferable_vaccine' do
+        # This logic is defined on page 48 of the CDC logic spec to evaluate the
+        # preferable vaccines and if they have been used (or if allowable has
+        # been used)
+      end
+
+      describe '#create_vaccine_attributes' do
+        it 'returns a hash with 4 attributes' do
+          dob = 1.year.ago.to_date
+          as_dose_vaccine.begin_age = '6 weeks'
+          expected_begin_age = dob + 6.weeks
+          as_dose_vaccine.end_age = '5 years'
+          expected_end_age = dob + 5.years
+
+          as_dose_vaccine.trade_name = 'test'
+          expected_trade_name = 'test'
+          as_dose_vaccine.volume = '0.5'
+          expected_volume = '0.5'
+          vaccine_attrs = test_target_dose.create_vaccine_attributes(
+            as_dose_vaccine,
+            dob
+          )
+          expect(vaccine_attrs[:expected_trade_name]).to eq(expected_trade_name)
+          expect(vaccine_attrs[:expected_volume]).to eq(expected_volume)
+          expect(vaccine_attrs[:begin_age_date])
+            .to eq(expected_begin_age)
+          expect(vaccine_attrs[:end_age_date])
+            .to eq(expected_end_age)
+        end
+        %w(
+          begin_age_date end_age_date
+        ).each do |vaccine_attr|
+          it "creates a hash with the attribute #{vaccine_attr}" do
+            dob = 2.years.ago.to_date
+            vaccine_attrs = test_target_dose.create_vaccine_attributes(
+              as_dose_vaccine,
+              dob
+            )
+            abr_attribute = vaccine_attr.split('_')[0...-1].join('_')
+            vaccine_time_string = as_dose_vaccine.send(abr_attribute)
+            expect(vaccine_time_string.nil?).to be(false)
+            vaccine_age_date = test_target_dose.create_patient_age_date(
+              vaccine_time_string, dob
+            )
+            expect(vaccine_attrs[vaccine_attr.to_sym])
+              .to eq(vaccine_age_date)
+            expect(vaccine_attrs[vaccine_attr.to_sym].class.name)
+              .to eq('Date')
+          end
+        end
+        describe 'default values' do
+          # As described on page 38 on CDC logic specs
+          # 'http://www.cdc.gov/vaccines/programs/iis/interop-proj/'\
+          #   'downloads/logic-spec-acip-rec.pdf'
+          it 'sets default value for begin_age_date' do
+            dob = 2.years.ago.to_date
+            as_dose_vaccine.begin_age = nil
+            vaccine_attrs = test_target_dose.create_vaccine_attributes(
+              as_dose_vaccine,
+              dob
+            )
+            expect(
+              vaccine_attrs[:begin_age_date]
+            ).to eq('01/01/1900'.to_date)
+          end
+          it 'sets default value for end_age_date' do
+            dob = 2.years.ago.to_date
+            as_dose_vaccine.end_age = nil
+            vaccine_attrs = test_target_dose.create_vaccine_attributes(
+              as_dose_vaccine,
+              dob
+            )
+            expect(vaccine_attrs[:end_age_date])
+              .to eq('12/31/2999'.to_date)
+          end
+        end
+      end
+
+      describe '#evaluate_vaccine_attributes' do
+        let(:valid_vaccine_attrs) do
+          {
+            begin_age_date: 10.months.ago.to_date,
+            end_age_date: 2.months.ago.to_date,
+            expected_trade_name: 'test',
+            expected_volume: '0.5'
+          }
+        end
+        describe 'for each minimum age attribute' do
+          administered_dose_date = 6.weeks.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [8.weeks.ago.to_date, true],
+            after_the_dose_date: [4.weeks.ago.to_date, false],
+            nil: [nil, nil]
+          }
+          %w(
+            begin_age_date
+          ).each do |attribute|
+            attribute_options.each do |descriptor, value|
+              descriptor_string = "returns #{value[1]} when the #{attribute}"\
+                                  " attribute is #{descriptor}"
+              it descriptor_string do
+                valid_vaccine_attrs[attribute.to_sym] = value[0]
+                eval_hash = test_target_dose.evaluate_vaccine_attributes(
+                  valid_vaccine_attrs,
+                  administered_dose_date,
+                  'test',
+                  '0.5'
+                )
+                expect(eval_hash[attribute.to_sym]).to eq(value[1])
+              end
+            end
+          end
+        end
+        describe 'for each max age attribute' do
+          administered_dose_date = 6.weeks.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [8.weeks.ago.to_date, false],
+            after_the_dose_date: [4.weeks.ago.to_date, true],
+            nil: [nil, nil]
+          }
+          %w(
+            end_age_date
+          ).each do |attribute|
+            attribute_options.each do |descriptor, value|
+              descriptor_string = "returns #{value[1]} when the #{attribute}"\
+                                  " attribute is #{descriptor}"
+              it descriptor_string do
+                valid_vaccine_attrs[attribute.to_sym] = value[0]
+                eval_hash = test_target_dose.evaluate_vaccine_attributes(
+                  valid_vaccine_attrs,
+                  administered_dose_date,
+                  'test',
+                  '0.5'
+                )
+                expect(eval_hash[attribute.to_sym]).to eq(value[1])
+              end
+            end
+          end
+        end
+      end
+
+      # describe '#get_interval_status' do
+      #   # This logic is defined on page 39 of the CDC logic spec
+      #   it 'returns invalid, too_soon for interval_absolute_min_date false' do
+      #     prev_status_hash = nil
+      #     interval_eval_hash = {
+      #       interval_absolute_min: false,
+      #       interval_min: false,
+      #       interval_earliest_recommended: false,
+      #       interval_latest_recommended: true
+      #     }
+      #     expected_result = { status: 'invalid',
+      #                         reason: 'interval',
+      #                         details: 'too_soon' }
+      #     expect(
+      #       test_target_dose.get_interval_status(interval_eval_hash,
+      #                                            prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+
+      #   it 'returns invalid, too_soon for before interval_min and ' \
+      #     'previous invalid' do
+      #     prev_status_hash = {
+      #       status: 'invalid',
+      #       reason: 'interval',
+      #       details: 'too_soon'
+      #     }
+      #     interval_eval_hash = {
+      #       interval_absolute_min: true,
+      #       interval_min: false,
+      #       interval_earliest_recommended: false,
+      #       interval_latest_recommended: true
+      #     }
+      #     expected_result = { status: 'invalid',
+      #                         reason: 'interval',
+      #                         details: 'too_soon' }
+      #     expect(
+      #       test_target_dose.get_interval_status(interval_eval_hash,
+      #                                            prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+
+      #   it 'returns valid, grace_period for before interval_min ' \
+      #     'and previous valid' do
+      #     prev_status_hash = {
+      #       status: 'valid',
+      #       reason: 'grace_period'
+      #     }
+      #     interval_eval_hash = {
+      #       interval_absolute_min: true,
+      #       interval_min: false,
+      #       interval_earliest_recommended: false,
+      #       interval_latest_recommended: true
+      #     }
+      #     expected_result = { status: 'valid',
+      #                         reason: 'grace_period' }
+      #     expect(
+      #       test_target_dose.get_interval_status(interval_eval_hash,
+      #                                            prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+      #   it 'returns valid, grace_period for before interval_min yet first dose' do
+      #     prev_status_hash = nil
+      #     interval_eval_hash = {
+      #       interval_absolute_min: true,
+      #       interval_min: false,
+      #       interval_earliest_recommended: false,
+      #       interval_latest_recommended: true
+      #     }
+      #     expected_result = { status: 'valid',
+      #                         reason: 'grace_period' }
+      #     expect(
+      #       test_target_dose.get_interval_status(interval_eval_hash,
+      #                                            prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+      #   it 'returns valid for after interval_min' do
+      #     prev_status_hash = nil
+      #     interval_eval_hash = {
+      #       interval_absolute_min: true,
+      #       interval_min: true,
+      #       interval_earliest_recommended: false,
+      #       interval_latest_recommended: true
+      #     }
+      #     expected_result = { status: 'valid',
+      #                         reason: 'on_schedule' }
+      #     expect(
+      #       test_target_dose.get_interval_status(interval_eval_hash,
+      #                                            prev_status_hash)
+      #     ).to eq(expected_result)
+      #   end
+      # end
     end
   end
 end

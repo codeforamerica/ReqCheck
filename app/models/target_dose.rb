@@ -15,8 +15,9 @@ class TargetDose
 
   [
     'dose_number', 'absolute_min_age', 'min_age', 'earliest_recommended_age',
-    'latest_recommended_age', 'max_age', 'allowable_interval_type', 'intervals',
-    'allowable_interval_absolute_min', 'required_gender', 'recurring_dose'
+    'latest_recommended_age', 'max_age', 'intervals', 'required_gender',
+    'recurring_dose', 'dose_vaccines', 'preferable_vaccines',
+    'allowable_vaccines'
   ].each do |action|
     define_method(action) do
       return nil if antigen_series_dose.nil?
@@ -34,7 +35,7 @@ class TargetDose
     return_hash
   end
 
-  def create_age_date_attributes(antigen_series_dose, dob)
+  def create_age_date_attributes(evaluated_antigen_series_dose, dob)
     age_attrs = {}
     default_values = {
       max_age_date: '12/31/2999'.to_date,
@@ -46,7 +47,7 @@ class TargetDose
       'latest_recommended_age', 'max_age'
     ].each do |action|
       date_action  = action + '_date'
-      age_string   = antigen_series_dose.read_attribute(action)
+      age_string   = evaluated_antigen_series_dose.read_attribute(action)
       patient_date = create_patient_age_date(age_string, dob)
       age_attrs[date_action.to_sym] = patient_date
     end
@@ -237,6 +238,66 @@ class TargetDose
     all_intervals = self.intervals
     interval = all_intervals.first
     # interval.
+
+  end
+
+  def create_vaccine_attributes(antigen_series_dose_vaccine, dob)
+    vaccine_attrs = {}
+    default_values = {
+      begin_age_date: '01/01/1900'.to_date,
+      end_age_date: '12/31/2999'.to_date
+    }
+    %w(begin_age end_age).each do |action|
+      date_action  = action + '_date'
+      age_string   = antigen_series_dose_vaccine.read_attribute(action)
+      patient_date = create_patient_age_date(age_string, dob)
+      vaccine_attrs[date_action.to_sym] = patient_date
+    end
+    vaccine_attrs[:expected_trade_name] = antigen_series_dose_vaccine.trade_name
+    vaccine_attrs[:expected_volume] = antigen_series_dose_vaccine.volume
+
+    set_default_values(vaccine_attrs, default_values)
+  end
+
+  def evaluate_vaccine_attributes(vaccine_attrs, date_of_dose,
+                                  trade_name, dose_volume='0')
+    dose_volume = '0' if dose_volume == '' || dose_volume.nil?
+    evaluated_hash = {}
+    %w(
+      begin_age_date
+      end_age_date
+    ).each do |vaccine_attr|
+      result = nil
+      if !vaccine_attrs[vaccine_attr.to_sym].nil?
+        if vaccine_attr == 'end_age_date'
+          result = validate_date_equal_or_before(
+                     vaccine_attrs[vaccine_attr.to_sym],
+                     date_of_dose
+                   )
+        else
+          result = validate_date_equal_or_after(
+                     vaccine_attrs[vaccine_attr.to_sym],
+                     date_of_dose
+                   )
+        end
+      end
+      result_attr = vaccine_attr.split('_')[0..-1].join('_')
+      evaluated_hash[result_attr.to_sym] = result
+    end
+    evaluated_hash[:trade_name] =
+      vaccine_attrs[:expected_trade_name] == trade_name
+    evaluated_hash[:volume] =
+      vaccine_attrs[:expected_volume].to_f <= dose_volume.to_f
+    evaluated_hash
+  end
+
+  def evaluate_preferable_vaccine(antigen_administered_record)
+    preferable_vaccine_status_hash = {}
+    preferable_cvx = self.preferable_vaccines.map(&:cvx_code)
+    if !preferable_cvx.include?(antigen_administered_record.cvx_code)
+      preferable_vaccine_status_hash[:preferable] = 'No'
+      preferable_vaccine_status_hash[:reason] = 'not_included'
+    end
 
   end
 

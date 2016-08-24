@@ -5,13 +5,10 @@ require_relative 'support/time_help'
 
 FactoryGirl.define do
   factory :vaccine_dose_evaluator do
-    
   end
   factory :antigen_evaluator do
-    
   end
   extend TimeHelp
-
 
   factory :interval do
     interval_type 'Previous'
@@ -42,7 +39,6 @@ FactoryGirl.define do
       antigen_importer.import_antigen_xml_files('spec/support/xml')
     end
   end
-
 
   factory :conditional_skip_set_condition do
     condition_id 1
@@ -88,7 +84,9 @@ FactoryGirl.define do
     cvx_code 10
     preferable true
     begin_age '6 weeks'
+    end_age '5 years'
     volume '0.5'
+    trade_name 'test'
     forecast_vaccine_type false
   end
 
@@ -114,7 +112,7 @@ FactoryGirl.define do
     earliest_recommended_age '4 months'
     latest_recommended_age '5 months + 4 weeks'
     max_age '18 years'
-    
+
     # This will probably fail - need to update as its one to many (or many to many)
     association :prefered_vaccine, factory: :antigen_series_dose_vaccine
     association :iinterval, factory: :interval

@@ -63,4 +63,12 @@ class AntigenAdministeredRecord
       lot_expiration_date: self.expiration_date
     }
   end
+
+  def trade_name
+    self.full_name
+  end
+
+  def volume
+    self.dosage
+  end
 end

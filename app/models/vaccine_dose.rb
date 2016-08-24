@@ -5,7 +5,7 @@ class VaccineDose < ActiveRecord::Base
   include TimeCalc
 
   def patient_age_at_vaccine_dose
-    unless self.patient.nil?
+    if !self.patient.nil?
       detailed_date_diff(self.patient.dob, self.date_administered)
     else
       'N/A'
