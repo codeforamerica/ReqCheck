@@ -858,6 +858,70 @@ RSpec.describe TargetDose, type: :model do
             end
           end
         end
+        describe 'for the trade_name attribute' do
+          it 'returns true when dose trade_name equals expected_trade_name' do
+            valid_vaccine_attrs[:expected_trade_name] = 'tester'
+            eval_hash = test_target_dose.evaluate_vaccine_attributes(
+              valid_vaccine_attrs,
+              Date.today,
+              'tester',
+              '0.5'
+            )
+            expect(eval_hash[:trade_name]).to eq(true)
+          end
+          it 'returns false when dose trade_name equals expected_trade_name' do
+            valid_vaccine_attrs[:expected_trade_name] = 'tester'
+            eval_hash = test_target_dose.evaluate_vaccine_attributes(
+              valid_vaccine_attrs,
+              Date.today,
+              'NOT TESTER',
+              '0.5'
+            )
+            expect(eval_hash[:trade_name]).to eq(false)
+          end
+        end
+        describe 'for the volume attribute' do
+          it 'returns true when dose volume is equal to expected_volume' do
+            valid_vaccine_attrs[:expected_volume] = '0.5'
+            eval_hash = test_target_dose.evaluate_vaccine_attributes(
+              valid_vaccine_attrs,
+              Date.today,
+              'tester',
+              '0.5'
+            )
+            expect(eval_hash[:volume]).to eq(true)
+          end
+          it 'returns true when dose volume is greater than expected_volume' do
+            valid_vaccine_attrs[:expected_volume] = '0.5'
+            eval_hash = test_target_dose.evaluate_vaccine_attributes(
+              valid_vaccine_attrs,
+              Date.today,
+              'tester',
+              '0.9'
+            )
+            expect(eval_hash[:volume]).to eq(true)
+          end
+          it 'returns false when dose volume is less than expected_volume' do
+            valid_vaccine_attrs[:expected_volume] = '0.5'
+            eval_hash = test_target_dose.evaluate_vaccine_attributes(
+              valid_vaccine_attrs,
+              Date.today,
+              'tester',
+              '0.3'
+            )
+            expect(eval_hash[:volume]).to eq(false)
+          end
+          it 'returns false when dose volume is nil' do
+            valid_vaccine_attrs[:expected_volume] = '0.5'
+            eval_hash = test_target_dose.evaluate_vaccine_attributes(
+              valid_vaccine_attrs,
+              Date.today,
+              'tester',
+              nil
+            )
+            expect(eval_hash[:volume]).to eq(false)
+          end
+        end
       end
 
       describe '#get_preferable_vaccine_status' do
