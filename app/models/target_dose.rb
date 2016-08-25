@@ -330,25 +330,16 @@ class TargetDose
 
   def evaluate_gender_attributes(gender_attrs, patient_gender)
     evaluated_hash = {}
-    %w(
-      required_gender
-    ).each do |interval_attr|
-      result = nil
-      if !interval_date_attrs[interval_attr.to_sym].nil?
-        if interval_attr == 'interval_latest_recommended_date'
-          result = validate_date_equal_or_before(
-                     interval_date_attrs[interval_attr.to_sym],
-                     date_of_second_dose
-                   )
-        else
-          result = validate_date_equal_or_after(
-                     interval_date_attrs[interval_attr.to_sym],
-                     date_of_second_dose
-                   )
-        end
-      end
-      result_attr = interval_attr.split('_')[0..-1].join('_')
-      evaluated_hash[result_attr.to_sym] = result
+    if patient_gender.nil?
+      patient_gender = 'unknown'
+    end
+    required_gender = gender_attrs[:required_gender]
+
+    if gender_attrs[:required_gender] == [] ||
+      required_gender.include?(patient_gender)
+        evaluated_hash[:required_gender_valid] = true
+    else
+      evaluated_hash[:required_gender_valid] = false
     end
     evaluated_hash
   end
