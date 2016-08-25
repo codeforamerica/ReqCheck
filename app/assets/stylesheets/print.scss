@@ -1,5 +1,11 @@
 $table-borders:1px solid black;
 
+* {
+	font-family: "dBook An­ti­qua", "Cal­isto MT", serif!important;
+	font-size: 11pt!important;
+	line-height: 1.3;
+}
+
 .top-bar,footer,.vaccine-record a {
 	display:none;
 }
@@ -36,17 +42,13 @@ thead tr{border-bottom:$table-borders;}
 	flex:100%;
 }
 
- table { page-break-after:auto; }
- tr    { page-break-inside:avoid; page-break-after:auto; }
- td    { page-break-inside:avoid; page-break-after:auto; }
+ table { page-break-inside:avoid; }
+ tr    { page-break-after:avoid;}
+ /*td    { page-break-inside:avoid; page-break-after:auto; }*/
  thead { display:table-header-group; }
+ thead th, tbody td {padding:0.4rem 0.625rem;}
 
  .card {padding:0; margin:0;}
 
-body,p,ul,td,h3 {
-	font-family: Georgia, "Times New Roman", Times, serif!important;
-	font-size: 12pt;
-	line-height: 1.3;
-	h3 {font-size: 16pt;}
-}
+
 
