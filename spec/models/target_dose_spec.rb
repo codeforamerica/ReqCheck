@@ -1242,112 +1242,24 @@ RSpec.describe TargetDose, type: :model do
         end
       end
 
-      # describe '#get_gender_status' do
-      #   # This logic is defined on page 50 of the CDC logic spec
-      #   it 'returns invalid, preferable, not_preferable for preferable false' do
-      #     prev_status_hash = nil
-      #     vaccine_eval_hash = {
-      #       begin_age: true,
-      #       end_age: true,
-      #       trade_name: true,
-      #       volume: true
-      #     }
-      #     expected_result = { status: 'invalid',
-      #                         reason: 'preferable',
-      #                         details: 'not_preferable' }
-      #     expect(
-      #       test_target_dose.get_gender_status(vaccine_eval_hash,
-      #                                                      prev_status_hash)
-      #     ).to eq(expected_result)
-      #   end
+      describe '#get_gender_status' do
+        # This logic is defined on page 53 of the CDC logic spec
+        it 'returns valid, gender, for required_gender_valid true' do
+          gender_eval_hash = { required_gender_valid: true }
+          expected_result = { status: 'valid',
+                              reason: 'gender' }
+          expect(test_target_dose.get_gender_status(gender_eval_hash))
+            .to eq(expected_result)
+        end
 
-      #   it 'returns invalid, preferable, out_of_age_range for '\
-      #   'begin_age false' do
-      #     prev_status_hash = nil
-      #     vaccine_eval_hash = {
-      #       begin_age: false,
-      #       end_age: true,
-      #       trade_name: true,
-      #       volume: true
-      #     }
-      #     expected_result = { status: 'invalid',
-      #                         reason: 'preferable',
-      #                         details: 'out_of_age_range' }
-      #     expect(
-      #       test_target_dose.get_gender_status(vaccine_eval_hash,
-      #                                                      prev_status_hash)
-      #     ).to eq(expected_result)
-      #   end
-
-      #   it 'returns invalid, preferable, out_of_age_range for '\
-      #   'end_age false' do
-      #     prev_status_hash = nil
-      #     vaccine_eval_hash = {
-      #       begin_age: true,
-      #       end_age: false,
-      #       trade_name: true,
-      #       volume: true
-      #     }
-      #     expected_result = { status: 'invalid',
-      #                         reason: 'preferable',
-      #                         details: 'out_of_age_range' }
-      #     expect(
-      #       test_target_dose.get_gender_status(vaccine_eval_hash,
-      #                                                      prev_status_hash)
-      #     ).to eq(expected_result)
-      #   end
-
-      #   it 'returns invalid, preferable, wrong_trade_name for '\
-      #   'trade_name false' do
-      #     prev_status_hash = nil
-      #     vaccine_eval_hash = {
-      #       begin_age: true,
-      #       end_age: true,
-      #       trade_name: false,
-      #       volume: true
-      #     }
-      #     expected_result = { status: 'invalid',
-      #                         reason: 'preferable',
-      #                         details: 'wrong_trade_name' }
-      #     expect(
-      #       test_target_dose.get_gender_status(vaccine_eval_hash,
-      #                                                      prev_status_hash)
-      #     ).to eq(expected_result)
-      #   end
-
-      #   it 'returns valid, preferable, less_than_recommended_volume for ' \
-      #     'volume false' do
-      #     prev_status_hash = nil
-      #     vaccine_eval_hash = {
-      #       begin_age: true,
-      #       end_age: true,
-      #       trade_name: true,
-      #       volume: false
-      #     }
-      #     expected_result = { status: 'valid',
-      #                         reason: 'preferable',
-      #                         details: 'less_than_recommended_volume' }
-      #     expect(
-      #       test_target_dose.get_gender_status(vaccine_eval_hash,
-      #                                                      prev_status_hash)
-      #     ).to eq(expected_result)
-      #   end
-      #   it 'returns valid, preferable for all true' do
-      #     prev_status_hash = nil
-      #     vaccine_eval_hash = {
-      #       begin_age: true,
-      #       end_age: true,
-      #       trade_name: true,
-      #       volume: true
-      #     }
-      #     expected_result = { status: 'valid',
-      #                         reason: 'preferable' }
-      #     expect(
-      #       test_target_dose.get_gender_status(vaccine_eval_hash,
-      #                                                      prev_status_hash)
-      #     ).to eq(expected_result)
-      #   end
-      # end
+        it 'returns invalid, gender, for required_gender_valid true' do
+          gender_eval_hash = { required_gender_valid: false }
+          expected_result = { status: 'invalid',
+                              reason: 'gender' }
+          expect(test_target_dose.get_gender_status(gender_eval_hash))
+            .to eq(expected_result)
+        end
+      end
     end
   end
 end

@@ -219,6 +219,18 @@ class TargetDose
     vaccine_status
   end
 
+  def get_gender_status(gender_evaluation_hash)
+    gender_status = {}
+    gender_status[:reason] = 'gender'
+
+    if gender_evaluation_hash[:required_gender_valid] == true
+      gender_status[:status] = 'valid'
+    else
+      gender_status[:status] = 'invalid'
+    end
+    gender_status
+  end
+
   def evaluate_antigen_administered_record(antigen_administered_record)
     if !@status_hash.nil? && @status_hash[:status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
