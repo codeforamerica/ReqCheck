@@ -35,6 +35,64 @@ class TargetDose
     return_hash
   end
 
+  def create_calculated_dates(time_attributes,
+                              read_object,
+                              start_date,
+                              result_hash={})
+    time_attributes.each do |atrribute|
+      date_atrribute  = atrribute + '_date'
+      time_string     = read_object.read_attribute(atrribute)
+      calculated_date = create_patient_age_date(time_string, start_date)
+      result_hash[date_atrribute.to_sym] = calculated_date
+    end
+    result_hash
+  end
+
+    # Date Administered 
+    # Patient Immunization History Administered - Dose Count 
+  def create_conditional_skip_set_condition_attributes(
+    condition,
+    previous_dose_date,
+    dob
+  )
+    condition_attrs = {}
+    condition_attrs[:assessment_date] = Date.today.to_date
+    condition_attrs[:condition_id]    = condition.condition_id
+    condition_attrs[:condition_type]  = condition.condition_type
+
+    time_attributes = %w(begin_age end_age)
+    condition_attrs = create_calculated_dates(time_attributes, condition,
+                                              dob, condition_attrs)
+    
+    expected_interval_date = create_patient_age_date(condition.interval,
+                                                     previous_dose_date)
+    condition_attrs[:interval_date] = expected_interval_date
+    
+    ['start_date', 'end_date'].each do |attribute|
+      condition_attribute = condition.read_attribute(attribute)
+      if !condition_attribute.nil? && condition_attribute != ''
+        condition_attrs[attribute.to_sym] = Date.strptime(condition_attribute,
+                                                          "%Y%m%d")
+      else
+        condition_attrs[attribute.to_sym] = nil
+      end
+    end
+    condition_attrs[:dose_count] = if condition.dose_count != '' || 
+                                      !condition.dose_count.nil?
+                                        condition.dose_count.to_i
+                                   else
+                                     nil
+                                   end
+    condition_attrs[:dose_type]        = condition.dose_type 
+    condition_attrs[:dose_count_logic] = condition.dose_count_logic 
+    condition_attrs[:vaccine_types]    = if !condition.vaccine_types.nil?
+                                           condition.vaccine_types.split(";")
+                                         else
+                                           []
+                                         end
+    condition_attrs
+  end
+
   def create_age_date_attributes(evaluation_antigen_series_dose, dob)
     age_attrs = {}
     default_values = {
@@ -54,7 +112,7 @@ class TargetDose
     set_default_values(age_attrs, default_values)
   end
 
-  def create_interval_date_attributes(interval_object, original_date)
+  def create_interval_date_attributes(interval_object, previous_dose_date)
     interval_attrs = {}
     default_values = {
       interval_absolute_min_date: '01/01/1900'.to_date,
@@ -66,7 +124,7 @@ class TargetDose
       date_action                = action + '_date'
       time_differential_string   = interval_object.read_attribute(action)
       interval_date = create_patient_age_date(time_differential_string,
-                                              original_date)
+                                              previous_dose_date)
       interval_attrs[date_action.to_sym] = interval_date
     end
     set_default_values(interval_attrs, default_values)
@@ -374,6 +432,20 @@ class TargetDose
       preferable_vaccine_status_hash[:preferable] = 'No'
       preferable_vaccine_status_hash[:reason] = 'not_included'
     end
+  end
+
+
+  def satisfy_target_dose
+    # Evaluate Conditional Skip
+    # Evaluate Age
+    # Evaluate Interval
+    # Evaluate Allowable Interval
+    # Evaluate Live Virus Conflict
+    # Evaluate Preferable Vaccine
+    # Evaluate Allowable Vaccine
+    # Evaluate Gender
+    # Satisfy Target Dose
+
   end
 
   # def evaluate_vs_antigen_administered_record(antigen_administered_record)

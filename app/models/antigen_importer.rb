@@ -285,7 +285,7 @@ class AntigenImporter
         condition_type: condition_hash['conditionType'],
         start_date: condition_hash['startDate'],
         end_date: condition_hash['endDate'],
-        start_age: condition_hash['beginAge'],
+        begin_age: condition_hash['beginAge'],
         end_age: condition_hash['endAge'],
         interval: condition_hash['interval'],
         dose_count: condition_hash['doseCount'],

@@ -57,8 +57,8 @@ FactoryGirl.define do
     condition_type 'Age'
 
     after(:create) do |condition|
-      if condition.condition_type == 'Age' && condition.start_age.nil?
-        condition.start_age = '4 years - 4 days'
+      if condition.condition_type == 'Age' && condition.begin_age.nil?
+        condition.begin_age = '4 years - 4 days'
       elsif condition.condition_type == 'Interval' && condition.interval.nil?
         condition.interval = '6 months - 4 days'
       end
@@ -67,8 +67,8 @@ FactoryGirl.define do
 
   factory :conditional_skip_set do
     set_id 1
-    set_description 'Dose is not required for those 4 years or older when the interval from the '\
-    'last dose is 6 months'
+    set_description('Dose is not required for those 4 years or older when the '\
+                    'interval from the last dose is 6 months')
     condition_logic 'AND'
 
     after(:create) do |cond_skip_set|
