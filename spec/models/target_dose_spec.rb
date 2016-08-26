@@ -93,6 +93,18 @@ RSpec.describe TargetDose, type: :model do
       end
     end
 
+    describe '#create_conditional_skip_set_condition_attributes' do
+      let(:condition_object) do
+        FactoryGirl.create(:conditional_skip_set_condition)
+      end
+      it 'creates a begin_age_date attribute' do
+        # conditional_object.begin_age
+        raise
+      end
+    end
+
+
+
     describe '#create_age_date_attributes' do
       %w(absolute_min_age_date min_age_date earliest_recommended_age_date
          latest_recommended_age_date max_age_date).each do |age_attribute|
@@ -1259,6 +1271,10 @@ RSpec.describe TargetDose, type: :model do
           expect(test_target_dose.get_gender_status(gender_eval_hash))
             .to eq(expected_result)
         end
+      end
+    end
+    describe 'satisfy target dose implementation logic' do
+      describe '#satisfy_target_dose' do
       end
     end
   end
