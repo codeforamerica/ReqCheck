@@ -97,13 +97,169 @@ RSpec.describe TargetDose, type: :model do
       let(:condition_object) do
         FactoryGirl.create(:conditional_skip_set_condition)
       end
+      let(:dob) { 10.years.ago.to_date }
+      let(:prev_dose_date) { 4.months.ago.to_date }
       it 'creates a begin_age_date attribute' do
-        # conditional_object.begin_age
-        raise
+        condition_object.begin_age = '3 years - 4 days'
+        condition_object.condition_type = 'Age'
+        dob            = 5.years.ago.to_date
+        expected_date  = dob + 3.years - 4.days
+        prev_dose_date = 1.year.ago.to_date
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+
+        expect(eval_hash[:begin_age_date]).to eq(expected_date)
+        expect(eval_hash[:condition_type]).to eq('Age')
+      end
+      it 'creates a end_age_date attribute' do
+        condition_object.end_age = '6 years'
+        condition_object.condition_type = 'Age'
+        dob            = 10.years.ago.to_date
+        expected_date  = dob + 6.years
+        prev_dose_date = 7.year.ago.to_date
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+
+        expect(eval_hash[:end_age_date]).to eq(expected_date)
+        expect(eval_hash[:condition_type]).to eq('Age')
+      end
+      it 'creates a start_date attribute' do
+        condition_object.start_date = '20150701'
+        condition_object.condition_type = 'Vaccine Count by Date'
+        expected_date = Date.strptime('20150701', '%Y%m%d')
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+
+        expect(eval_hash[:start_date]).to eq(expected_date)
+        expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      end
+      it 'creates a end_date attribute' do
+        condition_object.end_date = '20160630'
+        condition_object.condition_type = 'Vaccine Count by Date'
+        expected_date = Date.strptime('20160630', '%Y%m%d')
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+
+        expect(eval_hash[:end_date]).to eq(expected_date)
+        expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      end
+      it 'creates an assessment_date attribute equal to current date' do
+        expected_date = Date.today
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+
+        expect(eval_hash[:assessment_date]).to eq(expected_date)
+      end
+      it 'creates an condition_id and condition_type attribute' do
+        expect(condition_object.condition_type).to eq('Age')
+        expect(condition_object.condition_id).to eq(1)
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+
+        expect(eval_hash[:condition_type]).to eq('Age')
+        expect(eval_hash[:condition_id]).to eq(1)
+      end
+      it 'creates dose_count attribute as an integer' do
+        condition_object.dose_count = '5'
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+        expect(eval_hash[:dose_count]).to eq(5)
+      end
+      it 'creates dose_count attribute with nil for nil' do
+        expect(condition_object.dose_count).to eq(nil)
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+        expect(eval_hash[:dose_count]).to eq(nil)
+      end
+      it 'creates dose_type attribute' do
+        condition_object.dose_type = 'Total'
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+        expect(eval_hash[:dose_type]).to eq('Total')
+      end
+      it 'creates dose_count_logic attribute' do
+        condition_object.dose_count_logic = 'greater than'
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+        expect(eval_hash[:dose_count_logic]).to eq('greater than')
+      end
+      it 'creates dose_type attribute as an array' do
+        expected_result =
+          '01;09;20;22;28;50;102;106;107;110;113;115;120;130;132;138;139;146'
+          .split(';')
+        condition_object.vaccine_types =
+          '01;09;20;22;28;50;102;106;107;110;113;115;120;130;132;138;139;146'
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+        expect(eval_hash[:vaccine_types]).to eq(expected_result)
+      end
+      it 'creates dose_type attribute with a empty array value if nil' do
+        condition_object.vaccine_types = nil
+
+        eval_hash =
+          test_target_dose.create_conditional_skip_set_condition_attributes(
+            condition_object,
+            prev_dose_date,
+            dob
+          )
+        expect(eval_hash[:vaccine_types]).to eq([])
       end
     end
-
-
 
     describe '#create_age_date_attributes' do
       %w(absolute_min_age_date min_age_date earliest_recommended_age_date

@@ -77,11 +77,11 @@ class TargetDose
         condition_attrs[attribute.to_sym] = nil
       end
     end
-    condition_attrs[:dose_count] = if condition.dose_count != '' || 
-                                      !condition.dose_count.nil?
-                                        condition.dose_count.to_i
+    condition_attrs[:dose_count] = if condition.dose_count == '' || 
+                                      condition.dose_count.nil?
+                                        nil
                                    else
-                                     nil
+                                      condition.dose_count.to_i
                                    end
     condition_attrs[:dose_type]        = condition.dose_type 
     condition_attrs[:dose_count_logic] = condition.dose_count_logic 
