@@ -267,25 +267,27 @@ RSpec.describe TargetDose, type: :model do
       #   it 'evaluates the number of vaccine doses administered that meet all'\
       #     'requirements' do
       #       # Vaccine Type is one of the supporting data defined conditional
-      #       #   skip vaccine types
-            
+      #       #   skip vaccine types 
       #   end
       # end
       describe '#match_vaccine_doses_with_cvx_codes' do
         let(:cvx_polio) { [10, 110, 120] }
         let(:cvx_non_polio) { [162, 133, 85] }
         let(:all_vaccine_doses) { [] }
-        # let(:all_vaccine_doses) do
-        #   cvx_codes = cvx_polio.zip(cvx_non_polio)
-        #   vaccine_doses = []
-        #   cvx_codes.each_with_index do |cvx_code, index|
-        #     vax_code = TextVax.find_all_vax_codes_by_cvx(cvx_code).first
-        #     vaccine_doses << FactoryGirl.create_list(:vaccine_dose,
-        #                                              (index + 1),
-        #                                              vaccine_code: vax_code)
-        #   end
-        #   vaccine_doses.flatten
-        # end
+        let(:all_vaccine_doses) do
+          cvx_codes = [cvx_polio, cvx_non_polio].flatten
+          vaccine_doses = []
+          cvx_codes.each_with_index do |cvx_code, index|
+            vax_code = TextVax.find_all_vax_codes_by_cvx(cvx_code).first
+            vaccine_doses << FactoryGirl.create_list(
+              :vaccine_dose,
+              (index + 1),
+              vaccine_code: vax_code,
+              patient_profile: test_patient.patient_profile
+            )
+          end
+          vaccine_doses.flatten
+        end
         it 'pulls all vaccine_doses that match the cvx_codes' do
           polio_vaccine_doses =
             test_target_dose.match_vaccine_doses_with_cvx_codes(
@@ -293,7 +295,7 @@ RSpec.describe TargetDose, type: :model do
               cvx_polio
             )
           expect(polio_vaccine_doses.length).to eq(6)
-          expect(polio_vaccine_doses.class.name).to eq('VaccineDose')
+          expect(polio_vaccine_doses.first.class.name).to eq('VaccineDose')
         end
       end
       describe '#evaluate_conditional_skip_set_condition_attributes' do
@@ -322,17 +324,17 @@ RSpec.describe TargetDose, type: :model do
             nil: [nil, nil]
           }
           attribute_options.each do |descriptor, value|
-            descriptor_string = "returns #{value[1]} when the #{attribute}"\
+            descriptor_string = "returns #{value[1]} when the begin_age_date"\
                                 " attribute is #{descriptor}"
             it descriptor_string do
-              valid_age_attrs[attribute.to_sym] = value[0]
+              valid_age_attrs[:begin_age_date] = value[0]
               eval_hash =
                 test_target_dose
                 .evaluate_conditional_skip_set_condition_attributes(
                   valid_age_attrs,
                   dose_date
                 )
-              expect(eval_hash[attribute.to_sym]).to eq(value[1])
+              expect(eval_hash[:begin_age_date]).to eq(value[1])
             end
           end
         end

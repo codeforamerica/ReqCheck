@@ -434,27 +434,27 @@ class TargetDose
     end
   end
 
-# The Number of Conditional Doses Administered must be computed as the count of vaccine doses
-# administered where all of the following are true:
-# a. Vaccine Type is one of the supporting data defined conditional skip vaccine types.
-# b. Date Administered is:
-# - on or after the conditional skip begin age date and before the conditional skip end age date OR
-# - on or after the conditional skip start date and before conditional skip end date
-# c. Evaluation Status is:
-# - "Valid" if the conditional skip dose type is "Valid" OR
-# - of any status if the conditional skip dose type is "Total" 
+  # The Number of Conditional Doses Administered must be computed as the count of vaccine doses
+  # administered where all of the following are true:
+  # a. Vaccine Type is one of the supporting data defined conditional skip vaccine types.
+  # b. Date Administered is:
+  # - on or after the conditional skip begin age date and before the conditional skip end age date OR
+  # - on or after the conditional skip start date and before conditional skip end date
+  # c. Evaluation Status is:
+  # - "Valid" if the conditional skip dose type is "Valid" OR
+  # - of any status if the conditional skip dose type is "Total" 
 
 
-# Does the Conditional Skip Series Group identify a Series Group with at
-# least one series with a status of “Complete”? 
-#   I believe this means that if it completes one of the series in the group,
-#   then it is valid. If not, then it is not and should not be included - But is
-#   this true?
+  # Does the Conditional Skip Series Group identify a Series Group with at
+  # least one series with a status of “Complete”? 
+  #   I believe this means that if it completes one of the series in the group,
+  #   then it is valid. If not, then it is not and should not be included - But is
+  #   this true?
 
   def match_vaccine_doses_with_cvx_codes(vaccine_doses_administered,
                                          vaccine_types_cvx_codes)
-    all_vaccine_doses_administered.find_all do |vaccine_dose| 
-      vaccine_types.include?(vaccine_dose.cvx_code)
+    vaccine_doses_administered.find_all do |vaccine_dose| 
+      vaccine_types_cvx_codes.include?(vaccine_dose.cvx_code)
     end
     # This method counts the number of doses that follows all of the following
     # rules: 
@@ -474,10 +474,8 @@ class TargetDose
 
 
 
-  def evaluate_conditional_skip_set_condition_attributes(
-    condition_attrs,
-    date_of_dose
-  )
+  def evaluate_conditional_skip_set_condition_attributes(condition_attrs,
+                                                         date_of_dose)
     # condtion_types = [
     #   "Age", "Interval", "Vaccine Count by Age", "Vaccine Count by Date"
     # ]
