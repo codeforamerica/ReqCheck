@@ -63,6 +63,13 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	}
 	
 }
+.button.hollow.secondary {
+	border-color: #D2D2D2;
+	color: #D2D2D2;
+	&:hover {
+		background-color:#D2D2D2;
+	}
+}
 
 .vaccine-record .vax-name {
 	background-color:#3a3a3c; 
