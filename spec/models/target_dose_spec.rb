@@ -375,9 +375,156 @@ RSpec.describe TargetDose, type: :model do
           expect(
             test_target_dose.calculate_count_of_vaccine_doses(
               test_vaccine_doses,
-              condition_object.vaccine_types
+              condition_object.vaccine_types,
+              begin_age_date: begin_age_date
             )
           ).to eq(1)
+        end
+
+        it 'it includes only vaccines given before the end_age' do
+          patient = all_vaccine_doses.first.patient
+          end_age_date = patient.dob + 4.years
+          test_vaccine_doses = [FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (patient.dob + 5.years)
+          )]
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (patient.dob + 2.years)
+          )
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (patient.dob + 3.years)
+          )
+          expect(
+            test_target_dose.calculate_count_of_vaccine_doses(
+              test_vaccine_doses,
+              condition_object.vaccine_types,
+              end_age_date: end_age_date
+            )
+          ).to eq(2)
+        end
+        it 'it includes only vaccines given after the start_date' do
+          patient = all_vaccine_doses.first.patient
+          start_date = Date.today - 3.months
+          test_vaccine_doses = [FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 2.months)
+          )]
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 4.months)
+          )
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 6.months)
+          )
+          expect(
+            test_target_dose.calculate_count_of_vaccine_doses(
+              test_vaccine_doses,
+              condition_object.vaccine_types,
+              start_date: start_date
+            )
+          ).to eq(1)
+        end
+        it 'it includes only vaccines given before the end_date' do
+          patient = all_vaccine_doses.first.patient
+          end_date = Date.today - 3.months
+          test_vaccine_doses = [FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 2.months)
+          )]
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 4.months)
+          )
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 6.months)
+          )
+          expect(
+            test_target_dose.calculate_count_of_vaccine_doses(
+              test_vaccine_doses,
+              condition_object.vaccine_types,
+              end_date: end_date
+            )
+          ).to eq(2)
+        end
+        it 'it includes only vaccines with evaluation_status Valid if vaccine'\
+          'conditional skip dose type is Valid' do
+          patient = all_vaccine_doses.first.patient
+          test_vaccine_doses = [FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 2.months)
+          )]
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 4.months)
+          )
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 6.months)
+          )
+          expect(
+            test_target_dose.calculate_count_of_vaccine_doses(
+              test_vaccine_doses,
+              condition_object.vaccine_types,
+              dose_type: 'Valid'
+            )
+          ).to eq(2)
+        end
+        it 'it includes all vaccines if vaccine'\
+          'conditional skip dose type is Total' do
+          patient = all_vaccine_doses.first.patient
+          test_vaccine_doses = [FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 2.months)
+          )]
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 4.months)
+          )
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (Date.today - 6.months)
+          )
+          expect(
+            test_target_dose.calculate_count_of_vaccine_doses(
+              test_vaccine_doses,
+              condition_object.vaccine_types,
+              dose_type: 'Total'
+            )
+          ).to eq(2)
         end
 
         # context 'when dose_type is \'Valid\'' do
