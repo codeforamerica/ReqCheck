@@ -325,7 +325,7 @@ RSpec.describe TargetDose, type: :model do
             begin_age: '3 years - 4 days',
             condition_type: 'Age',
             dose_type: 'Valid',
-            vaccine_types: valid_vaccine_types
+            vaccine_types: valid_vaccine_types.join(';')
           )
         end
         let(:all_vaccine_doses) do
@@ -345,14 +345,14 @@ RSpec.describe TargetDose, type: :model do
 
         it 'it includes only vaccines from the list of vaccine types' do
           expect(all_vaccine_doses.length).to eq(21)
-          same_vaccine_types = all_vaccine_doses.map do |vaccine_dose|
+          same_vaccine_types = all_vaccine_doses.select do |vaccine_dose|
             valid_vaccine_types.include?(vaccine_dose.cvx_code)
           end
           expect(same_vaccine_types.length).to eq(6)
           expect(
             test_target_dose.calculate_count_of_vaccine_doses(
               all_vaccine_doses,
-              condition_object
+              condition_object.vaccine_types
             )
           ).to eq(6)
         end
@@ -360,41 +360,44 @@ RSpec.describe TargetDose, type: :model do
         it 'it includes only vaccines given after the begin_age' do
           expect(condition_object.begin_age).to eq('3 years - 4 days')
           patient = all_vaccine_doses.first.patient
-          after_begin_age_vaccine_dose = FactoryGirl.create(
-            :vaccine_dose,
+          test_vaccine_doses = [FactoryGirl.create(
+            :vaccine_dose_by_cvx,
             patient_profile: patient.patient_profile,
-            
+            cvx_code: 10,
+            date_administered: (patient.dob + 4.years)
+          )]
+          test_vaccine_doses << FactoryGirl.create(
+            :vaccine_dose_by_cvx,
+            patient_profile: patient.patient_profile,
+            cvx_code: 10,
+            date_administered: (patient.dob + 2.years)
           )
-          same_vaccine_types = all_vaccine_doses.map do |vaccine_dose|
-            valid_vaccine_types.include?(vaccine_dose.cvx_code)
-          end
-          expect(same_vaccine_types.length).to eq(6)
           expect(
             test_target_dose.calculate_count_of_vaccine_doses(
-              all_vaccine_doses,
-              condition_object
+              test_vaccine_doses,
+              condition_object.vaccine_types
             )
-          ).to eq(6)
+          ).to eq(1)
         end
 
-        context 'when dose_type is \'Valid\'' do
-          it 'returns an empty array if the cvx_codes is empty' do
-            polio_vaccine_doses =
-              test_target_dose.match_vaccine_doses_with_cvx_codes(
-                all_vaccine_doses,
-                []
-              )
-            expect(polio_vaccine_doses.length).to eq(0)
-          end
-          it 'returns an empty array if there are no vaccines that match' do
-            polio_vaccine_doses =
-              test_target_dose.match_vaccine_doses_with_cvx_codes(
-                all_vaccine_doses,
-                [12, 13, 14, 15]
-              )
-            expect(polio_vaccine_doses.length).to eq(0)
-          end
-        end
+        # context 'when dose_type is \'Valid\'' do
+        #   it 'returns an empty array if the cvx_codes is empty' do
+        #     polio_vaccine_doses =
+        #       test_target_dose.match_vaccine_doses_with_cvx_codes(
+        #         all_vaccine_doses,
+        #         []
+        #       )
+        #     expect(polio_vaccine_doses.length).to eq(0)
+        #   end
+        #   it 'returns an empty array if there are no vaccines that match' do
+        #     polio_vaccine_doses =
+        #       test_target_dose.match_vaccine_doses_with_cvx_codes(
+        #         all_vaccine_doses,
+        #         [12, 13, 14, 15]
+        #       )
+        #     expect(polio_vaccine_doses.length).to eq(0)
+        #   end
+        # end
       end
       describe '#evaluate_conditional_skip_set_condition_attributes' do
         let(:valid_condition_attrs) do

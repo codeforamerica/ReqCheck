@@ -434,7 +434,13 @@ class TargetDose
     end
   end
 
-  def calculate_count_of_vaccine_doses(vaccine_doses, condition)
+  def calculate_count_of_vaccine_doses(vaccine_doses_administered,
+                                       vaccine_types,
+                                       begin_age_date=nil,
+                                       end_age_date=nil,
+                                       start_date=nil,
+                                       end_date=nil
+                                       )
     # This method counts the number of doses that follows all of the following
     # rules: 
     #   a. Vaccine Type is one of the supporting data defined conditional skip
@@ -447,8 +453,25 @@ class TargetDose
     #   c. Evaluation Status is:
     #     - "Valid" if the conditional skip dose type is "Valid" OR
     #     - of any status if the conditional skip dose type is "Total" 
+    if vaccine_types.is_a?(String)
+      vaccine_types = vaccine_types.split(';').map(&:to_i)
+    end
+    matched_vaccines = match_vaccine_doses_with_cvx_codes(
+      vaccine_doses_administered,
+      vaccine_types
+    )
+    matched_vaccines.select! do |match_vaccine|
+      if begin_age_date && 
+        is_valid = match_vaccine.date_administered >= begin_age_date
+      end
+      # unless end_age_date.nil?
+      #   match_vaccine.date_administered >= begin_age_date
+      # end
 
 
+    end
+
+    matched_vaccines.count
   end
 
 
@@ -472,6 +495,7 @@ class TargetDose
   def match_vaccine_doses_with_cvx_codes(vaccine_doses_administered,
                                          vaccine_types_cvx_codes)
     # What if there are no 'vaccine_types'?
+    return [] if vaccine_types_cvx_codes.nil?
     vaccine_doses_administered.find_all do |vaccine_dose| 
       vaccine_types_cvx_codes.include?(vaccine_dose.cvx_code)
     end
