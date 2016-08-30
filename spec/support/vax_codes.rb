@@ -157,6 +157,7 @@ module TextVax
         return_vax_codes << key
       end
     end
+    raise "No Vaccine Codes Found for cvx #{cvx_code}" if return_vax_codes == []
     return_vax_codes
   end
   public_constant(:VAXCODES)

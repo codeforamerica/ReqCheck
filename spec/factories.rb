@@ -72,8 +72,11 @@ FactoryGirl.define do
     condition_logic 'AND'
 
     after(:create) do |cond_skip_set|
-      cond_skip_set.conditions << FactoryGirl.create(:conditional_skip_set_condition)
-      cond_skip_set.conditions << FactoryGirl.create(:conditional_skip_set_condition,
+      cond_skip_set.conditions << FactoryGirl.create(
+        :conditional_skip_set_condition
+      )
+      cond_skip_set.conditions << FactoryGirl.create(
+        :conditional_skip_set_condition,
         condition_id: 2,
         condition_type: 'Interval',
         interval: '6 months - 4 days'
@@ -85,7 +88,7 @@ FactoryGirl.define do
     set_logic 'n/a'
 
     after(:create) do |cond_skip|
-      if !cond_skip.sets
+      unless cond_skip.sets
         FactoryGirl.create(:conditional_skip_set, conditional_skip: cond_skip)
       end
     end
@@ -129,7 +132,7 @@ FactoryGirl.define do
     association :prefered_vaccine, factory: :antigen_series_dose_vaccine
     association :iinterval, factory: :interval
   end
-  
+
   factory :antigen_series do
     name 'Polio - All IPV - 4 Dose'
     target_disease 'Polio'
@@ -140,7 +143,7 @@ FactoryGirl.define do
     min_start_age 'n/a'
     max_start_age 'n/a'
   end
-  
+
   factory :vaccine_info do
     short_description 'Polio'
     full_name 'DTaP-HepB-IPV'
@@ -159,14 +162,14 @@ FactoryGirl.define do
       antigen.vaccines << FactoryGirl.create(:vaccine_info)
     end
   end
-  
+
   factory :patient do
     sequence(:first_name, 1) { |n| "Test#{n}" }
     sequence(:last_name, 1) { |n| "Tester#{n}" }
     sequence(:email, 1) { |n| "test#{n}@example.com" }   
-    
+
     after(:create) do |patient| 
-      create(:patient_profile, patient_id: "#{patient.id}")
+      create(:patient_profile, patient_id: patient.id.to_s)
     end
   end
 
@@ -182,8 +185,8 @@ FactoryGirl.define do
     date_administered { Date.today }
     send_flag false
     history_flag false
-    provider_code "432"
-    
+    provider_code '432'
+
     sequence(:mvx_code) do |num|
       vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
       vax_array[(num % vax_array.length)][1]
@@ -200,8 +203,25 @@ FactoryGirl.define do
     dose_number 1
     facility_id 19
 
-
     association :patient_profile, factory: :patient_profile
+  end
+
+  factory :vaccine_dose_by_cvx, parent: :vaccine_dose do
+    ignore do
+      vaccine_code 'POL'
+      mvx_code 0
+      lot_number ''
+    end
+
+    before(:create) do |vaccine_dose|
+      vaccine_dose.cvx_code = 10 if vaccine_dose.cvx_code.nil?
+      vaccine_code =
+        TextVax.find_all_vax_codes_by_cvx(vaccine_dose.cvx_code).first
+      vax_array = TextVax::VAXCODES[vaccine_code.to_sym]
+      vaccine_dose.vaccine_code = vaccine_code
+      vaccine_dose.mvx_code = vax_array.first[1]
+      vaccine_dose.lot_number = vax_array.first[2]
+    end
   end
 
   factory :random_vaccine_dose, parent: :vaccine_dose do
