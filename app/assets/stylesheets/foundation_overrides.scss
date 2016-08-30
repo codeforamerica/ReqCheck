@@ -1,3 +1,4 @@
+$primary-color: green;
 .callout {
 	border:none;
 	border-top-right-radius: 2px;
@@ -17,9 +18,9 @@
 }
 
 .callout {color: white;}
-.callout.success {background-color: #59A501;} 
-.callout.warning {background-color: #ED9A12;} 
-.callout.alert {background-color: #D0021B;}
+.callout.success {background-color: #2b840a;} 
+.callout.warning {background-color: #F3D812; color:black;} 
+.callout.alert {background-color: #af0216;}
 .callout svg {float:left; margin-right:1rem;}
 .callout .explanation {margin-left:4rem;}
 
@@ -48,12 +49,25 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 }
 
 .button {
+	transition: none;
 	color: white;
-	&:hover {
-		color: white;
-	}
 	&:visited {
 		color: white;
+	}
+	&:hover {
+		color: white;
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+	}
+	&:active {
+		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+	}
+	
+}
+.button.hollow.secondary {
+	border-color: #D2D2D2;
+	color: #D2D2D2;
+	&:hover {
+		background-color:#D2D2D2;
 	}
 }
 
