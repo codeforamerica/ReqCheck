@@ -273,7 +273,6 @@ RSpec.describe TargetDose, type: :model do
       describe '#match_vaccine_doses_with_cvx_codes' do
         let(:cvx_polio) { [10, 110, 120] }
         let(:cvx_non_polio) { [162, 133, 85] }
-        let(:all_vaccine_doses) { [] }
         let(:all_vaccine_doses) do
           cvx_codes = [cvx_polio, cvx_non_polio].flatten
           vaccine_doses = []
@@ -296,6 +295,105 @@ RSpec.describe TargetDose, type: :model do
             )
           expect(polio_vaccine_doses.length).to eq(6)
           expect(polio_vaccine_doses.first.class.name).to eq('VaccineDose')
+        end
+        it 'returns an empty array if the cvx_codes is empty' do
+          polio_vaccine_doses =
+            test_target_dose.match_vaccine_doses_with_cvx_codes(
+              all_vaccine_doses,
+              []
+            )
+          expect(polio_vaccine_doses.length).to eq(0)
+        end
+        it 'returns an empty array if there are no vaccines that match' do
+          polio_vaccine_doses =
+            test_target_dose.match_vaccine_doses_with_cvx_codes(
+              all_vaccine_doses,
+              [12, 13, 14, 15]
+            )
+          expect(polio_vaccine_doses.length).to eq(0)
+        end
+      end
+      describe '#calculate_count_of_vaccine_doses' do
+        let(:cvx_polio) { [10, 110, 120] }
+        let(:cvx_non_polio) { [162, 133, 85] }
+        let(:valid_vaccine_types) do
+          [1, 10, 22, 50, 102, 106, 107, 110, 115, 120, 130, 132, 146]
+        end
+        let(:condition_object) do
+          FactoryGirl.create(
+            :conditional_skip_set_condition,
+            begin_age: '3 years - 4 days',
+            condition_type: 'Age',
+            dose_type: 'Valid',
+            vaccine_types: valid_vaccine_types
+          )
+        end
+        let(:all_vaccine_doses) do
+          cvx_codes = [cvx_polio, cvx_non_polio].flatten
+          vaccine_doses = []
+          cvx_codes.each_with_index do |cvx_code, index|
+            vax_code = TextVax.find_all_vax_codes_by_cvx(cvx_code).first
+            vaccine_doses << FactoryGirl.create_list(
+              :vaccine_dose,
+              (index + 1),
+              vaccine_code: vax_code,
+              patient_profile: test_patient.patient_profile
+            )
+          end
+          vaccine_doses.flatten
+        end
+
+        it 'it includes only vaccines from the list of vaccine types' do
+          expect(all_vaccine_doses.length).to eq(21)
+          same_vaccine_types = all_vaccine_doses.map do |vaccine_dose|
+            valid_vaccine_types.include?(vaccine_dose.cvx_code)
+          end
+          expect(same_vaccine_types.length).to eq(6)
+          expect(
+            test_target_dose.calculate_count_of_vaccine_doses(
+              all_vaccine_doses,
+              condition_object
+            )
+          ).to eq(6)
+        end
+
+        it 'it includes only vaccines given after the begin_age' do
+          expect(condition_object.begin_age).to eq('3 years - 4 days')
+          patient = all_vaccine_doses.first.patient
+          after_begin_age_vaccine_dose = FactoryGirl.create(
+            :vaccine_dose,
+            patient_profile: patient.patient_profile,
+            
+          )
+          same_vaccine_types = all_vaccine_doses.map do |vaccine_dose|
+            valid_vaccine_types.include?(vaccine_dose.cvx_code)
+          end
+          expect(same_vaccine_types.length).to eq(6)
+          expect(
+            test_target_dose.calculate_count_of_vaccine_doses(
+              all_vaccine_doses,
+              condition_object
+            )
+          ).to eq(6)
+        end
+
+        context 'when dose_type is \'Valid\'' do
+          it 'returns an empty array if the cvx_codes is empty' do
+            polio_vaccine_doses =
+              test_target_dose.match_vaccine_doses_with_cvx_codes(
+                all_vaccine_doses,
+                []
+              )
+            expect(polio_vaccine_doses.length).to eq(0)
+          end
+          it 'returns an empty array if there are no vaccines that match' do
+            polio_vaccine_doses =
+              test_target_dose.match_vaccine_doses_with_cvx_codes(
+                all_vaccine_doses,
+                [12, 13, 14, 15]
+              )
+            expect(polio_vaccine_doses.length).to eq(0)
+          end
         end
       end
       describe '#evaluate_conditional_skip_set_condition_attributes' do
