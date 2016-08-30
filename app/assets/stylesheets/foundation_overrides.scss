@@ -25,15 +25,26 @@ $primary-color: green;
 .callout .explanation {margin-left:4rem;}
 
 
-.patient-info table tbody {border:none;}
-.patient-info  thread {border:none;}
-.patient-info p {display: none;}
+.patient-info {
+	table tbody {border:none;}
+	thead {
+		background-color: white;  
+		border-width: 0 0 1px 0;
+		border-color: $kc-grey;
+	}
+	thread {border:none;}
+	p {display: none;}
+}
 
 .pink {background-color: pink;}
 
 h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
-.top-bar {margin-bottom: 1rem; background-color: $kc-grey; color:white; min-height: 72px;}
+.top-bar {margin-bottom: 1rem; 
+	background-color: $kc-grey; 
+	color:white; 
+	min-height: 72px;
+}
 .top-bar .button {margin-bottom: 0px;}
 
 .top-bar-title a {
@@ -69,12 +80,12 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 }
 
 .vaccine-record .vax-name {
-	background-color:#3a3a3c; 
+	background-color:$kc-grey; 
 	color:white; 
-	border-color: #3a3a3c;
+	border-color: $kc-grey;
 	width:200px;
 }
-.vaccine-record tbody {border-color: #3a3a3c;}
+.vaccine-record tbody {border-color: $kc-grey;}
 .vaccine-record thead {border: none;}
 .vaccine-record thead th {min-height: 60px;}
 
