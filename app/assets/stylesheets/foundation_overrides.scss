@@ -54,21 +54,18 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	&:visited {
 		color: white;
 	}
-	&:hover {
+	&:hover, &focus {
 		color: white;
 		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
 	}
-	&:active {
-		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
-	}
-	
 }
 .button.hollow.secondary {
 	border-color: #D2D2D2;
 	color: #D2D2D2;
-	&:hover {
+	&:hover, &:focus {
 		background-color:#D2D2D2;
 	}
+	
 }
 
 .vaccine-record .vax-name {
