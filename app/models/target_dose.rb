@@ -50,6 +50,17 @@ class TargetDose
 
     # Date Administered 
     # Patient Immunization History Administered - Dose Count 
+    #     # when 'Age'
+    #   result = validate_date_equal_or_after(condition_attrs['begin_age_date'],
+    #                                         date_of_dose)
+    #   if condition_attrs['end_age_date']
+    #   end
+    #   evaluate begin_age
+    #   evaluate end_age? => need to look into this morer
+    # when 'Interval'
+    # when 'Vaccine Count by Age'
+    # when 'Vaccine Count by Date'
+
   def create_conditional_skip_set_condition_attributes(
     condition,
     previous_dose_date,
@@ -332,7 +343,7 @@ class TargetDose
                                                 date_of_dose)
         end
       end
-      result_attr = age_attr.split('_')[0..-1].join('_')
+      result_attr = age_attr.split('_')[0..-2].join('_')
       evaluated_hash[result_attr.to_sym] = result
     end
     evaluated_hash
@@ -360,7 +371,7 @@ class TargetDose
                    )
         end
       end
-      result_attr = interval_attr.split('_')[0..-1].join('_')
+      result_attr = interval_attr.split('_')[0..-2].join('_')
       evaluated_hash[result_attr.to_sym] = result
     end
     evaluated_hash
@@ -388,7 +399,7 @@ class TargetDose
                    )
         end
       end
-      result_attr = vaccine_attr.split('_')[0..-1].join('_')
+      result_attr = vaccine_attr.split('_')[0..-2].join('_')
       evaluated_hash[result_attr.to_sym] = result
     end
     evaluated_hash[:trade_name] =

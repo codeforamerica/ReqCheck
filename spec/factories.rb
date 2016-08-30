@@ -207,7 +207,7 @@ FactoryGirl.define do
   end
 
   factory :vaccine_dose_by_cvx, parent: :vaccine_dose do
-    ignore do
+    transient do
       vaccine_code 'POL'
       mvx_code 0
       lot_number ''
