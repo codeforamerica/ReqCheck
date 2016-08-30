@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
       redirect_to controller: 'patients', action: 'index'
     else
       flash[:notice] = "Invalid Email or Password"
-      render :login
+      render :index
     end
   end
 end
