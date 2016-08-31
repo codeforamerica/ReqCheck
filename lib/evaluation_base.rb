@@ -14,4 +14,13 @@ module EvaluationBase
     result_hash
   end
 
+  def set_default_values(return_hash, default_hash={})
+    default_hash.each do |default_value_key, default_value|
+      current_value = return_hash[default_value_key]
+      if current_value.nil? || current_value == ''
+        return_hash[default_value_key] = default_value
+      end
+    end
+    return_hash
+  end
 end
