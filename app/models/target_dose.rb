@@ -524,25 +524,40 @@ class TargetDose
 
   def evaluate_conditional_skip_set_condition_attributes(condition_attrs,
                                                          date_of_dose)
-    # condtion_types = [
-    #   "Age", "Interval", "Vaccine Count by Age", "Vaccine Count by Date"
-    # ]
-    # evaluated_hash = {}
-    # case condition_attrs[:condition_type]
-    # when 'Age'
-    #   result = validate_date_equal_or_after(condition_attrs['begin_age_date'],
-    #                                         date_of_dose)
-    #   if condition_attrs['end_age_date']
-
-    #   end
-
-    #   evaluate begin_age
-    #   evaluate end_age? => need to look into this morer
-    # when 'Interval'
-    # when 'Vaccine Count by Age'
-    # when 'Vaccine Count by Date'
+    # TABLE 6-7 CONDITIONAL TYPE OF COMPLETED SERIES – IS THE CONDITION MET? 
+    # How to evaluate this component?
+    evaluated_hash = {}
+    %w(
+      begin_age_date
+      start_date
+      end_age_date
+      end_date
+      interval_date
+    ).each do |condition_attr|
+      result = nil
+      if !condition_attrs[condition_attr.to_sym].nil?
+        if ['end_age_date', 'end_date'].include?(condition_attr)
+          result = validate_date_equal_or_before(
+                     condition_attrs[condition_attr.to_sym],
+                     date_of_dose
+                   )
+        else
+          result = validate_date_equal_or_after(
+                     condition_attrs[condition_attr.to_sym],
+                     date_of_dose
+                   )
+        end
+      end
+      name_array = condition_attr.split('_')
+      result_attr = if name_array.length == 3
+                      name_array[0..-2].join('_')
+                    else
+                      condition_attr
+                    end
+      evaluated_hash[result_attr.to_sym] = result
+    end
+    evaluated_hash
   end
-
 
   def satisfy_target_dose
     # Evaluate Conditional Skip

@@ -360,6 +360,7 @@ RSpec.describe TargetDose, type: :model do
         it 'it includes only vaccines given after the begin_age' do
           expect(condition_object.begin_age).to eq('3 years - 4 days')
           patient = all_vaccine_doses.first.patient
+          begin_age_date = patient.dob + 3.years - 4.days
           test_vaccine_doses = [FactoryGirl.create(
             :vaccine_dose_by_cvx,
             patient_profile: patient.patient_profile,
@@ -546,13 +547,41 @@ RSpec.describe TargetDose, type: :model do
         #   end
         # end
       end
+      describe '#evaluate_vaccine_dose_count' do
+        # <doseCount>5</doseCount>
+        # <doseType>Total</doseType>
+        # <doseCountLogic>greater than</doseCountLogic>
+        # <vaccineTypes>01;09;20;22;28;50;102;106;107;110;113;115;120;130;132;138;139;146</vaccineTypes>
+        dose_count_hash = {
+          'greater than' => [false, false, true],
+          'equals' => [false, true, false],
+          'less than' => [true, false, false]
+        }
+        dose_counts = [4, 5, 6]
+        required_dose_count = 5
+        dose_count_hash.each do |dose_count_logic, values|
+          dose_counts.each_with_index do |actual_dose_count, index|
+            expected_return_value = values[index]
+            it "returns #{expected_return_value} for logic #{dose_count_logic} " \
+               "with a required_dose_count of #{required_dose_count} and " \
+               "actual dose count of #{actual_dose_count}" do
+              result = test_target_dose.evaluate_vaccine_dose_count(
+                dose_count_logic,
+                required_dose_count,
+                actual_dose_count
+              )
+              expect(result).to eq(expected_return_value)
+            end
+          end
+        end
+      end
       describe '#evaluate_conditional_skip_set_condition_attributes' do
         let(:valid_condition_attrs) do
           {
             begin_age_date: 10.months.ago.to_date,
-            end_age_date: 12.years.since.to_date,
-            start_date: Date.strptime('20150701', '%Y%m%d'),
-            end_date: Date.strptime('20160630', '%Y%m%d'),
+            end_age_date: 2.months.ago.to_date,
+            start_date: 10.months.ago.to_date,
+            end_date: 2.months.ago.to_date,
             assessment_date: Date.today.to_date,
             condition_id: 1,
             condition_type: 'Age',
@@ -560,10 +589,38 @@ RSpec.describe TargetDose, type: :model do
             dose_count: 5,
             dose_type: 'Total',
             dose_count_logic: 'greater_than',
-            vaccine_types: []
+            vaccine_types: [1, 10, 20, 22, 28, 50, 102, 106, 107, 110, 113,
+                            115, 120, 130, 132, 138, 139, 146]
           }
         end
-
+        describe 'evaluating the conditional_type of completed series' do
+          # TABLE 6-7 CONDITIONAL TYPE OF COMPLETED SERIES – IS THE CONDITION MET?
+          it 'needs to be implemented' do
+            expect(true).to eq(false)
+          end
+        end
+        describe 'evaluating the interval_date attribute' do
+          dose_date = 1.month.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [2.months.ago.to_date, true],
+            after_the_dose_date: [2.weeks.ago.to_date, false],
+            nil: [nil, nil]
+          }
+          attribute_options.each do |descriptor, value|
+            descriptor_string = "returns #{value[1]} when the interval_date"\
+                                " attribute is #{descriptor}"
+            it descriptor_string do
+              valid_condition_attrs[:interval_date] = value[0]
+              eval_hash =
+                test_target_dose
+                .evaluate_conditional_skip_set_condition_attributes(
+                  valid_condition_attrs,
+                  dose_date
+                )
+              expect(eval_hash[:interval_date]).to eq(value[1])
+            end
+          end
+        end
         describe 'evaluating the begin_age_date attribute' do
           dose_date = 9.months.ago.to_date
           attribute_options = {
@@ -575,14 +632,80 @@ RSpec.describe TargetDose, type: :model do
             descriptor_string = "returns #{value[1]} when the begin_age_date"\
                                 " attribute is #{descriptor}"
             it descriptor_string do
-              valid_age_attrs[:begin_age_date] = value[0]
+              valid_condition_attrs[:begin_age_date] = value[0]
               eval_hash =
                 test_target_dose
                 .evaluate_conditional_skip_set_condition_attributes(
-                  valid_age_attrs,
+                  valid_condition_attrs,
                   dose_date
                 )
-              expect(eval_hash[:begin_age_date]).to eq(value[1])
+              expect(eval_hash[:begin_age]).to eq(value[1])
+            end
+          end
+        end
+        describe 'evaluating the end_age_date attribute' do
+          dose_date = 9.months.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [10.months.ago.to_date, false],
+            after_the_dose_date: [8.months.ago.to_date, true],
+            nil: [nil, nil]
+          }
+          attribute_options.each do |descriptor, value|
+            descriptor_string = "returns #{value[1]} when the end_age_date"\
+                                " attribute is #{descriptor}"
+            it descriptor_string do
+              valid_condition_attrs[:end_age_date] = value[0]
+              eval_hash =
+                test_target_dose
+                .evaluate_conditional_skip_set_condition_attributes(
+                  valid_condition_attrs,
+                  dose_date
+                )
+              expect(eval_hash[:end_age]).to eq(value[1])
+            end
+          end
+        end
+        describe 'evaluating the start_date attribute' do
+          dose_date = 9.months.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [10.months.ago.to_date, true],
+            after_the_dose_date: [8.months.ago.to_date, false],
+            nil: [nil, nil]
+          }
+          attribute_options.each do |descriptor, value|
+            descriptor_string = "returns #{value[1]} when the start_date"\
+                                " attribute is #{descriptor}"
+            it descriptor_string do
+              valid_condition_attrs[:start_date] = value[0]
+              eval_hash =
+                test_target_dose
+                .evaluate_conditional_skip_set_condition_attributes(
+                  valid_condition_attrs,
+                  dose_date
+                )
+              expect(eval_hash[:start_date]).to eq(value[1])
+            end
+          end
+        end
+        describe 'evaluating the end_date attribute' do
+          dose_date = 9.months.ago.to_date
+          attribute_options = {
+            before_the_dose_date: [10.months.ago.to_date, false],
+            after_the_dose_date: [8.months.ago.to_date, true],
+            nil: [nil, nil]
+          }
+          attribute_options.each do |descriptor, value|
+            descriptor_string = "returns #{value[1]} when the end_date"\
+                                " attribute is #{descriptor}"
+            it descriptor_string do
+              valid_condition_attrs[:end_date] = value[0]
+              eval_hash =
+                test_target_dose
+                .evaluate_conditional_skip_set_condition_attributes(
+                  valid_condition_attrs,
+                  dose_date
+                )
+              expect(eval_hash[:end_date]).to eq(value[1])
             end
           end
         end
