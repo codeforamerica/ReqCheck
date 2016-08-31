@@ -27,7 +27,7 @@ class AntigenAdministeredRecord
   def full_name
     self.vaccine_info.nil? ? nil : self.vaccine_info.full_name
   end
-  
+
   def self.create_records_from_vaccine_doses(vaccine_doses)
     antigen_records = []
     vaccine_doses.each do |vaccine_dose|

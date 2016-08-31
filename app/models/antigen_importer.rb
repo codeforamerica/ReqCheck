@@ -116,11 +116,13 @@ class AntigenImporter
     series_doses_data.each do |series_doses_hash|
       series_dose_number = get_dose_number(series_doses_hash['doseNumber'])
       required_gender    = series_doses_hash['requiredGender']
-      unless required_gender.is_a? Array
+      if required_gender.is_a? Array
+        required_gender.map! { |gender| gender.downcase }
+      else
         required_gender = if required_gender.nil? || required_gender == ''
                             []
                           else
-                            [required_gender]
+                            [required_gender.downcase]
                           end
       end
       series_doses_args = {
@@ -195,8 +197,8 @@ class AntigenImporter
     preferable_vaccine_data = [preferable_vaccine_data] if preferable_vaccine_data.is_a? Hash
 
     allowable_vaccine_data = antigen_series_dose_xml_hash['allowableVaccine']
-    if allowable_vaccine_data.is_a? Hash 
-      allowable_vaccine_data = [allowable_vaccine_data] 
+    if allowable_vaccine_data.is_a? Hash
+      allowable_vaccine_data = [allowable_vaccine_data]
     elsif allowable_vaccine_data.nil?
       allowable_vaccine_data = []
     end
