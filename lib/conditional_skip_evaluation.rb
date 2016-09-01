@@ -194,7 +194,8 @@ module ConditionalSkipEvaluation
     status_hash
   end
 
-  def evaluate_conditional_skip_set(condition_logic, condition_statuses_array)
+  def get_conditional_skip_set_status(condition_logic,
+                                      condition_statuses_array)
     if condition_statuses_array == []
       raise ArgumentError.new('Condition Status Array cannot be empty')
     end
@@ -222,7 +223,7 @@ module ConditionalSkipEvaluation
     status_hash
   end
 
-  def evaluate_conditional_skip(set_logic, set_statuses_array)
+  def get_conditional_skip_status(set_logic, set_statuses_array)
     if set_statuses_array == []
       raise ArgumentError.new('Set Status Array cannot be empty')
     end
@@ -268,5 +269,25 @@ module ConditionalSkipEvaluation
     get_conditional_skip_condition_status(condition_evaluation)
   end
 
+  def evaluate_conditional_skip_set(condition_object)
+    #                                       patient_dob,
+    #                                       date_of_dose,
+    #                                       patient_vaccine_doses: [],
+    #                                       date_of_previous_dose: nil)
+    # condition_attrs = create_conditional_skip_condition_attributes(
+    #   condition_object,
+    #   date_of_previous_dose,
+    #   patient_dob
+    # )
+    # condition_evaluation = evaluate_conditional_skip_condition_attributes(
+    #   condition_attrs,
+    #   date_of_dose
+    # )
+    # get_conditional_skip_condition_status(condition_evaluation)
+  end
+
+
+  def evaluate_conditional_skip(conditional_skip_object, patient_vaccines)
+  end
 
 end

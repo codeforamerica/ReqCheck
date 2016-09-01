@@ -9,7 +9,7 @@ RSpec.describe ConditionalSkipEvaluation do
     TestClass.new
   end
 
-  let(:condition1) do
+  let(:condition1a) do
     FactoryGirl.create(:conditional_skip_condition,
       **{
           condition_id: 1,
@@ -26,7 +26,7 @@ RSpec.describe ConditionalSkipEvaluation do
         }
     )
   end
-  let(:condition2) do
+  let(:condition2a) do
     FactoryGirl.create(:conditional_skip_condition,
       **{
           condition_id: 2,
@@ -43,21 +43,21 @@ RSpec.describe ConditionalSkipEvaluation do
         }
     )
   end
-  let(:conditional_set1) do
+  let(:conditional_set1a) do
     FactoryGirl.create(:conditional_skip_set,
       **{
           set_id: 1,
           set_description: 'Dose is not required for those 4 years or older' \
             'when the interval from the last dose is 6 months',
           condition_logic: 'AND',
-          conditions: [condition1, condition2]
+          conditions: [condition1a, condition2a]
         }
     )
   end
   let(:conditional_skip_object) do
     FactoryGirl.create(:conditional_skip_set,
                        set_logic: 'n/a',
-                       sets: [conditional_set1])
+                       sets: [conditional_set1a])
   end
 
   let(:test_condition_object) do
@@ -98,13 +98,13 @@ RSpec.describe ConditionalSkipEvaluation do
   #     condition_attrs = []
   #     condition_attrs <<
   #       test_object.create_conditional_skip_condition_attributes(
-  #         condition1,
+  #         condition1a,
   #         prev_dose_date,
   #         dob
   #       )
   #     condition_attrs <<
   #       test_object.create_conditional_skip_condition_attributes(
-  #         condition2,
+  #         condition2a,
   #         prev_dose_date,
   #         dob
   #       )
@@ -768,7 +768,7 @@ RSpec.describe ConditionalSkipEvaluation do
       end
     end
   end
-  describe '#evaluate_conditional_skip_set ' do
+  describe '#get_conditional_skip_set_status ' do
     condition_statuses_hash = {
       all_met:  [{status: 'condition_met'}, {status: 'condition_met'}],
       one_met:  [{status: 'condition_met'}, {status: 'condition_not_met'}],
@@ -791,7 +791,7 @@ RSpec.describe ConditionalSkipEvaluation do
         condition_statuses = condition_statuses_hash[statuses_key.to_sym]
         it "takes condition_logic #{condition_logic} with condition statuses" \
            " with #{statuses_key} and returns status: #{expected_status}" do
-          result_hash = test_object.evaluate_conditional_skip_set(
+          result_hash = test_object.get_conditional_skip_set_status(
             condition_logic.to_s,
             condition_statuses
           )
@@ -803,11 +803,11 @@ RSpec.describe ConditionalSkipEvaluation do
 
     it 'raises an error if the condition_statuses_array is empty' do
       expect{
-        test_object.evaluate_conditional_skip_set('AND', [])
+        test_object.get_conditional_skip_set_status('AND', [])
       }.to raise_exception(ArgumentError)
     end
   end
-  describe '#evaluate_conditional_skip ' do
+  describe '#get_conditional_skip_status ' do
     set_statuses_hash = {
       all_met:  [{status: 'set_met'}, {status: 'set_met'}],
       one_met:  [{status: 'set_met'}, {status: 'set_not_met'}],
@@ -830,7 +830,7 @@ RSpec.describe ConditionalSkipEvaluation do
         condition_statuses = set_statuses_hash[statuses_key.to_sym]
         it "takes condition_logic #{set_logic} with condition statuses " \
            "with #{statuses_key} and returns status: #{expected_status}" do
-          result_hash = test_object.evaluate_conditional_skip(
+          result_hash = test_object.get_conditional_skip_status(
             set_logic.to_s,
             condition_statuses
           )
@@ -842,14 +842,58 @@ RSpec.describe ConditionalSkipEvaluation do
 
     it 'raises an error if the condition_statuses_array is empty' do
       expect{
-        test_object.evaluate_conditional_skip('AND', [])
+        test_object.get_conditional_skip_status('AND', [])
       }.to raise_exception(ArgumentError)
     end
   end
   describe '#evaluate_conditional_skip_condition ' do
     it 'takes a condition with condition, patient_dob, date_of_dose, ' \
     'patient_vaccine_doses, date_of_previous_dose and returns a status hash' do
-      condition_object = condition1
+      condition_object = condition1a
+      patient_dob      = test_patient.dob
+      vaccine_doses    = test_patient.vaccine_doses
+      vaccine_dose     = vaccine_doses.first
+      date_of_dose     = vaccine_dose.date_administered
+      evaluation_hash = test_object.evaluate_conditional_skip_condition(
+        condition_object,
+        patient_dob,
+        date_of_dose,
+        patient_vaccine_doses: vaccine_doses
+      )
+      expected_result = {
+        evaluated: 'conditional_skip_condition',
+        reason: 'age',
+        status: 'condition_met'
+      }
+      expect(evaluation_hash).to eq(expected_result)
+    end
+  end
+  describe '#evaluate_conditional_skip_set ' do
+    it 'takes a set_object, with a patient_dob, patient_vaccine_doses, ' \
+        'antigen_administered_record and returns a status hash' do
+      set_object       = conditional_set1a
+      patient_dob      = test_patient.dob
+      vaccine_doses    = test_patient.vaccine_doses
+      vaccine_dose     = vaccine_doses.first
+      date_of_dose     = vaccine_dose.date_administered
+      evaluation_hash  = test_object.evaluate_conditional_skip_set(
+        set_object,
+        patient_dob,
+        date_of_dose,
+        patient_vaccine_doses: vaccine_doses
+      )
+      expected_result = {
+        evaluated: 'conditional_skip_condition',
+        reason: 'age',
+        status: 'condition_met'
+      }
+      expect(evaluation_hash).to eq(expected_result)
+    end
+  end
+  describe '#evaluate_conditional_skip ' do
+    it 'takes a condition with condition, patient_dob, date_of_dose, ' \
+    'patient_vaccine_doses, date_of_previous_dose and returns a status hash' do
+      condition_object = condition1a
       patient_dob      = test_patient.dob
       vaccine_doses    = test_patient.vaccine_doses
       vaccine_dose     = vaccine_doses.first
