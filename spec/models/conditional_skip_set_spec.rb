@@ -13,9 +13,9 @@ RSpec.describe ConditionalSkipSet, type: :model do
     end
     it 'has many conditions' do
       conditional_skip_set = FactoryGirl.create(:conditional_skip_set)
-      conditional_skip_set_condition = FactoryGirl.create(:conditional_skip_set_condition)
-      conditional_skip_set.conditions << conditional_skip_set_condition
-      expect(conditional_skip_set.conditions).to include(conditional_skip_set_condition)
+      conditional_skip_condition = FactoryGirl.create(:conditional_skip_condition)
+      conditional_skip_set.conditions << conditional_skip_condition
+      expect(conditional_skip_set.conditions).to include(conditional_skip_condition)
     end
   end
 end

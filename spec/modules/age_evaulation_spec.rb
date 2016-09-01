@@ -13,7 +13,7 @@ RSpec.describe AgeEvaluation do
   end
 
   let(:condition_object) do
-    FactoryGirl.create(:conditional_skip_set_condition)
+    FactoryGirl.create(:conditional_skip_condition)
   end
 
   let(:test_patient) do

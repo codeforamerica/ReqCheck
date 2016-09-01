@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826062127) do
+ActiveRecord::Schema.define(version: 20160901181047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 20160826062127) do
   add_index "antigens_vaccine_infos", ["antigen_id"], name: "index_antigens_vaccine_infos_on_antigen_id", using: :btree
   add_index "antigens_vaccine_infos", ["vaccine_info_id"], name: "index_antigens_vaccine_infos_on_vaccine_info_id", using: :btree
 
-  create_table "conditional_skip_set_conditions", force: :cascade do |t|
+  create_table "conditional_skip_conditions", force: :cascade do |t|
     t.integer  "conditional_skip_set_id"
     t.integer  "condition_id"
     t.string   "condition_type"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20160826062127) do
     t.datetime "updated_at",              null: false
   end
 
-  add_index "conditional_skip_set_conditions", ["conditional_skip_set_id"], name: "index_set_to_conditions_on_set_id", using: :btree
+  add_index "conditional_skip_conditions", ["conditional_skip_set_id"], name: "index_set_to_conditions_on_set_id", using: :btree
 
   create_table "conditional_skip_sets", force: :cascade do |t|
     t.integer  "conditional_skip_id"
@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 20160826062127) do
 
   add_foreign_key "antigen_series", "antigens"
   add_foreign_key "antigen_series_doses", "antigen_series"
-  add_foreign_key "conditional_skip_set_conditions", "conditional_skip_sets"
+  add_foreign_key "conditional_skip_conditions", "conditional_skip_sets"
   add_foreign_key "conditional_skip_sets", "conditional_skips"
   add_foreign_key "conditional_skips", "antigen_series_doses"
   add_foreign_key "vaccine_doses", "patient_profiles"

@@ -268,13 +268,13 @@ class AntigenImporter
         condition_logic: set_hash['conditionLogic']
       }
       conditional_skip_set = ConditionalSkipSet.create(set_arguments)
-      create_conditional_skip_set_conditions(set_hash, conditional_skip_set)
+      create_conditional_skip_conditions(set_hash, conditional_skip_set)
       sets << conditional_skip_set
     end
     sets
   end
 
-  def create_conditional_skip_set_conditions(conditional_skip_set_xml_hash,
+  def create_conditional_skip_conditions(conditional_skip_set_xml_hash,
                                              conditional_skip_set)
     condition_xml_data = conditional_skip_set_xml_hash['condition']
     conditions = []
@@ -295,7 +295,7 @@ class AntigenImporter
         dose_count_logic: condition_hash['doseCountLogic'],
         vaccine_types: condition_hash['vaccineTypes']
       }
-      conditions << ConditionalSkipSetCondition.create(condition_arguments)
+      conditions << ConditionalSkipCondition.create(condition_arguments)
     end
     conditions
   end

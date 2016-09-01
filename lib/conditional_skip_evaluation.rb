@@ -252,10 +252,10 @@ module ConditionalSkipEvaluation
   end
 
   def evaluate_conditional_skip_condition(condition_object,
-                                              patient_dob,
-                                              date_of_dose,
-                                              patient_vaccine_doses: [],
-                                              date_of_previous_dose: nil)
+                                          patient_dob,
+                                          date_of_dose,
+                                          patient_vaccine_doses: [],
+                                          date_of_previous_dose: nil)
     condition_attrs = create_conditional_skip_condition_attributes(
       condition_object,
       date_of_previous_dose,

@@ -173,7 +173,7 @@ RSpec.describe AntigenImporter, type: :model do
           expect(antigen_series.first.doses[2].conditional_skip.sets.first.conditions.length).to eq(2)
           expect(
             antigen_series.first.doses[2].conditional_skip.sets.first.conditions.first.class.name
-          ).to eq('ConditionalSkipSetCondition')
+          ).to eq('ConditionalSkipCondition')
         end
       end
     end
@@ -527,7 +527,7 @@ RSpec.describe AntigenImporter, type: :model do
           multiple_condition_set_hash,
           conditional_skip_set
         )
-        expect(conditions.first.class.name).to eq('ConditionalSkipSetCondition')
+        expect(conditions.first.class.name).to eq('ConditionalSkipCondition')
         expect(conditions.first.condition_id).to eq(1)
         expect(conditions.last.condition_id).to eq(2)
         expect(conditions.length).to eq(2)
