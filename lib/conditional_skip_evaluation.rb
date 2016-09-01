@@ -154,6 +154,74 @@ module ConditionalSkipEvaluation
     evaluated_hash
   end
 
+  def get_conditional_skip_set_condition_status(evaluation_hash)
+    status_hash = { evaluated: 'conditional_skip_condition' }
+    status_hash[:status] = nil
+
+    if evaluation_hash[:begin_age] == false ||
+       evaluation_hash[:end_age] == false
+      status_hash[:status] = 'condition_not_met'
+      status_hash[:reason] = 'age'
+    elsif evaluation_hash[:begin_age] == true ||
+       evaluation_hash[:end_age] == true
+      status_hash[:status] = 'condition_met'
+      status_hash[:reason] = 'age'
+    end
+    if status_hash[:status] != 'condition_not_met'
+      if evaluation_hash[:start_date] == false ||
+         evaluation_hash[:end_date] == false
+        status_hash[:status] = 'condition_not_met'
+        status_hash[:reason] = 'dose_timing'
+      elsif status_hash[:status].nil? &&
+            (evaluation_hash[:start_date] == true ||
+             evaluation_hash[:end_date] == true)
+        status_hash[:status] = 'condition_met'
+        status_hash[:reason] = 'dose_timing'
+      end
+    end
+    if status_hash[:status] != 'condition_not_met'
+      if evaluation_hash[:interval_date] == false ||
+         evaluation_hash[:end_date] == false
+        status_hash[:status] = 'condition_not_met'
+        status_hash[:reason] = 'interval'
+      elsif status_hash[:status].nil? &&
+            (evaluation_hash[:interval_date] == true ||
+             evaluation_hash[:end_date] == true)
+        status_hash[:status] = 'condition_met'
+        status_hash[:reason] = 'interval'
+      end
+    end
+    status_hash
+  end
+
+  def evaluate_conditional_skip_set(set_logic, condition_statuses_array)
+    if condition_statuses_array == []
+      raise ArgumentError.new('Conditional Status Array cannot be empty')
+    end
+    status_hash = { evaluated: 'conditional_skip_set' }
+    status_hash[:status] = nil
+
+    # conditional_eval = Proc.new {|condition_status| condition_status[:status] == 'condition_met' }
+    if set_logic == 'AND'
+      if condition_statuses_array.all? do |condition_status|
+        condition_status[:status] == 'condition_met'
+      end
+        status_hash[:status] = 'set_met'
+      else
+        status_hash[:status] = 'set_not_met'
+      end
+    elsif set_logic == 'OR'
+      if condition_statuses_array.any? do |condition_status|
+        condition_status[:status] == 'condition_met'
+      end
+        status_hash[:status] = 'set_met'
+      else
+        status_hash[:status] = 'set_not_met'
+      end
+    end
+    status_hash
+  end
+
   def evaluate_conditional_skip_set_condition(condition_object,
                                               patient_dob,
                                               date_of_dose,
@@ -168,7 +236,6 @@ module ConditionalSkipEvaluation
       condition_attrs,
       date_of_dose
     )
-    byebug
   end
 
 

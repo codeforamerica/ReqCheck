@@ -731,7 +731,81 @@ RSpec.describe ConditionalSkipEvaluation do
     end
   end
   describe '#get_conditional_skip_set_condition_status' do
+    # This logic is defined on page 50 of the CDC logic spec
+    let(:eval_hash) do
+      { begin_age: nil,
+        start_date: nil,
+        end_age: nil,
+        end_date: nil,
+        interval_date: nil }
+    end
 
+    [
+      ['begin_age', true, 'condition_met', 'age'],
+      ['begin_age', false, 'condition_not_met', 'age'],
+      ['end_age', true, 'condition_met', 'age'],
+      ['end_age', false, 'condition_not_met', 'age'],
+      ['start_date', true, 'condition_met', 'dose_timing'],
+      ['start_date', false, 'condition_not_met', 'dose_timing'],
+      ['end_date', true, 'condition_met', 'dose_timing'],
+      ['end_date', false, 'condition_not_met', 'dose_timing'],
+      ['interval_date', true, 'condition_met', 'interval'],
+      ['interval_date', false, 'condition_not_met', 'interval']
+    ].each do |test_array|
+      input_key, input_value, expected_status, expected_reason = test_array
+      evaluated = 'conditional_skip_condition'
+
+      it "returns status: #{expected_status}, reason: #{expected_reason}, " \
+         "evaluated: #{evaluated} for #{input_key}: #{input_value}" do
+         eval_hash[input_key.to_sym] = input_value
+
+         status_hash = test_object.get_conditional_skip_set_condition_status(
+           eval_hash
+         )
+         expect(status_hash[:status]).to eq(expected_status)
+         expect(status_hash[:reason]).to eq(expected_reason)
+         expect(status_hash[:evaluated]).to eq(evaluated)
+      end
+    end
+  end
+  describe '#evaluate_conditional_skip_set' do
+    condition_statuses_hash = {
+      all_met:  [{status: 'condition_met'}, {status: 'condition_met'}],
+      one_met:  [{status: 'condition_met'}, {status: 'condition_not_met'}],
+      none_met: [{status: 'condition_not_met'}, {status: 'condition_not_met'}]
+    }
+
+    {
+      AND: [['all_met', 'set_met'],
+            ['one_met', 'set_not_met'],
+            ['none_met', 'set_not_met']
+           ],
+      OR: [['all_met', 'set_met'],
+           ['one_met', 'set_met'],
+           ['none_met', 'set_not_met']
+          ]
+    }.each do |set_logic, value_arrays|
+      value_arrays.each do |value_array|
+        expected_status    = value_array[1]
+        statuses_key       = value_array[0]
+        condition_statuses = condition_statuses_hash[statuses_key.to_sym]
+        it "takes condition_logic #{set_logic} with condition statuses " \
+           "with #{statuses_key} and returns status: #{expected_status}" do
+          result_hash = test_object.evaluate_conditional_skip_set(
+            set_logic.to_s,
+            condition_statuses
+          )
+          expect(result_hash[:status]).to eq(expected_status)
+          expect(result_hash[:evaluated]).to eq('conditional_skip_set')
+        end
+      end
+    end
+
+    it 'raises an error if the condition_statuses_array is empty' do
+      expect{
+        test_object.evaluate_conditional_skip_set('AND', [])
+      }.to raise_exception(ArgumentError)
+    end
   end
   describe '#evaluate_conditional_skip_set_condition' do
     it 'takes a condition with condition, patient_dob, date_of_dose, ' \
