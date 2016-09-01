@@ -101,7 +101,6 @@ module ConditionalSkipEvaluation
       end
       true
     end
-
     matched_vaccines.count
   end
 
@@ -153,6 +152,23 @@ module ConditionalSkipEvaluation
       evaluated_hash[result_attr.to_sym] = result
     end
     evaluated_hash
+  end
+
+  def evaluate_conditional_skip_set_condition(condition_object,
+                                              patient_dob,
+                                              date_of_dose,
+                                              patient_vaccine_doses: [],
+                                              date_of_previous_dose: nil)
+    condition_attrs = create_conditional_skip_set_condition_attributes(
+      condition_object,
+      date_of_previous_dose,
+      patient_dob
+    )
+    condition_evaluation = evaluate_conditional_skip_set_condition_attributes(
+      condition_attrs,
+      date_of_dose
+    )
+    byebug
   end
 
 

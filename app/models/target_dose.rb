@@ -25,21 +25,6 @@ class TargetDose
     end
   end
 
-
-
-    # Date Administered
-    # Patient Immunization History Administered - Dose Count
-    #     # when 'Age'
-    #   result = validate_date_equal_or_after(condition_attrs['begin_age_date'],
-    #                                         date_of_dose)
-    #   if condition_attrs['end_age_date']
-    #   end
-    #   evaluate begin_age
-    #   evaluate end_age? => need to look into this morer
-    # when 'Interval'
-    # when 'Vaccine Count by Age'
-    # when 'Vaccine Count by Date'
-
   def evaluate_antigen_administered_record(antigen_administered_record)
     if !@status_hash.nil? && @status_hash[:status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
@@ -51,16 +36,7 @@ class TargetDose
                     antigen_administered_record.date_administered
                   )
     age_status = get_age_status(result_hash)
-
-
-
   end
-
-# A patient's reference dose date must be calculated as the
-# date administered of the most immediate previous vaccine
-# dose administered which has evaluation status “Valid” or “Not
-# Valid” if from immediate previous dose administered is “Y”.
-
 
   def has_conditional_skip?
     !self.antigen_series_dose.conditional_skip.nil?
@@ -82,8 +58,6 @@ class TargetDose
     end
   end
 
-
-
   def satisfy_target_dose
     # Evaluate Conditional Skip
     # Evaluate Age
@@ -94,7 +68,6 @@ class TargetDose
     # Evaluate Allowable Vaccine
     # Evaluate Gender
     # Satisfy Target Dose
-
   end
 
   # def evaluate_vs_antigen_administered_record(antigen_administered_record)
@@ -104,3 +77,24 @@ class TargetDose
   #   end
   # end
 end
+
+
+
+# Date Administered
+# Patient Immunization History Administered - Dose Count
+#     # when 'Age'
+#   result = validate_date_equal_or_after(condition_attrs['begin_age_date'],
+#                                         date_of_dose)
+#   if condition_attrs['end_age_date']
+#   end
+#   evaluate begin_age
+#   evaluate end_age? => need to look into this morer
+# when 'Interval'
+# when 'Vaccine Count by Age'
+# when 'Vaccine Count by Date'
+
+# A patient's reference dose date must be calculated as the
+# date administered of the most immediate previous vaccine
+# dose administered which has evaluation status “Valid” or “Not
+# Valid” if from immediate previous dose administered is “Y”.
+
