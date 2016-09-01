@@ -7,9 +7,9 @@ RSpec.describe ConditionalSkipSetCondition, type: :model do
   end
   describe 'relationships' do
     it 'belongs to skip_set' do
-      set_condition = FactoryGirl.create(:conditional_skip_set_condition)
-      cs_set = FactoryGirl.create(:conditional_skip_set, conditions: [set_condition])
-      expect(set_condition.skip_set).to eq(cs_set)
+      condition = FactoryGirl.create(:conditional_skip_condition)
+      cs_set = FactoryGirl.create(:conditional_skip_set, conditions: [condition])
+      expect(condition.skip_set).to eq(cs_set)
     end
   end
 end

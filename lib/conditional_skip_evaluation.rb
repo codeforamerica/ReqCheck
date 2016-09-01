@@ -7,7 +7,7 @@ module ConditionalSkipEvaluation
   #   then it is valid. If not, then it is not and should not be included - But is
   #   this true?
 
-  def create_conditional_skip_set_condition_attributes(
+  def create_conditional_skip_condition_attributes(
     condition,
     previous_dose_date,
     dob
@@ -117,7 +117,7 @@ module ConditionalSkipEvaluation
     end
   end
 
-  def evaluate_conditional_skip_set_condition_attributes(condition_attrs,
+  def evaluate_conditional_skip_condition_attributes(condition_attrs,
                                                          date_of_dose)
     # TABLE 6-7 CONDITIONAL TYPE OF COMPLETED SERIES – IS THE CONDITION MET?
     # How to evaluate this component?
@@ -154,7 +154,7 @@ module ConditionalSkipEvaluation
     evaluated_hash
   end
 
-  def get_conditional_skip_set_condition_status(evaluation_hash)
+  def get_conditional_skip_condition_status(evaluation_hash)
     status_hash = { evaluated: 'conditional_skip_condition' }
     status_hash[:status] = nil
 
@@ -251,20 +251,21 @@ module ConditionalSkipEvaluation
 
   end
 
-  def evaluate_conditional_skip_set_condition(condition_object,
+  def evaluate_conditional_skip_condition(condition_object,
                                               patient_dob,
                                               date_of_dose,
                                               patient_vaccine_doses: [],
                                               date_of_previous_dose: nil)
-    condition_attrs = create_conditional_skip_set_condition_attributes(
+    condition_attrs = create_conditional_skip_condition_attributes(
       condition_object,
       date_of_previous_dose,
       patient_dob
     )
-    condition_evaluation = evaluate_conditional_skip_set_condition_attributes(
+    condition_evaluation = evaluate_conditional_skip_condition_attributes(
       condition_attrs,
       date_of_dose
     )
+    get_conditional_skip_condition_status(condition_evaluation)
   end
 
 

@@ -8,7 +8,7 @@ RSpec.describe AntigenImporter, type: :model do
       expect(antigen_importer.class.name).to eq('AntigenImporter')
     end
   end
-  
+
   describe '#xml_to_hash' do
     it 'takes an xml string and returns a hash' do
       xml_string = TestAntigen::ANTIGENSTRING
@@ -46,7 +46,7 @@ RSpec.describe AntigenImporter, type: :model do
 
   describe 'pulling data from the xml hash' do
     let(:antigen_importer) { AntigenImporter.new }
-    let(:xml_string) { TestAntigen::ANTIGENSTRING } 
+    let(:xml_string) { TestAntigen::ANTIGENSTRING }
     let(:xml_hash) { antigen_importer.xml_to_hash(xml_string) }
 
     describe '#import_antigen_xml_files' do
@@ -96,7 +96,7 @@ RSpec.describe AntigenImporter, type: :model do
 
       it 'can take a single antigen_series attribute' do
         antigen_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGZOSTER)
-        
+
         antigen_series = antigen_importer.create_all_antigen_series(antigen_hash, antigen_object)
         expect(antigen_series.first.class.name).to eq('AntigenSeries')
         expect(antigen_series.length).to eq(1)
@@ -169,7 +169,7 @@ RSpec.describe AntigenImporter, type: :model do
           ).to eq('ConditionalSkipSet')
         end
 
-        it 'creates all conditional_skip_set_conditions' do
+        it 'creates all conditional_skip_conditions' do
           expect(antigen_series.first.doses[2].conditional_skip.sets.first.conditions.length).to eq(2)
           expect(
             antigen_series.first.doses[2].conditional_skip.sets.first.conditions.first.class.name
@@ -181,7 +181,7 @@ RSpec.describe AntigenImporter, type: :model do
     describe '#create_antigen_series_doses' do
       let(:antigen_series) { FactoryGirl.create(:antigen_series) }
       let(:series_xml_hash) { xml_hash["antigenSupportingData"]["series"][0] }
-    
+
       it 'antigen_series_hash:hash, antigen_series:object => array of antigen_series_dose objects' do
         expect(antigen_series.doses).to eq([])
         antigen_importer.create_antigen_series_doses(
@@ -474,9 +474,9 @@ RSpec.describe AntigenImporter, type: :model do
         end
       end
     end
-    
+
     describe '#create_conditional_skip_sets' do
-      let(:single_set_conditional_skip_hash) do
+      let(:single_conditional_skip_hash) do
         xml_hash["antigenSupportingData"]["series"][0]["seriesDose"][2]['conditionalSkip']
       end
       let(:multiple_sets_conditional_skip_hash) do
@@ -497,7 +497,7 @@ RSpec.describe AntigenImporter, type: :model do
       end
       it 'can take a conditional_skip hash with a hash of one set' do
         sets = antigen_importer.create_conditional_skip_sets(
-          single_set_conditional_skip_hash,
+          single_conditional_skip_hash,
           conditional_skip
         )
         expect(sets.length).to eq(1)
@@ -512,7 +512,7 @@ RSpec.describe AntigenImporter, type: :model do
     end
 
 
-    describe '#create_conditional_skip_set_conditions' do
+    describe '#create_conditional_skip_conditions' do
       let(:single_condition_set_hash) do
         new_xml_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGDIPHTHERIA)
         new_xml_hash["antigenSupportingData"]["series"]["seriesDose"][0]['conditionalSkip']["set"][0]
@@ -523,7 +523,7 @@ RSpec.describe AntigenImporter, type: :model do
       let(:conditional_skip_set) { FactoryGirl.create(:conditional_skip_set) }
 
       it 'conditional_skip_set_hash:hash, conditional_skip_set:object => array of conditions' do
-        conditions = antigen_importer.create_conditional_skip_set_conditions(
+        conditions = antigen_importer.create_conditional_skip_conditions(
           multiple_condition_set_hash,
           conditional_skip_set
         )
@@ -533,14 +533,14 @@ RSpec.describe AntigenImporter, type: :model do
         expect(conditions.length).to eq(2)
       end
       it 'can take a conditional_skip_set hash with a hash of one condition' do
-        conditions = antigen_importer.create_conditional_skip_set_conditions(
+        conditions = antigen_importer.create_conditional_skip_conditions(
           single_condition_set_hash,
           conditional_skip_set
         )
         expect(conditions.length).to eq(1)
       end
       it 'takes an conditional_skip_set hash with an array with many conditions' do
-        conditions = antigen_importer.create_conditional_skip_set_conditions(
+        conditions = antigen_importer.create_conditional_skip_conditions(
           multiple_condition_set_hash,
           conditional_skip_set
         )
