@@ -194,15 +194,15 @@ module ConditionalSkipEvaluation
     status_hash
   end
 
-  def evaluate_conditional_skip_set(set_logic, condition_statuses_array)
+  def evaluate_conditional_skip_set(condition_logic, condition_statuses_array)
     if condition_statuses_array == []
-      raise ArgumentError.new('Conditional Status Array cannot be empty')
+      raise ArgumentError.new('Condition Status Array cannot be empty')
     end
     status_hash = { evaluated: 'conditional_skip_set' }
     status_hash[:status] = nil
 
     # conditional_eval = Proc.new {|condition_status| condition_status[:status] == 'condition_met' }
-    if set_logic == 'AND'
+    if condition_logic == 'AND'
       if condition_statuses_array.all? do |condition_status|
         condition_status[:status] == 'condition_met'
       end
@@ -210,7 +210,7 @@ module ConditionalSkipEvaluation
       else
         status_hash[:status] = 'set_not_met'
       end
-    elsif set_logic == 'OR'
+    elsif condition_logic == 'OR'
       if condition_statuses_array.any? do |condition_status|
         condition_status[:status] == 'condition_met'
       end
@@ -220,6 +220,35 @@ module ConditionalSkipEvaluation
       end
     end
     status_hash
+  end
+
+  def evaluate_conditional_skip(set_logic, set_statuses_array)
+    if set_statuses_array == []
+      raise ArgumentError.new('Set Status Array cannot be empty')
+    end
+    status_hash = { evaluated: 'conditional_skip' }
+    status_hash[:status] = nil
+
+    # conditional_eval = Proc.new {|set_status| set_status[:status] == 'set_met' }
+    if set_logic == 'AND'
+      if set_statuses_array.all? do |set_status|
+        set_status[:status] == 'set_met'
+      end
+        status_hash[:status] = 'conditional_skip_met'
+      else
+        status_hash[:status] = 'conditional_skip_not_met'
+      end
+    elsif set_logic == 'OR'
+      if set_statuses_array.any? do |set_status|
+        set_status[:status] == 'set_met'
+      end
+        status_hash[:status] = 'conditional_skip_met'
+      else
+        status_hash[:status] = 'conditional_skip_not_met'
+      end
+    end
+    status_hash
+
   end
 
   def evaluate_conditional_skip_set_condition(condition_object,
