@@ -20,10 +20,15 @@ module ConditionalSkipEvaluation
     time_attributes = %w(begin_age end_age)
     condition_attrs = create_calculated_dates(time_attributes, condition,
                                               dob, condition_attrs)
-
-    expected_interval_date = create_patient_age_date(condition.interval,
+    if previous_dose_date.nil? &&
+       (!condition.interval.nil? &&
+        condition.interval != '')
+       raise ArgumentError.new('No previous dose date and interval required')
+    else
+      expected_interval_date = create_patient_age_date(condition.interval,
                                                      previous_dose_date)
-    condition_attrs[:interval_date] = expected_interval_date
+      condition_attrs[:interval_date] = expected_interval_date
+    end
 
     ['start_date', 'end_date'].each do |attribute|
       condition_attribute = condition.read_attribute(attribute)
@@ -203,23 +208,24 @@ module ConditionalSkipEvaluation
     status_hash[:status] = nil
 
     # conditional_eval = Proc.new {|condition_status| condition_status[:status] == 'condition_met' }
+    met, not_met = condition_statuses_array.partition do |condition_status|
+      condition_status[:status] == 'condition_met'
+    end
     if condition_logic == 'AND'
-      if condition_statuses_array.all? do |condition_status|
-        condition_status[:status] == 'condition_met'
-      end
+      if not_met.length.zero?
         status_hash[:status] = 'set_met'
       else
         status_hash[:status] = 'set_not_met'
       end
     elsif condition_logic == 'OR'
-      if condition_statuses_array.any? do |condition_status|
-        condition_status[:status] == 'condition_met'
-      end
+      if !met.length.zero?
         status_hash[:status] = 'set_met'
       else
         status_hash[:status] = 'set_not_met'
       end
     end
+    status_hash[:met_conditions] = met
+    status_hash[:not_met_conditions] = not_met
     status_hash
   end
 
@@ -253,8 +259,8 @@ module ConditionalSkipEvaluation
   end
 
   def evaluate_conditional_skip_condition(condition_object,
-                                          patient_dob,
-                                          date_of_dose,
+                                          patient_dob:,
+                                          date_of_dose:,
                                           patient_vaccine_doses: [],
                                           date_of_previous_dose: nil)
     condition_attrs = create_conditional_skip_condition_attributes(
@@ -269,21 +275,22 @@ module ConditionalSkipEvaluation
     get_conditional_skip_condition_status(condition_evaluation)
   end
 
-  def evaluate_conditional_skip_set(condition_object)
-    #                                       patient_dob,
-    #                                       date_of_dose,
-    #                                       patient_vaccine_doses: [],
-    #                                       date_of_previous_dose: nil)
-    # condition_attrs = create_conditional_skip_condition_attributes(
-    #   condition_object,
-    #   date_of_previous_dose,
-    #   patient_dob
-    # )
-    # condition_evaluation = evaluate_conditional_skip_condition_attributes(
-    #   condition_attrs,
-    #   date_of_dose
-    # )
-    # get_conditional_skip_condition_status(condition_evaluation)
+  def evaluate_conditional_skip_set(set_object,
+                                    patient_dob:,
+                                    date_of_dose:,
+                                    patient_vaccine_doses: [],
+                                    date_of_previous_dose: nil)
+    condition_statuses = set_object.conditions.map do |condition|
+      evaluate_conditional_skip_condition(
+        condition,
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: patient_vaccine_doses,
+        date_of_previous_dose: date_of_previous_dose
+      )
+    end
+    get_conditional_skip_set_status(set_object.condition_logic,
+                                    condition_statuses)
   end
 
 

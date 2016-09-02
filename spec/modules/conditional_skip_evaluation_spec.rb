@@ -186,6 +186,50 @@ RSpec.describe ConditionalSkipEvaluation do
       expect(eval_hash[:end_date]).to eq(expected_date)
       expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
     end
+    it 'creates a interval_date attribute when interval defined' do
+      test_condition_object.interval = '6 months'
+      test_condition_object.condition_type = 'Interval'
+      expected_date = prev_dose_date + 6.months
+
+      eval_hash =
+        test_object.create_conditional_skip_condition_attributes(
+          test_condition_object,
+          prev_dose_date,
+          dob
+        )
+
+      expect(eval_hash[:interval_date]).to eq(expected_date)
+      expect(eval_hash[:condition_type]).to eq('Interval')
+    end
+    it 'raises error when previous_dose_date is nil and interval defined' do
+      test_condition_object.interval = '6 months'
+      test_condition_object.condition_type = 'Interval'
+      prev_dose_date = nil
+
+      expect{
+        test_object.create_conditional_skip_condition_attributes(
+          test_condition_object,
+          prev_dose_date,
+          dob
+        )
+      }.to raise_exception(ArgumentError)
+    end
+    it 'raises no error when previous_dose_date nil and no interval defined' do
+      test_condition_object.interval = nil
+      test_condition_object.end_date = '20160630'
+      test_condition_object.condition_type = 'Vaccine Count by Date'
+      prev_dose_date = nil
+      expected_date = Date.strptime('20160630', '%Y%m%d')
+
+      eval_hash =
+        test_object.create_conditional_skip_condition_attributes(
+          test_condition_object,
+          prev_dose_date,
+          dob
+        )
+      expect(eval_hash[:end_date]).to eq(expected_date)
+      expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+    end
     it 'creates an assessment_date attribute equal to current date' do
       expected_date = Date.today
 
@@ -769,10 +813,13 @@ RSpec.describe ConditionalSkipEvaluation do
     end
   end
   describe '#get_conditional_skip_set_status ' do
-    condition_statuses_hash = {
-      all_met:  [{status: 'condition_met'}, {status: 'condition_met'}],
-      one_met:  [{status: 'condition_met'}, {status: 'condition_not_met'}],
-      none_met: [{status: 'condition_not_met'}, {status: 'condition_not_met'}]
+    condition_statuses = {
+      all_met:  [{status: 'condition_met', reason: 'age'},
+                 {status: 'condition_met', reason: 'interval'}],
+      one_met:  [{status: 'condition_met', reason: 'age'},
+                 {status: 'condition_not_met', reason: 'interval'}],
+      none_met: [{status: 'condition_not_met', reason: 'age'},
+                 {status: 'condition_not_met', reason: 'interval'}]
     }
 
     {
@@ -788,15 +835,31 @@ RSpec.describe ConditionalSkipEvaluation do
       value_arrays.each do |value_array|
         expected_status    = value_array[1]
         statuses_key       = value_array[0]
-        condition_statuses = condition_statuses_hash[statuses_key.to_sym]
+        statuses = condition_statuses[statuses_key.to_sym]
         it "takes condition_logic #{condition_logic} with condition statuses" \
            " with #{statuses_key} and returns status: #{expected_status}" do
           result_hash = test_object.get_conditional_skip_set_status(
             condition_logic.to_s,
-            condition_statuses
+            statuses
           )
           expect(result_hash[:status]).to eq(expected_status)
           expect(result_hash[:evaluated]).to eq('conditional_skip_set')
+          if statuses_key == 'all_met'
+            expect(result_hash[:met_conditions])
+              .to eq(condition_statuses[:all_met])
+            expect(result_hash[:not_met_conditions])
+              .to eq([])
+          elsif statuses_key == 'none_met'
+            expect(result_hash[:met_conditions])
+              .to eq([])
+            expect(result_hash[:not_met_conditions])
+              .to eq(condition_statuses[:none_met])
+          else
+            expect(result_hash[:met_conditions])
+              .to eq([condition_statuses[:one_met][0]])
+            expect(result_hash[:not_met_conditions])
+              .to eq([condition_statuses[:one_met][1]])
+          end
         end
       end
     end
@@ -856,8 +919,8 @@ RSpec.describe ConditionalSkipEvaluation do
       date_of_dose     = vaccine_dose.date_administered
       evaluation_hash = test_object.evaluate_conditional_skip_condition(
         condition_object,
-        patient_dob,
-        date_of_dose,
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
         patient_vaccine_doses: vaccine_doses
       )
       expected_result = {
@@ -870,22 +933,24 @@ RSpec.describe ConditionalSkipEvaluation do
   end
   describe '#evaluate_conditional_skip_set ' do
     it 'takes a set_object, with a patient_dob, patient_vaccine_doses, ' \
-        'antigen_administered_record and returns a status hash' do
-      set_object       = conditional_set1a
-      patient_dob      = test_patient.dob
-      vaccine_doses    = test_patient.vaccine_doses
-      vaccine_dose     = vaccine_doses.first
-      date_of_dose     = vaccine_dose.date_administered
-      evaluation_hash  = test_object.evaluate_conditional_skip_set(
+        'date_of_dose and returns a status hash' do
+      set_object         = conditional_set1a
+      patient_dob        = test_patient.dob
+      vaccine_doses      = test_patient.vaccine_doses
+      vaccine_dose       = vaccine_doses.last
+      date_of_dose       = vaccine_dose.date_administered
+      previous_dose_date = vaccine_doses.first.date_administered
+      evaluation_hash    = test_object.evaluate_conditional_skip_set(
         set_object,
-        patient_dob,
-        date_of_dose,
-        patient_vaccine_doses: vaccine_doses
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: vaccine_doses,
+        date_of_previous_dose: previous_dose_date
       )
       expected_result = {
-        evaluated: 'conditional_skip_condition',
-        reason: 'age',
-        status: 'condition_met'
+        evaluated: 'conditional_skip_set',
+        conditions_met: ['age', 'interval'],
+        status: 'set_met'
       }
       expect(evaluation_hash).to eq(expected_result)
     end
