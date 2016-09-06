@@ -55,7 +55,7 @@ RSpec.describe ConditionalSkipEvaluation do
     )
   end
   let(:conditional_skip_object) do
-    FactoryGirl.create(:conditional_skip_set,
+    FactoryGirl.create(:conditional_skip,
                        set_logic: 'n/a',
                        sets: [conditional_set1a])
   end
@@ -949,32 +949,138 @@ RSpec.describe ConditionalSkipEvaluation do
       )
       expected_result = {
         evaluated: 'conditional_skip_set',
-        conditions_met: ['age', 'interval'],
+        met_conditions: [
+          {
+            evaluated: "conditional_skip_condition",
+            status: "condition_met",
+            reason: "age"
+          },
+          {
+            evaluated: "conditional_skip_condition",
+            status: "condition_met",
+            reason: "interval"
+          },
+        ],
+        not_met_conditions: [],
         status: 'set_met'
+      }
+      expect(evaluation_hash).to eq(expected_result)
+    end
+    it 'returns conditions_met and conditions_not_met arrays' do
+      set_object         = conditional_set1a
+      patient_dob        = 3.years.ago.to_date
+      vaccine_doses      = test_patient.vaccine_doses
+      vaccine_dose       = vaccine_doses.last
+      date_of_dose       = vaccine_dose.date_administered
+      previous_dose_date = vaccine_doses.first.date_administered
+      evaluation_hash    = test_object.evaluate_conditional_skip_set(
+        set_object,
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: vaccine_doses,
+        date_of_previous_dose: previous_dose_date
+      )
+      expected_result = {
+        evaluated: 'conditional_skip_set',
+        met_conditions: [
+          {
+            evaluated: "conditional_skip_condition",
+            status: "condition_met",
+            reason: "interval"
+          }
+        ],
+        not_met_conditions: [
+          {
+            evaluated: "conditional_skip_condition",
+            status: "condition_not_met",
+            reason: "age"
+          }
+        ],
+        status: 'set_not_met'
       }
       expect(evaluation_hash).to eq(expected_result)
     end
   end
   describe '#evaluate_conditional_skip ' do
-    it 'takes a condition with condition, patient_dob, date_of_dose, ' \
-    'patient_vaccine_doses, date_of_previous_dose and returns a status hash' do
-      condition_object = condition1a
-      patient_dob      = test_patient.dob
-      vaccine_doses    = test_patient.vaccine_doses
-      vaccine_dose     = vaccine_doses.first
-      date_of_dose     = vaccine_dose.date_administered
-      evaluation_hash = test_object.evaluate_conditional_skip_condition(
-        condition_object,
-        patient_dob,
-        date_of_dose,
-        patient_vaccine_doses: vaccine_doses
+    it 'takes a conditional_skip_object with date_of_dose, patient_dob, ' \
+       'patient_vaccine_doses and returns a status hash' do
+      patient_dob             = test_patient.dob
+      vaccine_doses           = test_patient.vaccine_doses
+      vaccine_dose            = vaccine_doses.last
+      date_of_dose            = vaccine_dose.date_administered
+      previous_dose_date      = vaccine_doses.first.date_administered
+      evaluation_hash = test_object.evaluate_conditional_skip(
+        conditional_skip_object,
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: vaccine_doses,
+        date_of_previous_dose: previous_dose_date
       )
       expected_result = {
-        evaluated: 'conditional_skip_condition',
-        reason: 'age',
-        status: 'condition_met'
+        evaluated: 'conditional_skip',
+        met_sets: [
+          {
+            evaluated: 'conditional_skip_set',
+            met_conditions: [
+              {
+                evaluated: "conditional_skip_condition",
+                status: "condition_met",
+                reason: "age"
+              },
+              {
+                evaluated: "conditional_skip_condition",
+                status: "condition_met",
+                reason: "interval"
+              }
+            ],
+            not_met_conditions: [],
+            status: 'set_met'
+          }
+        ],
+        not_met_sets: [],
+        status: 'conditional_skip_met'
       }
-      expect(evaluation_hash).to eq({status: 'GOOD'})
+      expect(evaluation_hash).to eq(expected_result)
+    end
+    it 'returns sets_met_and sets_not_met arrays' do
+      patient_dob             = 3.years.ago.to_date
+      vaccine_doses           = test_patient.vaccine_doses
+      vaccine_dose            = vaccine_doses.last
+      date_of_dose            = vaccine_dose.date_administered
+      previous_dose_date      = vaccine_doses.first.date_administered
+      evaluation_hash = test_object.evaluate_conditional_skip(
+        conditional_skip_object,
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: vaccine_doses,
+        date_of_previous_dose: previous_dose_date
+      )
+      expected_result = {
+        evaluated: 'conditional_skip',
+        met_sets: [],
+        not_met_sets: [
+          {
+            evaluated: 'conditional_skip_set',
+            met_conditions: [
+              {
+                evaluated: "conditional_skip_condition",
+                status: "condition_met",
+                reason: "interval"
+              }
+            ],
+            not_met_conditions: [
+              {
+                evaluated: "conditional_skip_condition",
+                status: "condition_not_met",
+                reason: "age"
+              }
+            ],
+            status: 'set_not_met'
+          }
+        ],
+        status: 'conditional_skip_not_met'
+      }
+      expect(evaluation_hash).to eq(expected_result)
     end
   end
 end

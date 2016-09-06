@@ -236,26 +236,26 @@ module ConditionalSkipEvaluation
     status_hash = { evaluated: 'conditional_skip' }
     status_hash[:status] = nil
 
-    # conditional_eval = Proc.new {|set_status| set_status[:status] == 'set_met' }
-    if set_logic == 'AND'
-      if set_statuses_array.all? do |set_status|
-        set_status[:status] == 'set_met'
-      end
+    met, not_met = set_statuses_array.partition do |set_status|
+      set_status[:status] == 'set_met'
+    end
+
+    if set_logic == 'AND' || set_logic == 'n/a'
+      if not_met.length.zero?
         status_hash[:status] = 'conditional_skip_met'
       else
         status_hash[:status] = 'conditional_skip_not_met'
       end
     elsif set_logic == 'OR'
-      if set_statuses_array.any? do |set_status|
-        set_status[:status] == 'set_met'
-      end
+      if !met.length.zero?
         status_hash[:status] = 'conditional_skip_met'
       else
         status_hash[:status] = 'conditional_skip_not_met'
       end
     end
+    status_hash[:met_sets] = met
+    status_hash[:not_met_sets] = not_met
     status_hash
-
   end
 
   def evaluate_conditional_skip_condition(condition_object,
@@ -280,9 +280,9 @@ module ConditionalSkipEvaluation
                                     date_of_dose:,
                                     patient_vaccine_doses: [],
                                     date_of_previous_dose: nil)
-    condition_statuses = set_object.conditions.map do |condition|
+    condition_statuses = set_object.conditions.map do |condition_object|
       evaluate_conditional_skip_condition(
-        condition,
+        condition_object,
         patient_dob: patient_dob,
         date_of_dose: date_of_dose,
         patient_vaccine_doses: patient_vaccine_doses,
@@ -294,7 +294,22 @@ module ConditionalSkipEvaluation
   end
 
 
-  def evaluate_conditional_skip(conditional_skip_object, patient_vaccines)
+  def evaluate_conditional_skip(conditional_skip_object,
+                                patient_dob:,
+                                date_of_dose:,
+                                patient_vaccine_doses: [],
+                                date_of_previous_dose: nil)
+    set_statuses = conditional_skip_object.sets.map do |set_object|
+      evaluate_conditional_skip_set(
+        set_object,
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: patient_vaccine_doses,
+        date_of_previous_dose: date_of_previous_dose
+      )
+    end
+    get_conditional_skip_status(conditional_skip_object.set_logic,
+                                set_statuses)
   end
 
 end

@@ -71,16 +71,18 @@ FactoryGirl.define do
                     'interval from the last dose is 6 months')
     condition_logic 'AND'
 
-    after(:create) do |cond_skip_set|
-      cond_skip_set.conditions << FactoryGirl.create(
-        :conditional_skip_condition
-      )
-      cond_skip_set.conditions << FactoryGirl.create(
-        :conditional_skip_condition,
-        condition_id: 2,
-        condition_type: 'Interval',
-        interval: '6 months - 4 days'
-      )
+    after(:create) do |conditional_skip_set|
+      if conditional_skip_set.conditions.length == 0
+        conditional_skip_set.conditions << FactoryGirl.create(
+          :conditional_skip_condition
+        )
+        conditional_skip_set.conditions << FactoryGirl.create(
+          :conditional_skip_condition,
+          condition_id: 2,
+          condition_type: 'Interval',
+          interval: '6 months - 4 days'
+        )
+      end
     end
   end
 
