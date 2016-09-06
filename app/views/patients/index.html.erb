@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="row align-center">
-<div class="card columns small-8">
+<div class="card columns small-8 patient-info">
 
 <% if @patients.length != 0 %>
   <% if @patients[0].nil? %>
@@ -9,7 +9,7 @@
 <% end %>
 <h1 class="">Search Patients</h1>
 <%= render 'search' %>
-
+<!-- Optional earch results display
 <hr>
 <h2>Search Results</h2>
 <table>
@@ -29,7 +29,6 @@
             <td>26</td>
         </tr>
     </tbody>
-</table> 
-
+</table> -->
 </div>
 </div>

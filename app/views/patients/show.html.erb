@@ -17,8 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><%= @patient.first_name%> <%= @patient.last_name %></td>
+                    <tr><%= @patient.first_name%> <%= @patient.last_name %></td>
                         <td><%= @patient.record_number %></td>
                         <td><%= @patient.dob.strftime("%m/%d/%Y")%></td>
                         <td><%= @patient.age%></td>
