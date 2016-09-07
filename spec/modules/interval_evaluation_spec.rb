@@ -217,7 +217,7 @@ RSpec.describe IntervalEvaluation do
         interval_latest_recommended: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'interval',
+                          evaluated: 'interval',
                           details: 'too_soon' }
       expect(
         test_object.get_interval_status(interval_eval_hash,
@@ -239,7 +239,7 @@ RSpec.describe IntervalEvaluation do
         interval_latest_recommended: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'interval',
+                          evaluated: 'interval',
                           details: 'too_soon' }
       expect(
         test_object.get_interval_status(interval_eval_hash,
@@ -260,7 +260,8 @@ RSpec.describe IntervalEvaluation do
         interval_latest_recommended: true
       }
       expected_result = { status: 'valid',
-                          reason: 'grace_period' }
+                          evaluated: 'interval',
+                          details: 'grace_period' }
       expect(
         test_object.get_interval_status(interval_eval_hash,
                                              prev_status_hash)
@@ -276,7 +277,8 @@ RSpec.describe IntervalEvaluation do
         interval_latest_recommended: true
       }
       expected_result = { status: 'valid',
-                          reason: 'grace_period' }
+                          evaluated: 'interval',
+                          details: 'grace_period' }
       expect(
         test_object.get_interval_status(interval_eval_hash,
                                              prev_status_hash)
@@ -291,11 +293,55 @@ RSpec.describe IntervalEvaluation do
         interval_latest_recommended: true
       }
       expected_result = { status: 'valid',
-                          reason: 'on_schedule' }
+                          evaluated: 'interval',
+                          details: 'on_schedule' }
       expect(
         test_object.get_interval_status(interval_eval_hash,
                                              prev_status_hash)
       ).to eq(expected_result)
+    end
+  end
+  describe '#evaluate_interval' do
+    it 'takes a interval_object with date_of_dose, previous_dose_date, ' \
+       'previous_dose_status_hash and returns a status hash' do
+        interval_object    = FactoryGirl.create(:interval)
+        previous_dose_date = 1.year.ago.to_date
+        date_of_dose       = (1.year.ago + 9.weeks).to_date
+        interval_object.interval_absolute_min         = '5 weeks - 4 days'
+        interval_object.interval_min                  = '5 weeks'
+        interval_object.interval_earliest_recommended = '9 weeks'
+        interval_object.interval_latest_recommended   = '14 weeks'
+        evaluation_hash = test_object.evaluate_interval(
+          interval_object,
+          date_of_dose: date_of_dose,
+          previous_dose_date: previous_dose_date
+        )
+        expected_result = {
+                            status: 'valid',
+                            evaluated: 'interval',
+                            details: 'on_schedule'
+                          }
+        expect(evaluation_hash).to eq(expected_result)
+    end
+    it 'returns invalid for invalid interval between doses' do
+        interval_object    = FactoryGirl.create(:interval)
+        previous_dose_date = 1.year.ago.to_date
+        date_of_dose       = (1.year.ago + 4.weeks).to_date
+        interval_object.interval_absolute_min         = '5 weeks - 4 days'
+        interval_object.interval_min                  = '5 weeks'
+        interval_object.interval_earliest_recommended = '9 weeks'
+        interval_object.interval_latest_recommended   = '14 weeks'
+        evaluation_hash = test_object.evaluate_interval(
+          interval_object,
+          date_of_dose: date_of_dose,
+          previous_dose_date: previous_dose_date
+        )
+        expected_result = {
+                            status: 'invalid',
+                            evaluated: 'interval',
+                            details: 'too_soon'
+                          }
+        expect(evaluation_hash).to eq(expected_result)
     end
   end
 end

@@ -51,10 +51,9 @@ module IntervalEvaluation
 
   def get_interval_status(interval_evaluation_hash,
                           previous_dose_status_hash=nil)
-    interval_status = {}
+    interval_status = { evaluated: 'interval' }
     if interval_evaluation_hash[:interval_absolute_min] == false
       interval_status[:status]  = 'invalid'
-      interval_status[:reason]  = 'interval'
       interval_status[:details] = 'too_soon'
     elsif interval_evaluation_hash[:interval_min] == false
       has_previous_dose = !previous_dose_status_hash.nil?
@@ -72,16 +71,26 @@ module IntervalEvaluation
 
       if is_valid
         interval_status[:status]  = 'valid'
-        interval_status[:reason]  = 'grace_period'
+        interval_status[:details]  = 'grace_period'
       else
         interval_status[:status]  = 'invalid'
-        interval_status[:reason]  = 'interval'
         interval_status[:details] = 'too_soon'
       end
     else
       interval_status[:status]  = 'valid'
-      interval_status[:reason]  = 'on_schedule'
+      interval_status[:details]  = 'on_schedule'
     end
     interval_status
+  end
+
+  def evaluate_interval(interval_object,
+                        previous_dose_date:,
+                        date_of_dose:,
+                        previous_dose_status_hash: nil)
+    interval_attrs = create_interval_attributes(interval_object,
+                                                previous_dose_date)
+    interval_evaluation = evaluate_interval_attrs(interval_attrs,
+                                                  date_of_dose)
+    get_interval_status(interval_evaluation, previous_dose_status_hash)
   end
 end

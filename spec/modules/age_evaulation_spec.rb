@@ -307,7 +307,7 @@ RSpec.describe AgeEvaluation do
                         }
       expect(evaluation_hash).to eq(expected_result)
     end
-    it 'returns sets_met_and sets_not_met arrays' do
+    it 'returns invalid for invalid patient age at dose date' do
       expect(polio_antigen_series_dose.min_age).to eq('6 weeks')
       expect(polio_antigen_series_dose.absolute_min_age)
         .to eq('6 weeks - 4 days')
