@@ -151,7 +151,7 @@ RSpec.describe GenderEvaluation do
     it 'returns valid, gender, for required_gender_valid true' do
       gender_eval_hash = { required_gender_valid: true }
       expected_result = { status: 'valid',
-                          reason: 'gender' }
+                          evaluated: 'gender' }
       expect(test_object.get_gender_status(gender_eval_hash))
         .to eq(expected_result)
     end
@@ -159,9 +159,39 @@ RSpec.describe GenderEvaluation do
     it 'returns invalid, gender, for required_gender_valid true' do
       gender_eval_hash = { required_gender_valid: false }
       expected_result = { status: 'invalid',
-                          reason: 'gender' }
+                          evaluated: 'gender' }
       expect(test_object.get_gender_status(gender_eval_hash))
         .to eq(expected_result)
+    end
+  end
+
+  describe '#evaluate_gender ' do
+    it 'takes a evaluation_antigen_series_dose, patient_gender ' \
+       ' and returns a status hash' do
+      as_dose.required_gender = %w(Female Unknown)
+      patient_gender          = nil
+      evaluation_hash = test_object.evaluate_gender(
+        as_dose,
+        patient_gender: patient_gender
+      )
+      expected_result = {
+                          status: 'valid',
+                          evaluated: 'gender'
+                        }
+      expect(evaluation_hash).to eq(expected_result)
+    end
+    it 'returns invalid for invalid patient gender' do
+      as_dose.required_gender = %w(Female Unknown)
+      patient_gender          = 'male'
+      evaluation_hash = test_object.evaluate_gender(
+        as_dose,
+        patient_gender: patient_gender
+      )
+      expected_result = {
+                          status: 'invalid',
+                          evaluated: 'gender'
+                        }
+      expect(evaluation_hash).to eq(expected_result)
     end
   end
 end
