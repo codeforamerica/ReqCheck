@@ -5,7 +5,8 @@ module PreferableAllowableVaccineEvaluation
 
   include EvaluationBase
 
-  def create_vaccine_attributes(evaluation_antigen_series_dose_vaccine, dob)
+  def create_vaccine_attributes(evaluation_antigen_series_dose_vaccine,
+                                patient_dob)
     vaccine_attrs = {}
     default_values = {
       begin_age_date: '01/01/1900'.to_date,
@@ -15,7 +16,7 @@ module PreferableAllowableVaccineEvaluation
       date_action  = action + '_date'
       age_string   =
         evaluation_antigen_series_dose_vaccine.read_attribute(action)
-      patient_date = create_patient_age_date(age_string, dob)
+      patient_date = create_patient_age_date(age_string, patient_dob)
       vaccine_attrs[date_action.to_sym] = patient_date
     end
     vaccine_attrs[:expected_trade_name] =
@@ -60,24 +61,22 @@ module PreferableAllowableVaccineEvaluation
   end
 
   def get_preferable_vaccine_status(vaccine_evaluation_hash,
-                                        previous_dose_status_hash=nil)
+                                    previous_dose_status_hash=nil)
     vaccine_status = {}
+    vaccine_status[:evaluated] = 'preferable'
     if vaccine_evaluation_hash[:begin_age] == false ||
        vaccine_evaluation_hash[:end_age] == false
         vaccine_status[:status] = 'invalid'
-        vaccine_status[:reason] = 'preferable'
         vaccine_status[:details] = 'out_of_age_range'
     elsif vaccine_evaluation_hash[:trade_name] == false
       vaccine_status[:status] = 'invalid'
-      vaccine_status[:reason] = 'preferable'
       vaccine_status[:details] = 'wrong_trade_name'
     elsif vaccine_evaluation_hash[:volume] == false
       vaccine_status[:status] = 'valid'
-      vaccine_status[:reason] = 'preferable'
       vaccine_status[:details] = 'less_than_recommended_volume'
     else
       vaccine_status[:status] = 'valid'
-      vaccine_status[:reason] = 'preferable'
+      vaccine_status[:details] = 'within_age_trade_name_volume'
     end
     vaccine_status
   end
@@ -85,15 +84,37 @@ module PreferableAllowableVaccineEvaluation
   def get_allowable_vaccine_status(vaccine_evaluation_hash,
                                    previous_dose_status_hash=nil)
     vaccine_status = {}
+    vaccine_status[:evaluated] = 'allowable'
     if vaccine_evaluation_hash[:begin_age] == false ||
        vaccine_evaluation_hash[:end_age] == false
         vaccine_status[:status] = 'invalid'
-        vaccine_status[:reason] = 'allowable'
         vaccine_status[:details] = 'out_of_age_range'
     else
       vaccine_status[:status] = 'valid'
-      vaccine_status[:reason] = 'allowable'
+      vaccine_status[:details] = 'within_age_range'
     end
     vaccine_status
+  end
+
+  def evaluate_preferable_allowable_vaccine(
+    evaluation_antigen_series_dose_vaccine,
+    patient_dob:,
+    date_of_dose:,
+    dose_trade_name:,
+    dose_volume: nil
+  )
+    vaccine_attrs = create_vaccine_attributes(
+      evaluation_antigen_series_dose_vaccine,
+      patient_dob
+    )
+    vaccine_evaluation = evaluate_vaccine_attributes(vaccine_attrs,
+                                                     date_of_dose,
+                                                     dose_trade_name,
+                                                     dose_volume)
+    if evaluation_antigen_series_dose_vaccine.preferable == true
+      get_preferable_vaccine_status(vaccine_evaluation)
+    else
+      get_allowable_vaccine_status(vaccine_evaluation)
+    end
   end
 end

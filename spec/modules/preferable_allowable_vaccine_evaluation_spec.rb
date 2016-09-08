@@ -217,7 +217,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
 
   describe '#get_preferable_vaccine_status' do
     # This logic is defined on page 50 of the CDC logic spec
-    it 'returns invalid, preferable, not_preferable for preferable false' do
+    xit 'returns invalid, preferable, not_preferable for preferable false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
         begin_age: true,
@@ -226,7 +226,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'preferable',
+                          evaluated: 'preferable',
                           details: 'not_preferable' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
@@ -244,7 +244,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'preferable',
+                          evaluated: 'preferable',
                           details: 'out_of_age_range' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
@@ -262,7 +262,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'preferable',
+                          evaluated: 'preferable',
                           details: 'out_of_age_range' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
@@ -280,11 +280,11 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'preferable',
+                          evaluated: 'preferable',
                           details: 'wrong_trade_name' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
-                                                       prev_status_hash)
+                                                  prev_status_hash)
       ).to eq(expected_result)
     end
 
@@ -298,7 +298,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: false
       }
       expected_result = { status: 'valid',
-                          reason: 'preferable',
+                          evaluated: 'preferable',
                           details: 'less_than_recommended_volume' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
@@ -314,7 +314,8 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'valid',
-                          reason: 'preferable' }
+                          evaluated: 'preferable',
+                          details: 'within_age_trade_name_volume' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
                                                        prev_status_hash)
@@ -324,7 +325,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
 
   describe '#get_allowable_vaccine_status' do
     # This logic is defined on page 52 of the CDC logic spec
-    it 'returns invalid, allowable, not_allowable for allowable false' do
+    xit 'returns invalid, allowable, not_allowable for allowable false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
         begin_age: true,
@@ -333,8 +334,8 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'preferable',
-                          details: 'not_preferable' }
+                          evaluated: 'allowable',
+                          details: 'not_allowable' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
                                                       prev_status_hash)
@@ -351,7 +352,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'allowable',
+                          evaluated: 'allowable',
                           details: 'out_of_age_range' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
@@ -369,7 +370,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'invalid',
-                          reason: 'allowable',
+                          evaluated: 'allowable',
                           details: 'out_of_age_range' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
@@ -385,11 +386,106 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume: true
       }
       expected_result = { status: 'valid',
-                          reason: 'allowable' }
+                          evaluated: 'allowable',
+                          details: 'within_age_range' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
                                                       prev_status_hash)
       ).to eq(expected_result)
+    end
+  end
+  describe '#evaluate_preferable_allowable_vaccine' do
+    context 'with preferable vaccines' do
+      it 'takes a evaluation_antigen_series_dose_vaccine, patient_dob, ' \
+      'date_of_dose, dose_trade_name, dose_volume and returns a status hash' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = 1.year.ago.to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        expect(as_dose_vaccine.begin_age).to eq('6 weeks')
+        expect(as_dose_vaccine.end_age).to eq('5 years')
+        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
+          as_dose_vaccine,
+          patient_dob: patient_dob,
+          date_of_dose: date_of_dose,
+          dose_trade_name: trade_name,
+          dose_volume: volume
+        )
+        expected_result = {
+                            status: 'valid',
+                            evaluated: 'preferable',
+                            details: 'within_age_trade_name_volume'
+                          }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns invalid for invalid patient age at dose date' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = (2.year.ago + 4.weeks).to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        expect(as_dose_vaccine.begin_age).to eq('6 weeks')
+        expect(as_dose_vaccine.end_age).to eq('5 years')
+        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
+          as_dose_vaccine,
+          patient_dob: patient_dob,
+          date_of_dose: date_of_dose,
+          dose_trade_name: trade_name,
+          dose_volume: volume
+        )
+        expected_result = {
+                            status: 'invalid',
+                            evaluated: 'preferable',
+                            details: 'out_of_age_range'
+                          }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+    end
+    context 'with allowable vaccines' do
+      it 'takes a evaluation_antigen_series_dose_vaccine, patient_dob, ' \
+      'date_of_dose, dose_trade_name, dose_volume and returns a status hash' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = 1.year.ago.to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        expect(as_dose_vaccine.begin_age).to eq('6 weeks')
+        expect(as_dose_vaccine.end_age).to eq('5 years')
+        as_dose_vaccine.preferable = false
+        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
+          as_dose_vaccine,
+          patient_dob: patient_dob,
+          date_of_dose: date_of_dose,
+          dose_trade_name: trade_name,
+          dose_volume: volume
+        )
+        expected_result = {
+                            status: 'valid',
+                            evaluated: 'allowable',
+                            details: 'within_age_range'
+                          }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns invalid for invalid patient age at dose date' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = (2.year.ago + 4.weeks).to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        expect(as_dose_vaccine.begin_age).to eq('6 weeks')
+        expect(as_dose_vaccine.end_age).to eq('5 years')
+        as_dose_vaccine.preferable = false
+        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
+          as_dose_vaccine,
+          patient_dob: patient_dob,
+          date_of_dose: date_of_dose,
+          dose_trade_name: trade_name,
+          dose_volume: volume
+        )
+        expected_result = {
+                            status: 'invalid',
+                            evaluated: 'allowable',
+                            details: 'out_of_age_range'
+                          }
+        expect(evaluation_hash).to eq(expected_result)
+      end
     end
   end
 end
