@@ -97,7 +97,7 @@ RSpec.describe TargetDoseEvaluation do
         details: 'on_schedule'
       }
 
-      test_object.evaluate_target_dose_satisfied(
+      evaluation_hash = test_object.evaluate_target_dose_satisfied(
         conditional_skip: conditional_skip_object,
         antigen_series_dose: as_dose_object,
         intervals: [],

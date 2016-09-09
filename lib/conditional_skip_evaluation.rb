@@ -8,30 +8,35 @@ module ConditionalSkipEvaluation
   #   this true?
 
   def create_conditional_skip_condition_attributes(
-    condition,
+    condition_object,
     previous_dose_date,
     dob
   )
     condition_attrs = {}
     condition_attrs[:assessment_date] = Date.today.to_date
-    condition_attrs[:condition_id]    = condition.condition_id
-    condition_attrs[:condition_type]  = condition.condition_type
+    condition_attrs[:condition_id]    = condition_object.condition_id
+    condition_attrs[:condition_type]  = condition_object.condition_type
 
     time_attributes = %w(begin_age end_age)
-    condition_attrs = create_calculated_dates(time_attributes, condition,
-                                              dob, condition_attrs)
+    condition_attrs = create_calculated_dates(time_attributes,
+                                              condition_object,
+                                              dob,
+                                              condition_attrs)
     if previous_dose_date.nil? &&
-       (!condition.interval.nil? &&
-        condition.interval != '')
-       raise ArgumentError.new('No previous dose date and interval required')
+       (condition_object.interval.nil? &&
+        condition_object.interval != '')
+       raise ArgumentError.new('No previous dose date and conditional skip ' \
+                               'condition interval required')
     else
-      expected_interval_date = create_patient_age_date(condition.interval,
-                                                     previous_dose_date)
+      expected_interval_date = create_patient_age_date(
+        condition_object.interval,
+        previous_dose_date
+      )
       condition_attrs[:interval_date] = expected_interval_date
     end
 
     ['start_date', 'end_date'].each do |attribute|
-      condition_attribute = condition.read_attribute(attribute)
+      condition_attribute = condition_object.read_attribute(attribute)
       if !condition_attribute.nil? && condition_attribute != ''
         condition_attrs[attribute.to_sym] = Date.strptime(condition_attribute,
                                                           "%Y%m%d")
@@ -39,19 +44,20 @@ module ConditionalSkipEvaluation
         condition_attrs[attribute.to_sym] = nil
       end
     end
-    condition_attrs[:dose_count] = if condition.dose_count == '' ||
-                                      condition.dose_count.nil?
+    condition_attrs[:dose_count] = if condition_object.dose_count == '' ||
+                                      condition_object.dose_count.nil?
                                         nil
                                    else
-                                      condition.dose_count.to_i
+                                      condition_object.dose_count.to_i
                                    end
-    condition_attrs[:dose_type]        = condition.dose_type
-    condition_attrs[:dose_count_logic] = condition.dose_count_logic
-    condition_attrs[:vaccine_types]    = if !condition.vaccine_types.nil?
-                                           condition.vaccine_types.split(";")
-                                         else
-                                           []
-                                         end
+    condition_attrs[:dose_type]        = condition_object.dose_type
+    condition_attrs[:dose_count_logic] = condition_object.dose_count_logic
+    vaccine_types = if condition_object.vaccine_types.nil?
+                      condition_object.vaccine_types.split(";")
+                    else
+                      []
+                    end
+    condition_attrs[:vaccine_types] = vaccine_types
     condition_attrs
   end
 

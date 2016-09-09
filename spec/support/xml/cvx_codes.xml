@@ -1,0 +1,2471 @@
+<?xml version="1.0"?>
+<CVXCodes>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Adenovirus types 4 and 7</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Adenovirus, type 4 and type 7, live, oral</Value>
+ <Name>CVX Code</Name>
+ <Value>143       </Value>
+ <Name>Notes</Name>
+ <Value>This vaccine is administered as 2 tablets.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>3/20/2011</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>adenovirus, type 4</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>adenovirus vaccine, type 4, live, oral</Value>
+ <Name>CVX Code</Name>
+ <Value>54        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>adenovirus, type 7</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>adenovirus vaccine, type 7, live, oral</Value>
+ <Name>CVX Code</Name>
+ <Value>55        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>adenovirus, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>adenovirus vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>82        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a adenovirus vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>anthrax</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>anthrax vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>24        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>AS03 Adjuvant</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>AS03 Adjuvant</Value>
+ <Name>CVX Code</Name>
+ <Value>801       </Value>
+ <Name>Notes</Name>
+ <Value>This is the adjuvant that is packaged with H5N1 vaccine, adjuvanted</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>2/7/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>BCG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Bacillus Calmette-Guerin vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>19        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>botulinum antitoxin</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>botulinum antitoxin</Value>
+ <Name>CVX Code</Name>
+ <Value>27        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>cholera, BivWC</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>cholera, BivWC</Value>
+ <Name>CVX Code</Name>
+ <Value>173       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Non-US</Value>
+ <Name>Last Updated</Name>
+ <Value>6/17/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>cholera, live attenuated</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>cholera, live attenuated</Value>
+ <Name>CVX Code</Name>
+ <Value>174       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>6/17/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>cholera, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>cholera vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>26        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>6/17/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>cholera, WC-rBS</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>cholera, WC-rBS</Value>
+ <Name>CVX Code</Name>
+ <Value>172       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Non-US</Value>
+ <Name>Last Updated</Name>
+ <Value>6/17/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>CMVIG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>cytomegalovirus immune globulin, intravenous</Value>
+ <Name>CVX Code</Name>
+ <Value>29        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>dengue fever</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>dengue fever vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>56        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>diphtheria antitoxin</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>diphtheria antitoxin</Value>
+ <Name>CVX Code</Name>
+ <Value>12        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DT (pediatric)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>diphtheria and tetanus toxoids, adsorbed for pediatric use</Value>
+ <Name>CVX Code</Name>
+ <Value>28        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>diphtheria, tetanus toxoids and acellular pertussis vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>20        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP, 5 pertussis antigens</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>diphtheria, tetanus toxoids and acellular pertussis vaccine, 5 pertussis antigens</Value>
+ <Name>CVX Code</Name>
+ <Value>106       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>diphtheria, tetanus toxoids and acellular pertussis vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>107       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a DTaP vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP,IPV,Hib,HepB</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Diphtheria and Tetanus Toxoids and Acellular Pertussis Adsorbed, Inactivated Poliovirus, Haemophilus b Conjugate (Meningococcal Protein Conjugate), and Hepatitis B (Recombinant) Vaccine.</Value>
+ <Name>CVX Code</Name>
+ <Value>146       </Value>
+ <Name>Notes</Name>
+ <Value>Note that this vaccine is different from CVX 132.</Value>
+ <Name>Status</Name>
+ <Value>Pending</Value>
+ <Name>Last Updated</Name>
+ <Value>9/21/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP-Hep B-IPV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>DTaP-hepatitis B and poliovirus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>110       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP-Hib</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>DTaP-Haemophilus influenzae type b conjugate vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>50        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP-Hib-IPV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>diphtheria, tetanus toxoids and acellular pertussis vaccine, Haemophilus influenzae type b conjugate, and poliovirus vaccine, inactivated (DTaP-Hib-IPV)</Value>
+ <Name>CVX Code</Name>
+ <Value>120       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP-IPV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Diphtheria, tetanus toxoids and acellular pertussis vaccine, and poliovirus vaccine, inactivated</Value>
+ <Name>CVX Code</Name>
+ <Value>130       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTaP-IPV-HIB-HEP B, historical</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Historical record of vaccine containing
+    * diphtheria, tetanus toxoids and acellular pertussis,
+    * poliovirus, inactivated,
+    * Haemophilus influenzae type b conjugate,
+    * Hepatitis B</Value>
+ <Name>CVX Code</Name>
+ <Value>132       </Value>
+ <Name>Notes</Name>
+ <Value>This is not the same as CVX 146, Hexavalent vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/18/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTAP/IPV/HIB - non-US</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>non-US diphtheria, tetanus toxoids and acellular pertussis vaccine, Haemophilus influenzae type b conjugate, and poliovirus vaccine, inactivated (DTaP-Hib-IPV)</Value>
+ <Name>CVX Code</Name>
+ <Value>170       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX was split off from CVX 102, to correctly identify the contents of the vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Non-US</Value>
+ <Name>Last Updated</Name>
+ <Value>5/20/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTP</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>diphtheria, tetanus toxoids and pertussis vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>01        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTP-Hib</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>DTP-Haemophilus influenzae type b conjugate vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>22        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>DTP-Hib-Hep B</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>DTP- Haemophilus influenzae type b conjugate and hepatitis b vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>102       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX has been corrected. This non-US vaccine contained DTP, Hib and Hep B. It was withdrawn in 2007 .</Value>
+ <Name>Status</Name>
+ <Value>Non-US</Value>
+ <Name>Last Updated</Name>
+ <Value>5/20/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>hantavirus</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hantavirus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>57        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>HBIG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis B immune globulin</Value>
+ <Name>CVX Code</Name>
+ <Value>30        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A, adult</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis A vaccine, adult dosage</Value>
+ <Name>CVX Code</Name>
+ <Value>52        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A, IG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Hepatitis A immune globulin</Value>
+ <Name>CVX Code</Name>
+ <Value>154       </Value>
+ <Name>Notes</Name>
+ <Value>Do not use this code. This product may be used for Hep A and other viral infections. The correct vaccine / CVX is 86 (IG).</Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>4/1/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A, live attenuated</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Hep A, live attenuated-IM</Value>
+ <Name>CVX Code</Name>
+ <Value>169       </Value>
+ <Name>Notes</Name>
+ <Value>This vaccine is not available in the US.</Value>
+ <Name>Status</Name>
+ <Value>Non-US</Value>
+ <Name>Last Updated</Name>
+ <Value>5/10/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A, ped/adol, 2 dose</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis A vaccine, pediatric/adolescent dosage, 2 dose schedule</Value>
+ <Name>CVX Code</Name>
+ <Value>83        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A, ped/adol, 3 dose</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis A vaccine, pediatric/adolescent dosage, 3 dose schedule</Value>
+ <Name>CVX Code</Name>
+ <Value>84        </Value>
+ <Name>Notes</Name>
+ <Value>This vaccine formulation is inactive and should not be used, except to record historic vaccinations with this formulation.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A, pediatric, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis A vaccine, pediatric dosage, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>31        </Value>
+ <Name>Notes</Name>
+ <Value>Do NOT use this code.  If formulation is unknown, use CVX 85.  There is only one formulation of Hep A, peds.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis A vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>85        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a HepA vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep A-Hep B</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis A and hepatitis B vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>104       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep B, adolescent or pediatric</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis B vaccine, pediatric or pediatric/adolescent dosage</Value>
+ <Name>CVX Code</Name>
+ <Value>08        </Value>
+ <Name>Notes</Name>
+ <Value>This code applies to any standard pediatric formulation of Hepatitis B vaccine. It should not be used for the 2-dose hepatitis B schedule for adolescents (11-15 year olds). It requires Merck's Recombivax HB&#174; adult formulation. Use code 43 for that vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep B, adolescent/high risk infant</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis B vaccine, adolescent/high risk infant dosage</Value>
+ <Name>CVX Code</Name>
+ <Value>42        </Value>
+ <Name>Notes</Name>
+ <Value>As of August 27, 1998, Merck ceased distribution of their adolescent/high risk infant hepatitis B vaccine dosage. Code 42 should only be used to record historical records. For current administration of hepatitis B vaccine, pediatric/adolescent dosage, use code 08.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep B, adult</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis B vaccine, adult dosage</Value>
+ <Name>CVX Code</Name>
+ <Value>43        </Value>
+ <Name>Notes</Name>
+ <Value>As of September 1999, a 2-dose hepatitis B schedule for adolescents (11-15 year olds) was FDA approved for Merck's Recombivax HB&#174; adult formulation. Use code 43 for the 2-dose. This code should be used for any use of standard adult formulation of hepatitis B vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep B, dialysis</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis B vaccine, dialysis patient dosage</Value>
+ <Name>CVX Code</Name>
+ <Value>44        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep B, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis B vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>45        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a HepB vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep C</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis C vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>58        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hep E</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>hepatitis E vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>59        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>herpes simplex 2</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>herpes simplex virus, type 2 vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>60        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hib (HbOC)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Haemophilus influenzae type b vaccine, HbOC conjugate</Value>
+ <Name>CVX Code</Name>
+ <Value>47        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hib (PRP-D)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Haemophilus influenzae type b vaccine, PRP-D conjugate</Value>
+ <Name>CVX Code</Name>
+ <Value>46        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hib (PRP-OMP)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Haemophilus influenzae type b vaccine, PRP-OMP conjugate</Value>
+ <Name>CVX Code</Name>
+ <Value>49        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hib (PRP-T)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Haemophilus influenzae type b vaccine, PRP-T conjugate</Value>
+ <Name>CVX Code</Name>
+ <Value>48        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hib, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Haemophilus influenzae type b vaccine, conjugate unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>17        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Hib-Hep B</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Haemophilus influenzae type b conjugate and Hepatitis B vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>51        </Value>
+ <Name>Notes</Name>
+ <Value>This vaccine may still be in use until the existing lots expire on 8/19/16.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>3/11/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>HIV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>human immunodeficiency virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>61        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>HPV, bivalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>human papilloma virus vaccine, bivalent</Value>
+ <Name>CVX Code</Name>
+ <Value>118       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>HPV, quadrivalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>human papilloma virus vaccine, quadrivalent</Value>
+ <Name>CVX Code</Name>
+ <Value>62        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>HPV, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>HPV, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>137       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a HPV vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>HPV9</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Human Papillomavirus 9-valent vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>165       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>12/11/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>IG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>immune globulin, intramuscular</Value>
+ <Name>CVX Code</Name>
+ <Value>86        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>IG, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>immune globulin, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>14        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>IGIV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>immune globulin, intravenous</Value>
+ <Name>CVX Code</Name>
+ <Value>87        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Influenza A monovalent (H5N1), ADJUVANTED-2013</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Influenza A monovalent (H5N1), adjuvanted, National stockpile 2013</Value>
+ <Name>CVX Code</Name>
+ <Value>160       </Value>
+ <Name>Notes</Name>
+ <Value>Approved by FDA 2013, adjuvant is mixed at point of administration.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/27/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza nasal, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza nasal, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>151       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX should only be used for historical records where the formulation of nasal flu vaccine is not known.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>1/28/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, H5N1-1203</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza virus vaccine, H5N1, A/Vietnam/1203/2004 (national stockpile)</Value>
+ <Name>CVX Code</Name>
+ <Value>123       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Influenza, high dose seasonal</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza, high dose seasonal, preservative-free</Value>
+ <Name>CVX Code</Name>
+ <Value>135       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Influenza, injectable, MDCK, preservative free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Influenza, injectable, Madin Darby Canine Kidney, preservative free</Value>
+ <Name>CVX Code</Name>
+ <Value>153       </Value>
+ <Name>Notes</Name>
+ <Value>ccIIV3</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/17/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Influenza, injectable, MDCK, preservative free, quadrivalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Influenza, injectable, Madin Darby Canine Kidney, preservative free, quadrivalent</Value>
+ <Name>CVX Code</Name>
+ <Value>171       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>6/16/2016</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, injectable, quadrivalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza, injectable, quadrivalent, contains preservative</Value>
+ <Name>CVX Code</Name>
+ <Value>158       </Value>
+ <Name>Notes</Name>
+ <Value>New in 2013.  IIV4</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>8/20/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, injectable, quadrivalent, preservative free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Influenza, injectable, quadrivalent, preservative free</Value>
+ <Name>CVX Code</Name>
+ <Value>150       </Value>
+ <Name>Notes</Name>
+ <Value>New in 2012.  IIV4</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/17/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Influenza, injectable,quadrivalent, preservative free, pediatric</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Influenza, injectable,quadrivalent, preservative free, pediatric</Value>
+ <Name>CVX Code</Name>
+ <Value>161       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/23/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, intradermal, quadrivalent, preservative free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza, intradermal, quadrivalent, preservative free, injectable</Value>
+ <Name>CVX Code</Name>
+ <Value>166       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>12/15/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, live, intranasal</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza virus vaccine, live, attenuated, for intranasal use</Value>
+ <Name>CVX Code</Name>
+ <Value>111       </Value>
+ <Name>Notes</Name>
+ <Value>LAIV3</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/22/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, live, intranasal, quadrivalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza, live, intranasal, quadrivalent</Value>
+ <Name>CVX Code</Name>
+ <Value>149       </Value>
+ <Name>Notes</Name>
+ <Value>new in 2012.  LAIV4</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/17/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, recombinant, injectable, preservative free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Seasonal, trivalent, recombinant, injectable influenza vaccine, preservative free</Value>
+ <Name>CVX Code</Name>
+ <Value>155       </Value>
+ <Name>Notes</Name>
+ <Value>RIV</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/17/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Influenza, seasonal, injectable</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Influenza, seasonal, injectable</Value>
+ <Name>CVX Code</Name>
+ <Value>141       </Value>
+ <Name>Notes</Name>
+ <Value>IIV3. This is one of two codes replacing CVX 15, which is being retired.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/17/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Influenza, seasonal, injectable, preservative free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Influenza, seasonal, injectable, preservative free</Value>
+ <Name>CVX Code</Name>
+ <Value>140       </Value>
+ <Name>Notes</Name>
+ <Value>IIV3. This vaccine code is one of two which replace CVX 15, influenza, split virus.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/17/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, seasonal, intradermal, preservative free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>seasonal influenza, intradermal, preservative free</Value>
+ <Name>CVX Code</Name>
+ <Value>144       </Value>
+ <Name>Notes</Name>
+ <Value>IIV3</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/17/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, split (incl. purified surface antigen)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza virus vaccine, split virus (incl. purified surface antigen)-retired CODE</Value>
+ <Name>CVX Code</Name>
+ <Value>15        </Value>
+ <Name>Notes</Name>
+ <Value>This code is being retired. It will still be found in older immunization records. It included both preservative free and non-preservative free.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, trivalent, adjuvanted</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Seasonal trivalent influenza vaccine, adjuvanted, preservative free</Value>
+ <Name>CVX Code</Name>
+ <Value>168       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>12/10/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza virus vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>88        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a Influenza vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>influenza, whole</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>influenza virus vaccine, whole virus</Value>
+ <Name>CVX Code</Name>
+ <Value>16        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>IPV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>poliovirus vaccine, inactivated</Value>
+ <Name>CVX Code</Name>
+ <Value>10        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Japanese Encephalitis IM</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Japanese Encephalitis vaccine for intramuscular administration</Value>
+ <Name>CVX Code</Name>
+ <Value>134       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Japanese encephalitis SC</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Japanese Encephalitis Vaccine SC</Value>
+ <Name>CVX Code</Name>
+ <Value>39        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/24/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Japanese Encephalitis, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Japanese Encephalitis vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>129       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a JE vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Junin virus</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Junin virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>63        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>leishmaniasis</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>leishmaniasis vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>64        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>leprosy</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>leprosy vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>65        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Lyme disease</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Lyme disease vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>66        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>M/R</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>measles and rubella virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>04        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>malaria</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>malaria vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>67        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>measles</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>measles virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>05        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/31/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>melanoma</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>melanoma vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>68        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal ACWY, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal ACWY vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>108       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX is intended for use when one of the meningococcal vaccines containing serogroups A, C, W and Y (conjugate or polysaccaride) was given and the exact formulation was not recorded. It should not be used to record newly administered immunizations. It is not to be used when one of the meningococcal vaccines containing other serogroups was administered.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>12/1/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal B, OMV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal B vaccine, recombinant, OMV, adjuvanted</Value>
+ <Name>CVX Code</Name>
+ <Value>163       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>2/2/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal B, recombinant</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal B vaccine, fully recombinant</Value>
+ <Name>CVX Code</Name>
+ <Value>162       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>11/3/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal B, unspecified</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal B, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>164       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>11/3/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal C conjugate</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal C conjugate vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>103       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Meningococcal C/Y-HIB PRP</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Meningococcal Groups C and Y and Haemophilus b Tetanus Toxoid Conjugate Vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>148       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/11/2012</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal MCV4, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Meningococcal, MCV4, unspecified conjugate formulation(groups A, C, Y and W-135)</Value>
+ <Name>CVX Code</Name>
+ <Value>147       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX should only be used for historical doses of meningococcal conjugate vaccine where the formulation is unknown (oligosaccharide vs polysaccharide). It is not the same as CVX 108, Meningococcal, unspecified formulation. This CVX is for unspecified Meningococcal conjugate vaccines.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>2/8/2012</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Meningococcal MCV4O</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal oligosaccharide (groups A, C, Y and W-135) diphtheria toxoid conjugate vaccine (MCV4O)</Value>
+ <Name>CVX Code</Name>
+ <Value>136       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal MCV4P</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal polysaccharide (groups A, C, Y and W-135) diphtheria toxoid conjugate vaccine (MCV4P)</Value>
+ <Name>CVX Code</Name>
+ <Value>114       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal MPSV4</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal polysaccharide vaccine (MPSV4)</Value>
+ <Name>CVX Code</Name>
+ <Value>32        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>meningococcal, unknown serogroups</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>meningococcal vaccine of unknown formulation and unknown serogroups</Value>
+ <Name>CVX Code</Name>
+ <Value>167       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX is intended for use when any one of the meningococcal vaccines is recorded and there is no information about which serogroups are protected against. This code should not be used when a newly administered immunization is recorded.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>12/1/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>MMR</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>measles, mumps and rubella virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>03        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>MMRV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>measles, mumps, rubella, and varicella virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>94        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>mumps</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>mumps virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>07        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>6/18/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Novel influenza-H1N1-09</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Novel influenza-H1N1-09, injectable</Value>
+ <Name>CVX Code</Name>
+ <Value>127       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Novel Influenza-H1N1-09, all formulations</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Novel influenza-H1N1-09, all formulations</Value>
+ <Name>CVX Code</Name>
+ <Value>128       </Value>
+ <Name>Notes</Name>
+ <Value>This code is used whenever the actual formulation is not determined or when aggregating all Novel H1N1 Influenza-09 immunizations for reporting to CRA. It should not be used for seasonal influenza vaccine that is not otherwise specified. (NOS)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Novel Influenza-H1N1-09, nasal</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Novel Influenza-H1N1-09, live virus for nasal administration</Value>
+ <Name>CVX Code</Name>
+ <Value>125       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Novel influenza-H1N1-09, preservative-free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Novel influenza-H1N1-09, preservative-free, injectable</Value>
+ <Name>CVX Code</Name>
+ <Value>126       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>OPV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>poliovirus vaccine, live, oral</Value>
+ <Name>CVX Code</Name>
+ <Value>02        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>parainfluenza-3</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>parainfluenza-3 virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>69        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>pertussis</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>pertussis vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>11        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>plague</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>plague vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>23        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Pneumococcal conjugate PCV 13</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>pneumococcal conjugate vaccine, 13 valent</Value>
+ <Name>CVX Code</Name>
+ <Value>133       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>pneumococcal conjugate PCV 7</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>pneumococcal conjugate vaccine, 7 valent</Value>
+ <Name>CVX Code</Name>
+ <Value>100       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>6/26/2014</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Pneumococcal Conjugate, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Pneumococcal Conjugate, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>152       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX should only be used for historical records where the formulation of pneumococcal conjugate vaccine is not known.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>1/28/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>pneumococcal polysaccharide PPV23</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>pneumococcal polysaccharide vaccine, 23 valent</Value>
+ <Name>CVX Code</Name>
+ <Value>33        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>pneumococcal, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>pneumococcal vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>109       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a pneumococcal vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>polio, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>poliovirus vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>89        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a polio vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Q fever</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Q fever vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>70        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rabies, intradermal injection</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rabies vaccine, for intradermal injection</Value>
+ <Name>CVX Code</Name>
+ <Value>40        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>6/18/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rabies, intramuscular injection</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rabies vaccine, for intramuscular injection</Value>
+ <Name>CVX Code</Name>
+ <Value>18        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rabies, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rabies vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>90        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a rabies vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rheumatic fever</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rheumatic fever vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>72        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Rho(D) - Unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Rho(D) Unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>159       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/5/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Rho(D) -IG IM</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Rho(D) Immune globulin - IM</Value>
+ <Name>CVX Code</Name>
+ <Value>157       </Value>
+ <Name>Notes</Name>
+ <Value>This immune globulin may be administered IM only.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>8/13/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Rho(D)-IG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Rho(D) Immune globulin- IV or IM</Value>
+ <Name>CVX Code</Name>
+ <Value>156       </Value>
+ <Name>Notes</Name>
+ <Value>This immune globulin may be administered either IM or IV.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/26/2013</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Rift Valley fever</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Rift Valley fever vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>73        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Never Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>RIG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rabies immune globulin</Value>
+ <Name>CVX Code</Name>
+ <Value>34        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rotavirus, monovalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rotavirus, live, monovalent vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>119       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rotavirus, pentavalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rotavirus, live, pentavalent vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>116       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rotavirus, tetravalent</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rotavirus, live, tetravalent vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>74        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rotavirus, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rotavirus vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>122       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>RSV-IGIV</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>respiratory syncytial virus immune globulin, intravenous</Value>
+ <Name>CVX Code</Name>
+ <Value>71        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>RSV-MAb</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>respiratory syncytial virus monoclonal antibody (palivizumab), intramuscular</Value>
+ <Name>CVX Code</Name>
+ <Value>93        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>RSV-MAb (new)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>respiratory syncytial virus monoclonal antibody (motavizumab), intramuscular</Value>
+ <Name>CVX Code</Name>
+ <Value>145       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Pending</Value>
+ <Name>Last Updated</Name>
+ <Value>8/31/2011</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rubella</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rubella virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>06        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>6/18/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>rubella/mumps</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>rubella and mumps virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>38        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Staphylococcus bacterio lysate</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Staphylococcus bacteriophage lysate</Value>
+ <Name>CVX Code</Name>
+ <Value>76        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Td (adult)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus and diphtheria toxoids, not adsorbed, for adult use</Value>
+ <Name>CVX Code</Name>
+ <Value>138       </Value>
+ <Name>Notes</Name>
+ <Value>Note that this Td is not adsorbed.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Td (adult) preservative free</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus and diphtheria toxoids, adsorbed, preservative free, for adult use</Value>
+ <Name>CVX Code</Name>
+ <Value>113       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Td (adult), adsorbed</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus and diphtheria toxoids, adsorbed, for adult use</Value>
+ <Name>CVX Code</Name>
+ <Value>09        </Value>
+ <Name>Notes</Name>
+ <Value>Note that this vaccine name has changed.  See also Td (adult). It is not adsorbed.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>8/20/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Td(adult) unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Td(adult) unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>139       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a Td vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>Tdap</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus toxoid, reduced diphtheria toxoid, and acellular pertussis vaccine, adsorbed</Value>
+ <Name>CVX Code</Name>
+ <Value>115       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>tetanus toxoid, adsorbed</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus toxoid, adsorbed</Value>
+ <Name>CVX Code</Name>
+ <Value>35        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/14/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>tetanus toxoid, not adsorbed</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus toxoid, not adsorbed</Value>
+ <Name>CVX Code</Name>
+ <Value>142       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/14/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>tetanus toxoid, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus toxoid, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>112       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>tick-borne encephalitis</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tick-borne encephalitis vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>77        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>TIG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tetanus immune globulin</Value>
+ <Name>CVX Code</Name>
+ <Value>13        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>TST, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tuberculin skin test; unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>98        </Value>
+ <Name>Notes</Name>
+ <Value>TB Skin test is not vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>TST-OT tine test</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tuberculin skin test; old tuberculin, multipuncture device</Value>
+ <Name>CVX Code</Name>
+ <Value>95        </Value>
+ <Name>Notes</Name>
+ <Value>TB Skin test is not vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>TST-PPD intradermal</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tuberculin skin test; purified protein derivative solution, intradermal</Value>
+ <Name>CVX Code</Name>
+ <Value>96        </Value>
+ <Name>Notes</Name>
+ <Value>TB Skin test is not vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>TST-PPD tine test</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tuberculin skin test; purified protein derivative, multipuncture device</Value>
+ <Name>CVX Code</Name>
+ <Value>97        </Value>
+ <Name>Notes</Name>
+ <Value>TB Skin test is not vaccine.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>tularemia vaccine</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>tularemia vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>78        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>typhoid, oral</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>typhoid vaccine, live, oral</Value>
+ <Name>CVX Code</Name>
+ <Value>25        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>typhoid, parenteral</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>typhoid vaccine, parenteral, other than acetone-killed, dried</Value>
+ <Name>CVX Code</Name>
+ <Value>41        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>8/13/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>typhoid, parenteral, AKD (U.S. military)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>typhoid vaccine, parenteral, acetone-killed, dried (U.S. military)</Value>
+ <Name>CVX Code</Name>
+ <Value>53        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>6/18/2015</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>typhoid, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>typhoid vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>91        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a typhoid vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>typhoid, ViCPs</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>typhoid Vi capsular polysaccharide vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>101       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>typhus, historical</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Historical record of a typhus vaccination</Value>
+ <Name>CVX Code</Name>
+ <Value>131       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>vaccinia (smallpox)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>vaccinia (smallpox) vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>75        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>vaccinia (smallpox) diluted</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>vaccinia (smallpox) vaccine, diluted</Value>
+ <Name>CVX Code</Name>
+ <Value>105       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>vaccinia immune globulin</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>vaccinia immune globulin</Value>
+ <Name>CVX Code</Name>
+ <Value>79        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>varicella</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>varicella virus vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>21        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>VEE, inactivated</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Venezuelan equine encephalitis, inactivated</Value>
+ <Name>CVX Code</Name>
+ <Value>81        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>VEE, live</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Venezuelan equine encephalitis, live, attenuated</Value>
+ <Name>CVX Code</Name>
+ <Value>80        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>VEE, unspecified formulation</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>Venezuelan equine encephalitis vaccine, unspecified formulation</Value>
+ <Name>CVX Code</Name>
+ <Value>92        </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code allows reporting of a vaccination when formulation is unknown (for example, when recording a VEE vaccination when noted on a vaccination card)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>9/30/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>VZIG</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>varicella zoster immune globulin</Value>
+ <Name>CVX Code</Name>
+ <Value>36        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>VZIG (IND)</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>varicella zoster immune globulin (Investigational New Drug)</Value>
+ <Name>CVX Code</Name>
+ <Value>117       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>yellow fever</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>yellow fever vaccine</Value>
+ <Name>CVX Code</Name>
+ <Value>37        </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value>zoster</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>zoster vaccine, live</Value>
+ <Name>CVX Code</Name>
+ <Value>121       </Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value> no vaccine administered</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>no vaccine administered</Value>
+ <Name>CVX Code</Name>
+ <Value>998       </Value>
+ <Name>Notes</Name>
+ <Value>Code 998 was added for use in VXU HL7 messages where the OBX segment is nested with the RXA segment, but the message does not contain information about a vaccine administration. An example of this use is to report the vaccines due next for a patient when no vaccine administration is being reported.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value> RESERVED - do not use</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>RESERVED - do not use</Value>
+ <Name>CVX Code</Name>
+ <Value>99        </Value>
+ <Name>Notes</Name>
+ <Value>Code 99 will not be used in this table to avoid confusion with code 999.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ <CVXInfo>
+ <Name>Short Description</Name>
+ <Value> unknown</Value>
+ <Name>Full Vaccine name</Name>
+ <Value>unknown vaccine or immune globulin</Value>
+ <Name>CVX Code</Name>
+ <Value>999       </Value>
+ <Name>Notes</Name>
+ <Value>This CVX code has little utility and should rarely be used.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </CVXInfo>
+ </CVXCodes>

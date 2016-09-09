@@ -1,0 +1,867 @@
+<?xml version="1.0"?>
+<MVXCodes>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>AB</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Abbott Laboratories</Value>
+ <Name>Notes</Name>
+ <Value>includes Ross Products Division, Solvay</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>ACA</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Acambis, Inc</Value>
+ <Name>Notes</Name>
+ <Value>acquired by sanofi in sept 2008</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>AD</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Adams Laboratories, Inc.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>AKR</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Akorn, Inc</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>ALP</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Alpha Therapeutic Corporation</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>AR</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Armour</Value>
+ <Name>Notes</Name>
+ <Value>part of CSL</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>AVB</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Aventis Behring L.L.C.</Value>
+ <Name>Notes</Name>
+ <Value>part of CSL</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>AVI</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Aviron</Value>
+ <Name>Notes</Name>
+ <Value>acquired by Medimmune</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>BA</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Baxter Healthcare Corporation-inactive</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>BAH</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Baxter Healthcare Corporation</Value>
+ <Name>Notes</Name>
+ <Value>includes Hyland Immuno, Immuno International AG,and North American Vaccine, Inc./acquired some assets from alpha therapeutics</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>BAY</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Bayer Corporation</Value>
+ <Name>Notes</Name>
+ <Value>Bayer Biologicals now owned by Talecris</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>BP</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Berna Products</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>BPC</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Berna Products Corporation</Value>
+ <Name>Notes</Name>
+ <Value>includes Swiss Serum and Vaccine Institute Berne</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>BRR</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Barr Laboratories</Value>
+ <Name>Notes</Name>
+ <Value>Subsidiary of Teva Pharmaceuticals</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>3/20/2011</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>BTP</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Biotest Pharmaceuticals Corporation</Value>
+ <Name>Notes</Name>
+ <Value>New owner of NABI HB as of December 2007, Does NOT replace NABI Biopharmaceuticals in this code list.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>CEN</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Centeon L.L.C.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>CHI</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Chiron Corporation</Value>
+ <Name>Notes</Name>
+ <Value>Part of Novartis</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>CMP</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Celltech Medeva Pharmaceuticals</Value>
+ <Name>Notes</Name>
+ <Value>Part of Novartis</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>CNJ</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Cangene Corporation</Value>
+ <Name>Notes</Name>
+ <Value>Purchased by Emergent Biosolutions</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>4/29/2014</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>CON</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Connaught</Value>
+ <Name>Notes</Name>
+ <Value>acquired by Merieux</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>CRU</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Crucell</Value>
+ <Name>Notes</Name>
+ <Value>acquired Berna,  now a J &amp; J company</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>12/4/2013</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>CSL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>bioCSL</Value>
+ <Name>Notes</Name>
+ <Value>CSL Biotherapies renamed to bioCSL</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>9/9/2014</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>DVC</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>DynPort Vaccine Company, LLC</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>EVN</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Evans Medical Limited</Value>
+ <Name>Notes</Name>
+ <Value>Part of Novartis</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>GEO</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>GeoVax Labs, Inc.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>GRE</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Greer Laboratories, Inc.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>GRF</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Grifols</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>9/5/2013</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>IAG</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Immuno International AG</Value>
+ <Name>Notes</Name>
+ <Value>Part of Baxter</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>IDB</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>ID Biomedical</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>9/5/2013</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>IM</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Merieux</Value>
+ <Name>Notes</Name>
+ <Value>Part of sanofi</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>INT</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Intercell Biomedical</Value>
+ <Name>Notes</Name>
+ <Value>subsidiary of Valneva</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>7/19/2016</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>IUS</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Immuno-U.S., Inc.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>JNJ</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Johnson and Johnson</Value>
+ <Name>Notes</Name>
+ <Value>acquired CRUCELL which acquired Berna</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/11/2012</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>JPN</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>The Research Foundation for Microbial Diseases of Osaka University (BIKEN)</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>KED</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Kedrion Biopharma</Value>
+ <Name>Notes</Name>
+ <Value>acquired Rho(D) from Ortho</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>4/29/2014</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>KGC</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Korea Green Cross Corporation</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>LED</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Lederle</Value>
+ <Name>Notes</Name>
+ <Value>became a part of WAL, now owned by Pfizer</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>MA</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Massachusetts Public Health Biologic Laboratories</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>MBL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Massachusetts Biologic Laboratories</Value>
+ <Name>Notes</Name>
+ <Value>formerly Massachusetts Public Health Biologic Laboratories</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>MCM</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>MCM Vaccine Company</Value>
+ <Name>Notes</Name>
+ <Value>Partnership between Merck and Sanofi Pasteur</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>9/21/2015</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>MED</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>MedImmune, Inc.</Value>
+ <Name>Notes</Name>
+ <Value>acquisitions of U.S. Bioscience in 1999 and Aviron in 2002, as well as the integration with Cambridge Antibody Technology and the strategic alignment with our new parent company, AstraZeneca, in 2007.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>MIL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Miles</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>MIP</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Emergent BioDefense Operations Lansing</Value>
+ <Name>Notes</Name>
+ <Value>A unit of Emergent BioSolutions, Bioport renamed. Formerly Michigan Biologic Products Institute</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>4/29/2014</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>MSD</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Merck and Co., Inc.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>10/18/2012</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>NAB</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>NABI</Value>
+ <Name>Notes</Name>
+ <Value>formerly North American Biologicals, Inc.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>NAV</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>North American Vaccine, Inc.</Value>
+ <Name>Notes</Name>
+ <Value>part of Baxter</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>NOV</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Novartis Pharmaceutical Corporation</Value>
+ <Name>Notes</Name>
+ <Value>Novartis has sold its flu vaccines to Seqirus and other vaccines to GlaxoSmithKline. While Novartis vaccines may still be in circulation, its status is set to not active.</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>4/13/2016</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>NVX</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Novavax, Inc.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>NYB</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>New York Blood Center</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>ORT</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Ortho-clinical Diagnostics</Value>
+ <Name>Notes</Name>
+ <Value>a J &amp; J company (formerly Ortho Diagnostic Systems, Inc.)</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>OTC</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Organon Teknika Corporation</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>11/2/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>OTH</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Other manufacturer</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>PAX</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>PaxVax</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>6/24/2015</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>PD</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Parkedale Pharmaceuticals</Value>
+ <Name>Notes</Name>
+ <Value>no website and no news articles (formerly Parke-Davis)</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>PFR</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Pfizer, Inc</Value>
+ <Name>Notes</Name>
+ <Value>includes Wyeth-Lederle Vaccines and Pediatrics, Wyeth Laboratories, Lederle Laboratories, and Praxis Biologics,</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>PMC</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>sanofi pasteur</Value>
+ <Name>Notes</Name>
+ <Value>formerly Aventis Pasteur, Pasteur Merieux Connaught; includes Connaught Laboratories and Pasteur Merieux. Acquired ACAMBIS.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>PRX</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Praxis Biologics</Value>
+ <Name>Notes</Name>
+ <Value>became a part of WAL, now owned by Pfizer</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>PSC</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Protein Sciences</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/1/2013</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>PWJ</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>PowderJect Pharmaceuticals</Value>
+ <Name>Notes</Name>
+ <Value>See Novartis</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>SCL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Sclavo, Inc.</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>SEQ</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Seqirus</Value>
+ <Name>Notes</Name>
+ <Value>Seqirus acquired the flu vaccines from Novartis. It also includes the CSL vaccines.</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>4/13/2016</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>SI</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Swiss Serum and Vaccine Inst.</Value>
+ <Name>Notes</Name>
+ <Value>Part of Berna</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>SKB</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>GlaxoSmithKline</Value>
+ <Name>Notes</Name>
+ <Value> includes SmithKline Beecham and Glaxo Wellcome</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>SOL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Solvay Pharmaceuticals</Value>
+ <Name>Notes</Name>
+ <Value>Part of Abbott</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>TAL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Talecris Biotherapeutics</Value>
+ <Name>Notes</Name>
+ <Value>includes Bayer Biologicals</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>UNK</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Unknown manufacturer</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>USA</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>United States Army Medical Research and Material Command</Value>
+ <Name>Notes</Name>
+ <Value></Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>VAL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Valneva</Value>
+ <Name>Notes</Name>
+ <Value>Distributes through Intercell in the US</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>7/19/2016</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>VXG</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>VaxGen</Value>
+ <Name>Notes</Name>
+ <Value>acquired by Emergent Biodefense Operations Lansing, Inc</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>WA</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Wyeth-Ayerst</Value>
+ <Name>Notes</Name>
+ <Value>became WAL, now owned by Pfizer</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>WAL</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>Wyeth</Value>
+ <Name>Notes</Name>
+ <Value>acquired by Pfizer 10/15/2009</Value>
+ <Name>Status</Name>
+ <Value>Active</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+ <MVXInfo>
+ <Name>MVX_CODE</Name>
+ <Value>ZLB</Value>
+ <Name>Manufacturer Name</Name>
+ <Value>ZLB Behring</Value>
+ <Name>Notes</Name>
+ <Value>acquired by CSL</Value>
+ <Name>Status</Name>
+ <Value>Inactive</Value>
+ <Name>Last Updated</Name>
+ <Value>5/28/2010</Value>
+ </MVXInfo>
+</MVXCodes>

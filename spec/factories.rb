@@ -90,8 +90,9 @@ FactoryGirl.define do
     set_logic 'n/a'
 
     after(:create) do |cond_skip|
-      unless cond_skip.sets
+      if cond_skip.sets.length == 0
         FactoryGirl.create(:conditional_skip_set, conditional_skip: cond_skip)
+        cond_skip.reload
       end
     end
   end
