@@ -122,6 +122,50 @@ FactoryGirl.define do
     end
   end
 
+  factory :antigen_series_dose_with_vaccines, parent: :antigen_series_dose do
+    after(:create) do |dose|
+      dose.dose_vaccines << FactoryGirl.create(:antigen_series_dose_vaccine)
+      dose.dose_vaccines << FactoryGirl.create(
+        :antigen_series_dose_vaccine,
+        vaccine_type: 'DTaP-HepB-IPV',
+        cvx_code: 110,
+        begin_age: '6 weeks',
+        end_age: '7 years',
+        trade_name: '',
+        mvx_code: '',
+        volume: '0.5'
+      )
+      dose.dose_vaccines << FactoryGirl.create(
+        :antigen_series_dose_vaccine,
+        vaccine_type: 'DTaP-IPV',
+        cvx_code: 130,
+        begin_age: '6 weeks - 4 days',
+        end_age: '',
+        trade_name: '',
+        mvx_code: '',
+        volume: '',
+        preferable: false
+      )
+    end
+  end
+
+  factory :antigen_series_dose_second_with_vaccines,
+          parent: :antigen_series_dose_with_vaccines do
+    dose_number 2
+    absolute_min_age '10 weeks - 4 days'
+    min_age '10 weeks'
+    earliest_recommended_age '4 months'
+    latest_recommended_age '5 months + 4 weeks'
+    max_age '18 years'
+
+    # This will probably fail - need to update as its one to many (or many to many)
+    after(:create) do |dose|
+      super
+      dose.intervals << FactoryGirl.create(:interval,
+                                           antigen_series_dose: dose)
+    end
+  end
+
   factory :antigen_series_dose_second do
     dose_number 2
     absolute_min_age '10 weeks - 4 days'
@@ -132,7 +176,11 @@ FactoryGirl.define do
 
     # This will probably fail - need to update as its one to many (or many to many)
     association :prefered_vaccine, factory: :antigen_series_dose_vaccine
-    association :iinterval, factory: :interval
+
+    after(:create) do |dose|
+      dose.intervals << FactoryGirl.create(:interval,
+                                           antigen_series_dose: dose)
+    end
   end
 
   factory :antigen_series do
