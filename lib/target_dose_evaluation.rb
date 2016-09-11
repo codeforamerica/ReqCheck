@@ -14,12 +14,18 @@ module TargetDoseEvaluation
     patient_dob:,
     patient_gender: nil,
     patient_vaccine_doses:,
+    dose_cvx:,
     date_of_dose:,
     dose_trade_name: '',
     dose_volume: nil,
     date_of_previous_dose: nil,
     previous_dose_status_hash: nil
   )
+    target_dose_status = {
+      target_dose_status: 'satisfied',
+      evaluation_status: 'valid',
+      details: 'on_schedule'
+    }
     # Evaluate Conditional Skip
     # conditional_skip_evaluation = evaluate_conditional_skip(
     #   conditional_skip,
@@ -29,7 +35,6 @@ module TargetDoseEvaluation
     #   date_of_previous_dose: date_of_previous_dose
     # )
     # Evaluate Age
-    target_dose_status = {}
     age_evaluation = evaluate_age(
       antigen_series_dose,
       patient_dob: patient_dob,
@@ -38,10 +43,15 @@ module TargetDoseEvaluation
     )
     if age_evaluation[:status] == 'invalid'
       target_dose_status[:reason] = 'age'
+      target_dose_status[:target_dose_status]  = 'not_satisfied'
+      target_dose_status[:details] = age_evaluation[:details]
+
       if age_evaluation[:details] == 'too_young'
+        target_dose_status[:evaluation_status] = 'not_valid'
         # return {NOT satisfied}
         # No. The target dose status is "not satisfied." Evaluation status is "not valid " with evaluation reason(s).
       elsif age_evaluation[:details] == 'too_old'
+        target_dose_status[:evaluation_status] = 'extraneous'
         # return {EXTRANEOUS}
         # No. The target dose status is "not satisfied." Evaluation status is "extraneous " with possible evaluation reason(s).
       end
@@ -57,7 +67,8 @@ module TargetDoseEvaluation
     end
     interval_evaluations.each do |interval_evaluation|
       if interval_evaluation[:status] == 'invalid'
-        target_dose_status[:status] = 'not_satisfied'
+        target_dose_status[:target_dose_status] = 'not_satisfied'
+        target_dose_status[:evaluation_status] = 'not_valid'
         target_dose_status[:reason] = 'interval'
         return target_dose_status
       end
@@ -66,37 +77,28 @@ module TargetDoseEvaluation
     evaluate_live_virus_conflict = nil
     # Evaluate Preferable Vaccine
     # Evaluate Allowable Vaccine
-    vaccine_evaluations =
-      antigen_series_dose_vaccines.map do |antigen_series_dose_vaccine|
-        evaluate_preferable_allowable_vaccine(
-          antigen_series_dose_vaccine,
-          patient_dob: patient_dob,
-          date_of_dose: date_of_dose,
-          dose_trade_name: dose_trade_name,
-          dose_volume: dose_volume
-        )
+    vaccine_evaluation =
+      evaluate_vaccine_dose_for_preferable_allowable(
+        antigen_series_dose,
+        patient_dob: patient_dob,
+        dose_cvx: dose_cvx,
+        date_of_dose: date_of_dose,
+        dose_trade_name: dose_trade_name,
+        dose_volume: dose_volume
+      )
+    if vaccine_evaluation[:status] == 'invalid'
+      target_dose_status[:target_dose_status] = 'not_satisfied'
+      target_dose_status[:evaluation_status]  = 'not_valid'
+
+      if target_dose_status[:evaluated] == 'preferable'
+        target_dose_status[:reason] = 'preferable_vaccine_evaluation'
+      else
+        target_dose_status[:reason] = 'allowable_vaccine_evaluation'
       end
-    vaccine_evaluations.each do |vaccine_evaluation|
-      if vaccine_evaluation[:status] == 'invalid'
-        target_dose_status[:status] = 'not_satisfied'
-        if target_dose_status[:evaluated] == 'preferable'
-          target_dose_status[:reason] = 'preferable_vaccine_evaluation'
-        else
-          target_dose_status[:reason] = 'allowable_vaccine_evaluation'
-        end
-        return target_dose_status
-      end
+      return target_dose_status
     end
-
-    # Evaluate Gender
-    gender_evaluation = evaluate_gender(
-      antigen_series_dose,
-      patient_gender: patient_gender,
-      previous_dose_status_hash: previous_dose_status_hash
-    )
-
     # Satisfy Target Dose
-    return {}
+    return target_dose_status
   end
 end
 
@@ -112,3 +114,16 @@ end
 # dose_volume: nil,
 # date_of_previous_dose: nil,
 # previous_dose_status_hash: nil
+
+
+
+# 6.1 Evaluate Dose Administered Condition
+# 6.2 Evaluate Conditional Skip
+# 6.3 Evaluate For Inadvertent Vaccine
+# 6.4 Evaluate Age
+# 6.5 Evaluate Preferable Interval
+# 6.6 Evaluate Allowable Interval
+# 6.7 Evaluate Live Virus Conflict
+# 6.8 Evaluate For Preferable Vaccine
+# 6.9 Evaluate For Allowable Vaccine
+# 6.10 Satisfy Target Dose

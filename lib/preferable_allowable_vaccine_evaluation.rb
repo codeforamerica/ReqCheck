@@ -1,5 +1,5 @@
 module PreferableAllowableVaccineEvaluation
-  # This logic is defined on page 48 of the CDC logic spec to evaluate the
+  # This logic is defined on page 63 of the CDC logic spec to evaluate the
   # preferable vaccines and if they have been used (or if allowable has
   # been used)
 
@@ -96,7 +96,7 @@ module PreferableAllowableVaccineEvaluation
     vaccine_status
   end
 
-  def evaluate_preferable_allowable_vaccine(
+  def evaluate_preferable_allowable_vaccine_dose_requirement(
     evaluation_antigen_series_dose_vaccine,
     patient_dob:,
     date_of_dose:,
@@ -116,5 +116,57 @@ module PreferableAllowableVaccineEvaluation
     else
       get_allowable_vaccine_status(vaccine_evaluation)
     end
+  end
+
+
+  def evaluate_vaccine_dose_for_preferable_allowable(
+    evaluation_antigen_series_dose,
+    patient_dob:,
+    dose_cvx:,
+    date_of_dose:,
+    dose_trade_name:,
+    dose_volume: nil
+  )
+    evaluation_vaccine =
+      evaluation_antigen_series_dose.preferable_vaccines.find do |vaccine|
+        vaccine.cvx_code == dose_cvx
+      end
+
+    vaccine_evaluation = {}
+
+    unless evaluation_vaccine.nil?
+      vaccine_evaluation =
+        evaluate_preferable_allowable_vaccine_dose_requirement(
+          evaluation_vaccine,
+          patient_dob: patient_dob,
+          date_of_dose: date_of_dose,
+          dose_trade_name: dose_trade_name,
+          dose_volume: dose_volume
+        )
+      return vaccine_evaluation if vaccine_evaluation[:status] == 'valid'
+    end
+
+    evaluation_vaccine =
+      evaluation_antigen_series_dose.allowable_vaccines.find do |vaccine|
+        vaccine.cvx_code == dose_cvx
+      end
+    if evaluation_vaccine.nil?
+      if vaccine_evaluation == {}
+        vaccine_evaluation = { status: 'invalid',
+                               details: 'vaccine_cvx_not_found',
+                               evaluated: 'allowable' }
+      end
+    else
+      vaccine_evaluation =
+        evaluate_preferable_allowable_vaccine_dose_requirement(
+          evaluation_vaccine,
+          patient_dob: patient_dob,
+          date_of_dose: date_of_dose,
+          dose_trade_name: dose_trade_name,
+          dose_volume: dose_volume
+        )
+    end
+    byebug
+    vaccine_evaluation
   end
 end

@@ -13,6 +13,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
   end
 
   let(:as_dose_vaccine) { FactoryGirl.create(:antigen_series_dose_vaccine) }
+  let(:as_dose) { FactoryGirl.create(:antigen_series_dose_with_vaccines) }
 
   describe '#create_vaccine_attributes' do
     it 'returns a hash with 4 attributes' do
@@ -230,7 +231,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'not_preferable' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
-                                                       prev_status_hash)
+                                                  prev_status_hash)
       ).to eq(expected_result)
     end
 
@@ -248,7 +249,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'out_of_age_range' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
-                                                       prev_status_hash)
+                                                  prev_status_hash)
       ).to eq(expected_result)
     end
 
@@ -266,7 +267,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'out_of_age_range' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
-                                                       prev_status_hash)
+                                                  prev_status_hash)
       ).to eq(expected_result)
     end
 
@@ -302,7 +303,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'less_than_recommended_volume' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
-                                                       prev_status_hash)
+                                                  prev_status_hash)
       ).to eq(expected_result)
     end
     it 'returns valid, preferable for all true' do
@@ -318,7 +319,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'within_age_trade_name_volume' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
-                                                       prev_status_hash)
+                                                  prev_status_hash)
       ).to eq(expected_result)
     end
   end
@@ -338,7 +339,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'not_allowable' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
-                                                      prev_status_hash)
+                                                 prev_status_hash)
       ).to eq(expected_result)
     end
 
@@ -356,7 +357,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'out_of_age_range' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
-                                                      prev_status_hash)
+                                                 prev_status_hash)
       ).to eq(expected_result)
     end
 
@@ -374,7 +375,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'out_of_age_range' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
-                                                      prev_status_hash)
+                                                 prev_status_hash)
       ).to eq(expected_result)
     end
     it 'returns valid, allowable for all true' do
@@ -390,11 +391,11 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
                           details: 'within_age_range' }
       expect(
         test_object.get_allowable_vaccine_status(vaccine_eval_hash,
-                                                      prev_status_hash)
+                                                 prev_status_hash)
       ).to eq(expected_result)
     end
   end
-  describe '#evaluate_preferable_allowable_vaccine' do
+  describe '#evaluate_preferable_allowable_vaccine_dose_requirement' do
     context 'with preferable vaccines' do
       it 'takes a evaluation_antigen_series_dose_vaccine, patient_dob, ' \
       'date_of_dose, dose_trade_name, dose_volume and returns a status hash' do
@@ -404,13 +405,14 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume       = '0.5'
         expect(as_dose_vaccine.begin_age).to eq('6 weeks')
         expect(as_dose_vaccine.end_age).to eq('5 years')
-        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
-          as_dose_vaccine,
-          patient_dob: patient_dob,
-          date_of_dose: date_of_dose,
-          dose_trade_name: trade_name,
-          dose_volume: volume
-        )
+        evaluation_hash =
+          test_object.evaluate_preferable_allowable_vaccine_dose_requirement(
+            as_dose_vaccine,
+            patient_dob: patient_dob,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
         expected_result = {
                             status: 'valid',
                             evaluated: 'preferable',
@@ -425,13 +427,14 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         volume       = '0.5'
         expect(as_dose_vaccine.begin_age).to eq('6 weeks')
         expect(as_dose_vaccine.end_age).to eq('5 years')
-        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
-          as_dose_vaccine,
-          patient_dob: patient_dob,
-          date_of_dose: date_of_dose,
-          dose_trade_name: trade_name,
-          dose_volume: volume
-        )
+        evaluation_hash =
+          test_object.evaluate_preferable_allowable_vaccine_dose_requirement(
+            as_dose_vaccine,
+            patient_dob: patient_dob,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
         expected_result = {
                             status: 'invalid',
                             evaluated: 'preferable',
@@ -450,18 +453,17 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         expect(as_dose_vaccine.begin_age).to eq('6 weeks')
         expect(as_dose_vaccine.end_age).to eq('5 years')
         as_dose_vaccine.preferable = false
-        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
-          as_dose_vaccine,
-          patient_dob: patient_dob,
-          date_of_dose: date_of_dose,
-          dose_trade_name: trade_name,
-          dose_volume: volume
-        )
-        expected_result = {
-                            status: 'valid',
+        evaluation_hash =
+          test_object.evaluate_preferable_allowable_vaccine_dose_requirement(
+            as_dose_vaccine,
+            patient_dob: patient_dob,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
+        expected_result = { status: 'valid',
                             evaluated: 'allowable',
-                            details: 'within_age_range'
-                          }
+                            details: 'within_age_range' }
         expect(evaluation_hash).to eq(expected_result)
       end
       it 'returns invalid for invalid patient age at dose date' do
@@ -472,18 +474,119 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         expect(as_dose_vaccine.begin_age).to eq('6 weeks')
         expect(as_dose_vaccine.end_age).to eq('5 years')
         as_dose_vaccine.preferable = false
-        evaluation_hash = test_object.evaluate_preferable_allowable_vaccine(
-          as_dose_vaccine,
-          patient_dob: patient_dob,
-          date_of_dose: date_of_dose,
-          dose_trade_name: trade_name,
-          dose_volume: volume
-        )
-        expected_result = {
-                            status: 'invalid',
+        evaluation_hash =
+          test_object.evaluate_preferable_allowable_vaccine_dose_requirement(
+            as_dose_vaccine,
+            patient_dob: patient_dob,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
+        expected_result = { status: 'invalid',
                             evaluated: 'allowable',
-                            details: 'out_of_age_range'
-                          }
+                            details: 'out_of_age_range' }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+    end
+    describe '#evaluate_vaccine_dose_for_preferable_allowable' do
+      it 'returns preferable vaccine status if preferable vaccine' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = 1.year.ago.to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        cvx_code     = 10
+        evaluation_hash =
+          test_object.evaluate_vaccine_dose_for_preferable_allowable(
+            as_dose,
+            patient_dob: patient_dob,
+            dose_cvx: cvx_code,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
+        expected_result = { status: 'valid',
+                            evaluated: 'preferable',
+                            details: 'within_age_trade_name_volume' }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns invalid preferable vaccine status if preferable vaccine' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = (2.years.ago + 4.weeks).to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        cvx_code     = 10
+        evaluation_hash =
+          test_object.evaluate_vaccine_dose_for_preferable_allowable(
+            as_dose,
+            patient_dob: patient_dob,
+            dose_cvx: cvx_code,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
+        expected_result = { status: 'invalid',
+                            evaluated: 'preferable',
+                            details: 'out_of_age_range' }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns invalid if no vaccine is found' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = 1.year.ago.to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        cvx_code     = 3
+        evaluation_hash =
+          test_object.evaluate_vaccine_dose_for_preferable_allowable(
+            as_dose,
+            patient_dob: patient_dob,
+            dose_cvx: cvx_code,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
+        expected_result = { status: 'invalid',
+                            evaluated: 'allowable',
+                            details: 'vaccine_cvx_not_found' }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns allowable vaccine status if preferable vaccine' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = 1.year.ago.to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        cvx_code     = 130
+        evaluation_hash =
+          test_object.evaluate_vaccine_dose_for_preferable_allowable(
+            as_dose,
+            patient_dob: patient_dob,
+            dose_cvx: cvx_code,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
+        expected_result = { status: 'valid',
+                            evaluated: 'allowable',
+                            details: 'within_age_range' }
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns invalid allowable vaccine status if preferable vaccine' do
+        patient_dob  = 2.years.ago.to_date
+        date_of_dose = (2.years.ago + 4.weeks).to_date
+        trade_name   = 'test'
+        volume       = '0.5'
+        cvx_code     = 130
+        evaluation_hash =
+          test_object.evaluate_vaccine_dose_for_preferable_allowable(
+            as_dose,
+            patient_dob: patient_dob,
+            dose_cvx: cvx_code,
+            date_of_dose: date_of_dose,
+            dose_trade_name: trade_name,
+            dose_volume: volume
+          )
+        expected_result = { status: 'invalid',
+                            evaluated: 'allowable',
+                            details: 'out_of_age_range' }
         expect(evaluation_hash).to eq(expected_result)
       end
     end

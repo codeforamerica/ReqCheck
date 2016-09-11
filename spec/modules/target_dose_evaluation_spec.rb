@@ -16,30 +16,30 @@ RSpec.describe TargetDoseEvaluation do
     FactoryGirl.create(:conditional_skip)
   end
 
-  let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient)
-    FactoryGirl.create(
-      :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
-      vaccine_code: 'IPV',
-      date_administered: (test_patient.dob + 7.weeks)
-    )
-    FactoryGirl.create(
-      :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
-      vaccine_code: 'IPV',
-      date_administered: (test_patient.dob + 11.weeks)
-    )
-    test_patient.reload
-    test_patient
-  end
-
   let(:as_dose_object) do
     FactoryGirl.create(:antigen_series_dose_with_vaccines)
   end
 
   let(:second_as_dose_object) do
     FactoryGirl.create(:antigen_series_dose_second_with_vaccines)
+  end
+
+  let(:test_patient) do
+    test_patient = FactoryGirl.create(:patient)
+    FactoryGirl.create(
+      :vaccine_dose_by_cvx,
+      patient_profile: test_patient.patient_profile,
+      cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
+      date_administered: (test_patient.dob + 7.weeks)
+    )
+    FactoryGirl.create(
+      :vaccine_dose_by_cvx,
+      patient_profile: test_patient.patient_profile,
+      cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
+      date_administered: (test_patient.dob + 11.weeks)
+    )
+    test_patient.reload
+    test_patient
   end
 
   let(:interval_objects) do
@@ -61,7 +61,7 @@ RSpec.describe TargetDoseEvaluation do
       patient_gender      = test_patient.gender
 
       expected_result = {
-        status: 'valid',
+        status: 'satisfied',
         details: 'on_schedule'
       }
 
@@ -73,6 +73,7 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob: patient_dob,
         patient_gender: patient_gender,
         patient_vaccine_doses: patient_vaccines,
+        dose_cvx: first_vaccine_dose.cvx_code,
         date_of_dose: first_vaccine_dose.date_administered,
         dose_volume: first_vaccine_dose.dosage,
         dose_trade_name: '',
@@ -93,7 +94,7 @@ RSpec.describe TargetDoseEvaluation do
         details: 'on_schedule'
       }
       expected_result = {
-        status: 'valid',
+        status: 'satisfied',
         details: 'on_schedule'
       }
 
@@ -105,10 +106,11 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob: patient_dob,
         patient_gender: patient_gender,
         patient_vaccine_doses: patient_vaccines,
-        date_of_dose: first_vaccine_dose.date_administered,
-        dose_volume: first_vaccine_dose.dosage,
+        dose_cvx: second_vaccine_dose.cvx_code,
+        date_of_dose: second_vaccine_dose.date_administered,
+        dose_volume: second_vaccine_dose.dosage,
         dose_trade_name: '',
-        date_of_previous_dose: second_vaccine_dose.date_administered,
+        date_of_previous_dose: first_vaccine_dose.date_administered,
         previous_dose_status_hash: previous_status_hash
       )
       expect(evaluation_hash).to eq(expected_result)
