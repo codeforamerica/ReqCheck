@@ -87,16 +87,8 @@ module TargetDoseEvaluation
         return target_dose_status
       end
     end
-
-    # Evaluate Gender
-    gender_evaluation = evaluate_gender(
-      antigen_series_dose,
-      patient_gender: patient_gender,
-      previous_dose_status_hash: previous_dose_status_hash
-    )
-
     # Satisfy Target Dose
-    return {}
+    return target_dose_status
   end
 end
 
@@ -112,3 +104,16 @@ end
 # dose_volume: nil,
 # date_of_previous_dose: nil,
 # previous_dose_status_hash: nil
+
+
+
+# 6.1 Evaluate Dose Administered Condition
+# 6.2 Evaluate Conditional Skip
+# 6.3 Evaluate For Inadvertent Vaccine
+# 6.4 Evaluate Age
+# 6.5 Evaluate Preferable Interval
+# 6.6 Evaluate Allowable Interval
+# 6.7 Evaluate Live Virus Conflict
+# 6.8 Evaluate For Preferable Vaccine
+# 6.9 Evaluate For Allowable Vaccine
+# 6.10 Satisfy Target Dose

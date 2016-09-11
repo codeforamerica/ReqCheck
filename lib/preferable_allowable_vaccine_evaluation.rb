@@ -1,5 +1,5 @@
 module PreferableAllowableVaccineEvaluation
-  # This logic is defined on page 48 of the CDC logic spec to evaluate the
+  # This logic is defined on page 63 of the CDC logic spec to evaluate the
   # preferable vaccines and if they have been used (or if allowable has
   # been used)
 
@@ -96,7 +96,7 @@ module PreferableAllowableVaccineEvaluation
     vaccine_status
   end
 
-  def evaluate_preferable_allowable_vaccine(
+  def evaluate_preferable_allowable_vaccine_dose_requirement(
     evaluation_antigen_series_dose_vaccine,
     patient_dob:,
     date_of_dose:,
@@ -116,5 +116,29 @@ module PreferableAllowableVaccineEvaluation
     else
       get_allowable_vaccine_status(vaccine_evaluation)
     end
+  end
+
+
+  def evaluate_vaccine_dose_for_preferable_allowable(
+    evaluation_antigen_series_dose,
+    patient_dob:,
+    dose_cvx:,
+    date_of_dose:,
+    dose_trade_name:,
+    dose_volume: nil
+  )
+    vaccine_evaluations =
+      evaluation_antigen_series_dose.dose_vaccines.map do |dose_vaccine|
+        if dose_vaccine.cvx_code == dose_cvx
+          evaluate_preferable_allowable_vaccine_dose_requirement(
+            dose_vaccine,
+            patient_dob: patient_dob,
+            date_of_dose: date_of_dose,
+            dose_trade_name: dose_trade_name,
+            dose_volume: dose_volume
+          )
+        end
+      end.compact
+    vaccine_evaluations
   end
 end
