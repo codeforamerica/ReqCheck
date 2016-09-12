@@ -24,7 +24,7 @@ module TargetDoseEvaluation
     target_dose_status = {
       target_dose_status: 'satisfied',
       evaluation_status: 'valid',
-      details: 'on_schedule'
+      details: {}
     }
     # Evaluate Conditional Skip
     # conditional_skip_evaluation = evaluate_conditional_skip(
@@ -41,10 +41,11 @@ module TargetDoseEvaluation
       date_of_dose: date_of_dose,
       previous_dose_status_hash: previous_dose_status_hash
     )
+    target_dose_status[:details][:age] = age_evaluation[:details]
+
     if age_evaluation[:status] == 'invalid'
       target_dose_status[:reason] = 'age'
       target_dose_status[:target_dose_status]  = 'not_satisfied'
-      target_dose_status[:details] = age_evaluation[:details]
 
       if age_evaluation[:details] == 'too_young'
         target_dose_status[:evaluation_status] = 'not_valid'
@@ -65,7 +66,9 @@ module TargetDoseEvaluation
                         date_of_dose: date_of_dose,
                         previous_dose_status_hash: previous_dose_status_hash)
     end
+    target_dose_status[:details][:intervals] = []
     interval_evaluations.each do |interval_evaluation|
+      target_dose_status[:details][:intervals] << interval_evaluation[:details]
       if interval_evaluation[:status] == 'invalid'
         target_dose_status[:target_dose_status] = 'not_satisfied'
         target_dose_status[:evaluation_status] = 'not_valid'
@@ -86,11 +89,19 @@ module TargetDoseEvaluation
         dose_trade_name: dose_trade_name,
         dose_volume: dose_volume
       )
+    if vaccine_evaluation[:evaluated] == 'preferable'
+      target_dose_status[:details][:preferable] =
+        vaccine_evaluation[:details]
+    else
+      target_dose_status[:details][:allowable] =
+        vaccine_evaluation[:details]
+    end
+
     if vaccine_evaluation[:status] == 'invalid'
       target_dose_status[:target_dose_status] = 'not_satisfied'
       target_dose_status[:evaluation_status]  = 'not_valid'
 
-      if target_dose_status[:evaluated] == 'preferable'
+      if vaccine_evaluation[:evaluated] == 'preferable'
         target_dose_status[:reason] = 'preferable_vaccine_evaluation'
       else
         target_dose_status[:reason] = 'allowable_vaccine_evaluation'

@@ -52,7 +52,6 @@ module AgeEvaluation
                      previous_dose_status_hash=nil)
     # As described on page 38 (TABLE 4 - 12) in the CDC logic specifications
     # age_status = {record: antigen_administered_record}
-    # age_status = {record: antigen_administered_record}
     age_status = { evaluated: 'age' }
     if age_evaluation_hash[:absolute_min_age] == false
       age_status[:status]  = 'invalid'
@@ -62,7 +61,8 @@ module AgeEvaluation
       is_valid = true
 
       if has_previous_dose
-        previous_dose_invalid = previous_dose_status_hash[:status] == 'invalid'
+        previous_dose_invalid =
+          previous_dose_status_hash[:evaluation_status] == 'not_valid'
         previous_dose_reason  = previous_dose_status_hash[:reason]
         age_or_interval = ['age', 'interval'].include?(previous_dose_reason)
 
@@ -70,7 +70,6 @@ module AgeEvaluation
           is_valid = false
         end
       end
-
       if is_valid
         age_status[:status]  = 'valid'
         age_status[:details]  = 'grace_period'

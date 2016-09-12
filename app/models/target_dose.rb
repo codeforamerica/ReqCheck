@@ -26,7 +26,7 @@ class TargetDose
   end
 
   def evaluate_antigen_administered_record(antigen_administered_record)
-    if !@status_hash.nil? && @status_hash[:status] == 'valid'
+    if !@status_hash.nil? && @status_hash[:evaluation_status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
     end
     @antigen_administered_record = antigen_administered_record
