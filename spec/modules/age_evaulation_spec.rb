@@ -161,7 +161,7 @@ RSpec.describe AgeEvaluation do
 
   describe '#get_age_status' do
     # This logic is defined on page 38 of the CDC logic spec
-    it 'returns invalid, too young for absolute_min_age false' do
+    it 'returns not_valid, too young for absolute_min_age false' do
       prev_status_hash = nil
       age_eval_hash = {
         absolute_min_age: false,
@@ -170,7 +170,7 @@ RSpec.describe AgeEvaluation do
         latest_recommended_age: true,
         max_age: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'age',
                           details: 'too_young' }
                           # record: polio_antigen_series_dose }
@@ -181,9 +181,9 @@ RSpec.describe AgeEvaluation do
       ).to eq(expected_result)
     end
 
-    it 'returns invalid, too young for before min_age and previous invalid' do
+    it 'returns not_valid, too young for before min_age and previous not_valid' do
       prev_status_hash = {
-        status: 'invalid',
+        evaluation_status: 'not_valid',
         reason: 'age',
         details: 'too_young'
       }
@@ -194,7 +194,7 @@ RSpec.describe AgeEvaluation do
         latest_recommended_age: true,
         max_age: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'age',
                           details: 'too_young' }
                           # record: polio_antigen_series_dose }
@@ -207,7 +207,7 @@ RSpec.describe AgeEvaluation do
 
     it 'returns valid, grace_period for before min_age and previous valid' do
       prev_status_hash = {
-        status: 'valid',
+        evaluation_status: 'valid',
         details: 'grace_period'
       }
       age_eval_hash = {
@@ -217,7 +217,7 @@ RSpec.describe AgeEvaluation do
         latest_recommended_age: true,
         max_age: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'age',
                           details: 'grace_period' }
                           # record: polio_antigen_series_dose }
@@ -236,7 +236,7 @@ RSpec.describe AgeEvaluation do
         latest_recommended_age: true,
         max_age: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'age',
                           details: 'grace_period' }
                           # record: polio_antigen_series_dose }
@@ -255,7 +255,7 @@ RSpec.describe AgeEvaluation do
         latest_recommended_age: true,
         max_age: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'age',
                           details: 'on_schedule' }
                           # record: polio_antigen_series_dose }
@@ -265,7 +265,7 @@ RSpec.describe AgeEvaluation do
                                    prev_status_hash)
       ).to eq(expected_result)
     end
-    it 'returns invalid, too_old for after max_age' do
+    it 'returns not_valid, too_old for after max_age' do
       prev_status_hash = nil
       age_eval_hash = {
         absolute_min_age: true,
@@ -274,7 +274,7 @@ RSpec.describe AgeEvaluation do
         latest_recommended_age: false,
         max_age: false
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'age',
                           details: 'too_old' }
                           # record: polio_antigen_series_dose }
@@ -301,13 +301,13 @@ RSpec.describe AgeEvaluation do
         date_of_dose: date_of_dose
       )
       expected_result = {
-                          status: 'valid',
+                          evaluation_status: 'valid',
                           evaluated: 'age',
                           details: 'on_schedule'
                         }
       expect(evaluation_hash).to eq(expected_result)
     end
-    it 'returns invalid for invalid patient age at dose date' do
+    it 'returns not_valid for not_valid patient age at dose date' do
       expect(polio_antigen_series_dose.min_age).to eq('6 weeks')
       expect(polio_antigen_series_dose.absolute_min_age)
         .to eq('6 weeks - 4 days')
@@ -321,7 +321,7 @@ RSpec.describe AgeEvaluation do
         date_of_dose: date_of_dose
       )
       expected_result = {
-                          status: 'invalid',
+                          evaluation_status: 'not_valid',
                           evaluated: 'age',
                           details: 'too_young'
                         }

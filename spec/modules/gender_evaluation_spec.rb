@@ -150,15 +150,15 @@ RSpec.describe GenderEvaluation do
     # This logic is defined on page 53 of the CDC logic spec
     it 'returns valid, gender, for required_gender_valid true' do
       gender_eval_hash = { required_gender_valid: true }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'gender' }
       expect(test_object.get_gender_status(gender_eval_hash))
         .to eq(expected_result)
     end
 
-    it 'returns invalid, gender, for required_gender_valid true' do
+    it 'returns not_valid, gender, for required_gender_valid true' do
       gender_eval_hash = { required_gender_valid: false }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'gender' }
       expect(test_object.get_gender_status(gender_eval_hash))
         .to eq(expected_result)
@@ -175,12 +175,12 @@ RSpec.describe GenderEvaluation do
         patient_gender: patient_gender
       )
       expected_result = {
-                          status: 'valid',
+                          evaluation_status: 'valid',
                           evaluated: 'gender'
                         }
       expect(evaluation_hash).to eq(expected_result)
     end
-    it 'returns invalid for invalid patient gender' do
+    it 'returns not_valid for not_valid patient gender' do
       as_dose.required_gender = %w(Female Unknown)
       patient_gender          = 'male'
       evaluation_hash = test_object.evaluate_gender(
@@ -188,7 +188,7 @@ RSpec.describe GenderEvaluation do
         patient_gender: patient_gender
       )
       expected_result = {
-                          status: 'invalid',
+                          evaluation_status: 'not_valid',
                           evaluated: 'gender'
                         }
       expect(evaluation_hash).to eq(expected_result)

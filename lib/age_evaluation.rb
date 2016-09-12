@@ -54,36 +54,36 @@ module AgeEvaluation
     # age_status = {record: antigen_administered_record}
     age_status = { evaluated: 'age' }
     if age_evaluation_hash[:absolute_min_age] == false
-      age_status[:status]  = 'invalid'
+      age_status[:evaluation_status]  = 'not_valid'
       age_status[:details] = 'too_young'
     elsif age_evaluation_hash[:min_age] == false
       has_previous_dose = !previous_dose_status_hash.nil?
       is_valid = true
 
       if has_previous_dose
-        previous_dose_invalid =
+        previous_dose_not_valid =
           previous_dose_status_hash[:evaluation_status] == 'not_valid'
         previous_dose_reason  = previous_dose_status_hash[:reason]
         age_or_interval = ['age', 'interval'].include?(previous_dose_reason)
 
-        if previous_dose_invalid && age_or_interval
+        if previous_dose_not_valid && age_or_interval
           is_valid = false
         end
       end
       if is_valid
-        age_status[:status]  = 'valid'
+        age_status[:evaluation_status]  = 'valid'
         age_status[:details]  = 'grace_period'
       else
-        age_status[:status]  = 'invalid'
+        age_status[:evaluation_status]  = 'not_valid'
         age_status[:details] = 'too_young'
       end
 
     elsif age_evaluation_hash[:max_age] == false
       # Should we include extraneous on this as well? Where?
-      age_status[:status]  = 'invalid'
+      age_status[:evaluation_status]  = 'not_valid'
       age_status[:details] = 'too_old'
     else
-      age_status[:status]  = 'valid'
+      age_status[:evaluation_status]  = 'valid'
       age_status[:details]  = 'on_schedule'
     end
     age_status

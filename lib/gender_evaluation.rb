@@ -37,9 +37,9 @@ module GenderEvaluation
     gender_status[:evaluated] = 'gender'
 
     if gender_evaluation_hash[:required_gender_valid] == true
-      gender_status[:status] = 'valid'
+      gender_status[:evaluation_status] = 'valid'
     else
-      gender_status[:status] = 'invalid'
+      gender_status[:evaluation_status] = 'not_valid'
     end
     gender_status
   end

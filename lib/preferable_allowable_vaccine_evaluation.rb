@@ -66,16 +66,16 @@ module PreferableAllowableVaccineEvaluation
     vaccine_status[:evaluated] = 'preferable'
     if vaccine_evaluation_hash[:begin_age] == false ||
        vaccine_evaluation_hash[:end_age] == false
-        vaccine_status[:status] = 'invalid'
+        vaccine_status[:evaluation_status] = 'not_valid'
         vaccine_status[:details] = 'out_of_age_range'
     elsif vaccine_evaluation_hash[:trade_name] == false
-      vaccine_status[:status] = 'invalid'
+      vaccine_status[:evaluation_status] = 'not_valid'
       vaccine_status[:details] = 'wrong_trade_name'
     elsif vaccine_evaluation_hash[:volume] == false
-      vaccine_status[:status] = 'valid'
+      vaccine_status[:evaluation_status] = 'valid'
       vaccine_status[:details] = 'less_than_recommended_volume'
     else
-      vaccine_status[:status] = 'valid'
+      vaccine_status[:evaluation_status] = 'valid'
       vaccine_status[:details] = 'within_age_trade_name_volume'
     end
     vaccine_status
@@ -87,10 +87,10 @@ module PreferableAllowableVaccineEvaluation
     vaccine_status[:evaluated] = 'allowable'
     if vaccine_evaluation_hash[:begin_age] == false ||
        vaccine_evaluation_hash[:end_age] == false
-        vaccine_status[:status] = 'invalid'
+        vaccine_status[:evaluation_status] = 'not_valid'
         vaccine_status[:details] = 'out_of_age_range'
     else
-      vaccine_status[:status] = 'valid'
+      vaccine_status[:evaluation_status] = 'valid'
       vaccine_status[:details] = 'within_age_range'
     end
     vaccine_status
@@ -143,7 +143,9 @@ module PreferableAllowableVaccineEvaluation
           dose_trade_name: dose_trade_name,
           dose_volume: dose_volume
         )
-      return vaccine_evaluation if vaccine_evaluation[:status] == 'valid'
+      if vaccine_evaluation[:evaluation_status] == 'valid'
+        return vaccine_evaluation
+      end
     end
 
     evaluation_vaccine =
@@ -152,7 +154,7 @@ module PreferableAllowableVaccineEvaluation
       end
     if evaluation_vaccine.nil?
       if vaccine_evaluation == {}
-        vaccine_evaluation = { status: 'invalid',
+        vaccine_evaluation = { evaluation_status: 'not_valid',
                                details: 'vaccine_cvx_not_found',
                                evaluated: 'allowable' }
       end

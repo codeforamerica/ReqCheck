@@ -799,14 +799,14 @@ RSpec.describe ConditionalSkipEvaluation do
       input_key, input_value, expected_status, expected_reason = test_array
       evaluated = 'conditional_skip_condition'
 
-      it "returns status: #{expected_status}, reason: #{expected_reason}, " \
+      it "returns evaluation_status: #{expected_status}, reason: #{expected_reason}, " \
          "evaluated: #{evaluated} for #{input_key}: #{input_value}" do
          eval_hash[input_key.to_sym] = input_value
 
          status_hash = test_object.get_conditional_skip_condition_status(
            eval_hash
          )
-         expect(status_hash[:status]).to eq(expected_status)
+         expect(status_hash[:evaluation_status]).to eq(expected_status)
          expect(status_hash[:reason]).to eq(expected_reason)
          expect(status_hash[:evaluated]).to eq(evaluated)
       end
@@ -814,12 +814,12 @@ RSpec.describe ConditionalSkipEvaluation do
   end
   describe '#get_conditional_skip_set_status ' do
     condition_statuses = {
-      all_met:  [{status: 'condition_met', reason: 'age'},
-                 {status: 'condition_met', reason: 'interval'}],
-      one_met:  [{status: 'condition_met', reason: 'age'},
-                 {status: 'condition_not_met', reason: 'interval'}],
-      none_met: [{status: 'condition_not_met', reason: 'age'},
-                 {status: 'condition_not_met', reason: 'interval'}]
+      all_met:  [{evaluation_status: 'condition_met', reason: 'age'},
+                 {evaluation_status: 'condition_met', reason: 'interval'}],
+      one_met:  [{evaluation_status: 'condition_met', reason: 'age'},
+                 {evaluation_status: 'condition_not_met', reason: 'interval'}],
+      none_met: [{evaluation_status: 'condition_not_met', reason: 'age'},
+                 {evaluation_status: 'condition_not_met', reason: 'interval'}]
     }
 
     {
@@ -837,12 +837,12 @@ RSpec.describe ConditionalSkipEvaluation do
         statuses_key       = value_array[0]
         statuses = condition_statuses[statuses_key.to_sym]
         it "takes condition_logic #{condition_logic} with condition statuses" \
-           " with #{statuses_key} and returns status: #{expected_status}" do
+           " with #{statuses_key} and returns evaluation_status: #{expected_status}" do
           result_hash = test_object.get_conditional_skip_set_status(
             condition_logic.to_s,
             statuses
           )
-          expect(result_hash[:status]).to eq(expected_status)
+          expect(result_hash[:evaluation_status]).to eq(expected_status)
           expect(result_hash[:evaluated]).to eq('conditional_skip_set')
           if statuses_key == 'all_met'
             expect(result_hash[:met_conditions])
@@ -872,9 +872,9 @@ RSpec.describe ConditionalSkipEvaluation do
   end
   describe '#get_conditional_skip_status ' do
     set_statuses_hash = {
-      all_met:  [{status: 'set_met'}, {status: 'set_met'}],
-      one_met:  [{status: 'set_met'}, {status: 'set_not_met'}],
-      none_met: [{status: 'set_not_met'}, {status: 'set_not_met'}]
+      all_met:  [{evaluation_status: 'set_met'}, {evaluation_status: 'set_met'}],
+      one_met:  [{evaluation_status: 'set_met'}, {evaluation_status: 'set_not_met'}],
+      none_met: [{evaluation_status: 'set_not_met'}, {evaluation_status: 'set_not_met'}]
     }
 
     {
@@ -892,12 +892,12 @@ RSpec.describe ConditionalSkipEvaluation do
         statuses_key       = value_array[0]
         condition_statuses = set_statuses_hash[statuses_key.to_sym]
         it "takes condition_logic #{set_logic} with condition statuses " \
-           "with #{statuses_key} and returns status: #{expected_status}" do
+           "with #{statuses_key} and returns evaluation_status: #{expected_status}" do
           result_hash = test_object.get_conditional_skip_status(
             set_logic.to_s,
             condition_statuses
           )
-          expect(result_hash[:status]).to eq(expected_status)
+          expect(result_hash[:evaluation_status]).to eq(expected_status)
           expect(result_hash[:evaluated]).to eq('conditional_skip')
         end
       end
@@ -926,7 +926,7 @@ RSpec.describe ConditionalSkipEvaluation do
       expected_result = {
         evaluated: 'conditional_skip_condition',
         reason: 'age',
-        status: 'condition_met'
+        evaluation_status: 'condition_met'
       }
       expect(evaluation_hash).to eq(expected_result)
     end
@@ -952,17 +952,17 @@ RSpec.describe ConditionalSkipEvaluation do
         met_conditions: [
           {
             evaluated: "conditional_skip_condition",
-            status: "condition_met",
+            evaluation_status: "condition_met",
             reason: "age"
           },
           {
             evaluated: "conditional_skip_condition",
-            status: "condition_met",
+            evaluation_status: "condition_met",
             reason: "interval"
           },
         ],
         not_met_conditions: [],
-        status: 'set_met'
+        evaluation_status: 'set_met'
       }
       expect(evaluation_hash).to eq(expected_result)
     end
@@ -985,18 +985,18 @@ RSpec.describe ConditionalSkipEvaluation do
         met_conditions: [
           {
             evaluated: "conditional_skip_condition",
-            status: "condition_met",
+            evaluation_status: "condition_met",
             reason: "interval"
           }
         ],
         not_met_conditions: [
           {
             evaluated: "conditional_skip_condition",
-            status: "condition_not_met",
+            evaluation_status: "condition_not_met",
             reason: "age"
           }
         ],
-        status: 'set_not_met'
+        evaluation_status: 'set_not_met'
       }
       expect(evaluation_hash).to eq(expected_result)
     end
@@ -1024,21 +1024,21 @@ RSpec.describe ConditionalSkipEvaluation do
             met_conditions: [
               {
                 evaluated: "conditional_skip_condition",
-                status: "condition_met",
+                evaluation_status: "condition_met",
                 reason: "age"
               },
               {
                 evaluated: "conditional_skip_condition",
-                status: "condition_met",
+                evaluation_status: "condition_met",
                 reason: "interval"
               }
             ],
             not_met_conditions: [],
-            status: 'set_met'
+            evaluation_status: 'set_met'
           }
         ],
         not_met_sets: [],
-        status: 'conditional_skip_met'
+        evaluation_status: 'conditional_skip_met'
       }
       expect(evaluation_hash).to eq(expected_result)
     end
@@ -1064,21 +1064,21 @@ RSpec.describe ConditionalSkipEvaluation do
             met_conditions: [
               {
                 evaluated: "conditional_skip_condition",
-                status: "condition_met",
+                evaluation_status: "condition_met",
                 reason: "interval"
               }
             ],
             not_met_conditions: [
               {
                 evaluated: "conditional_skip_condition",
-                status: "condition_not_met",
+                evaluation_status: "condition_not_met",
                 reason: "age"
               }
             ],
-            status: 'set_not_met'
+            evaluation_status: 'set_not_met'
           }
         ],
-        status: 'conditional_skip_not_met'
+        evaluation_status: 'conditional_skip_not_met'
       }
       expect(evaluation_hash).to eq(expected_result)
     end

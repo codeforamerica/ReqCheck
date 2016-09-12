@@ -64,7 +64,7 @@ RSpec.describe IntervalEvaluation do
       expect(as_dose_w_interval.intervals.first.interval_absolute_min)
         .to eq('4 weeks - 4 days')
       interval_eval = test_object.evaluate_interval(test_aars[0], test_aars[1])
-      expect(interval_eval).to eq([{ status: 'valid', reason: 'whatever' }])
+      expect(interval_eval).to eq([{ evaluation_status: 'valid', reason: 'whatever' }])
     end
   end
 
@@ -208,7 +208,7 @@ RSpec.describe IntervalEvaluation do
   end
 
   describe '#get_interval_status' do
-    it 'returns invalid, too_soon for interval_absolute_min_date false' do
+    it 'returns not_valid, too_soon for interval_absolute_min_date false' do
       prev_status_hash = nil
       interval_eval_hash = {
         interval_absolute_min: false,
@@ -216,7 +216,7 @@ RSpec.describe IntervalEvaluation do
         interval_earliest_recommended: false,
         interval_latest_recommended: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'interval',
                           details: 'too_soon' }
       expect(
@@ -225,10 +225,10 @@ RSpec.describe IntervalEvaluation do
       ).to eq(expected_result)
     end
 
-    it 'returns invalid, too_soon for before interval_min and ' \
-      'previous invalid' do
+    it 'returns not_valid, too_soon for before interval_min and ' \
+      'previous not_valid' do
       prev_status_hash = {
-        status: 'invalid',
+        evaluation_status: 'not_valid',
         reason: 'interval',
         details: 'too_soon'
       }
@@ -238,7 +238,7 @@ RSpec.describe IntervalEvaluation do
         interval_earliest_recommended: false,
         interval_latest_recommended: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'interval',
                           details: 'too_soon' }
       expect(
@@ -250,7 +250,7 @@ RSpec.describe IntervalEvaluation do
     it 'returns valid, grace_period for before interval_min ' \
       'and previous valid' do
       prev_status_hash = {
-        status: 'valid',
+        evaluation_status: 'valid',
         reason: 'grace_period'
       }
       interval_eval_hash = {
@@ -259,7 +259,7 @@ RSpec.describe IntervalEvaluation do
         interval_earliest_recommended: false,
         interval_latest_recommended: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'interval',
                           details: 'grace_period' }
       expect(
@@ -276,7 +276,7 @@ RSpec.describe IntervalEvaluation do
         interval_earliest_recommended: false,
         interval_latest_recommended: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'interval',
                           details: 'grace_period' }
       expect(
@@ -292,7 +292,7 @@ RSpec.describe IntervalEvaluation do
         interval_earliest_recommended: false,
         interval_latest_recommended: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'interval',
                           details: 'on_schedule' }
       expect(
@@ -317,13 +317,13 @@ RSpec.describe IntervalEvaluation do
           previous_dose_date: previous_dose_date
         )
         expected_result = {
-                            status: 'valid',
+                            evaluation_status: 'valid',
                             evaluated: 'interval',
                             details: 'on_schedule'
                           }
         expect(evaluation_hash).to eq(expected_result)
     end
-    it 'returns invalid for invalid interval between doses' do
+    it 'returns not_valid for not_valid interval between doses' do
         interval_object    = FactoryGirl.create(:interval)
         previous_dose_date = 1.year.ago.to_date
         date_of_dose       = (1.year.ago + 4.weeks).to_date
@@ -337,7 +337,7 @@ RSpec.describe IntervalEvaluation do
           previous_dose_date: previous_dose_date
         )
         expected_result = {
-                            status: 'invalid',
+                            evaluation_status: 'not_valid',
                             evaluated: 'interval',
                             details: 'too_soon'
                           }

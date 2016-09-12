@@ -126,9 +126,9 @@ RSpec.describe TargetDoseEvaluation do
       )
       expect(evaluation_hash).to eq(expected_result)
     end
-    xcontext 'when conditional_skip is invalid' do
+    xcontext 'when conditional_skip is not_valid' do
     end
-    context 'when age is invalid' do
+    context 'when age is not_valid' do
       it 'returns satisfied for first dose age valid' do
         patient_vaccines     = test_patient.vaccine_doses
         vaccine_dose         = patient_vaccines[0]
@@ -164,7 +164,7 @@ RSpec.describe TargetDoseEvaluation do
         )
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns not_satisfied for first dose age invalid' do
+      it 'returns not_satisfied for first dose age not_valid' do
         patient_vaccines     = test_patient.vaccine_doses
         vaccine_dose         = patient_vaccines[0]
         patient_dob          = (vaccine_dose.date_administered - 5.weeks)
@@ -197,7 +197,7 @@ RSpec.describe TargetDoseEvaluation do
         )
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns not_satisfied for second age invalid and first invalid' do
+      it 'returns not_satisfied for second age not_valid and first not_valid' do
         patient_vaccines     = test_patient.vaccine_doses
         first_vaccine_dose   = patient_vaccines[0]
         second_vaccine_dose  = patient_vaccines[1]
@@ -239,7 +239,7 @@ RSpec.describe TargetDoseEvaluation do
         )
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns satisfied for second age invalid but first valid' do
+      it 'returns satisfied for second age not_valid but first valid' do
         patient_vaccines     = test_patient.vaccine_doses
         first_vaccine_dose   = patient_vaccines[0]
         second_vaccine_dose  = patient_vaccines[1]
@@ -275,11 +275,11 @@ RSpec.describe TargetDoseEvaluation do
         expect(evaluation_hash).to eq(expected_result)
       end
     end
-    context 'when interval is invalid' do
+    context 'when interval is not_valid' do
     end
-    context 'when allowable interval is invalid' do
+    context 'when allowable interval is not_valid' do
     end
-    context 'when allowable vaccine is invalid' do
+    context 'when allowable vaccine is not_valid' do
     end
   end
 end

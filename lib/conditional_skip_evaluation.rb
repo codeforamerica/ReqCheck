@@ -167,38 +167,38 @@ module ConditionalSkipEvaluation
 
   def get_conditional_skip_condition_status(evaluation_hash)
     status_hash = { evaluated: 'conditional_skip_condition' }
-    status_hash[:status] = nil
+    status_hash[:evaluation_status] = nil
 
     if evaluation_hash[:begin_age] == false ||
        evaluation_hash[:end_age] == false
-      status_hash[:status] = 'condition_not_met'
+      status_hash[:evaluation_status] = 'condition_not_met'
       status_hash[:reason] = 'age'
     elsif evaluation_hash[:begin_age] == true ||
        evaluation_hash[:end_age] == true
-      status_hash[:status] = 'condition_met'
+      status_hash[:evaluation_status] = 'condition_met'
       status_hash[:reason] = 'age'
     end
-    if status_hash[:status] != 'condition_not_met'
+    if status_hash[:evaluation_status] != 'condition_not_met'
       if evaluation_hash[:start_date] == false ||
          evaluation_hash[:end_date] == false
-        status_hash[:status] = 'condition_not_met'
+        status_hash[:evaluation_status] = 'condition_not_met'
         status_hash[:reason] = 'dose_timing'
-      elsif status_hash[:status].nil? &&
+      elsif status_hash[:evaluation_status].nil? &&
             (evaluation_hash[:start_date] == true ||
              evaluation_hash[:end_date] == true)
-        status_hash[:status] = 'condition_met'
+        status_hash[:evaluation_status] = 'condition_met'
         status_hash[:reason] = 'dose_timing'
       end
     end
-    if status_hash[:status] != 'condition_not_met'
+    if status_hash[:evaluation_status] != 'condition_not_met'
       if evaluation_hash[:interval_date] == false ||
          evaluation_hash[:end_date] == false
-        status_hash[:status] = 'condition_not_met'
+        status_hash[:evaluation_status] = 'condition_not_met'
         status_hash[:reason] = 'interval'
-      elsif status_hash[:status].nil? &&
+      elsif status_hash[:evaluation_status].nil? &&
             (evaluation_hash[:interval_date] == true ||
              evaluation_hash[:end_date] == true)
-        status_hash[:status] = 'condition_met'
+        status_hash[:evaluation_status] = 'condition_met'
         status_hash[:reason] = 'interval'
       end
     end
@@ -211,23 +211,23 @@ module ConditionalSkipEvaluation
       raise ArgumentError.new('Condition Status Array cannot be empty')
     end
     status_hash = { evaluated: 'conditional_skip_set' }
-    status_hash[:status] = nil
+    status_hash[:evaluation_status] = nil
 
-    # conditional_eval = Proc.new {|condition_status| condition_status[:status] == 'condition_met' }
+    # conditional_eval = Proc.new {|condition_status| condition_status[:evaluation_status] == 'condition_met' }
     met, not_met = condition_statuses_array.partition do |condition_status|
-      condition_status[:status] == 'condition_met'
+      condition_status[:evaluation_status] == 'condition_met'
     end
     if condition_logic == 'AND'
       if not_met.length.zero?
-        status_hash[:status] = 'set_met'
+        status_hash[:evaluation_status] = 'set_met'
       else
-        status_hash[:status] = 'set_not_met'
+        status_hash[:evaluation_status] = 'set_not_met'
       end
     elsif condition_logic == 'OR'
       if !met.length.zero?
-        status_hash[:status] = 'set_met'
+        status_hash[:evaluation_status] = 'set_met'
       else
-        status_hash[:status] = 'set_not_met'
+        status_hash[:evaluation_status] = 'set_not_met'
       end
     end
     status_hash[:met_conditions] = met
@@ -240,23 +240,23 @@ module ConditionalSkipEvaluation
       raise ArgumentError.new('Set Status Array cannot be empty')
     end
     status_hash = { evaluated: 'conditional_skip' }
-    status_hash[:status] = nil
+    status_hash[:evaluation_status] = nil
 
     met, not_met = set_statuses_array.partition do |set_status|
-      set_status[:status] == 'set_met'
+      set_status[:evaluation_status] == 'set_met'
     end
 
     if set_logic == 'AND' || set_logic == 'n/a'
       if not_met.length.zero?
-        status_hash[:status] = 'conditional_skip_met'
+        status_hash[:evaluation_status] = 'conditional_skip_met'
       else
-        status_hash[:status] = 'conditional_skip_not_met'
+        status_hash[:evaluation_status] = 'conditional_skip_not_met'
       end
     elsif set_logic == 'OR'
       if !met.length.zero?
-        status_hash[:status] = 'conditional_skip_met'
+        status_hash[:evaluation_status] = 'conditional_skip_met'
       else
-        status_hash[:status] = 'conditional_skip_not_met'
+        status_hash[:evaluation_status] = 'conditional_skip_not_met'
       end
     end
     status_hash[:met_sets] = met

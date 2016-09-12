@@ -218,7 +218,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
 
   describe '#get_preferable_vaccine_status' do
     # This logic is defined on page 50 of the CDC logic spec
-    xit 'returns invalid, preferable, not_preferable for preferable false' do
+    xit 'returns not_valid, preferable, not_preferable for preferable false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
         begin_age: true,
@@ -226,7 +226,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'preferable',
                           details: 'not_preferable' }
       expect(
@@ -235,7 +235,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
       ).to eq(expected_result)
     end
 
-    it 'returns invalid, preferable, out_of_age_range for '\
+    it 'returns not_valid, preferable, out_of_age_range for '\
     'begin_age false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
@@ -244,7 +244,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'preferable',
                           details: 'out_of_age_range' }
       expect(
@@ -253,7 +253,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
       ).to eq(expected_result)
     end
 
-    it 'returns invalid, preferable, out_of_age_range for '\
+    it 'returns not_valid, preferable, out_of_age_range for '\
     'end_age false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
@@ -262,7 +262,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'preferable',
                           details: 'out_of_age_range' }
       expect(
@@ -271,7 +271,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
       ).to eq(expected_result)
     end
 
-    it 'returns invalid, preferable, wrong_trade_name for '\
+    it 'returns not_valid, preferable, wrong_trade_name for '\
     'trade_name false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
@@ -280,7 +280,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: false,
         volume: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'preferable',
                           details: 'wrong_trade_name' }
       expect(
@@ -298,7 +298,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: false
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'preferable',
                           details: 'less_than_recommended_volume' }
       expect(
@@ -314,7 +314,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'preferable',
                           details: 'within_age_trade_name_volume' }
       expect(
@@ -326,7 +326,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
 
   describe '#get_allowable_vaccine_status' do
     # This logic is defined on page 52 of the CDC logic spec
-    xit 'returns invalid, allowable, not_allowable for allowable false' do
+    xit 'returns not_valid, allowable, not_allowable for allowable false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
         begin_age: true,
@@ -334,7 +334,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'allowable',
                           details: 'not_allowable' }
       expect(
@@ -343,7 +343,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
       ).to eq(expected_result)
     end
 
-    it 'returns invalid, allowable, out_of_age_range for '\
+    it 'returns not_valid, allowable, out_of_age_range for '\
     'begin_age false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
@@ -352,7 +352,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'allowable',
                           details: 'out_of_age_range' }
       expect(
@@ -361,7 +361,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
       ).to eq(expected_result)
     end
 
-    it 'returns invalid, allowable, out_of_age_range for '\
+    it 'returns not_valid, allowable, out_of_age_range for '\
     'end_age false' do
       prev_status_hash = nil
       vaccine_eval_hash = {
@@ -370,7 +370,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'invalid',
+      expected_result = { evaluation_status: 'not_valid',
                           evaluated: 'allowable',
                           details: 'out_of_age_range' }
       expect(
@@ -386,7 +386,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         trade_name: true,
         volume: true
       }
-      expected_result = { status: 'valid',
+      expected_result = { evaluation_status: 'valid',
                           evaluated: 'allowable',
                           details: 'within_age_range' }
       expect(
@@ -414,13 +414,13 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_volume: volume
           )
         expected_result = {
-                            status: 'valid',
+                            evaluation_status: 'valid',
                             evaluated: 'preferable',
                             details: 'within_age_trade_name_volume'
                           }
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns invalid for invalid patient age at dose date' do
+      it 'returns not_valid for not_valid patient age at dose date' do
         patient_dob  = 2.years.ago.to_date
         date_of_dose = (2.year.ago + 4.weeks).to_date
         trade_name   = 'test'
@@ -436,7 +436,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_volume: volume
           )
         expected_result = {
-                            status: 'invalid',
+                            evaluation_status: 'not_valid',
                             evaluated: 'preferable',
                             details: 'out_of_age_range'
                           }
@@ -461,12 +461,12 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_trade_name: trade_name,
             dose_volume: volume
           )
-        expected_result = { status: 'valid',
+        expected_result = { evaluation_status: 'valid',
                             evaluated: 'allowable',
                             details: 'within_age_range' }
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns invalid for invalid patient age at dose date' do
+      it 'returns not_valid for not_valid patient age at dose date' do
         patient_dob  = 2.years.ago.to_date
         date_of_dose = (2.year.ago + 4.weeks).to_date
         trade_name   = 'test'
@@ -482,7 +482,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_trade_name: trade_name,
             dose_volume: volume
           )
-        expected_result = { status: 'invalid',
+        expected_result = { evaluation_status: 'not_valid',
                             evaluated: 'allowable',
                             details: 'out_of_age_range' }
         expect(evaluation_hash).to eq(expected_result)
@@ -504,12 +504,12 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_trade_name: trade_name,
             dose_volume: volume
           )
-        expected_result = { status: 'valid',
+        expected_result = { evaluation_status: 'valid',
                             evaluated: 'preferable',
                             details: 'within_age_trade_name_volume' }
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns invalid preferable vaccine status if preferable vaccine' do
+      it 'returns not_valid preferable vaccine status if preferable vaccine' do
         patient_dob  = 2.years.ago.to_date
         date_of_dose = (2.years.ago + 4.weeks).to_date
         trade_name   = 'test'
@@ -524,12 +524,12 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_trade_name: trade_name,
             dose_volume: volume
           )
-        expected_result = { status: 'invalid',
+        expected_result = { evaluation_status: 'not_valid',
                             evaluated: 'preferable',
                             details: 'out_of_age_range' }
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns invalid if no vaccine is found' do
+      it 'returns not_valid if no vaccine is found' do
         patient_dob  = 2.years.ago.to_date
         date_of_dose = 1.year.ago.to_date
         trade_name   = 'test'
@@ -544,7 +544,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_trade_name: trade_name,
             dose_volume: volume
           )
-        expected_result = { status: 'invalid',
+        expected_result = { evaluation_status: 'not_valid',
                             evaluated: 'allowable',
                             details: 'vaccine_cvx_not_found' }
         expect(evaluation_hash).to eq(expected_result)
@@ -564,12 +564,12 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_trade_name: trade_name,
             dose_volume: volume
           )
-        expected_result = { status: 'valid',
+        expected_result = { evaluation_status: 'valid',
                             evaluated: 'allowable',
                             details: 'within_age_range' }
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns invalid allowable vaccine status if preferable vaccine' do
+      it 'returns not_valid allowable vaccine status if preferable vaccine' do
         patient_dob  = 2.years.ago.to_date
         date_of_dose = (2.years.ago + 4.weeks).to_date
         trade_name   = 'test'
@@ -584,7 +584,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
             dose_trade_name: trade_name,
             dose_volume: volume
           )
-        expected_result = { status: 'invalid',
+        expected_result = { evaluation_status: 'not_valid',
                             evaluated: 'allowable',
                             details: 'out_of_age_range' }
         expect(evaluation_hash).to eq(expected_result)

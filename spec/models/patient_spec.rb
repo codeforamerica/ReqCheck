@@ -14,7 +14,7 @@ RSpec.describe Patient, type: :model do
     patient = FactoryGirl.create(:patient,
                                  patient_profile_attributes: {
                                    dob: in_pst(5.years.ago),
-                                   record_number: 123 
+                                   record_number: 123
                                  })
     vaccine_types = %w(MCV6 DTaP MMR9)
     vaccine_types.each do |vax_code|
@@ -120,10 +120,10 @@ RSpec.describe Patient, type: :model do
       expect(valid_imm).to eq(true)
     end
 
-    xit 'returns false if invalid' do
-      invalid_patient = FactoryGirl.create(:patient)
-      invalid_imm = invalid_patient.check_record
-      expect(invalid_imm).to eq(false)
+    xit 'returns false if not_valid' do
+      not_valid_patient = FactoryGirl.create(:patient)
+      not_valid_imm = not_valid_patient.check_record
+      expect(not_valid_imm).to eq(false)
     end
   end
   describe '#age_in_days' do
@@ -194,7 +194,7 @@ RSpec.describe Patient, type: :model do
       patient = FactoryGirl.create(:patient,
                                    patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
-                                     record_number: 123 
+                                     record_number: 123
                                    })
       create(:vaccine_dose,
              patient_profile: patient.patient_profile,

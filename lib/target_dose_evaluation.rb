@@ -43,7 +43,7 @@ module TargetDoseEvaluation
     )
     target_dose_status[:details][:age] = age_evaluation[:details]
 
-    if age_evaluation[:status] == 'invalid'
+    if age_evaluation[:evaluation_status] == 'not_valid'
       target_dose_status[:reason] = 'age'
       target_dose_status[:target_dose_status]  = 'not_satisfied'
 
@@ -69,7 +69,7 @@ module TargetDoseEvaluation
     target_dose_status[:details][:intervals] = []
     interval_evaluations.each do |interval_evaluation|
       target_dose_status[:details][:intervals] << interval_evaluation[:details]
-      if interval_evaluation[:status] == 'invalid'
+      if interval_evaluation[:evaluation_status] == 'not_valid'
         target_dose_status[:target_dose_status] = 'not_satisfied'
         target_dose_status[:evaluation_status] = 'not_valid'
         target_dose_status[:reason] = 'interval'
@@ -97,7 +97,7 @@ module TargetDoseEvaluation
         vaccine_evaluation[:details]
     end
 
-    if vaccine_evaluation[:status] == 'invalid'
+    if vaccine_evaluation[:evaluation_status] == 'not_valid'
       target_dose_status[:target_dose_status] = 'not_satisfied'
       target_dose_status[:evaluation_status]  = 'not_valid'
 
