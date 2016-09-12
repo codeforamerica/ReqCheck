@@ -166,7 +166,6 @@ module PreferableAllowableVaccineEvaluation
           dose_volume: dose_volume
         )
     end
-    byebug
     vaccine_evaluation
   end
 end

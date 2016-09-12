@@ -61,7 +61,8 @@ RSpec.describe TargetDoseEvaluation do
       patient_gender      = test_patient.gender
 
       expected_result = {
-        status: 'satisfied',
+        evaluation_status: 'valid',
+        target_dose_status: 'satisfied',
         details: 'on_schedule'
       }
 
@@ -90,11 +91,13 @@ RSpec.describe TargetDoseEvaluation do
       patient_gender       = test_patient.gender
 
       previous_status_hash = {
-        status: 'valid',
+        evaluation_status: 'valid',
+        target_dose_status: 'satisfied',
         details: 'on_schedule'
       }
       expected_result = {
-        status: 'satisfied',
+        evaluation_status: 'valid',
+        target_dose_status: 'satisfied',
         details: 'on_schedule'
       }
 

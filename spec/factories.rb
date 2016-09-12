@@ -147,6 +147,17 @@ FactoryGirl.define do
         volume: '',
         preferable: false
       )
+      dose.dose_vaccines << FactoryGirl.create(
+        :antigen_series_dose_vaccine,
+        vaccine_type: 'IPV',
+        cvx_code: 10,
+        begin_age: '6 weeks - 4 days',
+        end_age: '',
+        trade_name: '',
+        mvx_code: '',
+        volume: '',
+        preferable: false
+      )
     end
   end
 
