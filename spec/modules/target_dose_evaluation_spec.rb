@@ -243,18 +243,22 @@ RSpec.describe TargetDoseEvaluation do
         patient_vaccines     = test_patient.vaccine_doses
         first_vaccine_dose   = patient_vaccines[0]
         second_vaccine_dose  = patient_vaccines[1]
-        patient_dob          = test_patient.dob
+        patient_dob          =
+          (second_vaccine_dose.date_administered - 6.weeks + 1.day)
         patient_gender       = test_patient.gender
 
         previous_status_hash = {
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
-          details: 'on_schedule'
         }
         expected_result = {
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
-          details: 'on_schedule'
+          details: {
+            age: 'grace_period',
+            intervals: [],
+            allowable: 'within_age_range'
+          }
         }
 
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
@@ -276,6 +280,7 @@ RSpec.describe TargetDoseEvaluation do
       end
     end
     context 'when interval is not_valid' do
+
     end
     context 'when allowable interval is not_valid' do
     end
