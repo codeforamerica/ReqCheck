@@ -24,6 +24,13 @@ RSpec.describe TargetDoseEvaluation do
     FactoryGirl.create(:antigen_series_dose_second_with_vaccines)
   end
 
+  let(:test_intervals) do
+    [
+      FactoryGirl.create(:preferable_interval),
+      FactoryGirl.create(:allowable_interval)
+    ]
+  end
+
   let(:test_patient) do
     test_patient = FactoryGirl.create(:patient)
     FactoryGirl.create(
@@ -65,7 +72,7 @@ RSpec.describe TargetDoseEvaluation do
         target_dose_status: 'satisfied',
         details: {
           age: 'on_schedule',
-          intervals: [],
+          interval: 'no_interval_required',
           allowable: 'within_age_range'
         }
       }
@@ -104,7 +111,7 @@ RSpec.describe TargetDoseEvaluation do
         target_dose_status: 'satisfied',
         details: {
           age: 'on_schedule',
-          intervals: [],
+          interval: 'no_interval_required',
           allowable: 'within_age_range'
         }
       }
@@ -142,7 +149,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'grace_period',
-            intervals: [],
+            interval: 'no_interval_required',
             allowable: 'within_age_range'
           }
         }
@@ -256,7 +263,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'grace_period',
-            intervals: [],
+            interval: 'no_interval_required',
             allowable: 'within_age_range'
           }
         }
@@ -280,9 +287,335 @@ RSpec.describe TargetDoseEvaluation do
       end
     end
     context 'when interval is not_valid' do
+      it 'returns not_satisfied less time between interval' do
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+        new_intervals        = [test_intervals.first]
 
+        expect(new_intervals.first.interval_absolute_min)
+          .to eq('6 months - 4 days')
+
+        second_vaccine_dose.update(
+          date_administered: (first_vaccine_dose.date_administered + 2.weeks)
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+        }
+        expected_result = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'interval',
+          details: {
+            age: 'on_schedule',
+            interval: 'too_soon'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: new_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied more time between interval' do
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+        new_intervals        = [test_intervals.first]
+
+        expect(new_intervals.first.interval_absolute_min)
+          .to eq('6 months - 4 days')
+
+        second_vaccine_dose.update(
+          date_administered: (first_vaccine_dose.date_administered + 6.months)
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+        }
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'on_schedule',
+            allowable: 'within_age_range'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: new_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns not_satisfied more time between intervals but ' \
+         'previous evaluation_status was not_valid due to age' do
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+        new_intervals        = [test_intervals.first]
+
+        expect(new_intervals.first.interval_min).to eq('6 months')
+        expect(new_intervals.first.interval_absolute_min)
+          .to eq('6 months - 4 days')
+        second_vaccine_dose.update(
+          date_administered: (
+            first_vaccine_dose.date_administered + 6.months - 2.days
+          )
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'age'
+        }
+        expected_result = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'interval',
+          details: {
+            age: 'on_schedule',
+            interval: 'too_soon'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: new_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied more time between intervals but ' \
+         'previous evaluation_status was valid due to age' do
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+        new_intervals        = [test_intervals.first]
+
+        expect(new_intervals.first.interval_min).to eq('6 months')
+        expect(new_intervals.first.interval_absolute_min)
+          .to eq('6 months - 4 days')
+        second_vaccine_dose.update(
+          date_administered: (
+            first_vaccine_dose.date_administered + 6.months - 2.days
+          )
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+        }
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'grace_period',
+            allowable: 'within_age_range'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: new_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
     end
     context 'when allowable interval is not_valid' do
+      it 'returns not_satisfied less time between allowable intervals' do
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+        second_vaccine_dose.update(
+          date_administered: (first_vaccine_dose.date_administered + 2.weeks)
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+        }
+        expected_result = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'interval',
+          details: {
+            age: 'on_schedule',
+            interval: 'too_soon'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: test_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied more time between allowable intervals' do
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+
+        expect(test_intervals.last.interval_absolute_min).to eq('4 months')
+        expect(test_intervals.first.interval_absolute_min)
+          .to eq('6 months - 4 days')
+
+        second_vaccine_dose.update(
+          date_administered: (first_vaccine_dose.date_administered + 4.months)
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+        }
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'on_schedule',
+            allowable: 'within_age_range'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: test_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied as interval_min_date defaults to 01/01/1900 ' \
+         'even with previous evaluation_status was not_valid due to age' do
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+
+        expect(test_intervals.last.interval_min).to eq('')
+        expect(test_intervals.last.interval_absolute_min)
+          .to eq('4 months')
+        second_vaccine_dose.update(
+          date_administered: (
+            first_vaccine_dose.date_administered + 4.months
+          )
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'age'
+        }
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'on_schedule',
+            allowable:'within_age_range'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: test_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
     end
     context 'when allowable vaccine is not_valid' do
     end

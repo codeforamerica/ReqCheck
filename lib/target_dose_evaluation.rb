@@ -62,16 +62,23 @@ module TargetDoseEvaluation
     # Evaluate Allowable Interval
     interval_evaluations = intervals.map do |interval|
       evaluate_interval(interval,
-                        previous_dose_date: previous_dose_date,
+                        previous_dose_date: date_of_previous_dose,
                         date_of_dose: date_of_dose,
                         previous_dose_status_hash: previous_dose_status_hash)
     end
-    target_dose_status[:details][:intervals] = []
-    interval_evaluations.each do |interval_evaluation|
-      target_dose_status[:details][:intervals] << interval_evaluation[:details]
-      if interval_evaluation[:evaluation_status] == 'not_valid'
+    if interval_evaluations.length == 0
+      target_dose_status[:details][:interval] = 'no_interval_required'
+    else
+      valid_interval = interval_evaluations.find do |interval_evaluation|
+        interval_evaluation[:evaluation_status] == 'valid'
+      end
+      if !valid_interval.nil?
+        target_dose_status[:details][:interval] = valid_interval[:details]
+      else
         target_dose_status[:target_dose_status] = 'not_satisfied'
-        target_dose_status[:evaluation_status] = 'not_valid'
+        target_dose_status[:evaluation_status]  = 'not_valid'
+        target_dose_status[:details][:interval] =
+          interval_evaluations[-1][:details]
         target_dose_status[:reason] = 'interval'
         return target_dose_status
       end

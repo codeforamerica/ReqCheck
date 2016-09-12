@@ -17,6 +17,21 @@ FactoryGirl.define do
     interval_earliest_recommended '8 weeks'
     interval_latest_recommended '13 weeks'
     allowable false
+
+    factory :preferable_interval do
+      interval_absolute_min '6 months - 4 days'
+      interval_min '6 months'
+      interval_earliest_recommended '6 months'
+      interval_latest_recommended '13 months + 4 weeks'
+    end
+
+    factory :allowable_interval do
+      interval_absolute_min '4 months'
+      interval_min ''
+      interval_earliest_recommended ''
+      interval_latest_recommended ''
+      allowable true
+    end
   end
 
   factory :seed_antigen_xml_polio, class: Hash do
