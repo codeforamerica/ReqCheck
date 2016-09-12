@@ -127,3 +127,7 @@ end
 # 6.8 Evaluate For Preferable Vaccine
 # 6.9 Evaluate For Allowable Vaccine
 # 6.10 Satisfy Target Dose
+
+
+# 3.2. STATUSES
+# Page 23 of 139
