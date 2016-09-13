@@ -19,7 +19,12 @@ module AgeCalc
     string_array.each_with_index do |string_data, index|
       math_operator = index.zero? ? '+' : second_operator
       data_array    = string_data.split(' ')
-      string_key    = data_array[1].to_sym
+
+      if %w(month week year day).include?(data_array[1])
+        data_array[1] = data_array[1] + 's'
+      end
+
+      string_key = data_array[1].to_sym
       return_hash[string_key] = (math_operator + data_array[0]).to_i
     end
     return_hash
