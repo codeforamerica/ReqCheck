@@ -617,6 +617,257 @@ RSpec.describe TargetDoseEvaluation do
         expect(evaluation_hash).to eq(expected_result)
       end
     end
+    context 'when preferable vaccine is not_valid and no allowable' do
+      let(:test_patient) do
+        test_patient = FactoryGirl.create(:patient)
+        FactoryGirl.create(
+          :vaccine_dose_by_cvx,
+          patient_profile: test_patient.patient_profile,
+          cvx_code: as_dose_object.preferable_vaccines.last.cvx_code,
+          date_administered: (test_patient.dob + 7.weeks)
+        )
+        FactoryGirl.create(
+          :vaccine_dose_by_cvx,
+          patient_profile: test_patient.patient_profile,
+          cvx_code: as_dose_object.preferable_vaccines.last.cvx_code,
+          date_administered: (test_patient.dob + 11.weeks)
+        )
+        test_patient.reload
+        test_patient
+      end
+
+      it 'ensures the vaccine codes are in preferable cdc as_dose ' \
+         'vaccine codes but not allowable cdc as_dose vaccine codes' do
+        preferable_cvx_codes = as_dose_object.preferable_vaccines.map(&:cvx_code)
+        allowable_cvx_codes  = as_dose_object.allowable_vaccines.map(&:cvx_code)
+        test_patient.vaccine_doses.each do |vaccine_dose|
+          expect(preferable_cvx_codes).to include(vaccine_dose.cvx_code)
+          expect(allowable_cvx_codes).not_to include(vaccine_dose.cvx_code)
+        end
+      end
+      it 'returns not_satisfied when the preferable vaccine age is not_valid' do
+        patient_vaccines     = test_patient.vaccine_doses
+        vaccine_dose         = patient_vaccines[0]
+        patient_dob          =
+          (vaccine_dose.date_administered - 6.weeks + 5.days)
+        patient_gender       = test_patient.gender
+        as_dose_object.absolute_min_age = '1 week'
+
+        expect(vaccine_dose.cvx_code).to eq(110)
+
+        preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
+          dose.cvx_code == vaccine_dose.cvx_code
+        end
+
+        expect(preferable_dose.begin_age).to eq('6 weeks')
+
+        previous_status_hash = nil
+        expected_result = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'preferable_vaccine_evaluation',
+          details: {
+            age: 'grace_period',
+            interval: 'no_interval_required',
+            preferable: 'out_of_age_range'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: vaccine_dose.cvx_code,
+          date_of_dose: vaccine_dose.date_administered,
+          dose_volume: vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: nil,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns not_satisfied when the preferable vaccine trade_name is ' \
+         'not_valid' do
+        patient_vaccines     = test_patient.vaccine_doses
+        vaccine_dose         = patient_vaccines[0]
+        patient_dob          =
+          (vaccine_dose.date_administered - 6.weeks)
+        patient_gender       = test_patient.gender
+        as_dose_object.absolute_min_age = '1 week'
+
+        preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
+          dose.cvx_code == 110
+        end
+
+        preferable_dose.trade_name = 'not_test'
+
+        expect(preferable_dose.begin_age).to eq('6 weeks')
+
+        previous_status_hash = nil
+        expected_result = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'preferable_vaccine_evaluation',
+          details: {
+            age: 'on_schedule',
+            interval: 'no_interval_required',
+            preferable: 'wrong_trade_name'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: vaccine_dose.cvx_code,
+          date_of_dose: vaccine_dose.date_administered,
+          dose_volume: vaccine_dose.dosage,
+          dose_trade_name: 'test',
+          date_of_previous_dose: nil,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied when the preferable vaccine volume is not_valid' do
+        patient_vaccines     = test_patient.vaccine_doses
+        vaccine_dose         = patient_vaccines[0]
+        vaccine_dose.dosage  = '0.4'
+        patient_dob          =
+          (vaccine_dose.date_administered - 6.weeks)
+        patient_gender       = test_patient.gender
+        as_dose_object.absolute_min_age = '1 week'
+
+        preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
+          dose.cvx_code == 10
+        end
+
+        expect(preferable_dose.volume).to eq('0.5')
+        expect(preferable_dose.begin_age).to eq('6 weeks')
+
+        previous_status_hash = nil
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'no_interval_required',
+            preferable: 'less_than_recommended_volume'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: vaccine_dose.cvx_code,
+          date_of_dose: vaccine_dose.date_administered,
+          dose_volume: vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: nil,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied when the preferable vaccine volume is not given' do
+        patient_vaccines     = test_patient.vaccine_doses
+        vaccine_dose         = patient_vaccines[0]
+
+        expect(vaccine_dose.dosage).to eq(nil)
+
+        patient_dob          =
+          (vaccine_dose.date_administered - 6.weeks)
+        patient_gender       = test_patient.gender
+        as_dose_object.absolute_min_age = '1 week'
+
+        preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
+          dose.cvx_code == 10
+        end
+
+        expect(preferable_dose.volume).to eq('0.5')
+        expect(preferable_dose.begin_age).to eq('6 weeks')
+
+        previous_status_hash = nil
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'no_interval_required',
+            preferable: 'no_vaccine_dosage_provided'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: vaccine_dose.cvx_code,
+          date_of_dose: vaccine_dose.date_administered,
+          dose_volume: vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: nil,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied when the preferable vaccine is valid' do
+        patient_vaccines     = test_patient.vaccine_doses
+        vaccine_dose         = patient_vaccines[0]
+        patient_dob          =
+          (vaccine_dose.date_administered - 6.weeks)
+        patient_gender       = test_patient.gender
+        as_dose_object.absolute_min_age = '1 week'
+
+        preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
+          dose.cvx_code == 10
+        end
+        expect(preferable_dose.begin_age).to eq('6 weeks')
+
+        previous_status_hash = nil
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'no_interval_required',
+            preferable: 'within_age_trade_name_volume'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: vaccine_dose.cvx_code,
+          date_of_dose: vaccine_dose.date_administered,
+          dose_volume: '0.5',
+          dose_trade_name: '',
+          date_of_previous_dose: nil,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+    end
     context 'when allowable vaccine is not_valid' do
       it 'ensures the vaccine codes are in cdc as_dose vaccine codes' do
         preferable_cvx_codes = as_dose_object.preferable_vaccines.map(&:cvx_code)
@@ -647,10 +898,56 @@ RSpec.describe TargetDoseEvaluation do
         expected_result = {
           evaluation_status: 'not_valid',
           target_dose_status: 'not_satisfied',
+          reason: 'allowable_vaccine_evaluation',
           details: {
-            age: 'on_schedule',
+            age: 'grace_period',
             interval: 'no_interval_required',
-            allowable:'within_age_range'
+            allowable: 'out_of_age_range'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: vaccine_dose.cvx_code,
+          date_of_dose: vaccine_dose.date_administered,
+          dose_volume: vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: nil,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied when the allowable vaccine is valid' do
+        patient_vaccines     = test_patient.vaccine_doses
+        vaccine_dose         = patient_vaccines[0]
+        patient_dob          =
+          (vaccine_dose.date_administered - 6.weeks + 3.days)
+        patient_gender       = test_patient.gender
+        as_dose_object.absolute_min_age = '1 week'
+
+        preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
+          dose.cvx_code == 10
+        end
+        allowable_dose = as_dose_object.allowable_vaccines.find do |dose|
+          dose.cvx_code == 10
+        end
+        expect(allowable_dose.begin_age).to eq('6 weeks - 4 days')
+        expect(preferable_dose.begin_age).to eq('6 weeks')
+
+        previous_status_hash = nil
+        expected_result = {
+          evaluation_status: 'valid',
+          target_dose_status: 'satisfied',
+          details: {
+            age: 'grace_period',
+            interval: 'no_interval_required',
+            allowable: 'within_age_range'
           }
         }
 

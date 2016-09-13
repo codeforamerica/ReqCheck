@@ -203,7 +203,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         )
         expect(eval_hash[:volume]).to eq(false)
       end
-      it 'returns false when dose volume is nil' do
+      it 'returns nil when dose volume is nil' do
         valid_vaccine_attrs[:expected_volume] = '0.5'
         eval_hash = test_object.evaluate_vaccine_attributes(
           valid_vaccine_attrs,
@@ -211,7 +211,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
           'tester',
           nil
         )
-        expect(eval_hash[:volume]).to eq(false)
+        expect(eval_hash[:volume]).to eq(nil)
       end
     end
   end
@@ -301,6 +301,23 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
       expected_result = { evaluation_status: 'valid',
                           evaluated: 'preferable',
                           details: 'less_than_recommended_volume' }
+      expect(
+        test_object.get_preferable_vaccine_status(vaccine_eval_hash,
+                                                  prev_status_hash)
+      ).to eq(expected_result)
+    end
+    it 'returns valid, preferable, no_vaccine_dosage_provided for ' \
+      'volume nil' do
+      prev_status_hash = nil
+      vaccine_eval_hash = {
+        begin_age: true,
+        end_age: true,
+        trade_name: true,
+        volume: nil
+      }
+      expected_result = { evaluation_status: 'valid',
+                          evaluated: 'preferable',
+                          details: 'no_vaccine_dosage_provided' }
       expect(
         test_object.get_preferable_vaccine_status(vaccine_eval_hash,
                                                   prev_status_hash)
@@ -514,7 +531,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         date_of_dose = (2.years.ago + 4.weeks).to_date
         trade_name   = 'test'
         volume       = '0.5'
-        cvx_code     = 10
+        cvx_code     = 110
         evaluation_hash =
           test_object.evaluate_vaccine_dose_for_preferable_allowable(
             as_dose,

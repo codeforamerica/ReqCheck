@@ -29,8 +29,8 @@ module PreferableAllowableVaccineEvaluation
 
 
   def evaluate_vaccine_attributes(vaccine_attrs, date_of_dose,
-                                  dose_trade_name, dose_volume='0')
-    dose_volume = '0' if dose_volume == '' || dose_volume.nil?
+                                  dose_trade_name, dose_volume=nil)
+    dose_volume = nil if dose_volume == '' || dose_volume.nil?
     evaluated_hash = {}
     %w(
       begin_age_date
@@ -56,7 +56,11 @@ module PreferableAllowableVaccineEvaluation
     evaluated_hash[:trade_name] =
       vaccine_attrs[:expected_trade_name] == dose_trade_name
     evaluated_hash[:volume] =
-      vaccine_attrs[:expected_volume].to_f <= dose_volume.to_f
+      if dose_volume.nil?
+        nil
+      else
+        vaccine_attrs[:expected_volume].to_f <= dose_volume.to_f
+      end
     evaluated_hash
   end
 
@@ -74,6 +78,9 @@ module PreferableAllowableVaccineEvaluation
     elsif vaccine_evaluation_hash[:volume] == false
       vaccine_status[:evaluation_status] = 'valid'
       vaccine_status[:details] = 'less_than_recommended_volume'
+    elsif vaccine_evaluation_hash[:volume].nil?
+      vaccine_status[:evaluation_status] = 'valid'
+      vaccine_status[:details] = 'no_vaccine_dosage_provided'
     else
       vaccine_status[:evaluation_status] = 'valid'
       vaccine_status[:details] = 'within_age_trade_name_volume'
