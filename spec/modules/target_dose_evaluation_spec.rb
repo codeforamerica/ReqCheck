@@ -618,6 +618,59 @@ RSpec.describe TargetDoseEvaluation do
       end
     end
     context 'when allowable vaccine is not_valid' do
+      it 'ensures the vaccine codes are in cdc as_dose vaccine codes' do
+        preferable_cvx_codes = as_dose_object.preferable_vaccines.map(&:cvx_code)
+        allowable_cvx_codes  = as_dose_object.allowable_vaccines.map(&:cvx_code)
+        test_patient.vaccine_doses.each do |vaccine_dose|
+          expect(preferable_cvx_codes).to include(vaccine_dose.cvx_code)
+          expect(allowable_cvx_codes).to include(vaccine_dose.cvx_code)
+        end
+      end
+      it 'returns not_satisfied when the allowable vaccine is not_valid' do
+        patient_vaccines     = test_patient.vaccine_doses
+        vaccine_dose         = patient_vaccines[0]
+        patient_dob          =
+          (vaccine_dose.date_administered - 6.weeks + 5.days)
+        patient_gender       = test_patient.gender
+        as_dose_object.absolute_min_age = '1 week'
+
+        preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
+          dose.cvx_code == 10
+        end
+        allowable_dose = as_dose_object.allowable_vaccines.find do |dose|
+          dose.cvx_code == 10
+        end
+        expect(allowable_dose.begin_age).to eq('6 weeks - 4 days')
+        expect(preferable_dose.begin_age).to eq('6 weeks')
+
+        previous_status_hash = nil
+        expected_result = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          details: {
+            age: 'on_schedule',
+            interval: 'no_interval_required',
+            allowable:'within_age_range'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: vaccine_dose.cvx_code,
+          date_of_dose: vaccine_dose.date_administered,
+          dose_volume: vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: nil,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
     end
   end
 end
