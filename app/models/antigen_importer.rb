@@ -171,6 +171,15 @@ class AntigenImporter
         interval_earliest_recommended: interval_hash['earliestRecInt'],
         interval_latest_recommended: interval_hash['latestRecInt']
       }
+      if interval_type == 'from_most_recent'
+        recent_vaccine_type = interval_hash['fromMostRecent']['vaccineType']
+        recent_cvx_code = interval_hash['fromMostRecent']['cvx']
+
+        interval_args[:recent_vaccine_type] = recent_vaccine_type
+        interval_args[:recent_cvx_code] = recent_cvx_code
+      elsif interval_type == 'from_target_dose'
+        interval_args[:target_dose_number] = interval_hash['fromTargetDose']
+      end
       interval_objects << Interval.create(interval_args)
     end
 
@@ -185,6 +194,15 @@ class AntigenImporter
         interval_earliest_recommended: allowable_interval_hash['earliestRecInt'],
         interval_latest_recommended: allowable_interval_hash['latestRecInt']
       }
+      if interval_type == 'from_most_recent'
+        recent_vaccine_type = allowable_interval_hash['fromMostRecent']['vaccineType']
+        recent_cvx_code = allowable_interval_hash['fromMostRecent']['cvx']
+
+        allowable_interval_args[:recent_vaccine_type] = recent_vaccine_type
+        allowable_interval_args[:recent_cvx_code] = recent_cvx_code
+      elsif interval_type == 'from_target_dose'
+        allowable_interval_args[:target_dose_number] = allowable_interval_hash['fromTargetDose']
+      end
       interval_objects << Interval.create(allowable_interval_args)
     end
     interval_objects

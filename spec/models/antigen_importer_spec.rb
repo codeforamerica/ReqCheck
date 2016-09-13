@@ -249,13 +249,13 @@ RSpec.describe AntigenImporter, type: :model do
           hpv_antigen_series =
             AntigenSeries.where(name: 'HPV Male 3 Dose').first
           required_gender = hpv_antigen_series.doses.first.required_gender
-          expect(required_gender).to eq(['Male'])
+          expect(required_gender).to eq(['male'])
         end
         it 'can process two genders with \'HPV Women 3 Dose\'' do
           hpv_antigen_series =
             AntigenSeries.where(name: 'HPV Female 3 Dose').first
           required_gender    = hpv_antigen_series.doses.first.required_gender
-          expect(required_gender).to eq(['Female', 'Unknown'])
+          expect(required_gender).to eq(['female', 'unknown'])
         end
         it 'can process no genders with \'Polio - All IPV - 4 Dose\'' do
           hpv_antigen_series =
@@ -272,6 +272,10 @@ RSpec.describe AntigenImporter, type: :model do
         antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGHEPA)
       end
 
+      let(:antigen_series_most_recent_xml_hash) do
+        antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGPNEUMOCOCCAL)
+      end
+
       it 'can process only one interval' do
         one_interval_hash =
           antigen_series_xml_hash['antigenSupportingData']['series'][1]['seriesDose'][1]
@@ -282,6 +286,38 @@ RSpec.describe AntigenImporter, type: :model do
         expect(dose_intervals.first.class.name).to eq('Interval')
         expect(dose_intervals.length).to eq(1)
         expect(antigen_series_dose.intervals).to eq(dose_intervals)
+      end
+
+      it 'can process from_target_dose intervals' do
+        multiple_interval_hash =
+          antigen_series_xml_hash['antigenSupportingData']['series'][0]['seriesDose'][1]
+        dose_intervals = antigen_importer.create_dose_intervals(
+          multiple_interval_hash,
+          antigen_series_dose
+        )
+        expect(dose_intervals.second.class.name).to eq('Interval')
+        expect(dose_intervals.length).to eq(2)
+
+        allowable_interval = dose_intervals.second
+        expect(allowable_interval.allowable).to eq(true)
+        expect(allowable_interval.target_dose_number).to eq(1)
+      end
+
+      it 'can process from_most_recent intervals' do
+        # antigen_series_most_recent_xml_hash['antigenSupportingData']['series'][4]['seriesDose'][1]['interval'][1]['fromMostRecent']
+        multiple_interval_hash =
+          antigen_series_most_recent_xml_hash['antigenSupportingData']['series'][4]['seriesDose'][1]
+        dose_intervals = antigen_importer.create_dose_intervals(
+          multiple_interval_hash,
+          antigen_series_dose
+        )
+        expect(dose_intervals.second.class.name).to eq('Interval')
+        expect(dose_intervals.length).to eq(2)
+
+        allowable_interval = dose_intervals.second
+        expect(allowable_interval.allowable).to eq(false)
+        expect(allowable_interval.recent_cvx_code).to eq(33)
+        expect(allowable_interval.recent_vaccine_type).to eq('PPSV23')
       end
 
       context 'with multiple intervals' do

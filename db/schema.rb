@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901181047) do
+ActiveRecord::Schema.define(version: 20160913185521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,9 @@ ActiveRecord::Schema.define(version: 20160901181047) do
     t.boolean  "allowable",                     default: false
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
+    t.string   "recent_vaccine_type"
+    t.integer  "recent_cvx_code"
+    t.integer  "target_dose_number"
   end
 
   create_table "patient_profiles", force: :cascade do |t|

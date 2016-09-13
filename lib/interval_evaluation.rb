@@ -96,4 +96,23 @@ module IntervalEvaluation
                                                   date_of_dose)
     get_interval_status(interval_evaluation, previous_dose_status_hash)
   end
+
+  def evaluate_intervals(interval_objects,
+                         date_of_dose:,
+                         previous_dose_date:,
+                         patient_vaccine_doses: [],
+                         previous_target_doses: [],
+                         previous_dose_status_hash: nil)
+    interval_objects.map do |interval_object|
+      comparison_dose_date = '01/01/1900'.to_date
+      if interval_object.interval_type == 'from_previous_dose'
+        comparison_dose_date = previous_dose_date
+      elsif interval_object.interval_type == 'from_target_dose'
+        comparison_dose_date = previous_dose_date
+      elsif interval_object.interval_type == 'from_most_recent'
+
+      end
+      evaluate_interval(interval_object)
+    end
+  end
 end
