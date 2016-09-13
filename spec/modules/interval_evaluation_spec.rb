@@ -343,5 +343,16 @@ RSpec.describe IntervalEvaluation do
                           }
         expect(evaluation_hash).to eq(expected_result)
     end
+    describe 'with different interval_types' do
+      context 'with interval_type from_previous_dose' do
+
+      end
+      context 'with interval_type from_target_dose' do
+
+      end
+      context 'with interval_type from_most_recent' do
+
+      end
+    end
   end
 end

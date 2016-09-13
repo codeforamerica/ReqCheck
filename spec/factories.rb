@@ -11,7 +11,7 @@ FactoryGirl.define do
   extend TimeHelp
 
   factory :interval do
-    interval_type 'Previous'
+    interval_type 'from_previous'
     interval_absolute_min '4 weeks - 4 days'
     interval_min '4 weeks'
     interval_earliest_recommended '8 weeks'

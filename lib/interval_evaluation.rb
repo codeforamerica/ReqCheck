@@ -87,6 +87,8 @@ module IntervalEvaluation
   def evaluate_interval(interval_object,
                         previous_dose_date:,
                         date_of_dose:,
+                        patient_vaccine_doses: [],
+                        previous_target_doses: [],
                         previous_dose_status_hash: nil)
     interval_attrs = create_interval_attributes(interval_object,
                                                 previous_dose_date)

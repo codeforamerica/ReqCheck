@@ -9,7 +9,8 @@ module TargetDoseEvaluation
   def evaluate_target_dose_satisfied(
     conditional_skip:,
     antigen_series_dose:,
-    intervals: [],
+    preferable_intervals: [],
+    allowable_intervals: [],
     antigen_series_dose_vaccines:,
     patient_dob:,
     patient_gender: nil,
@@ -58,31 +59,67 @@ module TargetDoseEvaluation
       end
       return target_dose_status
     end
-    # Evaluate Interval
-    # Evaluate Allowable Interval
-    interval_evaluations = intervals.map do |interval|
-      evaluate_interval(interval,
-                        previous_dose_date: date_of_previous_dose,
-                        date_of_dose: date_of_dose,
-                        previous_dose_status_hash: previous_dose_status_hash)
-    end
-    if interval_evaluations.length == 0
-      target_dose_status[:details][:interval] = 'no_interval_required'
+    # Evaluate Intervals
+    intervals_not_valid = nil
+
+    if preferable_intervals.length.zero?
+      target_dose_status[:details][:intervals] = ['no_intervals_required']
     else
-      valid_interval = interval_evaluations.find do |interval_evaluation|
-        interval_evaluation[:evaluation_status] == 'valid'
+      target_dose_status[:details][:intervals] = []
+      preferable_interval_evaluations = []
+
+      preferable_intervals.each do |interval|
+        interval_evaluation = evaluate_interval(
+          interval,
+          previous_dose_date: date_of_previous_dose,
+          date_of_dose: date_of_dose,
+          previous_dose_status_hash: previous_dose_status_hash
+        )
+        preferable_interval_evaluations << interval_evaluation
+        target_dose_status[:details][:intervals] << interval_evaluation[:details]
       end
-      if !valid_interval.nil?
-        target_dose_status[:details][:interval] = valid_interval[:details]
-      else
+
+      intervals_not_valid = interval_evaluations.any? do |interval_evaluation|
+        interval_evaluation[:evaluation_status] == 'not_valid'
+      end
+    end
+    # Evaluate Allowable Interval
+    allowable_intervals_not_valid = nil
+
+    if allowable_intervals.length.zero?
+      target_dose_status[:details][:allowable_intervals] =
+        ['no_intervals_required']
+    else
+      target_dose_status[:details][:allowable_intervals] = []
+      allowable_intervals_evaluations = []
+
+      allowable_intervals.each do |interval|
+        interval_evaluation = evaluate_interval(
+          interval,
+          previous_dose_date: date_of_previous_dose,
+          date_of_dose: date_of_dose,
+          previous_dose_status_hash: previous_dose_status_hash
+        )
+        allowable_intervals_evaluations << interval_evaluation
+        target_dose_status[:details][:allowable_intervals].push(
+          interval_evaluation[:details]
+        )
+      end
+
+      allowable_intervals_not_valid =
+        allowable_intervals_evaluations.any? do |interval_evaluation|
+          interval_evaluation[:evaluation_status] == 'not_valid'
+        end
+    end
+
+    if intervals_not_valid
+      if allowable_intervals_not_valid
         target_dose_status[:target_dose_status] = 'not_satisfied'
         target_dose_status[:evaluation_status]  = 'not_valid'
-        target_dose_status[:details][:interval] =
-          interval_evaluations[-1][:details]
         target_dose_status[:reason] = 'interval'
-        return target_dose_status
       end
     end
+
     # Evaluate Live Virus Conflict
     evaluate_live_virus_conflict = nil
     # Evaluate Preferable Vaccine
