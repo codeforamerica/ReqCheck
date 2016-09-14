@@ -25,7 +25,7 @@ RSpec.describe TargetDose, type: :model do
     it 'takes a patient and antigen_series_dose as parameters' do
       expect(
         TargetDose.new(antigen_series_dose: antigen_series_dose,
-                       patient_dob: test_patient.dob).class.name
+                       patient: test_patient).class.name
       ).to eq('TargetDose')
     end
 
@@ -34,7 +34,7 @@ RSpec.describe TargetDose, type: :model do
         .to raise_exception(ArgumentError)
     end
     it 'requires an antigen_series_dose' do
-      expect { TargetDose.new(patient_dob: test_patient.dob) }
+      expect { TargetDose.new(patient: test_patient) }
         .to raise_exception(ArgumentError)
     end
   end
@@ -71,7 +71,7 @@ RSpec.describe TargetDose, type: :model do
     end
     let(:test_target_dose) do
       TargetDose.new(antigen_series_dose: as_dose,
-                     patient_dob: test_patient.dob)
+                     patient: test_patient)
     end
 
     describe 'target dose attributes from the antigen_series_dose' do
@@ -155,7 +155,7 @@ RSpec.describe TargetDose, type: :model do
                                 ' IS NOT NULL'
                               ).first
         TargetDose.new(antigen_series_dose: as_dose_w_cond_skip,
-                       patient_dob: test_patient.dob)
+                       patient: test_patient)
       end
       let(:target_dose_no_cond_skip) do
         as_dose_no_cond_skip = AntigenSeriesDose
@@ -166,7 +166,7 @@ RSpec.describe TargetDose, type: :model do
                                ).where(antigens: { target_disease: 'polio' })
                                .first
         TargetDose.new(antigen_series_dose: as_dose_no_cond_skip,
-                       patient_dob: test_patient.dob)
+                       patient: test_patient)
       end
 
       describe '#has_conditional_skip?' do
@@ -194,5 +194,96 @@ RSpec.describe TargetDose, type: :model do
       describe '#satisfy_target_dose' do
       end
     end
+
+    describe 'full evaluation methods' do
+      let(:test_patient) do
+        test_patient = FactoryGirl.create(:patient)
+        FactoryGirl.create(
+          :vaccine_dose,
+          patient_profile: test_patient.patient_profile,
+          vaccine_code: 'IPV',
+          date_administered: (test_patient.dob + 7.weeks)
+        )
+        FactoryGirl.create(
+          :vaccine_dose,
+          patient_profile: test_patient.patient_profile,
+          vaccine_code: 'IPV',
+          date_administered: (test_patient.dob + 11.weeks)
+        )
+        test_patient.reload
+        test_patient
+      end
+
+      let(:antigen_series_dose) do
+        FactoryGirl.create(:antigen_series_dose_with_vaccines)
+      end
+
+      let(:test_target_dose) do
+          TargetDose.new(antigen_series_dose: antigen_series_dose,
+                         patient: test_patient)
+      end
+
+      describe '#evaluate_satisfy_target_dose' do
+        it 'evaluates the antigen_administered_record and returns a status hash' do
+          aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+            test_patient.vaccine_doses
+          )
+          aar = aars.first
+
+          expected_result = {
+            good: 'job'
+          }
+
+          result_hash = test_target_dose.evaluate_satisfy_target_dose(
+            aar
+          )
+
+          expect(result_hash).to eq(expected_result)
+        end
+      end
+      describe '#evaluate_antigen_administered_record' do
+        it 'evaluates the antigen_administered_record and returns boolean' do
+          aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+            test_patient.vaccine_doses
+          )
+          aar = aars.first
+
+          expected_result = {
+            good: 'job'
+          }
+
+          result = test_target_dose.evaluate_antigen_administered_record(
+            aar
+          )
+
+          expect(result).to eq(true)
+        end
+        it 'sets the satisfied, status_hash and antigen_administered_record' \
+           ' attributes on the target dose' do
+          aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+            test_patient.vaccine_doses
+          )
+          aar = aars.first
+
+          expected_result = {
+            good: 'job'
+          }
+
+          expect(test_target_dose.satisfied).to eq(nil)
+          expect(test_target_dose.status_hash).to eq(nil)
+          expect(test_target_dose.antigen_administered_record).to eq(nil)
+
+          test_target_dose.evaluate_antigen_administered_record(
+            aar
+          )
+
+          expect(test_target_dose.satisfied).to eq(true)
+          expect(test_target_dose.status_hash.class.name).to eq('Hash')
+          expect(test_target_dose.antigen_administered_record).to eq(aar)
+        end
+      end
+
+    end
+
   end
 end

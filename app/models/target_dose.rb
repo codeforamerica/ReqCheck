@@ -1,13 +1,14 @@
 class TargetDose
   include ActiveModel::Model
   include AgeCalc
+  include TargetDoseEvaluation
 
   attr_accessor :patient, :antigen_series_dose
-  attr_reader :eligible
+  attr_reader :eligible, :satisfied, :status_hash, :antigen_administered_record
 
-  def initialize(patient_dob:, antigen_series_dose:)
+  def initialize(patient:, antigen_series_dose:)
     @antigen_series_dose         = antigen_series_dose
-    @patient_dob                 = patient_dob
+    @patient                     = patient
     @eligible                    = nil
     @status_hash                 = nil
     @antigen_administered_record = nil
@@ -30,12 +31,9 @@ class TargetDose
       raise Error('The TargetDose has already evaluated to True')
     end
     @antigen_administered_record = antigen_administered_record
-    age_attrs   = create_age_date_attributes(antigen_series_dose, patient_dob)
-    result_hash = evaluate_dose_age(
-                    age_attrs,
-                    antigen_administered_record.date_administered
-                  )
-    age_status = get_age_status(result_hash)
+    @status_hash = evaluate_satisfy_target_dose(antigen_administered_record)
+    @satisfied   = @status_hash[:target_dose_status] == 'satisfied'
+    @satisfied
   end
 
   def has_conditional_skip?
@@ -58,16 +56,32 @@ class TargetDose
     end
   end
 
-  def satisfy_target_dose
-    # Evaluate Conditional Skip
-    # Evaluate Age
-    # Evaluate Interval
-    # Evaluate Allowable Interval
-    # Evaluate Live Virus Conflict
-    # Evaluate Preferable Vaccine
-    # Evaluate Allowable Vaccine
-    # Evaluate Gender
-    # Satisfy Target Dose
+  def evaluate_satisfy_target_dose(antigen_administered_record,
+                                   previous_antigen_administered_record=nil)
+    previous_status_hash  = nil
+    date_of_previous_dose = nil
+    unless previous_antigen_administered_record.nil?
+      previous_status_hash =
+        previous_antigen_administered_record.target_dose.status_hash
+      date_of_previous_dose =
+        previous_antigen_administered_record.date_administered
+    end
+    evaluate_target_dose_satisfied(
+      conditional_skip: @antigen_series_dose.conditional_skip,
+      antigen_series_dose: @antigen_series_dose,
+      preferable_intervals: @antigen_series_dose.preferable_intervals,
+      allowable_intervals: @antigen_series_dose.allowable_intervals,
+      antigen_series_dose_vaccines: @antigen_series_dose.dose_vaccines,
+      patient_dob: @patient.dob,
+      patient_gender: @patient.gender,
+      patient_vaccine_doses: @patient.vaccine_doses,
+      dose_cvx: antigen_administered_record.cvx_code,
+      date_of_dose: antigen_administered_record.date_administered,
+      dose_trade_name: antigen_administered_record.trade_name,
+      dose_volume: antigen_administered_record.dosage,
+      date_of_previous_dose: date_of_previous_dose,
+      previous_dose_status_hash: previous_status_hash
+    )
   end
 
   # def evaluate_vs_antigen_administered_record(antigen_administered_record)
