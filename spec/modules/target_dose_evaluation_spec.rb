@@ -24,13 +24,6 @@ RSpec.describe TargetDoseEvaluation do
     FactoryGirl.create(:antigen_series_dose_second_with_vaccines)
   end
 
-  let(:test_intervals) do
-    [
-      FactoryGirl.create(:preferable_interval),
-      FactoryGirl.create(:allowable_interval)
-    ]
-  end
-
   let(:test_patient) do
     test_patient = FactoryGirl.create(:patient)
     FactoryGirl.create(
@@ -72,7 +65,8 @@ RSpec.describe TargetDoseEvaluation do
         target_dose_status: 'satisfied',
         details: {
           age: 'on_schedule',
-          interval: 'no_interval_required',
+          preferable_intervals: ['no_intervals_required'],
+          allowable_intervals: ['no_intervals_required'],
           allowable: 'within_age_range'
         }
       }
@@ -80,7 +74,8 @@ RSpec.describe TargetDoseEvaluation do
       evaluation_hash = test_object.evaluate_target_dose_satisfied(
         conditional_skip: conditional_skip_object,
         antigen_series_dose: as_dose_object,
-        intervals: [],
+        preferable_intervals: [],
+        allowable_intervals: [],
         antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
         patient_dob: patient_dob,
         patient_gender: patient_gender,
@@ -111,7 +106,8 @@ RSpec.describe TargetDoseEvaluation do
         target_dose_status: 'satisfied',
         details: {
           age: 'on_schedule',
-          interval: 'no_interval_required',
+          preferable_intervals: ['no_intervals_required'],
+          allowable_intervals: ['no_intervals_required'],
           allowable: 'within_age_range'
         }
       }
@@ -119,7 +115,8 @@ RSpec.describe TargetDoseEvaluation do
       evaluation_hash = test_object.evaluate_target_dose_satisfied(
         conditional_skip: conditional_skip_object,
         antigen_series_dose: as_dose_object,
-        intervals: [],
+        preferable_intervals: [],
+        allowable_intervals: [],
         antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
         patient_dob: patient_dob,
         patient_gender: patient_gender,
@@ -149,7 +146,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'grace_period',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             allowable: 'within_age_range'
           }
         }
@@ -157,7 +155,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -190,7 +189,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -232,7 +232,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -263,7 +264,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'grace_period',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             allowable: 'within_age_range'
           }
         }
@@ -271,7 +273,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -286,14 +289,21 @@ RSpec.describe TargetDoseEvaluation do
         expect(evaluation_hash).to eq(expected_result)
       end
     end
-    context 'when interval is not_valid' do
-      it 'returns not_satisfied less time between interval' do
+    context 'when preferable_interval is not_valid' do
+      let(:test_preferable_intervals) do
+        [
+          FactoryGirl.create(:interval_6_months),
+          FactoryGirl.create(:interval_target_dose_16_weeks),
+        ]
+      end
+
+      it 'returns not_satisfied less time between interval and no allowable' do
         patient_vaccines     = test_patient.vaccine_doses
         first_vaccine_dose   = patient_vaccines[0]
         second_vaccine_dose  = patient_vaccines[1]
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
-        new_intervals        = [test_intervals.first]
+        new_intervals        = [test_preferable_intervals.first]
 
         expect(new_intervals.first.interval_absolute_min)
           .to eq('6 months - 4 days')
@@ -312,14 +322,16 @@ RSpec.describe TargetDoseEvaluation do
           reason: 'interval',
           details: {
             age: 'on_schedule',
-            interval: 'too_soon'
+            preferable_intervals: ['too_soon'],
+            allowable_intervals: ['no_intervals_required']
           }
         }
 
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: new_intervals,
+          preferable_intervals: new_intervals,
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -339,7 +351,7 @@ RSpec.describe TargetDoseEvaluation do
         second_vaccine_dose  = patient_vaccines[1]
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
-        new_intervals        = [test_intervals.first]
+        new_intervals        = [test_preferable_intervals.first]
 
         expect(new_intervals.first.interval_absolute_min)
           .to eq('6 months - 4 days')
@@ -357,7 +369,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'on_schedule',
-            interval: 'on_schedule',
+            preferable_intervals: ['on_schedule'],
+            allowable_intervals: ['no_intervals_required'],
             allowable: 'within_age_range'
           }
         }
@@ -365,7 +378,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: new_intervals,
+          preferable_intervals: new_intervals,
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -386,7 +400,7 @@ RSpec.describe TargetDoseEvaluation do
         second_vaccine_dose  = patient_vaccines[1]
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
-        new_intervals        = [test_intervals.first]
+        new_intervals        = [test_preferable_intervals.first]
 
         expect(new_intervals.first.interval_min).to eq('6 months')
         expect(new_intervals.first.interval_absolute_min)
@@ -408,14 +422,16 @@ RSpec.describe TargetDoseEvaluation do
           reason: 'interval',
           details: {
             age: 'on_schedule',
-            interval: 'too_soon'
+            preferable_intervals: ['too_soon'],
+            allowable_intervals: ['no_intervals_required']
           }
         }
 
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: new_intervals,
+          preferable_intervals: new_intervals,
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -436,7 +452,7 @@ RSpec.describe TargetDoseEvaluation do
         second_vaccine_dose  = patient_vaccines[1]
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
-        new_intervals        = [test_intervals.first]
+        new_intervals        = [test_preferable_intervals.first]
 
         expect(new_intervals.first.interval_min).to eq('6 months')
         expect(new_intervals.first.interval_absolute_min)
@@ -456,7 +472,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'on_schedule',
-            interval: 'grace_period',
+            preferable_intervals: ['grace_period'],
+            allowable_intervals: ['no_intervals_required'],
             allowable: 'within_age_range'
           }
         }
@@ -464,7 +481,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: new_intervals,
+          preferable_intervals: new_intervals,
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -480,6 +498,12 @@ RSpec.describe TargetDoseEvaluation do
       end
     end
     context 'when allowable interval is not_valid' do
+      let(:test_allowable_intervals) do
+        [
+          FactoryGirl.create(:interval_6_months, allowable: true),
+          FactoryGirl.create(:interval_4_months_allowable)
+        ]
+      end
       it 'returns not_satisfied less time between allowable intervals' do
         patient_vaccines     = test_patient.vaccine_doses
         first_vaccine_dose   = patient_vaccines[0]
@@ -500,14 +524,16 @@ RSpec.describe TargetDoseEvaluation do
           reason: 'interval',
           details: {
             age: 'on_schedule',
-            interval: 'too_soon'
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['too_soon', 'too_soon']
           }
         }
 
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: test_intervals,
+          preferable_intervals: [],
+          allowable_intervals: test_allowable_intervals,
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -527,10 +553,10 @@ RSpec.describe TargetDoseEvaluation do
         second_vaccine_dose  = patient_vaccines[1]
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
+        new_intervals        = [test_allowable_intervals.last]
 
-        expect(test_intervals.last.interval_absolute_min).to eq('4 months')
-        expect(test_intervals.first.interval_absolute_min)
-          .to eq('6 months - 4 days')
+        expect(new_intervals.first.interval_absolute_min)
+          .to eq('4 months')
 
         second_vaccine_dose.update(
           date_administered: (first_vaccine_dose.date_administered + 4.months)
@@ -545,7 +571,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'on_schedule',
-            interval: 'on_schedule',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['on_schedule'],
             allowable: 'within_age_range'
           }
         }
@@ -553,7 +580,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: test_intervals,
+          preferable_intervals: [],
+          allowable_intervals: new_intervals,
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -567,16 +595,72 @@ RSpec.describe TargetDoseEvaluation do
         )
         expect(evaluation_hash).to eq(expected_result)
       end
-      it 'returns satisfied as interval_min_date defaults to 01/01/1900 ' \
-         'even with previous evaluation_status was not_valid due to age' do
+      it 'returns not_satisfied even with interval_min_date defaulting ' \
+         ' to 01/01/1900 as the interval_absolute_min is false' do
         patient_vaccines     = test_patient.vaccine_doses
         first_vaccine_dose   = patient_vaccines[0]
         second_vaccine_dose  = patient_vaccines[1]
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
+        new_intervals        = [test_allowable_intervals.last]
 
-        expect(test_intervals.last.interval_min).to eq('')
-        expect(test_intervals.last.interval_absolute_min)
+        expect(new_intervals.first.interval_min).to eq('')
+        expect(new_intervals.first.interval_absolute_min)
+          .to eq('4 months')
+        second_vaccine_dose.update(
+          date_administered: (
+            first_vaccine_dose.date_administered + 2.months
+          )
+        )
+
+        previous_status_hash = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'age'
+        }
+        expected_result = {
+          evaluation_status: 'not_valid',
+          target_dose_status: 'not_satisfied',
+          reason: 'interval',
+          details: {
+            age: 'on_schedule',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['too_soon']
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          preferable_intervals: [],
+          allowable_intervals: new_intervals,
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: previous_status_hash
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'returns satisfied as interval_absolute_min is true and ' \
+         ' interval_min_date defaults to 01/01/1900 even with previous' \
+         ' evaluation_status was not_valid due to age' do
+        # This needs to be completed - currently it does not give grace period
+        # bc the default evaluates the min_age to be way before (1900)
+        patient_vaccines     = test_patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = test_patient.dob
+        patient_gender       = test_patient.gender
+        new_intervals        = [test_allowable_intervals.last]
+
+        expect(new_intervals.first.interval_min).to eq('')
+        expect(new_intervals.first.interval_absolute_min)
           .to eq('4 months')
         second_vaccine_dose.update(
           date_administered: (
@@ -594,15 +678,17 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'on_schedule',
-            interval: 'on_schedule',
-            allowable:'within_age_range'
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['grace_period'],
+            allowable: 'within_age_range'
           }
         }
 
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: test_intervals,
+          preferable_intervals: [],
+          allowable_intervals: new_intervals,
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -615,6 +701,12 @@ RSpec.describe TargetDoseEvaluation do
           previous_dose_status_hash: previous_status_hash
         )
         expect(evaluation_hash).to eq(expected_result)
+        expect('').to eq(
+          'Need to ensure that this is what is supposed to happen - this' \
+          'could mean that the something that does not make the min age' \
+          'on the allowable interval and then with the default could give' \
+          'a falst positive'
+        )
       end
     end
     context 'when preferable vaccine is not_valid and no allowable' do
@@ -668,7 +760,8 @@ RSpec.describe TargetDoseEvaluation do
           reason: 'preferable_vaccine_evaluation',
           details: {
             age: 'grace_period',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             preferable: 'out_of_age_range'
           }
         }
@@ -676,7 +769,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -714,7 +808,8 @@ RSpec.describe TargetDoseEvaluation do
           reason: 'preferable_vaccine_evaluation',
           details: {
             age: 'on_schedule',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             preferable: 'wrong_trade_name'
           }
         }
@@ -722,7 +817,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -758,7 +854,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'on_schedule',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             preferable: 'less_than_recommended_volume'
           }
         }
@@ -766,7 +863,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -804,7 +902,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'on_schedule',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             preferable: 'no_vaccine_dosage_provided'
           }
         }
@@ -812,7 +911,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -845,7 +945,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'on_schedule',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             preferable: 'within_age_trade_name_volume'
           }
         }
@@ -853,7 +954,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -901,7 +1003,8 @@ RSpec.describe TargetDoseEvaluation do
           reason: 'allowable_vaccine_evaluation',
           details: {
             age: 'grace_period',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             allowable: 'out_of_age_range'
           }
         }
@@ -909,7 +1012,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,
@@ -946,7 +1050,8 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'satisfied',
           details: {
             age: 'grace_period',
-            interval: 'no_interval_required',
+            preferable_intervals: ['no_intervals_required'],
+            allowable_intervals: ['no_intervals_required'],
             allowable: 'within_age_range'
           }
         }
@@ -954,7 +1059,8 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_hash = test_object.evaluate_target_dose_satisfied(
           conditional_skip: conditional_skip_object,
           antigen_series_dose: as_dose_object,
-          intervals: [],
+          preferable_intervals: [],
+          allowable_intervals: [],
           antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
           patient_dob: patient_dob,
           patient_gender: patient_gender,

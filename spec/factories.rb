@@ -12,25 +12,51 @@ FactoryGirl.define do
 
   factory :interval do
     interval_type 'from_previous'
-    interval_absolute_min '4 weeks - 4 days'
-    interval_min '4 weeks'
-    interval_earliest_recommended '8 weeks'
-    interval_latest_recommended '13 weeks'
     allowable false
 
-    factory :preferable_interval do
+    factory :interval_4_weeks do
+      interval_absolute_min '4 weeks - 4 days'
+      interval_min '4 weeks'
+      interval_earliest_recommended '8 weeks'
+      interval_latest_recommended '13 weeks'
+    end
+
+    factory :interval_6_months do
       interval_absolute_min '6 months - 4 days'
       interval_min '6 months'
       interval_earliest_recommended '6 months'
       interval_latest_recommended '13 months + 4 weeks'
     end
 
-    factory :allowable_interval do
+    factory :interval_4_months_allowable do
       interval_absolute_min '4 months'
       interval_min ''
       interval_earliest_recommended ''
       interval_latest_recommended ''
       allowable true
+    end
+
+    factory :interval_8_weeks do
+      interval_absolute_min '8 weeks - 4 days'
+      interval_min '8 weeks'
+      interval_earliest_recommended '8 weeks'
+      interval_latest_recommended '18 months + 4 weeks'
+    end
+
+    factory :interval_target_dose_16_weeks do
+      interval_type 'from_target_dose'
+      target_dose_number 1
+      interval_absolute_min '16 weeks - 4 days'
+      interval_min '16 weeks'
+    end
+
+    factory :interval_most_recent_1_year do
+      interval_type 'from_most_recent'
+      recent_vaccine_type 'PPSV23'
+      recent_cvx_code 33
+      interval_absolute_min '0 days'
+      interval_min '1 year'
+      interval_earliest_recommended '1 year'
     end
   end
 
@@ -188,7 +214,7 @@ FactoryGirl.define do
     # This will probably fail - need to update as its one to many (or many to many)
     after(:create) do |dose|
       super
-      dose.intervals << FactoryGirl.create(:interval,
+      dose.intervals << FactoryGirl.create(:interval_4_weeks,
                                            antigen_series_dose: dose)
     end
   end
@@ -205,7 +231,7 @@ FactoryGirl.define do
     association :prefered_vaccine, factory: :antigen_series_dose_vaccine
 
     after(:create) do |dose|
-      dose.intervals << FactoryGirl.create(:interval,
+      dose.intervals << FactoryGirl.create(:interval_4_weeks,
                                            antigen_series_dose: dose)
     end
   end

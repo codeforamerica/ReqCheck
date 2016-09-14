@@ -60,28 +60,31 @@ module TargetDoseEvaluation
       return target_dose_status
     end
     # Evaluate Intervals
-    intervals_not_valid = nil
+    preferable_intervals_not_valid = nil
 
     if preferable_intervals.length.zero?
-      target_dose_status[:details][:intervals] = ['no_intervals_required']
+      target_dose_status[:details][:preferable_intervals] = ['no_intervals_required']
     else
-      target_dose_status[:details][:intervals] = []
+      target_dose_status[:details][:preferable_intervals] = []
       preferable_interval_evaluations = []
 
       preferable_intervals.each do |interval|
         interval_evaluation = evaluate_interval(
           interval,
-          previous_dose_date: date_of_previous_dose,
+          comparison_dose_date: date_of_previous_dose,
           date_of_dose: date_of_dose,
           previous_dose_status_hash: previous_dose_status_hash
         )
         preferable_interval_evaluations << interval_evaluation
-        target_dose_status[:details][:intervals] << interval_evaluation[:details]
+        target_dose_status[:details][:preferable_intervals].push(
+          interval_evaluation[:details]
+        )
       end
 
-      intervals_not_valid = interval_evaluations.any? do |interval_evaluation|
-        interval_evaluation[:evaluation_status] == 'not_valid'
-      end
+      preferable_intervals_not_valid =
+        preferable_interval_evaluations.any? do |interval_evaluation|
+          interval_evaluation[:evaluation_status] == 'not_valid'
+        end
     end
     # Evaluate Allowable Interval
     allowable_intervals_not_valid = nil
@@ -96,7 +99,7 @@ module TargetDoseEvaluation
       allowable_intervals.each do |interval|
         interval_evaluation = evaluate_interval(
           interval,
-          previous_dose_date: date_of_previous_dose,
+          comparison_dose_date: date_of_previous_dose,
           date_of_dose: date_of_dose,
           previous_dose_status_hash: previous_dose_status_hash
         )
@@ -112,11 +115,15 @@ module TargetDoseEvaluation
         end
     end
 
-    if intervals_not_valid
-      if allowable_intervals_not_valid
-        target_dose_status[:target_dose_status] = 'not_satisfied'
-        target_dose_status[:evaluation_status]  = 'not_valid'
-        target_dose_status[:reason] = 'interval'
+    unless preferable_intervals_not_valid.nil? &&
+           allowable_intervals_not_valid.nil?
+      unless preferable_intervals_not_valid == false
+        unless allowable_intervals_not_valid == false
+          target_dose_status[:target_dose_status] = 'not_satisfied'
+          target_dose_status[:evaluation_status]  = 'not_valid'
+          target_dose_status[:reason] = 'interval'
+          return target_dose_status
+        end
       end
     end
 
