@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913185521) do
+ActiveRecord::Schema.define(version: 20160914203146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,7 +169,8 @@ ActiveRecord::Schema.define(version: 20160913185521) do
     t.string  "gender"
   end
 
-  add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", using: :btree
+  add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", unique: true, using: :btree
+  add_index "patient_profiles", ["record_number"], name: "index_patient_profiles_on_record_number", unique: true, using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "first_name", null: false

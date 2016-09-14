@@ -270,7 +270,9 @@ FactoryGirl.define do
     sequence(:first_name, 1) { |n| "Test#{n}" }
     sequence(:last_name, 1) { |n| "Tester#{n}" }
     sequence(:email, 1) { |n| "test#{n}@example.com" }
+  end
 
+  factory :patient_with_profile, parent: :patient do
     after(:create) do |patient|
       create(:patient_profile, patient_id: patient.id.to_s)
     end
@@ -305,7 +307,9 @@ FactoryGirl.define do
     expiration_date { 2.months.since.to_date }
     dose_number 1
     facility_id 19
+  end
 
+  factory :vaccine_dose_with_patient_profile, parent: :vaccine_dose do
     association :patient_profile, factory: :patient_profile
   end
 
@@ -325,9 +329,5 @@ FactoryGirl.define do
       vaccine_dose.mvx_code = vax_array.first[1]
       vaccine_dose.lot_number = vax_array.first[2]
     end
-  end
-
-  factory :random_vaccine_dose, parent: :vaccine_dose do
-    vaccine_code { TextVax::VAXCODES.keys.sample.to_s }
   end
 end

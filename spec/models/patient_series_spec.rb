@@ -5,7 +5,7 @@ RSpec.describe PatientSeries, type: :model do
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
   let(:test_patient) { FactoryGirl.create(:patient) }
   let(:antigen_series) { Antigen.find_by(target_disease: 'polio').series.first }
-  
+
   describe 'validations' do
     it 'takes a patient and antigen_series as parameters' do
       expect(
@@ -59,12 +59,12 @@ RSpec.describe PatientSeries, type: :model do
     end
   end
 
-  
+
   describe 'patient_series attributes from the antigen_series' do
     let(:test_patient_series) do
       PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
     end
-    
+
     dose_attributes = ['name', 'target_disease', 'vaccine_group', 'default_series', 'product_path',
                        'preference_number', 'min_start_age', 'max_start_age']
 
@@ -82,7 +82,7 @@ RSpec.describe PatientSeries, type: :model do
     let(:test_patient_series) do
       PatientSeries.new(antigen_series: antigen_series, patient: test_patient_2_years)
     end
-    
+
     describe 'it checks min age requirements' do
       it 'loops through the target doses and evaluates if the patient is eligible by birthday' do
         expect(test_patient_series.eligible_target_doses).to eq([])
@@ -106,7 +106,7 @@ RSpec.describe PatientSeries, type: :model do
 
   # describe '#evaluate_target_dose' do
   #   it 'compares itself against the antigen_administered_record' do
-      
+
 
   #   end
 
@@ -114,6 +114,181 @@ RSpec.describe PatientSeries, type: :model do
 
   #   end
   # end
+
+  describe '#evaluate_patient_series' do
+    context 'when the patient could be immune' do
+      let(:test_patient_5_years) do
+        FactoryGirl.create(:patient_profile,
+                           dob: 5.years.ago.to_date).patient
+      end
+
+      let(:patient_series_5_years) do
+        antigen = Antigen.find_by(target_disease: 'polio')
+        PatientSeries.create_antigen_patient_serieses(
+          antigen: antigen,
+          patient: test_patient_5_years
+        ).first
+      end
+
+      let(:vaccine_doses_complete) do
+        start_date = test_patient_5_years.dob
+        [
+          (start_date + 6.weeks).to_date,
+          (start_date + 10.weeks).to_date,
+          (start_date + 14.weeks).to_date,
+          (1.year.ago).to_date,
+        ].map do |date_admin|
+          FactoryGirl.create(:vaccine_dose_by_cvx,
+                             cvx_code: 10,
+                             patient_profile: test_patient_5_years.patient_profile,
+                             date_administered: date_admin)
+        end
+      end
+      let(:vaccine_doses_not_complete) do
+        start_date = test_patient_5_years.dob
+        [
+          (start_date + 6.weeks).to_date,
+          (start_date + 10.weeks).to_date,
+          (start_date + 14.weeks).to_date
+        ].map do |date_admin|
+          FactoryGirl.create(:vaccine_dose_by_cvx,
+                             cvx_code: 10,
+                             patient_profile: test_patient_5_years.patient_profile,
+                             date_administered: date_admin)
+        end
+      end
+      let(:vaccine_doses_invalid_age) do
+        start_date = test_patient_5_years.dob
+        [
+          (start_date + 3.weeks).to_date,
+          (start_date + 10.weeks).to_date,
+          (start_date + 14.weeks).to_date,
+          (1.year.ago).to_date,
+        ].map do |date_admin|
+          FactoryGirl.create(:vaccine_dose_by_cvx,
+                             cvx_code: 10,
+                             patient_profile: test_patient_5_years.patient_profile,
+                             date_administered: date_admin)
+        end
+      end
+      it 'returns immune if the patient is up to date and no other target_doses' do
+        aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses_complete
+        )
+        evaluation = patient_series_5_years.evaluate_patient_series(
+          patient_series_5_years.target_doses,
+          aars
+        )
+        expect(evaluation).to eq('immune')
+      end
+      it 'returns not_complete if the patient is not up to date' do
+        aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses_not_complete
+        )
+        evaluation = patient_series_5_years.evaluate_patient_series(
+          patient_series_5_years.target_doses,
+          aars
+        )
+        expect(evaluation).to eq('not_complete')
+      end
+      it 'returns not_complete if a vaccine age is invalid' do
+        aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses_invalid_age
+        )
+        evaluation = patient_series_5_years.evaluate_patient_series(
+          patient_series_5_years.target_doses,
+          aars
+        )
+        expect(evaluation).to eq('not_complete')
+      end
+    end
+    context 'when the patient cant be immune' do
+      let(:test_patient_3_years) do
+        FactoryGirl.create(:patient_profile,
+                           dob: 3.years.ago.to_date).patient
+      end
+
+      let(:patient_series_3_years) do
+        antigen = Antigen.find_by(target_disease: 'polio')
+        PatientSeries.create_antigen_patient_serieses(
+          antigen: antigen,
+          patient: test_patient_3_years
+        ).first
+      end
+
+      let(:vaccine_doses_complete) do
+        start_date = test_patient_3_years.dob
+        [
+          (start_date + 6.weeks).to_date,
+          (start_date + 10.weeks).to_date,
+          (start_date + 14.weeks).to_date
+        ].map do |date_admin|
+          FactoryGirl.create(:vaccine_dose_by_cvx,
+                             cvx_code: 10,
+                             patient_profile: test_patient_3_years.patient_profile,
+                             date_administered: date_admin)
+        end
+      end
+      let(:vaccine_doses_not_complete) do
+        start_date = test_patient_3_years.dob
+        [
+          (start_date + 6.weeks).to_date,
+          (start_date + 10.weeks).to_date
+        ].map do |date_admin|
+          FactoryGirl.create(:vaccine_dose_by_cvx,
+                             cvx_code: 10,
+                             patient_profile: test_patient_3_years.patient_profile,
+                             date_administered: date_admin)
+        end
+      end
+      let(:vaccine_doses_invalid_age) do
+        start_date = test_patient_3_years.dob
+        [
+          (start_date + 2.weeks).to_date,
+          (start_date + 10.weeks).to_date,
+          (start_date + 12.weeks).to_date
+        ].map do |date_admin|
+          FactoryGirl.create(:vaccine_dose_by_cvx,
+                             cvx_code: 10,
+                             patient_profile: test_patient_3_years.patient_profile,
+                             date_administered: date_admin)
+        end
+      end
+
+      it 'returns Complete if the patient is up to date' do
+        aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses_complete
+        )
+        evaluation = patient_series_3_years.evaluate_patient_series(
+          patient_series_3_years.target_doses[0..-2],
+          aars
+        )
+        expect(evaluation).to eq('complete')
+      end
+      it 'returns not_complete if the patient is not up to date' do
+        aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses_not_complete
+        )
+        evaluation = patient_series_3_years.evaluate_patient_series(
+          patient_series_3_years.target_doses[0..-2],
+          aars
+        )
+        expect(evaluation).to eq('not_complete')
+      end
+      it 'returns not_complete if a vaccine age is invalid' do
+        aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses_invalid_age
+        )
+        evaluation = patient_series_3_years.evaluate_patient_series(
+          patient_series_3_years.target_doses[0..-2],
+          aars
+        )
+        expect(evaluation).to eq('not_complete')
+      end
+    end
+
+
+  end
 
   describe '.create_antigen_patient_serieses' do
     let(:antigen) { Antigen.find_by(target_disease: 'polio') }
