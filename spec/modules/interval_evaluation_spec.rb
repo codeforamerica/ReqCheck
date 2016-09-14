@@ -30,7 +30,7 @@ RSpec.describe IntervalEvaluation do
     test_patient
   end
 
-  let(:test_interval) { FactoryGirl.create(:interval) }
+  let(:test_interval) { FactoryGirl.create(:interval_4_weeks) }
 
   let(:as_dose_w_interval) do
     as_dose = FactoryGirl.create(:antigen_series_dose)
@@ -304,7 +304,7 @@ RSpec.describe IntervalEvaluation do
   describe '#evaluate_interval' do
     it 'takes a interval_object with date_of_dose, previous_dose_date, ' \
        'previous_dose_status_hash and returns a status hash' do
-        interval_object    = FactoryGirl.create(:interval)
+        interval_object    = FactoryGirl.create(:interval_4_weeks)
         previous_dose_date = 1.year.ago.to_date
         date_of_dose       = (1.year.ago + 9.weeks).to_date
         interval_object.interval_absolute_min         = '5 weeks - 4 days'
@@ -324,7 +324,7 @@ RSpec.describe IntervalEvaluation do
         expect(evaluation_hash).to eq(expected_result)
     end
     it 'returns not_valid for not_valid interval between doses' do
-        interval_object    = FactoryGirl.create(:interval)
+        interval_object    = FactoryGirl.create(:interval_4_weeks)
         previous_dose_date = 1.year.ago.to_date
         date_of_dose       = (1.year.ago + 4.weeks).to_date
         interval_object.interval_absolute_min         = '5 weeks - 4 days'
@@ -343,6 +343,51 @@ RSpec.describe IntervalEvaluation do
                           }
         expect(evaluation_hash).to eq(expected_result)
     end
+  end
+  describe '#evaluate_intervals ' do
+    let(:test_intervals) do
+      [
+        FactoryGirl.create(:interval_8_weeks),
+        FactoryGirl.create(:interval_target_dose_16_weeks)
+      ]
+    end
+
+    it 'takes interval_objects, with date_of_dose, previous_dose_date, ' \
+       'satisfied_target_dose_dates, patient_vaccine_doses, ' \
+       'previous_dose_status_hash and returns a status hash' do
+      # the two intervals are for dose 3 Hep B in real life
+      # so need to include two previous target doses that are completed
+      #
+      # second_interval is from_target_dose #1
+      previous_dose_date        = 1.year.ago.to_date
+      date_of_dose              = (1.year.ago + 8.weeks).to_date
+      previous_dose_status_hash = nil
+      patient_vaccine_doses       = []
+      satisfied_target_dose_dates = [
+        (1.year.ago - 12.weeks).to_date, previous_dose_date
+      ]
+      evaluation_hash = test_object.evaluate_intervals(
+        test_intervals,
+        previous_dose_date: previous_dose_date,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: [],
+        satisfied_target_dose_dates: satisfied_target_dose_dates,
+        previous_dose_status_hash: previous_dose_status_hash,
+      )
+      expected_result = [
+        {
+          evaluation_status: 'valid',
+          evaluated: 'interval',
+          details: 'on_schedule'
+        },
+        {
+          evaluation_status: 'valid',
+          evaluated: 'interval',
+          details: 'on_schedule'
+        }
+      ]
+      expect(evaluation_hash).to eq(expected_result)
+    end
     describe 'with different interval_types' do
       context 'with interval_type from_previous_dose' do
 
@@ -351,7 +396,37 @@ RSpec.describe IntervalEvaluation do
 
       end
       context 'with interval_type from_most_recent' do
-
+        it 'pulls the most recent date from the cvx_code outlined in the ' \
+           'recent_cvx_code on the interval_object' do
+          intervals = [FactoryGirl.create(:interval_most_recent_1_year)]
+          previous_dose_date        = 1.year.ago.to_date
+          date_of_dose              = (1.year.ago + 8.weeks).to_date
+          previous_dose_status_hash = nil
+          patient_vaccine_doses       = [
+            FactoryGirl.create(:vaccine_dose_by_cvx,
+                               cvx_code: 33,
+                               date_administered: 2.years.ago.to_date)
+          ]
+          satisfied_target_dose_dates = [
+            (1.year.ago - 12.weeks).to_date, previous_dose_date
+          ]
+          evaluation_hash = test_object.evaluate_intervals(
+            intervals,
+            previous_dose_date: previous_dose_date,
+            date_of_dose: date_of_dose,
+            patient_vaccine_doses: [],
+            satisfied_target_dose_dates: satisfied_target_dose_dates,
+            previous_dose_status_hash: previous_dose_status_hash,
+          )
+          expected_result = [
+            {
+              evaluation_status: 'valid',
+              evaluated: 'interval',
+              details: 'on_schedule'
+            }
+          ]
+          expect(evaluation_hash).to eq(expected_result)
+        end
       end
     end
   end

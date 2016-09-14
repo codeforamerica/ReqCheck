@@ -26,8 +26,8 @@ RSpec.describe TargetDoseEvaluation do
 
   let(:test_intervals) do
     [
-      FactoryGirl.create(:preferable_interval),
-      FactoryGirl.create(:allowable_interval)
+      FactoryGirl.create(:interval_6_months),
+      FactoryGirl.create(:interval_4_months_allowable)
     ]
   end
 

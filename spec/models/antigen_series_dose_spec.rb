@@ -59,8 +59,8 @@ RSpec.describe AntigenSeriesDose, type: :model do
     end
     it 'has many intervals' do
       antigen_series_dose = FactoryGirl.create(:antigen_series_dose)
-      interval_1 = FactoryGirl.create(:interval)
-      interval_2 = FactoryGirl.create(:interval)
+      interval_1 = FactoryGirl.create(:interval_4_weeks)
+      interval_2 = FactoryGirl.create(:interval_4_weeks)
       antigen_series_dose.intervals << interval_1
       antigen_series_dose.intervals << interval_2
       expect(antigen_series_dose.intervals).to eq([interval_1, interval_2])
@@ -69,25 +69,25 @@ RSpec.describe AntigenSeriesDose, type: :model do
     end
     it 'has many preferable_intervals' do
       antigen_series_dose = FactoryGirl.create(:antigen_series_dose)
-      preferable_interval = FactoryGirl.create(:interval,
+      preferable_interval = FactoryGirl.create(:interval_4_weeks_4_weeks,
         antigen_series_dose: antigen_series_dose, allowable: false
       )
-      FactoryGirl.create(:interval, antigen_series_dose: antigen_series_dose, allowable: false)
-      FactoryGirl.create(:interval, allowable: false)
-      FactoryGirl.create(:interval, allowable: true)
-      FactoryGirl.create(:interval, allowable: true)
+      FactoryGirl.create(:interval_4_weeks, antigen_series_dose: antigen_series_dose, allowable: false)
+      FactoryGirl.create(:interval_4_weeks, allowable: false)
+      FactoryGirl.create(:interval_4_weeks, allowable: true)
+      FactoryGirl.create(:interval_4_weeks, allowable: true)
       expect(antigen_series_dose.preferable_intervals.length).to eq(2)
       expect(antigen_series_dose.preferable_intervals).to include(preferable_interval)
     end
     it 'has many allowable_intervals' do
       antigen_series_dose = FactoryGirl.create(:antigen_series_dose)
-      allowable_interval = FactoryGirl.create(:interval,
+      allowable_interval = FactoryGirl.create(:interval_4_weeks,
         antigen_series_dose: antigen_series_dose, allowable: true
       )
-      FactoryGirl.create(:interval, antigen_series_dose: antigen_series_dose, allowable: true)
-      FactoryGirl.create(:interval, allowable: false)
-      FactoryGirl.create(:interval, allowable: false)
-      FactoryGirl.create(:interval, allowable: true)
+      FactoryGirl.create(:interval_4_weeks, antigen_series_dose: antigen_series_dose, allowable: true)
+      FactoryGirl.create(:interval_4_weeks, allowable: false)
+      FactoryGirl.create(:interval_4_weeks, allowable: false)
+      FactoryGirl.create(:interval_4_weeks, allowable: true)
       expect(antigen_series_dose.allowable_intervals.length).to eq(2)
       expect(antigen_series_dose.allowable_intervals).to include(allowable_interval)
     end

@@ -85,34 +85,74 @@ module IntervalEvaluation
   end
 
   def evaluate_interval(interval_object,
-                        previous_dose_date:,
                         date_of_dose:,
-                        patient_vaccine_doses: [],
-                        previous_target_doses: [],
+                        comparison_dose_date:,
                         previous_dose_status_hash: nil)
     interval_attrs = create_interval_attributes(interval_object,
-                                                previous_dose_date)
+                                                comparison_dose_date)
     interval_evaluation = evaluate_interval_attrs(interval_attrs,
                                                   date_of_dose)
     get_interval_status(interval_evaluation, previous_dose_status_hash)
+  end
+
+  def get_target_dose_date(target_dose_dates, target_dose_number)
+    if !target_dose_number.is_a? Integer
+      raise "Invalid target_dose_number: #{target_dose_number}"
+    end
+    target_dose_index = (target_dose_number - 1)
+    target_dose_date = target_dose_dates.fetch(target_dose_index, false)
+    if target_dose_dates == false
+      raise "Invalid target_dose_dates: #{target_dose_dates}. " \
+            "target_dose_number #{taret_dose_number} out of range."
+    end
+    return target_dose_date
+  end
+
+  def get_most_recent_dose_date_by_cvx_code(vaccine_doses,
+                                            cvx_code)
+    if !cvx_code.is_a? Integer
+      raise "Invalid cvx_code: #{cvx_code}"
+    end
+    recent_vaccine_dose = vaccine_doses
+      .sort_by(&:date_administered)
+      .reverse!
+      .find do |vaccine_dose|
+        vaccine_dose.cvx_code == cvx_code
+      end
+    if recent_vaccine_dose == nil
+      raise "Invalid vaccine_doses: #{vaccine_doses}. " \
+            "cvx_code #{cvx_code} cannot be found."
+    end
+    return recent_vaccine_dose.date_administered
   end
 
   def evaluate_intervals(interval_objects,
                          date_of_dose:,
                          previous_dose_date:,
                          patient_vaccine_doses: [],
-                         previous_target_doses: [],
+                         satisfied_target_dose_dates: [],
                          previous_dose_status_hash: nil)
+    ## This currently does not account for the status hashes of the different
+    #  doses that are not the immediate previous dose (target_dose_number and
+    #  most_recent by cvx_code)
+    ## This currently will error if the previous satisfied target dose is not
+    #  found for the target_dose_number OR the patient_vaccine_dose is not
+    #  found for the recent_cvx_code
     interval_objects.map do |interval_object|
       comparison_dose_date = '01/01/1900'.to_date
-      if interval_object.interval_type == 'from_previous_dose'
+      if interval_object.interval_type == 'from_previous'
         comparison_dose_date = previous_dose_date
       elsif interval_object.interval_type == 'from_target_dose'
-        comparison_dose_date = previous_dose_date
+        comparison_dose_date =
+          get_target_dose_date(satisfied_target_dose_dates,
+                               interval_object.target_dose_number)
       elsif interval_object.interval_type == 'from_most_recent'
 
       end
-      evaluate_interval(interval_object)
+      evaluate_interval(interval_object,
+                        date_of_dose: date_of_dose,
+                        comparison_dose_date: comparison_dose_date,
+                        previous_dose_status_hash: previous_dose_status_hash)
     end
   end
 end
