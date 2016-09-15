@@ -96,17 +96,17 @@ class PatientSeries
     @status
   end
 
-  # def pull_eligible_target_doses
-  #   @eligible_target_doses, @non_eligible_target_doses = [], []
-  #   @target_doses.each do |target_dose|
-  #     if eligible_target_dose?(target_dose, @patient.dob)
-  #       @eligible_target_doses << target_dose
-  #     else
-  #       @non_eligible_target_doses << target_dose
-  #     end
-  #   end
-  #   @eligible_target_doses
-  # end
+  def pull_eligible_target_doses(target_doses)
+    @eligible_target_doses, @non_eligible_target_doses = [], []
+    target_doses.each do |target_dose|
+      if eligible_target_dose?(target_dose, @patient.dob)
+        @eligible_target_doses << target_dose
+      else
+        @non_eligible_target_doses << target_dose
+      end
+    end
+    @eligible_target_doses
+  end
 
   def self.create_antigen_patient_serieses(antigen:, patient:)
     patient_series = antigen.series.map do |antigen_series|

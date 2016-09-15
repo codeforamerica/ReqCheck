@@ -40,11 +40,26 @@ class TargetDose
     !self.antigen_series_dose.conditional_skip.nil?
   end
 
-  def evaluate_interval(first_administered_record, second_administered_record)
-    all_intervals = self.intervals
-    interval = all_intervals.first
-    # interval.
+  def eligible?
+    min_age      = self.min_age
+    max_age      = self.max_age
+    patient_dob  = @patient.dob
+    todays_date  = DateTime.now
+                    .in_time_zone('Central Time (US & Canada)').to_date
 
+    min_age_date = create_patient_age_date(min_age, patient_dob)
+
+    unless validate_date_equal_or_after(min_age_date, todays_date)
+      return false
+    end
+
+    unless max_age.nil?
+      max_age_date = create_patient_age_date(max_age, patient_dob)
+      unless validate_date_equal_or_before(max_age_date, todays_date)
+        return false
+      end
+    end
+    true
   end
 
   def evaluate_preferable_vaccine(antigen_administered_record)
@@ -83,32 +98,5 @@ class TargetDose
       previous_dose_status_hash: previous_status_hash
     )
   end
-
-  # def evaluate_vs_antigen_administered_record(antigen_administered_record)
-  #   age_eligible?(@patient.dob)
-  #   if !self.eligible
-  #     return
-  #   end
-  # end
 end
-
-
-
-# Date Administered
-# Patient Immunization History Administered - Dose Count
-#     # when 'Age'
-#   result = validate_date_equal_or_after(condition_attrs['begin_age_date'],
-#                                         date_of_dose)
-#   if condition_attrs['end_age_date']
-#   end
-#   evaluate begin_age
-#   evaluate end_age? => need to look into this morer
-# when 'Interval'
-# when 'Vaccine Count by Age'
-# when 'Vaccine Count by Date'
-
-# A patient's reference dose date must be calculated as the
-# date administered of the most immediate previous vaccine
-# dose administered which has evaluation status “Valid” or “Not
-# Valid” if from immediate previous dose administered is “Y”.
 
