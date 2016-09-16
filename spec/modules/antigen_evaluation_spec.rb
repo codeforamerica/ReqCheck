@@ -253,4 +253,39 @@ RSpec.describe AntigenEvaluation do
       expect(evaluation_hash).to eq(expected_result)
     end
   end
+  describe '#evaluate_antigen ' do
+    it 'takes an antigen, patient and antigen_administered_records and returns' \
+       'a status hash' do
+      valid_dates   = create_valid_dates(test_patient.dob)
+      vaccine_doses = create_patient_vaccines(test_patient, valid_dates)
+
+      aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+        vaccine_doses
+      )
+      evaluation_hash = test_object.evaluate_antigen(
+        polio_antigen,
+        test_patient,
+        aars
+      )
+
+      expected_result = 'immune'
+      expect(evaluation_hash).to eq(expected_result)
+    end
+    it 'returns incomplete if incomplete' do
+      valid_dates   = create_valid_dates(test_patient.dob)
+      vaccine_doses = create_patient_vaccines(test_patient, valid_dates[0..-2])
+
+      aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+        vaccine_doses
+      )
+      evaluation_hash = test_object.evaluate_antigen(
+        polio_antigen,
+        test_patient,
+        aars
+      )
+
+      expected_result = 'not_complete'
+      expect(evaluation_hash).to eq(expected_result)
+    end
+  end
 end

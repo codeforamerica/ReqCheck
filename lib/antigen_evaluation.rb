@@ -28,16 +28,18 @@ module AntigenEvaluation
     antigen_evaluation
   end
 
-  def get_antigen_evaluation(patient_series_evaluations)
+  # def get_antigen_evaluation(patient_series_evaluations)
 
 
-  end
+  # end
 
-  def evaluate_antigen
+  def evaluate_antigen(antigen, patient, antigen_administered_records)
     patient_serieses = PatientSeries.create_antigen_patient_serieses(
       patient: patient,
       antigen: antigen
     )
+    get_all_patient_series_evaluations(patient_serieses,
+                                       antigen_administered_records)
 
   end
 
