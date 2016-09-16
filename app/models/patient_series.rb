@@ -2,8 +2,8 @@ class PatientSeries
   include ActiveModel::Model
   include CheckType
 
-  attr_reader :target_doses, :patient, :antigen_series,
-              :eligible_target_doses, :non_eligible_target_doses
+  attr_reader :target_doses, :patient, :antigen_series, :series_status,
+              :satisfied_target_doses
 
   def initialize(patient:, antigen_series:)
     CheckType.enforce_type(patient, Patient)
@@ -12,8 +12,7 @@ class PatientSeries
     @antigen_series            = antigen_series
     @target_doses              = create_target_doses(antigen_series, patient)
     @satisfied_target_doses    = []
-    @ineligible_target_doses   = []
-    @status                    = nil
+    @series_status             = nil
 
     @invalid_antigen_administered_records = []
   end
@@ -30,6 +29,14 @@ class PatientSeries
     end
   end
 
+  def set_satisfied_target_doses(satisfied_target_doses)
+    @satisfied_target_doses = satisfied_target_doses
+  end
+
+  def set_series_status(series_status)
+    @series_status = series_status
+  end
+
   def create_target_doses(antigen_series, patient)
     target_doses = antigen_series.doses.map do |antigen_series_dose|
       TargetDose.new(antigen_series_dose: antigen_series_dose,
@@ -38,9 +45,12 @@ class PatientSeries
     target_doses.sort_by!(&:dose_number)
   end
 
-  def evaluate_target_dose(target_dose, antigen_administered_record)
+  def evaluate_individual_target_dose(target_dose,
+                           antigen_administered_record,
+                           previous_satisfied_target_dose=nil)
     target_dose.evaluate_antigen_administered_record(
-      antigen_administered_record
+      antigen_administered_record,
+      previous_satisfied_target_dose
     )
   end
 
@@ -49,18 +59,56 @@ class PatientSeries
     records.reverse
   end
 
-  def evaluate_patient_series(eligible_target_doses,
-                              antigen_administered_records)
+  def get_target_dose_from_status_hash(target_dose_hash)
+    return nil if target_dose_hash.nil?
+    target_dose_hash[:target_dose]
+  end
+
+  def evaluate_patient_series(antigen_administered_records)
+    target_doses = @target_doses
+    eligible_target_doses = pull_eligible_target_doses(target_doses)
+    evaluation_hash = evaluate_target_doses(eligible_target_doses,
+                                            antigen_administered_records)
+    satisfied_target_doses = evaluation_hash[:satisfied_target_doses]
+    set_satisfied_target_doses(satisfied_target_doses)
+    status = get_patient_series_status(target_doses,
+                                       eligible_target_doses,
+                                       satisfied_target_doses)
+    set_series_status(status)
+    status
+  end
+
+  def get_patient_series_status(target_doses,
+                                eligible_target_doses,
+                                satisfied_target_doses)
+    if target_doses.length == satisfied_target_doses.length
+      'immune'
+    elsif satisfied_target_doses.length == eligible_target_doses.length
+      'complete'
+    else
+      'not_complete'
+    end
+  end
+
+  def evaluate_target_doses(eligible_target_doses,
+                            antigen_administered_records)
+    invalid_antigen_administered_records = []
+    satisfied_target_doses = []
+
     antigen_administered_records = sort_by_date_reversed(
       antigen_administered_records
     )
+
     eligible_target_doses.each do |target_dose|
       antigen_administered_record = antigen_administered_records.pop
       if antigen_administered_record.nil?
         satisfied = false
       else
-        satisfied = evaluate_target_dose(target_dose,
-                                         antigen_administered_record)
+        satisfied = evaluate_individual_target_dose(
+          target_dose,
+          antigen_administered_record,
+          get_target_dose_from_status_hash(satisfied_target_doses[-1])
+        )
       end
       record_satisfied = satisfied == true
       until record_satisfied
@@ -69,13 +117,16 @@ class PatientSeries
         invalid_record[:antigen_administered_record] =
           antigen_administered_record
         invalid_record[:status_hash] = target_dose.status_hash
-        @invalid_antigen_administered_records << invalid_record
+        invalid_antigen_administered_records << invalid_record
         antigen_administered_record = antigen_administered_records.pop
         if antigen_administered_record.nil?
           record_satisfied = true
         else
-          satisfied = evaluate_target_dose(target_dose,
-                                           antigen_administered_record)
+          satisfied = evaluate_individual_target_dose(
+            target_dose,
+            antigen_administered_record,
+            get_target_dose_from_status_hash(satisfied_target_doses[-1])
+          )
           record_satisfied = satisfied == true
         end
       end
@@ -83,29 +134,17 @@ class PatientSeries
         target_dose_status_hash = {target_dose_number: target_dose.dose_number}
         target_dose_status_hash[:satisfied] = true
         target_dose_status_hash[:target_dose] = target_dose
-        @satisfied_target_doses << target_dose_status_hash
+        satisfied_target_doses << target_dose_status_hash
       end
     end
-    if @target_doses.length == @satisfied_target_doses.length
-      @status = 'immune'
-    elsif @satisfied_target_doses.length == eligible_target_doses.length
-      @status = 'complete'
-    else
-      @status = 'not_complete'
-    end
-    @status
+    {
+      invalid_antigen_administered_records: invalid_antigen_administered_records,
+      satisfied_target_doses: satisfied_target_doses
+    }
   end
 
   def pull_eligible_target_doses(target_doses)
-    @eligible_target_doses, @non_eligible_target_doses = [], []
-    target_doses.each do |target_dose|
-      if eligible_target_dose?(target_dose, @patient.dob)
-        @eligible_target_doses << target_dose
-      else
-        @non_eligible_target_doses << target_dose
-      end
-    end
-    @eligible_target_doses
+    target_doses.select { |target_dose| target_dose.eligible? }.compact
   end
 
   def self.create_antigen_patient_serieses(antigen:, patient:)

@@ -43,7 +43,6 @@ module TargetDoseEvaluation
       previous_dose_status_hash: previous_dose_status_hash
     )
     target_dose_status[:details][:age] = age_evaluation[:details]
-
     if age_evaluation[:evaluation_status] == 'not_valid'
       target_dose_status[:reason] = 'age'
       target_dose_status[:target_dose_status]  = 'not_satisfied'

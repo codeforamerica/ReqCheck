@@ -26,12 +26,18 @@ class TargetDose
     end
   end
 
-  def evaluate_antigen_administered_record(antigen_administered_record)
+  def evaluate_antigen_administered_record(
+    antigen_administered_record,
+    previous_satisfied_target_dose=nil
+  )
     if !@status_hash.nil? && @status_hash[:evaluation_status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
     end
     @antigen_administered_record = antigen_administered_record
-    @status_hash = evaluate_satisfy_target_dose(antigen_administered_record)
+    @status_hash = evaluate_satisfy_target_dose(
+      antigen_administered_record,
+      previous_satisfied_target_dose
+    )
     @satisfied   = @status_hash[:target_dose_status] == 'satisfied'
     @satisfied
   end
@@ -72,14 +78,14 @@ class TargetDose
   end
 
   def evaluate_satisfy_target_dose(antigen_administered_record,
-                                   previous_antigen_administered_record=nil)
+                                   previous_valid_target_dose=nil)
     previous_status_hash  = nil
     date_of_previous_dose = nil
-    unless previous_antigen_administered_record.nil?
+    unless previous_valid_target_dose.nil?
       previous_status_hash =
-        previous_antigen_administered_record.target_dose.status_hash
+        previous_valid_target_dose.status_hash
       date_of_previous_dose =
-        previous_antigen_administered_record.date_administered
+        previous_valid_target_dose.antigen_administered_record.date_administered
     end
     evaluate_target_dose_satisfied(
       conditional_skip: @antigen_series_dose.conditional_skip,

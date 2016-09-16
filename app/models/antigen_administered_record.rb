@@ -1,7 +1,7 @@
 class AntigenAdministeredRecord
   include ActiveModel::Model
 
-  attr_accessor :antigen, :vaccine_dose
+  attr_reader :antigen, :vaccine_dose
 
   def initialize(antigen:, vaccine_dose:)
     @antigen      = antigen
