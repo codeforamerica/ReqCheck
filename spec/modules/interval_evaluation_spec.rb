@@ -13,7 +13,7 @@ RSpec.describe IntervalEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient)
+    test_patient = FactoryGirl.create(:patient_with_profile)
     FactoryGirl.create(
       :vaccine_dose,
       patient_profile: test_patient.patient_profile,

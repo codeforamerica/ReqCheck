@@ -7,13 +7,13 @@ RSpec.describe VaccineDoseEvaluator, type: :model do
 
   # Creates a test patient with two vaccine doses
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient) 
+    test_patient = FactoryGirl.create(:patient_with_profile)
     FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 7.weeks))
     FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 11.weeks))
     test_patient.reload
     test_patient
   end
-  
+
   # Pulls a polio antigen series dose
   let(:as_dose) do
     AntigenSeriesDose.joins(:antigen_series).joins('INNER JOIN "antigens" ON "antigens"."id" = "antigen_series"."antigen_id"').where(antigens: {target_disease: 'polio'}).first
@@ -24,7 +24,7 @@ RSpec.describe VaccineDoseEvaluator, type: :model do
     TargetDose.new(antigen_series_dose: as_dose, patient: test_patient)
   end
 
-  # Creates antigen_administered_record based on 
+  # Creates antigen_administered_record based on
   let(:test_antigen_administered_record) do
     AntigenAdministeredRecord.create_records_from_vaccine_doses(
       [test_patient.vaccine_doses.first]

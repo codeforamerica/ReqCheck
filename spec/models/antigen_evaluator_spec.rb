@@ -5,8 +5,8 @@ RSpec.describe AntigenEvaluator, type: :model do
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
   let(:test_antigen) { Antigen.find_by(target_disease: 'polio') }
-  let(:test_patient) { FactoryGirl.create(:patient) }
-  
+  let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
+
   let(:test_vaccine_doses) do
     vax_doses = []
     vax_dates = [(test_patient.dob + 4.months), (test_patient.dob + 2.months)]
@@ -18,11 +18,11 @@ RSpec.describe AntigenEvaluator, type: :model do
     end
     vax_doses
   end
-  
-  let(:test_antigen_administered_records) do 
+
+  let(:test_antigen_administered_records) do
     AntigenAdministeredRecord.create_records_from_vaccine_doses(test_vaccine_doses)
   end
-  
+
   describe "validations" do
     it 'requires a patient object' do
       expect { AntigenEvaluator.new(antigen: test_antigen,
@@ -43,7 +43,7 @@ RSpec.describe AntigenEvaluator, type: :model do
     end
   end
   describe "relationships" do
-    let(:antigen_evaluator) do 
+    let(:antigen_evaluator) do
       AntigenEvaluator.new(patient: test_patient,
                            antigen: test_antigen,
                            antigen_administered_records: test_antigen_administered_records)

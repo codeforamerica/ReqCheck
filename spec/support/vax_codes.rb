@@ -100,7 +100,8 @@ module TextVax
     VAR4: [['C-317 Adult Varicella', 'MRK', 'K016129', 21]],
     PPV1: [['A-Pneumococcal Vaccine PPV23', 'MRK', 'K019933', 33]],
     POL: [['C-Polio (Unknown Type)', 'UNK', 'K1330', 10],
-          ['C-Polio (Unknown Type)', 'PMC', 'L1001-1', 10]],
+          ['C-Polio (Unknown Type)', 'PMC', 'L1001-1', 10],
+          ['polio, unspecified formulation', 'UNK', nil, 89]],
     IPV: [['C-IPV', 'SFP', 'K13301', 10],
           ['C-IPV', nil, nil, 10]],
     TYP: [['A-Typhoid Vaccine', 'SFP', 'K1536', 101]],
@@ -147,7 +148,8 @@ module TextVax
     PCV4: [['A-Pneumococcal Conjugate PCV13', nil, nil, 133]],
     H1N4: [['C-H1N1 Influenza Vaccine', 'UNK', nil, 127]],
     HBIG: [['Hepatitis B Immune Globulin', nil, nil, 30]],
-    ROT2: [['Rotavirus, unspecified', 'UNK', nil, 122]]
+    ROT2: [['Rotavirus, unspecified', 'UNK', nil, 122]],
+    OPV: [['Oral Polio Vaccine', 'UNK', nil, 02]]
   }
 
   def find_all_vax_codes_by_cvx(cvx_code)

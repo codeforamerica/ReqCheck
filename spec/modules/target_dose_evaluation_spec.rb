@@ -25,7 +25,7 @@ RSpec.describe TargetDoseEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient)
+    test_patient = FactoryGirl.create(:patient_with_profile)
     FactoryGirl.create(
       :vaccine_dose_by_cvx,
       patient_profile: test_patient.patient_profile,
@@ -711,7 +711,7 @@ RSpec.describe TargetDoseEvaluation do
     end
     context 'when preferable vaccine is not_valid and no allowable' do
       let(:test_patient) do
-        test_patient = FactoryGirl.create(:patient)
+        test_patient = FactoryGirl.create(:patient_with_profile)
         FactoryGirl.create(
           :vaccine_dose_by_cvx,
           patient_profile: test_patient.patient_profile,

@@ -11,7 +11,7 @@ RSpec.describe Patient, type: :model do
   end
 
   let(:patient_w_vaccines) do
-    patient = FactoryGirl.create(:patient,
+    patient = FactoryGirl.create(:patient_with_profile,
                                  patient_profile_attributes: {
                                    dob: in_pst(5.years.ago),
                                    record_number: 123
@@ -84,7 +84,7 @@ RSpec.describe Patient, type: :model do
       expect(patient.vaccine_doses.length).to eq(1)
     end
     it 'has a dob attribute in years' do
-      patient = FactoryGirl.create(:patient, patient_profile_attributes: {
+      patient = FactoryGirl.create(:patient_with_profile, patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
                                      record_number: 123
                                    })
@@ -93,7 +93,7 @@ RSpec.describe Patient, type: :model do
   end
 
   describe '#find_by_record_number' do
-    let(:test_patient) { FactoryGirl.create(:patient) }
+    let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
 
     it 'takes a string' do
       record_number = test_patient.record_number.to_s
@@ -121,14 +121,14 @@ RSpec.describe Patient, type: :model do
     end
 
     xit 'returns false if not_valid' do
-      not_valid_patient = FactoryGirl.create(:patient)
+      not_valid_patient = FactoryGirl.create(:patient_with_profile)
       not_valid_imm = not_valid_patient.check_record
       expect(not_valid_imm).to eq(false)
     end
   end
   describe '#age_in_days' do
     it 'returns the patients age in days' do
-      patient = FactoryGirl.create(:patient,
+      patient = FactoryGirl.create(:patient_with_profile,
                                    patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
                                      record_number: 123
@@ -191,7 +191,7 @@ RSpec.describe Patient, type: :model do
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) do
-      patient = FactoryGirl.create(:patient,
+      patient = FactoryGirl.create(:patient_with_profile,
                                    patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
                                      record_number: 123

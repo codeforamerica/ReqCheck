@@ -8,7 +8,7 @@ RSpec.describe Evaluator, type: :model do
     DatabaseCleaner.clean_with(:truncation)
   end
   let(:test_patient) do
-    patient = FactoryGirl.create(:patient)
+    patient = FactoryGirl.create(:patient_with_profile)
     FactoryGirl.create(:vaccine_dose, vaccine_code: 'POL', patient_profile: patient.patient_profile)
     FactoryGirl.create(:vaccine_dose, vaccine_code: 'POL', patient_profile: patient.patient_profile)
     patient
@@ -31,7 +31,7 @@ RSpec.describe Evaluator, type: :model do
       expect(evaluator.antigen_administered_records.first.class.name).to eq('AntigenAdministeredRecord')
     end
   end
-  
+
   describe '#get_antigens' do
     it 'pulls all antigens from the database' do
       expect(evaluator.get_antigens.length).to eq(17)
@@ -56,19 +56,19 @@ RSpec.describe Evaluator, type: :model do
 
   describe '#build_patient_series' do
     context 'with a child aged < 1 years' do
-      let(:test_patient_baby) { FactoryGirl.create(:patient, dob: 10.months.ago) }
+      let(:test_patient_baby) { FactoryGirl.create(:patient_with_profile, dob: 10.months.ago) }
 
     end
     context 'with a child aged ~= 5 years' do
-      let(:test_patient_child) { FactoryGirl.create(:patient, dob: 58.months.ago) }
+      let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 58.months.ago) }
 
     end
     context 'with a child aged ~= 12 years' do
-      let(:test_patient_child) { FactoryGirl.create(:patient, dob: 12.years.ago) }
+      let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 12.years.ago) }
 
     end
     context 'with a child aged ~= 18 years' do
-      let(:test_patient_child) { FactoryGirl.create(:patient, dob: 12.years.ago) }
+      let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 12.years.ago) }
 
     end
 

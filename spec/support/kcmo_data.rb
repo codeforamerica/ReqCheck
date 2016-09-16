@@ -94,8 +94,8 @@ patient_3 = {
       description: 'A-Hepatitis A Vaccine-Ped/adol',
       date_administered: '11/14/2013',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Hepatitis B Vaccine',
       date_administered: '07/16/2013',
@@ -154,25 +154,25 @@ patient_3 = {
       description: 'HIB Conjugate (Mening. Prot)',
       date_administered: '08/16/2013',
       history: false
-    },    
+    },
     {
       cvx_code: 110,
       description: 'HIB Conjugate (Mening. Prot)',
       date_administered: '07/16/2013',
       history: false
-    },    
+    },
     {
       cvx_code: 110,
       description: 'HIB Conjugate (Mening. Prot)',
       date_administered: '01/25/2013',
       history: false
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Rotavirus (2 dose)',
       date_administered: '01/25/2013',
       history: false
-    },    
+    },
     {
       cvx_code: 110,
       description: 'Varicella Vaccine',
@@ -236,8 +236,8 @@ patient_5 = {
       description: 'C-IPV',
       date_administered: '09/09/2016',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-IPV',
       date_administered: '08/09/2016',
@@ -322,8 +322,8 @@ patient_6 = {
       description: 'C-Measles, Mumps, Rubella',
       date_administered: '07/11/2016',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Tdap',
       date_administered: '07/11/2016',
@@ -366,8 +366,8 @@ patient_7 = {
       description: 'C-DTaP',
       date_administered: '07/06/2004',
       history: true
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Hep B/HIB',
       date_administered: '11/08/2004',
@@ -458,8 +458,8 @@ patient_8 = {
       description: 'C-Measles, Mumps, Rubella',
       date_administered: '09/02/2016',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Tdap',
       date_administered: '09/02/2016',
@@ -502,8 +502,8 @@ patient_9 = {
       description: 'C-Hepatitis A Vaccine (2 Dose)',
       date_administered: '11/24/2015',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Hepatitis B Vaccine',
       date_administered: '11/24/2015',
@@ -576,8 +576,8 @@ patient_10 = {
       description: 'C-Hepatitis B Vaccine',
       date_administered: '02/16/2011',
       history: true
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-IPV',
       date_administered: '09/07/2016',
@@ -632,8 +632,8 @@ patient_11 = {
       description: 'C-DTaP',
       date_administered: '04/30/2012',
       history: true
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Hepatitis A Vaccine (2 Dose)',
       date_administered: '09/07/2016',
@@ -692,37 +692,37 @@ patient_11 = {
       description: 'C-Pneumococcal Conjugate PCV13',
       date_administered: '08/30/2012',
       history: true
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Pneumococcal Conjugate PCV13',
       date_administered: '06/29/2012',
       history: true
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Pneumococcal Conjugate PCV13',
       date_administered: '04/30/2012',
       history: true
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Rotavirus (3 dose)',
       date_administered: '08/30/2012',
       history: true
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Rotavirus (3 dose)',
       date_administered: '06/29/2012',
       history: true
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Rotavirus (3 dose)',
       date_administered: '04/30/2012',
       history: true
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Varicella',
@@ -754,7 +754,7 @@ patient_12 = {
       description: 'C-Measles, Mumps, Rubella',
       date_administered: '09/07/2016',
       history: false
-    },     
+    },
     {
       cvx_code: 110,
       description: 'Measles, Mumps, Rubella',
@@ -792,8 +792,8 @@ patient_13 = {
       description: 'C-Hepatitis A Vaccine (2 Dose)',
       date_administered: '07/25/2012',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Hepatitis B Vaccine',
       date_administered: '11/22/2010',
@@ -834,7 +834,7 @@ patient_13 = {
       description: 'C-Varicella',
       date_administered: '12/31/2014',
       history: false
-    },    
+    },
     {
       cvx_code: 110,
       description: 'C-Varicella',
@@ -872,8 +872,8 @@ patient_14 = {
       description: 'C-Pneumococcal Conjugate PCV7',
       date_administered: '09/04/2012',
       history: true
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'HIB polyrib. - Tetanus tox',
       date_administered: '09/04/2012',
@@ -916,8 +916,8 @@ patient_15 = {
       description: 'C-IPV',
       date_administered: '08/12/2016',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Meningococcal, Menactra',
       date_administered: '07/20/2016',
@@ -1080,8 +1080,8 @@ patient_19 = {
       description: 'C-IPV',
       date_administered: '08/11/2016',
       history: false
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'C-Meningococcal, Menactra',
       date_administered: '08/11/2016',
@@ -1186,8 +1186,8 @@ patient_21 = {
       description: 'HPV, Quadrivalent, Gardasil',
       date_administered: '07/23/2013',
       history: true
-    }
-        {
+    },
+    {
       cvx_code: 110,
       description: 'HPV, Quadrivalent, Gardasil',
       date_administered: '10/29/2012',

@@ -273,14 +273,21 @@ FactoryGirl.define do
   end
 
   factory :patient_with_profile, parent: :patient do
-    after(:create) do |patient|
-      create(:patient_profile, patient_id: patient.id.to_s)
+    ignore do
+      dob false
+    end
+    after(:create) do |patient, args|
+      if args.dob
+        create(:patient_profile, patient_id: patient.id.to_s, dob: args.dob)
+      else
+        create(:patient_profile, patient_id: patient.id.to_s)
+      end
     end
   end
 
   factory :patient_profile do
     dob { 12.years.ago.to_date }
-    sequence(:record_number, 1000)
+    sequence(:record_number, 11000)
 
     association :patient, factory: :patient
   end
