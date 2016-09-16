@@ -1,0 +1,53 @@
+$table-borders:1px solid black;
+
+* {
+	font-family: "dBook An­ti­qua", "Cal­isto MT", serif!important;
+	font-size: 11pt!important;
+	line-height: 1.3;
+}
+
+.top-bar,footer,.vaccine-record a {
+	display:none;
+}
+
+table{
+	border:$table-borders;
+	margin-bottom: 0;
+	border-bottom: none;
+}
+
+tbody {border:none;}
+thead tr{border-bottom:$table-borders;}
+
+#callout-patient {
+	.explanation {margin-left:3rem;}
+	p,h3 {display:inline;}
+}
+
+.patient-info {
+	table,tr,td {border:none;}
+	th {border-right:none;}
+	thead {
+		border-bottom:$table-borders;
+		border-top:none;
+		border-right:none;
+		border-left:none;
+	}
+	p {display: block;}
+}
+
+.small-8 {
+	max-width:100%;
+	flex:100%;
+}
+
+ table { page-break-inside:avoid; }
+ tr    { page-break-after:avoid;}
+ /*td    { page-break-inside:avoid; page-break-after:auto; }*/
+ thead { display:table-header-group; }
+ thead th, tbody td {padding:0.4rem 0.625rem;}
+
+ .card {padding:0; margin:0;}
+
+
+

@@ -3,11 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://use.fontawesome.com/52bde5b34d.js"></script>
+    <title><%= content_for?(:title) ? yield(:title) : "ReqCheck" %></title>
 
-    <title><%= content_for?(:title) ? yield(:title) : "RecordCheck" %></title>
-
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= stylesheet_link_tag    "print", media: "print" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
@@ -15,15 +14,15 @@
   <body>
     <div class="top-bar">
       <div class="top-bar-title">
-        <strong><%= link_to "RecordCheck", root_url %></strong>
+        <strong><%= link_to "ReqCheck", root_url %></strong>
       </div>
       <div>
         <div class="top-bar-right">
             <% if @patient || @patients %>
               <% if @patient %>
-              <%= link_to "New Search", patients_path, class: "button"  %>
+              <%= link_to "New Search", patients_path, class: "button margin-right-10"  %>
               <% end %>
-              <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button" %>
+              <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button secondary hollow" %>
             <% end %>
         </div>
       </div>
@@ -34,7 +33,8 @@
     <footer class="footer">
       <div class="row align-center">
         <div class="columns small-8">
-          A project of <a href='https://www.codeforamerica.org/why-government/our-partners/kansas-city-mo'>Code for America</a> for the <a href="http://kcmo.gov/health/">KCMO</a> Health Department
+          <%= link_to "About", patients_path, class: "button secondary hollow margin-right-10"  %>
+          A project of <a href='https://www.codeforamerica.org/why-government/our-partners/kansas-city-mo'>Code for America</a> for the <a href="http://kcmo.gov/health/">Kansas City</a> Health Department
         </div>
       </div>
     </footer>
