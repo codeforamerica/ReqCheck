@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Patient, type: :model do
-  describe "a valid patient with a valid immunization history" do
+  describe "a valid patient with a valid vaccine doses history" do
     it "creates a valid patient with patient profile attributes" do
       dob     = in_pst(6.years.ago)
       patient = Patient.create(

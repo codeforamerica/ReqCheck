@@ -1,0 +1,10 @@
+<div class="row align-center">
+    <div class="card columns small-8">
+        <% if flash[:error] %>
+            <p class="callout alert"><%= flash[:error] %></p>
+        <% elsif flash[:notice] %>
+            <p class="callout success"><%= flash[:notice] %></p>
+        <% end %>
+        <%= render 'form' %>
+    </div>
+</div>

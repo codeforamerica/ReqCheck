@@ -17,6 +17,12 @@ gem 'jquery-rails'
 # webserver, production
 gem 'puma'
 
+# Americanization of dates
+gem 'american_date'
+
+# paperclip to upload files
+# gem "paperclip", "~> 5.0.0"
+
 gem 'devise'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 
@@ -32,6 +38,7 @@ group :development, :test do
  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
  gem 'factory_girl_rails'
  gem 'byebug'
+ gem 'rails-erd'
 end
 
 group :development do
@@ -49,6 +56,7 @@ group :test do
  gem 'capybara-webkit'
  gem 'timecop'
  gem 'codeclimate-test-reporter', require: false
+ gem 'shoulda-matchers', '~> 3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

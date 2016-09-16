@@ -1,0 +1,881 @@
+<antigenSupportingData>
+<immunity>
+</immunity>
+<series>
+<seriesName>Influenza Standard Series</seriesName>
+<targetDisease>Influenza</targetDisease>
+<vaccineGroup>Influenza</vaccineGroup>
+<selectBest>
+<defaultSeries>Yes</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>1</seriesPreference>
+<minAgeToStart>n/a</minAgeToStart>
+<maxAgeToStart>n/a</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>6 months - 4 days</absMinAge>
+<minAge>6 months</minAge>
+<earliestRecAge>6 months</earliestRecAge>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Influenza, live, intranasal</vaccineType>
+<cvx>111</cvx>
+<beginAge>2 years</beginAge>
+<endAge>50 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.2</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName>Flurarix</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>4 years</beginAge>
+<endAge/>
+<tradeName>Fluvirin - Preservative Free</tradeName>
+<mvx>NOV</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>6 months</beginAge>
+<endAge>3 years</endAge>
+<tradeName>Fluzone - Preservative Free</tradeName>
+<mvx>PMC</mvx>
+<volume>0.25</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName>Fluzone - Preservative Free</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>4 years</beginAge>
+<endAge/>
+<tradeName>Fluvirin</tradeName>
+<mvx>NOV</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>6 months</beginAge>
+<endAge/>
+<tradeName>Fluzone</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>5 years</beginAge>
+<endAge/>
+<tradeName>Afluria</tradeName>
+<mvx>CSL</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, live, intranasal, quadrivalent</vaccineType>
+<cvx>149</cvx>
+<beginAge>2 years</beginAge>
+<endAge>50 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free</vaccineType>
+<cvx>150</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent</vaccineType>
+<cvx>158</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free, peds</vaccineType>
+<cvx>161</cvx>
+<beginAge>6 months</beginAge>
+<endAge>3 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.25</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, intradermal, quadrivalent, preservative free, peds</vaccineType>
+<cvx>166</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, split incl. purified surface antigen</vaccineType>
+<cvx>15</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, whole</vaccineType>
+<cvx>16</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, Unspecified</vaccineType>
+<cvx>88</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, live, intranasal</vaccineType>
+<cvx>111</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, high dose seasonal</vaccineType>
+<cvx>135</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, intradermal, preservative free</vaccineType>
+<cvx>144</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, live, intranasal, quadrivalent</vaccineType>
+<cvx>149</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free</vaccineType>
+<cvx>150</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza nasal, unspecified formulation</vaccineType>
+<cvx>151</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable, MDCK, preservative free</vaccineType>
+<cvx>153</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, recombinant, injectable, preservative free</vaccineType>
+<cvx>155</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent</vaccineType>
+<cvx>158</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free, peds</vaccineType>
+<cvx>161</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge>3 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, intradermal, quadrivalent, preservative free</vaccineType>
+<cvx>166</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 9 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>9 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation>
+<startDate>20150701</startDate>
+<endDate>20160630</endDate>
+</seasonalRecommendation>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>4 weeks</earliestRecInt>
+<latestRecInt/>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Influenza, live, intranasal</vaccineType>
+<cvx>111</cvx>
+<beginAge>2 years</beginAge>
+<endAge>50 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.2</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName>Flurarix</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>4 years</beginAge>
+<endAge/>
+<tradeName>Fluvirin - Preservative Free</tradeName>
+<mvx>NOV</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>6 months</beginAge>
+<endAge>3 years</endAge>
+<tradeName>Fluzone - Preservative Free</tradeName>
+<mvx>PMC</mvx>
+<volume>0.25</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName>Fluzone - Preservative Free</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>4 years</beginAge>
+<endAge/>
+<tradeName>Fluvirin</tradeName>
+<mvx>NOV</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>6 months</beginAge>
+<endAge/>
+<tradeName>Fluzone</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>5 years</beginAge>
+<endAge/>
+<tradeName>Afluria</tradeName>
+<mvx>CSL</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, live, intranasal, quadrivalent</vaccineType>
+<cvx>149</cvx>
+<beginAge>2 years</beginAge>
+<endAge>50 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free</vaccineType>
+<cvx>150</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent</vaccineType>
+<cvx>158</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free, peds</vaccineType>
+<cvx>161</cvx>
+<beginAge>6 months</beginAge>
+<endAge>3 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.25</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, intradermal, quadrivalent, preservative free, peds</vaccineType>
+<cvx>166</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, split incl. purified surface antigen</vaccineType>
+<cvx>15</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, whole</vaccineType>
+<cvx>16</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, Unspecified</vaccineType>
+<cvx>88</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, live, intranasal</vaccineType>
+<cvx>111</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, high dose seasonal</vaccineType>
+<cvx>135</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, intradermal, preservative free</vaccineType>
+<cvx>144</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, live, intranasal, quadrivalent</vaccineType>
+<cvx>149</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free</vaccineType>
+<cvx>150</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza nasal, unspecified formulation</vaccineType>
+<cvx>151</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable, MDCK, preservative free</vaccineType>
+<cvx>153</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, recombinant, injectable, preservative free</vaccineType>
+<cvx>155</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent</vaccineType>
+<cvx>158</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free, peds</vaccineType>
+<cvx>161</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge>3 years</endAge>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, intradermal, quadrivalent, preservative free</vaccineType>
+<cvx>166</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>OR</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 9 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>9 years</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+<set>
+<setID>2</setID>
+<setDescription>Dose is not required if the patient has received 2 or more total doses to date</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>1</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>15; 16; 88; 111; 135; 140; 141; 144; 149; 150; 151; 153; 155; 158; 161; 166</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation>
+<startDate>20150701</startDate>
+<endDate>20160630</endDate>
+</seasonalRecommendation>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 3</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>4 weeks</earliestRecInt>
+<latestRecInt/>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Influenza, live, intranasal</vaccineType>
+<cvx>111</cvx>
+<beginAge>2 years</beginAge>
+<endAge>50 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.2</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, high dose seasonal</vaccineType>
+<cvx>135</cvx>
+<beginAge>65 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName>Flurarix</tradeName>
+<mvx>SKB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>4 years</beginAge>
+<endAge/>
+<tradeName>Fluvirin - Preservative Free</tradeName>
+<mvx>NOV</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName>Fluzone - Preservative Free</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>9 years</beginAge>
+<endAge/>
+<tradeName>Afluria, Preservative Free</tradeName>
+<mvx>CSL</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>4 years</beginAge>
+<endAge/>
+<tradeName>Fluvirin</tradeName>
+<mvx>NOV</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>6 months</beginAge>
+<endAge/>
+<tradeName>Fluzone</tradeName>
+<mvx>PMC</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>5 years</beginAge>
+<endAge/>
+<tradeName>Afluria</tradeName>
+<mvx>CSL</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>18 years</beginAge>
+<endAge/>
+<tradeName>Flulaval</tradeName>
+<mvx>IDB</mvx>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, intradermal, preservative free</vaccineType>
+<cvx>144</cvx>
+<beginAge>18 years</beginAge>
+<endAge>65 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, live, intranasal, quadrivalent</vaccineType>
+<cvx>149</cvx>
+<beginAge>2 years</beginAge>
+<endAge>50 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free</vaccineType>
+<cvx>150</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Influenza, injectable, MDCK, preservative free</vaccineType>
+<cvx>153</cvx>
+<beginAge>18 years</beginAge>
+<endAge>50 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, recombinant, injectable, preservative free</vaccineType>
+<cvx>155</cvx>
+<beginAge>18 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, injectable, quadrivalent</vaccineType>
+<cvx>158</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>influenza, intradermal, quadrivalent, preservative free, peds</vaccineType>
+<cvx>166</cvx>
+<beginAge>3 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, split incl. purified surface antigen</vaccineType>
+<cvx>15</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, whole</vaccineType>
+<cvx>16</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, Unspecified</vaccineType>
+<cvx>88</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, live, intranasal</vaccineType>
+<cvx>111</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, high dose seasonal</vaccineType>
+<cvx>135</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable preservative free</vaccineType>
+<cvx>140</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable</vaccineType>
+<cvx>141</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, intradermal, preservative free</vaccineType>
+<cvx>144</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, live, intranasal, quadrivalent</vaccineType>
+<cvx>149</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent, preservative free</vaccineType>
+<cvx>150</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza nasal, unspecified formulation</vaccineType>
+<cvx>151</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Influenza, injectable, MDCK, preservative free</vaccineType>
+<cvx>153</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, recombinant, injectable, preservative free</vaccineType>
+<cvx>155</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, injectable, quadrivalent</vaccineType>
+<cvx>158</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>influenza, intradermal, quadrivalent, preservative free</vaccineType>
+<cvx>166</cvx>
+<beginAge>6 months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient has received 1 or more doses during the current season</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Date</conditionType>
+<startDate>20150701</startDate>
+<endDate>20160630</endDate>
+<beginAge/>
+<endAge/>
+<interval/>
+<doseCount>0</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>15; 16; 88; 111; 135; 140; 141; 144; 149; 150; 151; 153; 155; 158; 161; 166</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>Yes</recurringDose>
+<seasonalRecommendation>
+<startDate>20150701</startDate>
+<endDate>20160630</endDate>
+</seasonalRecommendation>
+<requiredGender/>
+</seriesDose>
+</series>
+</antigenSupportingData>

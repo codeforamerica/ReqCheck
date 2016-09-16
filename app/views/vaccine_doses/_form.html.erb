@@ -1,0 +1,17 @@
+<%= form_for(@vaccine_dose) do |f| %>
+  <% if @vaccine_dose.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vaccine_dose.errors.count, "error") %> prohibited this vaccine_dose from being saved:</h2>
+
+      <ul>
+      <% @vaccine_dose.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
