@@ -52,8 +52,12 @@ class TargetDose
     patient_dob  = @patient.dob
     todays_date  = DateTime.now
                     .in_time_zone('Central Time (US & Canada)').to_date
-
     min_age_date = create_patient_age_date(min_age, patient_dob)
+
+    if min_age_date.nil?
+      min_age_date = DateTime.now
+                      .in_time_zone('Central Time (US & Canada)').to_date
+    end
 
     unless validate_date_equal_or_after(min_age_date, todays_date)
       return false

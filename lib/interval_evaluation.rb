@@ -9,7 +9,10 @@ module IntervalEvaluation
       interval_absolute_min_date: '01/01/1900'.to_date,
       interval_min_date: '01/01/1900'.to_date
     }
-
+    puts '#############'
+    puts interval_object.inspect
+    puts previous_dose_date
+    puts '#############'
     %w(interval_absolute_min interval_min interval_earliest_recommended
     interval_latest_recommended).each do |action|
       date_action                = action + '_date'

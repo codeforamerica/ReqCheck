@@ -17,5 +17,7 @@ class AntigenEvaluator
     @evaluation_status = evaluate_antigen(antigen, patient, aars)
   end
 
-
+  def target_disease
+    antigen.target_disease
+  end
 end

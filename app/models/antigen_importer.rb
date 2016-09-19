@@ -76,6 +76,26 @@ class AntigenImporter
     preference_number_string.to_i
   end
 
+  def convert_to_downcase(value)
+    if value.is_a? Array
+      value.map {|ind_value| ind_value.downcase }
+    elsif value.nil?
+      nil
+    elsif value.is_a? String
+      value.downcase
+    elsif value.is_a? Hash
+      convert_all_to_downcase(value)
+    else
+      value
+    end
+  end
+
+  def convert_all_to_downcase(args)
+    args.map do |key, value|
+      [key, convert_to_downcase(value)]
+    end.to_h
+  end
+
   def create_all_antigen_series(antigen_xml_hash, antigen_object)
     antigen_series_objects = []
 
@@ -85,13 +105,15 @@ class AntigenImporter
     end
 
     antigen_series_data.map do |hash|
-      antigen_series = AntigenSeries.find_or_initialize_by(name: hash['seriesName'])
+      antigen_series = AntigenSeries.find_or_initialize_by(
+        name: hash['seriesName']
+      )
 
       preference_number = get_preference_number(
         hash['selectBest']['seriesPreference']
       )
 
-      antigen_series.update_attributes(
+      antigen_series_args = {
         antigen: antigen_object,
         default_series: yes_bool(hash['selectBest']['defaultSeries']),
         max_start_age: hash['selectBest']['maxAgeToStart'],
@@ -100,7 +122,11 @@ class AntigenImporter
         product_path: yes_bool(hash['selectBest']['productPath']),
         target_disease: hash['targetDisease'],
         vaccine_group: hash['vaccineGroup']
-      )
+      }
+
+      antigen_series_args = convert_all_to_downcase(antigen_series_args)
+
+      antigen_series.update_attributes(antigen_series_args)
       create_antigen_series_doses(hash, antigen_series)
       antigen_series_objects << antigen_series
     end
@@ -136,6 +162,9 @@ class AntigenImporter
         required_gender: required_gender,
         recurring_dose: yes_bool(series_doses_hash['recurringDose'])
       }
+
+      series_doses_args = convert_all_to_downcase(series_doses_args)
+
       antigen_series_dose = AntigenSeriesDose.create(series_doses_args)
       create_antigen_series_dose_vaccines(series_doses_hash,
                                           antigen_series_dose)
@@ -171,6 +200,9 @@ class AntigenImporter
         interval_earliest_recommended: interval_hash['earliestRecInt'],
         interval_latest_recommended: interval_hash['latestRecInt']
       }
+
+      interval_args = convert_all_to_downcase(interval_args)
+
       if interval_type == 'from_most_recent'
         recent_vaccine_type = interval_hash['fromMostRecent']['vaccineType']
         recent_cvx_code = interval_hash['fromMostRecent']['cvx']
@@ -194,6 +226,11 @@ class AntigenImporter
         interval_earliest_recommended: allowable_interval_hash['earliestRecInt'],
         interval_latest_recommended: allowable_interval_hash['latestRecInt']
       }
+
+      allowable_interval_args = convert_all_to_downcase(
+        allowable_interval_args
+      )
+
       if interval_type == 'from_most_recent'
         recent_vaccine_type = allowable_interval_hash['fromMostRecent']['vaccineType']
         recent_cvx_code = allowable_interval_hash['fromMostRecent']['cvx']
@@ -234,6 +271,9 @@ class AntigenImporter
         mvx_code: vaccine_hash['mvx'],
         volume: vaccine_hash['volume']
       }
+
+      vaccine_args = convert_all_to_downcase(vaccine_args)
+
       dose_vaccines << AntigenSeriesDoseVaccine.create(vaccine_args)
     end
 
@@ -250,6 +290,9 @@ class AntigenImporter
         mvx_code: vaccine_hash['mvx'],
         volume: vaccine_hash['volume']
       }
+
+      vaccine_args = convert_all_to_downcase(vaccine_args)
+
       dose_vaccines << AntigenSeriesDoseVaccine.create(vaccine_args)
     end
     antigen_series_dose.dose_vaccines.push(*dose_vaccines)
@@ -260,11 +303,14 @@ class AntigenImporter
     conditional_skip_hash = antigen_series_dose_xml_hash['conditionalSkip']
     conditional_skip = nil
     if !conditional_skip_hash.nil?
-      conditional_skip_arguments = {
+      conditional_skip_args = {
         antigen_series_dose: antigen_series_dose,
         set_logic: conditional_skip_hash['setLogic']
       }
-      conditional_skip = ConditionalSkip.create(conditional_skip_arguments)
+
+      conditional_skip_args = convert_all_to_downcase(conditional_skip_args)
+
+      conditional_skip = ConditionalSkip.create(conditional_skip_args)
       antigen_series_dose.update(conditional_skip: conditional_skip)
       create_conditional_skip_sets(conditional_skip_hash, conditional_skip)
     end
@@ -279,13 +325,16 @@ class AntigenImporter
     set_xml_data = [set_xml_data] if set_xml_data.is_a? Hash
 
     set_xml_data.each do |set_hash|
-      set_arguments = {
+      set_args = {
         conditional_skip: conditional_skip,
         set_id: set_hash['setID'].to_i,
         set_description: set_hash['setDescription'],
         condition_logic: set_hash['conditionLogic']
       }
-      conditional_skip_set = ConditionalSkipSet.create(set_arguments)
+
+      set_args = convert_all_to_downcase(set_args)
+
+      conditional_skip_set = ConditionalSkipSet.create(set_args)
       create_conditional_skip_conditions(set_hash, conditional_skip_set)
       sets << conditional_skip_set
     end
@@ -299,7 +348,7 @@ class AntigenImporter
     condition_xml_data = [condition_xml_data] if condition_xml_data.is_a? Hash
 
     condition_xml_data.each do |condition_hash|
-      condition_arguments = {
+      condition_args = {
         skip_set: conditional_skip_set,
         condition_id: condition_hash['conditionID'].to_i,
         condition_type: condition_hash['conditionType'],
@@ -313,7 +362,10 @@ class AntigenImporter
         dose_count_logic: condition_hash['doseCountLogic'],
         vaccine_types: condition_hash['vaccineTypes']
       }
-      conditions << ConditionalSkipCondition.create(condition_arguments)
+
+      condition_args = convert_all_to_downcase(condition_args)
+
+      conditions << ConditionalSkipCondition.create(condition_args)
     end
     conditions
   end
