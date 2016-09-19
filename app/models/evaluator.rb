@@ -16,8 +16,9 @@ class Evaluator
     Antigen.select("DISTINCT ON(target_disease) *").order("target_disease, created_at DESC")
   end
 
-  def create_all_antigen_evaluators(patient, antigens, antigen_administered_records)
-    @antigen_evaluators = antigens.map do |antigen|
+  def create_all_antigen_evaluators(patient, antigens,
+                                    antigen_administered_records)
+    antigens.map do |antigen|
       AntigenEvaluator.new(
         antigen_administered_records: antigen_administered_records,
         antigen: antigen,

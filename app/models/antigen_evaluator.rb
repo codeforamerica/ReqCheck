@@ -1,21 +1,21 @@
 class AntigenEvaluator
-  attr_accessor :patient_serieses, :antigen_administered_records
+  attr_reader :antigen_administered_records, :evaluation_status, :antigen
+  include AntigenEvaluation
 
   def initialize(patient:, antigen:, antigen_administered_records:)
     CheckType.enforce_type(patient, Patient)
     CheckType.enforce_type(antigen, Antigen)
     CheckType.enforce_type(antigen_administered_records, Array)
-    @antigen          = antigen
-    @patient          = patient
+    @antigen           = antigen
+    @patient           = patient
 
-    @antigen_administered_records = antigen_administered_records.select do |record|
+    aars = antigen_administered_records.select do |record|
       record.antigen == antigen
     end.sort_by { |record| record.date_administered }
-    @patient_serieses = PatientSeries.create_antigen_patient_serieses(patient: patient,
-                                                                      antigen: antigen)
+
+    @antigen_administered_records = aars
+    @evaluation_status = evaluate_antigen(antigen, patient, aars)
   end
-
-
 
 
 end

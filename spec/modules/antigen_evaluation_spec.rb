@@ -139,7 +139,7 @@ RSpec.describe AntigenEvaluation do
       expect(evaluation_hash).to eq(expected_result)
     end
   end
-  describe '#get_all_patient_series_evaluations ' do
+  describe '#get_antigen_evaluation_status ' do
     it 'takes patient_serieses and antigen_administered_records and returns' \
        'a status hash' do
       patient_dob      = 2.years.ago
@@ -155,7 +155,7 @@ RSpec.describe AntigenEvaluation do
         patient: new_test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_all_patient_series_evaluations(
+      evaluation_hash = test_object.get_antigen_evaluation_status(
         test_patient_serieses,
         aars
       )
@@ -174,7 +174,7 @@ RSpec.describe AntigenEvaluation do
         patient: test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_all_patient_series_evaluations(
+      evaluation_hash = test_object.get_antigen_evaluation_status(
         test_patient_serieses,
         aars
       )
@@ -197,7 +197,7 @@ RSpec.describe AntigenEvaluation do
         patient: test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_all_patient_series_evaluations(
+      evaluation_hash = test_object.get_antigen_evaluation_status(
         test_patient_serieses,
         aars
       )
@@ -220,7 +220,7 @@ RSpec.describe AntigenEvaluation do
         patient: test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_all_patient_series_evaluations(
+      evaluation_hash = test_object.get_antigen_evaluation_status(
         test_patient_serieses,
         aars
       )
@@ -244,7 +244,7 @@ RSpec.describe AntigenEvaluation do
         patient: new_test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_all_patient_series_evaluations(
+      evaluation_hash = test_object.get_antigen_evaluation_status(
         test_patient_serieses,
         aars
       )

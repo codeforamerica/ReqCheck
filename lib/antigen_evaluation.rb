@@ -6,8 +6,8 @@ module AntigenEvaluation
     patient_series.evaluate_patient_series(antigen_administered_records)
   end
 
-  def get_all_patient_series_evaluations(all_patient_series,
-                                         antigen_administered_records)
+  def get_antigen_evaluation_status(all_patient_series,
+                                    antigen_administered_records)
     antigen_evaluation = nil
     all_patient_series.each do |patient_series|
       patient_series_evaluation =
@@ -38,8 +38,8 @@ module AntigenEvaluation
       patient: patient,
       antigen: antigen
     )
-    get_all_patient_series_evaluations(patient_serieses,
-                                       antigen_administered_records)
+    get_antigen_evaluation_status(patient_serieses,
+                                  antigen_administered_records)
 
   end
 

@@ -65,7 +65,6 @@ FactoryGirl.define do
 
     before(:create) do
       antigen_importer = AntigenImporter.new
-      # antigen_importer.import_antigen_xml_files('spec/support/xml')
       antigen_importer.import_single_file(
         'spec/support/xml/AntigenSupportingData- Polio.xml'
       )
@@ -77,7 +76,6 @@ FactoryGirl.define do
 
     before(:create) do
       antigen_importer = AntigenImporter.new
-      # antigen_importer.import_antigen_xml_files('spec/support/xml')
       antigen_importer.import_single_file(
         'spec/support/xml/AntigenSupportingData- HPV.xml'
       )
@@ -273,7 +271,7 @@ FactoryGirl.define do
   end
 
   factory :patient_with_profile, parent: :patient do
-    ignore do
+    transient do
       dob false
     end
     after(:create) do |patient, args|
