@@ -4,9 +4,19 @@ require_relative '../support/kcmo_data'
 
 
 RSpec.describe 'KCMO_HD_Data' do
-  before(:all) { FactoryGirl.create(:seed_full_antigen_xml) }
-  after(:all) { DatabaseCleaner.clean_with(:truncation) }
+  before(:all) do
+    FactoryGirl.create(:seed_full_antigen_xml)
+    KCMODATA.create_db_patients
+  end
+  after(:all) do
+    KCMODATA.delete_db_patients
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-  let(:all_patient_data) { KCMODATA::ALL_PATIENTS }
+  let(:all_patients) { KCMODATA.all_db_patients }
+
+  it 'has all db patients' do
+    expect(all_patients.length).to eq(21)
+  end
 
 end

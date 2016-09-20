@@ -1252,7 +1252,7 @@ module KCMODATA
     PATIENT21
   ]
 
-  def create_patient(patient_hash)
+  def self.create_patient(patient_hash)
     gender_index = patient_hash[:patient_number] % 2
     gender = ['m', 'f'].at(gender_index)
     Patient.create(
@@ -1266,7 +1266,7 @@ module KCMODATA
     )
   end
 
-  def create_vaccine_doses(patient, vaccine_doses_array)
+  def self.create_vaccine_doses(patient, vaccine_doses_array)
     vaccine_doses_array.map do |vaccine_dose_args|
       VaccineDose.create(
         patient_profile: patient.patient_profile,
@@ -1278,7 +1278,7 @@ module KCMODATA
     end
   end
 
-  def create_patient_with_vaccines(patient_hash)
+  def self.create_patient_with_vaccines(patient_hash)
     vaccine_array = patient_hash[:vaccines]
     patient = create_patient(patient_hash)
     create_vaccine_doses(patient, vaccine_array)
@@ -1286,10 +1286,28 @@ module KCMODATA
     patient
   end
 
-  def create_all_patients(patients_array)
+  def self.create_all_patients(patients_array)
     patients_array.map do |patient_args|
       create_patient_with_vaccines(patient_args)
     end
+  end
+
+  def all_db_patient_profiles
+    record_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
+    PatientProfile.where(record_number: record_numbers)
+  end
+
+  def all_db_patients
+    all_patient_profiles = all_db_patient_profiles
+    all_patients         = all_patient_profiles.map(&:patient)
+    all_patient_ids      = all_patients.map(&:id)
+    Patient.where(id: all_patient_ids)
+  end
+
+  def all_vaccine_doses
+    all_patient_profiles    = all_db_patient_profiles
+    all_patient_profile_ids = all_patient_profiles.map(&:id)
+    VaccineDose.where(patient_profile_id: all_patient_profile_ids)
   end
 
   def create_db_patients
@@ -1299,8 +1317,14 @@ module KCMODATA
   end
 
   def delete_db_patients
-    record_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
-    all_patients = PatientProfile.where(record_number: record_numbers)
-    all_patients.delete_all
+    all_vaccines         = all_vaccine_doses
+    all_patient_profiles = all_db_patient_profiles
+    all_patients         = all_db_patients
+
+    all_vaccines.delete_all unless all_vaccines.nil?
+    all_patient_profiles.delete_all unless all_patient_profiles.nil?
+    all_patients.delete_all unless all_patients.nil?
   end
+  module_function :delete_db_patients, :create_db_patients, :all_db_patients,
+                  :all_db_patient_profiles, :all_vaccine_doses
 end
