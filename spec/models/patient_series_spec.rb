@@ -93,6 +93,13 @@ RSpec.describe PatientSeries, type: :model do
           test_patient_series.pull_eligible_target_doses(target_doses)
         expect(eligible_target_doses).to eq(test_patient_series.target_doses[0...-1])
       end
+      it 'will return the dose if there is no min_age requirement' do
+        target_doses      = test_patient_series.target_doses
+        target_doses[-1].antigen_series_dose.min_age = nil
+        eligible_target_doses =
+          test_patient_series.pull_eligible_target_doses(target_doses)
+        expect(eligible_target_doses).to eq(test_patient_series.target_doses)
+      end
     end
     describe 'it checks max age requirements' do
       it 'pulls ineligible target doses out' do
@@ -104,6 +111,23 @@ RSpec.describe PatientSeries, type: :model do
           test_patient_series.pull_eligible_target_doses(target_doses)
         expect(eligible_target_doses).to eq([])
       end
+      it 'will return dose if no max_age requirement' do
+        test_patient_20_years = FactoryGirl.create(:patient_profile, dob: 20.years.ago).patient
+        test_patient_series   = PatientSeries.new(antigen_series: antigen_series,
+                                                  patient: test_patient_20_years)
+        target_doses = test_patient_series.target_doses
+        target_doses[0].antigen_series_dose.max_age = nil
+        eligible_target_doses =
+          test_patient_series.pull_eligible_target_doses(target_doses)
+        expect(eligible_target_doses).to eq([target_doses[0]])
+      end
+    end
+    it 'will error if the target_doses are not in order' do
+        target_doses = test_patient_series.target_doses
+        target_doses = test_patient_series.target_doses[1..-1]
+        expect{
+          test_patient_series.pull_eligible_target_doses(target_doses)
+        }.to raise_exception(StandardError)
     end
   end
 

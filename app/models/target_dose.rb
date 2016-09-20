@@ -47,22 +47,19 @@ class TargetDose
   end
 
   def eligible?
+    return false if self.recurring_dose == true
     min_age      = self.min_age
     max_age      = self.max_age
     patient_dob  = @patient.dob
     todays_date  = DateTime.now
                     .in_time_zone('Central Time (US & Canada)').to_date
-    min_age_date = create_patient_age_date(min_age, patient_dob)
 
-    if min_age_date.nil?
-      min_age_date = DateTime.now
-                      .in_time_zone('Central Time (US & Canada)').to_date
+    unless min_age.nil?
+      min_age_date = create_patient_age_date(min_age, patient_dob)
+      unless validate_date_equal_or_after(min_age_date, todays_date)
+        return false
+      end
     end
-
-    unless validate_date_equal_or_after(min_age_date, todays_date)
-      return false
-    end
-
     unless max_age.nil?
       max_age_date = create_patient_age_date(max_age, patient_dob)
       unless validate_date_equal_or_before(max_age_date, todays_date)
@@ -70,6 +67,10 @@ class TargetDose
       end
     end
     true
+  end
+
+  def first_dose?
+    dose_number == 1
   end
 
   def evaluate_preferable_vaccine(antigen_administered_record)

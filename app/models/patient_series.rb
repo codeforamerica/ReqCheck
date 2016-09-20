@@ -153,8 +153,25 @@ class PatientSeries
     }
   end
 
+  def ascending_dose_number? target_doses
+    original_numbers = target_doses.map { |target_dose| target_dose.dose_number }
+    sorted_numbers = target_doses.map do |target_dose|
+      target_dose.dose_number
+    end.sort
+    original_numbers == sorted_numbers
+  end
+
   def pull_eligible_target_doses(target_doses)
-    target_doses.select { |target_dose| target_dose.eligible? }.compact
+    eligible_target_doses = target_doses.select do |target_dose|
+      target_dose.eligible?
+    end.compact
+    if eligible_target_doses != []
+      if !eligible_target_doses[0].first_dose? ||
+         !ascending_dose_number?(eligible_target_doses)
+         eligible_target_doses = []
+      end
+    end
+    eligible_target_doses
   end
 
   def self.create_antigen_patient_serieses(antigen:, patient:)

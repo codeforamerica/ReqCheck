@@ -121,6 +121,17 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.absolute_min_age).to eq('6 weeks - 4 days')
         expect(test_target_dose.eligible?).to eq(false)
       end
+      it 'can handle min_age = nil' do
+        test_patient = FactoryGirl.create(:patient_profile,
+                                          dob: 16.years.ago.to_date)
+        eligible_as_dose.min_age = nil
+        test_target_dose = TargetDose.new(
+          patient: test_patient,
+          antigen_series_dose: eligible_as_dose
+        )
+        expect(test_target_dose.min_age).to eq(nil)
+        expect(test_target_dose.eligible?).to eq(true)
+      end
       it 'returns true if eligible by max_age and patient_dob' do
         test_patient = FactoryGirl.create(:patient_profile,
                                           dob: 17.years.ago.to_date)
@@ -151,6 +162,19 @@ RSpec.describe TargetDose, type: :model do
         )
         expect(test_target_dose.max_age).to eq(nil)
         expect(test_target_dose.eligible?).to eq(true)
+      end
+      it 'does not return recurring doses' do
+        test_patient = FactoryGirl.create(:patient_profile,
+                                          dob: 16.years.ago.to_date)
+        eligible_as_dose.min_age        = nil
+        eligible_as_dose.max_age        = nil
+        eligible_as_dose.recurring_dose = true
+        test_target_dose = TargetDose.new(
+          patient: test_patient,
+          antigen_series_dose: eligible_as_dose
+        )
+        expect(test_target_dose.recurring_dose).to eq(true)
+        expect(test_target_dose.eligible?).to eq(false)
       end
     end
 
