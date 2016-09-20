@@ -11,15 +11,22 @@
 <%= render 'search' %> <a href=""></a>
 <!-- Optional earch results display -->
 
-<div class="result-box">
-    <h2>Search Results</h2>
-        <a href="">
-        <span class="result-name">Kevin Berry</span>
-        <div>
-            <span><strong>Patient #:</strong> 1</span> <span><strong>Date of Birth:</strong> 02/08/1990</span> <span><strong>Age:</strong> 26</span>
+<% if @patients.length != 0 %>
+    <% unless @patients[0].nil? %>
+        <div class="result-box">
+            <h2>Search Results</h2>
+                <a href="">
+                <span class="result-name">
+                    <%= "#{@patients[0].first_name} #{@patients[0].last_name}" %></span>
+                <div>
+                    <span><strong>Patient #:</strong> <%= "#{@patients[0].patient_id}" %></span> 
+                    <span><strong>Date of Birth:</strong> <%= "#{@patients[0].dob}" %></span> 
+                    <span><strong>Age:</strong> <%= "#{@patients[0].age}" %></span>
+                </div>
+                </a>
         </div>
-        </a>
-</div>
+    <% end %>
+<% end %>
 
 </div>
 </div>
