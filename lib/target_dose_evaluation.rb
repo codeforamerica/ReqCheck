@@ -19,6 +19,7 @@ module TargetDoseEvaluation
     date_of_dose:,
     dose_trade_name: '',
     dose_volume: nil,
+    previous_satisfied_target_dose_dates: [],
     date_of_previous_dose: nil,
     previous_dose_status_hash: nil
   )
@@ -64,21 +65,19 @@ module TargetDoseEvaluation
     if preferable_intervals.length.zero?
       target_dose_status[:details][:preferable_intervals] = ['no_intervals_required']
     else
-      target_dose_status[:details][:preferable_intervals] = []
-      preferable_interval_evaluations = []
-
-      preferable_intervals.each do |interval|
-        interval_evaluation = evaluate_interval(
-          interval,
-          comparison_dose_date: date_of_previous_dose,
+      preferable_interval_evaluations =
+        evaluate_intervals(
+          preferable_intervals,
           date_of_dose: date_of_dose,
+          previous_dose_date: date_of_previous_dose,
+          patient_vaccine_doses: patient_vaccine_doses,
+          satisfied_target_dose_dates: previous_satisfied_target_dose_dates,
           previous_dose_status_hash: previous_dose_status_hash
         )
-        preferable_interval_evaluations << interval_evaluation
-        target_dose_status[:details][:preferable_intervals].push(
+      target_dose_status[:details][:preferable_intervals] =
+        preferable_interval_evaluations.map do |interval_evaluation|
           interval_evaluation[:details]
-        )
-      end
+        end
 
       preferable_intervals_not_valid =
         preferable_interval_evaluations.any? do |interval_evaluation|
@@ -92,21 +91,18 @@ module TargetDoseEvaluation
       target_dose_status[:details][:allowable_intervals] =
         ['no_intervals_required']
     else
-      target_dose_status[:details][:allowable_intervals] = []
-      allowable_intervals_evaluations = []
-
-      allowable_intervals.each do |interval|
-        interval_evaluation = evaluate_interval(
-          interval,
-          comparison_dose_date: date_of_previous_dose,
-          date_of_dose: date_of_dose,
-          previous_dose_status_hash: previous_dose_status_hash
-        )
-        allowable_intervals_evaluations << interval_evaluation
-        target_dose_status[:details][:allowable_intervals].push(
+      allowable_intervals_evaluations = evaluate_intervals(
+        allowable_intervals,
+        date_of_dose: date_of_dose,
+        previous_dose_date: date_of_previous_dose,
+        patient_vaccine_doses: patient_vaccine_doses,
+        satisfied_target_dose_dates: previous_satisfied_target_dose_dates,
+        previous_dose_status_hash: previous_dose_status_hash
+      )
+      target_dose_status[:details][:allowable_intervals] =
+        allowable_intervals_evaluations.map do |interval_evaluation|
           interval_evaluation[:details]
-        )
-      end
+        end
 
       allowable_intervals_not_valid =
         allowable_intervals_evaluations.any? do |interval_evaluation|

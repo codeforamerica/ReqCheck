@@ -20,4 +20,9 @@ class AntigenEvaluator
   def target_disease
     antigen.target_disease
   end
+
+  def vaccine_group
+    antigen.vaccine_group
+  end
+
 end

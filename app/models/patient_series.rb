@@ -46,11 +46,11 @@ class PatientSeries
   end
 
   def evaluate_individual_target_dose(target_dose,
-                           antigen_administered_record,
-                           previous_satisfied_target_dose=nil)
+                                      antigen_administered_record,
+                                      previous_satisfied_target_doses=[])
     target_dose.evaluate_antigen_administered_record(
       antigen_administered_record,
-      previous_satisfied_target_dose
+      previous_satisfied_target_doses
     )
   end
 
@@ -59,9 +59,11 @@ class PatientSeries
     records.reverse
   end
 
-  def get_target_dose_from_status_hash(target_dose_hash)
-    return nil if target_dose_hash.nil?
-    target_dose_hash[:target_dose]
+  def get_target_doses_from_status_array(status_array)
+    return [] if status_array == []
+    status_array.map do |target_dose_hash|
+      target_dose_hash[:target_dose]
+    end
   end
 
   def evaluate_patient_series(antigen_administered_records)
@@ -95,37 +97,43 @@ class PatientSeries
     invalid_antigen_administered_records = []
     satisfied_target_doses = []
 
-    antigen_administered_records = sort_by_date_reversed(
+    sorted_aars = sort_by_date_reversed(
       antigen_administered_records
     )
-
     eligible_target_doses.each do |target_dose|
-      antigen_administered_record = antigen_administered_records.pop
+      antigen_administered_record = sorted_aars.pop
       if antigen_administered_record.nil?
         satisfied = false
       else
         satisfied = evaluate_individual_target_dose(
           target_dose,
           antigen_administered_record,
-          get_target_dose_from_status_hash(satisfied_target_doses[-1])
+          get_target_doses_from_status_array(satisfied_target_doses)
         )
       end
       record_satisfied = satisfied == true
       until record_satisfied
         invalid_record = { target_dose_number: target_dose.dose_number }
+        invalid_record[:target_disease] =
+          eligible_target_doses.first
+            .antigen_series_dose.antigen_series
+            .antigen.target_disease
+        invalid_record[:series_name] =
+          eligible_target_doses.first
+            .antigen_series_dose.antigen_series.name
         invalid_record[:satisfied] = false
         invalid_record[:antigen_administered_record] =
           antigen_administered_record
         invalid_record[:status_hash] = target_dose.status_hash
         invalid_antigen_administered_records << invalid_record
-        antigen_administered_record = antigen_administered_records.pop
+        antigen_administered_record = sorted_aars.pop
         if antigen_administered_record.nil?
           record_satisfied = true
         else
           satisfied = evaluate_individual_target_dose(
             target_dose,
             antigen_administered_record,
-            get_target_dose_from_status_hash(satisfied_target_doses[-1])
+            get_target_doses_from_status_array(satisfied_target_doses)
           )
           record_satisfied = satisfied == true
         end
@@ -135,6 +143,8 @@ class PatientSeries
         target_dose_status_hash[:satisfied] = true
         target_dose_status_hash[:target_dose] = target_dose
         satisfied_target_doses << target_dose_status_hash
+      else
+        break
       end
     end
     {

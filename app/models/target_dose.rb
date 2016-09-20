@@ -28,7 +28,7 @@ class TargetDose
 
   def evaluate_antigen_administered_record(
     antigen_administered_record,
-    previous_satisfied_target_dose=nil
+    previous_satisfied_target_doses=[]
   )
     if !@status_hash.nil? && @status_hash[:evaluation_status] == 'valid'
       raise Error('The TargetDose has already evaluated to True')
@@ -36,7 +36,7 @@ class TargetDose
     @antigen_administered_record = antigen_administered_record
     @status_hash = evaluate_satisfy_target_dose(
       antigen_administered_record,
-      previous_satisfied_target_dose
+      previous_satisfied_target_doses
     )
     @satisfied   = @status_hash[:target_dose_status] == 'satisfied'
     @satisfied
@@ -82,14 +82,20 @@ class TargetDose
   end
 
   def evaluate_satisfy_target_dose(antigen_administered_record,
-                                   previous_valid_target_dose=nil)
-    previous_status_hash  = nil
-    date_of_previous_dose = nil
-    unless previous_valid_target_dose.nil?
+                                   previous_satisfied_target_doses=[])
+    previous_status_hash        = nil
+    date_of_previous_dose       = nil
+    satisfied_target_dose_dates = []
+    unless previous_satisfied_target_doses.length == 0
+      satisfied_target_dose_dates =
+        previous_satisfied_target_doses.map do |satisfied_target_dose|
+          satisfied_target_dose.antigen_administered_record.date_administered
+        end
+      previous_target_dose = previous_satisfied_target_doses[-1]
       previous_status_hash =
-        previous_valid_target_dose.status_hash
+        previous_target_dose.status_hash
       date_of_previous_dose =
-        previous_valid_target_dose.antigen_administered_record.date_administered
+        previous_target_dose.antigen_administered_record.date_administered
     end
     evaluate_target_dose_satisfied(
       conditional_skip: @antigen_series_dose.conditional_skip,
@@ -105,7 +111,8 @@ class TargetDose
       dose_trade_name: antigen_administered_record.trade_name,
       dose_volume: antigen_administered_record.dosage,
       date_of_previous_dose: date_of_previous_dose,
-      previous_dose_status_hash: previous_status_hash
+      previous_dose_status_hash: previous_status_hash,
+      previous_satisfied_target_dose_dates: satisfied_target_dose_dates
     )
   end
 end

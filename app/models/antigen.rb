@@ -6,7 +6,7 @@ class Antigen < ActiveRecord::Base
   has_many :dose_vaccines, through: :doses
 
   def readonly?
-    new_record? ? false : true 
+    new_record? ? false : true
   end
 
   def all_antigen_cvx_codes
@@ -17,4 +17,9 @@ class Antigen < ActiveRecord::Base
     all_vaccines = AntigenSeriesDoseVaccine.where(cvx_code: cvx_code).uniq
     all_vaccines.map(&:antigens).flatten.uniq
   end
+
+  def vaccine_group
+    self.series.first.vaccine_group
+  end
+
 end
