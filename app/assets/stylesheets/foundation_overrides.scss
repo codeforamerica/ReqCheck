@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	&:visited {
 		color: white;
 	}
-	&:hover, &focus {
+	&:hover, &:focus {
 		color: white;
 		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
 	}
@@ -97,5 +97,29 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	padding-right: 10px;
 }
 
+
+.result-name {
+		font-size: 1.25rem;
+		margin-bottom:$global-margin;
+		display: block;
+		text-decoration: underline;
+		font-weight: bold;
+		color:$anchor-color;
+		&:active {color:$button-background-hover;}
+	}
+.result-box {
+	border-top:1px solid $medium-gray;
+	span {padding-right:1rem;}
+	a {
+		font-size: .85rem;
+		display: block;
+		padding:.25rem;
+		color:$kc-grey;
+		&:visited {color:$kc-grey;}
+		&:hover {background:#F1F1F1;}
+		&:focus {background:#F1F1F1;}
+	}
+	
+}
 .footer a.button {text-decoration: none;}
 
