@@ -181,3 +181,5 @@ end
 #   'S', 'SPOX', 'SMP', 'TD5', 'TDP9', 'TD9', 'PPD9', 'PPD', 'TWNz', 'TYP2', 'TYPH', 'VAR9',
 #   'VZIG', 'Var'
 # ]
+
+# Missing vax codes discovered in test data 091616 are DTap, 5 pertussis antigens (106) and C-Hep B/HIB (51)
