@@ -34,14 +34,15 @@ RSpec.describe RecordEvaluator, type: :model do
   def valid_2_year_test_patient(test_patient=nil)
     test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
                                                       dob: 2.years.ago.to_date)
-    required_vaccine_cvxs = [
-      10, #'POL',
-      110, #'DTHI',
-      94 #'MMRV'
-    ]
-    valid_dates = create_valid_dates(test_patient.dob)[0..-2]
-    required_vaccine_cvxs.each do |cvx_code|
-      create_patient_vaccines(test_patient, valid_dates, cvx_code)
+    dob = test_patient.dob
+    required_vaccine_cvxs = {
+      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
+      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
+            (dob + 14.weeks), (dob + 15.months)],
+      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)] #'MMRV'
+    }
+    required_vaccine_cvxs.each do |cvx_key, date_array|
+      create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
     end
     test_patient
   end
@@ -50,11 +51,11 @@ RSpec.describe RecordEvaluator, type: :model do
     test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
                                                       dob: 5.years.ago.to_date)
     required_vaccine_cvxs = [
-      10, #'POL',
-      110, #'DTHI',
+      10, #'POL'
+      110, #'DTHI'
       94 #'MMRV'
     ]
-    valid_dates = create_valid_dates(test_patient.dob)
+    valid_dates = create_valid_dates(test_patient.dob + 1.year)
     required_vaccine_cvxs.each do |cvx_code|
       create_patient_vaccines(test_patient, valid_dates, cvx_code)
     end
@@ -74,8 +75,10 @@ RSpec.describe RecordEvaluator, type: :model do
     let(:record_evaluator) { RecordEvaluator.new(patient: test_patient) }
 
     it 'creates a patients antigen_administered_records' do
-      expect(record_evaluator.antigen_administered_records.length).to eq(2)
-      expect(record_evaluator.antigen_administered_records.first.class.name).to eq('AntigenAdministeredRecord')
+      expect(record_evaluator.antigen_administered_records.length).to eq(40)
+      expect(
+        record_evaluator.antigen_administered_records.first.class.name
+      ).to eq('AntigenAdministeredRecord')
     end
   end
 
@@ -98,7 +101,7 @@ RSpec.describe RecordEvaluator, type: :model do
     end
     let(:record_evaluator) { RecordEvaluator.new(patient: test_patient) }
 
-    it 'creates all patient series for each antigen' do
+    it 'creates an antigen evaluators for each antigen' do
       antigens = Antigen.all
       record_evaluator.create_all_antigen_evaluators(
         test_patient,
@@ -108,11 +111,6 @@ RSpec.describe RecordEvaluator, type: :model do
       expect(record_evaluator.antigen_evaluators.length).to eq(17)
       expect(record_evaluator.antigen_evaluators.first.class.name)
         .to eq('AntigenEvaluator')
-      expect(
-        record_evaluator.antigen_evaluators
-          .first.patient_serieses
-          .first.class.name
-      ).to eq('PatientSeries')
     end
   end
 
@@ -124,7 +122,19 @@ RSpec.describe RecordEvaluator, type: :model do
       )
       expect(record_evaluator.record_status).to eq('complete')
     end
-    xit 'returns not_complete for a not up to date patient' do
+    it 'returns not_complete for a not up to date patient' do
+      new_test_patient = valid_2_year_test_patient
+      VaccineDose.destroy_all(cvx_code: 94)
+
+      vaccines = new_test_patient.vaccine_doses
+      mmrv_vaccines = vaccines.select do |vaccine_dose|
+        vaccine_dose.cvx_code == 94
+      end
+      expect(mmrv_vaccines).to eq([])
+      record_evaluator = RecordEvaluator.new(
+        patient: new_test_patient
+      )
+      expect(record_evaluator.record_status).to eq('not_complete')
     end
   end
 end

@@ -1,7 +1,7 @@
 class RecordEvaluator
   include ActiveModel::Model
 
-  attr_accessor :patient, :antigen_evaluators,
+  attr_accessor :patient, :antigen_evaluators, :record_status,
                 :antigen_administered_records, :vaccine_group_evaluations
 
   def initialize(patient:)
@@ -53,8 +53,8 @@ class RecordEvaluator
 
   def antigens_status_to_vaccine_groups(antigen_evaluators)
     result_hash = {}
-    antigen_evalautors.each do |antigen_evaluator|
-      vaccine_group_key = antigen_evaluator.vaccine_group.to_sym
+    antigen_evaluators.each do |antigen_evaluator|
+      vaccine_group_key = antigen_evaluator.antigen.vaccine_group.to_sym
       if result_hash.has_key?(vaccine_group_key)
         result_hash[vaccine_group_key] << antigen_evaluator.evaluation_status
       else
@@ -85,11 +85,11 @@ class RecordEvaluator
 
   def pull_required_vaccine_groups(vaccine_group_evaluations)
     required_vaccine_groups = [
-      'Polio', 'Pneumococcal', 'HepB', 'DTaP/Tdap/Td', 'Varicella',
-      'MMR',
+      'polio', 'pneumococcal', 'hepb', 'dtap/tdap/td', 'varicella',
+      'mmr',
     ]
-    vaccine_group_evaluations.select do |key, value|
-      required_vaccine_groups.include?(key.to_s)
+    vaccine_group_evaluations.reject do |key|
+      !required_vaccine_groups.include?(key.to_s)
     end
   end
 

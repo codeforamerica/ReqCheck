@@ -87,27 +87,39 @@ RSpec.describe Antigen, type: :model do
     it 'pulls all cvx codes from the antigen\'s series\'s dose\'s vaccines' do
       a_vaccines  = antigen.series.map {|series| series.doses }
                       .flatten!.map {|dose| dose.dose_vaccines }.flatten!
-      
       expect(antigen.dose_vaccines.uniq.sort).to eq(a_vaccines.uniq.sort)
       expect(antigen.all_antigen_cvx_codes).to eq(a_vaccines.map(&:cvx_code).uniq.sort)
     end
   end
-
-  describe '#find_antigens_by_cvx' do
-    before(:each) do
-      antigen_importer = AntigenImporter.new
-      antigen_importer.import_antigen_xml_files('spec/support/xml')
+  describe 'tests that require cdc data' do
+    before(:all) do
+      FactoryGirl.create(:seed_full_antigen_xml)
     end
-
-    it 'finds all antigens per the cvx code' do
-      cvx_code = 110
-      antigens = Antigen.find_antigens_by_cvx(cvx_code)
-      expect(antigens.length).to eq(5)
-      ["tetanus", "polio", "pertussis", "hepb", "diphtheria"].each do |target_disease|
-        antigen_index = antigens.index{ |antigen_obj| antigen_obj.target_disease == target_disease }
-        antigens.delete_at(antigen_index)
+    after(:all) do
+      DatabaseCleaner.clean_with(:truncation)
+    end
+    describe '#find_antigens_by_cvx' do
+      it 'finds all antigens per the cvx code' do
+        cvx_code = 110
+        antigens = Antigen.find_antigens_by_cvx(cvx_code)
+        expect(antigens.length).to eq(5)
+        ["tetanus", "polio", "pertussis", "hepb", "diphtheria"].each do |target_disease|
+          antigen_index = antigens.index{ |antigen_obj| antigen_obj.target_disease == target_disease }
+          antigens.delete_at(antigen_index)
+        end
+        expect(antigens).to eq([])
       end
-      expect(antigens).to eq([])
+    end
+    describe 'using current cdc xml data' do
+      it 'has a vaccine_group which aligns with all series' do
+        all_antigens = Antigen.all
+        all_antigens.each do |antigen|
+          antigen_vaccine_group = antigen.vaccine_group
+          antigen.series.each do |antigen_series|
+            expect(antigen_vaccine_group).to eq(antigen_series.vaccine_group)
+          end
+        end
+      end
     end
   end
 end
