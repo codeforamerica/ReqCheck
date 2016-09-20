@@ -1251,4 +1251,56 @@ module KCMODATA
     PATIENT20,
     PATIENT21
   ]
+
+  def create_patient(patient_hash)
+    gender_index = patient_hash[:patient_number] % 2
+    gender = ['m', 'f'].at(gender_index)
+    Patient.create(
+      first_name: patient_hash[:patient_name].split(' ').first,
+      last_name: patient_hash[:patient_name].split(' ').last,
+      patient_profile_attributes: {
+        dob: patient_hash[:dob],
+        record_number: patient_hash[:patient_number],
+        gender: gender
+      }
+    )
+  end
+
+  def create_vaccine_doses(patient, vaccine_doses_array)
+    vaccine_doses_array.map do |vaccine_dose_args|
+      VaccineDose.create(
+        patient_profile: patient.patient_profile,
+        description: vaccine_dose_args[:description],
+        date_administered: vaccine_dose_args[:date_administered],
+        history_flag: vaccine_dose_args[:history],
+        cvx_code: vaccine_dose_args[:cvx_code]
+      )
+    end
+  end
+
+  def create_patient_with_vaccines(patient_hash)
+    vaccine_array = patient_hash[:vaccines]
+    patient = create_patient(patient_hash)
+    create_vaccine_doses(patient, vaccine_array)
+    patient.reload
+    patient
+  end
+
+  def create_all_patients(patients_array)
+    patients_array.map do |patient_args|
+      create_patient_with_vaccines(patient_args)
+    end
+  end
+
+  def create_db_patients
+    if PatientProfile.find_by(record_number: PATIENT1[:patient_number]).nil?
+      create_all_patients(ALL_PATIENTS)
+    end
+  end
+
+  def delete_db_patients
+    record_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
+    all_patients = PatientProfile.where(record_number: record_numbers)
+    all_patients.delete_all
+  end
 end

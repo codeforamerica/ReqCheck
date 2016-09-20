@@ -27,3 +27,5 @@
 # If the vaccine group/antigen is not evaluated at all (no eligible doses), return 'N/A'
 
 # Recurring doses are currently not eligible to be eligible
+
+# Have not included any sort of check to ensure the vaccine dose administered was valid by expiration or lot recals
