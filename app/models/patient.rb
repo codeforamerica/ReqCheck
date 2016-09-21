@@ -6,6 +6,7 @@ class Patient < User
     :home_phone, :race, :ethnicity, :gender, :vaccine_doses, to: :patient_profile
 
   accepts_nested_attributes_for :patient_profile
+
   include TimeCalc
 
   def self.find_by_record_number(record_number)
@@ -64,6 +65,23 @@ class Patient < User
                                         .create_records_from_vaccine_doses(
                                           self.vaccine_doses
                                         )
+  end
+
+  def evaluate_record
+    @record_evaluator = nil
+    record_evaluator
+  end
+
+  def record_evaluator
+    @record_evaluator ||= RecordEvaluator.new(patient: self)
+  end
+
+  def record_status
+    record_evaluator.record_status
+  end
+
+  def evaluation_details
+    record_evaluator.vaccine_group_evaluations
   end
 
 end

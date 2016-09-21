@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Patient, type: :model do
+  include PatientSpecHelper
   include AntigenImporterSpecHelper
 
   before do
@@ -224,15 +225,65 @@ RSpec.describe Patient, type: :model do
     end
   end
 
-  describe '#evaluate_record' do
+  describe 'record_evaluator methods' do
     before(:all) do
       seed_full_antigen_xml
     end
     after(:all) do
       DatabaseCleaner.clean_with(:truncation)
     end
-    it 'need to set up helper methods for the patient creation available to all spec functions' do
-      expect(false).to eq(true)
+    describe '#evaluate_record' do
+      it 'creates a record_evaluator object' do
+        test_patient           = valid_2_year_test_patient
+        first_record_evaluator = test_patient.record_evaluator
+
+        expect(test_patient.record_evaluator.object_id)
+          .to eq(first_record_evaluator.object_id)
+
+        test_patient.evaluate_record
+
+        expect(test_patient.record_evaluator.object_id)
+          .not_to eq(first_record_evaluator.object_id)
+
+        expect(test_patient.record_evaluator.object_id)
+          .to eq(test_patient.record_evaluator.object_id)
+      end
+    end
+    describe '#record_status' do
+      it 'evaluates complete for a valid 2 year olds record' do
+        test_patient = valid_2_year_test_patient
+        expect(test_patient.record_status).to eq('complete')
+      end
+      it 'evaluates not_complete for a invalid 2 year olds record' do
+        test_patient = invalid_2_year_test_patient
+        expect(test_patient.record_status).to eq('not_complete')
+      end
+      it 'evaluates complete for a valid 5 year olds record' do
+        test_patient = valid_5_year_test_patient
+        expect(test_patient.record_status).to eq('complete')
+      end
+      it 'evaluates not_complete for a invalid 5 year olds record' do
+        test_patient = invalid_5_year_test_patient
+        expect(test_patient.record_status).to eq('not_complete')
+      end
+    end
+    describe '#evaluation_details' do
+      it 'returns all required complete for a valid 2 year olds record' do
+        test_patient = valid_2_year_test_patient
+        expect(test_patient.evaluation_details).to eq('complete')
+      end
+      it 'returns required not_complete for a invalid 2 year olds record' do
+        test_patient = invalid_2_year_test_patient
+        expect(test_patient.evaluation_details).to eq('not_complete')
+      end
+      it 'returns all required complete for a valid 5 year olds record' do
+        test_patient = valid_5_year_test_patient
+        expect(test_patient.evaluation_details).to eq('complete')
+      end
+      it 'returns required not_complete for a invalid 5 year olds record' do
+        test_patient = invalid_5_year_test_patient
+        expect(test_patient.evaluation_details).to eq('not_complete')
+      end
     end
   end
 end

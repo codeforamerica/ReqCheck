@@ -1,5 +1,8 @@
 # To be Addressed
 
+# Need to have a better way of creating antigen administered records
+# Should have vaccine info linked to antigen and vaccine_dose linked to vaccine_info schema wise
+
 
 # Recurring Doses
 # PAGE 38
