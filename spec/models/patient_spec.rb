@@ -221,4 +221,16 @@ RSpec.describe Patient, type: :model do
         .to be(test_patient.antigen_administered_records)
     end
   end
+
+  describe '#evaluate_record' do
+    before(:all) do
+      FactoryGirl.create(:seed_full_antigen_xml)
+    end
+    after(:all) do
+      DatabaseCleaner.clean_with(:truncation)
+    end
+    it 'need to set up helper methods for the patient creation available to all spec functions' do
+      expect(false).to eq(true)
+    end
+  end
 end

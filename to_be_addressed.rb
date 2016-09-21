@@ -29,3 +29,6 @@
 # Recurring doses are currently not eligible to be eligible
 
 # Have not included any sort of check to ensure the vaccine dose administered was valid by expiration or lot recals
+
+
+# Report to CDC issues with the data (hep a and hepb formatting issues, 7 years/7 Years formatting issues)

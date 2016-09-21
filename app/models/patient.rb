@@ -68,4 +68,4 @@ class Patient < User
 
 end
 
-      
+

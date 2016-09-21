@@ -50,14 +50,15 @@ RSpec.describe RecordEvaluator, type: :model do
   def valid_5_year_test_patient(test_patient=nil)
     test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
                                                       dob: 5.years.ago.to_date)
-    required_vaccine_cvxs = [
-      10, #'POL'
-      110, #'DTHI'
-      94 #'MMRV'
-    ]
-    valid_dates = create_valid_dates(test_patient.dob + 1.year)
-    required_vaccine_cvxs.each do |cvx_code|
-      create_patient_vaccines(test_patient, valid_dates, cvx_code)
+    dob = test_patient.dob
+    required_vaccine_cvxs = {
+      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
+      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
+            (dob + 14.weeks), (dob + 15.months), (dob + 4.years)],
+      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)] #'MMRV'
+    }
+    required_vaccine_cvxs.each do |cvx_key, date_array|
+      create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
     end
     test_patient
   end
@@ -116,25 +117,78 @@ RSpec.describe RecordEvaluator, type: :model do
 
 
   describe '#record_evaluation' do
-    it 'returns complete for an up to date patient' do
+    it 'sets a record status to the evaluation' do
       record_evaluator = RecordEvaluator.new(
         patient: valid_2_year_test_patient
       )
       expect(record_evaluator.record_status).to eq('complete')
     end
-    it 'returns not_complete for a not up to date patient' do
-      new_test_patient = valid_2_year_test_patient
-      VaccineDose.destroy_all(cvx_code: 94)
-
-      vaccines = new_test_patient.vaccine_doses
-      mmrv_vaccines = vaccines.select do |vaccine_dose|
-        vaccine_dose.cvx_code == 94
-      end
-      expect(mmrv_vaccines).to eq([])
+    it 'sets a vaccine_group_evaluations to the evaluation' do
       record_evaluator = RecordEvaluator.new(
-        patient: new_test_patient
+        patient: valid_2_year_test_patient
       )
-      expect(record_evaluator.record_status).to eq('not_complete')
+      expect(record_evaluator.vaccine_group_evaluations).to eq(
+        {
+          :"dtap/tdap/td" => "complete",
+          :"hep a" => "complete",
+          :"zoster " => "complete",
+          :hepb => "complete",
+          :hib => "not_complete",
+          :hpv => "complete",
+          :influenza => "not_complete",
+          :mcv => "complete",
+          :mmr => "complete",
+          :pneumococcal => "complete",
+          :polio => "complete",
+          :rotavirus => "complete",
+          :varicella => "complete"
+        }
+      )
+      expect(false).to be(true) # NEED TO FIGURE OUT HOW TO UNIFY ALL OF THE KEYS TO BE OF THE SAME FORMAT (SOME ARE STRINGS, OTHERS ARE NOT)
+    end
+    context 'with a 2 year old patient' do
+      it 'returns complete for an up to date patient' do
+        record_evaluator = RecordEvaluator.new(
+          patient: valid_2_year_test_patient
+        )
+        expect(record_evaluator.record_status).to eq('complete')
+      end
+      it 'returns not_complete for a not up to date patient' do
+        new_test_patient = valid_2_year_test_patient
+        VaccineDose.destroy_all(cvx_code: 94)
+
+        vaccines = new_test_patient.vaccine_doses
+        mmrv_vaccines = vaccines.select do |vaccine_dose|
+          vaccine_dose.cvx_code == 94
+        end
+        expect(mmrv_vaccines).to eq([])
+        record_evaluator = RecordEvaluator.new(
+          patient: new_test_patient
+        )
+        expect(record_evaluator.record_status).to eq('not_complete')
+      end
+    end
+    context 'with a 5 year old patient' do
+      it 'returns complete for an up to date patient' do
+        record_evaluator = RecordEvaluator.new(
+          patient: valid_5_year_test_patient
+        )
+        expect(record_evaluator.record_status).to eq('complete')
+      end
+      it 'returns not_complete for a not up to date patient' do
+        new_test_patient = valid_5_year_test_patient
+        VaccineDose.destroy_all(cvx_code: 110)
+
+        vaccines = new_test_patient.vaccine_doses
+        deleted_vaccines = vaccines.select do |vaccine_dose|
+          vaccine_dose.cvx_code == 110
+        end
+        expect(deleted_vaccines).to eq([])
+        record_evaluator = RecordEvaluator.new(
+          patient: new_test_patient
+        )
+        expect(record_evaluator.record_status).to eq('not_complete')
+      end
     end
   end
 end
