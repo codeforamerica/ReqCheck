@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'antigen_evaluation'
 
 RSpec.describe AntigenEvaluation do
+  include PatientHelper
   before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
@@ -14,29 +15,6 @@ RSpec.describe AntigenEvaluation do
 
   let(:test_patient) do
     test_patient = FactoryGirl.create(:patient_with_profile)
-  end
-
-  def create_patient_vaccines(test_patient, vaccine_dates, cvx_code=10)
-    vaccines = vaccine_dates.map.with_index do |vaccine_date, index|
-      FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: test_patient.patient_profile,
-        dose_number: (index + 1),
-        date_administered: vaccine_date,
-        cvx_code: cvx_code
-      )
-    end
-    test_patient.reload
-    vaccines
-  end
-
-  def create_valid_dates(start_date)
-    [
-      start_date + 6.weeks,
-      start_date + 12.weeks,
-      start_date + 18.weeks,
-      start_date + 4.years
-    ]
   end
 
   let(:polio_antigen) do
