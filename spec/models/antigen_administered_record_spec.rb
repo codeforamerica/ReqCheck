@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe AntigenAdministeredRecord, type: :model do
-  before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
+  include AntigenImporterSpecHelper
+
+  before(:all) { seed_antigen_xml_polio }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
   let(:polio_antigen) { Antigen.find_by(target_disease: 'polio') }
@@ -101,10 +103,10 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
           expect(aar_hash[key]).to eq(value)
         end
       end
-    end  
+    end
   end
 
- 
+
   describe 'validate if AntigenAdministeredRecord can be evaluated' do
     describe '#validate_lot_expiration_date' do
       it 'calls the validate_lot_expiration_date on the vaccine_dose' do
@@ -129,7 +131,7 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
       # This function evaluates whether the antigen_administered_record can be evaluated
       # as described in the CDC's '4.1 EVALUATE DOSE ADMINISTERED CONDITION' (page 33)
       describe 'validating against lot_expiration_date' do
-        
+
 
       end
     end

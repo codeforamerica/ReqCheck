@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe TargetDose, type: :model do
+  include AntigenImporterSpecHelper
+
   describe 'validations' do
     # Test patient with two vaccine doses for polio, both should be valid
     let(:test_patient) do
@@ -40,7 +42,7 @@ RSpec.describe TargetDose, type: :model do
   end
 
   describe 'tests needing the antigen_series database' do
-    before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
+    before(:all) { seed_antigen_xml_polio }
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) do

@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe PatientSeries, type: :model do
-  before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
+  before(:all) { seed_antigen_xml_polio }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
+
   let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
-  let(:antigen_series) { Antigen.find_by(target_disease: 'polio').series.first }
+
+  let(:antigen_series) do
+    Antigen.find_by(target_disease: 'polio').series.first
+  end
 
   describe 'validations' do
     it 'takes a patient and antigen_series as parameters' do

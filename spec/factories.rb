@@ -60,37 +60,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :seed_antigen_xml_polio, class: Hash do
-    skip_create
-
-    before(:create) do
-      antigen_importer = AntigenImporter.new
-      antigen_importer.import_single_file(
-        'spec/support/xml/AntigenSupportingData- Polio.xml'
-      )
-    end
-  end
-
-  factory :seed_antigen_xml_hpv, class: Hash do
-    skip_create
-
-    before(:create) do
-      antigen_importer = AntigenImporter.new
-      antigen_importer.import_single_file(
-        'spec/support/xml/AntigenSupportingData- HPV.xml'
-      )
-    end
-  end
-
-  factory :seed_full_antigen_xml, class: Hash do
-    skip_create
-
-    before(:create) do
-      antigen_importer = AntigenImporter.new
-      antigen_importer.import_antigen_xml_files('spec/support/xml')
-    end
-  end
-
   factory :conditional_skip_condition do
     condition_id 1
     condition_type 'Age'

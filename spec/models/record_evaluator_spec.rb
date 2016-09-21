@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe RecordEvaluator, type: :model do
-  include PatientHelper
+  include PatientSpecHelper
+  include AntigenImporterSpecHelper
 
   before(:all) do
-    FactoryGirl.create(:seed_full_antigen_xml)
+    seed_full_antigen_xml
   end
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)

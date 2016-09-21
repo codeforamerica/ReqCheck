@@ -4,8 +4,10 @@ require_relative '../support/kcmo_data'
 
 
 RSpec.describe 'KCMO_HD_Data' do
+  include AntigenImporterSpecHelper
+
   before(:all) do
-    FactoryGirl.create(:seed_full_antigen_xml)
+    seed_full_antigen_xml
     KCMODATA.create_db_patients
   end
   after(:all) do

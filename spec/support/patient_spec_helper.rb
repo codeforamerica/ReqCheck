@@ -1,4 +1,4 @@
-module PatientHelper
+module PatientSpecHelper
   def create_patient_vaccines(test_patient, vaccine_dates, cvx_code=10)
     vaccines = vaccine_dates.map.with_index do |vaccine_date, index|
       FactoryGirl.create(

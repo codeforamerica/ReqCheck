@@ -2,6 +2,7 @@ require 'rails_helper'
 require_relative '../support/antigen_xml'
 
 RSpec.describe AntigenImporter, type: :model do
+  include AntigenImporterSpecHelper
   describe '#create' do
     it 'takes no arguments to instantiate' do
       antigen_importer = AntigenImporter.new
@@ -240,8 +241,8 @@ RSpec.describe AntigenImporter, type: :model do
       end
       describe 'with required_gender' do
         before(:all) do
-          FactoryGirl.create(:seed_antigen_xml_polio)
-          FactoryGirl.create(:seed_antigen_xml_hpv)
+          seed_antigen_xml_polio
+          seed_antigen_xml_hpv
         end
         after(:all) { DatabaseCleaner.clean_with(:truncation) }
 

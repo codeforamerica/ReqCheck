@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Patient, type: :model do
+  include AntigenImporterSpecHelper
+
   before do
     new_time = Time.local(2016, 1, 3, 10, 0, 0)
     Timecop.freeze(new_time)
@@ -187,7 +189,7 @@ RSpec.describe Patient, type: :model do
   end
 
   describe '#antigen_administered_records' do
-    before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
+    before(:all) { seed_antigen_xml_polio }
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) do
@@ -224,7 +226,7 @@ RSpec.describe Patient, type: :model do
 
   describe '#evaluate_record' do
     before(:all) do
-      FactoryGirl.create(:seed_full_antigen_xml)
+      seed_full_antigen_xml
     end
     after(:all) do
       DatabaseCleaner.clean_with(:truncation)
