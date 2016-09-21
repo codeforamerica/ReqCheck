@@ -76,7 +76,7 @@ class Patient < User
     @record_evaluator ||= RecordEvaluator.new(patient: self)
   end
 
-  def record_status
+  def evaluation_status
     record_evaluator.record_status
   end
 

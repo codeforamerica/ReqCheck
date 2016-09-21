@@ -1292,6 +1292,35 @@ module KCMODATA
     end
   end
 
+  def self.create_expected_record_statuses
+    record_statuses = {}
+    ALL_PATIENTS.each do |patient_args|
+      record_statuses[(patient_args[:patient_number].to_sym)] =
+        patient_args[:expected_evaluation]
+    end
+    record_statuses
+  end
+
+  def get_expected_record_status(record_number)
+    record_statuses = self.create_expected_record_statuses
+    record_statuses[record_number.to_sym]
+  end
+
+  def self.create_expected_not_complete_vaccine_groups
+    record_statuses = {}
+    ALL_PATIENTS.each do |patient_args|
+      record_statuses[(patient_args[:patient_number].to_sym)] =
+        patient_args[:not_complete_vaccine_groups]
+    end
+    record_statuses
+  end
+
+  def get_expected_not_complete_vaccine_groups(record_number)
+    not_complete_vaccine_groups =
+      self.create_expected_not_complete_vaccine_groups
+    not_complete_vaccine_groups[record_number.to_sym]
+  end
+
   def all_db_patient_profiles
     record_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
     PatientProfile.where(record_number: record_numbers)
@@ -1326,5 +1355,6 @@ module KCMODATA
     all_patients.delete_all unless all_patients.nil?
   end
   module_function :delete_db_patients, :create_db_patients, :all_db_patients,
-                  :all_db_patient_profiles, :all_vaccine_doses
+                  :all_db_patient_profiles, :get_expected_record_status,
+                  :get_expected_not_complete_vaccine_groups, :all_vaccine_doses
 end

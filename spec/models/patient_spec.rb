@@ -249,22 +249,22 @@ RSpec.describe Patient, type: :model do
           .to eq(test_patient.record_evaluator.object_id)
       end
     end
-    describe '#record_status' do
+    describe '#evaluation_status' do
       it 'evaluates complete for a valid 2 year olds record' do
         test_patient = valid_2_year_test_patient
-        expect(test_patient.record_status).to eq('complete')
+        expect(test_patient.evaluation_status).to eq('complete')
       end
       it 'evaluates not_complete for a invalid 2 year olds record' do
         test_patient = invalid_2_year_test_patient
-        expect(test_patient.record_status).to eq('not_complete')
+        expect(test_patient.evaluation_status).to eq('not_complete')
       end
       it 'evaluates complete for a valid 5 year olds record' do
         test_patient = valid_5_year_test_patient
-        expect(test_patient.record_status).to eq('complete')
+        expect(test_patient.evaluation_status).to eq('complete')
       end
       it 'evaluates not_complete for a invalid 5 year olds record' do
         test_patient = invalid_5_year_test_patient
-        expect(test_patient.record_status).to eq('not_complete')
+        expect(test_patient.evaluation_status).to eq('not_complete')
       end
     end
     describe '#evaluation_details' do
