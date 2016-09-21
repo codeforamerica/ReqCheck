@@ -47,16 +47,9 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 }
 .top-bar .button {margin-bottom: 0px;}
 
-.top-bar-title a {
-	color: white;
-	background-color: inherit;
-	&:hover {
-		color: white;
-		background-color: inherit;
-	}
-	&:visited {
-		color: white;
-	}
+.top-bar-title  {
+	img {height: 40px;}
+	a:hover {background: none;}
 }
 
 .button {
