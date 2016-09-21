@@ -4,6 +4,8 @@
 # Should have vaccine info linked to antigen and vaccine_dose linked to vaccine_info schema wise
 
 
+# If antigen/vaccine_group is not required age, return not_applicable and not 'complete'
+
 # Recurring Doses
 # PAGE 38
 # 6.	 This step determines if the current target dose (now the last target dose in the patient series) is a recurring
@@ -35,3 +37,11 @@
 
 
 # Report to CDC issues with the data (hep a and hepb formatting issues, 7 years/7 Years formatting issues)
+
+
+require_relative './spec/support/kcmo_data.rb'
+KCMODATA.create_db_patients
+patp = PatientProfile.find_by(record_number: 111)
+pat = patp.patient
+
+pat.evaluation_status

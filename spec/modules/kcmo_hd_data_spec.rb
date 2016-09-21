@@ -25,6 +25,15 @@ RSpec.describe 'KCMO_HD_Data' do
       puts '#####################'
       puts db_patient.first_name
       puts db_patient.last_name
+      puts db_patient.dob
+      db_patient.vaccine_doses.each do |dose|
+        if [01, 12, 20, 22, 28, 50, 102, 106, 107, 110, 120, 130, 132, 146, 170].include?(dose.cvx_code)
+          puts '_______________'
+          puts dose.cvx_code
+          puts dose.date_administered
+          puts '_______________'
+        end
+      end
       puts db_patient.evaluation_status
       puts db_patient.evaluation_details
       puts '#####################'

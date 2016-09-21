@@ -77,6 +77,20 @@ class PatientSeries
                                        eligible_target_doses,
                                        satisfied_target_doses)
     set_series_status(status)
+    puts '################'
+    puts self.vaccine_group
+    puts self.name
+    puts patient.dob
+    puts patient.age
+    puts status
+    if self.vaccine_group == 'pneumococcal'
+      byebug
+    end
+    puts "#{eligible_target_doses.map(&:dose_number)}"
+    puts "#{eligible_target_doses.map(&:absolute_min_age)}"
+    puts "#{eligible_target_doses.map(&:max_age)}"
+    puts "#{satisfied_target_doses.map {|td| td[:target_dose_number] }}"
+    puts '################'
     status
   end
 
