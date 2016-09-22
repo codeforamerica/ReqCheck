@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 .vaccine-record .vax-name {
 	background-color:$kc-grey; 
 	color:white; 
-	border-color: $kc-grey;
+	border: 1px solid $kc-grey;
 	width:200px;
 	font-size: 1rem;
 }
@@ -83,6 +83,12 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 .vaccine-record thead {border: none;}
 .vaccine-record thead th {min-height: 60px; font-size:13px;}
 .vaccine-record td {font-size: 13px;}
+
+.no-dose {
+		border:1px solid $kc-grey;
+		font-weight: normal;
+		font-style:italic; 	
+	}
 
 #callout-patient {
 	padding-bottom: 0;
