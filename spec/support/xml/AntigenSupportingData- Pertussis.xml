@@ -1172,7 +1172,7 @@
                     <conditionLogic />
                     <condition>
                         <conditionID>1</conditionID>
-                        <conditionType>Vaccine Count by Age</conditionType>
+                        <conditionType>/</conditionType>
                         <startDate />
                         <endDate />
                         <beginAge>6 weeks - 4 days</beginAge>

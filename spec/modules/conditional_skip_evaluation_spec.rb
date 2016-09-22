@@ -158,7 +158,7 @@ RSpec.describe ConditionalSkipEvaluation do
     end
     it 'creates a start_date attribute' do
       test_condition_object.start_date = '20150701'
-      test_condition_object.condition_type = 'Vaccine Count by Date'
+      test_condition_object.condition_type = 'vaccine count by date'
       expected_date = Date.strptime('20150701', '%Y%m%d')
 
       eval_hash =
@@ -169,11 +169,11 @@ RSpec.describe ConditionalSkipEvaluation do
         )
 
       expect(eval_hash[:start_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      expect(eval_hash[:condition_type]).to eq('vaccine count by date')
     end
     it 'creates a end_date attribute' do
       test_condition_object.end_date = '20160630'
-      test_condition_object.condition_type = 'Vaccine Count by Date'
+      test_condition_object.condition_type = 'vaccine count by date'
       expected_date = Date.strptime('20160630', '%Y%m%d')
 
       eval_hash =
@@ -184,7 +184,7 @@ RSpec.describe ConditionalSkipEvaluation do
         )
 
       expect(eval_hash[:end_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      expect(eval_hash[:condition_type]).to eq('vaccine count by date')
     end
     it 'creates a interval_date attribute when interval defined' do
       test_condition_object.interval = '6 months'
@@ -217,7 +217,7 @@ RSpec.describe ConditionalSkipEvaluation do
     it 'raises no error when previous_dose_date nil and no interval defined' do
       test_condition_object.interval = nil
       test_condition_object.end_date = '20160630'
-      test_condition_object.condition_type = 'Vaccine Count by Date'
+      test_condition_object.condition_type = 'vaccine count by date'
       prev_dose_date = nil
       expected_date = Date.strptime('20160630', '%Y%m%d')
 
@@ -228,7 +228,7 @@ RSpec.describe ConditionalSkipEvaluation do
           dob
         )
       expect(eval_hash[:end_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      expect(eval_hash[:condition_type]).to eq('vaccine count by date')
     end
     it 'creates an assessment_date attribute equal to current date' do
       expected_date = Date.today
