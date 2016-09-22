@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="row align-center">
-        <div class="card columns small-8 patient-info">
+        <div class="card columns small-12 large-8 medium-8 patient-info">
             <p>Printed DATE at TIME from ReqCheck.</p>
             <table>
                 <thead>
@@ -28,18 +28,18 @@
         </div>
     </div>
     <div class="row align-center">
-        <div class="card columns small-8" id="callout-patient">
+        <div class="card columns small-12 large-8 medium-8" id="callout-patient">
             <%if @patient.record_number < 5 %>
             <div class="callout success">
                 <svg width="70" height="70" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z" fill="#fff"/></svg>
-                <h3>Up To Date</h3>
+                <h2>Up To Date</h2>
                 <p>The patient is up to date. Next vaccine due: VAX on
                 DATE.</p>
             </div><%elsif @patient.record_number < 10 %>
             <div class="callout warning">
                 <svg width="70" height="70" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1024 1376v-192q0-14-9-23t-23-9h-192q-14 0-23 9t-9 23v192q0 14 9 23t23 9h192q14 0 23-9t9-23zm256-672q0-88-55.5-163t-138.5-116-170-41q-243 0-371 213-15 24 8 42l132 100q7 6 19 6 16 0 25-12 53-68 86-92 34-24 86-24 48 0 85.5 26t37.5 59q0 38-20 61t-68 45q-63 28-115.5 86.5t-52.5 125.5v36q0 14 9 23t23 9h192q14 0 23-9t9-23q0-19 21.5-49.5t54.5-49.5q32-18 49-28.5t46-35 44.5-48 28-60.5 12.5-81zm384 192q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z" fill="#000"/></svg>
                 <div class="explanation">
-                    <h3>Review Needed</h3>
+                    <h2>Review Needed</h2>
                     <p>Please have a nurse review the record.</p>
                     <ul>
                         <li><strong>Invalid vaccine:</strong> the VAX
@@ -54,7 +54,7 @@
             <div class="callout alert">
                 <svg width="70" height="70" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5-103 385.5-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103zm128 1247v-190q0-14-9-23.5t-22-9.5h-192q-13 0-23 10t-10 23v190q0 13 10 23t23 10h192q13 0 22-9.5t9-23.5zm-2-344l18-621q0-12-10-18-10-8-24-8h-220q-14 0-24 8-10 6-10 18l17 621q0 10 10 17.5t24 7.5h185q14 0 23.5-7.5t10.5-17.5z" fill="#fff"/></svg>
                 <div class="explanation">
-                    <h3>Vaccine Due</h3>
+                    <h2>Vaccine Due</h2>
                     <p>The patient requires additional vaccines.</p>
                     <ul>
                         <li><strong>Invalid vaccine:</strong> the VAX
@@ -69,9 +69,9 @@
         </div>
     </div><!-- temp for demo -->
     <div class="row align-center">
-        <div class="card columns small-8 small-centered vaccine-record">
-            <h3 class="float-left">Vaccine
-            Record</h3><%= link_to "Print Record", '#', :onclick => 'window.print();return false;', class: "button float-right"  %>
+        <div class="card columns small-12 large-8 medium-8 small-centered vaccine-record">
+            <h3 class="float-left">Vaccine Record</h3>
+            <%= link_to "Print Record", '#', :onclick => 'window.print();return false;', class: "button float-right margin-bottom-10"  %>
             <table class="hover">
                 <thead>
                     <tr>
