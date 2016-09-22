@@ -5,7 +5,7 @@
 	<%= label_tag "search", "Insight Patient Number" %>
 	</div>
 	<div class="columns small-12 large-8 medium-8">
-	<%= text_field_tag :search, params[:search], placeholder: "Search Patients", autofocus: true %>
+	<%= text_field_tag :search, params[:search], placeholder: "Search Patients", autofocus: true, :autocomplete => :off %>
 	</div>
 	
 	<div class="columns small-12 large-4 medium-4 large-4">
