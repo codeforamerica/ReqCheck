@@ -28,6 +28,21 @@ module PatientSpecHelper
     )
   end
 
+  def create_fake_valid_target_doses(vaccine_doses)
+    aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+      vaccine_doses
+    )
+    aars.map do |as_record|
+      td = instance_double(
+        'TargetDose',
+        patient: test_patient,
+        antigen_administered_record: as_record
+      )
+      allow(td).to receive(:date_administered) { as_record.date_administered }
+      td
+    end
+  end
+
   def create_valid_dates(start_date)
     [
       start_date + 6.weeks,

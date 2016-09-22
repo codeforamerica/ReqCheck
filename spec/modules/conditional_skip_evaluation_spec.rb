@@ -5,6 +5,9 @@ RSpec.describe ConditionalSkipEvaluation do
   include PatientSpecHelper
   include AntigenImporterSpecHelper
 
+  before(:all) { seed_antigen_xml_polio }
+  after(:all) { DatabaseCleaner.clean_with(:truncation) }
+
   let(:test_object) do
     class TestClass
       include ConditionalSkipEvaluation
@@ -13,10 +16,11 @@ RSpec.describe ConditionalSkipEvaluation do
   end
 
   let(:condition1a) do
-    FactoryGirl.create(:conditional_skip_condition,
+    FactoryGirl.create(
+      :conditional_skip_condition,
       **{
           condition_id: 1,
-          condition_type: 'Age',
+          condition_type: 'age',
           start_date: '',
           end_date: '',
           begin_age: '4 years - 4 days',
@@ -30,10 +34,11 @@ RSpec.describe ConditionalSkipEvaluation do
     )
   end
   let(:condition2a) do
-    FactoryGirl.create(:conditional_skip_condition,
+    FactoryGirl.create(
+      :conditional_skip_condition,
       **{
           condition_id: 2,
-          condition_type: 'Age',
+          condition_type: 'age',
           start_date: '',
           end_date: '',
           begin_age: '',
@@ -47,7 +52,8 @@ RSpec.describe ConditionalSkipEvaluation do
     )
   end
   let(:conditional_set1a) do
-    FactoryGirl.create(:conditional_skip_set,
+    FactoryGirl.create(
+      :conditional_skip_set,
       **{
           set_id: 1,
           set_description: 'Dose is not required for those 4 years or older' \
@@ -91,43 +97,10 @@ RSpec.describe ConditionalSkipEvaluation do
   let(:dob) { 10.years.ago.to_date }
   let(:prev_dose_date) { 4.months.ago.to_date }
 
-  # describe '#create_conditional_skip_attributes' do
-  #   # test_condition_object,
-  #   # prev_dose_date,
-  #   # later_dose_date,
-  #   # dob
-
-  #   it 'creates an array of set_attributes' do
-  #     condition_attrs = []
-  #     condition_attrs <<
-  #       test_object.create_conditional_skip_condition_attributes(
-  #         condition1a,
-  #         prev_dose_date,
-  #         dob
-  #       )
-  #     condition_attrs <<
-  #       test_object.create_conditional_skip_condition_attributes(
-  #         condition2a,
-  #         prev_dose_date,
-  #         dob
-  #       )
-
-  #     eval_hash =
-  #       test_object.create_conditional_skip_condition_attributes(
-  #         test_condition_object,
-  #         prev_dose_date,
-  #         dob
-  #       )
-
-  #     expect(eval_hash[:begin_age_date]).to eq(expected_date)
-  #     expect(eval_hash[:condition_type]).to eq('Age')
-  #   end
-  # end
-
   describe '#create_conditional_skip_condition_attributes' do
     it 'creates a begin_age_date attribute' do
       test_condition_object.begin_age = '3 years - 4 days'
-      test_condition_object.condition_type = 'Age'
+      test_condition_object.condition_type = 'age'
       dob            = 5.years.ago.to_date
       expected_date  = dob + 3.years - 4.days
       prev_dose_date = 1.year.ago.to_date
@@ -140,11 +113,11 @@ RSpec.describe ConditionalSkipEvaluation do
         )
 
       expect(eval_hash[:begin_age_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Age')
+      expect(eval_hash[:condition_type]).to eq('age')
     end
     it 'creates a end_age_date attribute' do
       test_condition_object.end_age = '6 years'
-      test_condition_object.condition_type = 'Age'
+      test_condition_object.condition_type = 'age'
       dob            = 10.years.ago.to_date
       expected_date  = dob + 6.years
       prev_dose_date = 7.year.ago.to_date
@@ -157,7 +130,7 @@ RSpec.describe ConditionalSkipEvaluation do
         )
 
       expect(eval_hash[:end_age_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Age')
+      expect(eval_hash[:condition_type]).to eq('age')
     end
     it 'creates a start_date attribute' do
       test_condition_object.start_date = '20150701'
@@ -718,9 +691,6 @@ RSpec.describe ConditionalSkipEvaluation do
       end
     end
     describe 'evaluating the dose_count attributes' do
-      before(:all) { seed_antigen_xml_polio }
-      after(:all) { DatabaseCleaner.clean_with(:truncation) }
-
       let(:test_patient_no_vaccines) do
         FactoryGirl.create(:patient_with_profile)
       end
@@ -972,11 +942,11 @@ RSpec.describe ConditionalSkipEvaluation do
     }
 
     {
-      AND: [['all_met', 'set_met'],
+      and: [['all_met', 'set_met'],
             ['one_met', 'set_not_met'],
             ['none_met', 'set_not_met']
            ],
-      OR: [['all_met', 'set_met'],
+      or: [['all_met', 'set_met'],
            ['one_met', 'set_met'],
            ['none_met', 'set_not_met']
           ]
@@ -1088,26 +1058,27 @@ RSpec.describe ConditionalSkipEvaluation do
       vaccine_doses      = test_patient.vaccine_doses
       vaccine_dose       = vaccine_doses.last
       date_of_dose       = vaccine_dose.date_administered
-      previous_dose_date = vaccine_doses.first.date_administered
+      fake_target_doses  =
+        create_fake_valid_target_doses(vaccine_doses[0..-2])
       evaluation_hash    = test_object.evaluate_conditional_skip_set(
         set_object,
         patient_dob: patient_dob,
         date_of_dose: date_of_dose,
         patient_vaccine_doses: vaccine_doses,
-        date_of_previous_dose: previous_dose_date
+        satisfied_target_doses: fake_target_doses
       )
       expected_result = {
         evaluated: 'conditional_skip_set',
         met_conditions: [
           {
-            evaluated: "conditional_skip_condition",
-            evaluation_status: "condition_met",
-            reason: "age"
+            evaluated: 'conditional_skip_condition',
+            evaluation_status: 'condition_met',
+            reason: 'age'
           },
           {
-            evaluated: "conditional_skip_condition",
-            evaluation_status: "condition_met",
-            reason: "interval"
+            evaluated: 'conditional_skip_condition',
+            evaluation_status: 'condition_met',
+            reason: 'interval'
           },
         ],
         not_met_conditions: [],
@@ -1121,13 +1092,14 @@ RSpec.describe ConditionalSkipEvaluation do
       vaccine_doses      = test_patient.vaccine_doses
       vaccine_dose       = vaccine_doses.last
       date_of_dose       = vaccine_dose.date_administered
-      previous_dose_date = vaccine_doses.first.date_administered
+      fake_target_doses  =
+        create_fake_valid_target_doses(vaccine_doses[0..-2])
       evaluation_hash    = test_object.evaluate_conditional_skip_set(
         set_object,
         patient_dob: patient_dob,
         date_of_dose: date_of_dose,
         patient_vaccine_doses: vaccine_doses,
-        date_of_previous_dose: previous_dose_date
+        satisfied_target_doses: fake_target_doses
       )
       expected_result = {
         evaluated: 'conditional_skip_set',
@@ -1157,13 +1129,14 @@ RSpec.describe ConditionalSkipEvaluation do
       vaccine_doses           = test_patient.vaccine_doses
       vaccine_dose            = vaccine_doses.last
       date_of_dose            = vaccine_dose.date_administered
-      previous_dose_date      = vaccine_doses.first.date_administered
+      fake_target_doses       =
+        create_fake_valid_target_doses(vaccine_doses[0..-2])
       evaluation_hash = test_object.evaluate_conditional_skip(
         conditional_skip_object,
         patient_dob: patient_dob,
         date_of_dose: date_of_dose,
         patient_vaccine_doses: vaccine_doses,
-        date_of_previous_dose: previous_dose_date
+        satisfied_target_doses: fake_target_doses
       )
       expected_result = {
         evaluated: 'conditional_skip',
@@ -1172,14 +1145,14 @@ RSpec.describe ConditionalSkipEvaluation do
             evaluated: 'conditional_skip_set',
             met_conditions: [
               {
-                evaluated: "conditional_skip_condition",
-                evaluation_status: "condition_met",
-                reason: "age"
+                evaluated: 'conditional_skip_condition',
+                evaluation_status: 'condition_met',
+                reason: 'age'
               },
               {
-                evaluated: "conditional_skip_condition",
-                evaluation_status: "condition_met",
-                reason: "interval"
+                evaluated: 'conditional_skip_condition',
+                evaluation_status: 'condition_met',
+                reason: 'interval'
               }
             ],
             not_met_conditions: [],
@@ -1196,13 +1169,14 @@ RSpec.describe ConditionalSkipEvaluation do
       vaccine_doses           = test_patient.vaccine_doses
       vaccine_dose            = vaccine_doses.last
       date_of_dose            = vaccine_dose.date_administered
-      previous_dose_date      = vaccine_doses.first.date_administered
+      fake_target_doses       =
+        create_fake_valid_target_doses(vaccine_doses[0..-2])
       evaluation_hash = test_object.evaluate_conditional_skip(
         conditional_skip_object,
         patient_dob: patient_dob,
         date_of_dose: date_of_dose,
         patient_vaccine_doses: vaccine_doses,
-        date_of_previous_dose: previous_dose_date
+        satisfied_target_doses: fake_target_doses
       )
       expected_result = {
         evaluated: 'conditional_skip',
@@ -1212,16 +1186,16 @@ RSpec.describe ConditionalSkipEvaluation do
             evaluated: 'conditional_skip_set',
             met_conditions: [
               {
-                evaluated: "conditional_skip_condition",
-                evaluation_status: "condition_met",
-                reason: "interval"
+                evaluated: 'conditional_skip_condition',
+                evaluation_status: 'condition_met',
+                reason: 'interval'
               }
             ],
             not_met_conditions: [
               {
-                evaluated: "conditional_skip_condition",
-                evaluation_status: "condition_not_met",
-                reason: "age"
+                evaluated: 'conditional_skip_condition',
+                evaluation_status: 'condition_not_met',
+                reason: 'age'
               }
             ],
             evaluation_status: 'set_not_met'

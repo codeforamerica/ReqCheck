@@ -4,12 +4,11 @@ class TargetDose
   include TargetDoseEvaluation
 
   attr_accessor :patient, :antigen_series_dose
-  attr_reader :eligible, :satisfied, :status_hash, :antigen_administered_record
+  attr_reader :satisfied, :status_hash, :antigen_administered_record
 
   def initialize(patient:, antigen_series_dose:)
     @antigen_series_dose         = antigen_series_dose
     @patient                     = patient
-    @eligible                    = nil
     @status_hash                 = nil
     @antigen_administered_record = nil
   end
@@ -67,6 +66,11 @@ class TargetDose
       end
     end
     true
+  end
+
+  def date_administered
+    return nil if antigen_administered_record.nil?
+    antigen_administered_record.date_administered
   end
 
   def first_dose?
