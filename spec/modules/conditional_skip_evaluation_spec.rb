@@ -2,6 +2,9 @@ require 'rails_helper'
 require 'conditional_skip_evaluation'
 
 RSpec.describe ConditionalSkipEvaluation do
+  include PatientSpecHelper
+  include AntigenImporterSpecHelper
+
   let(:test_object) do
     class TestClass
       include ConditionalSkipEvaluation
@@ -49,7 +52,7 @@ RSpec.describe ConditionalSkipEvaluation do
           set_id: 1,
           set_description: 'Dose is not required for those 4 years or older' \
             'when the interval from the last dose is 6 months',
-          condition_logic: 'AND',
+          condition_logic: 'and',
           conditions: [condition1a, condition2a]
         }
     )
@@ -158,7 +161,7 @@ RSpec.describe ConditionalSkipEvaluation do
     end
     it 'creates a start_date attribute' do
       test_condition_object.start_date = '20150701'
-      test_condition_object.condition_type = 'Vaccine Count by Date'
+      test_condition_object.condition_type = 'vaccine count by date'
       expected_date = Date.strptime('20150701', '%Y%m%d')
 
       eval_hash =
@@ -169,11 +172,11 @@ RSpec.describe ConditionalSkipEvaluation do
         )
 
       expect(eval_hash[:start_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      expect(eval_hash[:condition_type]).to eq('vaccine count by date')
     end
     it 'creates a end_date attribute' do
       test_condition_object.end_date = '20160630'
-      test_condition_object.condition_type = 'Vaccine Count by Date'
+      test_condition_object.condition_type = 'vaccine count by date'
       expected_date = Date.strptime('20160630', '%Y%m%d')
 
       eval_hash =
@@ -184,7 +187,7 @@ RSpec.describe ConditionalSkipEvaluation do
         )
 
       expect(eval_hash[:end_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      expect(eval_hash[:condition_type]).to eq('vaccine count by date')
     end
     it 'creates a interval_date attribute when interval defined' do
       test_condition_object.interval = '6 months'
@@ -217,7 +220,7 @@ RSpec.describe ConditionalSkipEvaluation do
     it 'raises no error when previous_dose_date nil and no interval defined' do
       test_condition_object.interval = nil
       test_condition_object.end_date = '20160630'
-      test_condition_object.condition_type = 'Vaccine Count by Date'
+      test_condition_object.condition_type = 'vaccine count by date'
       prev_dose_date = nil
       expected_date = Date.strptime('20160630', '%Y%m%d')
 
@@ -228,7 +231,7 @@ RSpec.describe ConditionalSkipEvaluation do
           dob
         )
       expect(eval_hash[:end_date]).to eq(expected_date)
-      expect(eval_hash[:condition_type]).to eq('Vaccine Count by Date')
+      expect(eval_hash[:condition_type]).to eq('vaccine count by date')
     end
     it 'creates an assessment_date attribute equal to current date' do
       expected_date = Date.today
@@ -243,7 +246,7 @@ RSpec.describe ConditionalSkipEvaluation do
       expect(eval_hash[:assessment_date]).to eq(expected_date)
     end
     it 'creates an condition_id and condition_type attribute' do
-      expect(test_condition_object.condition_type).to eq('Age')
+      expect(test_condition_object.condition_type).to eq('age')
       expect(test_condition_object.condition_id).to eq(1)
 
       eval_hash =
@@ -253,7 +256,7 @@ RSpec.describe ConditionalSkipEvaluation do
           dob
         )
 
-      expect(eval_hash[:condition_type]).to eq('Age')
+      expect(eval_hash[:condition_type]).to eq('age')
       expect(eval_hash[:condition_id]).to eq(1)
     end
     it 'creates dose_count attribute as an integer' do
@@ -279,7 +282,7 @@ RSpec.describe ConditionalSkipEvaluation do
       expect(eval_hash[:dose_count]).to eq(nil)
     end
     it 'creates dose_type attribute' do
-      test_condition_object.dose_type = 'Total'
+      test_condition_object.dose_type = 'total'
 
       eval_hash =
         test_object.create_conditional_skip_condition_attributes(
@@ -287,7 +290,7 @@ RSpec.describe ConditionalSkipEvaluation do
           prev_dose_date,
           dob
         )
-      expect(eval_hash[:dose_type]).to eq('Total')
+      expect(eval_hash[:dose_type]).to eq('total')
     end
     it 'creates dose_count_logic attribute' do
       test_condition_object.dose_count_logic = 'greater than'
@@ -387,8 +390,8 @@ RSpec.describe ConditionalSkipEvaluation do
       FactoryGirl.create(
         :conditional_skip_condition,
         begin_age: '3 years - 4 days',
-        condition_type: 'Age',
-        dose_type: 'Valid',
+        condition_type: 'vaccine count by age',
+        dose_type: 'valid',
         vaccine_types: valid_vaccine_types.join(';')
       )
     end
@@ -533,64 +536,6 @@ RSpec.describe ConditionalSkipEvaluation do
         )
       ).to eq(2)
     end
-    it 'it includes only vaccines with evaluation_status Valid if vaccine'\
-      'conditional skip dose type is Valid' do
-      patient = all_vaccine_doses.first.patient
-      test_vaccine_doses = [FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
-        cvx_code: 10,
-        date_administered: (Date.today - 2.months)
-      )]
-      test_vaccine_doses << FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
-        cvx_code: 10,
-        date_administered: (Date.today - 4.months)
-      )
-      test_vaccine_doses << FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
-        cvx_code: 10,
-        date_administered: (Date.today - 6.months)
-      )
-      expect(
-        test_object.calculate_count_of_vaccine_doses(
-          test_vaccine_doses,
-          test_condition_object.vaccine_types,
-          dose_type: 'Valid'
-        )
-      ).to eq(2)
-    end
-    it 'it includes all vaccines if vaccine'\
-      'conditional skip dose type is Total' do
-      patient = all_vaccine_doses.first.patient
-      test_vaccine_doses = [FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
-        cvx_code: 10,
-        date_administered: (Date.today - 2.months)
-      )]
-      test_vaccine_doses << FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
-        cvx_code: 10,
-        date_administered: (Date.today - 4.months)
-      )
-      test_vaccine_doses << FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
-        cvx_code: 10,
-        date_administered: (Date.today - 6.months)
-      )
-      expect(
-        test_object.calculate_count_of_vaccine_doses(
-          test_vaccine_doses,
-          test_condition_object.vaccine_types,
-          dose_type: 'Total'
-        )
-      ).to eq(2)
-    end
 
     # context 'when dose_type is \'Valid\'' do
     #   it 'returns an empty array if the cvx_codes is empty' do
@@ -648,13 +593,12 @@ RSpec.describe ConditionalSkipEvaluation do
         end_date: 2.months.ago.to_date,
         assessment_date: Date.today.to_date,
         condition_id: 1,
-        condition_type: 'Age',
+        condition_type: 'age',
         interval_date: 5.days.ago.to_date,
-        dose_count: 5,
-        dose_type: 'Total',
-        dose_count_logic: 'greater_than',
-        vaccine_types: [1, 10, 20, 22, 28, 50, 102, 106, 107, 110, 113,
-                        115, 120, 130, 132, 138, 139, 146]
+        dose_count: nil,
+        dose_type: nil,
+        dose_count_logic: nil,
+        vaccine_types: []
       }
     end
     describe 'evaluating the conditional_type of completed series' do
@@ -773,6 +717,211 @@ RSpec.describe ConditionalSkipEvaluation do
         end
       end
     end
+    describe 'evaluating the dose_count attributes' do
+      before(:all) { seed_antigen_xml_polio }
+      after(:all) { DatabaseCleaner.clean_with(:truncation) }
+
+      let(:test_patient_no_vaccines) do
+        FactoryGirl.create(:patient_with_profile)
+      end
+      let(:valid_antigen_administered_records) do
+        valid_dose_dates =
+          [2.years.ago, 1.year.ago, 6.months.ago, 5.months.ago, 4.months.ago]
+        create_antigen_administered_records(test_patient_no_vaccines,
+                                            valid_dose_dates,
+                                            10)
+      end
+
+      context 'conditional_type "vaccine count by age"' do
+        let(:valid_dose_count_by_age_attributes) do
+          {
+            begin_age_date: (test_patient_no_vaccines.dob + 6.weeks),
+            end_age_date: nil,
+            start_date: nil,
+            end_date: nil,
+            assessment_date: Date.today.to_date,
+            condition_id: 1,
+            condition_type: 'vaccine count by age',
+            interval_date: nil,
+            dose_count: 4,
+            dose_type: 'total',
+            dose_count_logic: 'greater than',
+            vaccine_types: [1, 10, 20, 22, 28, 50, 102, 106, 107, 110, 113,
+                            115, 120, 130, 132, 138, 139, 146]
+          }
+        end
+        it 'returns true if the actual count is greater than required' do
+          # aars are subbing for valid TargetDoses in this case
+          aars         = valid_antigen_administered_records
+          test_patient = test_patient_no_vaccines
+          dose_date    = 3.months.ago
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_age_attributes,
+              dose_date,
+              satisfied_target_doses: aars,
+              patient_vaccine_doses: test_patient.vaccine_doses
+            )
+
+          expect(eval_hash[:dose_count_valid]).to eq(true)
+        end
+        it 'returns false if the actual count is less than required' do
+          valid_dose_count_by_age_attributes[:dose_count] = 100
+          # aars are subbing for valid TargetDoses in this case
+          aars         = valid_antigen_administered_records
+          test_patient = test_patient_no_vaccines
+          dose_date    = 3.months.ago
+
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_age_attributes,
+              dose_date,
+              satisfied_target_doses: aars,
+              patient_vaccine_doses: test_patient.vaccine_doses
+            )
+
+          expect(eval_hash[:dose_count_valid]).to eq(false)
+        end
+        it 'evaluates the vaccine_doses if dose_type is total' do
+          # aars are subbing for valid TargetDoses in this case
+          valid_dose_count_by_age_attributes[:dose_type] = 'total'
+          valid_antigen_administered_records
+          test_patient = test_patient_no_vaccines
+          dose_date    = 3.months.ago
+
+          expect(test_patient.vaccine_doses.length).not_to eq(0)
+
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_age_attributes,
+              dose_date,
+              satisfied_target_doses: [],
+              patient_vaccine_doses: test_patient.vaccine_doses
+            )
+
+          expect(eval_hash[:dose_count_valid]).to eq(true)
+        end
+        it 'evaluates the satisfied_target_doses if dose_type is valid' do
+          # aars are subbing for valid TargetDoses in this case
+          valid_dose_count_by_age_attributes[:dose_type] = 'valid'
+          aars      = valid_antigen_administered_records
+          dose_date = 3.months.ago
+
+          expect(test_patient.vaccine_doses.length).not_to eq(0)
+
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_age_attributes,
+              dose_date,
+              satisfied_target_doses: aars,
+              patient_vaccine_doses: []
+            )
+          expect(eval_hash[:dose_count_valid]).to eq(true)
+        end
+      end
+      context 'conditional_type "vaccine count by date"' do
+        let(:valid_dose_count_by_date_attributes) do
+          {
+            begin_age_date: nil,
+            end_age_date: nil,
+            start_date: 2.years.ago,
+            end_date: 1.day.ago,
+            assessment_date: Date.today.to_date,
+            condition_id: 1,
+            condition_type: 'vaccine count by date',
+            interval_date: nil,
+            dose_count: 0,
+            dose_type: 'valid',
+            dose_count_logic: 'greater than',
+            vaccine_types: [1, 10, 20, 22, 28, 50, 102, 106, 107, 110, 113,
+                            115, 120, 130, 132, 138, 139, 146]
+          }
+        end
+        it 'returns true if the actual count is greater than required' do
+          # aars are subbing for valid TargetDoses in this case
+          test_patient = test_patient_no_vaccines
+          dose_date    = 3.months.ago
+          aars = create_antigen_administered_records(test_patient_no_vaccines,
+                                                     [1.year.ago],
+                                                     10)
+
+          expect(test_patient.vaccine_doses.length).to eq(1)
+
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_date_attributes,
+              dose_date,
+              satisfied_target_doses: aars,
+              patient_vaccine_doses: test_patient.vaccine_doses
+            )
+
+          expect(eval_hash[:dose_count_valid]).to eq(true)
+        end
+        it 'returns false if the actual count is less than required' do
+          # This is also checking for when it was given, which is outside
+          # of the range required.
+          # aars are subbing for valid TargetDoses in this case
+          test_patient = test_patient_no_vaccines
+          dose_date    = 3.months.ago
+          aars = create_antigen_administered_records(test_patient_no_vaccines,
+                                                     [3.years.ago],
+                                                     10)
+
+          expect(test_patient.vaccine_doses.length).to eq(1)
+
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_date_attributes,
+              dose_date,
+              satisfied_target_doses: aars,
+              patient_vaccine_doses: test_patient.vaccine_doses
+            )
+
+          expect(eval_hash[:dose_count_valid]).to eq(false)
+        end
+        it 'evaluates the vaccine_doses if dose_type is total' do
+          # aars are subbing for valid TargetDoses in this case
+          valid_dose_count_by_date_attributes[:dose_type] = 'total'
+          test_patient = test_patient_no_vaccines
+          dose_date    = 3.months.ago
+          create_antigen_administered_records(test_patient_no_vaccines,
+                                              [1.year.ago],
+                                              10)
+
+          expect(test_patient.vaccine_doses.length).to eq(1)
+
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_date_attributes,
+              dose_date,
+              satisfied_target_doses: [],
+              patient_vaccine_doses: test_patient.vaccine_doses
+            )
+
+          expect(eval_hash[:dose_count_valid]).to eq(true)
+        end
+        it 'evaluates the satisfied_target_doses if dose_type is valid' do
+          # aars are subbing for valid TargetDoses in this case
+          valid_dose_count_by_date_attributes[:dose_type] = 'valid'
+          test_patient = test_patient_no_vaccines
+          dose_date    = 3.months.ago
+          aars = create_antigen_administered_records(test_patient_no_vaccines,
+                                                     [1.year.ago],
+                                                     10)
+
+          expect(test_patient.vaccine_doses.length).to eq(1)
+
+          eval_hash =
+            test_object.evaluate_conditional_skip_condition_attributes(
+              valid_dose_count_by_date_attributes,
+              dose_date,
+              satisfied_target_doses: aars,
+              patient_vaccine_doses: []
+            )
+          expect(eval_hash[:dose_count_valid]).to eq(true)
+        end
+      end
+    end
   end
   describe '#get_conditional_skip_condition_status' do
     # This logic is defined on page 50 of the CDC logic spec
@@ -866,7 +1015,7 @@ RSpec.describe ConditionalSkipEvaluation do
 
     it 'raises an error if the condition_statuses_array is empty' do
       expect{
-        test_object.get_conditional_skip_set_status('AND', [])
+        test_object.get_conditional_skip_set_status('and', [])
       }.to raise_exception(ArgumentError)
     end
   end
@@ -878,11 +1027,11 @@ RSpec.describe ConditionalSkipEvaluation do
     }
 
     {
-      AND: [['all_met', 'conditional_skip_met'],
+      and: [['all_met', 'conditional_skip_met'],
             ['one_met', 'conditional_skip_not_met'],
             ['none_met', 'conditional_skip_not_met']
            ],
-      OR: [['all_met', 'conditional_skip_met'],
+      or: [['all_met', 'conditional_skip_met'],
            ['one_met', 'conditional_skip_met'],
            ['none_met', 'conditional_skip_not_met']
           ]
@@ -905,7 +1054,7 @@ RSpec.describe ConditionalSkipEvaluation do
 
     it 'raises an error if the condition_statuses_array is empty' do
       expect{
-        test_object.get_conditional_skip_status('AND', [])
+        test_object.get_conditional_skip_status('and', [])
       }.to raise_exception(ArgumentError)
     end
   end

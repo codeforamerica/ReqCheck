@@ -195,7 +195,7 @@ RSpec.describe TargetDose, type: :model do
 
       xit 'returns an evaluation hash' do
         eval_hash = test_target_dose.evaluate_antigen_administered_record(aar)
-        expect(eval_hash[:evaluation_status]).to eq('Valid')
+        expect(eval_hash[:evaluation_status]).to eq('valid')
         expect(eval_hash[:target_dose_satisfied]).to eq(true)
       end
     end

@@ -34,4 +34,17 @@
 # Have not included any sort of check to ensure the vaccine dose administered was valid by expiration or lot recals
 
 
-# Report to CDC issues with the data (hep a and hepb formatting issues, 7 years/7 Years formatting issues)
+# Report to CDC issues with the data (hep a and hepb formatting issues, 7 years/7 Years formatting issues), vaccine types spacing differences
+# <condition>
+# <conditionID>1</conditionID>
+# <conditionType>Vaccine Count by Date</conditionType>
+# <startDate>20150701</startDate>
+# <endDate>20160630</endDate>
+# <beginAge/>
+# <endAge/>
+# <interval/>
+# <doseCount>0</doseCount>
+# <doseType>Valid</doseType>
+# <doseCountLogic>greater than</doseCountLogic>
+# <vaccineTypes>15; 16; 88; 111; 135; 140; 141; 144; 149; 150; 151; 153; 155; 158; 161; 166</vaccineTypes>
+# </condition>
