@@ -1,0 +1,171 @@
+<antigenSupportingData>
+<immunity>
+</immunity>
+<series>
+<seriesName>MCV Standard Series</seriesName>
+<targetDisease>MCV</targetDisease>
+<vaccineGroup>MCV</vaccineGroup>
+<selectBest>
+<defaultSeries>Yes</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>1</seriesPreference>
+<minAgeToStart>n/a</minAgeToStart>
+<maxAgeToStart>n/a</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>10 Years</absMinAge>
+<minAge>11 Years</minAge>
+<earliestRecAge>11 Years</earliestRecAge>
+<latestRecAge>13 Years + 4 Weeks</latestRecAge>
+<maxAge/>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Meningococcal, MCV4P</vaccineType>
+<cvx>114</cvx>
+<beginAge>9 Months</beginAge>
+<endAge>56 Years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Meningococcal, MCV4O</vaccineType>
+<cvx>136</cvx>
+<beginAge>2 Months</beginAge>
+<endAge>56 Years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>Meningococcal, MPSV4</vaccineType>
+<cvx>32</cvx>
+<beginAge>2 Years - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Meningococcal, unspecified</vaccineType>
+<cvx>108</cvx>
+<beginAge>2 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Meningococcal, MCV4P</vaccineType>
+<cvx>114</cvx>
+<beginAge>9 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Meningococcal, MCV4O</vaccineType>
+<cvx>136</cvx>
+<beginAge>2 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>MCV4, unspecified</vaccineType>
+<cvx>147</cvx>
+<beginAge>2 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 16 years or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>16 years - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge>16 years - 4 days</absMinAge>
+<minAge>16 years</minAge>
+<earliestRecAge>16 years</earliestRecAge>
+<latestRecAge>17 years + 4 weeks</latestRecAge>
+<maxAge>22 Years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>5 years</earliestRecInt>
+<latestRecInt>6 years + 4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>Meningococcal, MCV4P</vaccineType>
+<cvx>114</cvx>
+<beginAge>9 Months</beginAge>
+<endAge>56 Years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<preferableVaccine>
+<vaccineType>Meningococcal, MCV4O</vaccineType>
+<cvx>136</cvx>
+<beginAge>2 Months</beginAge>
+<endAge>56 Years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>Meningococcal, unspecified</vaccineType>
+<cvx>108</cvx>
+<beginAge>2 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Meningococcal, MCV4P</vaccineType>
+<cvx>114</cvx>
+<beginAge>9 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Meningococcal, MCV4O</vaccineType>
+<cvx>136</cvx>
+<beginAge>2 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>MCV4, unspecified</vaccineType>
+<cvx>147</cvx>
+<beginAge>2 Months - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+</antigenSupportingData>

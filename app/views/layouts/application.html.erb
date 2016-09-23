@@ -14,13 +14,15 @@
   <body>
     <div class="top-bar">
       <div class="top-bar-title">
-        <strong><%= link_to "ReqCheck", root_url %></strong>
+
+        <%= link_to image_tag("ReqCheckLogo.svg", :alt => "ReqCheck logo"), root_url %>
+
       </div>
       <div>
         <div class="top-bar-right">
             <% if @patient || @patients %>
               <% if @patient %>
-              <%= link_to "New Search", patients_path, class: "button"  %>
+              <%= link_to "New Search", patients_path, class: "button margin-right-10"  %>
               <% end %>
               <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button secondary hollow" %>
             <% end %>
@@ -32,7 +34,8 @@
     </div>
     <footer class="footer">
       <div class="row align-center">
-        <div class="columns small-8">
+        <div class="columns small-12">
+          <%= link_to "About", patients_path, class: "button secondary hollow margin-right-10"  %>
           A project of <a href='https://www.codeforamerica.org/why-government/our-partners/kansas-city-mo'>Code for America</a> for the <a href="http://kcmo.gov/health/">Kansas City</a> Health Department
         </div>
       </div>

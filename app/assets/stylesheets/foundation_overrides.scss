@@ -25,27 +25,31 @@ $primary-color: green;
 .callout .explanation {margin-left:4rem;}
 
 
-.patient-info table tbody {border:none;}
-.patient-info  thread {border:none;}
-.patient-info p {display: none;}
+.patient-info {
+	table tbody {border:none;}
+	thead {
+		background-color: white;  
+		border-width: 0 0 1px 0;
+		border-color: $kc-grey;
+	}
+	thread {border:none;}
+	p {display: none;}
+}
 
 .pink {background-color: pink;}
 
 h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
-.top-bar {margin-bottom: 1rem; background-color: $kc-grey; color:white; min-height: 72px;}
+.top-bar {margin-bottom: 1rem; 
+	background-color: $kc-grey; 
+	color:white; 
+	min-height: 72px;
+}
 .top-bar .button {margin-bottom: 0px;}
 
-.top-bar-title a {
-	color: white;
-	background-color: inherit;
-	&:hover {
-		color: white;
-		background-color: inherit;
-	}
-	&:visited {
-		color: white;
-	}
+.top-bar-title  {
+	img {height: 40px;}
+	a:hover {background: none;}
 }
 
 .button {
@@ -54,33 +58,37 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	&:visited {
 		color: white;
 	}
-	&:hover {
+	&:hover, &:focus {
 		color: white;
 		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
 	}
-	&:active {
-		box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
-	}
-	
 }
 .button.hollow.secondary {
 	border-color: #D2D2D2;
 	color: #D2D2D2;
-	&:hover {
+	&:hover, &:focus {
 		background-color:#D2D2D2;
 	}
+	
 }
 
 .vaccine-record .vax-name {
-	background-color:#3a3a3c; 
+	background-color:$kc-grey; 
 	color:white; 
-	border-color: #3a3a3c;
+	border: 1px solid $kc-grey;
 	width:200px;
+	font-size: 1rem;
 }
-.vaccine-record tbody {border-color: #3a3a3c;}
+.vaccine-record tbody {border-color: $kc-grey;}
 .vaccine-record thead {border: none;}
-.vaccine-record thead th {min-height: 60px;}
+.vaccine-record thead th {min-height: 60px; font-size:13px;}
+.vaccine-record td {font-size: 13px;}
 
+.no-dose {
+		border:1px solid $kc-grey;
+		font-weight: normal;
+		font-style:italic; 	
+	}
 
 #callout-patient {
 	padding-bottom: 0;
@@ -88,3 +96,30 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
+
+.result-name {
+		font-size: 1.25rem;
+		margin-bottom:$global-margin;
+		display: block;
+		text-decoration: underline;
+		font-weight: bold;
+		color:$anchor-color;
+		&:active {color:$button-background-hover;}
+	}
+.result-box {
+	border-top:1px solid $medium-gray;
+	span {padding-right:1rem;}
+	a {
+		font-size: .85rem;
+		display: block;
+		padding:.25rem;
+		color:$kc-grey;
+		&:visited {color:$kc-grey;}
+		&:hover {background:#F1F1F1;}
+		&:focus {background:#F1F1F1;}
+	}
+	
+}
+.footer a.button {text-decoration: none;}
+

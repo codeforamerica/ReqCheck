@@ -1,0 +1,10 @@
+<div class="row align-center">
+    <div class="columns small-12 large-8 medium-8">
+        <h1>Upload XML File</h1>
+        <%= form_tag("/xml", method: "post", multipart: true) do %>
+          <%= label_tag(:uploaded_file, "XML_File:") %>
+          <%= file_field_tag(:uploaded_file) %>
+          <button><%= submit_tag "Upload", class:"button radius" %></button>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,1156 @@
+<antigenSupportingData>
+<immunity>
+</immunity>
+<series>
+<seriesName>PCV Standard Series</seriesName>
+<targetDisease>Pneumococcal</targetDisease>
+<vaccineGroup>Pneumococcal</vaccineGroup>
+<selectBest>
+<defaultSeries>No</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>1</seriesPreference>
+<minAgeToStart>n/a</minAgeToStart>
+<maxAgeToStart>12 months - 4 days</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>6 weeks - 4 days</absMinAge>
+<minAge>6 weeks</minAge>
+<earliestRecAge>2 months</earliestRecAge>
+<latestRecAge>3 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge>10 weeks - 4 days</absMinAge>
+<minAge>10 weeks</minAge>
+<earliestRecAge>4 months</earliestRecAge>
+<latestRecAge>5 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>13 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 24 months or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>24 months - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 3</doseNumber>
+<age>
+<absMinAge>14  weeks - 4 days</absMinAge>
+<minAge>14 weeks</minAge>
+<earliestRecAge>6 months</earliestRecAge>
+<latestRecAge>7 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>13 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 12 months or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 4</doseNumber>
+<age>
+<absMinAge>12 months - 4 days</absMinAge>
+<minAge>12 months</minAge>
+<earliestRecAge>12 months</earliestRecAge>
+<latestRecAge>16 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>6 months</earliestRecInt>
+<latestRecInt>7 months + 4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 5</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>8 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient  has received 1 or more doses of PCV13</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>0</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>133</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+<series>
+<seriesName>PCV Dose 2 at 7 mo Series</seriesName>
+<targetDisease>Pneumococcal</targetDisease>
+<vaccineGroup>Pneumococcal</vaccineGroup>
+<selectBest>
+<defaultSeries>No</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>2</seriesPreference>
+<minAgeToStart>n/a</minAgeToStart>
+<maxAgeToStart>12 months - 4 days</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>6 weeks - 4 days</absMinAge>
+<minAge>6 weeks</minAge>
+<earliestRecAge>2 months</earliestRecAge>
+<latestRecAge>3 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge>10 weeks - 4 days</absMinAge>
+<minAge>10 weeks</minAge>
+<earliestRecAge>4 months</earliestRecAge>
+<latestRecAge>5 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>13 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required for those 7 months or older</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>7 months - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount/>
+<doseType/>
+<doseCountLogic/>
+<vaccineTypes/>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 3</doseNumber>
+<age>
+<absMinAge>14  weeks - 4 days</absMinAge>
+<minAge>14 weeks</minAge>
+<earliestRecAge>6 months</earliestRecAge>
+<latestRecAge>7 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>4 weeks - 4 days</absMinInt>
+<minInt>4 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>13 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 4</doseNumber>
+<age>
+<absMinAge>12 months - 4 days</absMinAge>
+<minAge>12 months</minAge>
+<earliestRecAge>12 months</earliestRecAge>
+<latestRecAge>16 months + 4 weeks</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>6 months</earliestRecInt>
+<latestRecInt>7 months + 4 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 5</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>8 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient  has received 1 or more doses of PCV13</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>0</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>133</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+<series>
+<seriesName>PCV Start at 12 mo Series</seriesName>
+<targetDisease>Pneumococcal</targetDisease>
+<vaccineGroup>Pneumococcal</vaccineGroup>
+<selectBest>
+<defaultSeries>No</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>3</seriesPreference>
+<minAgeToStart>n/a</minAgeToStart>
+<maxAgeToStart>24 months - 4 days</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>12 months - 4 days</absMinAge>
+<minAge>12 months</minAge>
+<earliestRecAge>12 months</earliestRecAge>
+<latestRecAge>12 months</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>8 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 3</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>8 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient  has received 1 or more doses of PCV13</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>12 months - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>0</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>133</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+<series>
+<seriesName>PCV Start at 24 mo Series</seriesName>
+<targetDisease>Pneumococcal</targetDisease>
+<vaccineGroup>Pneumococcal</vaccineGroup>
+<selectBest>
+<defaultSeries>No</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>4</seriesPreference>
+<minAgeToStart>n/a</minAgeToStart>
+<maxAgeToStart>n/a</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>24 months - 4 days</absMinAge>
+<minAge>24 months</minAge>
+<earliestRecAge>24 months</earliestRecAge>
+<latestRecAge>24 months</latestRecAge>
+<maxAge>5 years</maxAge>
+</age>
+<interval/>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV7</vaccineType>
+<cvx>100</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal, unspecified formulation</vaccineType>
+<cvx>109</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<allowableVaccine>
+<vaccineType>Pneumococcal Conjugate, unspecified formulation</vaccineType>
+<cvx>152</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge>5 years</maxAge>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>8 weeks - 4 days</absMinInt>
+<minInt>8 weeks</minInt>
+<earliestRecInt>8 weeks</earliestRecInt>
+<latestRecInt>8 weeks</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge>5 years</endAge>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks - 4 days</beginAge>
+<endAge/>
+</allowableVaccine>
+<conditionalSkip>
+<setLogic>n/a</setLogic>
+<set>
+<setID>1</setID>
+<setDescription>Dose is not required if the patient  has received 1 or more doses of PCV13</setDescription>
+<conditionLogic/>
+<condition>
+<conditionID>1</conditionID>
+<conditionType>Vaccine Count by Age</conditionType>
+<startDate/>
+<endDate/>
+<beginAge>24 months - 4 days</beginAge>
+<endAge/>
+<interval/>
+<doseCount>0</doseCount>
+<doseType>Valid</doseType>
+<doseCountLogic>greater than</doseCountLogic>
+<vaccineTypes>133</vaccineTypes>
+</condition>
+</set>
+</conditionalSkip>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+<series>
+<seriesName>65+ PCV13 then PPSV23</seriesName>
+<targetDisease>Pneumococcal</targetDisease>
+<vaccineGroup>Pneumococcal</vaccineGroup>
+<selectBest>
+<defaultSeries>No</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>5</seriesPreference>
+<minAgeToStart>5 years</minAgeToStart>
+<maxAgeToStart>n/a</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>19 years</absMinAge>
+<minAge>65 years</minAge>
+<earliestRecAge>65 Years</earliestRecAge>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>N</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent>
+<vaccineType>PPSV23</vaccineType>
+<cvx>33</cvx>
+</fromMostRecent>
+<absMinInt>0 days</absMinInt>
+<minInt>1 year</minInt>
+<earliestRecInt>1 year</earliestRecInt>
+<latestRecInt/>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine/>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge>65 years</absMinAge>
+<minAge>65 years</minAge>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>0 days</absMinInt>
+<minInt>1 year</minInt>
+<earliestRecInt>1 year</earliestRecInt>
+<latestRecInt/>
+<intervalPriority/>
+</interval>
+<interval>
+<fromPrevious>N</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent>
+<vaccineType>PPSV23</vaccineType>
+<cvx>33</cvx>
+</fromMostRecent>
+<absMinInt>0 days</absMinInt>
+<minInt>5 years</minInt>
+<earliestRecInt>5 years</earliestRecInt>
+<latestRecInt>5 years</latestRecInt>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PPSV23</vaccineType>
+<cvx>33</cvx>
+<beginAge>2 Years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine/>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+<series>
+<seriesName>65+ PPSV23 then PCV13</seriesName>
+<targetDisease>Pneumococcal</targetDisease>
+<vaccineGroup>Pneumococcal</vaccineGroup>
+<selectBest>
+<defaultSeries>No</defaultSeries>
+<productPath>No</productPath>
+<seriesPreference>6</seriesPreference>
+<minAgeToStart>65 years</minAgeToStart>
+<maxAgeToStart>n/a</maxAgeToStart>
+</selectBest>
+<seriesDose>
+<doseNumber>Dose 1</doseNumber>
+<age>
+<absMinAge>65 years</absMinAge>
+<minAge>65 years</minAge>
+<earliestRecAge>65 Years</earliestRecAge>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>N</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent>
+<vaccineType>PPSV23</vaccineType>
+<cvx>33</cvx>
+</fromMostRecent>
+<absMinInt>0 days</absMinInt>
+<minInt>5 years</minInt>
+<earliestRecInt>5 years</earliestRecInt>
+<latestRecInt/>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PPSV23</vaccineType>
+<cvx>33</cvx>
+<beginAge>2 years</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>N</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine/>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+<seriesDose>
+<doseNumber>Dose 2</doseNumber>
+<age>
+<absMinAge/>
+<minAge/>
+<earliestRecAge/>
+<latestRecAge/>
+<maxAge/>
+</age>
+<interval>
+<fromPrevious>Y</fromPrevious>
+<fromTargetDose/>
+<fromMostRecent/>
+<absMinInt>0 days</absMinInt>
+<minInt>1 year</minInt>
+<earliestRecInt>1 year</earliestRecInt>
+<latestRecInt/>
+<intervalPriority/>
+</interval>
+<allowableInterval/>
+<preferableVaccine>
+<vaccineType>PCV13</vaccineType>
+<cvx>133</cvx>
+<beginAge>6 weeks</beginAge>
+<endAge/>
+<tradeName/>
+<mvx/>
+<volume>0.5</volume>
+<forecastVaccineType>Y</forecastVaccineType>
+</preferableVaccine>
+<allowableVaccine/>
+<conditionalSkip/>
+<recurringDose>No</recurringDose>
+<seasonalRecommendation/>
+<requiredGender/>
+</seriesDose>
+</series>
+</antigenSupportingData>

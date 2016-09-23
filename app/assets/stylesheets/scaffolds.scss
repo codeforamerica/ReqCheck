@@ -2,8 +2,8 @@ body {
   background-color: #F1F1F1;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 1rem;
+  line-height: 1.2;
   height: auto !important;
   display: flex;
   min-height: 100vh;
@@ -12,12 +12,6 @@ body {
 
 .container {
   flex: 1 0;
-}
-
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
 }
 
 pre {
