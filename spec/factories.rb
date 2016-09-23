@@ -65,9 +65,9 @@ FactoryGirl.define do
     condition_type 'age'
 
     after(:create) do |condition|
-      if condition.condition_type == 'Age' && condition.begin_age.nil?
+      if condition.condition_type == 'age' && condition.begin_age.nil?
         condition.begin_age = '4 years - 4 days'
-      elsif condition.condition_type == 'Interval' && condition.interval.nil?
+      elsif condition.condition_type == 'interval' && condition.interval.nil?
         condition.interval = '6 months - 4 days'
       end
     end

@@ -39,8 +39,10 @@ module TargetDoseEvaluation
         patient_vaccine_doses: patient_vaccine_doses,
         satisfied_target_doses: previous_satisfied_target_doses
       )
-      target_dose_status[:details][:conditional_skip] = [:evaluation_status]
+      target_dose_status[:details][:conditional_skip] =
+        conditional_skip_evaluation[:evaluation_status]
       if conditional_skip_evaluation[:evaluation_status] == 'conditional_skip_met'
+        target_dose_status[:target_dose_status]  = 'skipped'
         return target_dose_status
       end
     else

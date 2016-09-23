@@ -3,6 +3,8 @@ require 'target_dose_evaluation'
 
 RSpec.describe TargetDoseEvaluation do
   include AntigenImporterSpecHelper
+  include PatientSpecHelper
+
   before(:all) { seed_antigen_xml_polio }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
@@ -131,7 +133,67 @@ RSpec.describe TargetDoseEvaluation do
       )
       expect(evaluation_hash).to eq(expected_result)
     end
-    xcontext 'when conditional_skip is not_valid' do
+    context 'when conditional_skip is met' do
+      let(:valid_conditional_patient) do
+        test_patient = FactoryGirl.create(:patient_with_profile,
+                                          dob: 5.years.ago)
+        FactoryGirl.create(
+          :vaccine_dose_by_cvx,
+          patient_profile: test_patient.patient_profile,
+          cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
+          date_administered: (test_patient.dob + 3.years)
+        )
+        FactoryGirl.create(
+          :vaccine_dose_by_cvx,
+          patient_profile: test_patient.patient_profile,
+          cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
+          date_administered: (test_patient.dob + 4.years)
+        )
+        test_patient.reload
+        test_patient
+      end
+      it 'returns satisfied' do
+        # Dose is not required for those 4 years or older when the interval
+        # from the last dose is 6 months
+        patient = valid_conditional_patient
+        patient_vaccines     = patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = patient.dob
+        patient_gender       = patient.gender
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
+
+        expected_result = {
+          evaluation_status: 'skipped',
+          target_dose_status: 'satisfied',
+          details: {
+            conditional_skip: 'conditional_skip_met'
+          }
+        }
+
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          preferable_intervals: [],
+          allowable_intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: nil
+        )
+        expect(evaluation_hash).to eq(expected_result)
+      end
+      it 'does not evaluate age and exits the evaluation' do
+
+      end
     end
     context 'when age is not_valid' do
       it 'returns satisfied for first dose age valid' do
