@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require_relative '../spec/support/vax_codes'
+require_relative '../spec/support/kcmo_data'
 
 patients_list = [
   ['Jared', 'Leto', '02/08/1990', 'M'],
@@ -64,4 +65,6 @@ end
 
 antigen_importer = AntigenImporter.new
 antigen_importer.import_antigen_xml_files('spec/support/xml')
+
+KCMODATA.create_db_patients
 
