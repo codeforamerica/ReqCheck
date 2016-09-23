@@ -30,14 +30,15 @@ class TargetDose
     previous_satisfied_target_doses=[]
   )
     if !@status_hash.nil? && @status_hash[:evaluation_status] == 'valid'
-      raise Error('The TargetDose has already evaluated to True')
+      raise Error('The TargetDose is already Valid!')
     end
     @antigen_administered_record = antigen_administered_record
     @status_hash = evaluate_satisfy_target_dose(
       antigen_administered_record,
       previous_satisfied_target_doses
     )
-    @satisfied   = @status_hash[:target_dose_status] == 'satisfied'
+    @satisfied   =
+      ['satisfied', 'skipped'].include?(@status_hash[:target_dose_status])
     @satisfied
   end
 

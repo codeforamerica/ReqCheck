@@ -45,6 +45,10 @@ RSpec.describe TargetDoseEvaluation do
     test_patient
   end
 
+  let(:fake_target_doses) do
+    create_fake_valid_target_doses(test_patient.vaccine_doses)
+  end
+
   let(:interval_objects) do
     second_as_dose_object.intervals
   end
@@ -62,11 +66,14 @@ RSpec.describe TargetDoseEvaluation do
       second_vaccine_dose = patient_vaccines[1]
       patient_dob         = test_patient.dob
       patient_gender      = test_patient.gender
+      fake_target_doses    =
+        create_fake_valid_target_doses(patient_vaccines[0..-2])
 
       expected_result = {
         evaluation_status: 'valid',
         target_dose_status: 'satisfied',
         details: {
+          conditional_skip: 'conditional_skip_not_met',
           age: 'on_schedule',
           preferable_intervals: ['no_intervals_required'],
           allowable_intervals: ['no_intervals_required'],
@@ -83,6 +90,7 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob: patient_dob,
         patient_gender: patient_gender,
         patient_vaccine_doses: patient_vaccines,
+        previous_satisfied_target_doses: fake_target_doses,
         dose_cvx: first_vaccine_dose.cvx_code,
         date_of_dose: first_vaccine_dose.date_administered,
         dose_volume: first_vaccine_dose.dosage,
@@ -98,6 +106,8 @@ RSpec.describe TargetDoseEvaluation do
       second_vaccine_dose  = patient_vaccines[1]
       patient_dob          = test_patient.dob
       patient_gender       = test_patient.gender
+      fake_target_doses    =
+        create_fake_valid_target_doses(patient_vaccines[0..-2])
 
       previous_status_hash = {
         evaluation_status: 'valid',
@@ -108,6 +118,7 @@ RSpec.describe TargetDoseEvaluation do
         evaluation_status: 'valid',
         target_dose_status: 'satisfied',
         details: {
+          conditional_skip: 'conditional_skip_not_met',
           age: 'on_schedule',
           preferable_intervals: ['no_intervals_required'],
           allowable_intervals: ['no_intervals_required'],
@@ -124,6 +135,7 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob: patient_dob,
         patient_gender: patient_gender,
         patient_vaccine_doses: patient_vaccines,
+        previous_satisfied_target_doses: fake_target_doses,
         dose_cvx: second_vaccine_dose.cvx_code,
         date_of_dose: second_vaccine_dose.date_administered,
         dose_volume: second_vaccine_dose.dosage,
@@ -165,8 +177,8 @@ RSpec.describe TargetDoseEvaluation do
           create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expected_result = {
-          evaluation_status: 'skipped',
-          target_dose_status: 'satisfied',
+          evaluation_status: 'valid',
+          target_dose_status: 'skipped',
           details: {
             conditional_skip: 'conditional_skip_met'
           }
@@ -192,7 +204,37 @@ RSpec.describe TargetDoseEvaluation do
         expect(evaluation_hash).to eq(expected_result)
       end
       it 'does not evaluate age and exits the evaluation' do
+        # Dose is not required for those 4 years or older when the interval
+        # from the last dose is 6 months
+        patient = valid_conditional_patient
+        patient_vaccines     = patient.vaccine_doses
+        first_vaccine_dose   = patient_vaccines[0]
+        second_vaccine_dose  = patient_vaccines[1]
+        patient_dob          = patient.dob
+        patient_gender       = patient.gender
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
+        evaluation_hash = test_object.evaluate_target_dose_satisfied(
+          conditional_skip: conditional_skip_object,
+          antigen_series_dose: as_dose_object,
+          preferable_intervals: [],
+          allowable_intervals: [],
+          antigen_series_dose_vaccines: as_dose_object.dose_vaccines,
+          patient_dob: patient_dob,
+          patient_gender: patient_gender,
+          patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
+          dose_cvx: second_vaccine_dose.cvx_code,
+          date_of_dose: second_vaccine_dose.date_administered,
+          dose_volume: second_vaccine_dose.dosage,
+          dose_trade_name: '',
+          date_of_previous_dose: first_vaccine_dose.date_administered,
+          previous_dose_status_hash: nil
+        )
+        expect(evaluation_hash[:details].length).to eq(1)
+        expect(evaluation_hash[:details][:conditional_skip])
+          .to eq('conditional_skip_met')
       end
     end
     context 'when age is not_valid' do
@@ -202,12 +244,15 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          =
           (vaccine_dose.date_administered - 6.weeks + 1.day)
         patient_gender       = test_patient.gender
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         previous_status_hash = nil
         expected_result = {
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'grace_period',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -224,6 +269,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
@@ -238,6 +284,8 @@ RSpec.describe TargetDoseEvaluation do
         vaccine_dose         = patient_vaccines[0]
         patient_dob          = (vaccine_dose.date_administered - 5.weeks)
         patient_gender       = test_patient.gender
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         previous_status_hash = nil
         expected_result = {
@@ -245,6 +293,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'age',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'too_young'
           }
         }
@@ -258,6 +307,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
@@ -274,12 +324,15 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          =
           (second_vaccine_dose.date_administered - 6.weeks + 1.day)
         patient_gender       = test_patient.gender
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         previous_status_hash = {
           evaluation_status: 'not_valid',
           target_dose_status: 'not_satisfied',
           reason: 'age',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'too_young'
           }
         }
@@ -288,6 +341,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'age',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'too_young'
           }
         }
@@ -301,6 +355,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -317,6 +372,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          =
           (second_vaccine_dose.date_administered - 6.weeks + 1.day)
         patient_gender       = test_patient.gender
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         previous_status_hash = {
           evaluation_status: 'valid',
@@ -326,6 +383,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'grace_period',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -342,6 +400,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -367,6 +426,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
         new_intervals        = [test_preferable_intervals.first]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(new_intervals.first.interval_absolute_min)
           .to eq('6 months - 4 days')
@@ -384,6 +445,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'interval',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['too_soon'],
             allowable_intervals: ['no_intervals_required']
@@ -399,6 +461,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -415,6 +478,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
         new_intervals        = [test_preferable_intervals.first]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(new_intervals.first.interval_absolute_min)
           .to eq('6 months - 4 days')
@@ -431,6 +496,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['on_schedule'],
             allowable_intervals: ['no_intervals_required'],
@@ -447,6 +513,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -464,6 +531,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
         new_intervals        = [test_preferable_intervals.first]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(new_intervals.first.interval_min).to eq('6 months')
         expect(new_intervals.first.interval_absolute_min)
@@ -484,6 +553,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'interval',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['too_soon'],
             allowable_intervals: ['no_intervals_required']
@@ -499,6 +569,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -516,6 +587,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
         new_intervals        = [test_preferable_intervals.first]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(new_intervals.first.interval_min).to eq('6 months')
         expect(new_intervals.first.interval_absolute_min)
@@ -534,6 +607,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['grace_period'],
             allowable_intervals: ['no_intervals_required'],
@@ -550,6 +624,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -576,6 +651,9 @@ RSpec.describe TargetDoseEvaluation do
         second_vaccine_dose.update(
           date_administered: (first_vaccine_dose.date_administered + 2.weeks)
         )
+        patient_vaccines     = [first_vaccine_dose, second_vaccine_dose]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         previous_status_hash = {
           evaluation_status: 'valid',
@@ -586,6 +664,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'interval',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['too_soon', 'too_soon']
@@ -601,6 +680,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -617,6 +697,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
         new_intervals        = [test_allowable_intervals.last]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(new_intervals.first.interval_absolute_min)
           .to eq('4 months')
@@ -633,6 +715,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['on_schedule'],
@@ -649,6 +732,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -666,6 +750,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
         new_intervals        = [test_allowable_intervals.last]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(new_intervals.first.interval_min).to eq('')
         expect(new_intervals.first.interval_absolute_min)
@@ -686,6 +772,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'interval',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['too_soon']
@@ -701,6 +788,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -721,6 +809,8 @@ RSpec.describe TargetDoseEvaluation do
         patient_dob          = test_patient.dob
         patient_gender       = test_patient.gender
         new_intervals        = [test_allowable_intervals.last]
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(new_intervals.first.interval_min).to eq('')
         expect(new_intervals.first.interval_absolute_min)
@@ -740,6 +830,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['grace_period'],
@@ -756,6 +847,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: second_vaccine_dose.cvx_code,
           date_of_dose: second_vaccine_dose.date_administered,
           dose_volume: second_vaccine_dose.dosage,
@@ -807,6 +899,8 @@ RSpec.describe TargetDoseEvaluation do
           (vaccine_dose.date_administered - 6.weeks + 5.days)
         patient_gender       = test_patient.gender
         as_dose_object.absolute_min_age = '1 week'
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         expect(vaccine_dose.cvx_code).to eq(110)
 
@@ -822,6 +916,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'preferable_vaccine_evaluation',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'grace_period',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -838,6 +933,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
@@ -855,6 +951,8 @@ RSpec.describe TargetDoseEvaluation do
           (vaccine_dose.date_administered - 6.weeks)
         patient_gender       = test_patient.gender
         as_dose_object.absolute_min_age = '1 week'
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
           dose.cvx_code == 110
@@ -870,6 +968,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'preferable_vaccine_evaluation',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -886,6 +985,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
@@ -903,6 +1003,8 @@ RSpec.describe TargetDoseEvaluation do
           (vaccine_dose.date_administered - 6.weeks)
         patient_gender       = test_patient.gender
         as_dose_object.absolute_min_age = '1 week'
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
           dose.cvx_code == 10
@@ -916,6 +1018,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -932,6 +1035,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
@@ -949,6 +1053,8 @@ RSpec.describe TargetDoseEvaluation do
 
         patient_dob          =
           (vaccine_dose.date_administered - 6.weeks)
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
         patient_gender       = test_patient.gender
         as_dose_object.absolute_min_age = '1 week'
 
@@ -964,6 +1070,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -980,6 +1087,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
@@ -996,6 +1104,8 @@ RSpec.describe TargetDoseEvaluation do
           (vaccine_dose.date_administered - 6.weeks)
         patient_gender       = test_patient.gender
         as_dose_object.absolute_min_age = '1 week'
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
           dose.cvx_code == 10
@@ -1007,6 +1117,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'on_schedule',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -1023,6 +1134,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: '0.5',
@@ -1049,6 +1161,8 @@ RSpec.describe TargetDoseEvaluation do
           (vaccine_dose.date_administered - 6.weeks + 5.days)
         patient_gender       = test_patient.gender
         as_dose_object.absolute_min_age = '1 week'
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
           dose.cvx_code == 10
@@ -1065,6 +1179,7 @@ RSpec.describe TargetDoseEvaluation do
           target_dose_status: 'not_satisfied',
           reason: 'allowable_vaccine_evaluation',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'grace_period',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -1081,6 +1196,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
@@ -1097,6 +1213,8 @@ RSpec.describe TargetDoseEvaluation do
           (vaccine_dose.date_administered - 6.weeks + 3.days)
         patient_gender       = test_patient.gender
         as_dose_object.absolute_min_age = '1 week'
+        fake_target_doses    =
+          create_fake_valid_target_doses(patient_vaccines[0..-2])
 
         preferable_dose = as_dose_object.preferable_vaccines.find do |dose|
           dose.cvx_code == 10
@@ -1112,6 +1230,7 @@ RSpec.describe TargetDoseEvaluation do
           evaluation_status: 'valid',
           target_dose_status: 'satisfied',
           details: {
+            conditional_skip: 'conditional_skip_not_met',
             age: 'grace_period',
             preferable_intervals: ['no_intervals_required'],
             allowable_intervals: ['no_intervals_required'],
@@ -1128,6 +1247,7 @@ RSpec.describe TargetDoseEvaluation do
           patient_dob: patient_dob,
           patient_gender: patient_gender,
           patient_vaccine_doses: patient_vaccines,
+          previous_satisfied_target_doses: fake_target_doses,
           dose_cvx: vaccine_dose.cvx_code,
           date_of_dose: vaccine_dose.date_administered,
           dose_volume: vaccine_dose.dosage,
