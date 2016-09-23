@@ -19,7 +19,7 @@ module TargetDoseEvaluation
     date_of_dose:,
     dose_trade_name: '',
     dose_volume: nil,
-    previous_satisfied_target_dose_dates: [],
+    previous_satisfied_target_doses: [],
     date_of_previous_dose: nil,
     previous_dose_status_hash: nil
   )
@@ -28,14 +28,24 @@ module TargetDoseEvaluation
       evaluation_status: 'valid',
       details: {}
     }
+    previous_satisfied_target_dose_dates =
+      previous_satisfied_target_doses.map(&:date_administered)
     # Evaluate Conditional Skip
-    # conditional_skip_evaluation = evaluate_conditional_skip(
-    #   conditional_skip,
-    #   patient_dob: patient_dob,
-    #   date_of_dose: date_of_dose,
-    #   patient_vaccine_doses: patient_vaccine_doses,
-    #   date_of_previous_dose: date_of_previous_dose
-    # )
+    if !conditional_skip.nil?
+      conditional_skip_evaluation = evaluate_conditional_skip(
+        conditional_skip,
+        patient_dob: patient_dob,
+        date_of_dose: date_of_dose,
+        patient_vaccine_doses: patient_vaccine_doses,
+        satisfied_target_doses: previous_satisfied_target_doses
+      )
+      target_dose_status[:details][:conditional_skip] = [:evaluation_status]
+      if conditional_skip_evaluation[:evaluation_status] == 'conditional_skip_met'
+        return target_dose_status
+      end
+    else
+      target_dose_status[:details][:conditional_skip] = 'no_conditional_skip'
+    end
     # Evaluate Age
     age_evaluation = evaluate_age(
       antigen_series_dose,
