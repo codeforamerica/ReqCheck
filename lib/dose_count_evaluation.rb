@@ -1,5 +1,4 @@
 module DoseCountEvaluation
-
   def match_vaccine_doses_with_cvx_codes(vaccine_doses_administered,
                                          vaccine_types_cvx_codes)
     # What if there are no 'vaccine_types'?
