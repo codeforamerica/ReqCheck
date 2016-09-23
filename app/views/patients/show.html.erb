@@ -77,7 +77,7 @@
                     <tr>
                         <th class="vax-name">Hepatitis B</th>
                         <% if @patient.get_vaccine_doses(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).length == 0 %>
-                            <th>no</th>
+                            <th class="no-dose">No doses recorded</th>
                         <% else %>
                             <th>Trade Name</th>
                             <th>Date Given</th>
@@ -107,7 +107,7 @@
                     <tr>
                         <th class="vax-name">Diptheria, Tetanus, Pertussis</th>
                         <% if @patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).length == 0 %>
-                            <th>no</th>
+                            <th class="no-dose">No doses recorded</th>
                         <% else %>
                             <th>Trade Name</th>
                             <th>Date Given</th>
