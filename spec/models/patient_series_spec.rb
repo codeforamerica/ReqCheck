@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PatientSeries, type: :model do
+  include AntigenImporterSpecHelper
+
   before(:all) { seed_antigen_xml_polio }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 

@@ -61,7 +61,21 @@ class RecordEvaluator
         result_hash[vaccine_group_key] = [antigen_evaluator.evaluation_status]
       end
     end
-    result_hash
+    normalize_vaccine_group_names(result_hash)
+  end
+
+  def normalize_vaccine_group_names(vaccine_group_hash)
+    {
+      'dtap/tdap/td': :dtap,
+      'hep a': :hepa,
+      'zoster ': 'zoster'
+    }.each do |key, new_key|
+      if vaccine_group_hash.has_key?(key)
+        vaccine_group_hash[new_key] = vaccine_group_hash[key]
+        vaccine_group_hash.delete(key)
+      end
+    end
+    vaccine_group_hash
   end
 
   def evaluate_vaccine_group_hash(vaccine_group_hash)

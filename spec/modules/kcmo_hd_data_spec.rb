@@ -23,6 +23,7 @@ RSpec.describe 'KCMO_HD_Data' do
   it 'testing' do
     KCMODATA.all_db_patients.each do |db_patient|
       puts '#####################'
+      puts db_patient.dob
       puts db_patient.first_name
       puts db_patient.last_name
       puts db_patient.evaluation_status
