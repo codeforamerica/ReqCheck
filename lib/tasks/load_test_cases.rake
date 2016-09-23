@@ -31,17 +31,20 @@ def create_patient(row, load_code)
   Patient.create(first_name: "Test #{row['CDC_Test_ID']}",
                  last_name: "Tester #{load_code}",
                  patient_profile_attributes: { 
-                   dob: fix_date(row['DOB']), 
+                   dob: fix_date(row['DOB']),
+                   gender: row['Gender'],
                    record_number: $. }
                 )
 end
 
 def create_immunization(patient_profile, row, series_num)
-  Immunization.create(vaccine_code: row["CVX_#{series_num}"],
-                      description: row["Vaccine_Name_#{series_num}"],
-                      imm_date: fix_date(row["Date_Administered_#{series_num}"]), 
-                      patient_profile: patient_profile
-                     )
+  VaccineDose.create(cvx_code: row["CVX_#{series_num}"],
+                     mvx_code: row["MVX_#{series_num}"],
+                     vaccine_code: row['Vaccine_Group'],  # slightly guessing on if these correspond
+                     description: row["Vaccine_Name_#{series_num}"],
+                     date_administered: fix_date(row["Date_Administered_#{series_num}"]),
+                     patient_profile: patient_profile
+                    )
 end
 
 def fix_date date_string
@@ -52,7 +55,7 @@ end
 # CDC_Test_ID
 # Test_Case_Name
 # DOB
-# Gender (not in patient_profile)
+# Gender
 # Med_History_Text
 # Med_History_Code
 # Med_History_Code_Sys
