@@ -91,12 +91,7 @@ class TargetDose
                                    previous_satisfied_target_doses=[])
     previous_status_hash        = nil
     date_of_previous_dose       = nil
-    satisfied_target_dose_dates = []
     unless previous_satisfied_target_doses.length == 0
-      satisfied_target_dose_dates =
-        previous_satisfied_target_doses.map do |satisfied_target_dose|
-          satisfied_target_dose.antigen_administered_record.date_administered
-        end
       previous_target_dose = previous_satisfied_target_doses[-1]
       previous_status_hash =
         previous_target_dose.status_hash
@@ -118,7 +113,7 @@ class TargetDose
       dose_volume: antigen_administered_record.dosage,
       date_of_previous_dose: date_of_previous_dose,
       previous_dose_status_hash: previous_status_hash,
-      previous_satisfied_target_dose_dates: satisfied_target_dose_dates
+      previous_satisfied_target_doses: previous_satisfied_target_doses
     )
   end
 end

@@ -19,8 +19,8 @@ module TargetDoseEvaluation
     date_of_dose:,
     dose_trade_name: '',
     dose_volume: nil,
-    previous_satisfied_target_doses: [],
     date_of_previous_dose: nil,
+    previous_satisfied_target_doses: [],
     previous_dose_status_hash: nil
   )
     target_dose_status = {
