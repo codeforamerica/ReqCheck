@@ -548,7 +548,6 @@ RSpec.describe AntigenImporter, type: :model do
       end
     end
 
-
     describe '#create_conditional_skip_conditions' do
       let(:single_condition_set_hash) do
         new_xml_hash = antigen_importer.xml_to_hash(TestAntigen::ANTIGENSTRINGDIPHTHERIA)
@@ -582,6 +581,167 @@ RSpec.describe AntigenImporter, type: :model do
           conditional_skip_set
         )
         expect(conditions.length).to eq(2)
+      end
+    end
+    describe 'cvx_to_antigen methods' do
+      let(:valid_cvx_to_antigen_map) do
+        <<-eos
+          <cvxMap>
+          <cvx>01</cvx>
+          <shortDescription>DTP</shortDescription>
+          <association>
+          <antigen>Diphtheria</antigen>
+          <associationBeginAge />
+          <associationEndAge />
+          </association>
+          <association>
+          <antigen>Tetanus</antigen>
+          <associationBeginAge />
+          <associationEndAge />
+          </association>
+          <association>
+          <antigen>Pertussis</antigen>
+          <associationBeginAge />
+          <associationEndAge />
+          </association>
+          </cvxMap>
+        eos
+      end
+      describe '#pull_cvx_to_antigen_arguments' do
+        it 'pulls the information into an argument hash' do
+          cvx_hash = antigen_importer.xml_to_hash(valid_cvx_to_antigen_map)
+          cvx_hash = cvx_hash['cvxMap']
+          argument_hash =
+            antigen_importer.pull_cvx_to_antigen_arguments(cvx_hash)
+
+          expected_argument_hash = {
+            cvx_code: 01,
+            short_description: 'dtp',
+            antigens: ['diphtheria', 'tetanus', 'pertussis']
+          }
+          expect(argument_hash).to eq(expected_argument_hash)
+        end
+        it 'can handle a singular antigen map' do
+          cvx_to_antigen_map = <<-eos
+            <cvxMap>
+            <cvx>01</cvx>
+            <shortDescription>DTP</shortDescription>
+            <association>
+            <antigen>Diphtheria</antigen>
+            <associationBeginAge />
+            <associationEndAge />
+            </association>
+            </cvxMap>
+          eos
+          cvx_hash      = antigen_importer.xml_to_hash(cvx_to_antigen_map)
+          cvx_hash      = cvx_hash['cvxMap']
+          argument_hash =
+            antigen_importer.pull_cvx_to_antigen_arguments(cvx_hash)
+
+          expected_argument_hash = {
+            cvx_code: 01,
+            short_description: 'dtp',
+            antigens: ['diphtheria']
+          }
+          expect(argument_hash).to eq(expected_argument_hash)
+        end
+      end
+      describe '#create_or_update_cvx_to_antigen_association' do
+        it 'creates a new VaccineInfo object if none exists' do
+          expect(VaccineInfo.find_by(cvx_code: 01)).to eq(nil)
+          cvx_to_antigen_argument_hash = {
+            cvx_code: 01,
+            short_description: 'dtp',
+            antigens: ['diphtheria', 'tetanus', 'pertussis']
+          }
+          antigen_importer.create_or_update_cvx_to_antigen_association(
+            cvx_to_antigen_argument_hash
+          )
+          expect(VaccineInfo.find_by(cvx_code: 01)).not_to eq(nil)
+        end
+        it 'creates new Antigen objects if none exist' do
+          expect(Antigen.find_by(target_disease: 'diphtheria')).to eq(nil)
+          expect(Antigen.find_by(target_disease: 'tetanus')).to eq(nil)
+          expect(Antigen.find_by(target_disease: 'pertussis')).to eq(nil)
+          cvx_to_antigen_argument_hash = {
+            cvx_code: 01,
+            short_description: 'dtp',
+            antigens: ['diphtheria', 'tetanus', 'pertussis']
+          }
+          antigen_importer.create_or_update_cvx_to_antigen_association(
+            cvx_to_antigen_argument_hash
+          )
+          expect(Antigen.find_by(target_disease: 'diphtheria')).not_to eq(nil)
+          expect(Antigen.find_by(target_disease: 'tetanus')).not_to eq(nil)
+          expect(Antigen.find_by(target_disease: 'pertussis')).not_to eq(nil)
+        end
+        it 'deletes a VaccineInfo object and recreates one if one exists' do
+          cvx_to_antigen_argument_hash = {
+            cvx_code: 01,
+            short_description: 'dtp',
+            antigens: ['diphtheria']
+          }
+          antigen_importer.create_or_update_cvx_to_antigen_association(
+            cvx_to_antigen_argument_hash
+          )
+          vaccine_info_object = VaccineInfo.find_by(cvx_code: 01)
+          expect(vaccine_info_object.antigens.length).to eq(1)
+
+          cvx_to_antigen_argument_hash = {
+            cvx_code: 01,
+            short_description: 'dtp',
+            antigens: ['diphtheria', 'tetanus', 'pertussis']
+          }
+          antigen_importer.create_or_update_cvx_to_antigen_association(
+            cvx_to_antigen_argument_hash
+          )
+          vaccine_info_object2 = VaccineInfo.find_by(cvx_code: 01)
+          expect(vaccine_info_object.id).not_to eq(vaccine_info_object2.id)
+          expect(vaccine_info_object2.antigens.length).to eq(3)
+        end
+        it 'updates the Antigen objects if they exist' do
+          cvx_to_antigen_argument_hash = {
+            cvx_code: 01,
+            short_description: 'dtp',
+            antigens: ['diphtheria', 'tetanus', 'pertussis']
+          }
+          antigen_importer.create_or_update_cvx_to_antigen_association(
+            cvx_to_antigen_argument_hash
+          )
+          diphtheria = Antigen.find_by(target_disease: 'diphtheria')
+          tetanus    = Antigen.find_by(target_disease: 'tetanus')
+          pertussis  = Antigen.find_by(target_disease: 'pertussis')
+
+          expect(diphtheria.vaccine_infos.length).to eq(1)
+          expect(tetanus.vaccine_infos.length).to eq(1)
+          expect(pertussis.vaccine_infos.length).to eq(1)
+
+          cvx_to_antigen_argument_hash2 = {
+            cvx_code: 9,
+            short_description: 'Td (adult), adsorbed',
+            antigens: ['diphtheria', 'tetanus']
+          }
+          antigen_importer.create_or_update_cvx_to_antigen_association(
+            cvx_to_antigen_argument_hash2
+          )
+          expect(VaccineInfo.all.length).to eq(2)
+          [diphtheria, tetanus, pertussis].each { |antigen| antigen.reload }
+          expect(diphtheria.vaccine_infos.length).to eq(2)
+          expect(tetanus.vaccine_infos.length).to eq(2)
+          expect(pertussis.vaccine_infos.length).to eq(1)
+        end
+      end
+      describe '#create_all_cvx_to_antigen_mappings' do
+        let(:valid_cvx_to_antigen_xml_hash) do
+          antigen_importer.xml_to_hash(TestAntigen::CVXTOANTIGENMAP)
+        end
+        it 'creates all mappings in the database' do
+          expect(VaccineInfo.all.length).to eq(0)
+          antigen_importer.create_all_cvx_to_antigen_mappings(
+            valid_cvx_to_antigen_xml_hash
+          )
+          expect(VaccineInfo.all.length).to eq(82)
+        end
       end
     end
   end
