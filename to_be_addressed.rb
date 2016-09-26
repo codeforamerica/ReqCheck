@@ -43,6 +43,9 @@
 # Have not included any sort of check to ensure the vaccine dose administered was valid by expiration or lot recals
 
 
+# Implement interval type 'from_target_dose' for the interval evaluation
+
+
 # Report to CDC issues with the data (hep a and hepb formatting issues, 7 years/7 Years formatting issues), vaccine types spacing differences
 # <condition>
 # <conditionID>1</conditionID>
