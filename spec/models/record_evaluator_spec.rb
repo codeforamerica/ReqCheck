@@ -77,9 +77,9 @@ RSpec.describe RecordEvaluator, type: :model do
       )
       expect(record_evaluator.vaccine_group_evaluations).to eq(
         {
-          :"dtap/tdap/td" => "complete",
-          :"hep a" => "complete",
-          :"zoster " => "complete",
+          :dtap => "complete",
+          :hepa => "complete",
+          :zoster => "complete",
           :hepb => "complete",
           :hib => "not_complete",
           :hpv => "complete",

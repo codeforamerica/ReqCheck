@@ -3,7 +3,7 @@ class PatientSeries
   include CheckType
 
   attr_reader :target_doses, :patient, :antigen_series, :series_status,
-              :satisfied_target_doses
+              :satisfied_target_doses, :unsatisfied_target_dose
 
   def initialize(patient:, antigen_series:)
     CheckType.enforce_type(patient, Patient)
@@ -12,6 +12,7 @@ class PatientSeries
     @antigen_series            = antigen_series
     @target_doses              = create_target_doses(antigen_series, patient)
     @satisfied_target_doses    = []
+    @unsatisfied_target_dose   = nil
     @series_status             = nil
 
     @invalid_antigen_administered_records = []
@@ -31,6 +32,10 @@ class PatientSeries
 
   def set_satisfied_target_doses(satisfied_target_doses)
     @satisfied_target_doses = satisfied_target_doses
+  end
+
+  def set_unsatisfied_target_dose(unsatisfied_target_dose)
+    @unsatisfied_target_dose = unsatisfied_target_dose
   end
 
   def set_series_status(series_status)
@@ -72,7 +77,11 @@ class PatientSeries
     evaluation_hash = evaluate_target_doses(eligible_target_doses,
                                             antigen_administered_records)
     satisfied_target_doses = evaluation_hash[:satisfied_target_doses]
+    unsatisfied_target_dose =
+      evaluation_hash[:unsatisfied_target_dose]
+
     set_satisfied_target_doses(satisfied_target_doses)
+    set_unsatisfied_target_dose(unsatisfied_target_dose)
     status = get_patient_series_status(target_doses,
                                        eligible_target_doses,
                                        satisfied_target_doses)
@@ -95,7 +104,8 @@ class PatientSeries
   def evaluate_target_doses(eligible_target_doses,
                             antigen_administered_records)
     invalid_antigen_administered_records = []
-    satisfied_target_doses = []
+    satisfied_target_doses        = []
+    unsatisfied_target_dose = nil
 
     sorted_aars = sort_by_date_reversed(
       antigen_administered_records
@@ -144,11 +154,13 @@ class PatientSeries
         target_dose_status_hash[:target_dose] = target_dose
         satisfied_target_doses << target_dose_status_hash
       else
+        unsatisfied_target_dose = target_dose
         break
       end
     end
     {
       invalid_antigen_administered_records: invalid_antigen_administered_records,
+      unsatisfied_target_dose: unsatisfied_target_dose,
       satisfied_target_doses: satisfied_target_doses
     }
   end

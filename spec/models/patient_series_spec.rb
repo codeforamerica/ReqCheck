@@ -130,7 +130,7 @@ RSpec.describe PatientSeries, type: :model do
     end
     it 'will error if the target_doses are not in order' do
         target_doses = test_patient_series.target_doses
-        target_doses = test_patient_series.target_doses[1..-1]
+        target_doses = target_doses[1..-1]
         expect{
           test_patient_series.pull_eligible_target_doses(target_doses)
         }.to raise_exception(StandardError)
@@ -285,7 +285,7 @@ RSpec.describe PatientSeries, type: :model do
         end
       end
 
-      it 'returns Complete if the patient is up to date' do
+      it 'returns complete if the patient is up to date' do
         aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
           vaccine_doses_complete
         )
@@ -311,6 +311,20 @@ RSpec.describe PatientSeries, type: :model do
           aars
         )
         expect(evaluation).to eq('not_complete')
+      end
+
+      it 'sets \'unsatisfied_target_dose\' to the target dose not completed' do
+        aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+          vaccine_doses_not_complete
+        )
+        expected_target_dose = patient_series_3_years.target_doses.find do |td|
+          td.antigen_series_dose.id == 3
+        end
+        evaluation = patient_series_3_years.evaluate_patient_series(
+          aars
+        )
+        expect(patient_series_3_years.unsatisfied_target_dose)
+          .to eq(expected_target_dose)
       end
     end
 
