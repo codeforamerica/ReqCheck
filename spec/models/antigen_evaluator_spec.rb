@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AntigenEvaluator, type: :model do
+  include AntigenImporterSpecHelper
   include PatientSpecHelper
 
   before(:all) { seed_antigen_xml_polio }
@@ -66,6 +67,45 @@ RSpec.describe AntigenEvaluator, type: :model do
         antigen_administered_records: aars
       )
       expect(antigen_evaluator.evaluation_status).to eq('not_complete')
+    end
+    it 'sets the next target dose to nil if the antigen is immune' do
+      antigen_evaluator = AntigenEvaluator.new(
+        antigen: test_antigen,
+        patient: test_patient,
+        antigen_administered_records: test_antigen_administered_records
+      )
+      expect(antigen_evaluator.evaluation_status).to eq('immune')
+      expect(antigen_evaluator.next_required_target_dose).to eq(nil)
+    end
+    it 'sets the next target dose if the antigen is complete' do
+      vaccine_doses = valid_2_year_test_patient.vaccine_doses
+      aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+        vaccine_doses
+      )
+
+      antigen_evaluator = AntigenEvaluator.new(
+        antigen: test_antigen,
+        patient: valid_2_year_test_patient,
+        antigen_administered_records: aars
+      )
+      expect(antigen_evaluator.evaluation_status).to eq('complete')
+      expect(antigen_evaluator.next_required_target_dose).to eq('not_complete')
+    end
+    it 'sets the next target dose if the antigen is not_complete' do
+      not_complete_dates = create_valid_dates(test_patient.dob)[0..-2]
+      vaccine_doses = create_patient_vaccines(test_patient, not_complete_dates)
+
+      aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
+        vaccine_doses
+      )
+
+      antigen_evaluator = AntigenEvaluator.new(
+        antigen: test_antigen,
+        patient: test_patient,
+        antigen_administered_records: aars
+      )
+      expect(antigen_evaluator.evaluation_status).to eq('not_complete')
+      expect(antigen_evaluator.next_required_target_dose).to eq('not_complete')
     end
   end
 end

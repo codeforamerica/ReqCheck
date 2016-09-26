@@ -1,5 +1,5 @@
 class AntigenEvaluator
-  attr_reader :antigen_administered_records, :evaluation_status, :antigen
+  attr_reader :antigen_administered_records, :best_patient_series, :antigen
   include AntigenEvaluation
 
   def initialize(patient:, antigen:, antigen_administered_records:)
@@ -14,7 +14,9 @@ class AntigenEvaluator
     end.sort_by { |record| record.date_administered }
 
     @antigen_administered_records = aars
-    @evaluation_status = evaluate_antigen(antigen, patient, aars)
+    @best_patient_series = evaluate_antigen_for_patient_series(antigen,
+                                                               patient,
+                                                               aars)
   end
 
   def target_disease
@@ -23,6 +25,14 @@ class AntigenEvaluator
 
   def vaccine_group
     antigen.vaccine_group
+  end
+
+  def evaluation_status
+    best_patient_series.series_status
+  end
+
+  def next_required_target_dose
+    best_patient_series.unsatisfied_target_dose
   end
 
 end

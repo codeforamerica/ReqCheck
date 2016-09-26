@@ -119,14 +119,15 @@ RSpec.describe AntigenEvaluation do
       expect(evaluation_hash).to eq(expected_result)
     end
   end
-  describe '#get_antigen_evaluation_status ' do
+  describe '#pull_best_patient_series ' do
     it 'takes patient_serieses and antigen_administered_records and returns' \
-       'a status hash' do
+       'the most complete series' do
       patient_dob      = 2.years.ago
       new_test_patient = FactoryGirl.create(:patient_with_profile,
                                             dob: patient_dob)
       valid_dates   = create_valid_dates(new_test_patient.dob)
-      vaccine_doses = create_patient_vaccines(new_test_patient, valid_dates[0..-2])
+      vaccine_doses = create_patient_vaccines(new_test_patient,
+                                              valid_dates[0..-2])
 
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
         vaccine_doses
@@ -135,13 +136,16 @@ RSpec.describe AntigenEvaluation do
         patient: new_test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_antigen_evaluation_status(
+      best_series = test_object.pull_best_patient_series(
         test_patient_serieses,
         aars
       )
 
-      expected_result = 'complete'
-      expect(evaluation_hash).to eq(expected_result)
+      expected_status            = 'complete'
+      expect(best_series.series_status).to eq(expected_status)
+
+      expected_preference_number = 1
+      expect(best_series.preference_number).to eq(expected_preference_number)
     end
     it 'returns immune if immune' do
       valid_dates   = create_valid_dates(test_patient.dob)
@@ -154,13 +158,16 @@ RSpec.describe AntigenEvaluation do
         patient: test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_antigen_evaluation_status(
+      best_series = test_object.pull_best_patient_series(
         test_patient_serieses,
         aars
       )
 
-      expected_result = 'immune'
-      expect(evaluation_hash).to eq(expected_result)
+      expected_status            = 'immune'
+      expect(best_series.series_status).to eq(expected_status)
+
+      expected_preference_number = 1
+      expect(best_series.preference_number).to eq(expected_preference_number)
     end
     it 'returns immune if immune even if last series' do
       valid_dates   = create_valid_dates(test_patient.dob)
@@ -177,13 +184,16 @@ RSpec.describe AntigenEvaluation do
         patient: test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_antigen_evaluation_status(
+      best_series = test_object.pull_best_patient_series(
         test_patient_serieses,
         aars
       )
 
-      expected_result = 'immune'
-      expect(evaluation_hash).to eq(expected_result)
+      expected_status            = 'immune'
+      expect(best_series.series_status).to eq(expected_status)
+
+      expected_preference_number = 3
+      expect(best_series.preference_number).to eq(expected_preference_number)
     end
     it 'returns immune if immune is the second series (but not first)' do
       valid_dates   = create_valid_dates(test_patient.dob)
@@ -200,15 +210,18 @@ RSpec.describe AntigenEvaluation do
         patient: test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_antigen_evaluation_status(
+      best_series = test_object.pull_best_patient_series(
         test_patient_serieses,
         aars
       )
 
-      expected_result = 'immune'
-      expect(evaluation_hash).to eq(expected_result)
+      expected_status            = 'immune'
+      expect(best_series.series_status).to eq(expected_status)
+
+      expected_preference_number = 2
+      expect(best_series.preference_number).to eq(expected_preference_number)
     end
-    it 'takes returns not_complete if none are complete' do
+    it 'returns not_complete if none are complete' do
       patient_dob      = 2.years.ago
       new_test_patient = FactoryGirl.create(:patient_with_profile,
                                             dob: patient_dob)
@@ -224,16 +237,19 @@ RSpec.describe AntigenEvaluation do
         patient: new_test_patient,
         antigen: polio_antigen
       )
-      evaluation_hash = test_object.get_antigen_evaluation_status(
+      best_series = test_object.pull_best_patient_series(
         test_patient_serieses,
         aars
       )
 
-      expected_result = 'not_complete'
-      expect(evaluation_hash).to eq(expected_result)
+      expected_status            = 'not_complete'
+      expect(best_series.series_status).to eq(expected_status)
+
+      expected_preference_number = 1
+      expect(best_series.preference_number).to eq(expected_preference_number)
     end
   end
-  describe '#evaluate_antigen ' do
+  describe '#evaluate_antigen_for_patient_series ' do
     it 'takes an antigen, patient and antigen_administered_records and returns' \
        'a status hash' do
       valid_dates   = create_valid_dates(test_patient.dob)
@@ -242,7 +258,7 @@ RSpec.describe AntigenEvaluation do
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
         vaccine_doses
       )
-      evaluation_hash = test_object.evaluate_antigen(
+      evaluation_hash = test_object.evaluate_antigen_for_patient_series(
         polio_antigen,
         test_patient,
         aars
@@ -258,7 +274,7 @@ RSpec.describe AntigenEvaluation do
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
         vaccine_doses
       )
-      evaluation_hash = test_object.evaluate_antigen(
+      evaluation_hash = test_object.evaluate_antigen_for_patient_series(
         polio_antigen,
         test_patient,
         aars
