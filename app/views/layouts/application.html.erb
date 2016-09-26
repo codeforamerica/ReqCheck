@@ -12,12 +12,15 @@
   </head>
 
   <body>
-    <div class="top-bar">
+    <div class="header">
+
+    <div class="row align-center">
+    <div class="small-12 large-8 medium-8 ">
+
       <div class="top-bar-title">
-
-        <%= link_to image_tag("ReqCheckLogo.svg", :alt => "ReqCheck logo"), root_url %>
-
+        <%= link_to image_tag("ReqCheckLogo.svg", :alt => "ReqCheck"), root_url %>
       </div>
+
       <div>
         <div class="top-bar-right">
             <% if @patient || @patients %>
@@ -28,6 +31,10 @@
             <% end %>
         </div>
       </div>
+
+      </div>
+      </div>
+
     </div>
     <div class="container">
       <%= yield %>
