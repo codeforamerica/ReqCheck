@@ -78,18 +78,29 @@ RSpec.describe AntigenEvaluator, type: :model do
       expect(antigen_evaluator.next_required_target_dose).to eq(nil)
     end
     it 'sets the next target dose if the antigen is complete' do
-      vaccine_doses = valid_2_year_test_patient.vaccine_doses
+      new_test_patient = FactoryGirl.create(:patient_with_profile,
+                                        dob: 2.years.ago.to_date)
+      dob = new_test_patient.dob
+      date_array = [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)]
+      vaccine_doses = create_patient_vaccines(new_test_patient, date_array, 10)
+      new_test_patient.reload
+
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
         vaccine_doses
       )
 
       antigen_evaluator = AntigenEvaluator.new(
         antigen: test_antigen,
-        patient: valid_2_year_test_patient,
+        patient: new_test_patient,
         antigen_administered_records: aars
       )
       expect(antigen_evaluator.evaluation_status).to eq('complete')
-      expect(antigen_evaluator.next_required_target_dose).to eq('not_complete')
+
+      patient_series = antigen_evaluator.best_patient_series
+      expected_target_dose = patient_series.target_doses.last
+
+      expect(antigen_evaluator.next_required_target_dose)
+        .to eq(expected_target_dose)
     end
     it 'sets the next target dose if the antigen is not_complete' do
       not_complete_dates = create_valid_dates(test_patient.dob)[0..-2]
@@ -105,7 +116,12 @@ RSpec.describe AntigenEvaluator, type: :model do
         antigen_administered_records: aars
       )
       expect(antigen_evaluator.evaluation_status).to eq('not_complete')
-      expect(antigen_evaluator.next_required_target_dose).to eq('not_complete')
+
+      patient_series = antigen_evaluator.best_patient_series
+      expected_target_dose = patient_series.target_doses.last
+
+      expect(antigen_evaluator.next_required_target_dose)
+        .to eq(expected_target_dose)
     end
   end
 end

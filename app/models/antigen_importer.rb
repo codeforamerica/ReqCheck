@@ -21,7 +21,7 @@ class AntigenImporter
   def import_single_file(xml_file_name)
     xml_file_hash = parse_and_hash(xml_file_name)
     if xml_file_name.include? 'Schedule'
-
+      create_all_cvx_to_antigen_mappings(xml_file_hash)
     elsif xml_file_name.include? 'Antigen'
       parse_antigen_data_and_create_subobjects(xml_file_hash)
     end
