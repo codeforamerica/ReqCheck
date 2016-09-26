@@ -25,7 +25,6 @@ class AntigenImporter
     elsif xml_file_name.include? 'Antigen'
       parse_antigen_data_and_create_subobjects(xml_file_hash)
     end
-
   end
 
   def parse_and_hash(xml_file_path)
@@ -42,6 +41,7 @@ class AntigenImporter
   def parse_antigen_data_and_create_subobjects(xml_file_hash)
     target_disease = xml_file_hash.find_all_values_for('targetDisease')
                                   .first.downcase
+    puts target_disease
     antigen_object = Antigen.create(target_disease: target_disease)
     create_all_antigen_series(xml_file_hash, antigen_object)
     antigen_object
@@ -92,7 +92,9 @@ class AntigenImporter
     cvx_associations = cvx_to_antigen_xml_hash['association']
     cvx_associations = [cvx_associations] if cvx_associations.is_a? Hash
     cvx_associations.each do |antigen_association_hash|
-      return_hash[:antigens] << antigen_association_hash['antigen'].downcase
+      antigen_name = antigen_association_hash['antigen'].downcase
+      antigen_name = 'hepb' if antigen_name == 'hep b'
+      return_hash[:antigens] << antigen_name
     end
     return_hash
   end
@@ -147,7 +149,6 @@ class AntigenImporter
     if antigen_series_data.is_a? Hash
       antigen_series_data = [antigen_series_data]
     end
-
     antigen_series_data.map do |hash|
       antigen_series = AntigenSeries.find_or_initialize_by(
         name: hash['seriesName']

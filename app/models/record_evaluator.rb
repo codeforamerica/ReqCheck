@@ -22,9 +22,15 @@ class RecordEvaluator
   end
 
   def get_antigens
-    Antigen
+    all_antigens = [
+      'diphtheria', 'hep a', 'hepb', 'hib', 'hpv', 'influenza',
+      'mcv', 'measles', 'mumps', 'pertussis', 'pneumococcal', 'polio',
+      'rotavirus', 'rubella', 'tetanus', 'varicella', 'zoster'
+    ]
+    antigens = Antigen
       .select("DISTINCT ON(target_disease) *")
       .order("target_disease, created_at DESC")
+    antigens.select { |antigen| all_antigens.include?(antigen.target_disease) }
   end
 
   def create_all_antigen_evaluators(patient, antigens,

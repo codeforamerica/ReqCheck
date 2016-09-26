@@ -1,15 +1,15 @@
 class AntigenEvaluator
-  attr_reader :antigen_administered_records, :best_patient_series, :antigen
+  attr_reader :antigen_administered_records, :best_patient_series, :antigen, :patient, :aars
   include AntigenEvaluation
 
   def initialize(patient:, antigen:, antigen_administered_records:)
-    CheckType.enforce_type(patient, Patient)
-    CheckType.enforce_type(antigen, Antigen)
-    CheckType.enforce_type(antigen_administered_records, Array)
     @antigen           = antigen
     @patient           = patient
 
     aars = antigen_administered_records.select do |record|
+      # if antigen.target_disease == 'hep b' && record.antigen.target_disease == 'hep b'
+      #   byebug
+      # end
       record.antigen == antigen
     end.sort_by { |record| record.date_administered }
 
