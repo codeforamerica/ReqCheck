@@ -7,9 +7,6 @@ class AntigenEvaluator
     @patient           = patient
 
     aars = antigen_administered_records.select do |record|
-      # if antigen.target_disease == 'hep b' && record.antigen.target_disease == 'hep b'
-      #   byebug
-      # end
       record.antigen == antigen
     end.sort_by { |record| record.date_administered }
 

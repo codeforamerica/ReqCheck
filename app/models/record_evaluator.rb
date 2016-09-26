@@ -74,7 +74,7 @@ class RecordEvaluator
     {
       'dtap/tdap/td': :dtap,
       'hep a': :hepa,
-      'zoster ': 'zoster'
+      'zoster ': :zoster
     }.each do |key, new_key|
       if vaccine_group_hash.has_key?(key)
         vaccine_group_hash[new_key] = vaccine_group_hash[key]
@@ -87,7 +87,6 @@ class RecordEvaluator
   def evaluate_vaccine_group_hash(vaccine_group_hash)
     result_hash = {}
     vaccine_group_hash.each do |key, values_array|
-      puts "#{key}: #{values_array}"
       result_hash[key.to_sym] = evaluate_antigen_status_array(values_array)
     end
     result_hash

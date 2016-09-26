@@ -136,6 +136,7 @@ RSpec.describe RecordEvaluator, type: :model do
           patient: new_test_patient
         )
         expect(record_evaluator.record_status).to eq('not_complete')
+        byebug
       end
     end
   end
