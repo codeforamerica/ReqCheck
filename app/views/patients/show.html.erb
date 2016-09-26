@@ -71,6 +71,84 @@
         <div class="card columns small-12 large-8 medium-8 small-centered vaccine-record">
             <h3 class="float-left">Vaccine Record</h3>
             <%= link_to "Print Record", '#', :onclick => 'window.print();return false;', class: "button float-right margin-bottom-10"  %>
+                        <table class="hover">
+                <thead>
+                    <tr>
+                        <th class="vax-name">Diptheria, Tetanus, Pertussis</th>
+                        <% if @patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).length == 0 %>
+                            <th class="no-dose">No doses recorded</th>
+                        <% else %>
+                            <th>Trade Name</th>
+                            <th>Date Given</th>
+                            <th>Age</th>
+                            <th>Time Past</th>
+                            <th>Provider</th>
+                        <% end %>
+                    </tr>
+                </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).each do |individual_vaccine| %>
+                <tr>
+                    <td><%= individual_vaccine.vaccine_code %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
+                    <td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
+                    <td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
+                    <td>HD</td>
+                </tr><%end %>
+            </table>
+                        <table class="hover">
+                <thead>
+                    <tr>
+                        <th class="vax-name">Haemophilius influenzae type b</th>
+                        <% if @patient.get_vaccine_doses(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).length == 0 %>
+                            <th class="no-dose">No doses recorded</th>
+                        <% else %>
+                            <th>Trade Name</th>
+                            <th>Date Given</th>
+                            <th>Age</th>
+                            <th>Time Past</th>
+                            <th>Provider</th>
+                        <% end %>
+                    </tr>
+                </thead><%@patient.get_vaccine_doses(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).each do |individual_vaccine| %>
+                <tr>
+                    <td><%= individual_vaccine.vaccine_code %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
+                    <td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
+                    <td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
+                    <td>HD</td>
+                </tr><%end %>
+            </table>
+            <table class="hover">
+                <thead>
+                    <tr>
+                        <th class="vax-name">Hepatitis A</th>
+                        <% if @patient.get_vaccine_doses(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).length == 0 %>
+                            <th class="no-dose">No doses recorded</th>
+                        <% else %>
+                            <th>Trade Name</th>
+                            <th>Date Given</th>
+                            <th>Age</th>
+                            <th>Time Past</th>
+                            <th>Provider</th>
+                        <% end %>
+                    </tr>
+                </thead><%@patient.get_vaccine_doses(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).each do |individual_vaccine| %>
+                <tr>
+                    <td><%= individual_vaccine.vaccine_code %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
+                    <td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
+                    <td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
+                    <td>HD</td>
+                </tr><%end %>
+            </table>
             <table class="hover">
                 <thead>
                     <tr>
@@ -104,8 +182,8 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Diptheria, Tetanus, Pertussis</th>
-                        <% if @patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).length == 0 %>
+                        <th class="vax-name">Human Papillomavirus</th>
+                        <% if @patient.get_vaccine_doses(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).length == 0 %>
                             <th class="no-dose">No doses recorded</th>
                         <% else %>
                             <th>Trade Name</th>
@@ -115,7 +193,7 @@
                             <th>Provider</th>
                         <% end %>
                     </tr>
-                </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
                     <td><%= individual_vaccine.mvx_code %></td>
@@ -130,8 +208,8 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Haemophilius influenzae type b</th>
-                        <% if @patient.get_vaccine_doses(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).length == 0 %>
+                        <th class="vax-name">Measles, Mumps, Rubella</th>
+                        <% if @patient.get_vaccine_doses(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).length == 0 %>
                             <th class="no-dose">No doses recorded</th>
                         <% else %>
                             <th>Trade Name</th>
@@ -141,7 +219,7 @@
                             <th>Provider</th>
                         <% end %>
                     </tr>
-                </thead><%@patient.get_vaccine_doses(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
                     <td><%= individual_vaccine.mvx_code %></td>
@@ -156,8 +234,8 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Polio</th>
-                        <% if @patient.get_vaccine_doses(["DTHI", "DTI", "DHI", "POL", "IPV"]).length == 0 %>
+                        <th class="vax-name">Meningococcal</th>
+                        <% if @patient.get_vaccine_doses(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).length == 0 %>
                             <th class="no-dose">No doses recorded</th>
                         <% else %>
                             <th>Trade Name</th>
@@ -167,7 +245,7 @@
                             <th>Provider</th>
                         <% end %>
                     </tr>
-                </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "DHI", "POL", "IPV"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
                     <td><%= individual_vaccine.mvx_code %></td>
@@ -194,6 +272,32 @@
                         <% end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["PPV2", "PCV4", "PCV2", "PCV9", "PCV", "PPV1", "PPV9", "PPV2"]).each do |individual_vaccine| %>
+                <tr>
+                    <td><%= individual_vaccine.vaccine_code %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
+                    <td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
+                    <td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
+                    <td>HD</td>
+                </tr><%end %>
+            </table>
+            <table class="hover">
+                <thead>
+                    <tr>
+                        <th class="vax-name">Polio</th>
+                        <% if @patient.get_vaccine_doses(["DTHI", "DTI", "DHI", "POL", "IPV"]).length == 0 %>
+                            <th class="no-dose">No doses recorded</th>
+                        <% else %>
+                            <th>Trade Name</th>
+                            <th>Date Given</th>
+                            <th>Age</th>
+                            <th>Time Past</th>
+                            <th>Provider</th>
+                        <% end %>
+                    </tr>
+                </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "DHI", "POL", "IPV"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
                     <td><%= individual_vaccine.mvx_code %></td>
@@ -246,110 +350,6 @@
                         <% end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["VAR1", "VAR2", "VAR4", "VAR9"]).each do |individual_vaccine| %>
-                <tr>
-                    <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.mvx_code %></td>
-                    <td>
-                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
-                    <td>
-                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
-                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
-                    <td>HD</td>
-                </tr><%end %>
-            </table>
-            <table class="hover">
-                <thead>
-                    <tr>
-                        <th class="vax-name">Measles, Mumps, Rubella</th>
-                        <% if @patient.get_vaccine_doses(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).length == 0 %>
-                            <th class="no-dose">No doses recorded</th>
-                        <% else %>
-                            <th>Trade Name</th>
-                            <th>Date Given</th>
-                            <th>Age</th>
-                            <th>Time Past</th>
-                            <th>Provider</th>
-                        <% end %>
-                    </tr>
-                </thead><%@patient.get_vaccine_doses(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).each do |individual_vaccine| %>
-                <tr>
-                    <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.mvx_code %></td>
-                    <td>
-                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
-                    <td>
-                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
-                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
-                    <td>HD</td>
-                </tr><%end %>
-            </table>
-            <table class="hover">
-                <thead>
-                    <tr>
-                        <th class="vax-name">Hepatitis A</th>
-                        <% if @patient.get_vaccine_doses(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).length == 0 %>
-                            <th class="no-dose">No doses recorded</th>
-                        <% else %>
-                            <th>Trade Name</th>
-                            <th>Date Given</th>
-                            <th>Age</th>
-                            <th>Time Past</th>
-                            <th>Provider</th>
-                        <% end %>
-                    </tr>
-                </thead><%@patient.get_vaccine_doses(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).each do |individual_vaccine| %>
-                <tr>
-                    <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.mvx_code %></td>
-                    <td>
-                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
-                    <td>
-                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
-                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
-                    <td>HD</td>
-                </tr><%end %>
-            </table>
-            <table class="hover">
-                <thead>
-                    <tr>
-                        <th class="vax-name">Meningococcal</th>
-                        <% if @patient.get_vaccine_doses(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).length == 0 %>
-                            <th class="no-dose">No doses recorded</th>
-                        <% else %>
-                            <th>Trade Name</th>
-                            <th>Date Given</th>
-                            <th>Age</th>
-                            <th>Time Past</th>
-                            <th>Provider</th>
-                        <% end %>
-                    </tr>
-                </thead><%@patient.get_vaccine_doses(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).each do |individual_vaccine| %>
-                <tr>
-                    <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.mvx_code %></td>
-                    <td>
-                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
-                    <td>
-                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
-                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
-                    <td>HD</td>
-                </tr><%end %>
-            </table>
-            <table class="hover">
-                <thead>
-                    <tr>
-                        <th class="vax-name">Human Papillomavirus</th>
-                        <% if @patient.get_vaccine_doses(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).length == 0 %>
-                            <th class="no-dose">No doses recorded</th>
-                        <% else %>
-                            <th>Trade Name</th>
-                            <th>Date Given</th>
-                            <th>Age</th>
-                            <th>Time Past</th>
-                            <th>Provider</th>
-                        <% end %>
-                    </tr>
-                </thead><%@patient.get_vaccine_doses(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
                     <td><%= individual_vaccine.mvx_code %></td>
