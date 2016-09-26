@@ -24,7 +24,7 @@ RSpec.describe RecordEvaluator, type: :model do
     let(:record_evaluator) { RecordEvaluator.new(patient: test_patient) }
 
     it 'creates a patients antigen_administered_records' do
-      expect(record_evaluator.antigen_administered_records.length).to eq(40)
+      expect(record_evaluator.antigen_administered_records.length).to eq(47)
       expect(
         record_evaluator.antigen_administered_records.first.class.name
       ).to eq('AntigenAdministeredRecord')

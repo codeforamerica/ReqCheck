@@ -57,10 +57,13 @@ module PatientSpecHelper
                                         dob: 2.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
-      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
-      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
+      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], # 'POL',
+      110 => [(dob + 6.weeks), (dob + 10.weeks), # 'DTHI'
               (dob + 14.weeks), (dob + 15.months)],
-      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)] #'MMRV'
+      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)], # 'MMRV'
+      133 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks),
+              (dob + 52.weeks), (dob + 60.weeks)], # PPV9
+      83 => [(dob + 12.months), (dob + 18.months)] # HAV6
     }
     required_vaccine_cvxs.each do |cvx_key, date_array|
       create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
@@ -68,15 +71,18 @@ module PatientSpecHelper
     test_patient
   end
 
-  def valid_5_year_test_patient(test_patient=nil)
-    test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
-                                                      dob: 5.years.ago.to_date)
+  def valid_5_year_test_patient(test_patient = nil)
+    test_patient ||= FactoryGirl.create(:patient_with_profile,
+                                        dob: 5.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
-      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
-      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
+      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], # 'POL',
+      110 => [(dob + 6.weeks), (dob + 10.weeks), # 'DTHI'
             (dob + 14.weeks), (dob + 15.months), (dob + 4.years)],
-      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)] #'MMRV'
+      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)], # 'MMRV'
+      133 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks),
+              (dob + 52.weeks), (dob + 60.weeks)], # PPV9
+      83 => [(dob + 12.months), (dob + 18.months)] # HAV6
     }
     required_vaccine_cvxs.each do |cvx_key, date_array|
       create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
@@ -85,14 +91,14 @@ module PatientSpecHelper
   end
 
   def invalid_2_year_test_patient(test_patient = nil)
-    test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
-                                                      dob: 2.years.ago.to_date)
+    test_patient ||= FactoryGirl.create(:patient_with_profile,
+                                        dob: 2.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
-      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
-      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
+      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], # 'POL',
+      110 => [(dob + 6.weeks), (dob + 10.weeks), # 'DTHI'
             (dob + 14.weeks), (dob + 15.months)],
-      94 => [(dob + 14.months)] #'MMRV'
+      94 => [(dob + 14.months)] # 'MMRV'
     }
     required_vaccine_cvxs.each do |cvx_key, date_array|
       create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
@@ -101,14 +107,14 @@ module PatientSpecHelper
   end
 
   def invalid_5_year_test_patient(test_patient = nil)
-    test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
-                                                      dob: 5.years.ago.to_date)
+    test_patient ||= FactoryGirl.create(:patient_with_profile,
+                                        dob: 5.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
-      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
-      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
+      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], # 'POL',
+      110 => [(dob + 6.weeks), (dob + 10.weeks), # 'DTHI'
             (dob + 14.weeks), (dob + 15.months)],
-      94 => [(dob + 12.months), (dob + 18.months)] #'MMRV'
+      94 => [(dob + 12.months), (dob + 18.months)] # 'MMRV'
     }
     required_vaccine_cvxs.each do |cvx_key, date_array|
       create_patient_vaccines(test_patient, date_array, cvx_key.to_i)

@@ -87,6 +87,7 @@ class RecordEvaluator
   def evaluate_vaccine_group_hash(vaccine_group_hash)
     result_hash = {}
     vaccine_group_hash.each do |key, values_array|
+      puts "#{key}: #{values_array}"
       result_hash[key.to_sym] = evaluate_antigen_status_array(values_array)
     end
     result_hash
@@ -105,7 +106,7 @@ class RecordEvaluator
 
   def pull_required_vaccine_groups(vaccine_group_evaluations)
     required_vaccine_groups = [
-      'polio', 'pneumococcal', 'hepb', 'dtap/tdap/td', 'varicella',
+      'polio', 'pneumococcal', 'hepb', 'dtap', 'varicella',
       'mmr',
     ]
     vaccine_group_evaluations.reject do |key|

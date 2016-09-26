@@ -1,5 +1,14 @@
 # To be Addressed
 
+# Need them to clarify -
+#   Explain HepA vaccine schedule (0 - 12 months?)
+#   Explain Pneummococal vaccine schedule
+
+# NEED TO INCLUDE MIN AGE TO START AND MAX AGE TO START INTO THE CHECK IF THE ANTIGENSERIES IS VALID FOR THE PATIENT
+#   Pneumoccocal is not straightforward - there is max age/min age
+# NEED TO INCLUDE IF THE DOSE WAS EXPIRED OR INVALID
+
+
 # Need to have a better way of creating antigen administered records
 # Should have vaccine info linked to antigen and vaccine_dose linked to vaccine_info schema wise
 
