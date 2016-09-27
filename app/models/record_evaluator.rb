@@ -106,7 +106,7 @@ class RecordEvaluator
   def pull_required_vaccine_groups(vaccine_group_evaluations)
     required_vaccine_groups = [
       'polio', 'pneumococcal', 'hepb', 'dtap', 'varicella',
-      'mmr',
+      'mmr', 'hib', 'mcv'
     ]
     vaccine_group_evaluations.reject do |key|
       !required_vaccine_groups.include?(key.to_s)

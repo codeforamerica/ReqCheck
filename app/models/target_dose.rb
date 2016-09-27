@@ -2,22 +2,25 @@ class TargetDose
   include ActiveModel::Model
   include AgeCalc
   include TargetDoseEvaluation
+  include FutureDoseEvaluation
 
   attr_accessor :patient, :antigen_series_dose
-  attr_reader :satisfied, :status_hash, :antigen_administered_record
+  attr_reader :satisfied, :status_hash, :antigen_administered_record,
+              :earliest_dose_date
 
   def initialize(patient:, antigen_series_dose:)
     @antigen_series_dose         = antigen_series_dose
     @patient                     = patient
     @status_hash                 = nil
     @antigen_administered_record = nil
+    @earliest_dose_date          = nil
   end
 
   [
     'dose_number', 'absolute_min_age', 'min_age', 'earliest_recommended_age',
     'latest_recommended_age', 'max_age', 'intervals', 'required_gender',
     'recurring_dose', 'dose_vaccines', 'preferable_vaccines',
-    'allowable_vaccines'
+    'allowable_vaccines, conditional_skip'
   ].each do |action|
     define_method(action) do
       return nil if antigen_series_dose.nil?
@@ -44,6 +47,10 @@ class TargetDose
 
   def has_conditional_skip?
     !self.antigen_series_dose.conditional_skip.nil?
+  end
+
+  def conditional_skip
+    self.antigen_series_dose.conditional_skip
   end
 
   def eligible?
@@ -115,6 +122,18 @@ class TargetDose
       previous_dose_status_hash: previous_status_hash,
       previous_satisfied_target_doses: previous_satisfied_target_doses
     )
+  end
+
+
+  def get_earliest_future_target_dose_date(satisfied_target_doses)
+    future_dose_dates = create_future_dose_dates(
+      patient,
+      self,
+      vaccine_doses: patient.vaccine_doses,
+      satisfied_target_doses: satisfied_target_doses
+    )
+    @earliest_dose_date = find_maximium_min_date(future_dose_dates)
+    @earliest_dose_date
   end
 end
 

@@ -1,5 +1,8 @@
 # To be Addressed
 
+
+  # Why are the polio vaccines all '<forecastVaccineType>N</forecastVaccineType>'
+
 # Still need clarification from CDC: TABLE 6-7 CONDITIONAL TYPE OF COMPLETED SERIES – IS THE CONDITION MET?
 #   Also ask - if a patient has a conditional skip that is 'skipped' - does the target dose then be used for
 #   the next target dose?
@@ -8,6 +11,8 @@
 #   Explain HepA vaccine schedule (0 - 12 months?)
 #   Explain Pneummococal vaccine schedule
 #   Explain how a 'catch up schedule' works
+
+#   TD/TDAP same group, DTAP in different vaccine group
 
 # NEED TO INCLUDE MIN AGE TO START AND MAX AGE TO START INTO THE CHECK IF THE ANTIGENSERIES IS VALID FOR THE PATIENT
 #   Pneumoccocal is not straightforward - there is max age/min age
@@ -69,3 +74,10 @@
 # <doseCountLogic>greater than</doseCountLogic>
 # <vaccineTypes>15; 16; 88; 111; 135; 140; 141; 144; 149; 150; 151; 153; 155; 158; 161; 166</vaccineTypes>
 # </condition>
+
+
+
+# Varicella => If have disease =>
+
+
+# Same page for the entire staff on why we need a phone number

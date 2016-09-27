@@ -6,8 +6,6 @@ class PatientSeries
               :satisfied_target_doses, :unsatisfied_target_dose
 
   def initialize(patient:, antigen_series:)
-    CheckType.enforce_type(patient, Patient)
-    CheckType.enforce_type(antigen_series, AntigenSeries)
     @patient                   = patient
     @antigen_series            = antigen_series
     @target_doses              = create_target_doses(antigen_series, patient)
@@ -36,7 +34,11 @@ class PatientSeries
   def unsatisfied_target_dose
     return nil if series_status.nil?
     next_target_dose_index = satisfied_target_doses.length
-    target_doses.at(next_target_dose_index)
+    next_target_dose = target_doses.at(next_target_dose_index)
+    next_target_dose.get_earliest_future_target_dose_date(
+      satisfied_target_doses
+    )
+    next_target_dose
   end
 
   def set_series_status(series_status)

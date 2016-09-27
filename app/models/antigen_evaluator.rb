@@ -32,4 +32,8 @@ class AntigenEvaluator
     best_patient_series.unsatisfied_target_dose
   end
 
+  def next_required_target_dose_date
+    next_required_target_dose.earliest_dose_date
+  end
+
 end

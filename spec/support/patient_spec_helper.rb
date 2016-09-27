@@ -35,13 +35,30 @@ module PatientSpecHelper
     aars.map do |as_record|
       td = instance_double(
         'TargetDose',
-        patient: test_patient,
+        patient: vaccine_doses.first.patient,
         antigen_administered_record: as_record
       )
       allow(td).to receive(:date_administered) { as_record.date_administered }
       td
     end
   end
+
+  # def create_fake_valid_future_target_doses(test_patient,
+  #                                           antigen_series_dose_args,
+  #                                           dose_vaccines_cvx: [10])
+  #   as_dose = FactoryGirl.create(
+  #     :antigen_series_dose,
+  #     **antigen_series_dose_args
+  #   )
+  #   dose_vaccines_cvx.each do |dose_vaccine_cvx|
+  #     as_dose.dose_vaccines << FactoryGirl.create(
+  #       :antigen_series_dose_vaccine,
+  #       cvx_code: dose_vaccine_cvx
+  #     )
+  #   end
+  #     TargetDose.new(patient: test_patient, antigen_series_dose: as_dose)
+
+  # end
 
   def create_valid_dates(start_date)
     [

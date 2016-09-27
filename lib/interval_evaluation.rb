@@ -160,8 +160,8 @@ module IntervalEvaluation
     interval_objects.map do |interval_object|
       comparison_dose_date = get_comparison_dose_date(
         interval_object,
-        satisfied_target_dose_dates = [],
-        patient_vaccine_doses = []
+        satisfied_target_dose_dates,
+        patient_vaccine_doses
       )
       create_interval_attributes(interval_object, comparison_dose_date)
     end
@@ -178,6 +178,9 @@ module IntervalEvaluation
         get_target_dose_date(satisfied_target_dose_dates,
                              interval_object.target_dose_number)
     elsif interval_object.interval_type == 'from_most_recent'
+    end
+    if comparison_dose_date.nil?
+      raise "Invalid comparison dose date for Interval #{interval_object.id}"
     end
     comparison_dose_date
   end
