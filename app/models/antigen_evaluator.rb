@@ -25,14 +25,17 @@ class AntigenEvaluator
   end
 
   def evaluation_status
+    return nil if best_patient_series.nil?
     best_patient_series.series_status
   end
 
   def next_required_target_dose
+    return nil if best_patient_series.nil?
     best_patient_series.unsatisfied_target_dose
   end
 
   def next_required_target_dose_date
+    return nil if next_required_target_dose.nil?
     next_required_target_dose.earliest_dose_date
   end
 
