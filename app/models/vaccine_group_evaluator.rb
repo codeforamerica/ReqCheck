@@ -24,10 +24,7 @@ class VaccineGroupEvaluator
 
   def evaluation_status
     return_status = nil
-    puts vaccine_group_name
-    puts next_target_dose
     all_statuses = @antigen_evaluators.map {|evaluator| evaluator.evaluation_status}
-    puts all_statuses
     if all_statuses.all? {|status| status == 'complete' || status == 'immune'}
       return_status = 'complete'
     else

@@ -102,6 +102,15 @@ class RecordEvaluator
     result_hash
   end
 
+  def vaccine_groups_next_target_doses
+    result_hash = {}
+    @vaccine_group_evaluators.each do |vaccine_group_evaluator|
+      result_hash[vaccine_group_evaluator.vaccine_group_name.to_sym] =
+        vaccine_group_evaluator.next_target_dose
+    end
+    result_hash
+  end
+
   def pull_required_vaccine_groups(vaccine_group_evaluators)
     required_vaccine_groups = [
       'polio', 'pneumococcal', 'hepb', 'dtap', 'varicella',

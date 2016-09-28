@@ -84,6 +84,10 @@ class Patient < User
     record_evaluator.vaccine_group_evaluations
   end
 
+  def future_dose_dates
+    record_evaluator.vaccine_groups_next_target_doses
+  end
+
 end
 
 

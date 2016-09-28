@@ -137,7 +137,7 @@ RSpec.describe RecordEvaluator, type: :model do
         expect(record_evaluator.record_status).to eq('not_complete')
       end
     end
-    context 'when the record is not complete but no vaccines can be given' do
+    context 'when the record is not_complete but no vaccines can be given' do
       it 'returns not_complete_no_action as the evaluation_status' do
         test_patient = incomplete_no_immediate_vaccines_2_year_test_patient
         record_evaluator = RecordEvaluator.new(
@@ -145,6 +145,26 @@ RSpec.describe RecordEvaluator, type: :model do
         )
         expect(record_evaluator.record_status).to eq('not_complete_no_action')
       end
+    end
+    context 'when the record is not_complete and vaccines can be given' do
+      it 'returns not_complete_no_action as the evaluation_status' do
+        test_patient = invalid_2_year_test_patient
+        record_evaluator = RecordEvaluator.new(
+          patient: test_patient
+        )
+        expect(record_evaluator.record_status).to eq('not_complete')
+      end
+    end
+  end
+  describe '#vaccine_group_next_target_doses' do
+    it 'returns a hash of all the next target doses' do
+      test_patient = incomplete_no_immediate_vaccines_2_year_test_patient
+      record_evaluator = RecordEvaluator.new(
+        patient: test_patient
+      )
+      expect(record_evaluator.vaccine_groups_next_target_doses).to eq(
+        {}
+      )
     end
   end
 end

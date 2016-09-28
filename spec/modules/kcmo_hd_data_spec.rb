@@ -10,10 +10,17 @@ RSpec.describe 'KCMO_HD_Data' do
   before(:all) do
     seed_full_antigen_xml
     KCMODATA.create_db_patients
+
+    # Ensure the assessment date is 9/28/2016 so that many of the patients
+    #  are not up to date but cannot get a vaccine due to a catch up schedule
+    new_time = Time.local(2016, 9, 28, 10, 0, 0)
+    Timecop.freeze(new_time)
   end
+
   after(:all) do
     KCMODATA.delete_db_patients
     DatabaseCleaner.clean_with(:truncation)
+    Timecop.return
   end
 
   it 'has all db patients' do
@@ -28,6 +35,7 @@ RSpec.describe 'KCMO_HD_Data' do
       puts db_patient.last_name
       puts db_patient.evaluation_status
       puts db_patient.evaluation_details
+      puts db_patient.future_dose_dates
       puts '#####################'
     end
   end
