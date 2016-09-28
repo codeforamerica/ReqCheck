@@ -191,7 +191,8 @@ RSpec.describe AntigenEvaluation do
 
       expected_status            = 'immune'
       expect(best_series.series_status).to eq(expected_status)
-
+      expect(true).to eq(false)
+      # Need to figure out how to set this up for it to be the last patient series
       expected_preference_number = 3
       expect(best_series.preference_number).to eq(expected_preference_number)
     end
@@ -251,21 +252,21 @@ RSpec.describe AntigenEvaluation do
   end
   describe '#evaluate_antigen_for_patient_series ' do
     it 'takes an antigen, patient and antigen_administered_records and returns' \
-       'a status hash' do
+       'the most complete patient series' do
       valid_dates   = create_valid_dates(test_patient.dob)
       vaccine_doses = create_patient_vaccines(test_patient, valid_dates)
 
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
         vaccine_doses
       )
-      evaluation_hash = test_object.evaluate_antigen_for_patient_series(
+      best_patient_series = test_object.evaluate_antigen_for_patient_series(
         polio_antigen,
         test_patient,
         aars
       )
 
       expected_result = 'immune'
-      expect(evaluation_hash).to eq(expected_result)
+      expect(best_patient_series.series_status).to eq(expected_result)
     end
     it 'returns incomplete if incomplete' do
       valid_dates   = create_valid_dates(test_patient.dob)
@@ -274,14 +275,14 @@ RSpec.describe AntigenEvaluation do
       aars = AntigenAdministeredRecord.create_records_from_vaccine_doses(
         vaccine_doses
       )
-      evaluation_hash = test_object.evaluate_antigen_for_patient_series(
+      best_patient_series = test_object.evaluate_antigen_for_patient_series(
         polio_antigen,
         test_patient,
         aars
       )
 
       expected_result = 'not_complete'
-      expect(evaluation_hash).to eq(expected_result)
+      expect(best_patient_series.series_status).to eq(expected_result)
     end
   end
 end

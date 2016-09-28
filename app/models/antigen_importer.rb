@@ -23,7 +23,7 @@ class AntigenImporter
     if xml_file_name.include? 'Schedule'
       create_all_cvx_to_antigen_mappings(xml_file_hash)
     elsif xml_file_name.include? 'Antigen'
-      parse_antigen_data_and_create_subobjects(xml_file_hash)
+      parse_antigen_data_and_create_subobjects(xml_file_hash, xml_file_name)
     end
   end
 
@@ -38,7 +38,8 @@ class AntigenImporter
     Hash.from_xml(xml_string)
   end
 
-  def parse_antigen_data_and_create_subobjects(xml_file_hash)
+  def parse_antigen_data_and_create_subobjects(xml_file_hash, afile_name=nil)
+    puts "Importing the antigen supporting data for #{afile_name}"
     target_disease = xml_file_hash.find_all_values_for('targetDisease')
                                   .first.downcase
     antigen_object = Antigen.create(target_disease: target_disease)
@@ -71,6 +72,7 @@ class AntigenImporter
   end
 
   def create_all_cvx_to_antigen_mappings(xml_hash)
+    puts 'Importing the cvx to antigen mapping'
     cvx_to_antigens =
       xml_hash['scheduleSupportingData']['cvxToAntigenMap']['cvxMap']
     unless cvx_to_antigens.is_a? Array

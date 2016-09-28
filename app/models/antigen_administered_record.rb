@@ -36,7 +36,8 @@ class AntigenAdministeredRecord
         raise Exceptions::MissingCVX.new("CVX #{vaccine_dose.cvx_code} not found")
       end
       antigens.each do |antigen_object|
-        antigen_records << self.new(antigen: antigen_object, vaccine_dose: vaccine_dose)
+        antigen_records << self.new(antigen: antigen_object,
+                                    vaccine_dose: vaccine_dose)
       end
     end
     antigen_records

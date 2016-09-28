@@ -35,6 +35,7 @@ class PatientSeries
     return nil if series_status.nil?
     next_target_dose_index = satisfied_target_doses.length
     next_target_dose = target_doses.at(next_target_dose_index)
+    return nil if next_target_dose.nil?
     next_target_dose.get_earliest_future_target_dose_date(
       satisfied_target_doses
     )

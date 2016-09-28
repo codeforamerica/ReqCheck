@@ -736,11 +736,105 @@ RSpec.describe AntigenImporter, type: :model do
           antigen_importer.xml_to_hash(TestAntigen::CVXTOANTIGENMAP)
         end
         it 'creates all mappings in the database' do
-          expect(VaccineInfo.all.length).to eq(0)
+          all_antigen_hash = {
+            1 => ['Diphtheria', 'Tetanus', 'Pertussis'],
+            2 => ['Polio'],
+            3 => ['Measles', 'Mumps', 'Rubella'],
+            4 => ['Measles', 'Rubella'],
+            5 => ['Measles'],
+            6 => ['rubella'],
+            7 => ['mumps'],
+            8 => ['Hep B'],
+            9 => ['Tetanus', 'Diphtheria'],
+            10 => ['polio'],
+            15 => ['influenza'],
+            16 => ['influenza'],
+            17 => ['Hib'],
+            20 => ['Diphtheria', 'Tetanus', 'Pertussis'],
+            21 => ['varicella'],
+            22 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Hib'],
+            28 => ['Diphtheria', 'Tetanus'],
+            32 => ['MCV'],
+            33 => ['Pneumococcal'],
+            35 => ['Tetanus'],
+            38 => ['Rubella', 'Mumps'],
+            42 => ['Hep B'],
+            43 => ['Hep B'],
+            44 => ['Hep B'],
+            45 => ['Hep B'],
+            46 => ['Hib'],
+            47 => ['Hib'],
+            48 => ['Hib'],
+            49 => ['Hib'],
+            50 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Hib'],
+            51 => ['Hib', 'Hep B'],
+            52 => ['Hep A'],
+            62 => ['HPV'],
+            74 => ['Rotavirus'],
+            83 => ['Hep A'],
+            84 => ['Hep A'],
+            85 => ['Hep A'],
+            88 => ['Influenza'],
+            89 => ['Polio'],
+            94 => ['Measles', 'Mumps', 'Rubella', 'Varicella'],
+            100 => ['Pneumococcal'],
+            102 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Hib', 'Hep B'],
+            104 => ['Hep A', 'Hep B'],
+            106 => ['Diphtheria', 'Tetanus', 'Pertussis'],
+            107 => ['Diphtheria', 'Tetanus', 'Pertussis'],
+            108 => ['MCV'],
+            109 => ['Pneumococcal'],
+            110 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Hep B', 'Polio'],
+            111 => ['Influenza'],
+            113 => ['Tetanus', 'Diphtheria'],
+            114 => ['MCV'],
+            115 => ['Tetanus', 'Diphtheria', 'Pertussis'],
+            116 => ['Rotavirus'],
+            118 => ['HPV'],
+            119 => ['Rotavirus'],
+            120 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Hib', 'Polio'],
+            121 => ['Varicella', 'Zoster'],
+            122 => ['Rotavirus'],
+            130 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Polio'],
+            132 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Polio', 'Hib', 'Hep B'],
+            133 => ['Pneumococcal'],
+            135 => ['Influenza'],
+            136 => ['MCV'],
+            137 => ['HPV'],
+            138 => ['Tetanus', 'Diphtheria'],
+            139 => ['Tetanus', 'Diphtheria'],
+            140 => ['Influenza'],
+            141 => ['Influenza'],
+            144 => ['Influenza'],
+            146 => ['Diphtheria', 'Tetanus', 'Pertussis', 'Hib', 'Hep B'],
+            147 => ['MCV'],
+            148 => ['MCV', 'Hib'],
+            149 => ['Influenza'],
+            150 => ['Influenza'],
+            151 => ['Influenza'],
+            152 => ['Pneumococcal'],
+            153 => ['Influenza'],
+            155 => ['Influenza'],
+            158 => ['Influenza'],
+            161 => ['Influenza'],
+            165 => ['HPV'],
+            166 => ['Influenza']
+          }
           antigen_importer.create_all_cvx_to_antigen_mappings(
             valid_cvx_to_antigen_xml_hash
           )
-          expect(VaccineInfo.all.length).to eq(82)
+          all_antigen_hash.each do |key, antigens|
+            vaccine_info = VaccineInfo.find_by(cvx_code: key.to_i)
+            antigens_names = antigens.map do |antigen|
+              if antigen == 'Hep B' || antigen == 'hep b'
+                'hepb'
+              else
+                antigen.downcase
+              end
+            end
+            vaccine_info_antigens = vaccine_info.antigens.map(&:target_disease)
+            expect(antigens_names).to match_array(vaccine_info_antigens)
+          end
         end
       end
     end

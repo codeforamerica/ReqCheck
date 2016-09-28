@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe AntigenAdministeredRecord, type: :model do
   include AntigenImporterSpecHelper
 
-  before(:all) { seed_antigen_xml_polio }
+  before(:all) do
+    seed_full_antigen_xml
+  end
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
   let(:polio_antigen) { Antigen.find_by(target_disease: 'polio') }
@@ -40,7 +42,10 @@ RSpec.describe AntigenAdministeredRecord, type: :model do
   describe 'relationships' do
     it 'has a patient' do
       expect(
-        AntigenAdministeredRecord.new(vaccine_dose: polio_vaccine_dose, antigen: polio_antigen).patient
+        AntigenAdministeredRecord.new(
+          vaccine_dose: polio_vaccine_dose,
+          antigen: polio_antigen
+        ).patient
       ).to eq(polio_vaccine_dose.patient)
     end
   end

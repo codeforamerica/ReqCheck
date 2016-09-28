@@ -11,6 +11,12 @@ module AntigenImporterSpecHelper
       'spec/support/xml/AntigenSupportingData- HPV.xml'
     )
   end
+  def seed_antigen_xml_hib
+    antigen_importer = AntigenImporter.new
+    antigen_importer.import_single_file(
+      'spec/support/xml/AntigenSupportingData- Hib.xml'
+    )
+  end
   def seed_xml_to_antigen_mapping
     antigen_importer = AntigenImporter.new
     antigen_importer.import_single_file(
