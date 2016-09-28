@@ -105,8 +105,10 @@ class RecordEvaluator
   def vaccine_groups_next_target_doses
     result_hash = {}
     @vaccine_group_evaluators.each do |vaccine_group_evaluator|
-      result_hash[vaccine_group_evaluator.vaccine_group_name.to_sym] =
-        vaccine_group_evaluator.next_target_dose
+      if vaccine_group_evaluator.vaccine_group_name != 'influenza'
+        result_hash[vaccine_group_evaluator.vaccine_group_name.to_sym] =
+          vaccine_group_evaluator.next_target_dose
+      end
     end
     result_hash
   end

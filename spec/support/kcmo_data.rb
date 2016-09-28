@@ -1252,371 +1252,393 @@ module KCMODATA
     PATIENT21
   ]
 
-  def str_to_date(date_string)
+  def self.str_to_date(date_string)
     DateTime.parse(date_string).to_date
   end
-
 
   def expected_results
     {
       PATIENT1: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
+        101,
+        'not_complete',
+        {
+          dtap: str_to_date('9/23/16'),
+          hepa: nil,
+          zoster: nil,
+          hepb: str_to_date('9/23/16'),
+          hib: str_to_date('9/23/16'),
+          hpv: nil,
+          mcv: nil,
+          mmr: nil,
+          pneumococcal: str_to_date('9/23/16'),
+          polio: str_to_date('9/23/16'),
+          rotavirus: nil,
+          varicella: nil
         }
       ],
       PATIENT2: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
+        102,
+        'not_complete',
+          {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('9/01/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          mcv: str_to_date('9/01/16'),
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/23/16'),
+          rotavirus: nil,
+          varicella: nil
         }
       ],
       PATIENT3: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
+        103,
+        'not_complete',
+          {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: nil,
+          hib: nil,
+          hpv: nil,
+          mcv: nil,
+          mmr: nil,
+          pneumococcal: str_to_date('9/01/16'),
+          polio: nil,
+          rotavirus: nil,
+          varicella: nil
         }
       ],
       PATIENT4: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
+        104,
+        'not_complete',
+          {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('9/01/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          mcv: nil,
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/01/16'),
+          rotavirus: nil,
+          varicella: str_to_date('9/01/16'),
         }
       ],
       PATIENT5: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
+        105,
+        'not_complete',
+          {
+          dtap: str_to_date('2/09/2017'),
+          hepa: str_to_date('2/09/2017'),
+          zoster: nil,
+          hepb: str_to_date('11/11/16'),
+          hib: nil,
+          hpv: nil,
+          mcv: nil,
+          mmr: nil,
+          pneumococcal: nil,
+          polio: str_to_date('3/09/2017'),
+          rotavirus: nil,
+          varicella: nil
         }
-      ],
-      PATIENT6: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT7: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT8: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT9: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT10: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT11: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT12: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT13: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT14: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT15: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT16: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT17: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT18: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT19: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT20: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
-      PATIENT21: [
-        'not_complete', {
-          dtap: "complete",
-          hepa: "complete",
-          zoster: "complete",
-          hepb: "complete",
-          hib: "complete",
-          hpv: "complete",
-          influenza: "not_complete",
-          mcv: "complete",
-          mmr: "complete",
-          pneumococcal: "complete",
-          polio: "complete",
-          rotavirus: "complete",
-          varicella: "complete"
-        }
-      ],
+      ]
     }
+      # ,
+      # PATIENT6: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT7: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT8: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT9: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT10: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT11: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT12: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT13: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT14: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT15: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT16: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT17: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT18: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT19: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT20: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT21: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ]
+    # }
   end
 
   def self.create_patient(patient_hash)
@@ -1723,5 +1745,6 @@ module KCMODATA
   end
   module_function :delete_db_patients, :create_db_patients, :all_db_patients,
                   :all_db_patient_profiles, :get_expected_record_status,
-                  :get_expected_not_complete_vaccine_groups, :all_vaccine_doses
+                  :get_expected_not_complete_vaccine_groups,
+                  :all_vaccine_doses, :expected_results
 end

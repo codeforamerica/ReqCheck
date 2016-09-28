@@ -1,5 +1,13 @@
 # To be Addressed
 
+# Dtap - if too old, need to switch to a series that the person qualifies for
+
+# CDC Question
+# If a target dose is labeled "skip" do you take the next AAR and use that for then ext one?
+#   The documentation says:
+#     Skipped A target dose status that indicates no vaccine dose administered has met the goals of the target dose. Due to the patient's age and/or interval from a previous dose, the target dose does not need to be satisfied.
+#   This seems to imply that the target dose conditional skip was evaluated after the rest of the other attributes (age, interval, etc) - However when evaluating 'satisfy target dose', the order of the evaluations has the target dose conditional skip being evaluated before age/interval
+
 
   # Why are the polio vaccines all '<forecastVaccineType>N</forecastVaccineType>'
 
@@ -11,6 +19,10 @@
 #   Explain HepA vaccine schedule (0 - 12 months?)
 #   Explain Pneummococal vaccine schedule
 #   Explain how a 'catch up schedule' works
+#   Hep A latest RECOMMENDED Interval 19 months + 4 weeks</latestRecInt>
+#     - Is there such thing as a latest interval that it can no longer be
+#     given or they have to restart?
+
 
 #   TD/TDAP same group, DTAP in different vaccine group
 
