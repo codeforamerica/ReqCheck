@@ -24,7 +24,7 @@ RSpec.describe RecordEvaluator, type: :model do
     let(:record_evaluator) { RecordEvaluator.new(patient: test_patient) }
 
     it 'creates a patients antigen_administered_records' do
-      expect(record_evaluator.antigen_administered_records.length).to eq(47)
+      expect(record_evaluator.antigen_administered_records.length).to eq(67)
       expect(
         record_evaluator.antigen_administered_records.first.class.name
       ).to eq('AntigenAdministeredRecord')
@@ -81,7 +81,7 @@ RSpec.describe RecordEvaluator, type: :model do
           :hepa => "complete",
           :zoster => "complete",
           :hepb => "complete",
-          :hib => "not_complete",
+          :hib => "complete",
           :hpv => "complete",
           :influenza => "not_complete",
           :mcv => "complete",
@@ -92,7 +92,6 @@ RSpec.describe RecordEvaluator, type: :model do
           :varicella => "complete"
         }
       )
-      expect(false).to be(true) # NEED TO FIGURE OUT HOW TO UNIFY ALL OF THE KEYS TO BE OF THE SAME FORMAT (SOME ARE STRINGS, OTHERS ARE NOT)
     end
     context 'with a 2 year old patient' do
       it 'returns complete for an up to date patient' do
@@ -136,7 +135,15 @@ RSpec.describe RecordEvaluator, type: :model do
           patient: new_test_patient
         )
         expect(record_evaluator.record_status).to eq('not_complete')
-        byebug
+      end
+    end
+    context 'when the record is not complete but no vaccines can be given' do
+      it 'returns not_complete_no_action as the evaluation_status' do
+        test_patient = incomplete_no_immediate_vaccines_2_year_test_patient
+        record_evaluator = RecordEvaluator.new(
+          patient: test_patient
+        )
+        expect(record_evaluator.record_status).to eq('not_complete_no_action')
       end
     end
   end

@@ -36,8 +36,11 @@ class PatientSeries
     next_target_dose_index = satisfied_target_doses.length
     next_target_dose = target_doses.at(next_target_dose_index)
     return nil if next_target_dose.nil?
+    target_dose_objects = satisfied_target_doses.map do |td_hash|
+      td_hash[:target_dose]
+    end
     next_target_dose.get_earliest_future_target_dose_date(
-      satisfied_target_doses
+      target_dose_objects
     )
     next_target_dose
   end

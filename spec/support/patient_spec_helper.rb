@@ -80,7 +80,9 @@ module PatientSpecHelper
       94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)], # 'MMRV'
       133 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks),
               (dob + 52.weeks), (dob + 60.weeks)], # PPV9
-      83 => [(dob + 12.months), (dob + 18.months)] # HAV6
+      83 => [(dob + 12.months), (dob + 18.months)], # HAV6
+      120 => [(dob + 6.weeks), (dob + 10.weeks),
+              (dob + 14.weeks), (dob + 12.months)] # HIB
     }
     required_vaccine_cvxs.each do |cvx_key, date_array|
       create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
@@ -99,7 +101,31 @@ module PatientSpecHelper
       94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)], # 'MMRV'
       133 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks),
               (dob + 52.weeks), (dob + 60.weeks)], # PPV9
-      83 => [(dob + 12.months), (dob + 18.months)] # HAV6
+      83 => [(dob + 12.months), (dob + 18.months)], # HAV6
+      120 => [(dob + 6.weeks), (dob + 10.weeks),
+              (dob + 14.weeks), (dob + 12.months)]
+    }
+    required_vaccine_cvxs.each do |cvx_key, date_array|
+      create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
+    end
+    test_patient
+  end
+
+  def incomplete_no_immediate_vaccines_2_year_test_patient(test_patient = nil)
+    test_patient ||= FactoryGirl.create(:patient_with_profile,
+                                        dob: 2.years.ago.to_date)
+    dob = test_patient.dob
+    required_vaccine_cvxs = {
+      43 => [(Date.today - 1.day)], # 'HEPB'
+      10 => [(Date.today - 1.day)], # 'POL',
+      20 => [(dob + 6.weeks), (dob + 10.weeks), # 'DTAP'
+              (dob + 14.weeks), (dob + 15.months)],
+      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)], # 'MMRV'
+      133 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks),
+              (dob + 52.weeks), (dob + 60.weeks)], # PPV9
+      83 => [(dob + 12.months), (dob + 18.months)], # HAV6
+      49 => [(dob + 6.weeks), (dob + 10.weeks),
+              (Date.today - 1.day)] # HIB
     }
     required_vaccine_cvxs.each do |cvx_key, date_array|
       create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
