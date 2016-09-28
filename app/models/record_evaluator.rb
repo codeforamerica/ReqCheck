@@ -145,4 +145,10 @@ class RecordEvaluator
     @record_status = evaluate_entire_required_groups(required_evaluations)
     @record_status
   end
+
+  def get_vaccine_group_evaluator(vaccine_group_name)
+    @vaccine_group_evaluators.find do |vaccine_group_evaluator|
+      vaccine_group_evaluator.vaccine_group_name == vaccine_group_name
+    end
+  end
 end

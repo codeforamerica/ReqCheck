@@ -1347,62 +1347,66 @@ module KCMODATA
           rotavirus: nil,
           varicella: nil
         }
+      ],
+      PATIENT6: [
+        106,
+        'not_complete',
+        {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('9/01/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          influenza: nil,
+          mcv: nil,
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/01/16'),
+          rotavirus: nil,
+          varicella: str_to_date('9/01/16')
+        }
+      ],
+      PATIENT7: [
+        107,
+        'not_complete',
+        {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: nil,
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          influenza: nil,
+          mcv: str_to_date('9/01/16'),
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/01/16'),
+          rotavirus: nil,
+          varicella: str_to_date('9/01/16')
+        }
+      ],
+      PATIENT8: [
+        108,
+        'not_complete',
+        {
+          dtap: str_to_date('10/02/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('10/02/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          influenza: nil,
+          mcv: nil,
+          mmr: str_to_date('10/02/16'),
+          pneumococcal: nil,
+          polio: str_to_date('10/02/16'),
+          rotavirus: nil,
+          varicella: str_to_date('10/02/16')
+        }
       ]
     }
-      # ,
-      # PATIENT6: [
-      #   'not_complete',
-      #   {
-      #     dtap: nil,
-      #     hepa: nil,
-      #     zoster: nil,
-      #     hepb: nil,
-      #     hib: nil,
-      #     hpv: nil,
-      #     influenza: nil,
-      #     mcv: nil,
-      #     mmr: nil,
-      #     pneumococcal: nil,
-      #     polio: nil,
-      #     rotavirus: nil,
-      #     varicella: nil
-      #   }
-      # ],
-      # PATIENT7: [
-      #   'not_complete',
-      #   {
-      #     dtap: nil,
-      #     hepa: nil,
-      #     zoster: nil,
-      #     hepb: nil,
-      #     hib: nil,
-      #     hpv: nil,
-      #     influenza: nil,
-      #     mcv: nil,
-      #     mmr: nil,
-      #     pneumococcal: nil,
-      #     polio: nil,
-      #     rotavirus: nil,
-      #     varicella: nil
-      #   }
-      # ],
-      # PATIENT8: [
-      #   'not_complete',
-      #   {
-      #     dtap: nil,
-      #     hepa: nil,
-      #     zoster: nil,
-      #     hepb: nil,
-      #     hib: nil,
-      #     hpv: nil,
-      #     influenza: nil,
-      #     mcv: nil,
-      #     mmr: nil,
-      #     pneumococcal: nil,
-      #     polio: nil,
-      #     rotavirus: nil,
-      #     varicella: nil
-      #   }
+  end
       # ],
       # PATIENT9: [
       #   'not_complete',
@@ -1639,7 +1643,7 @@ module KCMODATA
       #   }
       # ]
     # }
-  end
+  # end
 
   def self.create_patient(patient_hash)
     gender_index = patient_hash[:patient_number] % 2
