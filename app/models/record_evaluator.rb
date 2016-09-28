@@ -2,7 +2,7 @@ class RecordEvaluator
   include ActiveModel::Model
 
   attr_accessor :patient, :antigen_evaluators, :record_status,
-                :antigen_administered_records, :vaccine_group_evaluations
+                :antigen_administered_records, :vaccine_group_evaluators
 
   def initialize(patient:)
     @patient                      = patient
@@ -107,7 +107,7 @@ class RecordEvaluator
     @vaccine_group_evaluators.each do |vaccine_group_evaluator|
       if vaccine_group_evaluator.vaccine_group_name != 'influenza'
         result_hash[vaccine_group_evaluator.vaccine_group_name.to_sym] =
-          vaccine_group_evaluator.next_target_dose
+          vaccine_group_evaluator.next_target_dose_date
       end
     end
     result_hash
@@ -144,5 +144,11 @@ class RecordEvaluator
     )
     @record_status = evaluate_entire_required_groups(required_evaluations)
     @record_status
+  end
+
+  def get_vaccine_group_evaluator(vaccine_group_name)
+    @vaccine_group_evaluators.find do |vaccine_group_evaluator|
+      vaccine_group_evaluator.vaccine_group_name == vaccine_group_name
+    end
   end
 end

@@ -88,6 +88,13 @@ class Patient < User
     record_evaluator.vaccine_groups_next_target_doses
   end
 
+  def future_dose(vaccine_group_name)
+    vaccine_group_evaluator =
+      record_evaluator.get_vaccine_group_evaluator(vaccine_group_name)
+    return nil if vaccine_group_evaluator.nil?
+    vaccine_group_evaluator.next_target_dose
+  end
+
 end
 
 

@@ -78,6 +78,31 @@ RSpec.describe 'KCMO_HD_Data' do
         ).patient
         expect(db_patient.future_dose_dates).to eq(expected_future_dates)
       end
+      it "\#future_dose_dates for hep b" do
+        db_patient = KCMODATA.all_db_patient_profiles.find_by(
+          record_number: record_number
+        ).patient
+        target_dose = db_patient.future_dose('hepb')
+        # if target_dose.nil?
+        #   byebug
+        # end
+        latest_vax  = db_patient.vaccine_doses.where(
+          cvx_code: [8, 42, 43, 44, 45, 51, 102, 104, 110, 132]
+        ).last
+        new_expected_future_dates = []
+        if target_dose.nil?
+          expect(nil).to eq(db_patient.future_dose_dates[:hepb])
+        else
+          target_dose.intervals.each do |i|
+            date_string = i.interval_min
+            new_expected_future_dates << target_dose.create_patient_age_date(
+              date_string,
+              latest_vax.date_administered
+            )
+            expect(new_expected_future_dates).to include(db_patient.future_dose_dates[:hepb])
+          end
+        end
+      end
     end
   end
   # KCMODATA.all_db_patients.each do |db_patient|

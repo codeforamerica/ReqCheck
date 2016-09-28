@@ -19,7 +19,10 @@
 #   Explain HepA vaccine schedule (0 - 12 months?)
 #   Explain Pneummococal vaccine schedule
 #   Explain how a 'catch up schedule' works
-#   Hep A latest RECOMMENDED Interval 19 months + 4 weeks</latestRecInt>
+#   Hep A latest RECOMMENDED Interval (latestRecInt) 19 months + 4 weeks
+#     - Is there such thing as a latest interval that it can no longer be
+#     given or they have to restart?
+#   Hep B latest RECOMMENDED interval (latestRecInt) 19 months + 4 weeks
 #     - Is there such thing as a latest interval that it can no longer be
 #     given or they have to restart?
 
@@ -93,3 +96,47 @@
 
 
 # Same page for the entire staff on why we need a phone number
+
+
+
+# Responses from Jolene
+
+# Need HD to clarify -
+#   Explain HepA vaccine schedule (0 - 12 months?)
+
+#     - Supposed to be given at age 1, 2nd 6 months later (on time)
+#     - If not at age 1, next 6 months later
+#       - Even with massive time in between, second dose
+#       - 2 doses and good
+
+#   Explain Pneummococal vaccine schedule
+#     - On schedule: 2 months, 4 months, 6 months, then 12 months
+#     - Catchup: 2 months (as early as 6 weeks)
+#       -> 4 weeks if before 1st dose before 12 months
+#       -> 8 weeks if first dose given at 12 months or older, or if current age is 24 through 59 months
+#       -> No second dose needed if health and first dose given at 24 or older
+
+#   Pneumoccocal is not straightforward - there is max age/min age
+#     - After max age you no longer need to give it
+
+#   Explain how a 'catch up schedule' works
+#   Hep A latest RECOMMENDED Interval (latestRecInt) 19 months + 4 weeks
+#     - Is there such thing as a latest interval that it can no longer be
+#     given or they have to restart?
+#       => Its recommended - never TOO much time passed between so you cant get a shot
+#   Hep B latest RECOMMENDED interval (latestRecInt) 19 months + 4 weeks
+#     - Is there such thing as a latest interval that it can no longer be
+#     given or they have to restart?
+
+#   Because of the different recommendations (school is 4)
+#     - Most adults, if they are refugees, recomend 3 tetanus
+#       - starts with TDAp
+#       - 30 days another TD
+#       - 6 months for another TD
+#     - Kids
+#       - Dtap (2 months to age of 6)
+#       - Once they turn 7, they get TD or TDAp
+#         - 7 year old comes in without anything before, hit em with a TDAp
+#         - 7 with say 3 dtaps, hit them with a TD
+#           - Want to make sure they have 2 - 3 pertussis, if not you will do a TDAP (7 year old with 1 - 2 dtap, hit em with tdap)
+
