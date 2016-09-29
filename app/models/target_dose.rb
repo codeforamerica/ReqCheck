@@ -124,7 +124,6 @@ class TargetDose
     )
   end
 
-
   def get_earliest_future_target_dose_date(satisfied_target_doses)
     future_dose_dates = create_future_dose_dates(
       patient,

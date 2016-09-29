@@ -6,9 +6,16 @@ module FutureDoseEvaluation
   include PreferableAllowableVaccineEvaluation
 
   def create_future_dose_dates(patient,
-                               target_dose,
                                vaccine_doses: [],
+                               unsatisfied_target_doses: [],
                                satisfied_target_doses: [])
+    if unsatisfied_target_doses == []
+      return []
+    else
+      unsatisfied_target_doses = unsatisfied_target_doses.dup
+      target_dose = unsatisfied_target_doses.first
+    end
+
     patient_dob = patient.dob
     evaluation_antigen_series_dose = target_dose.antigen_series_dose
     conditional_skip = target_dose.conditional_skip
@@ -23,6 +30,24 @@ module FutureDoseEvaluation
         patient_vaccine_doses: patient.vaccine_doses,
         satisfied_target_doses: satisfied_target_doses
       )
+      until conditional_skip_evaluation[:evaluation_status] == 'conditional_skip_not_met'
+
+        if target_dose.nil? || target_dose.conditional_skip.nil?
+          break
+        end
+
+        target_dose = unsatisfied_target_doses.shift
+        conditional_skip_evaluation = evaluate_conditional_skip(
+          conditional_skip,
+          patient_dob: patient_dob,
+          date_of_dose: Date.today,
+          patient_vaccine_doses: patient.vaccine_doses,
+          satisfied_target_doses: satisfied_target_doses
+        )
+      end
+      if target_dose.nil?
+        return []
+      end
     end
 
     age_date_attributes = create_age_attributes(evaluation_antigen_series_dose,

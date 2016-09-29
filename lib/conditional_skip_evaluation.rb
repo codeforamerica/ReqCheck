@@ -84,7 +84,6 @@ module ConditionalSkipEvaluation
                                     condition_statuses)
   end
 
-
   def evaluate_conditional_skip(conditional_skip_object,
                                 patient_dob:,
                                 date_of_dose:,
@@ -102,5 +101,4 @@ module ConditionalSkipEvaluation
     get_conditional_skip_status(conditional_skip_object.set_logic,
                                 set_statuses)
   end
-
 end
