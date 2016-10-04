@@ -6,4 +6,3 @@ class VaccineDosesController < InheritedResources::Base
       params.require(:vaccine_dose).permit()
     end
 end
-

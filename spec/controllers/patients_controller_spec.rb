@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe PatientsController, type: :controller do
-  describe "GET index" do
+  describe 'GET index' do
     before(:each) do
       FactoryGirl.create_list(:patient, 5)
     end
-
 
     it '#patients should 302 redirect to patient show when given valid search params' do
       patient = FactoryGirl.create(:patient_with_profile)
@@ -29,6 +28,5 @@ RSpec.describe PatientsController, type: :controller do
       get :index
       expect(assigns(:patients).length).to eq(0)
     end
-
   end
 end
