@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ImporterController, type: :controller do
-  describe 'POST data_importer' do
+  describe 'POST import_patient_data' do
     let(:same_json) do
       {
         json_data: [

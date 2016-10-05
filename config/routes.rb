@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get '/login/go', to: 'welcome#go'
 
   # API for importing Patient Data from the Extractor
-  post '/data', to: 'importer#import_data'
+  post '/patient_data', to: 'importer#import_patient_data'
+  post '/vaccine_data', to: 'importer#import_vaccine_data'
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

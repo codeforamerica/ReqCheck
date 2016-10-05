@@ -16,8 +16,13 @@ class ImporterController < ApplicationController
     redirect_to action: 'index'
   end
 
-  def import_data
-    json_data = params[:json_data]
+  def import_patient_data
+    json_data = params[:patient_data]
+    render json: { valid: 'You betcha' }
+  end
+
+  def import_vaccine_data
+    json_data = params[:vaccine_data]
     render json: { valid: 'You betcha' }
   end
 end
