@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914203146) do
+ActiveRecord::Schema.define(version: 20161004233143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,19 +154,21 @@ ActiveRecord::Schema.define(version: 20160914203146) do
   end
 
   create_table "patient_profiles", force: :cascade do |t|
-    t.uuid    "patient_id",    null: false
-    t.integer "record_number", null: false
-    t.date    "dob",           null: false
-    t.string  "address"
-    t.string  "address2"
-    t.string  "city"
-    t.string  "state"
-    t.string  "zip_code"
-    t.string  "cell_phone"
-    t.string  "home_phone"
-    t.string  "race"
-    t.string  "ethnicity"
-    t.string  "gender"
+    t.uuid     "patient_id",            null: false
+    t.integer  "record_number",         null: false
+    t.date     "dob",                   null: false
+    t.string   "address"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "cell_phone"
+    t.string   "home_phone"
+    t.string   "race"
+    t.string   "ethnicity"
+    t.string   "gender"
+    t.datetime "hd_mpfile_update_date"
+    t.integer  "family_number"
   end
 
   add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", unique: true, using: :btree
@@ -184,25 +186,23 @@ ActiveRecord::Schema.define(version: 20160914203146) do
   create_table "vaccine_doses", force: :cascade do |t|
     t.string   "vaccine_code"
     t.integer  "patient_profile_id"
-    t.date     "date_administered",                         null: false
-    t.string   "description"
-    t.boolean  "send_flag"
-    t.boolean  "history_flag",       default: false,        null: false
+    t.date     "date_administered",                            null: false
+    t.string   "hd_description"
+    t.boolean  "history_flag",          default: false,        null: false
     t.string   "provider_code"
-    t.string   "cosite"
-    t.string   "region"
     t.string   "dosage"
     t.string   "mvx_code"
     t.string   "lot_number"
-    t.date     "expiration_date",    default: '2999-12-31'
-    t.string   "dose_number"
-    t.string   "encounter_number"
-    t.date     "sent_date"
+    t.date     "expiration_date",       default: '2999-12-31'
+    t.string   "hd_encounter_id"
     t.string   "vfc_code"
-    t.integer  "facility_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "cvx_code",                                  null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "cvx_code",                                     null: false
+    t.string   "vfc_description"
+    t.string   "given_by"
+    t.string   "injection_site"
+    t.string   "hd_imfile_update_date"
   end
 
   create_table "vaccine_infos", force: :cascade do |t|

@@ -7,9 +7,12 @@ class UpdateHdFieldsToVaccineDose < ActiveRecord::Migration
     remove_column :vaccine_doses, :dose_number
     remove_column :vaccine_doses, :facility_id
 
-    add_column :vaccine_doses, :vfc_description
-    add_column :vaccine_doses, :given_by
-    add_column :vaccine_doses, :injection_site
-    add_column :vaccine_doses, :hd_imfile_update_date
+    add_column :vaccine_doses, :vfc_description, :string
+    add_column :vaccine_doses, :given_by, :string
+    add_column :vaccine_doses, :injection_site, :string
+    add_column :vaccine_doses, :hd_imfile_update_date, :string
+
+    rename_column :vaccine_doses, :description, :hd_description
+    rename_column :vaccine_doses, :encounter_number, :hd_encounter_id
   end
 end
