@@ -11,11 +11,15 @@ RSpec.describe VaccineDose, type: :model do
 
     it "can take a Patient object as a parameter" do
       patient = Patient.create(first_name: 'Test', last_name: 'Tester',
-                               patient_profile_attributes: {dob: Date.today, record_number: 123})
-      vaccine_dose = VaccineDose.create(vaccine_code: 'VAR1',
-                                        date_administered: Date.today,
-                                        patient_profile: patient.patient_profile,
-                                        cvx_code: 21)
+                               patient_profile_attributes: {
+                                 dob: Date.today, patient_number: 123
+                               })
+      vaccine_dose = VaccineDose.create(
+        vaccine_code: 'VAR1',
+        date_administered: Date.today,
+        patient_profile: patient.patient_profile,
+        cvx_code: 21
+      )
       expect(vaccine_dose.class.name).to eq('VaccineDose')
     end
 
@@ -48,7 +52,7 @@ RSpec.describe VaccineDose, type: :model do
       FactoryGirl.create(:vaccine_dose,
                          vaccine_code: 'POL',
                          date_administered: 10.days.ago.to_date,
-                         expiration_date: 5.days.ago.to_date) 
+                         expiration_date: 5.days.ago.to_date)
     end
     let(:expired_vax_dose) do
       FactoryGirl.create(:vaccine_dose,
@@ -59,9 +63,9 @@ RSpec.describe VaccineDose, type: :model do
     let(:no_expiration_vax_dose) do
       VaccineDose.create(vaccine_code: 'POL',
                          date_administered: 5.days.ago.to_date,
-                         cvx_code: 10) 
+                         cvx_code: 10)
     end
-  
+
     it 'returns true when the vaccine_dose was given before the lot_expiration_date' do
       expect(valid_vax_dose.validate_lot_expiration_date).to be(true)
     end
@@ -94,7 +98,7 @@ RSpec.describe VaccineDose, type: :model do
       patient = Patient.create(first_name: 'Test',
                                last_name: 'Tester',
                                patient_profile_attributes: {dob: 6.years.ago.to_date,
-                                                            record_number: 123})
+                                                            patient_number: 123})
       VaccineDose.create(vaccine_code: 'VAR1',
         date_administered: Date.yesterday,
         patient_profile: patient.patient_profile,
@@ -121,7 +125,7 @@ RSpec.describe VaccineDose, type: :model do
   end
 
 
-  describe '#vaccine_info' do 
+  describe '#vaccine_info' do
     it 'has a vaccine_info object that is joined on the cvx code' do
       vaccine_dose = FactoryGirl.create(:vaccine_dose)
       vaccine_info = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)
@@ -131,7 +135,7 @@ RSpec.describe VaccineDose, type: :model do
   end
 
 
-  describe '#antigens' do 
+  describe '#antigens' do
     it 'has a number of antigens through the vaccine_info' do
       vaccine_dose = FactoryGirl.create(:vaccine_dose)
       vaccine_info = FactoryGirl.create(:vaccine_info, cvx_code: vaccine_dose.cvx_code)

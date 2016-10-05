@@ -1653,7 +1653,7 @@ module KCMODATA
       last_name: patient_hash[:patient_name].split(' ').last,
       patient_profile_attributes: {
         dob: patient_hash[:dob],
-        record_number: patient_hash[:patient_number],
+        patient_number: patient_hash[:patient_number],
         gender: gender
       }
     )
@@ -1694,9 +1694,9 @@ module KCMODATA
     record_statuses
   end
 
-  def get_expected_record_status(record_number)
+  def get_expected_record_status(patient_number)
     record_statuses = self.create_expected_record_statuses
-    record_statuses[record_number.to_sym]
+    record_statuses[patient_number.to_sym]
   end
 
   def self.create_expected_not_complete_vaccine_groups
@@ -1708,15 +1708,15 @@ module KCMODATA
     record_statuses
   end
 
-  def get_expected_not_complete_vaccine_groups(record_number)
+  def get_expected_not_complete_vaccine_groups(patient_number)
     not_complete_vaccine_groups =
       self.create_expected_not_complete_vaccine_groups
-    not_complete_vaccine_groups[record_number.to_sym]
+    not_complete_vaccine_groups[patient_number.to_sym]
   end
 
   def all_db_patient_profiles
-    record_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
-    PatientProfile.where(record_number: record_numbers)
+    patient_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
+    PatientProfile.where(patient_number: patient_numbers)
   end
 
   def all_db_patients
@@ -1733,7 +1733,7 @@ module KCMODATA
   end
 
   def create_db_patients
-    if PatientProfile.find_by(record_number: PATIENT1[:patient_number]).nil?
+    if PatientProfile.find_by(patient_number: PATIENT1[:patient_number]).nil?
       create_all_patients(ALL_PATIENTS)
     end
   end

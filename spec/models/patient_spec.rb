@@ -17,7 +17,7 @@ RSpec.describe Patient, type: :model do
     patient = FactoryGirl.create(:patient_with_profile,
                                  patient_profile_attributes: {
                                    dob: in_pst(5.years.ago),
-                                   record_number: 123
+                                   patient_number: 123
                                  })
     vaccine_types = %w(MCV6 DTaP MMR9)
     vaccine_types.each do |vax_code|
@@ -47,10 +47,10 @@ RSpec.describe Patient, type: :model do
       dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob, record_number: 123 }
+        patient_profile_attributes: { dob: dob, patient_number: 123 }
       )
       expect(patient.dob).to eq(dob)
-      expect(patient.record_number).to eq(123)
+      expect(patient.patient_number).to eq(123)
       expect(patient.patient_profile.id).not_to eq(nil)
       expect(Patient.all.length).to eq(1)
     end
@@ -59,7 +59,7 @@ RSpec.describe Patient, type: :model do
       dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob, record_number: 123 }
+        patient_profile_attributes: { dob: dob, patient_number: 123 }
       )
       expect(patient.patient_profile.patient_id).to eq(patient.id)
     end
@@ -69,7 +69,7 @@ RSpec.describe Patient, type: :model do
       dob_string = '01/13/2010'
       patient    = Patient.create(
         first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob_string, record_number: 123 }
+        patient_profile_attributes: { dob: dob_string, patient_number: 123 }
       )
       dob_date_object = DateTime.parse(dob_string).to_date
       expect(patient.dob).to eq(dob_date_object)
@@ -80,7 +80,7 @@ RSpec.describe Patient, type: :model do
       dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob, record_number: 123 }
+        patient_profile_attributes: { dob: dob, patient_number: 123 }
       )
       expect(patient.vaccine_doses.length).to eq(0)
       FactoryGirl.create(:vaccine_dose, patient: patient)
@@ -89,29 +89,29 @@ RSpec.describe Patient, type: :model do
     it 'has a dob attribute in years' do
       patient = FactoryGirl.create(:patient_with_profile, patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
-                                     record_number: 123
+                                     patient_number: 123
                                    })
       expect(patient.dob).to eq(5.years.ago.to_date)
     end
   end
 
-  describe '#find_by_record_number' do
+  describe '#find_by_patient_number' do
     let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
 
     it 'takes a string' do
-      record_number = test_patient.record_number.to_s
-      result = Patient.find_by_record_number(record_number)
+      patient_number = test_patient.patient_number.to_s
+      result = Patient.find_by_patient_number(patient_number)
       expect(result.id).to eq(test_patient.id)
     end
 
     it 'takes an integer' do
-      record_number = test_patient.record_number.to_i
-      result = Patient.find_by_record_number(record_number)
+      patient_number = test_patient.patient_number.to_i
+      result = Patient.find_by_patient_number(patient_number)
       expect(result.id).to eq(test_patient.id)
     end
 
     it 'returns nil when no patient is found' do
-      result = Patient.find_by_record_number('9876')
+      result = Patient.find_by_patient_number('9876')
       expect(result).to eq(nil)
     end
   end
@@ -134,7 +134,7 @@ RSpec.describe Patient, type: :model do
       patient = FactoryGirl.create(:patient_with_profile,
                                    patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
-                                     record_number: 123
+                                     patient_number: 123
                                    })
       days_age = patient.age_in_days
       expect(days_age).to eq((365 * 5) + 1)
@@ -146,7 +146,7 @@ RSpec.describe Patient, type: :model do
         :patient,
         patient_profile_attributes: {
           dob: in_pst(5.years.ago),
-          record_number: 123
+          patient_number: 123
         }
       )
     end
@@ -197,7 +197,7 @@ RSpec.describe Patient, type: :model do
       patient = FactoryGirl.create(:patient_with_profile,
                                    patient_profile_attributes: {
                                      dob: in_pst(5.years.ago),
-                                     record_number: 123
+                                     patient_number: 123
                                    })
       create(:vaccine_dose,
              patient_profile: patient.patient_profile,

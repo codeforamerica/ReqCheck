@@ -186,23 +186,23 @@ ActiveRecord::Schema.define(version: 20161004233143) do
   create_table "vaccine_doses", force: :cascade do |t|
     t.string   "vaccine_code"
     t.integer  "patient_profile_id"
-    t.date     "date_administered",                            null: false
+    t.date     "date_administered",                           null: false
     t.string   "hd_description"
-    t.boolean  "history_flag",          default: false,        null: false
+    t.boolean  "history_flag",         default: false,        null: false
     t.string   "provider_code"
     t.string   "dosage"
     t.string   "mvx_code"
     t.string   "lot_number"
-    t.date     "expiration_date",       default: '2999-12-31'
+    t.date     "expiration_date",      default: '2999-12-31'
     t.string   "hd_encounter_id"
     t.string   "vfc_code"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.integer  "cvx_code",                                     null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "cvx_code",                                    null: false
     t.string   "vfc_description"
     t.string   "given_by"
     t.string   "injection_site"
-    t.string   "hd_imfile_update_date"
+    t.string   "hd_imfile_updated_at"
   end
 
   create_table "vaccine_infos", force: :cascade do |t|

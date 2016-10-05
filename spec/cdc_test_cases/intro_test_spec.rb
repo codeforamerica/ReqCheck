@@ -16,7 +16,7 @@ RSpec.describe 'CDC Tests' do
       test_case            = 'Newborn Testing'
       dob                  = '02/01/2012'
       gender               = 'f'
-      record_number        = test_number.split("-").join().to_i
+      patient_number       = test_number.split("-").join().to_i
       series_status        = 'Not Complete'
       forecast_number      = 1
       assesment_date       = '02/01/2012'
@@ -28,16 +28,16 @@ RSpec.describe 'CDC Tests' do
       vaccine_group        = 'DTaP'
   # => !!? Is this true?
       overall_evaluation_status    = ''
-      
+
       # patient_args = {
-      #   dob: dob, gender: gender, record_number: 1, address: "#{test_number} drive",
+      #   dob: dob, gender: gender, patient_profile: 1, address: "#{test_number} drive",
       #   city: 'San Francisco', state: 'CA', zip_code: '94103', cell_phone: '555-555-5555',
       #   first_name: 'Test', last_name: test_number
       # }
       patient_args = {
         dob: '02/12/2011',
         gender: 'f',
-        record_number: 1,
+        patient_profile: 1,
         address: "#{test_number} CDC Street",
         city: 'San Francisco',
         state: 'CA',
@@ -68,12 +68,12 @@ RSpec.describe 'CDC Tests' do
       recommended_date     = '06/26/2011'
       past_due_date        = '08/22/2011'
       vaccine_group        = 'DTaP'
-          
-      
+
+
       patient_args = {
         dob: '02/26/2011',
         gender: 'f',
-        record_number: test_number.split("-").join().to_i,
+        patient_profile: test_number.split("-").join().to_i,
         address: "#{test_number} CDC Street",
         city: 'San Francisco',
         state: 'CA',
@@ -82,13 +82,13 @@ RSpec.describe 'CDC Tests' do
         first_name: 'Test',
         last_name: test_number
       }
-      
+
       vaccine_1 = {
         date_administered: '04/06/2011',
         vaccine_name: 'DTaP Unspecified',
         cvx_code: 107,
         evaluation_status: 'valid'
-      }     
+      }
       vaccine_2 = {
         date_administered: '05/02/2011',
         vaccine_name: 'DTaP Unspecified',
@@ -98,7 +98,7 @@ RSpec.describe 'CDC Tests' do
       }
 
       @test_patient_20130002 = Patient.create_full_profile(patient_args)
-      
+
       vaccine_1_args = {
         patient_profile_id: @test_patient_20130002.patient_profile.id,
         date_administered: vaccine_1[:date_administered],

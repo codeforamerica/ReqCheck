@@ -2,7 +2,7 @@ class PatientsController < InheritedResources::Base
   def index
     @patients = []
     if params[:search]
-      @patients = [Patient.find_by_record_number(params[:search])]
+      @patients = [Patient.find_by_patient_number(params[:search])]
       redirect_to action: 'show', id: @patients[0] unless @patients[0].nil?
     end
   end

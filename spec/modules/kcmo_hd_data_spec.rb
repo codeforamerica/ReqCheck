@@ -41,12 +41,12 @@ RSpec.describe 'KCMO_HD_Data' do
   # end
 
   # KCMODATA.all_db_patients.each do |db_patient|
-  #   record_number = db_patient.record_number
-  #   expected_evaluation = get_expected_record_status(record_number)
+  #   patient_number = db_patient.patient_number
+  #   expected_evaluation = get_expected_record_status(patient_number)
   #   not_complete_vaccine_groups =
-  #     get_expected_not_complete_vaccine_groups(record_number)
+  #     get_expected_not_complete_vaccine_groups(patient_number)
 
-  #   xdescribe "patient with record_number #{patient.record_number}" do
+  #   xdescribe "patient with patient_number #{patient.patient_number}" do
   #     it "\#evaluation_status evaluates to #{expected_evaluation}" do
   #       expect(db_patient.evaluation_status).to eq(expected_evaluation)
   #     end
@@ -61,26 +61,26 @@ RSpec.describe 'KCMO_HD_Data' do
   # end
 
   KCMODATA.expected_results.each do |key, value|
-    record_number = value[0]
+    patient_number = value[0]
     expected_evaluation = value[1]
     expected_future_dates  = value[2]
 
-    describe "patient with record_number #{record_number}" do
+    describe "patient with patient_number #{patient_number}" do
       it "\#evaluation_status evaluates to #{expected_evaluation}" do
         db_patient = KCMODATA.all_db_patient_profiles.find_by(
-          record_number: record_number
+          patient_number: patient_number
         ).patient
         expect(db_patient.evaluation_status).to eq(expected_evaluation)
       end
       it "\#future_dose_dates equals the expected_future_dose_dates" do
         db_patient = KCMODATA.all_db_patient_profiles.find_by(
-          record_number: record_number
+          patient_number: patient_number
         ).patient
         expect(db_patient.future_dose_dates).to eq(expected_future_dates)
       end
       it "\#future_dose_dates for hep b" do
         db_patient = KCMODATA.all_db_patient_profiles.find_by(
-          record_number: record_number
+          patient_number: patient_number
         ).patient
         target_dose = db_patient.future_dose('hepb')
         # if target_dose.nil?
@@ -106,7 +106,7 @@ RSpec.describe 'KCMO_HD_Data' do
     end
   end
   # KCMODATA.all_db_patients.each do |db_patient|
-  #   xdescribe "patient with record_number #{patient.record_number}" do
+  #   xdescribe "patient with patient_number #{patient.patient_number}" do
   #     it "\#evaluation_status evaluates to #{expected_evaluation}" do
   #       expect(db_patient.evaluation_status).to eq(expected_evaluation)
   #     end

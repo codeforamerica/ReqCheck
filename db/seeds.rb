@@ -27,7 +27,7 @@ patients_list.each_with_index do |value, index|
     first_name: value[0], last_name: value[1],
     email: "#{value[1]}#{index.to_s}@example.com",
     patient_profile_attributes: {
-      dob: Date.strptime(value[2], '%m/%d/%Y'), record_number: (index + 1),
+      dob: Date.strptime(value[2], '%m/%d/%Y'), patient_number: (index + 1),
       gender: value[3]
     }
   )

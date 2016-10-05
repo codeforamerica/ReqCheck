@@ -254,7 +254,7 @@ FactoryGirl.define do
 
   factory :patient_profile do
     dob { 12.years.ago.to_date }
-    sequence(:record_number, 11000)
+    sequence(:patient_number, 11000)
 
     association :patient, factory: :patient
   end
@@ -262,7 +262,6 @@ FactoryGirl.define do
   factory :vaccine_dose do
     vaccine_code 'POL'
     date_administered { Date.today }
-    send_flag false
     history_flag false
     provider_code '432'
 

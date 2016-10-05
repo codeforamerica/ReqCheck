@@ -2,21 +2,21 @@ class Patient < User
   after_initialize :set_defaults, unless: :persisted?
   has_one :patient_profile
   has_many :vaccine_doses, through: :patient_profile
-  delegate :dob, :record_number, :address, :address2, :city, :state, :zip_code, :cell_phone,
+  delegate :dob, :patient_number, :address, :address2, :city, :state, :zip_code, :cell_phone,
     :home_phone, :race, :ethnicity, :gender, :vaccine_doses, to: :patient_profile
 
   accepts_nested_attributes_for :patient_profile
 
   include TimeCalc
 
-  def self.find_by_record_number(record_number)
+  def self.find_by_patient_number(patient_number)
     return self.joins(:patient_profile)
-      .where(patient_profiles: {record_number: record_number})
+      .where(patient_profiles: {patient_number: patient_number})
       .order("created_at DESC").first
   end
 
-  def self.create_full_profile(first_name:, last_name:, dob:, record_number:, email: '', **options)
-    allowable_keys = [:record_number, :dob, :address, :address2, :city, :state,
+  def self.create_full_profile(first_name:, last_name:, dob:, patient_number:, email: '', **options)
+    allowable_keys = [:patient_number, :dob, :address, :address2, :city, :state,
                       :zip_code, :cell_phone, :home_phone, :race, :ethnicity, :gender]
     options.keys.each do |key_symbol|
       if !allowable_keys.include? key_symbol
@@ -24,7 +24,7 @@ class Patient < User
       end
     end
     options[:dob]           = dob
-    options[:record_number] = record_number
+    options[:patient_number] = patient_number
     options = options.symbolize_keys
     self.create(first_name: first_name, last_name: last_name, email: email,
                 patient_profile_attributes: options)
@@ -35,7 +35,7 @@ class Patient < User
   end
 
   def check_record
-    # if self.record_number < 10
+    # if self.patient_number < 10
     #   true
     # end
     # false
