@@ -15,10 +15,8 @@ RSpec.describe Patient, type: :model do
 
   let(:patient_w_vaccines) do
     patient = FactoryGirl.create(:patient_with_profile,
-                                 patient_profile_attributes: {
-                                   dob: in_pst(5.years.ago),
-                                   patient_number: 123
-                                 })
+                                 dob: in_pst(5.years.ago),
+                                 patient_number: 123)
     vaccine_types = %w(MCV6 DTaP MMR9)
     vaccine_types.each do |vax_code|
       create(:vaccine_dose,
@@ -95,7 +93,7 @@ RSpec.describe Patient, type: :model do
     end
   end
 
-  describe '#find_by_patient_number' do
+  describe '.find_by_patient_number' do
     let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
 
     it 'takes a string' do
@@ -222,6 +220,52 @@ RSpec.describe Patient, type: :model do
       expect(test_patient.vaccine_doses).not_to eq([])
       expect(test_patient.antigen_administered_records)
         .to be(test_patient.antigen_administered_records)
+    end
+  end
+
+  describe '.find_or_create_by_patient_number' do
+    it 'finds a record by the number if it exists' do
+
+    end
+  end
+
+  describe '.update_or_create_by_patient_number' do
+    let(:valid_patient) do
+      FactoryGirl.create(
+        :patient_with_profile,
+        dob: 5.years.ago.to_date,
+
+      )
+    end
+    it 'finds a record by the number if it exists and updates it' do
+      expect(valid_patient.first_name).to eq('Test1')
+      patient_args = {
+        dob: 3.years.ago.to_date,
+        patient_number: 321,
+        first_name: 'New1',
+        last_name: 'Tester1'
+      }
+      patient = Patient.update_or_create_by_patient_number(patient_args)
+      expect(patient.dob).to eq(3.years.ago.to_date)
+      expect(patient.first_name).to eq('New1')
+    end
+    it 'creates a new record if one does not already exist' do
+      patient_args = {
+        first_name: '1Test',
+        last_name: '1Tester',
+        dob: 3.years.ago.to_date,
+        patient_number: 121
+      }
+      patient = Patient.update_or_create_by_patient_number(patient_args)
+      expect(patient.dob).to eq(3.years.ago.to_date)
+    end
+    it 'errors if not all required arguments are present' do
+      patient_args = {
+        dob: 3.years.ago.to_date,
+        patient_number: 321
+      }
+      expect{ Patient.update_or_create_by_patient_number(patient_args) }
+        .to raise_exception(ArgumentError)
     end
   end
 

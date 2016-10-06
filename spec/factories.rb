@@ -278,8 +278,6 @@ FactoryGirl.define do
       vax_array[(num % vax_array.length)][3]
     end
     expiration_date { 2.months.since.to_date }
-    dose_number 1
-    facility_id 19
   end
 
   factory :vaccine_dose_with_patient_profile, parent: :vaccine_dose do

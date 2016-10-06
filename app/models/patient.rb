@@ -8,19 +8,30 @@ class Patient < User
   accepts_nested_attributes_for :patient_profile
 
   include TimeCalc
+  extend PatientValidator
 
   def self.find_by_patient_number(patient_number)
+    patient_number = patient_number.to_i if patient_number.is_a? String
     return self.joins(:patient_profile)
       .where(patient_profiles: {patient_number: patient_number})
       .order("created_at DESC").first
   end
 
-  def self.create_full_profile(first_name:, last_name:, dob:, patient_number:, email: '', **options)
-    allowable_keys = [:patient_number, :dob, :address, :address2, :city, :state,
-                      :zip_code, :cell_phone, :home_phone, :race, :ethnicity, :gender]
+  def self.create_full_profile(first_name:,
+                               last_name:,
+                               dob:,
+                               patient_number:,
+                               email: '',
+                               **options)
+    allowable_keys = [
+      :patient_number, :dob, :address, :address2, :city, :state,
+      :zip_code, :cell_phone, :home_phone, :race, :ethnicity, :gender
+    ]
     options.keys.each do |key_symbol|
       if !allowable_keys.include? key_symbol
-        raise ArgumentError.new("unknown attribute #{key_symbol.to_s} for PatientProfile")
+        raise ArgumentError.new(
+          "unknown attribute #{key_symbol.to_s} for PatientProfile"
+        )
       end
     end
     options[:dob]           = dob
@@ -28,6 +39,31 @@ class Patient < User
     options = options.symbolize_keys
     self.create(first_name: first_name, last_name: last_name, email: email,
                 patient_profile_attributes: options)
+  end
+
+  def self.find_or_create_by_patient_number(patient_number,
+                                            **options)
+    patient = self.find_by_patient_number(patient_number)
+    if patient.nil?
+      patient = Patient.create_full_profile(patient_number: patient_number,
+                                            **options)
+    end
+    patient
+  end
+
+  def self.update_or_create_by_patient_number(**options)
+    self.check_required_patient_args(options)
+    patient = self.find_by_patient_number(options[:patient_number])
+    if patient.nil?
+      patient = Patient.create_full_profile(**options)
+    else
+      patient_args         = self.pull_patient_attrs(options)
+      patient_profile_args = self.pull_patient_profile_attrs(options)
+
+      patient.update(patient_args)
+      patient.patient_profile.update(patient_profile_args)
+    end
+    patient
   end
 
   def set_defaults

@@ -154,9 +154,9 @@ ActiveRecord::Schema.define(version: 20161004233143) do
   end
 
   create_table "patient_profiles", force: :cascade do |t|
-    t.uuid     "patient_id",            null: false
-    t.integer  "record_number",         null: false
-    t.date     "dob",                   null: false
+    t.uuid     "patient_id",           null: false
+    t.integer  "patient_number",       null: false
+    t.date     "dob",                  null: false
     t.string   "address"
     t.string   "address2"
     t.string   "city"
@@ -167,12 +167,12 @@ ActiveRecord::Schema.define(version: 20161004233143) do
     t.string   "race"
     t.string   "ethnicity"
     t.string   "gender"
-    t.datetime "hd_mpfile_update_date"
+    t.datetime "hd_mpfile_updated_at"
     t.integer  "family_number"
   end
 
   add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", unique: true, using: :btree
-  add_index "patient_profiles", ["record_number"], name: "index_patient_profiles_on_record_number", unique: true, using: :btree
+  add_index "patient_profiles", ["patient_number"], name: "index_patient_profiles_on_patient_number", unique: true, using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "first_name", null: false

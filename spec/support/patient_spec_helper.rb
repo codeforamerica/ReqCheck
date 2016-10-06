@@ -4,7 +4,6 @@ module PatientSpecHelper
       FactoryGirl.create(
         :vaccine_dose_by_cvx,
         patient_profile: test_patient.patient_profile,
-        dose_number: (index + 1),
         date_administered: vaccine_date,
         cvx_code: cvx_code
       )
