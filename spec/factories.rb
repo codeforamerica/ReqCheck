@@ -4,6 +4,9 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :data_import_error do
+
+  end
   factory :vaccine_dose_evaluator do
   end
   factory :antigen_evaluator do
@@ -242,19 +245,21 @@ FactoryGirl.define do
   factory :patient_with_profile, parent: :patient do
     transient do
       dob false
+      patient_number false
     end
     after(:create) do |patient, args|
-      if args.dob
-        create(:patient_profile, patient_id: patient.id.to_s, dob: args.dob)
-      else
-        create(:patient_profile, patient_id: patient.id.to_s)
+      patient_profile_args = { patient_id: patient.id.to_s }
+      patient_profile_args[:dob] = args.dob if args.dob
+      if args.patient_number
+        patient_profile_args[:patient_number] = args.patient_number
       end
+      create(:patient_profile, patient: patient, **patient_profile_args)
     end
   end
 
   factory :patient_profile do
     dob { 12.years.ago.to_date }
-    sequence(:patient_number, 11000)
+    sequence(:patient_number, 11_000)
 
     association :patient, factory: :patient
   end

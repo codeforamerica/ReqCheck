@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004233143) do
+ActiveRecord::Schema.define(version: 20161006233720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,17 @@ ActiveRecord::Schema.define(version: 20161004233143) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  create_table "data_import_errors", force: :cascade do |t|
+    t.string   "object_class_name"
+    t.string   "import_id"
+    t.string   "error_message"
+    t.jsonb    "raw_hash",          default: {}
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "data_import_errors", ["raw_hash"], name: "index_data_import_errors_on_raw_hash", using: :btree
 
   create_table "intervals", force: :cascade do |t|
     t.integer  "antigen_series_dose_id"

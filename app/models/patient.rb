@@ -25,7 +25,8 @@ class Patient < User
                                **options)
     allowable_keys = [
       :patient_number, :dob, :address, :address2, :city, :state,
-      :zip_code, :cell_phone, :home_phone, :race, :ethnicity, :gender
+      :zip_code, :cell_phone, :home_phone, :race, :ethnicity,
+      :gender, :hd_mpfile_updated_at
     ]
     options.keys.each do |key_symbol|
       if !allowable_keys.include? key_symbol
@@ -53,6 +54,7 @@ class Patient < User
 
   def self.update_or_create_by_patient_number(**options)
     self.check_required_patient_args(options)
+    self.check_extraneous_args(options)
     patient = self.find_by_patient_number(options[:patient_number])
     if patient.nil?
       patient = Patient.create_full_profile(**options)

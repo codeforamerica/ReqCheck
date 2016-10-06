@@ -267,6 +267,18 @@ RSpec.describe Patient, type: :model do
       expect{ Patient.update_or_create_by_patient_number(patient_args) }
         .to raise_exception(ArgumentError)
     end
+    it 'can take a string for the patient_number' do
+      expect(valid_patient.first_name).to eq('Test1')
+      patient_args = {
+        dob: 3.years.ago.to_date.to_s,
+        patient_number: '321',
+        first_name: 'New1',
+        last_name: 'Tester1'
+      }
+      patient = Patient.update_or_create_by_patient_number(patient_args)
+      expect(patient.dob).to eq(3.years.ago.to_date)
+      expect(patient.first_name).to eq('New1')
+    end
   end
 
   describe 'record_evaluator methods' do

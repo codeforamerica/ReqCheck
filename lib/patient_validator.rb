@@ -2,7 +2,8 @@ module PatientValidator
   def pull_patient_profile_attrs(all_attrs)
     patient_profile_attrs = [
       :patient_number, :dob, :address, :address2, :city, :state,
-      :zip_code, :cell_phone, :home_phone, :race, :ethnicity, :gender
+      :zip_code, :cell_phone, :home_phone, :race, :ethnicity,
+      :gender, :hd_mpfile_updated_at
     ]
     return_attrs = {}
     patient_profile_attrs.each do |attribute|
@@ -43,6 +44,26 @@ module PatientValidator
     unless missing_args == []
       raise ArgumentError.new(
         "Missing arguments #{missing_args} for new Patient"
+      )
+    end
+  end
+
+  def check_extraneous_args(args)
+    temp_args = args.clone
+    [
+      :patient_number, :dob, :address, :address2, :city, :state,
+      :zip_code, :cell_phone, :home_phone, :race, :ethnicity,
+      :gender, :first_name, :last_name, :email, :hd_mpfile_updated_at
+    ].each do |allowable_arg|
+      temp_args.delete(allowable_arg)
+    end
+    unless temp_args == {}
+      extraneous_arg_names = temp_args.keys
+      # puts '###### ERROR #########'
+      # puts extraneous_arg_names
+      # puts '###############'
+      raise ArgumentError.new(
+        "Extraneous arguments #{extraneous_arg_names} for new Patient"
       )
     end
   end
