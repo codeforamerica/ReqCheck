@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ImporterController, type: :controller do
+  include PatientSpecHelper
+
   before(:each) do
     FactoryGirl.create(:patient_with_profile,
                        dob: 3.years.ago,
@@ -63,6 +65,14 @@ RSpec.describe ImporterController, type: :controller do
       expect(Patient.find_by_patient_number(6).address).to eq('7 Kings Lane')
     end
 
+    it 'raises an error if no \'patient_data\' key available' do
+      post :import_patient_data, { hello: 'world' }, format: :json
+      expect(response.response_code).to eq(400)
+      expect(JSON.parse(response.body)).to eq(
+        {'status': 'patient_data key missing'}.stringify_keys
+      )
+    end
+
     it 'saves each new patient to the database' do
       patient_json = valid_patient_json
       patient_json[:patient_data] << {
@@ -97,13 +107,14 @@ RSpec.describe ImporterController, type: :controller do
     end
 
     it 'saves the raw hash to the database if an error occurs' do
+      date_of_birth = 3.years.ago.to_date.to_s
       patient_data = {
         patient_data: [
           {
             patient_number: -14,
             first_name: 'Shouldnot',
             last_name: 'Work',
-            dob: 3.years.ago
+            dob: date_of_birth
           }
         ]
       }
@@ -112,6 +123,16 @@ RSpec.describe ImporterController, type: :controller do
       response_body = JSON.parse(response.body)
       expect(response_body['status']).to eq('partial_failure')
       expect(response_body['error_objects_ids']).to eq([1])
+
+      import_error = DataImportError.find(1)
+      expect(import_error.raw_hash).to eq(
+        {
+          'patient_number': '-14',
+          'first_name': 'Shouldnot',
+          'last_name': 'Work',
+          'dob': date_of_birth
+        }.stringify_keys
+      )
     end
 
     it 'saves multiple error raw hashes if multiple errors occur' do
@@ -183,62 +204,287 @@ RSpec.describe ImporterController, type: :controller do
       expect(response_body['status']).to eq('partial_failure')
       expect(response_body['error_objects_ids']).to eq([9])
     end
+    context 'with different valid dob date formats' do
+      now_date = Date.today
+      patient_json = {
+        patient_data: [
+          {
+            patient_number: 4,
+            first_name: 'Test0',
+            last_name: 'Tester0',
+            dob: 3.years.ago,
+            hd_mpfile_updated_at: DateTime.now
+          }
+        ]
+      }
+      [
+        now_date.to_s,
+        now_date.strftime('%m/%d/%Y'),
+        now_date.strftime('%Y/%m/%d'),
+        now_date.strftime('%Y-%m-%d')
+      ].each.with_index do |date_string, index|
+        it "VALID \##{index + 1}: can add the datetime format #{date_string} " \
+           " to the database" do
+          patient_json[:patient_data].first[:dob] =
+            date_string
+          post :import_patient_data, patient_json, format: :json
+          expect(response.response_code).to eq(201)
+          response_body = JSON.parse(response.body)
+          expect(response_body['status']).to eq('success')
+          expect(Patient.find_by_patient_number(4).dob)
+            .to eq(now_date)
+        end
+      end
+    end
+    context 'with different NOT valid dob date formats' do
+      now_date = Date.parse('10/07/2016')
+      patient_json = {
+        patient_data: [
+          {
+            patient_number: 4,
+            first_name: 'Test0',
+            last_name: 'Tester0',
+            dob: 3.years.ago,
+            hd_mpfile_updated_at: DateTime.now
+          }
+        ]
+      }
+      [
+        [now_date.strftime('%m/%d/%y'), Date.parse('10/07/0016')],
+        [now_date.strftime('%m-%d-%Y'), Date.parse('07/10/2016')]
+      ].each.with_index do |(date_string, expected_date), index|
+        it "NOT VALID \##{index + 1}: can add the datetime format " \
+           "#{date_string} to the database" do
+          patient_json[:patient_data].first[:dob] =
+            date_string
+          post :import_patient_data, patient_json, format: :json
+          expect(response.response_code).to eq(201)
+          response_body = JSON.parse(response.body)
+          expect(response_body['status']).to eq('success')
+          expect(Patient.find_by_patient_number(4).dob)
+            .to eq(expected_date)
+        end
+      end
+    end
+    context 'with different hd_mpfile_updated_at date formats' do
+      now_datetime = DateTime.now.in_time_zone("Central Time (US & Canada)") - 1.day
+      now_date =
+        now_datetime.in_time_zone("Central Time (US & Canada)")
+        .to_date.to_datetime + 5.hours
+      patient_json = {
+        patient_data: [
+          {
+            patient_number: 4,
+            first_name: 'Test0',
+            last_name: 'Tester0',
+            dob: 3.years.ago,
+            hd_mpfile_updated_at: DateTime.now
+          }
+        ]
+      }
+      [
+        [ now_datetime.to_s, now_datetime ],
+        [ now_datetime.strftime('%m/%d/%Y %H:%M:%S'),
+          now_datetime.in_time_zone("Central Time (US & Canada)") ],
+        [ now_datetime.strftime('%m/%d/%Y %H:%M:%S %z'), now_datetime ],
+        [ now_datetime.strftime('%m/%d/%Y'),
+          now_date ]
+      ].each.with_index do |(datetime_string, expected_datetime), index|
+        it "\# #{index + 1}: can add the datetime format #{datetime_string} " \
+           " to the database" do
+          patient_json[:patient_data].first[:hd_mpfile_updated_at] =
+            datetime_string
+          post :import_patient_data, patient_json, format: :json
+          expect(response.response_code).to eq(201)
+          response_body = JSON.parse(response.body)
+          expect(response_body['status']).to eq('success')
+          expect(Patient.find_by_patient_number(4).hd_mpfile_updated_at.to_i)
+            .to eq(expected_datetime.to_i)
+        end
+      end
+    end
   end
   describe 'POST import_vaccine_data' do
-    # let(:same_json) do
-    #   {
-    #     vaccine_data: [
-    #       {
-    #         patient_number: 01,
-    #         first_name: 'Test',
-    #         last_name: 'World',
-    #         patient_number: ,
-    #         dob: ,
-    #         gender: ,
-    #         race: ,
-    #         home_phone: ,
-    #         email: ,
-    #         address: ,
-    #         address2: ,
-    #         city: ,
-    #         state: ,
-    #         zip_code: ,
-    #       }
-    #     ]
-    #   }
-    # end
+    let(:valid_vaccine_json) do
+      {
+        vaccine_data: [
+          {
+            patient_number: '4',
+            vaccine_code: 'POL',
+            date_administered: '2014-03-08',
+            hd_description: 'C-Polio (Unknown Type)',
+            history_flag: true,
+            provider_code: '432',
+            mvx_code: 'UNK',
+            lot_number: 'K1330',
+            cvx_code: '10',
+            hd_imfile_updated_at: DateTime.now.to_s,
+          },
+          {
+            patient_number: '4',
+            vaccine_code: 'POL',
+            date_administered: '2015-02-04',
+            hd_imfile_updated_at: DateTime.now.to_s,
+            cvx_code: '10'
+          },
+          {
+            patient_number: '4',
+            vaccine_code: 'DTap',
+            date_administered: '2015-09-05',
+            hd_imfile_updated_at: DateTime.now.to_s,
+            cvx_code: '20',
+            mvx_code: 'GSK',
+            lot_number: 'AC7AG',
+            hd_description: 'C-DTaP'
+          },
+          {
+            patient_number: '4',
+            vaccine_code: 'DTAP',
+            date_administered: '2013-03-12', # need to try multiple data formats
+            hd_imfile_updated_at: DateTime.now.to_s,
+            cvx_code: '20',
+            mvx_code: 'UNK',
+            hd_description: 'C-DTaP'
+          }
+        ]
+      }
+    end
+    # test if no patient is found, a interum 'sample patient' is created and saved to db
 
     it 'imports json with key \'vaccine_data\' and an array vaccine doses' do
-
-    end
-
-    it 'saves each vaccine dose to the database' do
-      vaccine_data = { vaccine_data: 'made' }
-      post :import_data, vaccine_data, format: :json
+      post :import_vaccine_data, valid_vaccine_json, format: :json
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
-      expect(response_body['status']).to eq('You betcha')
+
+      expect(response_body['status']).to eq('success')
+      patient = Patient.find_by_patient_number(4)
+      expect(patient.vaccine_doses.length)
+        .to eq(4)
+      expect(patient.vaccine_doses.first.date_administered)
+        .to eq(DateTime.parse('2013-03-12'))
+      expect(patient.vaccine_doses.first.cvx_code)
+        .to eq(20)
+      expect(patient.vaccine_doses.first.vaccine_code)
+        .to eq('DTAP')
+    end
+
+    it 'raises an error if no \'vaccine_data\' key available' do
+      post :import_vaccine_data, { hello: 'world' }, format: :json
+      expect(response.response_code).to eq(400)
+      expect(JSON.parse(response.body)).to eq(
+        {'status': 'vaccine_data key missing'}.stringify_keys
+      )
+    end
+
+    it 'clears previous vaccine_doses from the patient and adds new ones' do
+      patient = valid_2_year_test_patient
+      expect(patient.vaccine_doses.length).to eq(21)
+
+      post :import_vaccine_data, valid_vaccine_json, format: :json
+
+      expect(response.response_code).to eq(201)
+
+      patient = Patient.find_by_patient_number(4)
+      expect(patient.vaccine_doses.length)
+        .to eq(4)
+    end
+
+    it 'saves the vaccine_code to the db in upcase' do
+      vaccine_json = {
+        vaccine_data: [
+          {
+            patient_number: 4,
+            vaccine_code: 'DTaP',
+            date_administered: '2014-03-08',
+            cvx_code: '10',
+            hd_imfile_updated_at: DateTime.now.to_s,
+          }
+        ]
+      }
+      post :import_vaccine_data, valid_vaccine_json, format: :json
+      expect(response.response_code).to eq(201)
+      patient = Patient.find_by_patient_number(4)
+      expect(patient.vaccine_doses.first.vaccine_code).to eq('DTAP')
     end
 
     it 'saves the raw hash to the database if an error occurs' do
-      vaccine_data = { vaccine_data: 'made' }
-      post :import_data, vaccine_data, format: :json
+      hd_imfile_updated_at = DateTime.now.to_s
+      vaccine_data = {
+        vaccine_data: [
+          {
+            patient_number: '4',
+            date_administered: '2013-03-12', # need to try multiple data formats
+            hd_imfile_updated_at: hd_imfile_updated_at
+          }
+        ]
+      }
+      post :import_vaccine_data, vaccine_data, format: :json
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
-      expect(response_body['status']).to eq('You betcha')
+      expect(response_body['status']).to eq('partial_failure')
+      expect(response_body['error_objects_ids']).to eq([1])
+      data_import_error = DataImportError.last
+      expect(data_import_error.raw_hash).to eq(
+        {
+          'patient_number': '4',
+          'date_administered': '2013-03-12', # need to try multiple data formats
+          'hd_imfile_updated_at': hd_imfile_updated_at
+        }.stringify_keys
+      )
     end
 
-    [
-      'patient_id',
-      'cvx_code',
-      'date_administered',
-      'hd_imfile_updated_at'
-    ].each do |vaccine_attr|
+    %w(
+      patient_number date_administered hd_imfile_updated_at cvx_code
+    ).each.with_index do |vaccine_attr, index|
+      vaccine_json = {
+        vaccine_data: [
+          {
+            patient_number: 4,
+            date_administered: '2014-03-08',
+            cvx_code: '10',
+            hd_imfile_updated_at: DateTime.now.to_s,
+          }
+        ]
+      }
       it "requires a #{vaccine_attr}" do
+        vaccine_json[:vaccine_data].first.delete(vaccine_attr.to_sym)
+        post :import_vaccine_data, vaccine_json, format: :json
+        expect(response.response_code).to eq(201)
+        response_body = JSON.parse(response.body)
+        expect(response_body['status']).to eq('partial_failure')
+        expect(response_body['error_objects_ids']).to eq([(index + 2)])
       end
     end
 
-    it 'creates new patient if patient_id is not found and logs error' do
+    it 'saves the raw hash to the database the patient cannot be found' do
+      hd_imfile_updated_at = DateTime.now.to_s
+      vaccine_data = {
+        vaccine_data: [
+          {
+            patient_number: '100032',
+            date_administered: '2013-03-12',
+            hd_imfile_updated_at: hd_imfile_updated_at,
+            cvx_code: '10'
+          }
+        ]
+      }
+      post :import_vaccine_data, vaccine_data, format: :json
+      expect(response.response_code).to eq(201)
+      response_body = JSON.parse(response.body)
+      expect(response_body['status']).to eq('partial_failure')
+      expect(response_body['error_objects_ids']).to eq([6])
+      data_import_error = DataImportError.last
+      expect(data_import_error.error_message).to eq(
+        'Patient with patient_number 100032 could not be found'
+      )
+      expect(data_import_error.raw_hash).to eq(
+        {
+          'patient_number': '100032',
+          'date_administered': '2013-03-12', # need to try multiple data formats
+          'hd_imfile_updated_at': hd_imfile_updated_at,
+          'cvx_code': '10'
+        }.stringify_keys
+      )
     end
   end
 end

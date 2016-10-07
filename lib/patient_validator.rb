@@ -59,9 +59,6 @@ module PatientValidator
     end
     unless temp_args == {}
       extraneous_arg_names = temp_args.keys
-      # puts '###### ERROR #########'
-      # puts extraneous_arg_names
-      # puts '###############'
       raise ArgumentError.new(
         "Extraneous arguments #{extraneous_arg_names} for new Patient"
       )

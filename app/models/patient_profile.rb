@@ -1,6 +1,6 @@
 class PatientProfile < ActiveRecord::Base
   belongs_to :patient
-  has_many :vaccine_doses
+  has_many :vaccine_doses, -> { order(:date_administered) }
 
   validates :patient_number, numericality: { greater_than: 0, strict: true }
   before_save :standardise_gender
