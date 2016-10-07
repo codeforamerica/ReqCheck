@@ -1,7 +1,8 @@
-$table-borders:1px solid black;
+$table-borders:.5pt solid black;
+
 
 * {
-	font-family: "dBook An­ti­qua", "Cal­isto MT", serif!important;
+	font-family: "Book An­ti­qua", "Cal­isto MT", serif!important;
 	font-size: 11pt!important;
 	line-height: 1.3;
 }
@@ -12,30 +13,41 @@ svg {width: 2rem; height: 2rem;}
 .header,footer,.vaccine-record a {
 	display:none;
 }
+table * {
+	border:none;
+	border-top: none;
+	border-bottom: none;
+	border-right: none;
+	border-left:none;
+}
 
 table{
 	border:$table-borders;
-	margin-bottom: 0;
-	border-bottom: none;
+	margin-bottom: 10px;
 }
 
-tbody {border:none;}
-thead tr{border-bottom:$table-borders;}
-.no-dose {border:none;}
-
+.no-dose, .vaccine-record .vax-name {
+	border:none; 
+}
+.no-dose { background-color: white!important;}
 #callout-patient {
 	.explanation {margin-left:3rem;}
 	p,h2 {display:inline;}
 }
 
+.varicella-history {
+	display: table-row;
+	border: $table-borders;
+	border-top: none;
+}
+
 .patient-info {
-	table,tr,td {border:none;}
-	th {border-right:none;}
+	table,tr,td {
+		border:none;
+	}
 	thead {
 		border-bottom:$table-borders;
-		border-top:none;
-		border-right:none;
-		border-left:none;
+		background-color: white;
 	}
 	p {display: block;}
 }
@@ -53,5 +65,8 @@ thead tr{border-bottom:$table-borders;}
 
  .card {padding:0; margin:0;}
 
-
-
+.vaccine-record {
+	margin-top: 1rem;
+	tbody {border: $table-borders;}
+	h3 {display:none;}
+}
