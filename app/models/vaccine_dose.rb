@@ -3,6 +3,14 @@ class VaccineDose < ActiveRecord::Base
   has_one :patient, through: :patient_profile
 
   include TimeCalc
+  extend VaccineDoseValidator
+
+  before_save :upcase_vaccine_code
+
+  def upcase_vaccine_code
+    self.vaccine_code = self.vaccine_code.upcase unless vaccine_code.nil?
+  end
+
 
   def patient_age_at_vaccine_dose
     if !self.patient.nil?
@@ -35,4 +43,14 @@ class VaccineDose < ActiveRecord::Base
   def validate_condition
     true
   end
+
+  def self.create_by_patient_profile(patient_profile, **options)
+    options.delete('patient_number') if options.has_key?(:patient_number)
+    options[:patient_profile] = patient_profile
+
+    self.check_required_vaccine_dose_args(options)
+    self.check_extraneous_args_vaccine_dose(options)
+    self.create(patient_profile: patient_profile, **options)
+  end
+
 end

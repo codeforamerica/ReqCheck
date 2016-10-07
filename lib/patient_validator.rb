@@ -43,7 +43,7 @@ module PatientValidator
     end
     unless missing_args == []
       raise ArgumentError.new(
-        "Missing arguments #{missing_args} for new Patient"
+        "Missing arguments #{missing_args} for Patient"
       )
     end
   end
@@ -59,11 +59,8 @@ module PatientValidator
     end
     unless temp_args == {}
       extraneous_arg_names = temp_args.keys
-      # puts '###### ERROR #########'
-      # puts extraneous_arg_names
-      # puts '###############'
       raise ArgumentError.new(
-        "Extraneous arguments #{extraneous_arg_names} for new Patient"
+        "Extraneous arguments #{extraneous_arg_names} for Patient"
       )
     end
   end

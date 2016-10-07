@@ -2,8 +2,9 @@ class Patient < User
   after_initialize :set_defaults, unless: :persisted?
   has_one :patient_profile
   has_many :vaccine_doses, through: :patient_profile
-  delegate :dob, :patient_number, :address, :address2, :city, :state, :zip_code, :cell_phone,
-    :home_phone, :race, :ethnicity, :gender, :vaccine_doses, to: :patient_profile
+  delegate :dob, :patient_number, :address, :address2, :city, :state,
+           :zip_code, :cell_phone, :home_phone, :race, :ethnicity, :gender,
+           :vaccine_doses, :hd_mpfile_updated_at, to: :patient_profile
 
   accepts_nested_attributes_for :patient_profile
 
