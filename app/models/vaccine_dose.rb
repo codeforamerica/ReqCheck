@@ -12,6 +12,13 @@ class VaccineDose < ActiveRecord::Base
   end
 
 
+  before_save :upcase_vaccine_code
+
+  def upcase_vaccine_code
+    self.vaccine_code = self.vaccine_code.upcase unless vaccine_code.nil?
+  end
+
+
   def patient_age_at_vaccine_dose
     if !self.patient.nil?
       detailed_date_diff(self.patient.dob, self.date_administered)

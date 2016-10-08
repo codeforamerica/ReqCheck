@@ -304,6 +304,105 @@ RSpec.describe ImporterController, type: :controller do
         end
       end
     end
+    context 'with different valid dob date formats' do
+      now_date = Date.today
+      patient_json = {
+        patient_data: [
+          {
+            patient_number: 4,
+            first_name: 'Test0',
+            last_name: 'Tester0',
+            dob: 3.years.ago,
+            hd_mpfile_updated_at: DateTime.now
+          }
+        ]
+      }
+      [
+        now_date.to_s,
+        now_date.strftime('%m/%d/%Y'),
+        now_date.strftime('%Y/%m/%d'),
+        now_date.strftime('%Y-%m-%d')
+      ].each.with_index do |date_string, index|
+        it "VALID \##{index + 1}: can add the datetime format #{date_string} " \
+           " to the database" do
+          patient_json[:patient_data].first[:dob] =
+            date_string
+          post :import_patient_data, patient_json, format: :json
+          expect(response.response_code).to eq(201)
+          response_body = JSON.parse(response.body)
+          expect(response_body['status']).to eq('success')
+          expect(Patient.find_by_patient_number(4).dob)
+            .to eq(now_date)
+        end
+      end
+    end
+    context 'with different NOT valid dob date formats' do
+      now_date = Date.parse('10/07/2016')
+      patient_json = {
+        patient_data: [
+          {
+            patient_number: 4,
+            first_name: 'Test0',
+            last_name: 'Tester0',
+            dob: 3.years.ago,
+            hd_mpfile_updated_at: DateTime.now
+          }
+        ]
+      }
+      [
+        [now_date.strftime('%m/%d/%y'), Date.parse('10/07/0016')],
+        [now_date.strftime('%m-%d-%Y'), Date.parse('07/10/2016')]
+      ].each.with_index do |(date_string, expected_date), index|
+        it "NOT VALID \##{index + 1}: can add the datetime format " \
+           "#{date_string} to the database" do
+          patient_json[:patient_data].first[:dob] =
+            date_string
+          post :import_patient_data, patient_json, format: :json
+          expect(response.response_code).to eq(201)
+          response_body = JSON.parse(response.body)
+          expect(response_body['status']).to eq('success')
+          expect(Patient.find_by_patient_number(4).dob)
+            .to eq(expected_date)
+        end
+      end
+    end
+    context 'with different hd_mpfile_updated_at date formats' do
+      now_datetime = DateTime.now.in_time_zone("Central Time (US & Canada)") - 1.day
+      now_date =
+        now_datetime.in_time_zone("Central Time (US & Canada)")
+        .to_date.to_datetime + 5.hours
+      patient_json = {
+        patient_data: [
+          {
+            patient_number: 4,
+            first_name: 'Test0',
+            last_name: 'Tester0',
+            dob: 3.years.ago,
+            hd_mpfile_updated_at: DateTime.now
+          }
+        ]
+      }
+      [
+        [ now_datetime.to_s, now_datetime ],
+        [ now_datetime.strftime('%m/%d/%Y %H:%M:%S'),
+          now_datetime.in_time_zone("Central Time (US & Canada)") ],
+        [ now_datetime.strftime('%m/%d/%Y %H:%M:%S %z'), now_datetime ],
+        [ now_datetime.strftime('%m/%d/%Y'),
+          now_date ]
+      ].each.with_index do |(datetime_string, expected_datetime), index|
+        it "\# #{index + 1}: can add the datetime format #{datetime_string} " \
+           " to the database" do
+          patient_json[:patient_data].first[:hd_mpfile_updated_at] =
+            datetime_string
+          post :import_patient_data, patient_json, format: :json
+          expect(response.response_code).to eq(201)
+          response_body = JSON.parse(response.body)
+          expect(response_body['status']).to eq('success')
+          expect(Patient.find_by_patient_number(4).hd_mpfile_updated_at.to_i)
+            .to eq(expected_datetime.to_i)
+        end
+      end
+    end
   end
   describe 'POST import_vaccine_dose_data' do
     let(:valid_vaccine_json) do
@@ -351,7 +450,6 @@ RSpec.describe ImporterController, type: :controller do
       }
     end
     # test if no patient is found, a interum 'sample patient' is created and saved to db
-
     it 'imports json with key \'vaccine_dose_data\' and an array vaccine doses' do
       post :import_vaccine_dose_data, valid_vaccine_json, format: :json
       expect(response.response_code).to eq(201)
