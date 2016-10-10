@@ -21,6 +21,13 @@ class RecordEvaluator
     evaluate_record
   end
 
+  # def evaluate(antigens)
+  #   @antigen_evaluations = antigens.map do |antigen|
+  #     antigen.evaluate(self)
+  #   end
+  #   RecordEvaluation.new(self)
+  # end
+
   def get_antigens
     all_antigens = [
       'diphtheria', 'hep a', 'hepb', 'hib', 'hpv', 'influenza',

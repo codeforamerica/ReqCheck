@@ -4,6 +4,18 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :age_evaluator do
+    
+  end
+  factory :target_dose_evaluator do
+    
+  end
+  factory :base_evaluator do
+    
+  end
+  factory :base_evaluation do
+    
+  end
   factory :data_import_error do
 
   end

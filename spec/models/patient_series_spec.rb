@@ -35,61 +35,32 @@ RSpec.describe PatientSeries, type: :model do
     end
   end
 
-  describe '#create_target_doses' do
-    it 'maps through the antigen_series_doses and creates a target_dose for each one' do
-      patient_series = PatientSeries.new(antigen_series: antigen_series,
-                                         patient: test_patient)
-      antigen_series_length = antigen_series.doses.length
-      patient_series.create_target_doses(antigen_series, test_patient)
-      expect(patient_series.target_doses.length).to eq(antigen_series_length)
-    end
-    it 'creates target_doses' do
-      patient_series = PatientSeries.new(antigen_series: antigen_series,
-                                         patient: test_patient)
-      patient_series.create_target_doses(antigen_series, test_patient)
-      expect(patient_series.target_doses.first.class.name).to eq('TargetDose')
-    end
-    xit 'removes old objects' do
-      patient_series = PatientSeries.new(antigen_series: antigen_series,
-                                         patient: test_patient)
-      patient_series.create_target_doses(antigen_series, test_patient)
-      first_target_dose = patient_series.target_doses.first
-      patient_series.create_target_doses(antigen_series, test_patient)
-      expect(patient_series.target_doses.first).not_to eq(first_target_dose)
-    end
-    it 'orders them by dose number' do
-      patient_series = PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
-      patient_series.create_target_doses(antigen_series, test_patient)
-
-      first_target_dose  = patient_series.target_doses[0]
-      expect(first_target_dose.dose_number).to eq(1)
-
-      second_target_dose = patient_series.target_doses[1]
-      expect(second_target_dose.dose_number).to eq(2)
-    end
-  end
-
   describe 'patient_series attributes from the antigen_series' do
     let(:test_patient_series) do
       PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
     end
 
-    dose_attributes = ['name', 'target_disease', 'vaccine_group', 'default_series', 'product_path',
-                       'preference_number', 'min_start_age', 'max_start_age']
+    dose_attributes = [
+      'name', 'target_disease', 'vaccine_group', 'default_series',
+      'product_path', 'preference_number', 'min_start_age', 'max_start_age'
+    ]
 
     dose_attributes.each do | dose_attribute |
       it "has the attribute #{dose_attribute}" do
         expect(test_patient_series.antigen_series).not_to eq(nil)
-        expect(test_patient_series.send(dose_attribute)).to eq(antigen_series.send(dose_attribute))
+        expect(test_patient_series.send(dose_attribute))
+          .to eq(antigen_series.send(dose_attribute))
       end
     end
   end
 
-
   describe '#pull_eligible_target_doses' do
-    let(:test_patient_2_years) { FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient }
+    let(:test_patient_2_years) do
+      FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient
+    end
     let(:test_patient_series) do
-      PatientSeries.new(antigen_series: antigen_series, patient: test_patient_2_years)
+      PatientSeries.new(antigen_series: antigen_series,
+                        patient: test_patient_2_years)
     end
 
     describe 'it checks min age requirements' do

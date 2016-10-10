@@ -16,7 +16,7 @@ module PreferableAllowableVaccineEvaluation
       date_action  = action + '_date'
       age_string   =
         evaluation_antigen_series_dose_vaccine.read_attribute(action)
-      patient_date = create_patient_age_date(age_string, patient_dob)
+      patient_date = create_calculated_date(age_string, patient_dob)
       vaccine_attrs[date_action.to_sym] = patient_date
     end
     vaccine_attrs[:expected_trade_name] =

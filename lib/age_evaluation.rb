@@ -14,7 +14,7 @@ module AgeEvaluation
     ].each do |action|
       date_action  = action + '_date'
       age_string   = evaluation_antigen_series_dose.read_attribute(action)
-      patient_date = create_patient_age_date(age_string, patient_dob)
+      patient_date = create_calculated_date(age_string, patient_dob)
       age_attrs[date_action.to_sym] = patient_date
     end
     set_default_values(age_attrs, default_values)
@@ -48,7 +48,7 @@ module AgeEvaluation
   end
 
   def get_age_status(age_evaluation_hash,
-                     # antigen_administered_record,
+                     antigen_administered_record,
                      previous_dose_status_hash=nil)
     # As described on page 38 (TABLE 4 - 12) in the CDC logic specifications
     # age_status = {record: antigen_administered_record}

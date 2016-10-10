@@ -95,7 +95,7 @@ RSpec.describe 'KCMO_HD_Data' do
         else
           target_dose.intervals.each do |i|
             date_string = i.interval_min
-            new_expected_future_dates << target_dose.create_patient_age_date(
+            new_expected_future_dates << target_dose.create_calculated_date(
               date_string,
               latest_vax.date_administered
             )

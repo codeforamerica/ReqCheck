@@ -24,6 +24,7 @@ RSpec.describe TargetDose, type: :model do
     end
 
     let(:antigen_series_dose) { FactoryGirl.create(:antigen_series_dose) }
+
     it 'takes a patient and antigen_series_dose as parameters' do
       expect(
         TargetDose.new(antigen_series_dose: antigen_series_dose,
@@ -38,6 +39,42 @@ RSpec.describe TargetDose, type: :model do
     it 'requires an antigen_series_dose' do
       expect { TargetDose.new(patient: test_patient) }
         .to raise_exception(ArgumentError)
+    end
+  end
+
+  describe '.create_target_doses' do
+    before(:all) { seed_antigen_xml_polio }
+    after(:all) { DatabaseCleaner.clean_with(:truncation) }
+
+    let(:antigen_series) do
+      Antigen.find_by(target_disease: 'polio').series.first
+    end
+
+    let(:test_patient_series) do
+      PatientSeries.new(antigen_series: antigen_series, patient: test_patient)
+    end
+
+    it 'maps the patient_series doses and creates a target_dose for each' do
+      antigen_series_length = test_patient_series.doses.length
+      expect(test_patient_series.target_doses).to eq(nil)
+
+      TargetDose.create_target_doses(patient_series)
+      expect(patient_series.target_doses.length).to eq(antigen_series_length)
+    end
+
+    it 'creates target_doses' do
+      target_doses = TargetDose.create_target_doses(patient_series)
+      expect(target_doses.first.class.name).to eq('TargetDose')
+    end
+
+    it 'orders them by dose number' do
+      target_doses = TargetDose.create_target_doses(patient_series)
+
+      first_target_dose = target_doses[0]
+      expect(first_target_dose.dose_number).to eq(1)
+
+      second_target_dose = target_doses[1]
+      expect(second_target_dose.dose_number).to eq(2)
     end
   end
 

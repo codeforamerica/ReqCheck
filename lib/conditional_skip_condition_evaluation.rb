@@ -23,7 +23,7 @@ module ConditionalSkipConditionEvaluation
        raise ArgumentError.new('No previous dose date and conditional skip ' \
                                'condition interval required')
     else
-      expected_interval_date = create_patient_age_date(
+      expected_interval_date = create_calculated_date(
         condition_object.interval,
         previous_dose_date
       )

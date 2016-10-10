@@ -13,7 +13,7 @@ module IntervalEvaluation
     interval_latest_recommended).each do |action|
       date_action                = action + '_date'
       time_differential_string   = interval_object.read_attribute(action)
-      interval_date = create_patient_age_date(time_differential_string,
+      interval_date = create_calculated_date(time_differential_string,
                                               comparison_dose_date)
       interval_attrs[date_action.to_sym] = interval_date
     end

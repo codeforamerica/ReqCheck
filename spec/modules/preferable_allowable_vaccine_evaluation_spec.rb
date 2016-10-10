@@ -51,7 +51,7 @@ RSpec.describe PreferableAllowableVaccineEvaluation do
         abr_attribute = vaccine_attr.split('_')[0...-1].join('_')
         vaccine_time_string = as_dose_vaccine.send(abr_attribute)
         expect(vaccine_time_string.nil?).to be(false)
-        vaccine_age_date = test_object.create_patient_age_date(
+        vaccine_age_date = test_object.create_calculated_date(
           vaccine_time_string, dob
         )
         expect(vaccine_attrs[vaccine_attr.to_sym])

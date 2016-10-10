@@ -52,7 +52,7 @@ module AgeCalc
               .days_since(days)
   end
 
-  def create_patient_age_date(cdc_age_string, dob)
+  def create_calculated_date(cdc_age_string, dob)
     # Need to add tests for age_calc or keep it in time_calc
     # Especially with duplicate methods
     return nil if cdc_age_string == '' || cdc_age_string.nil?

@@ -102,7 +102,7 @@ RSpec.describe IntervalEvaluation do
         )
         abr_attribute = interval_attribute.split('_')[0...-1].join('_')
         interval_time_string = test_interval.send(abr_attribute)
-        interval_date = test_object.create_patient_age_date(
+        interval_date = test_object.create_calculated_date(
           interval_time_string, test_aars[0].date_administered
         )
         expect(interval_attrs[interval_attribute.to_sym])

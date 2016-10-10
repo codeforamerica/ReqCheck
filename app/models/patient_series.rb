@@ -2,16 +2,14 @@ class PatientSeries
   include ActiveModel::Model
   include CheckType
 
-  attr_reader :target_doses, :patient, :antigen_series, :series_status,
-              :satisfied_target_doses, :unsatisfied_target_dose
+  attr_reader :target_doses, :patient, :antigen_series, :evaluation,
+              :unsatisfied_target_dose, :invalid_antigen_administered_records
 
   def initialize(patient:, antigen_series:)
     @patient                   = patient
     @antigen_series            = antigen_series
-    @target_doses              = create_target_doses(antigen_series, patient)
-    @satisfied_target_doses    = []
-    @series_status             = nil
-
+    @target_doses              = TargetDose.create_target_doses(antigen_series,
+                                                                patient_series)
     @invalid_antigen_administered_records = []
   end
 
@@ -25,10 +23,6 @@ class PatientSeries
       return nil if @antigen_series.nil?
       @antigen_series.send(action)
     end
-  end
-
-  def set_satisfied_target_doses(satisfied_target_doses)
-    @satisfied_target_doses = satisfied_target_doses
   end
 
   def unsatisfied_target_dose
@@ -45,16 +39,8 @@ class PatientSeries
     next_target_dose
   end
 
-  def set_series_status(series_status)
-    @series_status = series_status
-  end
-
-  def create_target_doses(antigen_series, patient)
-    target_doses = antigen_series.doses.map do |antigen_series_dose|
-      TargetDose.new(antigen_series_dose: antigen_series_dose,
-                     patient: patient)
-    end
-    target_doses.sort_by!(&:dose_number)
+  def add_target_doses(target_doses)
+    @target_doses = target_doses
   end
 
   def evaluate_individual_target_dose(target_dose,
@@ -79,7 +65,6 @@ class PatientSeries
   end
 
   def evaluate_patient_series(antigen_administered_records)
-    target_doses = @target_doses
     eligible_target_doses = pull_eligible_target_doses(target_doses)
     evaluation_hash = evaluate_target_doses(eligible_target_doses,
                                             antigen_administered_records)
@@ -108,7 +93,6 @@ class PatientSeries
   def evaluate_target_doses(eligible_target_doses,
                             antigen_administered_records)
     invalid_antigen_administered_records = []
-    satisfied_target_doses        = []
 
     sorted_aars = sort_by_date_reversed(
       antigen_administered_records

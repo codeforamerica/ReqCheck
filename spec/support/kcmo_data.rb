@@ -1,7 +1,7 @@
 module KCMODATA
   PATIENT1 = {
     patient_number: 101,
-    patient_name: 'Test Patient',
+    patient_name: 'Test1 Patient1',
     dob: '10/15/2015',
     vaccines: [
       {
@@ -33,7 +33,7 @@ module KCMODATA
 
   PATIENT2 = {
     patient_number: 102,
-    patient_name: 'Test Patient2',
+    patient_name: 'Test2 Patient2',
     dob: '04/05/1999',
     vaccines: [
       {
@@ -65,7 +65,7 @@ module KCMODATA
 
   PATIENT3 = {
     patient_number: 103,
-    patient_name: 'Test Patient3',
+    patient_name: 'Test3 Patient3',
     dob: '11/01/2012',
     vaccines: [
       {
@@ -181,7 +181,7 @@ module KCMODATA
 
   PATIENT4 = {
     patient_number: 104,
-    patient_name: 'Test Patient4',
+    patient_name: 'Test4 Patient4',
     dob: '10/03/1996',
     vaccines: [
       {
@@ -207,7 +207,7 @@ module KCMODATA
 
   PATIENT5 = {
     patient_number: 105,
-    patient_name: 'Test Patient5',
+    patient_name: 'Test5 Patient5',
     dob: '05/22/2000',
     vaccines: [
       {
@@ -293,7 +293,7 @@ module KCMODATA
 
   PATIENT6 = {
     patient_number: 106,
-    patient_name: 'Test Patient6',
+    patient_name: 'Test6 Patient6',
     dob: '02/26/1999',
     vaccines: [
       {
@@ -337,7 +337,7 @@ module KCMODATA
 
   PATIENT7 = {
     patient_number: 107,
-    patient_name: 'Test Patient7',
+    patient_name: 'Test7 Patient7',
     dob: '05/03/2004',
     vaccines: [
       {
@@ -429,7 +429,7 @@ module KCMODATA
 
   PATIENT8 = {
     patient_number: 108,
-    patient_name: 'Test Patient8',
+    patient_name: 'Test8 Patient8',
     dob: '02/01/2001',
     vaccines: [
       {
@@ -473,7 +473,7 @@ module KCMODATA
 
   PATIENT9 = {
     patient_number: 109,
-    patient_name: 'Test Patient9',
+    patient_name: 'Test9 Patient9',
     dob: '10/29/2014',
     vaccines: [
       {
@@ -547,7 +547,7 @@ module KCMODATA
 
   PATIENT10 = {
     patient_number: 110,
-    patient_name: 'Test Patient10',
+    patient_name: 'Test10 Patient10',
     dob: '02/12/2011',
     vaccines: [
       {
@@ -603,7 +603,7 @@ module KCMODATA
 
   PATIENT11 = {
     patient_number: 111,
-    patient_name: 'Test Patient11',
+    patient_name: 'Test11 Patient11',
     dob: '02/28/2012',
     vaccines: [
       {
@@ -731,7 +731,7 @@ module KCMODATA
 
   PATIENT12 = {
     patient_number: 112,
-    patient_name: 'Test Patient12',
+    patient_name: 'Test12 Patient12',
     dob: '10/13/2010',
     vaccines: [
       {
@@ -763,7 +763,7 @@ module KCMODATA
 
   PATIENT13 = {
     patient_number: 113,
-    patient_name: 'Test Patient13',
+    patient_name: 'Test13 Patient13',
     dob: '11/22/2010',
     vaccines: [
       {
@@ -843,7 +843,7 @@ module KCMODATA
 
   PATIENT14 = {
     patient_number: 114,
-    patient_name: 'Test Patient14',
+    patient_name: 'Test14 Patient14',
     dob: '11/09/2010',
     vaccines: [
       {
@@ -887,7 +887,7 @@ module KCMODATA
 
   PATIENT15 = {
     patient_number: 115,
-    patient_name: 'Test Patient15',
+    patient_name: 'Test15 Patient15',
     dob: '11/11/2000',
     vaccines: [
       {
@@ -943,7 +943,7 @@ module KCMODATA
 
   PATIENT16 = {
     patient_number: 116,
-    patient_name: 'Test Patient16',
+    patient_name: 'Test16 Patient16',
     dob: '04/14/2015',
     vaccines: [
       {
@@ -981,7 +981,7 @@ module KCMODATA
 
   PATIENT17 = {
     patient_number: 117,
-    patient_name: 'Test Patient17',
+    patient_name: 'Test17 Patient17',
     dob: '12/22/1998',
     vaccines: [
       {
@@ -1013,7 +1013,7 @@ module KCMODATA
 
   PATIENT18 = {
     patient_number: 118,
-    patient_name: 'Test Patient18',
+    patient_name: 'Test18 Patient18',
     dob: '12/22/1998',
     vaccines: [
       {
@@ -1051,7 +1051,7 @@ module KCMODATA
 
   PATIENT19 = {
     patient_number: 119,
-    patient_name: 'Test Patient19',
+    patient_name: 'Test19 Patient19',
     dob: '01/11/1999',
     vaccines: [
       {
@@ -1113,7 +1113,7 @@ module KCMODATA
 
   PATIENT20 = {
     patient_number: 120,
-    patient_name: 'Test Patient20',
+    patient_name: 'Test20 Patient20',
     dob: '01/13/2016',
     vaccines: [
       {
@@ -1157,7 +1157,7 @@ module KCMODATA
 
   PATIENT21 = {
     patient_number: 121,
-    patient_name: 'Test Patient21',
+    patient_name: 'Test21 Patient21',
     dob: '09/16/1997',
     vaccines: [
       {

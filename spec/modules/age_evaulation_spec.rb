@@ -57,7 +57,7 @@ RSpec.describe AgeEvaluation do
         polio_antigen_series_dose_age_string = polio_antigen_series_dose.send(
           as_dose_attr
         )
-        age_date = test_object.create_patient_age_date(
+        age_date = test_object.create_calculated_date(
           polio_antigen_series_dose_age_string, test_patient.dob
         )
         expect(age_attrs[age_attribute.to_sym]).to eq(age_date)
