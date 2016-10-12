@@ -8,7 +8,7 @@ RSpec.describe AntigenEvaluator, type: :model do
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
   let(:test_antigen) { Antigen.find_by(target_disease: 'polio') }
-  let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
+  let(:test_patient) { FactoryGirl.create(:patient) }
 
   let(:test_vaccine_doses) do
     valid_dates = create_valid_dates(test_patient.dob)
@@ -78,7 +78,7 @@ RSpec.describe AntigenEvaluator, type: :model do
       expect(antigen_evaluator.next_required_target_dose).to eq(nil)
     end
     it 'sets the next target dose if the antigen is complete' do
-      new_test_patient = FactoryGirl.create(:patient_with_profile,
+      new_test_patient = FactoryGirl.create(:patient,
                                         dob: 2.years.ago.to_date)
       dob = new_test_patient.dob
       date_array = [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)]

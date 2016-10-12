@@ -5,7 +5,7 @@ require_relative 'support/time_help'
 
 FactoryGirl.define do
   factory :data_import do
-    
+
   end
   factory :data_import_error do
 
@@ -243,28 +243,8 @@ FactoryGirl.define do
     sequence(:first_name, 1) { |n| "Test#{n}" }
     sequence(:last_name, 1) { |n| "Tester#{n}" }
     sequence(:email, 1) { |n| "test#{n}@example.com" }
-  end
-
-  factory :patient_with_profile, parent: :patient do
-    transient do
-      dob false
-      patient_number false
-    end
-    after(:create) do |patient, args|
-      patient_profile_args = { patient_id: patient.id.to_s }
-      patient_profile_args[:dob] = args.dob if args.dob
-      if args.patient_number
-        patient_profile_args[:patient_number] = args.patient_number
-      end
-      create(:patient_profile, patient: patient, **patient_profile_args)
-    end
-  end
-
-  factory :patient_profile do
-    dob { 12.years.ago.to_date }
+    dob { 5.years.ago.to_date }
     sequence(:patient_number, 11_000)
-
-    association :patient, factory: :patient
   end
 
   factory :vaccine_dose do
@@ -288,8 +268,8 @@ FactoryGirl.define do
     expiration_date { 2.months.since.to_date }
   end
 
-  factory :vaccine_dose_with_patient_profile, parent: :vaccine_dose do
-    association :patient_profile, factory: :patient_profile
+  factory :vaccine_dose_with_patient, parent: :vaccine_dose do
+    association :patient, factory: :patient
   end
 
   factory :vaccine_dose_by_cvx, parent: :vaccine_dose do

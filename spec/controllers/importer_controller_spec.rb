@@ -4,13 +4,13 @@ RSpec.describe ImporterController, type: :controller do
   include PatientSpecHelper
 
   before(:each) do
-    FactoryGirl.create(:patient_with_profile,
+    FactoryGirl.create(:patient,
                        dob: 3.years.ago,
                        patient_number: 4)
-    FactoryGirl.create(:patient_with_profile,
+    FactoryGirl.create(:patient,
                        dob: 5.years.ago,
                        patient_number: 5)
-    FactoryGirl.create(:patient_with_profile,
+    FactoryGirl.create(:patient,
                        dob: 7.years.ago,
                        patient_number: 6)
   end
@@ -778,7 +778,7 @@ end
 
 
     # it '#patients should return a list one patient with valid search params' do
-    #   patient = FactoryGirl.create(:patient_with_profile)
+    #   patient = FactoryGirl.create(:patient)
     #   get :index, search: patient.patient_number
     #   expect(assigns(:patients).length).to eq(1)
     #   expect(assigns(:patients)[0].id).to eq(patient.id)

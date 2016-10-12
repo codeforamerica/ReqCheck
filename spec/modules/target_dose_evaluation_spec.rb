@@ -28,16 +28,16 @@ RSpec.describe TargetDoseEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient_with_profile)
+    test_patient = FactoryGirl.create(:patient)
     FactoryGirl.create(
       :vaccine_dose_by_cvx,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
       date_administered: (test_patient.dob + 7.weeks)
     )
     FactoryGirl.create(
       :vaccine_dose_by_cvx,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
       date_administered: (test_patient.dob + 11.weeks)
     )
@@ -147,17 +147,17 @@ RSpec.describe TargetDoseEvaluation do
     end
     context 'when conditional_skip is met' do
       let(:valid_conditional_patient) do
-        test_patient = FactoryGirl.create(:patient_with_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 5.years.ago)
         FactoryGirl.create(
           :vaccine_dose_by_cvx,
-          patient_profile: test_patient.patient_profile,
+          patient: test_patient,
           cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
           date_administered: (test_patient.dob + 3.years)
         )
         FactoryGirl.create(
           :vaccine_dose_by_cvx,
-          patient_profile: test_patient.patient_profile,
+          patient: test_patient,
           cvx_code: as_dose_object.preferable_vaccines.first.cvx_code,
           date_administered: (test_patient.dob + 4.years)
         )
@@ -866,16 +866,16 @@ RSpec.describe TargetDoseEvaluation do
     end
     context 'when preferable vaccine is not_valid and no allowable' do
       let(:test_patient) do
-        test_patient = FactoryGirl.create(:patient_with_profile)
+        test_patient = FactoryGirl.create(:patient)
         FactoryGirl.create(
           :vaccine_dose_by_cvx,
-          patient_profile: test_patient.patient_profile,
+          patient: test_patient,
           cvx_code: as_dose_object.preferable_vaccines.last.cvx_code,
           date_administered: (test_patient.dob + 7.weeks)
         )
         FactoryGirl.create(
           :vaccine_dose_by_cvx,
-          patient_profile: test_patient.patient_profile,
+          patient: test_patient,
           cvx_code: as_dose_object.preferable_vaccines.last.cvx_code,
           date_administered: (test_patient.dob + 11.weeks)
         )

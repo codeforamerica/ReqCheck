@@ -30,14 +30,13 @@ RSpec.describe 'CDC Tests' do
       overall_evaluation_status    = ''
 
       # patient_args = {
-      #   dob: dob, gender: gender, patient_profile: 1, address: "#{test_number} drive",
+      #   dob: dob, gender: gender, address: "#{test_number} drive",
       #   city: 'San Francisco', state: 'CA', zip_code: '94103', cell_phone: '555-555-5555',
       #   first_name: 'Test', last_name: test_number
       # }
       patient_args = {
         dob: '02/12/2011',
         gender: 'f',
-        patient_profile: 1,
         address: "#{test_number} CDC Street",
         city: 'San Francisco',
         state: 'CA',
@@ -73,7 +72,6 @@ RSpec.describe 'CDC Tests' do
       patient_args = {
         dob: '02/26/2011',
         gender: 'f',
-        patient_profile: test_number.split("-").join().to_i,
         address: "#{test_number} CDC Street",
         city: 'San Francisco',
         state: 'CA',
@@ -100,14 +98,14 @@ RSpec.describe 'CDC Tests' do
       @test_patient_20130002 = Patient.create_full_profile(patient_args)
 
       vaccine_1_args = {
-        patient_profile_id: @test_patient_20130002.patient_profile.id,
+        patient_id: @test_patient_20130002.id,
         date_administered: vaccine_1[:date_administered],
         description: vaccine_1[:vaccine_name],
         cvx_code: vaccine_1[:cvx_code]
       }
 
       vaccine_2_args = {
-        patient_profile_id: @test_patient_20130002.patient_profile.id,
+        patient_id: @test_patient_20130002.id,
         date_administered: vaccine_2[:date_administered],
         description: vaccine_2[:vaccine_name],
         cvx_code: vaccine_1[:cvx_code]

@@ -19,15 +19,13 @@ patients_list.each_with_index do |value, index|
   patient = Patient.create(
     first_name: value[0], last_name: value[1],
     email: "#{value[1]}#{index}@example.com",
-    patient_profile_attributes: {
-      dob: Date.strptime(value[2], '%m/%d/%Y'), patient_number: (index + 1),
-      gender: value[3]
-    }
+    dob: Date.strptime(value[2], '%m/%d/%Y'), patient_number: (index + 1),
+    gender: value[3]
   )
   vaccine_types = %w(MCV6 DTaP MMR9 HepB)
   vaccine_types.each do |vax_code|
     VaccineDose.create(
-      patient_profile: patient.patient_profile,
+      patient: patient,
       vaccine_code: vax_code,
       hd_description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       date_administered: 2.years.ago.to_date,
@@ -36,7 +34,7 @@ patients_list.each_with_index do |value, index|
       cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
     )
     VaccineDose.create(
-      patient_profile: patient.patient_profile,
+      patient: patient,
       vaccine_code: vax_code,
       hd_description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       date_administered: 1.years.ago.to_date,
@@ -45,7 +43,7 @@ patients_list.each_with_index do |value, index|
       cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
     )
     VaccineDose.create(
-      patient_profile: patient.patient_profile,
+      patient: patient,
       vaccine_code: vax_code,
       hd_description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       date_administered: Date.today,

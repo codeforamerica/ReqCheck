@@ -105,8 +105,8 @@ class ImporterController < ApplicationController
                 end
               raise ArgumentError.new(argument_error)
             end
-            VaccineDose.create_by_patient_profile(
-              patient.patient_profile,
+            VaccineDose.create_by_patient(
+              patient.patient,
               **ind_vaccine_dose_data
             )
           rescue => e

@@ -173,10 +173,12 @@ ActiveRecord::Schema.define(version: 20161012172234) do
     t.integer  "target_dose_number"
   end
 
-  create_table "patient_profiles", force: :cascade do |t|
-    t.uuid     "patient_id",           null: false
+  create_table "patients", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "first_name",           null: false
+    t.string   "last_name",            null: false
     t.integer  "patient_number",       null: false
     t.date     "dob",                  null: false
+    t.string   "email"
     t.string   "address"
     t.string   "address2"
     t.string   "city"
@@ -186,27 +188,19 @@ ActiveRecord::Schema.define(version: 20161012172234) do
     t.string   "home_phone"
     t.string   "race"
     t.string   "ethnicity"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "gender"
     t.datetime "hd_mpfile_updated_at"
     t.integer  "family_number"
     t.text     "notes"
   end
 
-  add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", unique: true, using: :btree
-  add_index "patient_profiles", ["patient_number"], name: "index_patient_profiles_on_patient_number", unique: true, using: :btree
-
-  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "first_name", null: false
-    t.string   "last_name",  null: false
-    t.string   "email"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "patients", ["patient_number"], name: "index_patients_on_patient_number", unique: true, using: :btree
 
   create_table "vaccine_doses", force: :cascade do |t|
     t.string   "vaccine_code"
-    t.integer  "patient_profile_id"
+    t.integer  "patient_number"
     t.date     "date_administered",                           null: false
     t.string   "hd_description"
     t.boolean  "history_flag",         default: false,        null: false
@@ -219,6 +213,7 @@ ActiveRecord::Schema.define(version: 20161012172234) do
     t.string   "vfc_code"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.integer  "patients_id"
     t.integer  "cvx_code",                                    null: false
     t.string   "vfc_description"
     t.string   "given_by"
@@ -226,6 +221,9 @@ ActiveRecord::Schema.define(version: 20161012172234) do
     t.string   "hd_imfile_updated_at"
     t.text     "comments"
   end
+
+  add_index "vaccine_doses", ["patient_number"], name: "index_vaccine_doses_on_patient_number", using: :btree
+  add_index "vaccine_doses", ["patients_id"], name: "index_vaccine_doses_on_patients_id", using: :btree
 
   create_table "vaccine_infos", force: :cascade do |t|
     t.string   "short_description"
@@ -247,5 +245,5 @@ ActiveRecord::Schema.define(version: 20161012172234) do
   add_foreign_key "conditional_skip_sets", "conditional_skips"
   add_foreign_key "conditional_skips", "antigen_series_doses"
   add_foreign_key "data_import_errors", "data_imports"
-  add_foreign_key "vaccine_doses", "patient_profiles"
+  add_foreign_key "vaccine_doses", "patients", column: "patient_number", primary_key: "patient_number"
 end

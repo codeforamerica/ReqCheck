@@ -56,19 +56,19 @@ RSpec.describe ConditionalSkipConditionEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient_with_profile)
+    test_patient = FactoryGirl.create(:patient)
     # These vaccines are will evaluate to valid dose to skip as it is past
     # 4 years and the interval is more than 6 months as noted in
     # conditional_skip_set set_description
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 5.years)
     )
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 6.years)
     )
@@ -420,7 +420,7 @@ RSpec.describe ConditionalSkipConditionEvaluation do
     end
     describe 'evaluating the dose_count attributes' do
       let(:test_patient_no_vaccines) do
-        FactoryGirl.create(:patient_with_profile)
+        FactoryGirl.create(:patient)
       end
       let(:valid_antigen_administered_records) do
         valid_dose_dates =

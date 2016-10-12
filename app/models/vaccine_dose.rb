@@ -1,6 +1,5 @@
 class VaccineDose < ActiveRecord::Base
-  belongs_to :patient_profile
-  has_one :patient, through: :patient_profile
+  belongs_to :patient, foreign_key: :patient_number, primary_key: :patient_number
 
   include TimeCalc
   extend VaccineDoseValidator
@@ -10,14 +9,6 @@ class VaccineDose < ActiveRecord::Base
   def upcase_vaccine_code
     self.vaccine_code = self.vaccine_code.upcase unless vaccine_code.nil?
   end
-
-
-  before_save :upcase_vaccine_code
-
-  def upcase_vaccine_code
-    self.vaccine_code = self.vaccine_code.upcase unless vaccine_code.nil?
-  end
-
 
   def patient_age_at_vaccine_dose
     if !self.patient.nil?
@@ -51,13 +42,13 @@ class VaccineDose < ActiveRecord::Base
     true
   end
 
-  def self.create_by_patient_profile(patient_profile, **options)
+  def self.create_by_patient(patient, **options)
     options.delete('patient_number') if options.has_key?(:patient_number)
-    options[:patient_profile] = patient_profile
+    options[:patient] = patient
 
     self.check_required_vaccine_dose_args(options)
     self.check_extraneous_args_vaccine_dose(options)
-    self.create(patient_profile: patient_profile, **options)
+    self.create(patient: patient, **options)
   end
 
 end

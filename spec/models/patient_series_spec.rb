@@ -6,7 +6,7 @@ RSpec.describe PatientSeries, type: :model do
   before(:all) { seed_antigen_xml_polio }
   after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
-  let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
+  let(:test_patient) { FactoryGirl.create(:patient) }
 
   let(:antigen_series) do
     Antigen.find_by(target_disease: 'polio').series.first
@@ -87,7 +87,7 @@ RSpec.describe PatientSeries, type: :model do
 
 
   describe '#pull_eligible_target_doses' do
-    let(:test_patient_2_years) { FactoryGirl.create(:patient_profile, dob: 2.years.ago).patient }
+    let(:test_patient_2_years) { FactoryGirl.create(:patient, dob: 2.years.ago).patient }
     let(:test_patient_series) do
       PatientSeries.new(antigen_series: antigen_series, patient: test_patient_2_years)
     end
@@ -109,7 +109,7 @@ RSpec.describe PatientSeries, type: :model do
     end
     describe 'it checks max age requirements' do
       it 'pulls ineligible target doses out' do
-        test_patient_20_years = FactoryGirl.create(:patient_profile, dob: 20.years.ago).patient
+        test_patient_20_years = FactoryGirl.create(:patient, dob: 20.years.ago).patient
         test_patient_series   = PatientSeries.new(antigen_series: antigen_series,
                                                   patient: test_patient_20_years)
         target_doses = test_patient_series.target_doses
@@ -118,7 +118,7 @@ RSpec.describe PatientSeries, type: :model do
         expect(eligible_target_doses).to eq([])
       end
       it 'will return dose if no max_age requirement' do
-        test_patient_20_years = FactoryGirl.create(:patient_profile, dob: 20.years.ago).patient
+        test_patient_20_years = FactoryGirl.create(:patient, dob: 20.years.ago).patient
         test_patient_series   = PatientSeries.new(antigen_series: antigen_series,
                                                   patient: test_patient_20_years)
         target_doses = test_patient_series.target_doses
@@ -151,7 +151,7 @@ RSpec.describe PatientSeries, type: :model do
   describe '#evaluate_patient_series' do
     context 'when the patient could be immune' do
       let(:test_patient_5_years) do
-        FactoryGirl.create(:patient_profile,
+        FactoryGirl.create(:patient,
                            dob: 5.years.ago.to_date).patient
       end
 
@@ -173,7 +173,7 @@ RSpec.describe PatientSeries, type: :model do
         ].map do |date_admin|
           FactoryGirl.create(:vaccine_dose_by_cvx,
                              cvx_code: 10,
-                             patient_profile: test_patient_5_years.patient_profile,
+                             patient: test_patient_5_years,
                              date_administered: date_admin)
         end
       end
@@ -186,7 +186,7 @@ RSpec.describe PatientSeries, type: :model do
         ].map do |date_admin|
           FactoryGirl.create(:vaccine_dose_by_cvx,
                              cvx_code: 10,
-                             patient_profile: test_patient_5_years.patient_profile,
+                             patient: test_patient_5_years,
                              date_administered: date_admin)
         end
       end
@@ -200,7 +200,7 @@ RSpec.describe PatientSeries, type: :model do
         ].map do |date_admin|
           FactoryGirl.create(:vaccine_dose_by_cvx,
                              cvx_code: 10,
-                             patient_profile: test_patient_5_years.patient_profile,
+                             patient: test_patient_5_years,
                              date_administered: date_admin)
         end
       end
@@ -234,7 +234,7 @@ RSpec.describe PatientSeries, type: :model do
     end
     context 'when the patient cant be immune' do
       let(:test_patient_3_years) do
-        FactoryGirl.create(:patient_profile,
+        FactoryGirl.create(:patient,
                            dob: 3.years.ago.to_date).patient
       end
 
@@ -255,7 +255,7 @@ RSpec.describe PatientSeries, type: :model do
         ].map do |date_admin|
           FactoryGirl.create(:vaccine_dose_by_cvx,
                              cvx_code: 10,
-                             patient_profile: test_patient_3_years.patient_profile,
+                             patient: test_patient_3_years,
                              date_administered: date_admin)
         end
       end
@@ -267,7 +267,7 @@ RSpec.describe PatientSeries, type: :model do
         ].map do |date_admin|
           FactoryGirl.create(:vaccine_dose_by_cvx,
                              cvx_code: 10,
-                             patient_profile: test_patient_3_years.patient_profile,
+                             patient: test_patient_3_years,
                              date_administered: date_admin)
         end
       end
@@ -280,7 +280,7 @@ RSpec.describe PatientSeries, type: :model do
         ].map do |date_admin|
           FactoryGirl.create(:vaccine_dose_by_cvx,
                              cvx_code: 10,
-                             patient_profile: test_patient_3_years.patient_profile,
+                             patient: test_patient_3_years,
                              date_administered: date_admin)
         end
       end

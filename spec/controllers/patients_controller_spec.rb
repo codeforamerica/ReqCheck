@@ -7,14 +7,14 @@ RSpec.describe PatientsController, type: :controller do
     end
 
     it '#patients should 302 redirect to patient show when given valid search params' do
-      patient = FactoryGirl.create(:patient_with_profile)
-      get :index, search: patient.patient_profile
+      patient = FactoryGirl.create(:patient)
+      get :index, search: patient
       expect(response.response_code).to eq(302)
     end
 
     it '#patients should return a list one patient with valid search params' do
-      patient = FactoryGirl.create(:patient_with_profile)
-      get :index, search: patient.patient_profile
+      patient = FactoryGirl.create(:patient)
+      get :index, search: patient
       expect(assigns(:patients).length).to eq(1)
       expect(assigns(:patients)[0].id).to eq(patient.id)
     end

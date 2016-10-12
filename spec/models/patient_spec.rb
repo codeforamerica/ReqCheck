@@ -14,62 +14,52 @@ RSpec.describe Patient, type: :model do
   end
 
   let(:patient_w_vaccines) do
-    patient = FactoryGirl.create(:patient_with_profile,
+    patient = FactoryGirl.create(:patient,
                                  dob: in_pst(5.years.ago),
                                  patient_number: 123)
     vaccine_types = %w(MCV6 DTaP MMR9)
     vaccine_types.each do |vax_code|
       create(:vaccine_dose,
-             patient_profile: patient.patient_profile,
+             patient: patient,
              vaccine_code: vax_code,
              date_administered: 2.years.ago.to_date)
       create(:vaccine_dose,
-             patient_profile: patient.patient_profile,
+             patient: patient,
              vaccine_code: vax_code,
              date_administered: 1.years.ago.to_date)
       create(:vaccine_dose,
-             patient_profile: patient.patient_profile,
+             patient: patient,
              vaccine_code: vax_code)
     end
     patient
   end
 
-  describe '#create' do
-    it 'automatically creates a User with the type \'Patient\'' do
-      patient = Patient.create(first_name: 'Test', last_name: 'Tester')
-      expect(User.last).to eq(patient)
-      expect(User.last.type).to eq('Patient')
-    end
-
-    it 'allows patient_profile_attributes to be included in instantiation' do
-      dob     = in_pst(Date.today)
-      patient = Patient.create(
-        first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob, patient_number: 123 }
-      )
-      expect(patient.dob).to eq(dob)
-      expect(patient.patient_number).to eq(123)
-      expect(patient.patient_profile.id).not_to eq(nil)
-      expect(Patient.all.length).to eq(1)
-    end
-
-    it 'has a patient profile with the join on its uuid' do
-      dob     = in_pst(Date.today)
-      patient = Patient.create(
-        first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob, patient_number: 123 }
-      )
-      expect(patient.patient_profile.patient_id).to eq(patient.id)
-    end
-  end
   describe '#validations' do
+    let(:valid_patient_args) do
+      {
+        first_name: 'Test',
+        last_name: 'Tester',
+        dob: 2.years.ago,
+        patient_number: 123
+      }
+    end
+    [:first_name, :last_name, :dob, :patient_number].each do |valid_key|
+      it 'requires the #{valid_key} upon creation' do
+        args = valid_patient_args
+        args.delete(valid_key)
+        expect{ Patient.create(args) }
+          .to raise_exception(ActiveModel::StrictValidationFailed)
+      end
+    end
+
     it 'can take string dates and convert them to the database date object' do
+      patient_args = valid_patient_args
       dob_string = '01/13/2010'
-      patient    = Patient.create(
-        first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob_string, patient_number: 123 }
-      )
+      patient_args[:dob] = dob_string
       dob_date_object = DateTime.parse(dob_string).to_date
+
+      patient = Patient.create(patient_args)
+
       expect(patient.dob).to eq(dob_date_object)
     end
   end
@@ -78,23 +68,42 @@ RSpec.describe Patient, type: :model do
       dob     = in_pst(Date.today)
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
-        patient_profile_attributes: { dob: dob, patient_number: 123 }
+        dob: dob, patient_number: 123
       )
       expect(patient.vaccine_doses.length).to eq(0)
+
       FactoryGirl.create(:vaccine_dose, patient: patient)
+      patient.reload
+
       expect(patient.vaccine_doses.length).to eq(1)
     end
+    it 'orders the vaccine doses by date' do
+      dob     = in_pst(Date.today)
+      patient = Patient.create(
+        first_name: 'Test', last_name: 'Tester',
+        dob: dob, patient_number: 123
+      )
+      FactoryGirl.create(:vaccine_dose,
+                         patient: patient,
+                         date_administered: 10.days.ago)
+      FactoryGirl.create(:vaccine_dose,
+                         patient: patient,
+                         date_administered: 1.year.ago)
+      patient.reload
+
+      dates_administered = patient.vaccine_doses.map(&:date_administered)
+      expect(dates_administered[0] < dates_administered[1]).to be(true)
+    end
     it 'has a dob attribute in years' do
-      patient = FactoryGirl.create(:patient_with_profile, patient_profile_attributes: {
-                                     dob: in_pst(5.years.ago),
-                                     patient_number: 123
-                                   })
+      patient = FactoryGirl.create(:patient,
+                                   dob: in_pst(5.years.ago),
+                                   patient_number: 123)
       expect(patient.dob).to eq(5.years.ago.to_date)
     end
   end
 
   describe '.find_by_patient_number' do
-    let(:test_patient) { FactoryGirl.create(:patient_with_profile) }
+    let(:test_patient) { FactoryGirl.create(:patient) }
 
     it 'takes a string' do
       patient_number = test_patient.patient_number.to_s
@@ -122,18 +131,16 @@ RSpec.describe Patient, type: :model do
     end
 
     xit 'returns false if not_valid' do
-      not_valid_patient = FactoryGirl.create(:patient_with_profile)
+      not_valid_patient = FactoryGirl.create(:patient)
       not_valid_imm = not_valid_patient.check_record
       expect(not_valid_imm).to eq(false)
     end
   end
   describe '#age_in_days' do
     it 'returns the patients age in days' do
-      patient = FactoryGirl.create(:patient_with_profile,
-                                   patient_profile_attributes: {
-                                     dob: in_pst(5.years.ago),
-                                     patient_number: 123
-                                   })
+      patient = FactoryGirl.create(:patient,
+                                   dob: in_pst(5.years.ago),
+                                   patient_number: 123)
       days_age = patient.age_in_days
       expect(days_age).to eq((365 * 5) + 1)
     end
@@ -142,10 +149,8 @@ RSpec.describe Patient, type: :model do
     let(:patient_5_years) do
       FactoryGirl.create(
         :patient,
-        patient_profile_attributes: {
-          dob: in_pst(5.years.ago),
-          patient_number: 123
-        }
+        dob: in_pst(5.years.ago),
+        patient_number: 123
       )
     end
     it 'returns the patients age in years' do
@@ -154,15 +159,15 @@ RSpec.describe Patient, type: :model do
     end
 
     it 'is still 5 years if born one day earlier' do
-      new_date = patient_5_years.patient_profile.dob - 1
-      patient_5_years.patient_profile.update(dob: new_date)
+      new_date = patient_5_years.dob - 1
+      patient_5_years.update(dob: new_date)
       pat_age = patient_5_years.age
       expect(pat_age).to eq(5)
     end
 
     it 'is 4 years if born one day later' do
-      new_date = patient_5_years.patient_profile.dob + 1
-      patient_5_years.patient_profile.update(dob: new_date)
+      new_date = patient_5_years.dob + 1
+      patient_5_years.update(dob: new_date)
       pat_age = patient_5_years.age
       expect(pat_age).to eq(4)
     end
@@ -171,8 +176,12 @@ RSpec.describe Patient, type: :model do
   describe '#get_vaccine_doses' do
     it 'returns all vaccines of the types passed in' do
       expect(patient_w_vaccines.get_vaccine_doses(%w(DTaP DTP)).length).to eq(3)
+    end
+
+    it 'it is not case sensitive' do
+      expect(patient_w_vaccines.get_vaccine_doses(%w(DTAP DtP)).length).to eq(3)
       expect(patient_w_vaccines.get_vaccine_doses(%w(DTaP DTP))[0].vaccine_code)
-        .to eq('DTaP')
+        .to eq('DTAP')
     end
 
     it 'returns all vaccines in the order of vaccine_dose date' do
@@ -192,21 +201,19 @@ RSpec.describe Patient, type: :model do
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) do
-      patient = FactoryGirl.create(:patient_with_profile,
-                                   patient_profile_attributes: {
+      patient = FactoryGirl.create(:patient,
                                      dob: in_pst(5.years.ago),
-                                     patient_number: 123
-                                   })
+                                     patient_number: 123)
       create(:vaccine_dose,
-             patient_profile: patient.patient_profile,
+             patient: patient,
              vaccine_code: 'POL',
              date_administered: 2.years.ago.to_date)
       create(:vaccine_dose,
-             patient_profile: patient.patient_profile,
+             patient: patient,
              vaccine_code: 'POL',
              date_administered: 1.years.ago.to_date)
       create(:vaccine_dose,
-             patient_profile: patient.patient_profile,
+             patient: patient,
              vaccine_code: 'POL')
       patient
     end
@@ -232,9 +239,9 @@ RSpec.describe Patient, type: :model do
   describe '.update_or_create_by_patient_number' do
     let(:valid_patient) do
       FactoryGirl.create(
-        :patient_with_profile,
-        dob: 5.years.ago.to_date,
-
+        :patient,
+        first_name: 'Test1',
+        dob: 5.years.ago.to_date
       )
     end
     it 'finds a record by the number if it exists and updates it' do
