@@ -4,6 +4,9 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :data_import do
+    
+  end
   factory :data_import_error do
 
   end
