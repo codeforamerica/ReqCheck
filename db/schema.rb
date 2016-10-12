@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006233720) do
+ActiveRecord::Schema.define(version: 20161012172234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,9 +144,18 @@ ActiveRecord::Schema.define(version: 20161006233720) do
     t.jsonb    "raw_hash",          default: {}
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "data_import_id"
   end
 
+  add_index "data_import_errors", ["data_import_id"], name: "index_data_import_errors_on_data_import_id", using: :btree
   add_index "data_import_errors", ["raw_hash"], name: "index_data_import_errors_on_raw_hash", using: :btree
+
+  create_table "data_imports", force: :cascade do |t|
+    t.string   "type"
+    t.text     "updated_patient_numbers", default: [],              array: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   create_table "intervals", force: :cascade do |t|
     t.integer  "antigen_series_dose_id"
@@ -180,6 +189,7 @@ ActiveRecord::Schema.define(version: 20161006233720) do
     t.string   "gender"
     t.datetime "hd_mpfile_updated_at"
     t.integer  "family_number"
+    t.text     "notes"
   end
 
   add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", unique: true, using: :btree
@@ -214,6 +224,7 @@ ActiveRecord::Schema.define(version: 20161006233720) do
     t.string   "given_by"
     t.string   "injection_site"
     t.string   "hd_imfile_updated_at"
+    t.text     "comments"
   end
 
   create_table "vaccine_infos", force: :cascade do |t|
@@ -235,5 +246,6 @@ ActiveRecord::Schema.define(version: 20161006233720) do
   add_foreign_key "conditional_skip_conditions", "conditional_skip_sets"
   add_foreign_key "conditional_skip_sets", "conditional_skips"
   add_foreign_key "conditional_skips", "antigen_series_doses"
+  add_foreign_key "data_import_errors", "data_imports"
   add_foreign_key "vaccine_doses", "patient_profiles"
 end

@@ -3,7 +3,7 @@ module PatientValidator
     patient_profile_attrs = [
       :patient_number, :dob, :address, :address2, :city, :state,
       :zip_code, :cell_phone, :home_phone, :race, :ethnicity,
-      :gender, :hd_mpfile_updated_at
+      :gender, :hd_mpfile_updated_at, :notes
     ]
     return_attrs = {}
     patient_profile_attrs.each do |attribute|
@@ -53,7 +53,7 @@ module PatientValidator
     [
       :patient_number, :dob, :address, :address2, :city, :state,
       :zip_code, :cell_phone, :home_phone, :race, :ethnicity,
-      :gender, :first_name, :last_name, :email, :hd_mpfile_updated_at
+      :gender, :first_name, :last_name, :email, :hd_mpfile_updated_at, :notes
     ].each do |allowable_arg|
       temp_args.delete(allowable_arg)
     end

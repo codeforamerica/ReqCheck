@@ -23,6 +23,13 @@ class ImporterController < ApplicationController
     if patient_data.nil?
       render json: { status: 'patient_data key missing' }, status: 400
     else
+      patient_numbers = patient_data.map do |ind_patient|
+        ind_patient[:patient_number].to_i
+      end
+      patient_data_import = PatientDataImport.create(
+        updated_patient_numbers: patient_numbers
+      )
+
       patient_data.each do |ind_patient_data|
         ind_patient_data = ind_patient_data.symbolize_keys
         begin
@@ -38,13 +45,17 @@ class ImporterController < ApplicationController
           import_error = DataImportError.create(
             error_message: e.message,
             object_class_name: 'Patient',
-            raw_hash: ind_patient_data
+            raw_hash: ind_patient_data,
+            data_import: patient_data_import
           )
           error_ids << import_error.id
         end
       end
 
-      return_json = { status: 'success' }
+      return_json = {
+        status: 'success',
+        data_import_id: patient_data_import.id
+      }
       unless error_ids == []
         return_json[:status] = 'partial_failure'
         return_json[:error_objects_ids] = error_ids
@@ -64,6 +75,11 @@ class ImporterController < ApplicationController
       vaccines_by_patient = vaccine_dose_data.group_by do |ind_vaccine_dose_data|
         ind_vaccine_dose_data['patient_number']
       end
+
+      patient_numbers = vaccines_by_patient.keys.map(&:to_i)
+      vaccine_dose_data_import = VaccineDoseDataImport.create(
+        updated_patient_numbers: patient_numbers
+      )
 
       vaccines_by_patient.each do |patient_number, patient_vaccines|
         patient = Patient.find_by_patient_number(patient_number)
@@ -100,14 +116,18 @@ class ImporterController < ApplicationController
             import_error = DataImportError.create(
               error_message: e.message,
               object_class_name: 'Vaccine',
-              raw_hash: ind_vaccine_dose_data
+              raw_hash: ind_vaccine_dose_data,
+              data_import: vaccine_dose_data_import
             )
             error_ids << import_error.id
           end
         end
       end
 
-      return_json = { status: 'success' }
+      return_json = {
+        status: 'success',
+        data_import_id: vaccine_dose_data_import.id
+      }
       unless error_ids == []
         return_json[:status] = 'partial_failure'
         return_json[:error_objects_ids] = error_ids

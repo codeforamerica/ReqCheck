@@ -30,7 +30,7 @@ RSpec.describe ImporterController, type: :controller do
             home_phone: '555-555-1212',
             email: 'newemail@example.com',
             hd_mpfile_updated_at: DateTime.now,
-            comments: 'This patient has Varicella through the chicken pox'
+            notes: 'This patient has Varicella through the chicken pox'
           },
           {
             patient_number: 5,
@@ -59,6 +59,8 @@ RSpec.describe ImporterController, type: :controller do
     it 'imports json with key \'patient_data\' and an array patients' do
       post :import_patient_data, valid_patient_json, format: :json
       expect(response.response_code).to eq(201)
+      response_body = JSON.parse(response.body)
+      expect(response_body['data_import_id'].class).to eq(Fixnum)
 
       expect(Patient.find_by_patient_number(4).home_phone)
         .to eq('555-555-1212')
@@ -70,7 +72,7 @@ RSpec.describe ImporterController, type: :controller do
       post :import_patient_data, { hello: 'world' }, format: :json
       expect(response.response_code).to eq(400)
       expect(JSON.parse(response.body)).to eq(
-        {'status': 'patient_data key missing'}.stringify_keys
+        {status: 'patient_data key missing'}.stringify_keys
       )
     end
 
@@ -107,6 +109,63 @@ RSpec.describe ImporterController, type: :controller do
       expect(Patient.find_by_patient_number(6).address).to eq('7 Kings Lane')
     end
 
+    it 'creates a PatientDataImport object in the database' do
+      patient_json = {
+        patient_data: [
+          {
+            patient_number: 200,
+            first_name: 'This',
+            last_name: 'Test',
+            dob: 3.years.ago.to_date.to_s,
+            hd_mpfile_updated_at: DateTime.now.to_s,
+          }
+        ]
+      }
+      post :import_patient_data, patient_json, format: :json
+      expect(response.response_code).to eq(201)
+      patient_import = PatientDataImport.last
+      expect(patient_import.updated_patient_numbers).to eq(['200'])
+    end
+
+    it 'PatientDataImport object saves the patient_numbers (even errors)' do
+      hd_mpfile_updated_at = DateTime.now.to_s
+      patient_json = valid_patient_json
+      patient_json[:patient_data] << {
+        patient_number: 7,
+        first_name: 'This',
+        last_name: 'Test',
+        hd_mpfile_updated_at: DateTime.now.to_s,
+      }
+      post :import_patient_data, patient_json, format: :json
+      expect(response.response_code).to eq(201)
+      patient_import = PatientDataImport.last
+      expect(patient_import.updated_patient_numbers)
+        .to eq(['4', '5', '6', '7'])
+      expect(DataImportError.all.length).to eq(1)
+    end
+
+    it 'PatientDataImport defaults to 0 with no patient_number' do
+      date_of_birth = 3.years.ago.to_date.to_s
+      hd_mpfile_updated_at = DateTime.now.to_s
+      patient_json = {
+        patient_data: [
+          {
+            first_name: 'No',
+            last_name: 'PatientNumber',
+            dob: date_of_birth,
+            hd_mpfile_updated_at: hd_mpfile_updated_at
+          }
+        ]
+      }
+      post :import_patient_data, patient_json, format: :json
+      expect(response.response_code).to eq(201)
+
+      patient_import = PatientDataImport.last
+      expect(patient_import.updated_patient_numbers).to eq(['0'])
+      expect(DataImportError.all.length).to eq(1)
+    end
+
+
     it 'saves the raw hash to the database if an error occurs' do
       date_of_birth = 3.years.ago.to_date.to_s
       patient_data = {
@@ -123,10 +182,10 @@ RSpec.describe ImporterController, type: :controller do
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
       expect(response_body['status']).to eq('partial_failure')
-      expect(response_body['error_objects_ids']).to eq([1])
+      expect(response_body['data_import_id'].class).to eq(Fixnum)
 
-      import_error = DataImportError.find(1)
-      expect(import_error.raw_hash).to eq(
+      data_import_error = DataImportError.last
+      expect(data_import_error.raw_hash).to eq(
         {
           'patient_number': '-14',
           'first_name': 'Shouldnot',
@@ -134,6 +193,9 @@ RSpec.describe ImporterController, type: :controller do
           'dob': date_of_birth
         }.stringify_keys
       )
+      patient_import = PatientDataImport.last
+      expect(patient_import.data_import_errors.last)
+        .to eq(data_import_error)
     end
 
     it 'saves multiple error raw hashes if multiple errors occur' do
@@ -160,7 +222,11 @@ RSpec.describe ImporterController, type: :controller do
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
       expect(response_body['status']).to eq('partial_failure')
-      expect(response_body['error_objects_ids']).to eq([2, 3])
+
+      patient_numbers =
+        DataImportError.all.map {|derror| derror.raw_hash['patient_number']}
+      expect(patient_numbers).to eq(['-14', '19'])
+
     end
 
     %w(patient_number first_name last_name dob hd_mpfile_updated_at
@@ -445,6 +511,16 @@ RSpec.describe ImporterController, type: :controller do
             hd_imfile_updated_at: DateTime.now.to_s,
             cvx_code: '20',
             mvx_code: 'UNK',
+            hd_description: 'C-DTaP',
+            comments: 'This was given at through a school clinic'
+          },
+          {
+            patient_number: 5,
+            vaccine_code: 'DTAP',
+            date_administered: '2013-03-12', # need to try multiple data formats
+            hd_imfile_updated_at: DateTime.now.to_s,
+            cvx_code: '20',
+            mvx_code: 'UNK',
             hd_description: 'C-DTaP'
           }
         ]
@@ -456,6 +532,8 @@ RSpec.describe ImporterController, type: :controller do
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
       expect(response_body['status']).to eq('success')
+      expect(response_body['data_import_id'].class).to eq(Fixnum)
+
       patient = Patient.find_by_patient_number(4)
       expect(patient.vaccine_doses.length)
         .to eq(4)
@@ -471,7 +549,7 @@ RSpec.describe ImporterController, type: :controller do
       post :import_vaccine_dose_data, { hello: 'world' }, format: :json
       expect(response.response_code).to eq(400)
       expect(JSON.parse(response.body)).to eq(
-        {'status': 'vaccine_dose_data key missing'}.stringify_keys
+        {status: 'vaccine_dose_data key missing'}.stringify_keys
       )
     end
 
@@ -506,6 +584,59 @@ RSpec.describe ImporterController, type: :controller do
       expect(patient.vaccine_doses.first.vaccine_code).to eq('DTAP')
     end
 
+    it 'creates a VaccineDoseDataImport object in the database' do
+      vaccine_json = {
+        vaccine_dose_data: [
+          {
+            patient_number: 4,
+            vaccine_code: 'DTaP',
+            date_administered: '2014-03-08',
+            cvx_code: '10',
+            hd_imfile_updated_at: DateTime.now.to_s,
+          }
+        ]
+      }
+      post :import_vaccine_dose_data, vaccine_json, format: :json
+      expect(response.response_code).to eq(201)
+      vaccine_dose_import = VaccineDoseDataImport.last
+      expect(vaccine_dose_import.updated_patient_numbers).to eq(['4'])
+    end
+
+    it 'VaccineDoseDataImport object saves the patient_numbers (even errors)' do
+      hd_imfile_updated_at = DateTime.now.to_s
+      vaccine_json = valid_vaccine_json
+      vaccine_json[:vaccine_dose_data] << {
+        patient_number: 6,
+        date_administered: '2013-03-12', # need to try multiple data formats
+        hd_imfile_updated_at: hd_imfile_updated_at
+      }
+      post :import_vaccine_dose_data, vaccine_json, format: :json
+      expect(response.response_code).to eq(201)
+      vaccine_dose_import = VaccineDoseDataImport.last
+      expect(vaccine_dose_import.updated_patient_numbers).to eq(['4', '5', '6'])
+      expect(DataImportError.all.length).to eq(1)
+    end
+
+    it 'VaccineDoseDataImport defaults to 0 with no patient_number' do
+      hd_imfile_updated_at = DateTime.now.to_s
+      vaccine_json = {
+        vaccine_dose_data: [
+          {
+            vaccine_code: 'DTAP',
+            cvx_code: 10,
+            date_administered: '2013-03-12', # need to try multiple data formats
+            hd_imfile_updated_at: hd_imfile_updated_at
+          }
+        ]
+      }
+      post :import_vaccine_dose_data, vaccine_json, format: :json
+      expect(response.response_code).to eq(201)
+
+      vaccine_dose_import = VaccineDoseDataImport.last
+      expect(vaccine_dose_import.updated_patient_numbers).to eq(['0'])
+      expect(DataImportError.all.length).to eq(1)
+    end
+
     it 'saves the raw hash to the database if an error occurs' do
       hd_imfile_updated_at = DateTime.now.to_s
       vaccine_dose_data = {
@@ -521,17 +652,21 @@ RSpec.describe ImporterController, type: :controller do
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
       expect(response_body['status']).to eq('partial_failure')
+      expect(response_body['data_import_id'].class).to eq(Fixnum)
       data_import_error = DataImportError.last
       expect(data_import_error.raw_hash).to eq(
         {
-          'patient_number': '4',
-          'date_administered': '2013-03-12', # need to try multiple data formats
-          'hd_imfile_updated_at': hd_imfile_updated_at
+          patient_number: '4',
+          date_administered: '2013-03-12', # need to try multiple data formats
+          hd_imfile_updated_at: hd_imfile_updated_at
         }.stringify_keys
       )
+      vaccine_dose_import = VaccineDoseDataImport.last
+      expect(vaccine_dose_import.data_import_errors.last)
+        .to eq(data_import_error)
     end
 
-    it 'saves the raw hash to the database if an error occurs' do
+    it 'saves multple errors to the database if errors occur' do
       hd_imfile_updated_at = DateTime.now.to_s
       vaccine_dose_data = {
         vaccine_dose_data: [
@@ -555,9 +690,9 @@ RSpec.describe ImporterController, type: :controller do
       data_import_error = DataImportError.last
       expect(data_import_error.raw_hash).to eq(
         {
-          'patient_number': '4',
-          'cvx_code': '10',
-          'hd_imfile_updated_at': hd_imfile_updated_at
+          patient_number: '4',
+          cvx_code: '10',
+          hd_imfile_updated_at: hd_imfile_updated_at
         }.stringify_keys
       )
     end
