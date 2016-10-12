@@ -20,7 +20,7 @@ module VaccineDoseValidator
       :history_flag, :provider_code, :dosage, :mvx_code, :lot_number,
       :expiration_date, :hd_encounter_id, :vfc_code, :cvx_code,
       :vfc_description, :given_by, :injection_site, :hd_imfile_updated_at,
-      :patient_profile
+      :patient_profile, :comments
     ].each do |allowable_arg|
       temp_args.delete(allowable_arg)
     end

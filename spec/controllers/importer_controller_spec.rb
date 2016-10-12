@@ -29,7 +29,8 @@ RSpec.describe ImporterController, type: :controller do
             dob: 3.years.ago,
             home_phone: '555-555-1212',
             email: 'newemail@example.com',
-            hd_mpfile_updated_at: DateTime.now
+            hd_mpfile_updated_at: DateTime.now,
+            comments: 'This patient has Varicella through the chicken pox'
           },
           {
             patient_number: 5,
