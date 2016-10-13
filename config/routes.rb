@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'welcome/index'
 
   # resources :vaccine_doses
@@ -7,10 +8,6 @@ Rails.application.routes.draw do
   # xml importation
   post '/xml', to: 'importer#import_file'
   get '/xml', to: 'importer#index'
-
-  # Temp login faking
-  get '/login', to: 'welcome#login'
-  get '/login/go', to: 'welcome#go'
 
   # API for importing Patient Data from the Extractor
   post '/patient_data', to: 'importer#import_patient_data'
