@@ -84,16 +84,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%@patient.get_vaccines(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).each do |individual_vaccine| %>
+                    <%@patient.get_vaccine_doses(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).each do |individual_vaccine| %>
                     <tr>
                         <td><%= individual_vaccine.vaccine_code %></td>
-                        <td><%= individual_vaccine.manufacturer %></td>
+                        <td><%= individual_vaccine.mvx_code %></td>
                         <td>
-                        <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                        <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                         <td>
-                        <%= individual_vaccine.patient_age_at_immunization %></td>
+                        <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
                         <td>
-                        <%= individual_vaccine.time_since_immunization %></td>
+                        <%= individual_vaccine.time_since_vaccine_dose %></td>
                         <td>HD</td>
                     </tr><%end %>
                 </tbody>
@@ -108,15 +108,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -131,15 +131,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -153,15 +153,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["DTHI", "DTI", "DHI", "POL", "IPV"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "DHI", "POL", "IPV"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -175,15 +175,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["PPV2", "PCV4", "PCV2", "PCV9", "PCV", "PPV1", "PPV9", "PPV2"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["PPV2", "PCV4", "PCV2", "PCV9", "PCV", "PPV1", "PPV9", "PPV2"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -197,15 +197,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["ROT1", "ROT2", "ROTA"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["ROT1", "ROT2", "ROTA"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -219,15 +219,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["VAR1", "VAR2", "VAR4", "VAR9"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["VAR1", "VAR2", "VAR4", "VAR9"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -241,15 +241,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -263,15 +263,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -285,15 +285,15 @@
                         <th>Time Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -307,15 +307,15 @@
                         <th>Days Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -330,15 +330,15 @@
                         <th>Days Past</th>
                         <th>Provider</th>
                     </tr>
-                </thead><%@patient.get_vaccines(["FL10", "FL11", "FL14", "FLU", "FLU6", "FLU7", "FLU8", "FLU9", "FLUZ", "FLZ", "H1N4"]).each do |individual_vaccine| %>
+                </thead><%@patient.get_vaccine_doses(["FL10", "FL11", "FL14", "FLU", "FLU6", "FLU7", "FLU8", "FLU9", "FLUZ", "FLZ", "H1N4"]).each do |individual_vaccine| %>
                 <tr>
                     <td><%= individual_vaccine.vaccine_code %></td>
-                    <td><%= individual_vaccine.manufacturer %></td>
+                    <td><%= individual_vaccine.mvx_code %></td>
                     <td>
-                    <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                    <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                     <td>
-                    <%= individual_vaccine.patient_age_at_immunization %></td>
-                    <td><%= individual_vaccine.time_since_immunization %></td>
+                    <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+                    <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
             </table>
@@ -354,16 +354,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%@patient.get_vaccines(["YFV", "TYP", "TWNz", "TWN3", "TWN1", "RAB1", "PPD9", "PPD1"]).each do |individual_vaccine| %>
+                    <%@patient.get_vaccine_doses(["YFV", "TYP", "TWNz", "TWN3", "TWN1", "RAB1", "PPD9", "PPD1"]).each do |individual_vaccine| %>
                     <tr>
                         <td><%= individual_vaccine.vaccine_code %></td>
-                        <td><%= individual_vaccine.manufacturer %></td>
+                        <td><%= individual_vaccine.mvx_code %></td>
                         <td>
-                        <%= individual_vaccine.imm_date.strftime("%m/%d/%Y") %></td>
+                        <%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
                         <td>
-                        <%= individual_vaccine.patient_age_at_immunization %></td>
+                        <%= individual_vaccine.patient_age_at_vaccine_dose %></td>
                         <td>
-                        <%= individual_vaccine.time_since_immunization %></td>
+                        <%= individual_vaccine.time_since_vaccine_dose %></td>
                         <td>HD</td>
                     </tr><%end %>
                 </tbody>
