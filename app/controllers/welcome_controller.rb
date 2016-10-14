@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  skip_before_filer :authenticate_user!
+
   def index
   end
 

@@ -29,4 +29,7 @@ RSpec.describe PatientsController, type: :controller do
       expect(assigns(:patients).length).to eq(0)
     end
   end
+
+  # Write controller test to ensure a logged out person will be redirected to home page
+
 end

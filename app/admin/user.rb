@@ -12,8 +12,6 @@ ActiveAdmin.register User do
     actions
   end
 
-  filter :email
-
   form do |f|
     f.inputs 'User Details' do
       f.input :email

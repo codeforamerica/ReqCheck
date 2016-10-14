@@ -20,9 +20,12 @@
       </div>
       <div>
         <div class="top-bar-right">
+
+
+
             <% if @patient || @patients %>
               <% if @patient %>
-              <%= link_to "New Search", patients_path, class: "button margin-right-10"  %>
+                <%= link_to "New Search", patients_path, class: "button margin-right-10"  %>
               <% end %>
               <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button secondary hollow" %>
             <% end %>

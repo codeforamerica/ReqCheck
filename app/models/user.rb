@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
          :timeoutable, :lockable
 
   def role?(r)
-    role.include? r.to_s
+    role.present? && role.include?(r.to_s)
   end
 end
