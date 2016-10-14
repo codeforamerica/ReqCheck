@@ -19,17 +19,25 @@
 
       </div>
       <div>
-        <div class="top-bar-right">
-
-
-
-            <% if @patient || @patients %>
-              <% if @patient %>
-                <%= link_to "New Search", patients_path, class: "button margin-right-10"  %>
-              <% end %>
-              <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button secondary hollow" %>
+        <ul class="top-bar-right">
+          <% if signed_in? %>
+            <% if current_user.role?('admin') %>
+              <%= link_to "Admin", admin_root_path %>
             <% end %>
-        </div>
+            <%= link_to current_user.email, edit_user_registration_path %>
+            <%= link_to "Sign out", destroy_user_session_path, method: :get %>
+          <% else %>
+            <%= link_to "Sign in", new_user_session_path %>
+          <% end %>
+        </ul><!-- /.login toolbar -->
+
+
+            <%# if @patient || @patients %>
+              <%# if @patient %>
+                <%#= link_to "New Search", patients_path, class: "button margin-right-10"  %>
+              <%# end %>
+              <%#= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button secondary hollow" %>
+            <%# end %>
       </div>
     </div>
     <div class="container">

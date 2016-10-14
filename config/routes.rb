@@ -3,6 +3,16 @@ Rails.application.routes.draw do
   devise_for :users
   get 'welcome/index'
 
+  # To have a /login endpoint
+  get 'login', to: 'devise/sessions#new'
+
+  # authenticated :user do
+  #   root to: 'admin/dashboard#index', as: :authenticated_root
+  # end
+  # unauthenticated :user do
+  #   root to: 'users/sessions#new', as: :unauthenticated_root
+  # end
+
   # resources :vaccine_doses
   resources :patients, only: [:index, :show]
 
