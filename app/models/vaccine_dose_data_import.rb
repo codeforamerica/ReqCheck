@@ -1,3 +1,2 @@
 class VaccineDoseDataImport < DataImport
-
 end

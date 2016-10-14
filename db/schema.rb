@@ -154,7 +154,6 @@ ActiveRecord::Schema.define(version: 20161013230026) do
 
   create_table "data_import_errors", force: :cascade do |t|
     t.string   "object_class_name"
-    t.string   "import_id"
     t.string   "error_message"
     t.jsonb    "raw_hash",          default: {}
     t.datetime "created_at",                     null: false

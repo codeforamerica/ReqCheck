@@ -64,3 +64,8 @@ User.create!(
   password_confirmation: 'password',
   role: 'admin'
 )
+
+data_import = PatientDataImport.create(updated_patient_numbers: [1, 2, 3])
+DataImportError.create(object_class_name: 'Patient',
+                       data_import: data_import,
+                       error_message: 'Yes')
