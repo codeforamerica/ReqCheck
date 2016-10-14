@@ -5,8 +5,7 @@
 </head>
 <body>
     <div class="row align-center">
-        <div class="card columns small-8 patient-info">
-            <p>Printed DATE at TIME from ReqCheck.</p>
+        <div class="card columns small-12 large-8 medium-8 patient-info">
             <table>
                 <thead>
                     <tr>
@@ -37,50 +36,59 @@
                 DATE.</p>
             </div><%elsif @patient.patient_number < 10 %>
             <div class="callout warning">
-                <svg width="70" height="70" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1024 1376v-192q0-14-9-23t-23-9h-192q-14 0-23 9t-9 23v192q0 14 9 23t23 9h192q14 0 23-9t9-23zm256-672q0-88-55.5-163t-138.5-116-170-41q-243 0-371 213-15 24 8 42l132 100q7 6 19 6 16 0 25-12 53-68 86-92 34-24 86-24 48 0 85.5 26t37.5 59q0 38-20 61t-68 45q-63 28-115.5 86.5t-52.5 125.5v36q0 14 9 23t23 9h192q14 0 23-9t9-23q0-19 21.5-49.5t54.5-49.5q32-18 49-28.5t46-35 44.5-48 28-60.5 12.5-81zm384 192q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z" fill="#000"/></svg>
+                <svg height="70" viewbox="0 0 1792 1792" width="70" xmlns=
+                "http://www.w3.org/2000/svg">
+                <path d=
+                "M1024 1376v-192q0-14-9-23t-23-9h-192q-14 0-23 9t-9 23v192q0 14 9 23t23 9h192q14 0 23-9t9-23zm256-672q0-88-55.5-163t-138.5-116-170-41q-243 0-371 213-15 24 8 42l132 100q7 6 19 6 16 0 25-12 53-68 86-92 34-24 86-24 48 0 85.5 26t37.5 59q0 38-20 61t-68 45q-63 28-115.5 86.5t-52.5 125.5v36q0 14 9 23t23 9h192q14 0 23-9t9-23q0-19 21.5-49.5t54.5-49.5q32-18 49-28.5t46-35 44.5-48 28-60.5 12.5-81zm384 192q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"
+                fill="#000"></path></svg>
                 <div class="explanation">
-                    <h3>Review Needed</h3>
-                    <p>Please have a nurse review the record.</p>
-                    <ul>
+                    <h2>Review Needed</h2>
+                    <p>Please have a nurse review the record.</p><!--<ul>
                         <li><strong>Invalid vaccine:</strong> the VAX
                         dose given on DATE was not valid, because it was given
                         X days after the first dose. These doses must be given
                         at least X days apart.</li>
                         <li><strong>Past due vaccine:</strong> X dose of
                         VAX, due by DATE is missing.</li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div><%else %>
             <div class="callout alert">
-                <svg width="70" height="70" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5-103 385.5-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103zm128 1247v-190q0-14-9-23.5t-22-9.5h-192q-13 0-23 10t-10 23v190q0 13 10 23t23 10h192q13 0 22-9.5t9-23.5zm-2-344l18-621q0-12-10-18-10-8-24-8h-220q-14 0-24 8-10 6-10 18l17 621q0 10 10 17.5t24 7.5h185q14 0 23.5-7.5t10.5-17.5z" fill="#fff"/></svg>
+                <svg height="70" viewbox="0 0 1792 1792" width="70" xmlns=
+                "http://www.w3.org/2000/svg">
+                <path d=
+                "M896 128q209 0 385.5 103t279.5 279.5 103 385.5-103 385.5-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103zm128 1247v-190q0-14-9-23.5t-22-9.5h-192q-13 0-23 10t-10 23v190q0 13 10 23t23 10h192q13 0 22-9.5t9-23.5zm-2-344l18-621q0-12-10-18-10-8-24-8h-220q-14 0-24 8-10 6-10 18l17 621q0 10 10 17.5t24 7.5h185q14 0 23.5-7.5t10.5-17.5z"
+                fill="#fff"></path></svg>
                 <div class="explanation">
-                    <h3>Vaccine Due</h3>
+                    <h2>Vaccine Due</h2>
                     <p>The patient requires additional vaccines.</p>
-                    <ul>
+                    <!--<ul>
                         <li><strong>Invalid vaccine:</strong> the VAX
                         dose given on DATE was not valid, because it was given
                         X days after the first dose. These doses must be given
                         at least X days apart.</li>
                         <li><strong>Past due vaccine:</strong> X dose of
                         VAX, due by DATE is missing.</li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div><%end %>
         </div>
     </div><!-- temp for demo -->
     <div class="row align-center">
-        <div class="card columns small-8 small-centered vaccine-record">
-            <h3 class="float-left">Vaccine
-            Record</h3><%= link_to "Print Record", '#', :onclick => 'window.print();return false;', class: "button float-right"  %>
+        <div class=
+        "card columns small-12 large-8 medium-8 small-centered vaccine-record">
+            <h3 class="float-left">Vaccine Record</h3><%= link_to "Print Record", '#', :onclick => 'window.print();return false;', class: "button float-right margin-bottom-10"  %>
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Hepatitis B</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">Diptheria, Tetanus,
+                        Pertussis</th><%if @patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,12 +109,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Diptheria, Tetanus, Pertussis</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">
+                        HIB</th><%if @patient.get_vaccine_doses(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"]).each do |individual_vaccine| %>
                 <tr>
@@ -123,13 +133,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Haemophilius influenzae type
-                        b</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">Hepatitis
+                        A</th><%if @patient.get_vaccine_doses(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["DHI", "PRPO", "PRPT", "HIB", "HIB2"]).each do |individual_vaccine| %>
                 <tr>
@@ -146,12 +157,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Polio</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">Hepatitis
+                        B</th><%if @patient.get_vaccine_doses(["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["DTHI", "DTI", "DHI", "POL", "IPV"]).each do |individual_vaccine| %>
                 <tr>
@@ -168,12 +181,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Pneumococcal</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">Human
+                        Papillomavirus</th><%if @patient.get_vaccine_doses(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["PPV2", "PCV4", "PCV2", "PCV9", "PCV", "PPV1", "PPV9", "PPV2"]).each do |individual_vaccine| %>
                 <tr>
@@ -190,12 +205,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Rotavirus</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">Measles, Mumps,
+                        Rubella</th><%if @patient.get_vaccine_doses(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["ROT1", "ROT2", "ROTA"]).each do |individual_vaccine| %>
                 <tr>
@@ -212,12 +229,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Varicella</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">
+                        Meningococcal</th><%if @patient.get_vaccine_doses(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["VAR1", "VAR2", "VAR4", "VAR9"]).each do |individual_vaccine| %>
                 <tr>
@@ -234,12 +253,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Measles, Mumps, Rubella</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">
+                        Pneumococcal</th><%if @patient.get_vaccine_doses(["PPV2", "PCV4", "PCV2", "PCV9", "PCV", "PPV1", "PPV9", "PPV2"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["MMR", "MMR1", "MMR3", "MMR9", "MMRV"]).each do |individual_vaccine| %>
                 <tr>
@@ -256,12 +277,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Hepatitis A</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">
+                        Polio</th><%if @patient.get_vaccine_doses(["DTHI", "DTI", "DHI", "POL", "IPV"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"]).each do |individual_vaccine| %>
                 <tr>
@@ -278,12 +301,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Meningococcal</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">
+                        Rotavirus</th><%if @patient.get_vaccine_doses(["ROT1", "ROT2", "ROTA"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"]).each do |individual_vaccine| %>
                 <tr>
@@ -300,12 +325,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Human Papillomavirus</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">
+                        Varicella</th><%if @patient.get_vaccine_doses(["VAR1", "VAR2", "VAR4", "VAR9"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Days Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["HPV", "HPV3", "HPV5", "HPV6", "HPV9"]).each do |individual_vaccine| %>
                 <tr>
@@ -318,17 +345,22 @@
                     <td><%= individual_vaccine.time_since_vaccine_dose %></td>
                     <td>HD</td>
                 </tr><%end %>
+                <tr class="varicella-history">
+                    <td colspan="6">Varicella history:</td>
+               </tr>
             </table>
             <hr>
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Influenza</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">
+                        Influenza</th><%if @patient.get_vaccine_doses(["FL10", "FL11", "FL14", "FLU", "FLU6", "FLU7", "FLU8", "FLU9", "FLUZ", "FLZ", "H1N4"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Days Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead><%@patient.get_vaccine_doses(["FL10", "FL11", "FL14", "FLU", "FLU6", "FLU7", "FLU8", "FLU9", "FLUZ", "FLZ", "H1N4"]).each do |individual_vaccine| %>
                 <tr>
@@ -345,12 +377,14 @@
             <table class="hover">
                 <thead>
                     <tr>
-                        <th class="vax-name">Travel &amp; Other</th>
-                        <th>Trade Name</th>
+                        <th class="vax-name">Travel &amp;
+                        Other</th><%if @patient.get_vaccine_doses(["YFV", "TYP", "TWNz", "TWN3", "TWN1", "RAB1", "PPD9", "PPD1"]).length == 0 %>
+                        <th class="no-dose">No doses recorded</th><%else %>
+                        <th>Brand Name</th>
                         <th>Date Given</th>
-                        <th>Age</th>
-                        <th>Time Past</th>
-                        <th>Provider</th>
+                        <th>Age at Dose</th>
+                        <th>Time Passed</th>
+                        <th>Provider</th><%end %>
                     </tr>
                 </thead>
                 <tbody>

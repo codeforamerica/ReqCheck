@@ -24,32 +24,41 @@ patients_list.each_with_index do |value, index|
   )
   vaccine_types = %w(MCV6 DTaP MMR9 HepB)
   vaccine_types.each do |vax_code|
+    vax_code_key = vax_code.to_sym
+    description   = TextVax::VAXCODES[vax_code_key][0][0]
+    mvx_code      = TextVax::VAXCODES[vax_code_key][0][1]
+    lot_number    = TextVax::VAXCODES[vax_code_key][0][2]
+    cvx_code      = TextVax::VAXCODES[vax_code_key][0][3]
+    trade_name    = TextVax.trade_name_lookup(cvx_code, mvx_code)
     VaccineDose.create(
       patient: patient,
       vaccine_code: vax_code,
       hd_description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       date_administered: 2.years.ago.to_date,
-      mvx_code: TextVax::VAXCODES[vax_code.to_sym][0][1],
-      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2],
-      cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
+      mvx_code: mvx_code,
+      lot_number: lot_number,
+      cvx_code: cvx_code,
+      trade_name: trade_name
     )
     VaccineDose.create(
       patient: patient,
       vaccine_code: vax_code,
       hd_description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       date_administered: 1.years.ago.to_date,
-      mvx_code: TextVax::VAXCODES[vax_code.to_sym][0][1],
-      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2],
-      cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
+      mvx_code: mvx_code,
+      lot_number: lot_number,
+      cvx_code: cvx_code,
+      trade_name: trade_name
     )
     VaccineDose.create(
       patient: patient,
       vaccine_code: vax_code,
       hd_description: TextVax::VAXCODES[vax_code.to_sym][0][0],
       date_administered: Date.today,
-      mvx_code: TextVax::VAXCODES[vax_code.to_sym][0][1],
-      lot_number: TextVax::VAXCODES[vax_code.to_sym][0][2],
-      cvx_code: TextVax::VAXCODES[vax_code.to_sym][0][3]
+      mvx_code: mvx_code,
+      lot_number: lot_number,
+      cvx_code: cvx_code,
+      trade_name: trade_name
     )
   end
 end

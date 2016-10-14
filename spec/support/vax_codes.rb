@@ -152,6 +152,149 @@ module TextVax
     OPV: [['Oral Polio Vaccine', 'UNK', nil, 02]]
   }
 
+  TRADENAMES = {
+    ACA75: 'ACAM2000',
+    PMC75: 'ACAM2000',
+    NONE20: 'ACEL-IMUNE',
+    PMC48: 'ACTHIB',
+    PMC115: 'ADACEL',
+    BRR143: 'Adenovirus types 4 and 7',
+    CSL141: 'AFLURIA',
+    SEQ141: 'Afluria',
+    CSL140: 'Afluria, preservative free',
+    SEQ140: 'Afluria, preservative free',
+    NOV140: 'AGRIFLU',
+    SKB801: 'AS03 adjuvant',
+    MSD05: 'ATTENUVAX',
+    NOV163: 'Bexsero',
+    SKB163: 'Bexsero',
+    NONE38: 'BIAVAX II',
+    MIP24: 'BIOTHRAX',
+    SKB115: 'BOOSTRIX',
+    NONE20: 'CERTIVA',
+    SKB118: 'CERVARIX',
+    MSD51: 'COMVAX',
+    PMC106: 'DAPTACEL',
+    PMC113: 'DECAVAC',
+    NONE75: 'DRYVAX',
+    PMC28: 'DT(GENERIC)',
+    SKB08: 'ENGERIX B-PEDS',
+    SKB43: 'ENGERIX-B-ADULT',
+    NOV168: 'Fluad',
+    SEQ168: 'Fluad',
+    SKB140: 'FLUARIX',
+    SKB150: 'Fluarix, quadrivalent, preservative free',
+    PSC155: 'Flublok',
+    NOV153: 'Flucelvax',
+    SEQ171: 'flucelvax, quadrivalent',
+    IDB141: 'FLULAVAL',
+    IDB158: 'Flulaval quadrivalent',
+    IDB150: 'Flulaval, quadrivalent, preservative free',
+    MED111: 'FLUMIST',
+    MED149: 'Flumist quadrivalent',
+    NOV141: 'FLUVIRIN',
+    NOV140: 'FLUVIRIN-PRESERVATIVE FREE',
+    PMC141: 'FLUZONE',
+    PMC166: 'Fluzone Quad Intradermal',
+    PMC161: 'Fluzone Quadrivalent, pediatric',
+    PMC144: 'Fluzone, intradermal',
+    PMC158: 'Fluzone, Quadrivalent',
+    PMC150: 'Fluzone, quadrivalent, preservative free',
+    PMC135: 'FLUZONE-HIGH DOSE',
+    PMC140: 'FLUZONE-PRESERVATIVE FREE',
+    MSD62: 'GARDASIL',
+    MSD165: 'Gardasil 9',
+    SKB52: 'HAVRIX-ADULT',
+    SKB83: 'HAVRIX-PEDS',
+    SKB48: 'HIBERIX',
+    NONE47: 'HIBTITER',
+    PMC18: 'IMOVAX',
+    PMC40: 'IMOVAX ID',
+    SKB20: 'INFANRIX',
+    IDB160: 'Influenza A (H5N1) -2013',
+    SKB160: 'Influenza A monovalent (H5N1), ADJUVANTED-2013',
+    PMC10: 'IPOL',
+    VAL134: 'Ixiaro',
+    INT134: 'IXIARO',
+    NONE39: 'JE-VAX',
+    SKB130: 'KINRIX',
+    PMC114: 'MENACTRA',
+    SKB148: 'MENHIBRIX',
+    PMC32: 'MENOMUNE',
+    SKB136: 'Menveo',
+    NOV136: 'MENVEO',
+    MSD06: 'MERUVAX II',
+    MSD03: 'M-M-R II',
+    NONE07: 'MUMPSVAX',
+    NONE19: 'MYCOBAX',
+    NOV127: 'Novel influenza-H1N1-09',
+    PMC127: 'Novel influenza-H1N1-09',
+    CSL127: 'Novel influenza-H1N1-09',
+    MED125: 'Novel Influenza-H1N1-09, nasal',
+    PMC126: 'Novel influenza-H1N1-09, preservative-free',
+    NOV126: 'Novel influenza-H1N1-09, preservative-free',
+    CSL126: 'Novel influenza-H1N1-09, preservative-free',
+    NONE48: 'OMNIHIB',
+    NONE02: 'ORIMUNE',
+    SKB110: 'PEDIARIX',
+    MSD49: 'PEDVAXHIB',
+    PMC120: 'PENTACEL',
+    MSD33: 'PNEUMOVAX 23',
+    WAL133: 'PREVNAR 13',
+    PFR133: 'PREVNAR 13',
+    WAL100: 'PREVNAR 7',
+    WAL100: 'PREVNAR 7',
+    NONE46: 'PROHIBIT',
+    MSD94: 'PROQUAD',
+    PMC130: 'Quadracel',
+    CHI40: 'RabAvert',
+    NOV18: 'RABAVERT',
+    SKB18: 'Rabavert',
+    MSD43: 'RECOMBIVAX-ADULT',
+    MSD44: 'RECOMBIVAX-DIALYSIS',
+    MSD08: 'RECOMBIVAX-PEDS',
+    SKB119: 'ROTARIX',
+    MSD116: 'ROTATEQ',
+    MBL09: 'TD(GENERIC)',
+    NONE09: 'Td, (adult)',
+    AKR09: 'Td, adsorbed',
+    PMC113: 'Tenivac',
+    PMC35: 'TETANUS TOXOID (GENERIC)',
+    NONE22: 'TETRAMUNE',
+    OTC19: 'TICE BCG',
+    PMC50: 'TRIHIBIT',
+    PMC20: 'TRIPEDIA',
+    PFR162: 'Trumenba',
+    SKB104: 'TWINRIX',
+    PMC101: 'TYPHIM VI',
+    NONE53: 'TYPHOID-AKD',
+    MSD52: 'VAQTA-ADULT',
+    MSD83: 'VAQTA-PEDS',
+    MSD21: 'VARIVAX',
+    PAX174: 'VAXCHORA',
+    PAX25: 'Vivotif',
+    CRU25: 'VIVOTIF BERNA',
+    PMC37: 'YF-VAX',
+    MSD121: 'ZOSTAVAX'
+  }
+
+  def self.create_trade_name_key(cvx_code, mvx_code)
+    if mvx_code == '' || mvx_code.nil?
+      mvx_code = 'NONE'
+    end
+    mvx_code = mvx_code.upcase
+    if cvx_code > 0 && cvx_code < 10
+      cvx_code = '0' + cvx_code.to_s
+    end
+    "#{mvx_code}#{cvx_code}".to_sym
+  end
+
+  def trade_name_lookup(cvx_code, mvx_code)
+    trade_name_key = create_trade_name_key(cvx_code, mvx_code)
+    TRADENAMES[trade_name_key]
+  end
+
+
   def find_all_vax_codes_by_cvx(cvx_code)
     return_vax_codes = []
     VAXCODES.each do |key, value|
@@ -162,8 +305,8 @@ module TextVax
     raise "No Vaccine Codes Found for cvx #{cvx_code}" if return_vax_codes == []
     return_vax_codes
   end
-  public_constant(:VAXCODES)
-  module_function :find_all_vax_codes_by_cvx
+  public_constant(:VAXCODES, :TRADENAMES)
+  module_function :find_all_vax_codes_by_cvx, :trade_name_lookup
 end
 
 # vax_codes =  [

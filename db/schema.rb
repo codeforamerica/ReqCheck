@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 20161013230026) do
     t.string   "injection_site"
     t.string   "hd_imfile_updated_at"
     t.text     "comments"
+    t.string   "trade_name"
   end
 
   add_index "vaccine_doses", ["patient_number"], name: "index_vaccine_doses_on_patient_number", using: :btree

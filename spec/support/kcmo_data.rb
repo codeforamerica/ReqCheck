@@ -1659,12 +1659,19 @@ module KCMODATA
 
   def self.create_vaccine_doses(patient, vaccine_doses_array)
     vaccine_doses_array.map do |vaccine_dose_args|
+      begin
+        vaccine_codes = TextVax.find_all_vax_codes_by_cvx(vaccine_dose_args[:cvx_code])
+        vaccine_dose_args[:vaccine_code] = vaccine_codes.first
+      rescue
+        puts "No vaccine code found for #{vaccine_dose_args}"
+      end
       VaccineDose.create(
         patient: patient,
         hd_description: vaccine_dose_args[:hd_description],
         date_administered: vaccine_dose_args[:date_administered],
         history_flag: vaccine_dose_args[:history],
-        cvx_code: vaccine_dose_args[:cvx_code]
+        cvx_code: vaccine_dose_args[:cvx_code],
+        vaccine_code: vaccine_dose_args[:vaccine_code]
       )
     end
   end
