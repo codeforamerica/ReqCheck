@@ -1,7 +1,7 @@
 <div class="row align-center">
 <div class="columns small-12 large-8 medium-8">
 <h1>Log In</h1>
-<%= form_tag("/login/go", method: "get") do %>
+<%= form_tag("/users/sign_in", method: "post") do %>
   <%= label_tag(:email, "Email:") %>
   <%= text_field_tag(:email) %>
   <%= label_tag(:account, "Password:") %>
@@ -10,3 +10,5 @@
 <% end %>
 </div>
 </div>
+
+<!-- <input autocomplete="off" type="password" name="user[password]" id="user_password"> -->

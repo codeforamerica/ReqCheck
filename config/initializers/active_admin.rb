@@ -108,7 +108,7 @@ ActiveAdmin.setup do |config|
   # link. For example :get, :delete, :put, etc..
   #
   # Default:
-  config.logout_link_method = :delete
+  config.logout_link_method = :get
 
   # == Root
   #
