@@ -68,10 +68,15 @@ antigen_importer.import_antigen_xml_files('spec/support/xml')
 
 KCMODATA.create_db_patients
 User.create!(
-  email: 'admin@example.com',
-  password: 'password',
-  password_confirmation: 'password',
+  email: 'admin@admin.com',
+  password: 'admin',
+  password_confirmation: 'admin',
   role: 'admin'
+)
+User.create!(
+  email: 'test@test.com',
+  password: 'test',
+  password_confirmation: 'test'
 )
 
 data_import = PatientDataImport.create(updated_patient_numbers: [1, 2, 3])

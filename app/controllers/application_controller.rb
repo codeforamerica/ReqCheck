@@ -10,4 +10,13 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) ||
+      if current_user.role?(:admin)
+        admin_dashboard_path
+      else
+        patients_path
+      end
+  end
 end
