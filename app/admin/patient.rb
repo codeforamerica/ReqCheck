@@ -1,4 +1,7 @@
 ActiveAdmin.register Patient do
+  menu priority: 1, parent: 'Application Data'
+
+
   index do
     column :first_name
     column :last_name

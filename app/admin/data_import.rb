@@ -1,4 +1,6 @@
 ActiveAdmin.register DataImport do
+  menu priority: 1, parent: 'Import Data'
+
   index do
     column :id
     column :updated_patient_numbers
