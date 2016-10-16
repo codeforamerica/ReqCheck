@@ -1,0 +1,3 @@
+class PatientDataImport < DataImport
+
+end

@@ -4645,9 +4645,1034 @@ module TestAntigen
     </series>
     </antigenSupportingData>
   eos
+  CVXTOANTIGENMAP = <<-eos
+    <scheduleSupportingData>
+    <cvxToAntigenMap>
+    <cvxMap>
+    <cvx>01</cvx>
+    <shortDescription>DTP</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>02</cvx>
+    <shortDescription>OPV</shortDescription>
+    <association>
+    <antigen>Polio</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>03</cvx>
+    <shortDescription>MMR</shortDescription>
+    <association>
+    <antigen>Measles</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Mumps</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Rubella</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>04</cvx>
+    <shortDescription>M/R</shortDescription>
+    <association>
+    <antigen>Measles</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Rubella</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>05</cvx>
+    <shortDescription>measles</shortDescription>
+    <association>
+    <antigen>Measles</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>06</cvx>
+    <shortDescription>rubella</shortDescription>
+    <association>
+    <antigen>Rubella</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>07</cvx>
+    <shortDescription>mumps</shortDescription>
+    <association>
+    <antigen>Mumps</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>08</cvx>
+    <shortDescription>Hep B, adolescent or pediatric</shortDescription>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>09</cvx>
+    <shortDescription>Td (adult), adsorbed</shortDescription>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>10</cvx>
+    <shortDescription>IPV</shortDescription>
+    <association>
+    <antigen>Polio</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>15</cvx>
+    <shortDescription>influenza, split (incl. purified surface antigen)</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>16</cvx>
+    <shortDescription>influenza, whole</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>17</cvx>
+    <shortDescription>Hib, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>20</cvx>
+    <shortDescription>DTaP</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>21</cvx>
+    <shortDescription>varicella</shortDescription>
+    <association>
+    <antigen>Varicella</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>22</cvx>
+    <shortDescription>DTP-Hib</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>28</cvx>
+    <shortDescription>DT (pediatric)</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>32</cvx>
+    <shortDescription>meningococcal MPSV4</shortDescription>
+    <association>
+    <antigen>MCV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>33</cvx>
+    <shortDescription>pneumococcal polysaccharide PPV23</shortDescription>
+    <association>
+    <antigen>Pneumococcal</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>35</cvx>
+    <shortDescription>tetanus toxoid, adsorbed</shortDescription>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>38</cvx>
+    <shortDescription>rubella/mumps</shortDescription>
+    <association>
+    <antigen>Rubella</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Mumps</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>42</cvx>
+    <shortDescription>Hep B, adolescent/high risk infant</shortDescription>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>43</cvx>
+    <shortDescription>Hep B, adult</shortDescription>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>44</cvx>
+    <shortDescription>Hep B, dialysis</shortDescription>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>45</cvx>
+    <shortDescription>Hep B, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>46</cvx>
+    <shortDescription>Hib (PRP-D)</shortDescription>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>47</cvx>
+    <shortDescription>Hib (HbOC)</shortDescription>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>48</cvx>
+    <shortDescription>Hib (PRP-T)</shortDescription>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>49</cvx>
+    <shortDescription>Hib (PRP-OMP)</shortDescription>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>50</cvx>
+    <shortDescription>DTaP-Hib</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>51</cvx>
+    <shortDescription>Hib-Hep B</shortDescription>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>52</cvx>
+    <shortDescription>Hep A, adult</shortDescription>
+    <association>
+    <antigen>Hep A</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>62</cvx>
+    <shortDescription>HPV, quadrivalent</shortDescription>
+    <association>
+    <antigen>HPV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>74</cvx>
+    <shortDescription>rotavirus, tetravalent</shortDescription>
+    <association>
+    <antigen>Rotavirus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>83</cvx>
+    <shortDescription>Hep A, ped/adol, 2 dose</shortDescription>
+    <association>
+    <antigen>Hep A</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>84</cvx>
+    <shortDescription>Hep A, ped/adol, 3 dose</shortDescription>
+    <association>
+    <antigen>Hep A</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>85</cvx>
+    <shortDescription>Hep A, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Hep A</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>88</cvx>
+    <shortDescription>influenza, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>89</cvx>
+    <shortDescription>polio, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Polio</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>94</cvx>
+    <shortDescription>MMRV</shortDescription>
+    <association>
+    <antigen>Measles</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Mumps</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Rubella</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Varicella</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>100</cvx>
+    <shortDescription>pneumococcal conjugate PCV 7</shortDescription>
+    <association>
+    <antigen>Pneumococcal</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>102</cvx>
+    <shortDescription>DTP-Hib-Hep B</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>104</cvx>
+    <shortDescription>Hep A-Hep B</shortDescription>
+    <association>
+    <antigen>Hep A</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>106</cvx>
+    <shortDescription>DTaP, 5 pertussis antigens</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>107</cvx>
+    <shortDescription>DTaP, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>108</cvx>
+    <shortDescription>meningococcal, unspecified formulation</shortDescription>
+    <association>
+    <antigen>MCV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>109</cvx>
+    <shortDescription>pneumococcal, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Pneumococcal</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>110</cvx>
+    <shortDescription>DTaP-Hep B-IPV</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Polio</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>111</cvx>
+    <shortDescription>influenza, live, intranasal</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>113</cvx>
+    <shortDescription>Td (adult) preservative free</shortDescription>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>114</cvx>
+    <shortDescription>meningococcal MCV4P</shortDescription>
+    <association>
+    <antigen>MCV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>115</cvx>
+    <shortDescription>Tdap</shortDescription>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>116</cvx>
+    <shortDescription>rotavirus, pentavalent</shortDescription>
+    <association>
+    <antigen>Rotavirus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>118</cvx>
+    <shortDescription>HPV, bivalent</shortDescription>
+    <association>
+    <antigen>HPV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>119</cvx>
+    <shortDescription>rotavirus, monovalent</shortDescription>
+    <association>
+    <antigen>Rotavirus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>120</cvx>
+    <shortDescription>DTaP-Hib-IPV</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Polio</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>121</cvx>
+    <shortDescription>Zoster</shortDescription>
+    <association>
+    <antigen>Varicella</antigen>
+    <associationBeginAge>0 days</associationBeginAge>
+    <associationEndAge>50 years</associationEndAge>
+    </association>
+    <association>
+    <antigen>Zoster</antigen>
+    <associationBeginAge>50 years</associationBeginAge>
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>122</cvx>
+    <shortDescription>rotavirus, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Rotavirus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>130</cvx>
+    <shortDescription>DTaP-IPV</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Polio</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>132</cvx>
+    <shortDescription>DTaP-IPV-HIB-HEP B, historical</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Polio</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>133</cvx>
+    <shortDescription>Pneumococcal conjugate PCV 13</shortDescription>
+    <association>
+    <antigen>Pneumococcal</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>135</cvx>
+    <shortDescription>Influenza, high dose seasonal</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>136</cvx>
+    <shortDescription>Meningococcal MCV4O</shortDescription>
+    <association>
+    <antigen>MCV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>137</cvx>
+    <shortDescription>HPV, unspecified formulation</shortDescription>
+    <association>
+    <antigen>HPV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>138</cvx>
+    <shortDescription>Td (adult)</shortDescription>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>139</cvx>
+    <shortDescription>Td(adult) unspecified formulation</shortDescription>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>140</cvx>
+    <shortDescription>Influenza, seasonal, injectable, preservative free</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>141</cvx>
+    <shortDescription>Influenza, seasonal, injectable</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>144</cvx>
+    <shortDescription>influenza, seasonal, intradermal, preservative free</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>146</cvx>
+    <shortDescription>DTaP,IPV,Hib,HepB</shortDescription>
+    <association>
+    <antigen>Diphtheria</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Tetanus</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Pertussis</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hep B</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>147</cvx>
+    <shortDescription>meningococcal MCV4, unspecified formulation</shortDescription>
+    <association>
+    <antigen>MCV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>148</cvx>
+    <shortDescription>Meningococcal C/Y-HIB PRP</shortDescription>
+    <association>
+    <antigen>MCV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    <association>
+    <antigen>Hib</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>149</cvx>
+    <shortDescription>influenza, live, intranasal, quadrivalent</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>150</cvx>
+    <shortDescription>influenza, injectable, quadrivalent, preservative free</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>151</cvx>
+    <shortDescription>influenza, nasal, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>152</cvx>
+    <shortDescription>Pneumococcal Conjugate, unspecified formulation</shortDescription>
+    <association>
+    <antigen>Pneumococcal</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>153</cvx>
+    <shortDescription>Influenza, injectable, Madin Darby Canine Kidney, preservative free</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>155</cvx>
+    <shortDescription>influenza, recombinant, injectable, preservative free</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>158</cvx>
+    <shortDescription>influenza, injectable, quadrivalent</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>161</cvx>
+    <shortDescription>Influenza, injectable,quadrivalent, preservative free, pediatric</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>165</cvx>
+    <shortDescription>HPV9</shortDescription>
+    <association>
+    <antigen>HPV</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    <cvxMap>
+    <cvx>166</cvx>
+    <shortDescription>influenza, intradermal, quadrivalent, preservative free</shortDescription>
+    <association>
+    <antigen>Influenza</antigen>
+    <associationBeginAge />
+    <associationEndAge />
+    </association>
+    </cvxMap>
+    </cvxToAntigenMap>
+    </scheduleSupportingData>
+  eos
   public_constant(:ANTIGENSTRING)
   public_constant(:ANTIGENSTRINGDIPHTHERIA)
   public_constant(:ANTIGENSTRINGHEPA)
   public_constant(:ANTIGENSTRINGZOSTER)
   public_constant(:ANTIGENSTRINGPNEUMOCOCCAL)
+  public_constant(:CVXTOANTIGENMAP)
 end

@@ -1,19 +1,29 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
+  devise_for :users
   get 'welcome/index'
 
-  resources :vaccine_doses
-  resources :patients
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # To have a /login endpoint
+  get 'login', to: 'devise/sessions#new'
+
+  # authenticated :user do
+  #   root to: 'admin/dashboard#index', as: :authenticated_root
+  # end
+  # unauthenticated :user do
+  #   root to: 'users/sessions#new', as: :unauthenticated_root
+  # end
+
+  # resources :vaccine_doses
+  resources :patients, only: [:index, :show]
 
   # xml importation
-  post '/xml', to: 'xml_importer#import_file'
-  get '/xml', to: 'xml_importer#index'
+  post '/xml', to: 'importer#import_file'
+  get '/xml', to: 'importer#index'
 
-  # Temp login faking
-  get '/login', to: 'welcome#login'
-  get '/login/go', to: 'welcome#go'
-  
+  # API for importing Patient Data from the Extractor
+  post '/patient_data', to: 'importer#import_patient_data'
+  post '/vaccine_dose_data', to: 'importer#import_vaccine_dose_data'
+
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 end

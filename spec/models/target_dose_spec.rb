@@ -1,19 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe TargetDose, type: :model do
+  include AntigenImporterSpecHelper
+
   describe 'validations' do
     # Test patient with two vaccine doses for polio, both should be valid
     let(:test_patient) do
-      test_patient = FactoryGirl.create(:patient_with_profile)
+      test_patient = FactoryGirl.create(:patient)
       FactoryGirl.create(
         :vaccine_dose,
-        patient_profile: test_patient.patient_profile,
+        patient: test_patient,
         vaccine_code: 'IPV',
         date_administered: (test_patient.dob + 7.weeks)
       )
       FactoryGirl.create(
         :vaccine_dose,
-        patient_profile: test_patient.patient_profile,
+        patient: test_patient,
         vaccine_code: 'IPV',
         date_administered: (test_patient.dob + 11.weeks)
       )
@@ -40,20 +42,20 @@ RSpec.describe TargetDose, type: :model do
   end
 
   describe 'tests needing the antigen_series database' do
-    before(:all) { FactoryGirl.create(:seed_antigen_xml_polio) }
+    before(:all) { seed_antigen_xml_polio }
     after(:all) { DatabaseCleaner.clean_with(:truncation) }
 
     let(:test_patient) do
-      test_patient = FactoryGirl.create(:patient_with_profile)
+      test_patient = FactoryGirl.create(:patient)
       FactoryGirl.create(
         :vaccine_dose,
-        patient_profile: test_patient.patient_profile,
+        patient: test_patient,
         vaccine_code: 'IPV',
         date_administered: (test_patient.dob + 7.weeks)
       )
       FactoryGirl.create(
         :vaccine_dose,
-        patient_profile: test_patient.patient_profile,
+        patient: test_patient,
         vaccine_code: 'IPV',
         date_administered: (test_patient.dob + 11.weeks)
       )
@@ -102,7 +104,7 @@ RSpec.describe TargetDose, type: :model do
         )
       end
       it 'returns true if eligible by absolute_min_age and patient_dob' do
-        test_patient = FactoryGirl.create(:patient_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 10.weeks.ago.to_date)
         test_target_dose = TargetDose.new(
           patient: test_patient,
@@ -112,7 +114,7 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.eligible?).to eq(true)
       end
       it 'returns false if ineligible by absolute_min_age and patient_dob' do
-        test_patient = FactoryGirl.create(:patient_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 3.weeks.ago.to_date)
         test_target_dose = TargetDose.new(
           patient: test_patient,
@@ -122,7 +124,7 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.eligible?).to eq(false)
       end
       it 'can handle min_age = nil' do
-        test_patient = FactoryGirl.create(:patient_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 16.years.ago.to_date)
         eligible_as_dose.min_age = nil
         test_target_dose = TargetDose.new(
@@ -133,7 +135,7 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.eligible?).to eq(true)
       end
       it 'returns true if eligible by max_age and patient_dob' do
-        test_patient = FactoryGirl.create(:patient_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 17.years.ago.to_date)
         test_target_dose = TargetDose.new(
           patient: test_patient,
@@ -143,7 +145,7 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.eligible?).to eq(true)
       end
       it 'returns false if ineligible by max_age and patient_dob' do
-        test_patient = FactoryGirl.create(:patient_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 19.years.ago.to_date)
         test_target_dose = TargetDose.new(
           patient: test_patient,
@@ -153,7 +155,7 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.eligible?).to eq(false)
       end
       it 'can handle max_age = nil' do
-        test_patient = FactoryGirl.create(:patient_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 16.years.ago.to_date)
         eligible_as_dose.max_age = nil
         test_target_dose = TargetDose.new(
@@ -164,7 +166,7 @@ RSpec.describe TargetDose, type: :model do
         expect(test_target_dose.eligible?).to eq(true)
       end
       it 'does not return recurring doses' do
-        test_patient = FactoryGirl.create(:patient_profile,
+        test_patient = FactoryGirl.create(:patient,
                                           dob: 16.years.ago.to_date)
         eligible_as_dose.min_age        = nil
         eligible_as_dose.max_age        = nil
@@ -193,7 +195,7 @@ RSpec.describe TargetDose, type: :model do
 
       xit 'returns an evaluation hash' do
         eval_hash = test_target_dose.evaluate_antigen_administered_record(aar)
-        expect(eval_hash[:evaluation_status]).to eq('Valid')
+        expect(eval_hash[:evaluation_status]).to eq('valid')
         expect(eval_hash[:target_dose_satisfied]).to eq(true)
       end
     end
@@ -254,16 +256,16 @@ RSpec.describe TargetDose, type: :model do
 
     describe 'full evaluation methods' do
       let(:test_patient) do
-        test_patient = FactoryGirl.create(:patient_with_profile)
+        test_patient = FactoryGirl.create(:patient)
         FactoryGirl.create(
           :vaccine_dose,
-          patient_profile: test_patient.patient_profile,
+          patient: test_patient,
           vaccine_code: 'IPV',
           date_administered: (test_patient.dob + 7.weeks)
         )
         FactoryGirl.create(
           :vaccine_dose,
-          patient_profile: test_patient.patient_profile,
+          patient: test_patient,
           vaccine_code: 'IPV',
           date_administered: (test_patient.dob + 11.weeks)
         )

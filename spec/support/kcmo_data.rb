@@ -6,25 +6,25 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 110,
-        description: 'C-DTaP/Hep B/IPV',
+        hd_description: 'C-DTaP/Hep B/IPV',
         date_administered: '07/19/2016',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '07/19/2016',
         history: true
       },
       {
         cvx_code: 49,
-        description: 'C-HIB',
+        hd_description: 'C-HIB',
         date_administered: '07/19/2016',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate PCV13',
+        hd_description: 'C-Pneumococcal Conjugate PCV13',
         date_administered: '07/19/2016',
         history: false
       }
@@ -38,25 +38,25 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '05/08/2003',
         history: true
       },
       {
         cvx_code: 115,
-        description: 'C-Tdap',
+        hd_description: 'C-Tdap',
         date_administered: '07/08/2010',
         history: true
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '05/15/2008',
         history: true
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '07/14/2000',
         history: false
       }
@@ -70,109 +70,109 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '08/16/2013',
         history: true
       },
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '07/16/2013',
         history: true
       },
       {
         cvx_code: 110,
-        description: 'C-DtaP/Hep B/IPV',
+        hd_description: 'C-DtaP/Hep B/IPV',
         date_administered: '01/25/2013',
         history: true
       },
       {
         cvx_code: 83,
-        description: 'A-Hepatitis A Vaccine-Ped/adol',
+        hd_description: 'A-Hepatitis A Vaccine-Ped/adol',
         date_administered: '11/14/2013',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '07/16/2013',
         history: true
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '11/02/2012',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'Measles, Mumps, Rubella',
+        hd_description: 'Measles, Mumps, Rubella',
         date_administered: '11/14/2013',
         history: true
       },
       {
         cvx_code: 133,
-        description: 'Pneumococcal Conjugate, PCV13',
+        hd_description: 'Pneumococcal Conjugate, PCV13',
         date_administered: '08/16/2013',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'Pneumococcal Conjugate, PCV13',
+        hd_description: 'Pneumococcal Conjugate, PCV13',
         date_administered: '07/16/2013',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'Pneumococcal Conjugate, PCV13',
+        hd_description: 'Pneumococcal Conjugate, PCV13',
         date_administered: '01/25/2013',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '08/16/2013',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '07/16/2013',
         history: false
       },
       {
         cvx_code: 49,
-        description: 'HIB Conjugate (Mening. Prot)',
+        hd_description: 'HIB Conjugate (Mening. Prot)',
         date_administered: '11/14/2013',
         history: false
       },
       {
         cvx_code: 49,
-        description: 'HIB Conjugate (Mening. Prot)',
+        hd_description: 'HIB Conjugate (Mening. Prot)',
         date_administered: '08/16/2013',
         history: false
       },
       {
         cvx_code: 49,
-        description: 'HIB Conjugate (Mening. Prot)',
+        hd_description: 'HIB Conjugate (Mening. Prot)',
         date_administered: '07/16/2013',
         history: false
       },
       {
         cvx_code: 49,
-        description: 'HIB Conjugate (Mening. Prot)',
+        hd_description: 'HIB Conjugate (Mening. Prot)',
         date_administered: '01/25/2013',
         history: false
       },
       {
         cvx_code: 119,
-        description: 'C-Rotavirus (2 dose)',
+        hd_description: 'C-Rotavirus (2 dose)',
         date_administered: '01/25/2013',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'Varicella Vaccine',
+        hd_description: 'Varicella Vaccine',
         date_administered: '11/14/2013',
         history: false
       }
@@ -186,19 +186,19 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 83,
-        description: 'A-Hepatitis A Vaccine-Ped/adol',
+        hd_description: 'A-Hepatitis A Vaccine-Ped/adol',
         date_administered: '06/04/2001',
         history: true
       },
       {
         cvx_code: 62,
-        description: 'C-317 Adult HPV',
+        hd_description: 'C-317 Adult HPV',
         date_administered: '07/18/2016',
         history: false
       },
       {
         cvx_code: 114,
-        description: 'C-317 Adult Meningococcal',
+        hd_description: 'C-317 Adult Meningococcal',
         date_administered: '07/18/2016',
         history: false
       }
@@ -212,79 +212,79 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '08/09/2016',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '08/09/2016',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '09/09/2016',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '08/09/2016',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 136,
-        description: 'C-Meningococcal, Menveo',
+        hd_description: 'C-Meningococcal, Menveo',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '08/09/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 113,
-        description: 'C-Td 7+',
+        hd_description: 'C-Td 7+',
         date_administered: '08/09/2016',
         history: false
       },
       {
         cvx_code: 115,
-        description: 'C-Tdap',
+        hd_description: 'C-Tdap',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '08/09/2016',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '07/11/2016',
         history: false
       }
@@ -298,37 +298,37 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 136,
-        description: 'C-Meningococcal, Menveo',
+        hd_description: 'C-Meningococcal, Menveo',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 115,
-        description: 'C-Tdap',
+        hd_description: 'C-Tdap',
         date_administered: '07/11/2016',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '07/11/2016',
         history: false
       }
@@ -342,85 +342,85 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '05/17/2005',
         history: true
       },
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '11/08/2004',
         history: true
       },
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '09/09/2004',
         history: true
       },
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '07/06/2004',
         history: true
       },
       {
         cvx_code: 51,
-        description: 'C-Hep B/HIB',
+        hd_description: 'C-Hep B/HIB',
         date_administered: '11/08/2004',
         history: true
       },
       {
         cvx_code: 51,
-        description: 'C-Hep B/HIB',
+        hd_description: 'C-Hep B/HIB',
         date_administered: '07/06/2004',
         history: true
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '05/03/2004',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'Measles, Mumps, Rubella',
+        hd_description: 'Measles, Mumps, Rubella',
         date_administered: '05/17/2005',
         history: true
       },
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '05/17/2005',
         history: true
       },
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '09/09/2004',
         history: true
       },
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '07/06/2004',
         history: true
       },
       {
         cvx_code: 48,
-        description: 'HIB polyrib. - Tetanus tox',
+        hd_description: 'HIB polyrib. - Tetanus tox',
         date_administered: '05/17/2005',
         history: true
       },
       {
         cvx_code: 48,
-        description: 'HIB polyrib. - Tetanus tox',
+        hd_description: 'HIB polyrib. - Tetanus tox',
         date_administered: '09/09/2004',
         history: true
       },
       {
         cvx_code: 21,
-        description: 'Varicella Vaccine',
+        hd_description: 'Varicella Vaccine',
         date_administered: '05/17/2005',
         history: true
       }
@@ -434,37 +434,37 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 114,
-        description: 'C-Meningococcal, Menactra',
+        hd_description: 'C-Meningococcal, Menactra',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 115,
-        description: 'C-Tdap',
+        hd_description: 'C-Tdap',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '09/02/2016',
         history: false
       }
@@ -478,67 +478,67 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 120,
-        description: 'C-DTaP/HIB/IPV',
+        hd_description: 'C-DTaP/HIB/IPV',
         date_administered: '11/24/2015',
         history: false
       },
       {
         cvx_code: 110,
-        description: 'C-DTaP/Hep B/IPV',
+        hd_description: 'C-DTaP/Hep B/IPV',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '11/24/2015',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '11/24/2015',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '10/29/2014',
         history: true
       },
       {
         cvx_code: 49,
-        description: 'C-HIB',
+        hd_description: 'C-HIB',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '11/24/2015',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate, PCV13',
+        hd_description: 'C-Pneumococcal Conjugate, PCV13',
         date_administered: '09/02/2016',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate, PCV13',
+        hd_description: 'C-Pneumococcal Conjugate, PCV13',
         date_administered: '11/24/2015',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '11/24/2015',
         history: false
       }
@@ -552,49 +552,49 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 110,
-        description: 'C-DTaP/Hep B/IPV',
+        hd_description: 'C-DTaP/Hep B/IPV',
         date_administered: '08/05/2016',
         history: false
       },
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '08/05/2016',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '02/16/2011',
         history: true
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '08/05/2016',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '08/05/2016',
         history: false
       }
@@ -608,121 +608,121 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 120,
-        description: 'C-DTaP/HIB/IPV',
+        hd_description: 'C-DTaP/HIB/IPV',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '08/30/2012',
         history: true
       },
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '06/29/2012',
         history: true
       },
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '04/30/2012',
         history: true
       },
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '08/30/2012',
         history: true
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '04/30/2012',
         history: true
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '02/29/2012',
         history: true
       },
       {
         cvx_code: 49,
-        description: 'C-HIB',
+        hd_description: 'C-HIB',
         date_administered: '08/30/2012',
         history: true
       },
       {
         cvx_code: 49,
-        description: 'C-HIB',
+        hd_description: 'C-HIB',
         date_administered: '06/29/2012',
         history: true
       },
       {
         cvx_code: 49,
-        description: 'C-HIB',
+        hd_description: 'C-HIB',
         date_administered: '04/30/2012',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate PCV13',
+        hd_description: 'C-Pneumococcal Conjugate PCV13',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate PCV13',
+        hd_description: 'C-Pneumococcal Conjugate PCV13',
         date_administered: '08/30/2012',
         history: true
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate PCV13',
+        hd_description: 'C-Pneumococcal Conjugate PCV13',
         date_administered: '06/29/2012',
         history: true
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate PCV13',
+        hd_description: 'C-Pneumococcal Conjugate PCV13',
         date_administered: '04/30/2012',
         history: true
       },
       {
         cvx_code: 116,
-        description: 'C-Rotavirus (3 dose)',
+        hd_description: 'C-Rotavirus (3 dose)',
         date_administered: '08/30/2012',
         history: true
       },
       {
         cvx_code: 116,
-        description: 'C-Rotavirus (3 dose)',
+        hd_description: 'C-Rotavirus (3 dose)',
         date_administered: '06/29/2012',
         history: true
       },
       {
         cvx_code: 116,
-        description: 'C-Rotavirus (3 dose)',
+        hd_description: 'C-Rotavirus (3 dose)',
         date_administered: '04/30/2012',
         history: true
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '09/07/2016',
         history: false
       }
@@ -736,25 +736,25 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 106,
-        description: 'DTaP, 5 pertussis antigens',
+        hd_description: 'DTaP, 5 pertussis antigens',
         date_administered: '08/02/2016',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '09/07/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'Measles, Mumps, Rubella',
+        hd_description: 'Measles, Mumps, Rubella',
         date_administered: '08/02/2016',
         history: true
       }
@@ -768,73 +768,73 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 110,
-        description: 'C-DTaP/Hep B/IPV',
+        hd_description: 'C-DTaP/Hep B/IPV',
         date_administered: '12/31/2014',
         history: false
       },
       {
         cvx_code: 110,
-        description: 'C-DTaP/Hep B/IPV',
+        hd_description: 'C-DTaP/Hep B/IPV',
         date_administered: '07/25/2012',
         history: false
       },
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '12/31/2014',
         history: false
       },
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '07/25/2012',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '11/22/2010',
         history: true
       },
       {
         cvx_code: 49,
-        description: 'C-HIB',
+        hd_description: 'C-HIB',
         date_administered: '07/25/2012',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '12/31/2014',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '07/25/2012',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate, PCV13',
+        hd_description: 'C-Pneumococcal Conjugate, PCV13',
         date_administered: '12/31/2014',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate, PCV13',
+        hd_description: 'C-Pneumococcal Conjugate, PCV13',
         date_administered: '07/25/2012',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '12/31/2014',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '07/25/2012',
         history: false
       }
@@ -848,37 +848,37 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 110,
-        description: 'C-Tdap/Hep B/IPV',
+        hd_description: 'C-Tdap/Hep B/IPV',
         date_administered: '09/04/2012',
         history: true
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '11/10/2010',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'Measles, Mumps, Rubella',
+        hd_description: 'Measles, Mumps, Rubella',
         date_administered: '09/04/2012',
         history: true
       },
       {
         cvx_code: 100,
-        description: 'C-Pneumococcal Conjugate PCV7',
+        hd_description: 'C-Pneumococcal Conjugate PCV7',
         date_administered: '09/04/2012',
         history: true
       },
       {
         cvx_code: 48,
-        description: 'HIB polyrib. - Tetanus tox',
+        hd_description: 'HIB polyrib. - Tetanus tox',
         date_administered: '09/04/2012',
         history: true
       },
       {
         cvx_code: 21,
-        description: 'Varicella Vaccine',
+        hd_description: 'Varicella Vaccine',
         date_administered: '09/04/2012',
         history: true
       }
@@ -892,49 +892,49 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '08/12/2016',
         history: false
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '07/20/2016',
         history: true
       },
       {
         cvx_code: 165,
-        description: 'C-HPV, 9',
+        hd_description: 'C-HPV, 9',
         date_administered: '08/12/2016',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '08/12/2016',
         history: false
       },
       {
         cvx_code: 114,
-        description: 'C-Meningococcal, Menactra',
+        hd_description: 'C-Meningococcal, Menactra',
         date_administered: '07/20/2016',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '07/20/2016',
         history: true
       },
       {
         cvx_code: 115,
-        description: 'C-Tdap',
+        hd_description: 'C-Tdap',
         date_administered: '07/20/2016',
         history: true
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '07/20/2016',
         history: true
       }
@@ -948,31 +948,31 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 120,
-        description: 'C-DTaP/HIB/IPV',
+        hd_description: 'C-DTaP/HIB/IPV',
         date_administered: '08/12/2016',
         history: false
       },
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '08/12/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '08/12/2016',
         history: false
       },
       {
         cvx_code: 133,
-        description: 'C-Pneumococcal Conjugate PCV13',
+        hd_description: 'C-Pneumococcal Conjugate PCV13',
         date_administered: '08/12/2016',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '08/12/2016',
         history: false
       }
@@ -986,25 +986,25 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '08/04/2004',
         history: true
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '08/04/2004',
         history: true
       },
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '08/04/2004',
         history: true
       },
       {
         cvx_code: 115,
-        description: 'C-Tdap',
+        hd_description: 'C-Tdap',
         date_administered: '10/02/2012',
         history: false
       }
@@ -1018,31 +1018,31 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 83,
-        description: 'C-Hepatitis A Vaccine (2 Dose)',
+        hd_description: 'C-Hepatitis A Vaccine (2 Dose)',
         date_administered: '08/04/2004',
         history: true
       },
       {
         cvx_code: 114,
-        description: 'C-Meningococcal, Menactra',
+        hd_description: 'C-Meningococcal, Menactra',
         date_administered: '08/18/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '08/04/2004',
         history: true
       },
       {
         cvx_code: 10,
-        description: 'C-Polio (Unknown Type)',
+        hd_description: 'C-Polio (Unknown Type)',
         date_administered: '08/04/2004',
         history: true
       },
       {
         cvx_code: 115,
-        description: 'C-Tdap',
+        hd_description: 'C-Tdap',
         date_administered: '10/02/2012',
         history: false
       }
@@ -1056,55 +1056,55 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '03/03/1999',
         history: true
       },
       {
         cvx_code: 140,
-        description: 'Flu, Preservative Free',
+        hd_description: 'Flu, Preservative Free',
         date_administered: '10/25/2010',
         history: true
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '08/11/2016',
         history: false
       },
       {
         cvx_code: 10,
-        description: 'C-IPV',
+        hd_description: 'C-IPV',
         date_administered: '08/11/2016',
         history: false
       },
       {
         cvx_code: 114,
-        description: 'C-Meningococcal, Menactra',
+        hd_description: 'C-Meningococcal, Menactra',
         date_administered: '08/11/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'C-Measles, Mumps, Rubella',
+        hd_description: 'C-Measles, Mumps, Rubella',
         date_administered: '08/11/2016',
         history: false
       },
       {
         cvx_code: 48,
-        description: 'HIB polyrib. - Tetanus tox',
+        hd_description: 'HIB polyrib. - Tetanus tox',
         date_administered: '03/03/1999',
         history: true
       },
       {
         cvx_code: 115,
-        description: 'C-317 Adult Tdap',
+        hd_description: 'C-317 Adult Tdap',
         date_administered: '08/11/2016',
         history: false
       },
       {
         cvx_code: 21,
-        description: 'C-Varicella',
+        hd_description: 'C-Varicella',
         date_administered: '08/11/2016',
         history: false
       }
@@ -1118,37 +1118,37 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 110,
-        description: 'C-DTaP/Hep B/IPV',
+        hd_description: 'C-DTaP/Hep B/IPV',
         date_administered: '03/08/2016',
         history: true
       },
       {
         cvx_code: 8,
-        description: 'C-Hepatitis B Vaccine',
+        hd_description: 'C-Hepatitis B Vaccine',
         date_administered: '01/13/2016',
         history: true
       },
       {
         cvx_code: 133,
-        description: 'Pneumococcal Conjugate, PCV13',
+        hd_description: 'Pneumococcal Conjugate, PCV13',
         date_administered: '03/08/2016',
         history: true
       },
       {
         cvx_code: 49,
-        description: 'HIB Conjugate (Mening. Prot)',
+        hd_description: 'HIB Conjugate (Mening. Prot)',
         date_administered: '03/08/2016',
         history: true
       },
       {
         cvx_code: 48,
-        description: 'HIB polyrib. - Tetanus tox',
+        hd_description: 'HIB polyrib. - Tetanus tox',
         date_administered: '03/08/2016',
         history: true
       },
       {
         cvx_code: 119,
-        description: 'C-Rotavirus (2 dose)',
+        hd_description: 'C-Rotavirus (2 dose)',
         date_administered: '03/08/2016',
         history: true
       }
@@ -1162,67 +1162,67 @@ module KCMODATA
     vaccines: [
       {
         cvx_code: 20,
-        description: 'C-DTaP',
+        hd_description: 'C-DTaP',
         date_administered: '03/13/1998',
         history: true
       },
       {
         cvx_code: 111,
-        description: 'C-Flumist (Live, Intranasal)',
+        hd_description: 'C-Flumist (Live, Intranasal)',
         date_administered: '10/29/2012',
         history: true
       },
       {
         cvx_code: 45,
-        description: 'Hepatitis B, unspecified',
+        hd_description: 'Hepatitis B, unspecified',
         date_administered: '03/13/1998',
         history: true
       },
       {
         cvx_code: 62,
-        description: 'HPV, Quadrivalent, Gardasil',
+        hd_description: 'HPV, Quadrivalent, Gardasil',
         date_administered: '07/23/2013',
         history: true
       },
       {
         cvx_code: 62,
-        description: 'HPV, Quadrivalent, Gardasil',
+        hd_description: 'HPV, Quadrivalent, Gardasil',
         date_administered: '10/29/2012',
         history: true
       },
       {
         cvx_code: 62,
-        description: 'HPV, Quadrivalent, Gardasil',
+        hd_description: 'HPV, Quadrivalent, Gardasil',
         date_administered: '08/31/2012',
         history: true
       },
       {
         cvx_code: 114,
-        description: 'C-Meningococcal, Menactra',
+        hd_description: 'C-Meningococcal, Menactra',
         date_administered: '08/13/2016',
         history: false
       },
       {
         cvx_code: 162,
-        description: 'C-Meningococcal, Trumenba',
+        hd_description: 'C-Meningococcal, Trumenba',
         date_administered: '08/13/2016',
         history: false
       },
       {
         cvx_code: 3,
-        description: 'Measles, Mumps, Rubella',
+        hd_description: 'Measles, Mumps, Rubella',
         date_administered: '07/23/2013',
         history: true
       },
       {
         cvx_code: 48,
-        description: 'HIB polyrib. - Tetanus tox',
+        hd_description: 'HIB polyrib. - Tetanus tox',
         date_administered: '03/13/1998',
         history: true
       },
       {
         cvx_code: 115,
-        description: 'Tdap',
+        hd_description: 'Tdap',
         date_administered: '08/31/2012',
         history: true
       }
@@ -1252,17 +1252,408 @@ module KCMODATA
     PATIENT21
   ]
 
+  def self.str_to_date(date_string)
+    DateTime.parse(date_string).to_date
+  end
+
+  def expected_results
+    {
+      PATIENT1: [
+        101,
+        'not_complete',
+        {
+          dtap: str_to_date('9/23/16'),
+          hepa: nil,
+          zoster: nil,
+          hepb: str_to_date('9/23/16'),
+          hib: str_to_date('9/23/16'),
+          hpv: nil,
+          mcv: nil,
+          mmr: nil,
+          pneumococcal: str_to_date('9/23/16'),
+          polio: str_to_date('9/23/16'),
+          rotavirus: nil,
+          varicella: nil
+        }
+      ],
+      PATIENT2: [
+        102,
+        'not_complete',
+          {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('9/01/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          mcv: str_to_date('9/01/16'),
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/23/16'),
+          rotavirus: nil,
+          varicella: nil
+        }
+      ],
+      PATIENT3: [
+        103,
+        'not_complete',
+          {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: nil,
+          hib: nil,
+          hpv: nil,
+          mcv: nil,
+          mmr: nil,
+          pneumococcal: str_to_date('9/01/16'),
+          polio: nil,
+          rotavirus: nil,
+          varicella: nil
+        }
+      ],
+      PATIENT4: [
+        104,
+        'not_complete',
+          {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('9/01/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          mcv: nil,
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/01/16'),
+          rotavirus: nil,
+          varicella: str_to_date('9/01/16'),
+        }
+      ],
+      PATIENT5: [
+        105,
+        'not_complete',
+          {
+          dtap: str_to_date('2/09/2017'),
+          hepa: str_to_date('2/09/2017'),
+          zoster: nil,
+          hepb: str_to_date('11/11/16'),
+          hib: nil,
+          hpv: nil,
+          mcv: nil,
+          mmr: nil,
+          pneumococcal: nil,
+          polio: str_to_date('3/09/2017'),
+          rotavirus: nil,
+          varicella: nil
+        }
+      ],
+      PATIENT6: [
+        106,
+        'not_complete',
+        {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('9/01/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          influenza: nil,
+          mcv: nil,
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/01/16'),
+          rotavirus: nil,
+          varicella: str_to_date('9/01/16')
+        }
+      ],
+      PATIENT7: [
+        107,
+        'not_complete',
+        {
+          dtap: str_to_date('9/01/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: nil,
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          influenza: nil,
+          mcv: str_to_date('9/01/16'),
+          mmr: str_to_date('9/01/16'),
+          pneumococcal: nil,
+          polio: str_to_date('9/01/16'),
+          rotavirus: nil,
+          varicella: str_to_date('9/01/16')
+        }
+      ],
+      PATIENT8: [
+        108,
+        'not_complete',
+        {
+          dtap: str_to_date('10/02/16'),
+          hepa: str_to_date('9/01/16'),
+          zoster: nil,
+          hepb: str_to_date('10/02/16'),
+          hib: nil,
+          hpv: str_to_date('9/01/16'),
+          influenza: nil,
+          mcv: nil,
+          mmr: str_to_date('10/02/16'),
+          pneumococcal: nil,
+          polio: str_to_date('10/02/16'),
+          rotavirus: nil,
+          varicella: str_to_date('10/02/16')
+        }
+      ]
+    }
+  end
+      # ],
+      # PATIENT9: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT10: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT11: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT12: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT13: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT14: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT15: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT16: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT17: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT18: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT19: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT20: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ],
+      # PATIENT21: [
+      #   'not_complete',
+      #   {
+      #     dtap: nil,
+      #     hepa: nil,
+      #     zoster: nil,
+      #     hepb: nil,
+      #     hib: nil,
+      #     hpv: nil,
+      #     influenza: nil,
+      #     mcv: nil,
+      #     mmr: nil,
+      #     pneumococcal: nil,
+      #     polio: nil,
+      #     rotavirus: nil,
+      #     varicella: nil
+      #   }
+      # ]
+    # }
+  # end
+
   def self.create_patient(patient_hash)
     gender_index = patient_hash[:patient_number] % 2
     gender = ['m', 'f'].at(gender_index)
     Patient.create(
       first_name: patient_hash[:patient_name].split(' ').first,
       last_name: patient_hash[:patient_name].split(' ').last,
-      patient_profile_attributes: {
-        dob: patient_hash[:dob],
-        record_number: patient_hash[:patient_number],
-        gender: gender
-      }
+      dob: patient_hash[:dob],
+      patient_number: patient_hash[:patient_number],
+      gender: gender
     )
   end
 
@@ -1275,8 +1666,8 @@ module KCMODATA
         puts "No vaccine code found for #{vaccine_dose_args}"
       end
       VaccineDose.create(
-        patient_profile: patient.patient_profile,
-        description: vaccine_dose_args[:description],
+        patient: patient,
+        hd_description: vaccine_dose_args[:hd_description],
         date_administered: vaccine_dose_args[:date_administered],
         history_flag: vaccine_dose_args[:history],
         cvx_code: vaccine_dose_args[:cvx_code],
@@ -1299,39 +1690,59 @@ module KCMODATA
     end
   end
 
-  def all_db_patient_profiles
-    record_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
-    PatientProfile.where(record_number: record_numbers)
+  def self.create_expected_record_statuses
+    record_statuses = {}
+    ALL_PATIENTS.each do |patient_args|
+      record_statuses[(patient_args[:patient_number].to_sym)] =
+        patient_args[:expected_evaluation]
+    end
+    record_statuses
+  end
+
+  def get_expected_record_status(patient_number)
+    record_statuses = self.create_expected_record_statuses
+    record_statuses[patient_number.to_sym]
+  end
+
+  def self.create_expected_not_complete_vaccine_groups
+    record_statuses = {}
+    ALL_PATIENTS.each do |patient_args|
+      record_statuses[(patient_args[:patient_number].to_sym)] =
+        patient_args[:not_complete_vaccine_groups]
+    end
+    record_statuses
+  end
+
+  def get_expected_not_complete_vaccine_groups(patient_number)
+    not_complete_vaccine_groups =
+      self.create_expected_not_complete_vaccine_groups
+    not_complete_vaccine_groups[patient_number.to_sym]
   end
 
   def all_db_patients
-    all_patient_profiles = all_db_patient_profiles
-    all_patients         = all_patient_profiles.map(&:patient)
-    all_patient_ids      = all_patients.map(&:id)
-    Patient.where(id: all_patient_ids)
+    patient_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
+    Patient.where(patient_number: patient_numbers)
   end
 
   def all_vaccine_doses
-    all_patient_profiles    = all_db_patient_profiles
-    all_patient_profile_ids = all_patient_profiles.map(&:id)
-    VaccineDose.where(patient_profile_id: all_patient_profile_ids)
+    all_patient_ids = all_db_patients.map(&:id)
+    VaccineDose.where(patient__id: all_patient_ids)
   end
 
   def create_db_patients
-    if PatientProfile.find_by(record_number: PATIENT1[:patient_number]).nil?
+    if Patient.find_by(patient_number: PATIENT1[:patient_number]).nil?
       create_all_patients(ALL_PATIENTS)
     end
   end
 
   def delete_db_patients
     all_vaccines         = all_vaccine_doses
-    all_patient_profiles = all_db_patient_profiles
     all_patients         = all_db_patients
 
     all_vaccines.delete_all unless all_vaccines.nil?
-    all_patient_profiles.delete_all unless all_patient_profiles.nil?
     all_patients.delete_all unless all_patients.nil?
   end
   module_function :delete_db_patients, :create_db_patients, :all_db_patients,
-                  :all_db_patient_profiles, :all_vaccine_doses
+                  :all_vaccine_doses, :get_expected_record_status,
+                  :get_expected_not_complete_vaccine_groups, :expected_results
 end

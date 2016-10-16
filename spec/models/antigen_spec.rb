@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Antigen, type: :model do
+  include AntigenImporterSpecHelper
+
   describe '#create' do
     it 'requires a name' do
       expect{ Antigen.create }.to raise_exception
@@ -93,7 +95,7 @@ RSpec.describe Antigen, type: :model do
   end
   describe 'tests that require cdc data' do
     before(:all) do
-      FactoryGirl.create(:seed_full_antigen_xml)
+      seed_full_antigen_xml
     end
     after(:all) do
       DatabaseCleaner.clean_with(:truncation)

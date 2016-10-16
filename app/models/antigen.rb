@@ -16,9 +16,15 @@ class Antigen < ActiveRecord::Base
   def self.find_antigens_by_cvx(cvx_code)
     all_vaccines = AntigenSeriesDoseVaccine.where(cvx_code: cvx_code).uniq
     all_vaccines.map(&:antigens).flatten.uniq
+    # all_vaccine_infos = VaccineInfo.where(cvx_code: cvx_code)
+    # all_vaccine_infos.map(&:antigens).flatten.uniq
   end
 
   def vaccine_group
+    # puts self.inspect
+    # if self.target_disease == 'hep b'
+    #   byebug
+    # end
     self.series.first.vaccine_group
   end
 

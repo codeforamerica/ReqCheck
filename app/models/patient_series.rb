@@ -3,11 +3,9 @@ class PatientSeries
   include CheckType
 
   attr_reader :target_doses, :patient, :antigen_series, :series_status,
-              :satisfied_target_doses
+              :satisfied_target_doses, :unsatisfied_target_dose
 
   def initialize(patient:, antigen_series:)
-    CheckType.enforce_type(patient, Patient)
-    CheckType.enforce_type(antigen_series, AntigenSeries)
     @patient                   = patient
     @antigen_series            = antigen_series
     @target_doses              = create_target_doses(antigen_series, patient)
@@ -31,6 +29,20 @@ class PatientSeries
 
   def set_satisfied_target_doses(satisfied_target_doses)
     @satisfied_target_doses = satisfied_target_doses
+  end
+
+  def unsatisfied_target_dose
+    return nil if series_status.nil?
+    next_target_dose_index = satisfied_target_doses.length
+    next_target_dose = target_doses.at(next_target_dose_index)
+    return nil if next_target_dose.nil?
+    target_dose_objects = satisfied_target_doses.map do |td_hash|
+      td_hash[:target_dose]
+    end
+    next_target_dose.get_earliest_future_target_dose_date(
+      target_dose_objects
+    )
+    next_target_dose
   end
 
   def set_series_status(series_status)
@@ -72,6 +84,7 @@ class PatientSeries
     evaluation_hash = evaluate_target_doses(eligible_target_doses,
                                             antigen_administered_records)
     satisfied_target_doses = evaluation_hash[:satisfied_target_doses]
+
     set_satisfied_target_doses(satisfied_target_doses)
     status = get_patient_series_status(target_doses,
                                        eligible_target_doses,
@@ -95,7 +108,7 @@ class PatientSeries
   def evaluate_target_doses(eligible_target_doses,
                             antigen_administered_records)
     invalid_antigen_administered_records = []
-    satisfied_target_doses = []
+    satisfied_target_doses        = []
 
     sorted_aars = sort_by_date_reversed(
       antigen_administered_records

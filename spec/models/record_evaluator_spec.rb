@@ -1,66 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe RecordEvaluator, type: :model do
+  include PatientSpecHelper
+  include AntigenImporterSpecHelper
+
   before(:all) do
-    FactoryGirl.create(:seed_full_antigen_xml)
+    seed_full_antigen_xml
   end
   after(:all) do
     DatabaseCleaner.clean_with(:truncation)
-  end
-
-  def create_patient_vaccines(test_patient, vaccine_dates, cvx_code=10)
-    vaccines = vaccine_dates.map.with_index do |vaccine_date, index|
-      FactoryGirl.create(
-        :vaccine_dose_by_cvx,
-        patient_profile: test_patient.patient_profile,
-        dose_number: (index + 1),
-        date_administered: vaccine_date,
-        cvx_code: cvx_code
-      )
-    end
-    test_patient.reload
-    vaccines
-  end
-
-  def create_valid_dates(start_date)
-    [
-      start_date + 6.weeks,
-      start_date + 12.weeks,
-      start_date + 18.weeks,
-      start_date + 4.years
-    ]
-  end
-
-  def valid_2_year_test_patient(test_patient=nil)
-    test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
-                                                      dob: 2.years.ago.to_date)
-    dob = test_patient.dob
-    required_vaccine_cvxs = {
-      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
-      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
-            (dob + 14.weeks), (dob + 15.months)],
-      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)] #'MMRV'
-    }
-    required_vaccine_cvxs.each do |cvx_key, date_array|
-      create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
-    end
-    test_patient
-  end
-
-  def valid_5_year_test_patient(test_patient=nil)
-    test_patient = test_patient || FactoryGirl.create(:patient_with_profile,
-                                                      dob: 5.years.ago.to_date)
-    dob = test_patient.dob
-    required_vaccine_cvxs = {
-      10 => [(dob + 6.weeks), (dob + 12.weeks), (dob + 18.weeks)], #'POL',
-      110 => [(dob + 6.weeks), (dob + 10.weeks), #'DTHI'
-            (dob + 14.weeks), (dob + 15.months), (dob + 4.years)],
-      94 => [(dob + 12.months), (dob + 14.months), (dob + 18.months)] #'MMRV'
-    }
-    required_vaccine_cvxs.each do |cvx_key, date_array|
-      create_patient_vaccines(test_patient, date_array, cvx_key.to_i)
-    end
-    test_patient
   end
 
   let(:test_patient) { valid_5_year_test_patient }
@@ -76,7 +24,7 @@ RSpec.describe RecordEvaluator, type: :model do
     let(:record_evaluator) { RecordEvaluator.new(patient: test_patient) }
 
     it 'creates a patients antigen_administered_records' do
-      expect(record_evaluator.antigen_administered_records.length).to eq(40)
+      expect(record_evaluator.antigen_administered_records.length).to eq(67)
       expect(
         record_evaluator.antigen_administered_records.first.class.name
       ).to eq('AntigenAdministeredRecord')
@@ -129,11 +77,11 @@ RSpec.describe RecordEvaluator, type: :model do
       )
       expect(record_evaluator.vaccine_group_evaluations).to eq(
         {
-          :"dtap/tdap/td" => "complete",
-          :"hep a" => "complete",
-          :"zoster " => "complete",
+          :dtap => "complete",
+          :hepa => "complete",
+          :zoster => "complete",
           :hepb => "complete",
-          :hib => "not_complete",
+          :hib => "complete",
           :hpv => "complete",
           :influenza => "not_complete",
           :mcv => "complete",
@@ -144,7 +92,6 @@ RSpec.describe RecordEvaluator, type: :model do
           :varicella => "complete"
         }
       )
-      expect(false).to be(true) # NEED TO FIGURE OUT HOW TO UNIFY ALL OF THE KEYS TO BE OF THE SAME FORMAT (SOME ARE STRINGS, OTHERS ARE NOT)
     end
     context 'with a 2 year old patient' do
       it 'returns complete for an up to date patient' do
@@ -190,24 +137,53 @@ RSpec.describe RecordEvaluator, type: :model do
         expect(record_evaluator.record_status).to eq('not_complete')
       end
     end
+    context 'when the record is not_complete but no vaccines can be given' do
+      it 'returns not_complete_no_action as the evaluation_status' do
+        test_patient = incomplete_no_immediate_vaccines_2_year_test_patient
+        record_evaluator = RecordEvaluator.new(
+          patient: test_patient
+        )
+        expect(record_evaluator.record_status).to eq('not_complete_no_action')
+      end
+    end
+    context 'when the record is not_complete and vaccines can be given' do
+      it 'returns not_complete_no_action as the evaluation_status' do
+        test_patient = invalid_2_year_test_patient
+        record_evaluator = RecordEvaluator.new(
+          patient: test_patient
+        )
+        expect(record_evaluator.record_status).to eq('not_complete')
+      end
+    end
+  end
+  describe '#vaccine_group_next_target_doses' do
+    it 'returns a hash of all the next target doses' do
+      test_patient = incomplete_no_immediate_vaccines_2_year_test_patient
+      record_evaluator = RecordEvaluator.new(
+        patient: test_patient
+      )
+      expect(record_evaluator.vaccine_groups_next_target_doses).to eq(
+        {}
+      )
+    end
   end
 end
 
 
 
 # context 'with a child aged < 1 years' do
-#   let(:test_patient_baby) { FactoryGirl.create(:patient_with_profile, dob: 10.months.ago) }
+#   let(:test_patient_baby) { FactoryGirl.create(:patient, dob: 10.months.ago) }
 
 # end
 # context 'with a child aged ~= 5 years' do
-#   let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 58.months.ago) }
+#   let(:test_patient_child) { FactoryGirl.create(:patient, dob: 58.months.ago) }
 
 # end
 # context 'with a child aged ~= 12 years' do
-#   let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 12.years.ago) }
+#   let(:test_patient_child) { FactoryGirl.create(:patient, dob: 12.years.ago) }
 
 # end
 # context 'with a child aged ~= 18 years' do
-#   let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 12.years.ago) }
+#   let(:test_patient_child) { FactoryGirl.create(:patient, dob: 12.years.ago) }
 
 # end

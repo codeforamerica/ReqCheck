@@ -2,7 +2,7 @@ class CreateVaccineDoses < ActiveRecord::Migration
   def change
     create_table :vaccine_doses do |t|
       t.string  :vaccine_code, null: false
-      t.integer :patient_profile_id
+      t.integer :patient_number, index: true
       t.date    :administered_date, null: false
       t.string  :description
       t.boolean :send_flag
@@ -22,6 +22,7 @@ class CreateVaccineDoses < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :vaccine_doses, :patient_profiles, index: true
+    add_reference :vaccine_doses, :patients, index: true
+    add_foreign_key :vaccine_doses, :patients, column: :patient_number, primary_key: :patient_number
   end
 end

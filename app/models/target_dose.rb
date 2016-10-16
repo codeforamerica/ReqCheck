@@ -2,23 +2,25 @@ class TargetDose
   include ActiveModel::Model
   include AgeCalc
   include TargetDoseEvaluation
+  include FutureDoseEvaluation
 
   attr_accessor :patient, :antigen_series_dose
-  attr_reader :eligible, :satisfied, :status_hash, :antigen_administered_record
+  attr_reader :satisfied, :status_hash, :antigen_administered_record,
+              :earliest_dose_date
 
   def initialize(patient:, antigen_series_dose:)
     @antigen_series_dose         = antigen_series_dose
     @patient                     = patient
-    @eligible                    = nil
     @status_hash                 = nil
     @antigen_administered_record = nil
+    @earliest_dose_date          = nil
   end
 
   [
     'dose_number', 'absolute_min_age', 'min_age', 'earliest_recommended_age',
     'latest_recommended_age', 'max_age', 'intervals', 'required_gender',
     'recurring_dose', 'dose_vaccines', 'preferable_vaccines',
-    'allowable_vaccines'
+    'allowable_vaccines, conditional_skip'
   ].each do |action|
     define_method(action) do
       return nil if antigen_series_dose.nil?
@@ -31,19 +33,24 @@ class TargetDose
     previous_satisfied_target_doses=[]
   )
     if !@status_hash.nil? && @status_hash[:evaluation_status] == 'valid'
-      raise Error('The TargetDose has already evaluated to True')
+      raise Error('The TargetDose is already Valid!')
     end
     @antigen_administered_record = antigen_administered_record
     @status_hash = evaluate_satisfy_target_dose(
       antigen_administered_record,
       previous_satisfied_target_doses
     )
-    @satisfied   = @status_hash[:target_dose_status] == 'satisfied'
+    @satisfied   =
+      ['satisfied', 'skipped'].include?(@status_hash[:target_dose_status])
     @satisfied
   end
 
   def has_conditional_skip?
     !self.antigen_series_dose.conditional_skip.nil?
+  end
+
+  def conditional_skip
+    self.antigen_series_dose.conditional_skip
   end
 
   def eligible?
@@ -69,6 +76,11 @@ class TargetDose
     true
   end
 
+  def date_administered
+    return nil if antigen_administered_record.nil?
+    antigen_administered_record.date_administered
+  end
+
   def first_dose?
     dose_number == 1
   end
@@ -86,12 +98,7 @@ class TargetDose
                                    previous_satisfied_target_doses=[])
     previous_status_hash        = nil
     date_of_previous_dose       = nil
-    satisfied_target_dose_dates = []
     unless previous_satisfied_target_doses.length == 0
-      satisfied_target_dose_dates =
-        previous_satisfied_target_doses.map do |satisfied_target_dose|
-          satisfied_target_dose.antigen_administered_record.date_administered
-        end
       previous_target_dose = previous_satisfied_target_doses[-1]
       previous_status_hash =
         previous_target_dose.status_hash
@@ -113,8 +120,19 @@ class TargetDose
       dose_volume: antigen_administered_record.dosage,
       date_of_previous_dose: date_of_previous_dose,
       previous_dose_status_hash: previous_status_hash,
-      previous_satisfied_target_dose_dates: satisfied_target_dose_dates
+      previous_satisfied_target_doses: previous_satisfied_target_doses
     )
+  end
+
+  def get_earliest_future_target_dose_date(satisfied_target_doses)
+    future_dose_dates = create_future_dose_dates(
+      patient,
+      self,
+      vaccine_doses: patient.vaccine_doses,
+      satisfied_target_doses: satisfied_target_doses
+    )
+    @earliest_dose_date = find_maximium_min_date(future_dose_dates)
+    @earliest_dose_date
   end
 end
 

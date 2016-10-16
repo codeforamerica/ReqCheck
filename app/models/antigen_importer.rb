@@ -21,11 +21,10 @@ class AntigenImporter
   def import_single_file(xml_file_name)
     xml_file_hash = parse_and_hash(xml_file_name)
     if xml_file_name.include? 'Schedule'
-
+      create_all_cvx_to_antigen_mappings(xml_file_hash)
     elsif xml_file_name.include? 'Antigen'
-      parse_antigen_data_and_create_subobjects(xml_file_hash)
+      parse_antigen_data_and_create_subobjects(xml_file_hash, xml_file_name)
     end
-
   end
 
   def parse_and_hash(xml_file_path)
@@ -39,7 +38,8 @@ class AntigenImporter
     Hash.from_xml(xml_string)
   end
 
-  def parse_antigen_data_and_create_subobjects(xml_file_hash)
+  def parse_antigen_data_and_create_subobjects(xml_file_hash, afile_name=nil)
+    puts "Importing the antigen supporting data for #{afile_name}"
     target_disease = xml_file_hash.find_all_values_for('targetDisease')
                                   .first.downcase
     antigen_object = Antigen.create(target_disease: target_disease)
@@ -69,6 +69,53 @@ class AntigenImporter
 
   def y_n_bool(datum)
     datum == 'Y'
+  end
+
+  def create_all_cvx_to_antigen_mappings(xml_hash)
+    puts 'Importing the cvx to antigen mapping'
+    cvx_to_antigens =
+      xml_hash['scheduleSupportingData']['cvxToAntigenMap']['cvxMap']
+    unless cvx_to_antigens.is_a? Array
+      cvx_to_antigens = [cvx_to_antigens]
+    end
+    cvx_to_antigens.each do |cvx_to_antigen_xml_hash|
+      cvx_info_args = pull_cvx_to_antigen_arguments(cvx_to_antigen_xml_hash)
+      create_or_update_cvx_to_antigen_association(cvx_info_args)
+    end
+  end
+
+  def pull_cvx_to_antigen_arguments(cvx_to_antigen_xml_hash)
+    return_hash = {
+      cvx_code: cvx_to_antigen_xml_hash['cvx'].to_i,
+      short_description: cvx_to_antigen_xml_hash['shortDescription'].downcase,
+      antigens: []
+    }
+    cvx_associations = cvx_to_antigen_xml_hash['association']
+    cvx_associations = [cvx_associations] if cvx_associations.is_a? Hash
+    cvx_associations.each do |antigen_association_hash|
+      antigen_name = antigen_association_hash['antigen'].downcase
+      antigen_name = 'hepb' if antigen_name == 'hep b'
+      return_hash[:antigens] << antigen_name
+    end
+    return_hash
+  end
+
+  def create_or_update_cvx_to_antigen_association(cvx_info_args)
+    vaccine_info = VaccineInfo.find_by(cvx_code: cvx_info_args[:cvx_code])
+    unless vaccine_info.nil?
+      vaccine_info.delete
+    end
+    vaccine_info = VaccineInfo.create(
+      cvx_code: cvx_info_args[:cvx_code],
+      short_description: cvx_info_args[:short_description]
+    )
+    cvx_info_args[:antigens].each do |target_disease_name|
+      antigen_object = Antigen.find_by(target_disease: target_disease_name)
+      if antigen_object.nil?
+        antigen_object = Antigen.create(target_disease: target_disease_name)
+      end
+      antigen_object.vaccine_infos << vaccine_info
+    end
   end
 
   def get_preference_number(preference_number_string)
@@ -103,7 +150,6 @@ class AntigenImporter
     if antigen_series_data.is_a? Hash
       antigen_series_data = [antigen_series_data]
     end
-
     antigen_series_data.map do |hash|
       antigen_series = AntigenSeries.find_or_initialize_by(
         name: hash['seriesName']

@@ -3,7 +3,7 @@ module IntervalEvaluation
   # interval (or intervals) between two antigen_administered_records
   include EvaluationBase
 
-  def create_interval_attributes(interval_object, previous_dose_date)
+  def create_interval_attributes(interval_object, comparison_dose_date)
     interval_attrs = {}
     default_values = {
       interval_absolute_min_date: '01/01/1900'.to_date,
@@ -14,7 +14,7 @@ module IntervalEvaluation
       date_action                = action + '_date'
       time_differential_string   = interval_object.read_attribute(action)
       interval_date = create_patient_age_date(time_differential_string,
-                                              previous_dose_date)
+                                              comparison_dose_date)
       interval_attrs[date_action.to_sym] = interval_date
     end
     set_default_values(interval_attrs, default_values)
@@ -142,20 +142,46 @@ module IntervalEvaluation
     #  but currently do not know how to get the target doses with the statuses
     #  and the vaccine doses
     interval_objects.map do |interval_object|
-      comparison_dose_date = '01/01/1900'.to_date
-      if interval_object.interval_type == 'from_previous'
-        comparison_dose_date = previous_dose_date
-      elsif interval_object.interval_type == 'from_target_dose'
-        comparison_dose_date =
-          get_target_dose_date(satisfied_target_dose_dates,
-                               interval_object.target_dose_number)
-      elsif interval_object.interval_type == 'from_most_recent'
-
-      end
+      comparison_dose_date = get_comparison_dose_date(
+        interval_object,
+        satisfied_target_dose_dates,
+        patient_vaccine_doses
+      )
       evaluate_interval(interval_object,
                         date_of_dose: date_of_dose,
                         comparison_dose_date: comparison_dose_date,
                         previous_dose_status_hash: previous_dose_status_hash)
     end
+  end
+
+  def create_multiple_intervals_attributes(interval_objects,
+                                           satisfied_target_dose_dates = [],
+                                           patient_vaccine_doses = [])
+    interval_objects.map do |interval_object|
+      comparison_dose_date = get_comparison_dose_date(
+        interval_object,
+        satisfied_target_dose_dates,
+        patient_vaccine_doses
+      )
+      create_interval_attributes(interval_object, comparison_dose_date)
+    end
+  end
+
+  def get_comparison_dose_date(interval_object,
+                               satisfied_target_dose_dates = [],
+                               patient_vaccine_doses = [])
+    comparison_dose_date = '01/01/1900'.to_date
+    if interval_object.interval_type == 'from_previous'
+      comparison_dose_date = satisfied_target_dose_dates.last
+    elsif interval_object.interval_type == 'from_target_dose'
+      comparison_dose_date =
+        get_target_dose_date(satisfied_target_dose_dates,
+                             interval_object.target_dose_number)
+    elsif interval_object.interval_type == 'from_most_recent'
+    end
+    if comparison_dose_date.nil?
+      raise "Invalid comparison dose date for Interval #{interval_object.id}"
+    end
+    comparison_dose_date
   end
 end

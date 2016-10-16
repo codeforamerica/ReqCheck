@@ -6,9 +6,10 @@ module AntigenEvaluation
     patient_series.evaluate_patient_series(antigen_administered_records)
   end
 
-  def get_antigen_evaluation_status(all_patient_series,
-                                    antigen_administered_records)
-    antigen_evaluation = nil
+  def pull_best_patient_series(all_patient_series,
+                               antigen_administered_records)
+    best_series = nil
+    all_patient_series.sort_by! { |series| series.preference_number }
     all_patient_series.each do |patient_series|
       patient_series_evaluation =
         get_patient_series_evaluation(
@@ -16,30 +17,27 @@ module AntigenEvaluation
           antigen_administered_records
         )
       if patient_series_evaluation == 'immune'
-        antigen_evaluation = patient_series_evaluation
+        best_series = patient_series
         break
-      elsif patient_series_evaluation == 'complete'
-        antigen_evaluation = patient_series_evaluation
+      elsif patient_series_evaluation == 'complete' && best_series
+        best_series = patient_series
       end
     end
-    if antigen_evaluation.nil?
-      antigen_evaluation = 'not_complete'
+    if best_series.nil?
+      best_series = all_patient_series.first
     end
-    antigen_evaluation
+    best_series
   end
 
-  # def get_antigen_evaluation(patient_series_evaluations)
-
-
-  # end
-
-  def evaluate_antigen(antigen, patient, antigen_administered_records)
+  def evaluate_antigen_for_patient_series(antigen,
+                                          patient,
+                                          antigen_administered_records)
     patient_serieses = PatientSeries.create_antigen_patient_serieses(
       patient: patient,
       antigen: antigen
     )
-    get_antigen_evaluation_status(patient_serieses,
-                                  antigen_administered_records)
+    pull_best_patient_series(patient_serieses,
+                             antigen_administered_records)
 
   end
 

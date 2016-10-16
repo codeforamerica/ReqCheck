@@ -4,6 +4,15 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  factory :user do
+    
+  end
+  factory :data_import do
+
+  end
+  factory :data_import_error do
+
+  end
   factory :vaccine_dose_evaluator do
   end
   factory :antigen_evaluator do
@@ -60,45 +69,14 @@ FactoryGirl.define do
     end
   end
 
-  factory :seed_antigen_xml_polio, class: Hash do
-    skip_create
-
-    before(:create) do
-      antigen_importer = AntigenImporter.new
-      antigen_importer.import_single_file(
-        'spec/support/xml/AntigenSupportingData- Polio.xml'
-      )
-    end
-  end
-
-  factory :seed_antigen_xml_hpv, class: Hash do
-    skip_create
-
-    before(:create) do
-      antigen_importer = AntigenImporter.new
-      antigen_importer.import_single_file(
-        'spec/support/xml/AntigenSupportingData- HPV.xml'
-      )
-    end
-  end
-
-  factory :seed_full_antigen_xml, class: Hash do
-    skip_create
-
-    before(:create) do
-      antigen_importer = AntigenImporter.new
-      antigen_importer.import_antigen_xml_files('spec/support/xml')
-    end
-  end
-
   factory :conditional_skip_condition do
     condition_id 1
-    condition_type 'Age'
+    condition_type 'age'
 
     after(:create) do |condition|
-      if condition.condition_type == 'Age' && condition.begin_age.nil?
+      if condition.condition_type == 'age' && condition.begin_age.nil?
         condition.begin_age = '4 years - 4 days'
-      elsif condition.condition_type == 'Interval' && condition.interval.nil?
+      elsif condition.condition_type == 'interval' && condition.interval.nil?
         condition.interval = '6 months - 4 days'
       end
     end
@@ -108,7 +86,7 @@ FactoryGirl.define do
     set_id 1
     set_description('Dose is not required for those 4 years or older when the '\
                     'interval from the last dose is 6 months')
-    condition_logic 'AND'
+    condition_logic 'and'
 
     after(:create) do |conditional_skip_set|
       if conditional_skip_set.conditions.length == 0
@@ -268,32 +246,13 @@ FactoryGirl.define do
     sequence(:first_name, 1) { |n| "Test#{n}" }
     sequence(:last_name, 1) { |n| "Tester#{n}" }
     sequence(:email, 1) { |n| "test#{n}@example.com" }
-  end
-
-  factory :patient_with_profile, parent: :patient do
-    transient do
-      dob false
-    end
-    after(:create) do |patient, args|
-      if args.dob
-        create(:patient_profile, patient_id: patient.id.to_s, dob: args.dob)
-      else
-        create(:patient_profile, patient_id: patient.id.to_s)
-      end
-    end
-  end
-
-  factory :patient_profile do
-    dob { 12.years.ago.to_date }
-    sequence(:record_number, 11000)
-
-    association :patient, factory: :patient
+    dob { 5.years.ago.to_date }
+    sequence(:patient_number, 11_000)
   end
 
   factory :vaccine_dose do
     vaccine_code 'POL'
     date_administered { Date.today }
-    send_flag false
     history_flag false
     provider_code '432'
 
@@ -310,12 +269,10 @@ FactoryGirl.define do
       vax_array[(num % vax_array.length)][3]
     end
     expiration_date { 2.months.since.to_date }
-    dose_number 1
-    facility_id 19
   end
 
-  factory :vaccine_dose_with_patient_profile, parent: :vaccine_dose do
-    association :patient_profile, factory: :patient_profile
+  factory :vaccine_dose_with_patient, parent: :vaccine_dose do
+    association :patient, factory: :patient
   end
 
   factory :vaccine_dose_by_cvx, parent: :vaccine_dose do
