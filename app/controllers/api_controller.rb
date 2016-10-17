@@ -1,6 +1,6 @@
 class ApiController < ApplicationController
   protect_from_forgery with: :null_session
-  before_action :destroy_session
+  before_action :destroy_session, :check_credentials
 
   def destroy_session
     request.session_options[:skip] = true
