@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   # end
 
   # Heartbeat to get last import DateTime
-  get '/heartbeat', to: 'heartbeat#heartbeat'
 
   # resources :vaccine_doses
   resources :patients, only: [:index, :show]
@@ -24,6 +23,7 @@ Rails.application.routes.draw do
   get '/xml', to: 'importer#index'
 
   # API for importing Patient Data from the Extractor
+  get '/heartbeat', to: 'api#heartbeat'
   post '/patient_data', to: 'api#import_patient_data'
   post '/vaccine_dose_data', to: 'api#import_vaccine_dose_data'
 

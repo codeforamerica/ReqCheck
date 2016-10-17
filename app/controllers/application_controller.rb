@@ -21,11 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
   def earliest_created_object(database_objects)
-    database_objects.min_by { |obj| obj.created_at }
-  end
-
-  def check_credentials
-    http_basic_authenticate_with name: ENV['EXTRACTOR_NAME'],
-                                 password: ENV['EXTRACTOR_PASSWORD']
+    database_objects.min_by(&:created_at)
   end
 end
