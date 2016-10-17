@@ -786,7 +786,6 @@ RSpec.describe ImporterController, type: :controller do
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
       expect(response_body['status']).to eq('partial_failure')
-
       data_import_error = DataImportError.last
       expect(data_import_error.error_message).to eq(
         'Patient with patient_number 100032 could not be found'

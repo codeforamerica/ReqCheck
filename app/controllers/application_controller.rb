@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
         patients_path
       end
   end
+
+  def earliest_created_object(database_objects)
+    database_objects.min_by { |obj| obj.created_at }
+  end
 end

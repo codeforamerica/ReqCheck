@@ -4,21 +4,35 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  extend TimeHelp
+
   factory :user do
-    
-  end
-  factory :data_import do
 
   end
-  factory :data_import_error do
+  factory :patient_data_import do
+    type 'PatientDataImport'
+    updated_patient_numbers [1, 2, 3]
+  end
+  factory :vaccine_dose_data_import do
+    type 'VaccineDoseDataImport'
+    updated_patient_numbers [1, 2, 3]
+  end
+  factory :patient_data_import_error, class: DataImportError do
+    object_class_name 'Patient'
+    error_message 'Test patient error message'
 
+    association :data_import, factory: :patient_data_import
+  end
+  factory :vaccine_dose_data_import_error, class: DataImportError do
+    object_class_name 'VaccineDose'
+    error_message 'Test vaccine_dose error message'
+
+    association :data_import, factory: :vaccine_dose_data_import
   end
   factory :vaccine_dose_evaluator do
   end
   factory :antigen_evaluator do
   end
-  extend TimeHelp
-
   factory :interval do
     interval_type 'from_previous'
     allowable false

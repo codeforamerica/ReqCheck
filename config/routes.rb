@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   #   root to: 'users/sessions#new', as: :unauthenticated_root
   # end
 
+  # Heartbeat to get last import DateTime
+  get '/heartbeat', to: 'heartbeat#heartbeat'
+
   # resources :vaccine_doses
   resources :patients, only: [:index, :show]
 
