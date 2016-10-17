@@ -83,7 +83,17 @@ class ImporterController < ApplicationController
 
       vaccines_by_patient.each do |patient_number, patient_vaccines|
         patient = Patient.find_by_patient_number(patient_number)
-        unless patient.nil?
+        patient_not_found = patient.nil?
+        if patient.nil?
+          unless patient_number.nil?
+            patient = Patient.create(
+              patient_number: patient_number,
+              first_name: 'Not Found',
+              last_name: 'Not Found',
+              dob: '1/1/1900'
+            )
+          end
+        else
           patient.vaccine_doses.destroy_all
         end
         patient_vaccines.each do |ind_vaccine_dose_data|
@@ -95,20 +105,20 @@ class ImporterController < ApplicationController
                 "Missing arguments [\"hd_imfile_updated_at\"] for VaccineDose"
               )
             end
-            if patient.nil?
+            if patient.nil? && patient_number.nil?
               argument_error =
-                if patient_number.nil?
-                  'Missing arguments ["patient_number"] for VaccineDose'
-                else
-                  "Patient with patient_number #{patient_number} " \
-                  "could not be found"
-                end
+                'Missing arguments ["patient_number"] for VaccineDose'
               raise ArgumentError.new(argument_error)
             end
             VaccineDose.create_by_patient(
-              patient.patient,
+              patient,
               **ind_vaccine_dose_data
             )
+            if patient_not_found
+              argument_error = "Patient with patient_number #{patient_number}" \
+                               " could not be found"
+              raise ArgumentError.new(argument_error)
+            end
           rescue => e
             unless patient_number.nil?
               ind_vaccine_dose_data[:patient_number] = patient_number

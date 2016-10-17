@@ -61,7 +61,6 @@ RSpec.describe ImporterController, type: :controller do
       expect(response.response_code).to eq(201)
       response_body = JSON.parse(response.body)
       expect(response_body['data_import_id'].class).to eq(Fixnum)
-
       expect(Patient.find_by_patient_number(4).home_phone)
         .to eq('555-555-1212')
       expect(Patient.find_by_patient_number(5).dob).to eq(4.years.ago.to_date)
@@ -742,7 +741,7 @@ RSpec.describe ImporterController, type: :controller do
         .to eq("Extraneous arguments [:extra] for VaccineDose")
     end
 
-    it 'saves the raw hash to the database the patient cannot be found' do
+    xit 'saves the raw hash to the database the patient cannot be found' do
       hd_imfile_updated_at = DateTime.now.to_s
       vaccine_dose_data = {
         vaccine_dose_data: [
@@ -764,32 +763,47 @@ RSpec.describe ImporterController, type: :controller do
       )
       expect(data_import_error.raw_hash).to eq(
         {
-          'patient_number': '100032',
-          'date_administered': '2013-03-12', # need to try multiple data formats
-          'hd_imfile_updated_at': hd_imfile_updated_at,
-          'cvx_code': '10'
+          patient_number: '100032',
+          date_administered: '2013-03-12', # need to try multiple data formats
+          hd_imfile_updated_at: hd_imfile_updated_at,
+          cvx_code: '10'
         }.stringify_keys
       )
     end
+    it 'creates a new patient if patient_number cannot be found' do
+      hd_imfile_updated_at = DateTime.now.to_s
+      vaccine_dose_data = {
+        vaccine_dose_data: [
+          {
+            patient_number: '100032',
+            date_administered: '2013-03-12',
+            hd_imfile_updated_at: hd_imfile_updated_at,
+            cvx_code: '10'
+          }
+        ]
+      }
+      post :import_vaccine_dose_data, vaccine_dose_data, format: :json
+      expect(response.response_code).to eq(201)
+      response_body = JSON.parse(response.body)
+      expect(response_body['status']).to eq('partial_failure')
+
+      data_import_error = DataImportError.last
+      expect(data_import_error.error_message).to eq(
+        'Patient with patient_number 100032 could not be found'
+      )
+      expect(data_import_error.raw_hash).to eq(
+        {
+          patient_number: '100032',
+          date_administered: '2013-03-12', # need to try multiple data formats
+          hd_imfile_updated_at: hd_imfile_updated_at,
+          cvx_code: '10'
+        }.stringify_keys
+      )
+
+      test_patient = Patient.find_by_patient_number(100032)
+      expect(test_patient.first_name).to eq('Not Found')
+      expect(test_patient.last_name).to eq('Not Found')
+      expect(test_patient.dob).to eq(DateTime.parse('1/1/1900'))
+    end
   end
 end
-
-
-
-
-    # it '#patients should return a list one patient with valid search params' do
-    #   patient = FactoryGirl.create(:patient)
-    #   get :index, search: patient.patient_number
-    #   expect(assigns(:patients).length).to eq(1)
-    #   expect(assigns(:patients)[0].id).to eq(patient.id)
-    # end
-
-    # it '#patients should 201 when visited with no search params' do
-    #   get :index
-    #   expect(response.response_code).to eq(201)
-    # end
-
-    # it '#patients should return no users with no search params' do
-    #   get :index
-    #   expect(assigns(:patients).length).to eq(0)
-    # end

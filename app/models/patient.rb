@@ -68,7 +68,7 @@ class Patient < ActiveRecord::Base
     if patient.nil?
       patient = Patient.create_full_profile(**options)
     else
-      patient.update(patient_args)
+      patient.update(**options)
     end
     patient
   end
