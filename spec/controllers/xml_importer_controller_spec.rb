@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ImporterController, type: :controller do
+RSpec.describe XMLImporterController, type: :controller do
   include PatientSpecHelper
 
   before(:each) do

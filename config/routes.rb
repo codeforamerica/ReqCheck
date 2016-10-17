@@ -24,8 +24,8 @@ Rails.application.routes.draw do
   get '/xml', to: 'importer#index'
 
   # API for importing Patient Data from the Extractor
-  post '/patient_data', to: 'importer#import_patient_data'
-  post '/vaccine_dose_data', to: 'importer#import_vaccine_dose_data'
+  post '/patient_data', to: 'api#import_patient_data'
+  post '/vaccine_dose_data', to: 'api#import_vaccine_dose_data'
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
