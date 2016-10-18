@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, :skip => [:registrations]
+  as :user do
+    get 'users/edit', to: 'devise/registrations#edit',
+                      as: 'edit_user_registration'
+    put 'users', to: 'devise/registrations#update', as: 'user_registration'
+  end
+
   get 'welcome/index'
 
   # To have a /login endpoint
-  get 'login', to: 'devise/sessions#new'
+  devise_scope :user do
+    get 'login', to: 'devise/sessions#new'
+  end
 
   # authenticated :user do
   #   root to: 'admin/dashboard#index', as: :authenticated_root
