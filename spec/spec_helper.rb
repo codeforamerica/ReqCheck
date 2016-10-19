@@ -17,7 +17,9 @@
 require 'database_cleaner'
 require_relative './support/time_help'
 require 'capybara/rspec'
-
+puts '###################'
+puts "HELLO WORLD"
+puts '###################'
 Capybara.javascript_driver = :webkit
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
