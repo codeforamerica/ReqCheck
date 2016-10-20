@@ -36,6 +36,67 @@ feature 'Signing in' do
     expect(page).to have_current_path('/patients')
     expect(page).to have_content('Search Patients')
   end
+
+  scenario 'Unsuccessful sign in with admin' do
+    FactoryGirl.create(:admin)
+
+    visit '/'
+    within '.header' do
+      click_link 'Sign in'
+    end
+
+    fill_in 'Email', with: 'admin@admin.com'
+    fill_in 'Password', with: 'bad_password'
+    click_on('Log in')
+
+    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_content('Invalid Email or password.')
+    expect(page).to have_content('Log In')
+  end
+
+  scenario 'Unsuccessful sign in 4 times warns of locked account' do
+    FactoryGirl.create(:admin)
+
+    visit '/'
+    within '.header' do
+      click_link 'Sign in'
+    end
+
+    4.times do
+      fill_in 'Email', with: 'admin@admin.com'
+      fill_in 'Password', with: 'bad_password'
+      click_on('Log in')
+    end
+    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_content(
+      'You have one more attempt before your account is locked.'
+    )
+    expect(page).to have_content('Log In')
+  end
+  scenario 'Unsuccessful sign in 5 times locks account' do
+    FactoryGirl.create(:admin)
+
+    visit '/'
+    within '.header' do
+      click_link 'Sign in'
+    end
+
+    5.times do
+      fill_in 'Email', with: 'admin@admin.com'
+      fill_in 'Password', with: 'bad_password'
+      click_on('Log in')
+    end
+    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_content('Your account is locked.')
+
+    fill_in 'Email', with: 'admin@admin.com'
+    fill_in 'Password', with: 'bad_password'
+    click_on('Log in')
+
+    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_content('Your account is locked.')
+    expect(page).to have_content('Log In')
+  end
 end
 
 # Ensure sign in admin goes to admin homepage
