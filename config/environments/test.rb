@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Added from Capybara Docs b/c the env is not threadsafe
+  config.allow_concurrency = false
+
   # Remove verbose activerecord logging
   config.log_level = :info
 

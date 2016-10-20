@@ -6,8 +6,14 @@ require_relative 'support/time_help'
 FactoryGirl.define do
   extend TimeHelp
 
-  factory :user do
-
+  factory :staff, class: User do
+    email 'staff@staff.com'
+    password 'password'
+  end
+  factory :admin, class: User do
+    email 'admin@admin.com'
+    password 'password'
+    role 'admin'
   end
   factory :patient_data_import do
     type 'PatientDataImport'

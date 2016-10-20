@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  devise_for :users, :skip => [:registrations]
+  devise_for :users, skip: [:registrations]
   as :user do
     get 'users/edit', to: 'devise/registrations#edit',
                       as: 'edit_user_registration'
@@ -21,10 +21,8 @@ Rails.application.routes.draw do
   #   root to: 'users/sessions#new', as: :unauthenticated_root
   # end
 
-  # Heartbeat to get last import DateTime
-
-  # resources :vaccine_doses
   resources :patients, only: [:index, :show]
+  # resources :vaccine_doses, only: [:show]
 
   # xml importation
   post '/xml', to: 'importer#import_file'
