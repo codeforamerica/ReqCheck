@@ -43,14 +43,6 @@ RSpec.configure do |config|
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
 
-  # allow devise to fake user sign-in
-  # config.include Devise::Test::ControllerHelpers, type: :controller
-  # config.include Devise::Test::ControllerHelpers, type: :view
-  # config.include Warden::Test::Helpers
-  # config.before :suite do
-  #   Warden.test_mode!
-  # end
-
   # Database Cleaner
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
@@ -63,6 +55,9 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  # For fake user login helpers
+  config.include Devise::TestHelpers, type: :controller
 
   # For Login Helpers in Feature Specs
   config.include Warden::Test::Helpers
