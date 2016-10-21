@@ -1,6 +1,7 @@
 # signing_in_spec.rb
 require 'rails_helper'
 
+# Ensure that sign in is redirected to patient index search
 
 feature 'Signing in' do
   scenario 'Successful sign in with admin' do

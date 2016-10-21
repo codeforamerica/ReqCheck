@@ -43,7 +43,7 @@ RSpec.describe PatientsController, type: :controller do
     end
   end
 
-  describe 'testing that write methods do not exist' do
+  describe 'testing write methods do not exist' do
     it "rejects POST to '/patients'" do
       sign_in(staff)
       expect(post: '/patients').not_to be_routable
