@@ -26,7 +26,7 @@ RSpec.describe VaccineDosesController, type: :controller do
       :patch,
       :delete
     ].each do |action|
-      it "rejects POST #{action} with no sign in and redirects" do
+      it "rejects POST #{action}" do
         vaccine_dose_id = FactoryGirl.create(:vaccine_dose).id
         sign_in(staff)
         expect(action => "/vaccine_doses/#{vaccine_dose_id}").not_to be_routable

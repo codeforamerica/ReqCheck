@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   # resources :vaccine_doses, only: [:show]
 
   # xml importation
-  post '/xml', to: 'importer#import_file'
-  get '/xml', to: 'importer#index'
+  post '/xml', to: 'xml_importer#import_file'
+  get '/xml', to: 'xml_importer#index'
 
   # API for importing Patient Data from the Extractor
   get '/heartbeat', to: 'api#heartbeat'

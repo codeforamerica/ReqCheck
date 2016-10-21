@@ -1,4 +1,7 @@
 class XMLImporterController < ApplicationController
+  def index
+  end
+
   def import_file
     file_data = params[:uploaded_file]
     if file_data.respond_to?(:read)
