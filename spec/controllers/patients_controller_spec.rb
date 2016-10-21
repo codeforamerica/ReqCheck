@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+# Write controller test to ensure a logged out person will be redirected to home page
+
 RSpec.describe PatientsController, type: :controller do
   let(:staff) { FactoryGirl.create(:staff) }
   before(:all) { FactoryGirl.create_list(:patient, 5) }
@@ -89,8 +91,4 @@ RSpec.describe PatientsController, type: :controller do
       expect(assigns(:patients).length).to eq(0)
     end
   end
-
-  # Write controller test to ensure a logged out person will be redirected to home page
-  # Write controller spec to ensure that a new patient cannot be created
-  # Write controller spec to ensure that a logged in person cannot update a patient profile
 end
