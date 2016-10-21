@@ -22,7 +22,7 @@ feature 'Signing in' do
     expect(page).to have_content('Signed in successfully.')
   end
 
-  scenario 'Successful sign in with admin' do
+  scenario 'Successful sign in with staff' do
     FactoryGirl.create(:staff)
 
     visit '/'

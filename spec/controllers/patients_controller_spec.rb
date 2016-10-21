@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# Write controller test to ensure a logged out person will be redirected to home page
-
 RSpec.describe PatientsController, type: :controller do
   let(:staff) { FactoryGirl.create(:staff) }
   before(:all) { FactoryGirl.create_list(:patient, 5) }

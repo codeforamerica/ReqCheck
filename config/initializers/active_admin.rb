@@ -216,7 +216,7 @@ ActiveAdmin.setup do |config|
     admin.build_menu :utility_navigation do |menu|
       menu.add label: 'ReqCheck Home', url: '/patients'
       admin.add_current_user_to_menu  menu
-      admin.add_logout_button_to_menu menu
+      menu.add label: 'Sign out', url: '/users/sign_out', priority: 20
     end
   end
   #
