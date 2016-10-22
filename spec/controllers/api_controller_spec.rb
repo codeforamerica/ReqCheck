@@ -79,6 +79,40 @@ RSpec.describe ApiController, type: :controller do
         vaccine_dose_import_time = vaccine_dose_import.created_at
         expect(response_body_time.to_i).to eq(vaccine_dose_import_time.to_i)
       end
+      it 'returns nil if there are no imports' do
+        DataImportError.destroy_all
+        VaccineDoseDataImport.destroy_all
+        PatientDataImport.destroy_all
+
+        get :heartbeat
+        expect(response.response_code).to eq(200)
+        response_body = JSON.parse(response.body)
+        expect(response_body['last_update_date']).to eq(nil)
+      end
+      it 'returns last patient_data_import with no vaccine_dose_imports' do
+        DataImportError.destroy_all
+        VaccineDoseDataImport.destroy_all
+        patient_data_import = FactoryGirl.create(:patient_data_import)
+
+        get :heartbeat
+        expect(response.response_code).to eq(200)
+        response_body = JSON.parse(response.body)
+        response_body_time = DateTime.parse(response_body['last_update_date'])
+        patient_data_import_time = patient_data_import.created_at
+        expect(response_body_time.to_i).to eq(patient_data_import_time.to_i)
+      end
+      it 'returns last vaccine_dose_import with no patient_data_imports' do
+        DataImportError.destroy_all
+        PatientDataImport.destroy_all
+        vaccine_data_import = FactoryGirl.create(:vaccine_dose_data_import)
+
+        get :heartbeat
+        expect(response.response_code).to eq(200)
+        response_body = JSON.parse(response.body)
+        response_body_time = DateTime.parse(response_body['last_update_date'])
+        vaccine_data_import_time = vaccine_data_import.created_at
+        expect(response_body_time.to_i).to eq(vaccine_data_import_time.to_i)
+      end
     end
   end
 

@@ -3,9 +3,14 @@ class ApiController < ApplicationController
                                password: ENV['EXTRACTOR_PASSWORD']
 
   def heartbeat
-    last_imports = [PatientDataImport.last, VaccineDoseDataImport.last]
-    earliest_import_obj = earliest_created_object(last_imports)
-    return_json = { last_update_date: earliest_import_obj.created_at }
+    last_imports = [PatientDataImport.last, VaccineDoseDataImport.last].compact
+    earliest_import_obj  = earliest_created_object(last_imports)
+    earliest_import_date = if earliest_import_obj.nil?
+                             nil
+                           else
+                             earliest_import_obj.created_at
+                           end
+    return_json = { last_update_date: earliest_import_date }
     render json: return_json, status: 200
   end
 
