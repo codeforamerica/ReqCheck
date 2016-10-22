@@ -26,8 +26,6 @@
                 <% end %>
                 <%= link_to current_user.email, edit_user_registration_path %>
                 <%= link_to "Sign out", destroy_user_session_path, method: :get %>
-              <% else %>
-                <%= link_to "Sign in", new_user_session_path %>
               <% end %>
             </ul>
           </div>
