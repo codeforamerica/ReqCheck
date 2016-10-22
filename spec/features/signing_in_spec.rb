@@ -38,7 +38,7 @@ feature 'Signing in' do
     expect(page).to have_content('Search Patients')
   end
 
-  scenario 'Unsuccessful sign in with admin' do
+  scenario 'Unsuccessful sign in routes back to homepage' do
     FactoryGirl.create(:admin)
 
     visit '/'
@@ -50,7 +50,7 @@ feature 'Signing in' do
     fill_in 'Password', with: 'bad_password'
     click_on('Log in')
 
-    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_current_path('/')
     expect(page).to have_content('Invalid Email or password.')
     expect(page).to have_content('Log In')
   end

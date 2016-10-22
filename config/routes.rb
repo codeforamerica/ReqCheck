@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  devise_for :users, skip: [:registrations]
+  devise_for :users, skip: [:registrations, :sessions]
   as :user do
+    # Allow edits to a user profile
     get 'users/edit', to: 'devise/registrations#edit',
                       as: 'edit_user_registration'
-    put 'users', to: 'devise/registrations#update', as: 'user_registration'
+    put 'users', to: 'devise/registrations#update',
+                 as: 'user_registration'
+
+    # Sign in and out routes
+    post 'users/sign_in', to: 'devise/sessions#create',
+                          as: :user_session
+    get 'users/sign_out', to: 'devise/sessions#destroy',
+                          as: :destroy_user_session
   end
 
   get 'welcome/index'

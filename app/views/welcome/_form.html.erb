@@ -1,12 +1,12 @@
 <div class="row align-center">
 <div class="columns small-12 large-8 medium-8">
 <h1>Log In</h1>
-<%= form_tag("/users/sign_in", method: "post") do %>
-  <%= label_tag(:email, "Email:") %>
-  <%= text_field_tag(:email) %>
-  <%= label_tag(:account, "Password:") %>
-  <%= password_field(:account, :password) %>
-  <button><%= submit_tag "Log in", class:"button radius" %></button>
+<%= form_for(:user, :url => session_path(:user)) do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email, autofocus: true %>
+  <%= f.label :password %>
+  <%= f.password_field :password, autocomplete: "off" %>
+  <button><%= f.submit "Log in", class:"button radius" %></button>
 <% end %>
 </div>
 </div>
