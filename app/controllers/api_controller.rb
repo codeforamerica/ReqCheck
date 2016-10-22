@@ -5,12 +5,15 @@ class ApiController < ApplicationController
   def heartbeat
     last_imports = [PatientDataImport.last, VaccineDoseDataImport.last].compact
     earliest_import_obj  = earliest_created_object(last_imports)
-    earliest_import_date = if earliest_import_obj.nil?
-                             nil
-                           else
-                             earliest_import_obj.created_at
-                           end
-    return_json = { last_update_date: earliest_import_date }
+    if earliest_import_obj.nil?
+      earliest_import_date = nil
+      earliest_import_date_timestamp = nil
+    else
+      earliest_import_date = earliest_import_obj.created_at
+      earliest_import_date_timestamp = earliest_import_date.getutc
+    end
+    return_json = { last_update_date: earliest_import_date,
+                    last_update_date_timestamp: earliest_import_date_timestamp }
     render json: return_json, status: 200
   end
 
