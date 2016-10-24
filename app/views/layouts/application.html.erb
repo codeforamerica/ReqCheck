@@ -25,7 +25,7 @@
                   <%= link_to "Admin Dashboard", admin_root_path %>
                 <% end %>
                 <%= link_to current_user.email, edit_user_registration_path %>
-                <%= link_to "Sign out", destroy_user_session_path, method: :get %>
+                <%= link_to "Sign out", destroy_user_session_path, method: :get, class:"button" %>
               <% end %>
             </ul>
           </div>
