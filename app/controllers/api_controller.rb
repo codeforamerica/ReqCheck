@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   http_basic_authenticate_with name: ENV['EXTRACTOR_NAME'],
                                password: ENV['EXTRACTOR_PASSWORD']
 
