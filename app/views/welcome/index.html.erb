@@ -4,8 +4,8 @@
 		<p>ReqCheck is a tool for checking patients' immunization records. It will tell you if they're due for immunizations, or when they need them next.</p>
 	</div>
 	<div class="card columns small-8">
-		<% if notice %>
-		<p class="callout alert"><%= notice %></p>
+		<% if alert %>
+			<p class="callout alert"><%= alert %> 1</p>
 		<% end %>
 		<%= render 'form' %>
 	</div>

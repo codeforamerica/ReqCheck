@@ -12,6 +12,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20161013230026) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -252,12 +253,12 @@ ActiveRecord::Schema.define(version: 20161013230026) do
     t.datetime "updated_at",                                  null: false
     t.integer  "patients_id"
     t.integer  "cvx_code",                                    null: false
+    t.string   "trade_name"
     t.string   "vfc_description"
     t.string   "given_by"
     t.string   "injection_site"
     t.string   "hd_imfile_updated_at"
     t.text     "comments"
-    t.string   "trade_name"
   end
 
   add_index "vaccine_doses", ["patient_number"], name: "index_vaccine_doses_on_patient_number", using: :btree
