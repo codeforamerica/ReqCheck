@@ -45,7 +45,7 @@ RSpec.describe ApiController, type: :controller do
 
     end
   end
-  describe 'GET heartbeat' do
+  describe 'POST heartbeat' do
     before(:each) do
       FactoryGirl.create(:vaccine_dose_data_import)
       FactoryGirl.create(:patient_data_import)
@@ -60,7 +60,7 @@ RSpec.describe ApiController, type: :controller do
         patient_import = FactoryGirl.create(:patient_data_import)
         FactoryGirl.create(:vaccine_dose_data_import)
 
-        get :heartbeat
+        post :heartbeat
         expect(response.response_code).to eq(200)
         response_body = JSON.parse(response.body)
         response_body_time = DateTime.parse(response_body['last_update_date'])
@@ -72,7 +72,7 @@ RSpec.describe ApiController, type: :controller do
         vaccine_dose_import = FactoryGirl.create(:vaccine_dose_data_import)
         FactoryGirl.create(:patient_data_import)
 
-        get :heartbeat
+        post :heartbeat
         expect(response.response_code).to eq(200)
         response_body = JSON.parse(response.body)
         response_body_time = DateTime.parse(response_body['last_update_date'])
@@ -84,7 +84,7 @@ RSpec.describe ApiController, type: :controller do
         VaccineDoseDataImport.destroy_all
         PatientDataImport.destroy_all
 
-        get :heartbeat
+        post :heartbeat
         expect(response.response_code).to eq(200)
         response_body = JSON.parse(response.body)
         expect(response_body['last_update_date']).to eq(nil)
@@ -94,7 +94,7 @@ RSpec.describe ApiController, type: :controller do
         VaccineDoseDataImport.destroy_all
         patient_data_import = FactoryGirl.create(:patient_data_import)
 
-        get :heartbeat
+        post :heartbeat
         expect(response.response_code).to eq(200)
         response_body = JSON.parse(response.body)
         response_body_time = DateTime.parse(response_body['last_update_date'])
@@ -106,7 +106,7 @@ RSpec.describe ApiController, type: :controller do
         PatientDataImport.destroy_all
         vaccine_data_import = FactoryGirl.create(:vaccine_dose_data_import)
 
-        get :heartbeat
+        post :heartbeat
         expect(response.response_code).to eq(200)
         response_body = JSON.parse(response.body)
         response_body_time = DateTime.parse(response_body['last_update_date'])
