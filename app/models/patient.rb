@@ -32,7 +32,8 @@ class Patient < ActiveRecord::Base
     allowable_keys = [
       :patient_number, :dob, :address, :address2, :city, :state,
       :zip_code, :cell_phone, :home_phone, :race, :ethnicity,
-      :gender, :hd_mpfile_updated_at, :email
+      :gender, :hd_mpfile_updated_at, :email, :family_number,
+      :hd_mpfile_updated_at, :notes
     ]
     options.keys.each do |key_symbol|
       if !allowable_keys.include? key_symbol

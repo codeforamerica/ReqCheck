@@ -18,7 +18,8 @@ module PatientValidator
     [
       :patient_number, :dob, :address, :address2, :city, :state,
       :zip_code, :cell_phone, :home_phone, :race, :ethnicity,
-      :gender, :first_name, :last_name, :email, :hd_mpfile_updated_at, :notes
+      :gender, :first_name, :last_name, :email, :hd_mpfile_updated_at, :notes,
+      :family_number
     ].each do |allowable_arg|
       temp_args.delete(allowable_arg)
     end
