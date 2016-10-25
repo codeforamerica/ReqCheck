@@ -67,21 +67,21 @@ RSpec.describe 'KCMO_HD_Data' do
 
     describe "patient with patient_number #{patient_number}" do
       it "\#evaluation_status evaluates to #{expected_evaluation}" do
-        db_patient = KCMODATA.all_db_patient_profiles.find_by(
+        db_patient = KCMODATA.all_db_patiens.find_by(
           patient_number: patient_number
-        ).patient
+        )
         expect(db_patient.evaluation_status).to eq(expected_evaluation)
       end
       it "\#future_dose_dates equals the expected_future_dose_dates" do
-        db_patient = KCMODATA.all_db_patient_profiles.find_by(
+        db_patient = KCMODATA.all_db_patients.find_by(
           patient_number: patient_number
-        ).patient
+        )
         expect(db_patient.future_dose_dates).to eq(expected_future_dates)
       end
       it "\#future_dose_dates for hep b" do
-        db_patient = KCMODATA.all_db_patient_profiles.find_by(
+        db_patient = KCMODATA.all_db_patients.find_by(
           patient_number: patient_number
-        ).patient
+        )
         target_dose = db_patient.future_dose('hepb')
         # if target_dose.nil?
         #   byebug

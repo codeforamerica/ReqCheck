@@ -3,7 +3,7 @@ module PatientSpecHelper
     vaccines = vaccine_dates.map.with_index do |vaccine_date, index|
       FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: test_patient.patient_profile,
+        patient: test_patient,
         date_administered: vaccine_date,
         cvx_code: cvx_code
       )
@@ -69,7 +69,7 @@ module PatientSpecHelper
   end
 
   def valid_2_year_test_patient(test_patient = nil)
-    test_patient ||= FactoryGirl.create(:patient_with_profile,
+    test_patient ||= FactoryGirl.create(:patient,
                                         dob: 2.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
@@ -90,7 +90,7 @@ module PatientSpecHelper
   end
 
   def valid_5_year_test_patient(test_patient = nil)
-    test_patient ||= FactoryGirl.create(:patient_with_profile,
+    test_patient ||= FactoryGirl.create(:patient,
                                         dob: 5.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
@@ -111,7 +111,7 @@ module PatientSpecHelper
   end
 
   def incomplete_no_immediate_vaccines_2_year_test_patient(test_patient = nil)
-    test_patient ||= FactoryGirl.create(:patient_with_profile,
+    test_patient ||= FactoryGirl.create(:patient,
                                         dob: 2.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
@@ -133,7 +133,7 @@ module PatientSpecHelper
   end
 
   def invalid_2_year_test_patient(test_patient = nil)
-    test_patient ||= FactoryGirl.create(:patient_with_profile,
+    test_patient ||= FactoryGirl.create(:patient,
                                         dob: 2.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {
@@ -149,7 +149,7 @@ module PatientSpecHelper
   end
 
   def invalid_5_year_test_patient(test_patient = nil)
-    test_patient ||= FactoryGirl.create(:patient_with_profile,
+    test_patient ||= FactoryGirl.create(:patient,
                                         dob: 5.years.ago.to_date)
     dob = test_patient.dob
     required_vaccine_cvxs = {

@@ -4,27 +4,54 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
+  extend TimeHelp
+
   factory :age_evaluator do
-    
+
   end
   factory :target_dose_evaluator do
-    
+
   end
   factory :base_evaluator do
-    
+
   end
   factory :base_evaluation do
-    
-  end
-  factory :data_import_error do
 
+  end
+
+  factory :staff, class: User do
+    email 'staff@staff.com'
+    password 'password'
+  end
+  factory :admin, class: User do
+    email 'admin@admin.com'
+    password 'password'
+    role 'admin'
+  end
+  factory :patient_data_import do
+    type 'PatientDataImport'
+    updated_patient_numbers [1, 2, 3]
+  end
+  factory :vaccine_dose_data_import do
+    type 'VaccineDoseDataImport'
+    updated_patient_numbers [1, 2, 3]
+  end
+  factory :patient_data_import_error, class: DataImportError do
+    object_class_name 'Patient'
+    error_message 'Test patient error message'
+
+    association :data_import, factory: :patient_data_import
+  end
+  factory :vaccine_dose_data_import_error, class: DataImportError do
+    object_class_name 'VaccineDose'
+    error_message 'Test vaccine_dose error message'
+
+    association :data_import, factory: :vaccine_dose_data_import
   end
   factory :vaccine_dose_evaluator do
   end
   factory :antigen_evaluator do
   end
-  extend TimeHelp
-
   factory :interval do
     interval_type 'from_previous'
     allowable false
@@ -252,28 +279,8 @@ FactoryGirl.define do
     sequence(:first_name, 1) { |n| "Test#{n}" }
     sequence(:last_name, 1) { |n| "Tester#{n}" }
     sequence(:email, 1) { |n| "test#{n}@example.com" }
-  end
-
-  factory :patient_with_profile, parent: :patient do
-    transient do
-      dob false
-      patient_number false
-    end
-    after(:create) do |patient, args|
-      patient_profile_args = { patient_id: patient.id.to_s }
-      patient_profile_args[:dob] = args.dob if args.dob
-      if args.patient_number
-        patient_profile_args[:patient_number] = args.patient_number
-      end
-      create(:patient_profile, patient: patient, **patient_profile_args)
-    end
-  end
-
-  factory :patient_profile do
-    dob { 12.years.ago.to_date }
+    dob { 5.years.ago.to_date }
     sequence(:patient_number, 11_000)
-
-    association :patient, factory: :patient
   end
 
   factory :vaccine_dose do
@@ -297,8 +304,8 @@ FactoryGirl.define do
     expiration_date { 2.months.since.to_date }
   end
 
-  factory :vaccine_dose_with_patient_profile, parent: :vaccine_dose do
-    association :patient_profile, factory: :patient_profile
+  factory :vaccine_dose_with_patient, parent: :vaccine_dose do
+    association :patient, factory: :patient
   end
 
   factory :vaccine_dose_by_cvx, parent: :vaccine_dose do

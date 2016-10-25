@@ -1,4 +1,5 @@
 $primary-color: green;
+
 .callout {
 	border:none;
 	border-top-right-radius: 2px;
@@ -27,29 +28,40 @@ $primary-color: green;
 
 .patient-info {
 	table tbody {border:none;}
+	table {margin-bottom: 0;}
 	thead {
 		background-color: white;  
 		border-width: 0 0 1px 0;
 		border-color: $kc-grey;
 	}
 	thread {border:none;}
-	p {display: none;}
 }
 
-.pink {background-color: pink;}
+.pink {
+	background-color: pink;
+	border:1px solid red;
+	img {height: 40px;}
+}
+.green {background-color: green; border:2px solid yellow;}
 
 h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
-.top-bar {margin-bottom: 1rem; 
+.header {
+	margin-bottom: 1rem; 
+	padding:1rem 0;
 	background-color: $kc-grey; 
 	color:white; 
-	min-height: 72px;
 }
 .top-bar .button {margin-bottom: 0px;}
 
 .top-bar-title  {
+	float: left;
 	img {height: 40px;}
 	a:hover {background: none;}
+}
+
+.top-bar-right {
+	float: right;
 }
 
 .button {
@@ -69,19 +81,25 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	&:hover, &:focus {
 		background-color:#D2D2D2;
 	}
-	
 }
 
 .vaccine-record .vax-name {
 	background-color:$kc-grey; 
 	color:white; 
-	border-color: $kc-grey;
+	border: 1px solid $kc-grey;
 	width:200px;
+	font-size: 1rem;
 }
 .vaccine-record tbody {border-color: $kc-grey;}
 .vaccine-record thead {border: none;}
-.vaccine-record thead th {min-height: 60px;}
+.vaccine-record thead th {min-height: 60px; font-size:13px;}
+.vaccine-record td {font-size: 13px;}
 
+.no-dose {
+		border:1px solid $kc-grey;
+		font-weight: normal;
+		font-style:italic; 	
+	}
 
 #callout-patient {
 	padding-bottom: 0;
@@ -114,5 +132,9 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	}
 	
 }
-.footer a.button {text-decoration: none;}
 
+.varicella-history {display: none;}
+.footer a.button {text-decoration: none;}
+@media print {
+	thead {background-color: #e6e6e6!important;background: #e6e6e6!important;}
+}

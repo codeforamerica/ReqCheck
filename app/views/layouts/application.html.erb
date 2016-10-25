@@ -12,29 +12,34 @@
   </head>
 
   <body>
-    <div class="top-bar">
-      <div class="top-bar-title">
-
-        <%= link_to image_tag("ReqCheckLogo.svg", :alt => "ReqCheck logo"), root_url %>
-
-      </div>
-      <div>
-        <div class="top-bar-right">
-            <% if @patient || @patients %>
-              <% if @patient %>
-              <%= link_to "New Search", patients_path, class: "button margin-right-10"  %>
+    <div class="header">
+      <div class="row align-center">
+        <div class="small-12 large-8 medium-8 ">
+          <div class="top-bar-title">
+            <%= link_to image_tag("ReqCheckLogo.svg", :alt => "ReqCheck"), root_url %>
+          </div>
+          <div>
+            <ul class="top-bar-right">
+              <% if signed_in? %>
+                <% if current_user.role?('admin') %>
+                  <%= link_to "Admin Dashboard", admin_root_path %>
+                <% end %>
+                <%= link_to current_user.email, edit_user_registration_path %>
+                <%= link_to "Sign out", destroy_user_session_path, method: :get %>
               <% end %>
-              <%= link_to "Log Out", {controller: "welcome", action: "index"}, class: "button secondary hollow" %>
-            <% end %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
     <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
     <footer class="footer">
       <div class="row align-center">
-        <div class="columns small-8">
+        <div class="columns small-12">
           <%= link_to "About", patients_path, class: "button secondary hollow margin-right-10"  %>
           A project of <a href='https://www.codeforamerica.org/why-government/our-partners/kansas-city-mo'>Code for America</a> for the <a href="http://kcmo.gov/health/">Kansas City</a> Health Department
         </div>

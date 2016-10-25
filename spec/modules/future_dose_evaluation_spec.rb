@@ -17,7 +17,7 @@ RSpec.describe FutureDoseEvaluation do
 
   let(:polio_catch_up_patient) do
     patient_dob = 2.years.ago.to_date
-    test_patient = FactoryGirl.create(:patient_with_profile,
+    test_patient = FactoryGirl.create(:patient,
                                       dob: patient_dob)
     vaccine_dates = [(patient_dob + 6.weeks), (patient_dob + 10.weeks)]
     create_patient_vaccines(test_patient, vaccine_dates, cvx_code = 10)
@@ -26,7 +26,7 @@ RSpec.describe FutureDoseEvaluation do
 
   let(:polio_up_to_date_patient) do
     patient_dob = 2.years.ago.to_date
-    test_patient = FactoryGirl.create(:patient_with_profile,
+    test_patient = FactoryGirl.create(:patient,
                                       dob: patient_dob)
     vaccine_dates = [
       (patient_dob + 6.weeks),

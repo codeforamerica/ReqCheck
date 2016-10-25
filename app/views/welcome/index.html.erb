@@ -1,9 +1,12 @@
-<div class="row text-center align-center welcome-center">
-	<div class="columns small-8">
-		<h1>Welcome to ReqCheck</h1>
-		<div>
-			<p>Built with care by the KCMO fellows for the KCMO Health Department</p>
-			<%= link_to "Login", { controller: "welcome", action: "login" }, class: "button radius" %>
-		</div>
+<div class="row align-center">
+	<div class="card columns small-8">
+		<h2>Welcome to ReqCheck</h2>
+		<p>ReqCheck is a tool for checking patients' immunization records. It will tell you if they're due for immunizations, or when they need them next.</p>
+	</div>
+	<div class="card columns small-8">
+		<% if notice %>
+		<p class="callout alert"><%= notice %></p>
+		<% end %>
+		<%= render 'form' %>
 	</div>
 </div>

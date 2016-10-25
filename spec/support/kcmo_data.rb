@@ -1651,22 +1651,27 @@ module KCMODATA
     Patient.create(
       first_name: patient_hash[:patient_name].split(' ').first,
       last_name: patient_hash[:patient_name].split(' ').last,
-      patient_profile_attributes: {
-        dob: patient_hash[:dob],
-        patient_number: patient_hash[:patient_number],
-        gender: gender
-      }
+      dob: patient_hash[:dob],
+      patient_number: patient_hash[:patient_number],
+      gender: gender
     )
   end
 
   def self.create_vaccine_doses(patient, vaccine_doses_array)
     vaccine_doses_array.map do |vaccine_dose_args|
+      begin
+        vaccine_codes = TextVax.find_all_vax_codes_by_cvx(vaccine_dose_args[:cvx_code])
+        vaccine_dose_args[:vaccine_code] = vaccine_codes.first
+      rescue
+        puts "No vaccine code found for #{vaccine_dose_args}"
+      end
       VaccineDose.create(
-        patient_profile: patient.patient_profile,
+        patient: patient,
         hd_description: vaccine_dose_args[:hd_description],
         date_administered: vaccine_dose_args[:date_administered],
         history_flag: vaccine_dose_args[:history],
-        cvx_code: vaccine_dose_args[:cvx_code]
+        cvx_code: vaccine_dose_args[:cvx_code],
+        vaccine_code: vaccine_dose_args[:vaccine_code]
       )
     end
   end
@@ -1714,41 +1719,30 @@ module KCMODATA
     not_complete_vaccine_groups[patient_number.to_sym]
   end
 
-  def all_db_patient_profiles
-    patient_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
-    PatientProfile.where(patient_number: patient_numbers)
-  end
-
   def all_db_patients
-    all_patient_profiles = all_db_patient_profiles
-    all_patients         = all_patient_profiles.map(&:patient)
-    all_patient_ids      = all_patients.map(&:id)
-    Patient.where(id: all_patient_ids)
+    patient_numbers = ALL_PATIENTS.map { |args| args[:patient_number] }
+    Patient.where(patient_number: patient_numbers)
   end
 
   def all_vaccine_doses
-    all_patient_profiles    = all_db_patient_profiles
-    all_patient_profile_ids = all_patient_profiles.map(&:id)
-    VaccineDose.where(patient_profile_id: all_patient_profile_ids)
+    all_patient_ids = all_db_patients.map(&:id)
+    VaccineDose.where(patient__id: all_patient_ids)
   end
 
   def create_db_patients
-    if PatientProfile.find_by(patient_number: PATIENT1[:patient_number]).nil?
+    if Patient.find_by(patient_number: PATIENT1[:patient_number]).nil?
       create_all_patients(ALL_PATIENTS)
     end
   end
 
   def delete_db_patients
     all_vaccines         = all_vaccine_doses
-    all_patient_profiles = all_db_patient_profiles
     all_patients         = all_db_patients
 
     all_vaccines.delete_all unless all_vaccines.nil?
-    all_patient_profiles.delete_all unless all_patient_profiles.nil?
     all_patients.delete_all unless all_patients.nil?
   end
   module_function :delete_db_patients, :create_db_patients, :all_db_patients,
-                  :all_db_patient_profiles, :get_expected_record_status,
-                  :get_expected_not_complete_vaccine_groups,
-                  :all_vaccine_doses, :expected_results
+                  :all_vaccine_doses, :get_expected_record_status,
+                  :get_expected_not_complete_vaccine_groups, :expected_results
 end

@@ -9,9 +9,9 @@ RSpec.describe VaccineDoseEvaluator, type: :model do
 
   # Creates a test patient with two vaccine doses
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient_with_profile)
-    FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 7.weeks))
-    FactoryGirl.create(:vaccine_dose, patient_profile: test_patient.patient_profile, vaccine_code: "IPV", date_administered: (test_patient.dob + 11.weeks))
+    test_patient = FactoryGirl.create(:patient)
+    FactoryGirl.create(:vaccine_dose, patient: test_patient, vaccine_code: "IPV", date_administered: (test_patient.dob + 7.weeks))
+    FactoryGirl.create(:vaccine_dose, patient: test_patient, vaccine_code: "IPV", date_administered: (test_patient.dob + 11.weeks))
     test_patient.reload
     test_patient
   end
