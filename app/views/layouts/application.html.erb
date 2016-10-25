@@ -27,9 +27,6 @@
                 <%= link_to "Sign out", destroy_user_session_path, method: :get, class:"button secondary hollow" %>
                 <%= link_to image_tag("avatar.png", :alt => "edit user"), edit_user_registration_path, class:"avatar" %>
               <% end %>
-              <% if @patient %>
-              <%= link_to "New Search", patients_path, class: "button"  %>
-              <% end %>
             </ul>
           </div>
         </div>

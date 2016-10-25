@@ -17,8 +17,8 @@ $primary-color: green;
 	.explanation {margin-left:4rem;}
 }
 .callout.success {background-color: #2b840a; margin: 0 -15px;} 
-.callout.warning {background-color: #F3D812; color:black;} 
-.callout.alert {background-color: #af0216;}
+.callout.warning {background-color: #F3D812; color:black; margin: 0 -15px;} 
+.callout.alert {background-color: #af0216; margin: 0 -15px;}
 
 .patient-info {
 	table tbody {border:none;}
@@ -66,6 +66,7 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
 .top-bar-right {
 	float: right;
+	margin-bottom: 0;
 }
 
 .button {
