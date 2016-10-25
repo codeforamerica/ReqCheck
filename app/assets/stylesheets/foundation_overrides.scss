@@ -13,12 +13,12 @@ $primary-color: green;
 .callout {
 	color: white;
 	border:none;
-	.success {background-color: #2b840a;} 
-	.warning {background-color: #F3D812; color:black;} 
-	.alert {background-color: #af0216;}
 	svg {float:left; margin-right:1rem;}
 	.explanation {margin-left:4rem;}
 }
+.callout.success {background-color: #2b840a; margin: 0 -15px;} 
+.callout.warning {background-color: #F3D812; color:black;} 
+.callout.alert {background-color: #af0216;}
 
 .patient-info {
 	table tbody {border:none;}
@@ -46,6 +46,16 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	background-color: $kc-grey; 
 	color:white; 
 }
+
+.avatar {
+	&:hover {background-color:transparent;}
+	margin-left:1rem;
+	img {
+	height: 40px;
+	width: 40px;
+	}
+}
+
 .top-bar .button {margin-bottom: 0px;}
 
 .top-bar-title  {

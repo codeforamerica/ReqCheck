@@ -24,8 +24,11 @@
                 <% if current_user.role?('admin') %>
                   <%= link_to "Admin Dashboard", admin_root_path %>
                 <% end %>
-                <%= link_to current_user.email, edit_user_registration_path %>
-                <%= link_to "Sign out", destroy_user_session_path, method: :get, class:"button" %>
+                <%= link_to "Sign out", destroy_user_session_path, method: :get, class:"button secondary hollow" %>
+                <%= link_to image_tag("avatar.png", :alt => "edit user"), edit_user_registration_path, class:"avatar" %>
+              <% end %>
+              <% if @patient %>
+              <%= link_to "New Search", patients_path, class: "button"  %>
               <% end %>
             </ul>
           </div>
