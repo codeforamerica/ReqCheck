@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BaseEvaluator, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#create_calculated_dates' do
+    it 'loops through a '
+  end
 end

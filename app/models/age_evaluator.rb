@@ -1,4 +1,8 @@
+# Class to build evaluation of a target dose's age attributes
 class AgeEvaluator < BaseEvaluator
+  # initialized with TargetDose
+  # inherited attr readers :target_dose, :evaluation, :attributes,
+  #                        :analyze_attributes, :evaluation
 
   def default_values
     {
@@ -16,10 +20,9 @@ class AgeEvaluator < BaseEvaluator
     %w(latest_recommended_age max_age)
   end
 
-  def build_attributes(antigen_administered_record)
+  def build_attributes
     patient_dob = target_dose.patient.dob
-    age_attrs = create_calculated_dates(base_attributes,
-                                        target_dose,
+    age_attrs = create_calculated_dates(target_dose,
                                         patient_dob)
     set_default_values(age_attrs)
   end

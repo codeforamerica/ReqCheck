@@ -45,57 +45,6 @@ RSpec.describe AgeEvaluation do
       ).where(antigens: { target_disease: 'polio' }).first
   end
 
-  describe '#create_age_attributes' do
-    %w(absolute_min_age_date min_age_date earliest_recommended_age_date
-       latest_recommended_age_date max_age_date).each do |age_attribute|
-      it "creates a hash with the attribute #{age_attribute}" do
-        age_attrs = test_object.create_age_attributes(
-          polio_antigen_series_dose,
-          test_patient.dob
-        )
-        as_dose_attr  = age_attribute.split('_')[0...-1].join('_')
-        polio_antigen_series_dose_age_string = polio_antigen_series_dose.send(
-          as_dose_attr
-        )
-        age_date = test_object.create_calculated_date(
-          polio_antigen_series_dose_age_string, test_patient.dob
-        )
-        expect(age_attrs[age_attribute.to_sym]).to eq(age_date)
-        expect(age_attrs[age_attribute.to_sym].class.name).to eq('Date')
-      end
-    end
-    describe 'default values' do
-      # As described on page 38 on CDC logic specs
-      # 'http://www.cdc.gov/vaccines/programs/iis/interop-proj/'\
-      #   'downloads/logic-spec-acip-rec.pdf'
-
-      it 'sets default value for max_age_date' do
-        polio_antigen_series_dose.max_age = nil
-        age_attrs = test_object.create_age_attributes(
-          polio_antigen_series_dose,
-          test_patient.dob
-        )
-        expect(age_attrs[:max_age_date]).to eq('12/31/2999'.to_date)
-      end
-      it 'sets default value for min_age_date' do
-        polio_antigen_series_dose.min_age = nil
-        age_attrs = test_object.create_age_attributes(
-          polio_antigen_series_dose,
-          test_patient.dob
-        )
-        expect(age_attrs[:min_age_date]).to eq('01/01/1900'.to_date)
-      end
-      it 'sets default value for absolute_min_age_date' do
-        polio_antigen_series_dose.absolute_min_age = nil
-        age_attrs = test_object.create_age_attributes(
-          polio_antigen_series_dose,
-          test_patient.dob
-        )
-        expect(age_attrs[:absolute_min_age_date]).to eq('01/01/1900'.to_date)
-      end
-    end
-  end
-
   describe '#evaluate_age_attributes' do
     let(:valid_age_attrs) do
       {

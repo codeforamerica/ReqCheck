@@ -51,4 +51,13 @@ RSpec.describe AgeCalc do
       ).to eq(false)
     end
   end
+  describe '#create_calculated_date' do
+    it 'takes a time string and a start date and returns the date diff' do
+      time_string   = '6 weeks'
+      input_date    = 10.weeks.ago
+      expected_date = 4.weeks.ago.to_date
+      expect(test_class.create_calculated_date(time_string, input_date))
+        .to eq(expected_date)
+    end
+  end
 end

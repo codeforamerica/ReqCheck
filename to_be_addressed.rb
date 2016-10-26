@@ -1,5 +1,8 @@
 # To be Addressed
 
+# Create tests to check the structure of the current xml file
+#   If they change the structure, the tests will fail (more generalized)
+
 # Dtap - if too old, need to switch to a series that the person qualifies for
 
 # CDC Question

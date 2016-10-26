@@ -1,6 +1,8 @@
 # Base class inherited by all Target Dose evaluators
 class BaseEvaluator
   include ActiveModel::Model
+  include ActiveModel::AttributeMethods
+  include AgeCalc
 
   attr_reader :target_dose, :evaluation, :attributes,
               :analyze_attributes, :evaluation
@@ -58,7 +60,7 @@ class BaseEvaluator
   end
 
   def date_attributes
-    {}
+    minimum_date_attributes + maximum_date_attributes
   end
 
   def set_default_values(return_hash)
@@ -76,7 +78,7 @@ class BaseEvaluator
                               result_hash={})
     date_attributes.each do |atrribute|
       date_atrribute  = atrribute + '_date'
-      time_string     = read_object.read_attribute(atrribute)
+      time_string     = read_object.send(atrribute)
       calculated_date = create_calculated_date(time_string, start_date)
       result_hash[date_atrribute.to_sym] = calculated_date
     end

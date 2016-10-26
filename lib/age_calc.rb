@@ -1,5 +1,4 @@
 module AgeCalc
-  include TimeCalc
   def validate_date_equal_or_after(base_date, evaluated_date)
     base_date <= evaluated_date
   end
