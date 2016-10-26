@@ -8,8 +8,7 @@ class PatientSeries
   def initialize(patient:, antigen_series:)
     @patient                   = patient
     @antigen_series            = antigen_series
-    @target_doses              = TargetDose.create_target_doses(antigen_series,
-                                                                patient_series)
+    @target_doses              = TargetDose.create_target_doses(self)
     @invalid_antigen_administered_records = []
   end
 

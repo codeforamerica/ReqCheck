@@ -81,7 +81,7 @@ RSpec.describe PatientSeries, type: :model do
     end
     describe 'it checks max age requirements' do
       it 'pulls ineligible target doses out' do
-        test_patient_20_years = FactoryGirl.create(:patient, dob: 20.years.ago).patient
+        test_patient_20_years = FactoryGirl.create(:patient, dob: 20.years.ago)
         test_patient_series   = PatientSeries.new(antigen_series: antigen_series,
                                                   patient: test_patient_20_years)
         target_doses = test_patient_series.target_doses
@@ -90,7 +90,7 @@ RSpec.describe PatientSeries, type: :model do
         expect(eligible_target_doses).to eq([])
       end
       it 'will return dose if no max_age requirement' do
-        test_patient_20_years = FactoryGirl.create(:patient, dob: 20.years.ago).patient
+        test_patient_20_years = FactoryGirl.create(:patient, dob: 20.years.ago)
         test_patient_series   = PatientSeries.new(antigen_series: antigen_series,
                                                   patient: test_patient_20_years)
         target_doses = test_patient_series.target_doses
@@ -124,7 +124,7 @@ RSpec.describe PatientSeries, type: :model do
     context 'when the patient could be immune' do
       let(:test_patient_5_years) do
         FactoryGirl.create(:patient,
-                           dob: 5.years.ago.to_date).patient
+                           dob: 5.years.ago.to_date)
       end
 
       let(:patient_series_5_years) do
@@ -207,7 +207,7 @@ RSpec.describe PatientSeries, type: :model do
     context 'when the patient cant be immune' do
       let(:test_patient_3_years) do
         FactoryGirl.create(:patient,
-                           dob: 3.years.ago.to_date).patient
+                           dob: 3.years.ago.to_date)
       end
 
       let(:patient_series_3_years) do

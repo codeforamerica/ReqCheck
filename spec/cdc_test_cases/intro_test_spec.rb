@@ -44,7 +44,7 @@ RSpec.describe 'CDC Tests' do
         cell_phone: '555-555-5555',
         first_name: 'Test',
         last_name: test_number,
-        patient_number: 01
+        patient_number: test_number.split('-').join().to_i
       }
 
 
@@ -79,7 +79,8 @@ RSpec.describe 'CDC Tests' do
         zip_code: '94103',
         cell_phone: '555-555-5555',
         first_name: 'Test',
-        last_name: test_number
+        last_name: test_number,
+        patient_number: test_number.split('-').join().to_i
       }
 
       vaccine_1 = {
@@ -99,16 +100,16 @@ RSpec.describe 'CDC Tests' do
       @test_patient_20130002 = Patient.create_full_profile(patient_args)
 
       vaccine_1_args = {
-        patient_id: @test_patient_20130002.id,
+        patient_number: @test_patient_20130002.patient_number,
         date_administered: vaccine_1[:date_administered],
-        description: vaccine_1[:vaccine_name],
+        hd_description: vaccine_1[:vaccine_name],
         cvx_code: vaccine_1[:cvx_code]
       }
 
       vaccine_2_args = {
-        patient_id: @test_patient_20130002.id,
+        patient_number: @test_patient_20130002.patient_number,
         date_administered: vaccine_2[:date_administered],
-        description: vaccine_2[:vaccine_name],
+        hd_description: vaccine_2[:vaccine_name],
         cvx_code: vaccine_1[:cvx_code]
       }
 

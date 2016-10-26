@@ -69,7 +69,7 @@ RSpec.describe AntigenSeriesDose, type: :model do
     end
     it 'has many preferable_intervals' do
       antigen_series_dose = FactoryGirl.create(:antigen_series_dose)
-      preferable_interval = FactoryGirl.create(:interval_4_weeks_4_weeks,
+      preferable_interval = FactoryGirl.create(:interval_4_weeks,
         antigen_series_dose: antigen_series_dose, allowable: false
       )
       FactoryGirl.create(:interval_4_weeks, antigen_series_dose: antigen_series_dose, allowable: false)

@@ -5,7 +5,8 @@ class TargetDose
   include FutureDoseEvaluation
 
   attr_reader :satisfied, :status_hash, :antigen_administered_record,
-              :earliest_dose_date, :evaluator, :evaluation
+              :earliest_dose_date, :evaluator, :evaluation,
+              :antigen_series_dose, :patient_series
 
   def initialize(patient_series:, antigen_series_dose:)
     @antigen_series_dose = antigen_series_dose
@@ -53,7 +54,7 @@ class TargetDose
     return false if self.recurring_dose == true
     min_age      = self.min_age
     max_age      = self.max_age
-    patient_dob  = @patient.dob
+    patient_dob  = patient.dob
     todays_date  = DateTime.now
                     .in_time_zone('Central Time (US & Canada)').to_date
 

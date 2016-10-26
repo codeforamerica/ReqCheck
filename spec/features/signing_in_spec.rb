@@ -56,7 +56,7 @@ feature 'Signing in' do
       fill_in 'Password', with: 'bad_password'
       click_on('Log in')
     end
-    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_current_path('/')
     expect(page).to have_content(
       'You have one more attempt before your account is locked.'
     )
@@ -72,14 +72,14 @@ feature 'Signing in' do
       fill_in 'Password', with: 'bad_password'
       click_on('Log in')
     end
-    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_current_path('/')
     expect(page).to have_content('Your account is locked.')
 
     fill_in 'Email', with: 'admin@admin.com'
     fill_in 'Password', with: 'bad_password'
     click_on('Log in')
 
-    expect(page).to have_current_path('/users/sign_in')
+    expect(page).to have_current_path('/')
     expect(page).to have_content('Your account is locked.')
     expect(page).to have_content('Log In')
   end
