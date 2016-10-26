@@ -43,7 +43,8 @@ RSpec.describe 'CDC Tests' do
         zip_code: '94103',
         cell_phone: '555-555-5555',
         first_name: 'Test',
-        last_name: test_number
+        last_name: test_number,
+        patient_number: 01
       }
 
 

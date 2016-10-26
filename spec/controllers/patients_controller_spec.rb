@@ -17,7 +17,7 @@ RSpec.describe PatientsController, type: :controller do
             get action
           end
           expect(response.response_code).to eq(302)
-          expect(response).to redirect_to(new_user_session_path)
+          expect(response).to redirect_to(root_path)
         end
         it "rejects GET #{action} after signing out" do
           sign_in(staff)
@@ -37,7 +37,7 @@ RSpec.describe PatientsController, type: :controller do
             get action
           end
           expect(response.response_code).to eq(302)
-          expect(response).to redirect_to(new_user_session_path)
+          expect(response).to redirect_to(root_path)
         end
       end
     end

@@ -8,9 +8,6 @@ feature 'Signing in' do
     FactoryGirl.create(:admin)
 
     visit '/'
-    within '.header' do
-      click_link 'Sign in'
-    end
 
     fill_in 'Email', with: 'admin@admin.com'
     fill_in 'Password', with: 'password'
@@ -26,9 +23,6 @@ feature 'Signing in' do
     FactoryGirl.create(:staff)
 
     visit '/'
-    within '.header' do
-      click_link 'Sign in'
-    end
 
     fill_in 'Email', with: 'staff@staff.com'
     fill_in 'Password', with: 'password'
@@ -42,9 +36,6 @@ feature 'Signing in' do
     FactoryGirl.create(:admin)
 
     visit '/'
-    within '.header' do
-      click_link 'Sign in'
-    end
 
     fill_in 'Email', with: 'admin@admin.com'
     fill_in 'Password', with: 'bad_password'
@@ -59,9 +50,6 @@ feature 'Signing in' do
     FactoryGirl.create(:admin)
 
     visit '/'
-    within '.header' do
-      click_link 'Sign in'
-    end
 
     4.times do
       fill_in 'Email', with: 'admin@admin.com'
@@ -78,9 +66,6 @@ feature 'Signing in' do
     FactoryGirl.create(:admin)
 
     visit '/'
-    within '.header' do
-      click_link 'Sign in'
-    end
 
     5.times do
       fill_in 'Email', with: 'admin@admin.com'

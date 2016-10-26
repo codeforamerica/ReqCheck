@@ -18,7 +18,7 @@ feature 'Signing out' do
       expect(page).to have_content('Welcome')
 
       visit '/patients'
-      expect(page).to have_current_path('/users/sign_in')
+      expect(page).to have_current_path('/')
     end
   end
   context 'with an admin user' do
@@ -37,7 +37,7 @@ feature 'Signing out' do
       expect(page).to have_content('Welcome')
 
       visit '/patients'
-      expect(page).to have_current_path('/users/sign_in')
+      expect(page).to have_current_path('/')
     end
   end
 end

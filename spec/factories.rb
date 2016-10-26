@@ -12,12 +12,6 @@ FactoryGirl.define do
   factory :target_dose_evaluator do
 
   end
-  factory :base_evaluator do
-
-  end
-  factory :base_evaluation do
-
-  end
 
   factory :staff, class: User do
     email 'staff@staff.com'
