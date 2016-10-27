@@ -1,0 +1,9 @@
+<div class="row align-center">
+    <div class=
+    "card columns small-12 large-8 medium-8 small-centered vaccine-record">
+        <h3 class="float-left">Vaccine Record</h3><%= link_to "Print Record", '#', :onclick => 'window.print();return false;', class: "button float-right margin-bottom-10"  %>
+        <% patient_record_vaccine_groups.each do |vaccine_group_name| %>
+            <%= render 'vaccine_group', view_patient: view_patient, vaccine_group_name: vaccine_group_name %>
+        <% end %>
+    </div>
+</div>
