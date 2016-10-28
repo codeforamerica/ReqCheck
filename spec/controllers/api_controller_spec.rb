@@ -56,6 +56,39 @@ RSpec.describe ApiController, type: :controller do
     context 'with valid basic auth credentials' do
       before(:each) { basic_auth 'test', 'test' }
 
+      it 'returns the date in string date format' do
+        patient_import = FactoryGirl.create(:patient_data_import)
+        FactoryGirl.create(:vaccine_dose_data_import)
+
+        patient_import_time_string =
+          patient_import.created_at.strftime('%Y-%m-%d')
+
+        post :heartbeat
+        expect(response.response_code).to eq(200)
+        response_body = JSON.parse(response.body)
+        response_body_string = response_body['last_update_date']
+
+        expect(patient_import_time_string).to be_in(
+          response_body_string
+        )
+      end
+
+      it 'returns the date in unix time format' do
+        patient_import = FactoryGirl.create(:patient_data_import)
+        FactoryGirl.create(:vaccine_dose_data_import)
+
+        patient_import_timestamp = patient_import.created_at.to_i
+
+        post :heartbeat
+        expect(response.response_code).to eq(200)
+        response_body = JSON.parse(response.body)
+        response_body_timestamp = response_body['last_update_date_timestamp']
+
+        expect(response_body_timestamp).to eq(
+          patient_import_timestamp
+        )
+      end
+
       it 'gives the patient_data_import created_at datetime when older' do
         patient_import = FactoryGirl.create(:patient_data_import)
         FactoryGirl.create(:vaccine_dose_data_import)

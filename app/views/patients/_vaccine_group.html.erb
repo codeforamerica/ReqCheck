@@ -1,0 +1,26 @@
+<table class="hover">
+    <thead>
+        <tr>
+            <th class="vax-name"><%= vaccine_group_name %></th>
+                <%if view_patient.get_vaccine_doses_by_group_name(vaccine_group_name).length == 0 %>
+                    <th class="no-dose">No doses recorded</th>
+                <%else %>
+                    <th>Brand Name</th>
+                    <th>Date Given</th>
+                    <th>Age at Dose</th>
+                    <th>Time Passed</th>
+                    <th>Provider</th>
+                <%end %>
+        </tr>
+    </thead>
+    <% view_patient.get_vaccine_doses_by_group_name(vaccine_group_name).each do |individual_vaccine| %>
+        <tr>
+            <td><%= individual_vaccine.vaccine_code %></td>
+            <td><%= individual_vaccine.mvx_code %></td>
+            <td><%= individual_vaccine.date_administered.strftime("%m/%d/%Y") %></td>
+            <td><%= individual_vaccine.patient_age_at_vaccine_dose %></td>
+            <td><%= individual_vaccine.time_since_vaccine_dose %></td>
+            <td>HD</td>
+        </tr>
+    <%end %>
+</table>

@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   http_basic_authenticate_with name: ENV['EXTRACTOR_NAME'],
                                password: ENV['EXTRACTOR_PASSWORD']
 
@@ -10,7 +11,7 @@ class ApiController < ApplicationController
       earliest_import_date_timestamp = nil
     else
       earliest_import_date = earliest_import_obj.created_at
-      earliest_import_date_timestamp = earliest_import_date.getutc
+      earliest_import_date_timestamp = earliest_import_date.to_i
     end
     return_json = { last_update_date: earliest_import_date,
                     last_update_date_timestamp: earliest_import_date_timestamp }

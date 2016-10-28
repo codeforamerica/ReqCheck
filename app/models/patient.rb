@@ -104,6 +104,32 @@ class Patient < ActiveRecord::Base
     end.sort_by { |vaccine_dose| vaccine_dose.date_administered }
   end
 
+  def group_to_array(vaccine_group_name)
+    {
+      'Diptheria, Tetanus, Pertussis': ["DTHI", "DTI", "TDP9", "TDP1", "TDP2", "TDP9", "Td", "DTaP", "TD4", "TD2", "TD9", "DHI", "TD5", "TDP4", "DTP"],
+      'HIB': ["DHI", "PRPO", "PRPT", "HIB", "HIB2"],
+      'Hepatitis A': ["HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "TWN1", "TWN3", "TWNz"],
+      'Hepatitis B': ["DTHI", "HAV1", "HAV3", "HAV4", "HAV5", "HAV6", "HAV9", "HBIG", "HBV1", "HBV3", "HBV6", "HBV9", "HepB"],
+      'Human Papillomavirus': ["HPV", "HPV3", "HPV5", "HPV6", "HPV9"],
+      'Measles, Mumps, Rubella': ["MMR", "MMR1", "MMR3", "MMR9", "MMRV"],
+      'Meningococcal': ["MCV3", "MCV4", "MCV5", "MCV6", "MCV7", "MCV9"],
+      'Pneumococcal': ["PPV2", "PCV4", "PCV2", "PCV9", "PCV", "PPV1", "PPV9", "PPV2"],
+      'Polio': ["DTHI", "DTI", "DHI", "POL", "IPV"],
+      'Rotavirus': ["ROT1", "ROT2", "ROTA"],
+      'Varicella': ["VAR1", "VAR2", "VAR4", "VAR9"],
+      'Influenza': ["FL10", "FL11", "FL14", "FLU", "FLU6", "FLU7", "FLU8", "FLU9", "FLUZ", "FLZ", "H1N4"],
+      'Travel & Other': ["YFV", "TYP", "TWNz", "TWN3", "TWN1", "RAB1", "PPD9", "PPD1"]
+    }[vaccine_group_name.to_sym]
+  end
+
+  def get_vaccine_doses_by_group_name(vaccine_group_name)
+    vaccine_code_array = group_to_array(vaccine_group_name)
+    vaccine_code_array.map! { |vaccine_code| vaccine_code.upcase }
+    self.vaccine_doses.select do |vaccine_dose|
+      vaccine_code_array.include? vaccine_dose.vaccine_code
+    end.sort_by { |vaccine_dose| vaccine_dose.date_administered }
+  end
+
   def antigen_administered_records
     @antigen_administered_records ||= AntigenAdministeredRecord
                                         .create_records_from_vaccine_doses(
