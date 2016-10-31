@@ -111,7 +111,15 @@ This project uses [Rubocop](http://) to ensure the formatting and syntax is corr
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+This project will be fully hosted once configuration of the servers are completed so that they are in compliance with HIPAA.
+
+**PLEASE NOTE: This application does not ensure HIPAA compliance is provided with no guarantees. It is the responsibility of the implementers to ensure it passes their HIPAA compliance standards. The developing team and organization assumes no responsibility for this.**
+
+This project was deployed in development on [aptible](http://aptible.com/) using [docker](https://www.docker.com/) and [puma](http://puma.io/).
+
+The development specifics can be found in the following files:
+    - [procfile](https://github.com/codeforamerica/ReqCheck/blob/master/Procfile)
+    - [dockerfile](https://github.com/codeforamerica/ReqCheck/blob/master/Dockerfile)
 
 ## Built With
 
@@ -119,9 +127,12 @@ Add additional notes about how to deploy this on a live system
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
-## Contributing
-
+## Contribute
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+
+Include a [CONTRIBUTING.md file](https://github.com/18F/hub/blob/master/CONTRIBUTING.md). Here is a good [CfA example](https://github.com/codeforamerica/ohana-web-search/blob/master/CONTRIBUTING.md). GitHub also has some new guides on [how to contribute](https://guides.github.com/activities/contributing-to-open-source/#contributing).
+
 
 ## Versioning
 
@@ -135,7 +146,7 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under Code for America's copyright. Please see the [License file](LICENSE.md)
 
 ## Acknowledgments
 
@@ -150,3 +161,15 @@ After cloning, run `bundle install` and `rake db:setup`.
 
 Run tests with `rspec spec`.
 
+
+
+
+
+
+To be done:
+    How to import a new group antigen import requirements
+        Delete old ones
+        Import new ones
+        Run all the tests
+    Overview of 3 separate components (api, algorithm, kcmohd frontend)
+    Explanation of the database component (getting data out of the application)
