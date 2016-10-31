@@ -4,8 +4,6 @@ require_relative 'support/vax_codes'
 require_relative 'support/time_help'
 
 FactoryGirl.define do
-  extend TimeHelp
-
   factory :staff, class: User do
     email 'staff@staff.com'
     password 'password'

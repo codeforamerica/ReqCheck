@@ -13,5 +13,4 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
   # Add the custom helpers
-  config.include TimeHelp
 end

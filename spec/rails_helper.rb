@@ -18,8 +18,6 @@ require 'capybara/rspec'
 Capybara.javascript_driver = :webkit
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-# To be able to use the module TimeHelp in factory girl (note also used in rspec)
-FactoryGirl::SyntaxRunner.send(:include, TimeHelp)
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

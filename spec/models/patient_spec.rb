@@ -15,7 +15,7 @@ RSpec.describe Patient, type: :model do
 
   let(:patient_w_vaccines) do
     patient = FactoryGirl.create(:patient,
-                                 dob: in_pst(5.years.ago),
+                                 dob: 5.years.ago.to_date,
                                  patient_number: 123)
     vaccine_types = %w(MCV6 DTaP MMR9)
     vaccine_types.each do |vax_code|
@@ -65,7 +65,7 @@ RSpec.describe Patient, type: :model do
   end
   describe '#relationships' do
     it 'has many vaccine_doses' do
-      dob     = in_pst(Date.today)
+      dob     = Date.today
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         dob: dob, patient_number: 123
@@ -78,7 +78,7 @@ RSpec.describe Patient, type: :model do
       expect(patient.vaccine_doses.length).to eq(1)
     end
     it 'orders the vaccine doses by date' do
-      dob     = in_pst(Date.today)
+      dob     = Date.today
       patient = Patient.create(
         first_name: 'Test', last_name: 'Tester',
         dob: dob, patient_number: 123
@@ -96,7 +96,7 @@ RSpec.describe Patient, type: :model do
     end
     it 'has a dob attribute in years' do
       patient = FactoryGirl.create(:patient,
-                                   dob: in_pst(5.years.ago),
+                                   dob: 5.years.ago.to_date,
                                    patient_number: 123)
       expect(patient.dob).to eq(5.years.ago.to_date)
     end
@@ -139,7 +139,7 @@ RSpec.describe Patient, type: :model do
   describe '#age_in_days' do
     it 'returns the patients age in days' do
       patient = FactoryGirl.create(:patient,
-                                   dob: in_pst(5.years.ago),
+                                   dob: 5.years.ago.to_date,
                                    patient_number: 123)
       days_age = patient.age_in_days
       expect(days_age).to eq((365 * 5) + 1)
@@ -149,7 +149,7 @@ RSpec.describe Patient, type: :model do
     let(:patient_5_years) do
       FactoryGirl.create(
         :patient,
-        dob: in_pst(5.years.ago),
+        dob: 5.years.ago.to_date,
         patient_number: 123
       )
     end
@@ -202,7 +202,7 @@ RSpec.describe Patient, type: :model do
 
     let(:test_patient) do
       patient = FactoryGirl.create(:patient,
-                                     dob: in_pst(5.years.ago),
+                                     dob: 5.years.ago.to_date,
                                      patient_number: 123)
       create(:vaccine_dose,
              patient: patient,
