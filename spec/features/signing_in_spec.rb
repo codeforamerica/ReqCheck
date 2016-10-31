@@ -19,7 +19,6 @@ feature 'Signing in' do
     expect(page).to have_current_path('/admin/dashboard')
     expect(page).to have_content('admin@admin.com')
     expect(page).to have_content('Dashboard')
-    expect(page).to have_content('Signed in successfully.')
   end
 
   scenario 'Successful sign in with staff' do

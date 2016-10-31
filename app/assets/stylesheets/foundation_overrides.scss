@@ -1,13 +1,5 @@
 $primary-color: green;
 
-.callout {
-	border:none;
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
-    margin: 0 -15px;
-}
-
-.card.callout {padding:0px;}
 
 .card {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -18,13 +10,15 @@ $primary-color: green;
 	padding: 1rem;
 }
 
-.callout {color: white;}
-.callout.success {background-color: #2b840a;} 
-.callout.warning {background-color: #F3D812; color:black;} 
-.callout.alert {background-color: #af0216;}
-.callout svg {float:left; margin-right:1rem;}
-.callout .explanation {margin-left:4rem;}
-
+.callout {
+	color: white;
+	border:none;
+	svg {float:left; margin-right:1rem;}
+	.explanation {margin-left:4rem;}
+}
+.callout.success {background-color: #2b840a; margin: 0 -15px;} 
+.callout.warning {background-color: #F3D812; color:black; margin: 0 -15px;} 
+.callout.alert {background-color: #af0216; margin: 0 -15px;}
 
 .patient-info {
 	table tbody {border:none;}
@@ -52,6 +46,16 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	background-color: $kc-grey; 
 	color:white; 
 }
+
+.avatar {
+	&:hover {background-color:transparent;}
+	margin-left:1rem;
+	img {
+	height: 40px;
+	width: 40px;
+	}
+}
+
 .top-bar .button {margin-bottom: 0px;}
 
 .top-bar-title  {
@@ -62,6 +66,7 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
 .top-bar-right {
 	float: right;
+	margin-bottom: 0;
 }
 
 .button {
