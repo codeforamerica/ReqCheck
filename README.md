@@ -9,7 +9,7 @@ This project references requirements from the CDC in order to evaluate a patient
 
 This project is a prototype, and has limited functionality. It can currently tell between a up-to-date and non-up-to-date records. However, it is unable to evaluate records currently in the midst of a check up schedule.
 
-![ReqCheck at work](http://i.giphy.com/SIV3ijAwkNt9C.gif)
+![ReqCheck at work](https://media.giphy.com/media/3o6Zt5O09Lxx6chXIQ/source.gif)
 
 This project exists to enable healthcare professionals to evaluate a vaccine record with the up to date CDC requirements.
 
@@ -19,11 +19,10 @@ The project was started after understanding the skilled resources necessary to e
 
 ### Prerequisites
 
-This project requires:
-  - Ruby (2.3.1)
-  - Rails (4+)
-  - Postgres (9.5.4)
-  - Bundler (1.13.5)
+* Ruby (2.3.1)
+* Rails (4+)
+* Postgres (9.5.4)
+* Bundler (1.13.5)
 
 Ensure you are using Ruby version 2.3.1.
 `ruby --version`
@@ -37,7 +36,7 @@ Ensure you have Postgres 9.5.4 installed
 Ensure you have Bundler 1.13.5 installed
 `bundle --version`
 
-### Installing
+## Installing
 
 #### Environment Variables
 * `RAILS_ENV=[development]` — Environment variable to tell rails application which configuration to use
@@ -113,13 +112,14 @@ This project uses [Rubocop](http://) to ensure the formatting and syntax is corr
 
 This project will be fully hosted once configuration of the servers are completed so that they are in compliance with HIPAA.
 
-**PLEASE NOTE: This application does not ensure HIPAA compliance is provided with no guarantees. It is the responsibility of the implementers to ensure it passes their HIPAA compliance standards. The developing team and organization assumes no responsibility for this.**
+**PLEASE NOTE: This application does not guarantee HIPAA compliance. It is the responsibility of the implementers to ensure it passes their HIPAA compliance standards. The developing team and organization assumes no responsibility for this.**
 
 This project was deployed in development on [aptible](http://aptible.com/) using [docker](https://www.docker.com/) and [puma](http://puma.io/).
 
 The development specifics can be found in the following files:
-    - [procfile](https://github.com/codeforamerica/ReqCheck/blob/master/Procfile)
-    - [dockerfile](https://github.com/codeforamerica/ReqCheck/blob/master/Dockerfile)
+
+* [Procfile](https://github.com/codeforamerica/ReqCheck/blob/master/Procfile)
+* [Dockerfile](https://github.com/codeforamerica/ReqCheck/blob/master/Dockerfile)
 
 ## Built With
 
@@ -134,13 +134,13 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 Include a [CONTRIBUTING.md file](https://github.com/18F/hub/blob/master/CONTRIBUTING.md). Here is a good [CfA example](https://github.com/codeforamerica/ohana-web-search/blob/master/CONTRIBUTING.md). GitHub also has some new guides on [how to contribute](https://guides.github.com/activities/contributing-to-open-source/#contributing).
 
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **[Rachel Edelman](http://racheledelman.com/)** - Design & Frontend Development - [Github](https://github.com/racheledelman)
+* **[Kevin Berry](http://kevin-berry.com)** - Development - [Github](https://github.com/lostmarinero)
+* **[Jessica Cole](https://about.me/jessicacole)** - Project Management - [Github](https://github.com/jessonawhim)
+
+??**Also a special thanks to [Ben Golder](https://github.com/bengolder) for his mentorship on this project**??
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -150,19 +150,18 @@ This project is licensed under Code for America's copyright. Please see the [Lic
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+Thank you to our funders and the Code for America staff for their support. Without this support, this project would not have been possible.
 
+* [Health Care Foundation of Greater Kansas City](http://hcfgkc.org/)
+* [The Robert Wood Johnson Foundation](http://www.rwjf.org/)
+* [Reach Healthcare Foundation](https://reachhealth.org/)
+* [ANY ADDITIONAL FUNDERS?](https://)
 
+Also, thank you to everyone involved in the research and development
 
-### Development
-After cloning, run `bundle install` and `rake db:setup`.
-
-Run tests with `rspec spec`.
-
-
-
+* The Staff at the Kansas City, Missouri Health Department
+* The Center for Disease Control and Prevention
+* [Ben Golder](https://github.com/bengolder)
 
 
 
