@@ -17,12 +17,12 @@ The project was started after understanding the skilled resources necessary to e
 
 ## Getting Started
 
-### Prerequisites
+### Built With
 
-* Ruby (2.3.1)
-* Rails (4+)
-* Postgres (9.5.4)
-* Bundler (1.13.5)
+* [Ruby 2.3.1](https://www.ruby-lang.org/en/news/2016/04/26/ruby-2-3-1-released/)
+* [Rails 4](http://guides.rubyonrails.org/4_0_release_notes.html)
+* [Postgres 9.5.4](https://www.postgresql.org/docs/9.6/static/release-9-5-4.html)
+* [Bundler 1.13.5](https://rubygems.org/gems/bundler)
 
 Ensure you are using Ruby version 2.3.1.
 `ruby --version`
@@ -121,18 +121,8 @@ The development specifics can be found in the following files:
 * [Procfile](https://github.com/codeforamerica/ReqCheck/blob/master/Procfile)
 * [Dockerfile](https://github.com/codeforamerica/ReqCheck/blob/master/Dockerfile)
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
 ## Contribute
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-
-Include a [CONTRIBUTING.md file](https://github.com/18F/hub/blob/master/CONTRIBUTING.md). Here is a good [CfA example](https://github.com/codeforamerica/ohana-web-search/blob/master/CONTRIBUTING.md). GitHub also has some new guides on [how to contribute](https://guides.github.com/activities/contributing-to-open-source/#contributing).
-
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
