@@ -101,7 +101,7 @@ Although 3rd party packages are not guaranteed to ensure your app is secure, it 
 3. Run `brakeman`
 
 ### Coding Style Tests
-This project uses [Rubocop](http://) to ensure the formatting and syntax is correct. This will help produce easily readable code that follows best practices.
+This project uses [Rubocop](http://) to ensure the formatting and syntax is correct. This will help produce easily readable code that follows best practices. Rubocop follows the [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide).
 
 1. First, cd into your repo (`cd reqcheck`)
 2. To install, run `gem install rubocop`
@@ -162,6 +162,13 @@ Also, thank you to everyone involved in the research and development
 * The Staff at the Kansas City, Missouri Health Department
 * The Center for Disease Control and Prevention
 * [Ben Golder](https://github.com/bengolder)
+
+
+## HIPAA Compliance
+
+The [Health Insurance Portability and Accountability Act (HIPAA)](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) outlines national security standards intended to protect health data created, received, maintained, or transmitted electronically.
+
+To review what has been done, please visit the [HIPAA Readme](HIPAA.md).
 
 
 
