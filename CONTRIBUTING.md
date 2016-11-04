@@ -78,14 +78,14 @@ _*If you use Sublime Text, please make sure to set your tab indentation to 2
 spaces. We also highly recommend you use the [TrailingSpaces][trailing_spaces]
 plugin and set it to [Trim On Save][trim_on_save]._
 
-[install_instructions]: https://github.com/codeforamerica/ohana-web-search/blob/master/INSTALL.md
-[open_prs]: https://github.com/codeforamerica/ohana-web-search/pulls?q=is%3Aopen+is%3Apr
-[hack_request]: https://github.com/codeforamerica/ohana-web-search/labels/hack%20request
+[install_instructions]: https://github.com/codeforamerica/ReqCheck
+[open_prs]: https://github.com/codeforamerica/ReqCheck/pulls?q=is%3Aopen+is%3Apr
+[hack_request]: https://github.com/codeforamerica/ReqCheck/labels/hack%20request
 [donate]: http://codeforamerica.org/support-us/
-[issue_tracker]: https://github.com/codeforamerica/ohana-web-search/issues
-[issue_search]: https://github.com/codeforamerica/ohana-web-search/search?ref=cmdform&type=Issues
-[new_issue]: https://github.com/codeforamerica/ohana-web-search/issues/new
-[prerequisites]: https://github.com/codeforamerica/ohana-web-search/blob/master/INSTALL.md#install-prerequisites
+[issue_tracker]: https://github.com/codeforamerica/ReqCheck/issues
+[issue_search]: https://github.com/codeforamerica/ReqCheck/search?ref=cmdform&type=Issues
+[new_issue]: https://github.com/codeforamerica/ReqCheck/issues/new
+[prerequisites]: https://github.com/codeforamerica/ReqCheck/blob/master/INSTALL.md#install-prerequisites
 [fork]: http://help.github.com/fork-a-repo/
 [branch]: https://help.github.com/articles/creating-and-deleting-branches-within-your-repository
 [style_guide]: https://github.com/bbatsov/ruby-style-guide
