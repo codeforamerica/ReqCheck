@@ -145,7 +145,7 @@ Thank you to our funders and the Code for America staff for their support. Witho
 * [Health Care Foundation of Greater Kansas City](http://hcfgkc.org/)
 * [The Robert Wood Johnson Foundation](http://www.rwjf.org/)
 * [Reach Healthcare Foundation](https://reachhealth.org/)
-* [ANY ADDITIONAL FUNDERS?](https://)
+* [Google Fiber](https://fiber.google.com/)
 
 Also, thank you to everyone involved in the research and development
 
