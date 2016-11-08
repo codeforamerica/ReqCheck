@@ -1,6 +1,5 @@
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
-require_relative './support/time_help'
 # require 'capybara/rspec'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

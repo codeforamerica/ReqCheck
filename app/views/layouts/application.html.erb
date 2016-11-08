@@ -22,7 +22,7 @@
             <ul class="top-bar-right">
               <% if signed_in? %>
                 <% if current_user.role?('admin') %>
-                  <%= link_to "Admin Dashboard", admin_root_path %>
+                  <%= link_to "Admin Dashboard", admin_root_path, class:"button secondary hollow" %>
                 <% end %>
                 <%= link_to "Sign out", destroy_user_session_path, method: :get, class:"button secondary hollow" %>
                 <%= link_to image_tag("avatar.png", :alt => "edit user"), edit_user_registration_path, class:"avatar" %>
