@@ -1,7 +1,6 @@
 # This will guess the User class
 require 'faker'
 require_relative 'support/vax_codes'
-require_relative 'support/time_help'
 
 FactoryGirl.define do
   factory :staff, class: User do

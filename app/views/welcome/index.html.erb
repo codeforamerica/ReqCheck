@@ -5,8 +5,14 @@
 	</div>
 	<div class="card columns small-12 large-8 medium-8">
 		<% if alert %>
-			<p class="callout alert"><%= alert %> 1</p>
+			<p class="callout alert"><%= alert %></p>
 		<% end %>
-		<%= render 'form' %>
+		<% if signed_in? %>
+			<div class="small-12 large-8 medium-8 ">
+				<%= link_to "New Search".html_safe, patients_path, class: "button margin-bottom-10"  %>
+			</div>
+		<% else %>
+			<%= render 'form' %>
+		<% end %>
 	</div>
 </div>
