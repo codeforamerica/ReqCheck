@@ -9,7 +9,7 @@ This project references requirements from the CDC in order to evaluate a patient
 
 This project is a prototype, and has limited functionality. It can currently tell between a up-to-date and non-up-to-date records. However, it is unable to evaluate records currently in the midst of a check up schedule.
 
-![ReqCheck at work](https://media.giphy.com/media/3o6Zt5O09Lxx6chXIQ/source.gif)
+[See how it works here!](https://media.giphy.com/media/3o6Zt5O09Lxx6chXIQ/source.gif)
 
 This project exists to enable healthcare professionals to evaluate a vaccine record with the up to date CDC requirements.
 
@@ -130,7 +130,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 * **[Kevin Berry](http://kevin-berry.com)** - Development - [Github](https://github.com/lostmarinero)
 * **[Jessica Cole](https://about.me/jessicacole)** - Project Management - [Github](https://github.com/jessonawhim)
 
-??**Also a special thanks to [Ben Golder](https://github.com/bengolder) for his mentorship on this project**??
+**Also a special thanks to [Ben Golder](https://github.com/bengolder) for his mentorship on this project**
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
@@ -144,7 +144,7 @@ Thank you to our funders and the Code for America staff for their support. Witho
 
 * [Health Care Foundation of Greater Kansas City](http://hcfgkc.org/)
 * [The Robert Wood Johnson Foundation](http://www.rwjf.org/)
-* [Reach Healthcare Foundation](https://reachhealth.org/)
+* [REACH Healthcare Foundation](https://reachhealth.org/)
 * [Google Fiber](https://fiber.google.com/)
 
 Also, thank you to everyone involved in the research and development
@@ -160,12 +160,3 @@ The [Health Insurance Portability and Accountability Act (HIPAA)](https://en.wik
 
 To review what has been done, please visit the [HIPAA Readme](HIPAA.md).
 
-
-
-To be done:
-    How to import a new group antigen import requirements
-        Delete old ones
-        Import new ones
-        Run all the tests
-    Overview of 3 separate components (api, algorithm, kcmohd frontend)
-    Explanation of the database component (getting data out of the application)
