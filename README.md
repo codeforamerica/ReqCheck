@@ -15,6 +15,67 @@ This project exists to enable healthcare professionals to evaluate a vaccine rec
 
 The project was started after understanding the skilled resources necessary to evaluate a patient's record, and recognizing the benefit for a health clinic's work flow if one is able to evaluate a patient's record from the moment they walk in. It is designed to be a simple tool usable by a health clinic's intake staff.
 
+## How it works
+This project was developed using the information provided by the [CDC's implementation guide](http://www.cdc.gov/vaccines/programs/iis/interop-proj/downloads/logic-spec-acip-rec.pdf). The CDC provides guidelines for using the supporting data published yearly, and this information has been interpreted from that guide.
+
+### Terminology
+There are many terms that are important for interpretting the algorithm. Many of them are provided below. Others can be found in the [CDC's implementation guide]'s glossary.
+
+* **Antigen** - Foreign substance that triggers immune response. An antigen has many antigen series.
+* **Antigen Series** - One possible path to achieve perceived immunity to a disease. Has many antigen series doses.
+* **Patient Series** - Patient specified series required to satisfy a recommendation. A patient series is created with an antigen series combined with an individual patient, and is unique to the patient. Has many target doses.
+* **Antigen Series Dose** - Individually defined dose within an Antigen Series. Has many Antigen Series Dose Vaccines.
+* **Target Dose** - Patient specified dose required to satisfy a recommendation. A target dose is created with an antigen series dose combined with an individual patient, and is unique to the patient. A target doses is evaluated against an Antigen Administered Record to get a Target Dose Status (satisfied, not satisfied).
+* **Vaccine Dose Administered** - Record of an event where a vaccine was administered. Has many Antigen Administered Records and one vaccine.
+* **Vaccine** - Specific instance of medicine (which contains antigens).
+* **Antigen Administered Record** - Created for each antigen contained within a Vaccine Dose Administered. A single vaccine dose administered could have many antigen administered records
+    * **Example:** MMR vaccine dose administered has 3 antigen administered records. 1 each for the antigens for Measles, Mumps and Rubella. 
+* **Vaccine Group (Classification category)** - Describes broad categories of diseases. Can be one disease or many (Can have one or more antigens). This is usually to categorize diseases into groups known/used by medical professionals, and usually reflects a specific vaccine.
+    * **Example:** MMR is used for Measles, Mumps, Rubella, which is 3 separate diseases with 3 separate antigens
+* **Interval** - Space of time between a vaccine dose administered (and therefor antigen administered records as well)
+
+For a visual representation of how they work together, please see [this diagram](WHERE IS RACHEL!).
+
+### The Algorithm
+The algorithm is broken into many parts and runs through many different processes. All of the information from the CDC has been imported into the Postgres Database. It is then used to build patient specific requirements to check against the patient's vaccine record.
+
+#### Step 1
+All of the patient's vaccine doses administered are taken and used to create antigen administered records.
+A vaccine dose administered with multiple antigens creates multiple antigen administered records.
+The antigen administered records are then split into groups based on the specific Antigen they address.
+
+#### Step 2
+Each antigen has multiple antigen series. Each antigen series has many antigen series doses. This information is necessary to create ***PATIENT SPECIFIC*** information, used to evaluate the patient's vaccine record.
+
+    1. Each antigen combines the individual patient's information with each antigen series, creating many patient series nested below it
+    2. Each patient series passes the patient information to each antigen series dose, creating the target doses nested below it
+
+#### Step 3
+Evaluation of the patient serieses against the antigen administered records
+
+    1. Each antigen passes the patient and antigen specific 'antigen administered records' to each patient series
+    2. The patient series lines each 'antigen administered record' up to each target dose
+    3. The patient series loops through the target doses
+        * If the target dose is *NOT* able to be evaluated:
+            * It is dropped aside
+        * If the target dose is able to be evaluated (for example, sometimes the patient is not old enough):
+            * The target dose is evaluated using its specified logic against the next antigen administered record in line
+            * If the target dose is satisfied:
+                * The target dose is marked 'satisfied'
+            * If the target dose is not satisfied (due to invalid age, invalid interval from the previous antigen administered record):
+                * The antigen administered record is removed
+                * If there are more antigen administered records left to evaluate:
+                    * The next antigen administered record is evaluated against the target dose
+                * If there are no more antigen administered records:
+                    * The target dose is marked 'not_satisfied'
+    4. After all target doses have been evaluated, the patient series is evaluated based on the individual statuses of each target dose and the patient series logic. The patient series is given an evaluation status.
+#### Step 4
+Each antigen is evaluated based on the most complete patient series. If there is a patient series that is either 'completed' or ??'up to date'??, then the antigen is evaluated to be 'completed' or ??'up to date'??.
+
+If there is no series that is 'up to date', then the Antigen is marked 'not complete'.
+
+
+
 ## Getting Started
 
 ### Built With
@@ -123,6 +184,9 @@ The development specifics can be found in the following files:
 
 ## Contribute
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+### Features Needed
+    We have  a few features that need to be implemented. A high priority would be an admin panel to upload new CDC requirements and delete past ones, followed by running all the tests to see if they still pass.
 
 ## Authors
 
