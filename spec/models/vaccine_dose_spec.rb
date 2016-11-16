@@ -11,13 +11,11 @@ RSpec.describe VaccineDose, type: :model do
 
     it "can take a Patient object as a parameter" do
       patient = Patient.create(first_name: 'Test', last_name: 'Tester',
-                               patient_profile_attributes: {
-                                 dob: Date.today, patient_number: 123
-                               })
+                               dob: Date.today, patient_number: 123)
       vaccine_dose = VaccineDose.create(
         vaccine_code: 'VAR1',
         date_administered: Date.today,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 21
       )
       expect(vaccine_dose.class.name).to eq('VaccineDose')
@@ -97,13 +95,12 @@ RSpec.describe VaccineDose, type: :model do
     let(:test_vaccine_dose) do
       patient = Patient.create(first_name: 'Test',
                                last_name: 'Tester',
-                               patient_profile_attributes: {dob: 6.years.ago.to_date,
-                                                            patient_number: 123})
+                               dob: 6.years.ago.to_date,
+                               patient_number: 123)
       VaccineDose.create(vaccine_code: 'VAR1',
-        date_administered: Date.yesterday,
-        patient_profile: patient.patient_profile,
-        cvx_code: 21
-      )
+                         date_administered: Date.yesterday,
+                         patient: patient,
+                         cvx_code: 21)
     end
     it "gives the patients age at the date of the vaccine_dose" do
       new_time = Time.local(2016, 1, 3, 10, 0, 0)

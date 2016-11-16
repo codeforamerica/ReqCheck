@@ -16,7 +16,7 @@ RSpec.describe AntigenEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient_with_profile)
+    test_patient = FactoryGirl.create(:patient)
   end
 
   let(:polio_antigen) do
@@ -49,7 +49,7 @@ RSpec.describe AntigenEvaluation do
     end
     it 'returns complete for patient that is complete but not immune' do
       patient_dob      = 2.years.ago
-      new_test_patient = FactoryGirl.create(:patient_with_profile,
+      new_test_patient = FactoryGirl.create(:patient,
                                             dob: patient_dob)
       valid_dates   = create_valid_dates(new_test_patient.dob)
       vaccine_doses = create_patient_vaccines(new_test_patient, valid_dates[0..-2])
@@ -72,7 +72,7 @@ RSpec.describe AntigenEvaluation do
     end
     it 'returns not_complete for patient that is not up to date' do
       patient_dob      = 2.years.ago
-      new_test_patient = FactoryGirl.create(:patient_with_profile,
+      new_test_patient = FactoryGirl.create(:patient,
                                             dob: patient_dob)
       valid_dates   = create_valid_dates(new_test_patient.dob)
       vaccine_doses = create_patient_vaccines(new_test_patient, valid_dates[0..-3])
@@ -95,7 +95,7 @@ RSpec.describe AntigenEvaluation do
     end
     it 'returns not_complete for patient that has an invalid dose (interval)' do
       patient_dob      = 2.years.ago
-      new_test_patient = FactoryGirl.create(:patient_with_profile,
+      new_test_patient = FactoryGirl.create(:patient,
                                             dob: patient_dob)
       valid_dates   = create_valid_dates(new_test_patient.dob)
       new_dates     = valid_dates[0..-3]
@@ -123,7 +123,7 @@ RSpec.describe AntigenEvaluation do
     it 'takes patient_serieses and antigen_administered_records and returns' \
        'the most complete series' do
       patient_dob      = 2.years.ago
-      new_test_patient = FactoryGirl.create(:patient_with_profile,
+      new_test_patient = FactoryGirl.create(:patient,
                                             dob: patient_dob)
       valid_dates   = create_valid_dates(new_test_patient.dob)
       vaccine_doses = create_patient_vaccines(new_test_patient,
@@ -224,7 +224,7 @@ RSpec.describe AntigenEvaluation do
     end
     it 'returns not_complete if none are complete' do
       patient_dob      = 2.years.ago
-      new_test_patient = FactoryGirl.create(:patient_with_profile,
+      new_test_patient = FactoryGirl.create(:patient,
                                             dob: patient_dob)
       valid_dates   = create_valid_dates(new_test_patient.dob)
       new_dates     = valid_dates[0..-3]

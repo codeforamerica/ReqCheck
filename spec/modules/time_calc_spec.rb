@@ -68,7 +68,7 @@ RSpec.describe TimeCalc do
     end
     context 'with only one input date' do
       it 'defaults date 2 to Date.today' do
-        input_date = in_pst(5.years.ago)
+        input_date = 5.years.ago.to_date
         age_days = time_calc_obj.date_diff_in_days(input_date)
         expect(age_days).to be(5 * 365 + 1)
       end
@@ -81,25 +81,25 @@ RSpec.describe TimeCalc do
 
     context 'with multiple dates' do
       it 'returns the difference between the two dates in days' do
-        input_date  = in_pst(5.years.ago).to_date
+        input_date  = 5.years.ago.to_date
         input_date2 = 4.years.ago.to_date
         age_days    = time_calc_obj.date_diff_in_days(input_date, input_date2)
         expect(age_days).to be(365)
       end
       it 'can accept a string date' do
-        string_date  = in_pst(5.years.ago).to_s
+        string_date  = 5.years.ago.to_date.to_s
         string_date2 = 4.years.ago.to_s
         age_days = time_calc_obj.date_diff_in_days(string_date, string_date2)
         expect(age_days).to be(365)
       end
       it 'can accept date_time object' do
-        string_date  = in_pst(5.years.ago).to_datetime
+        string_date  = 5.years.ago.to_date.to_datetime
         string_date2 = 4.years.ago.to_datetime
         age_days = time_calc_obj.date_diff_in_days(string_date, string_date2)
         expect(age_days).to be(365)
       end
       it 'can accept time object' do
-        string_date  = in_pst(5.years.ago)
+        string_date  = 5.years.ago.to_date
         string_date2 = 4.years.ago.to_time
         age_days = time_calc_obj.date_diff_in_days(string_date, string_date2)
         expect(age_days).to be(365)
@@ -110,7 +110,7 @@ RSpec.describe TimeCalc do
   describe '#date_diff_in_years' do
     context 'with only one input date' do
       it 'defaults date 2 to Date.today' do
-        input_date = in_pst(5.years.ago)
+        input_date = 5.years.ago.to_date
         age_in_years = time_calc_obj.date_diff_in_years(input_date)
         expect(age_in_years).to be(5)
       end
@@ -123,25 +123,25 @@ RSpec.describe TimeCalc do
 
     context 'with multiple dates' do
       it 'returns the difference between the two dates in years' do
-        input_date   = in_pst(5.years.ago).to_date
+        input_date   = 5.years.ago.to_date
         input_date2  = 4.years.ago.to_date
         age_in_years = time_calc_obj.date_diff_in_years(input_date, input_date2)
         expect(age_in_years).to be(1)
       end
       it 'can accept a string date' do
-        str_date  = in_pst(5.years.ago).to_s
+        str_date  = 5.years.ago.to_date.to_s
         str_date2 = 4.years.ago.to_s
         age_in_years = time_calc_obj.date_diff_in_years(str_date, str_date2)
         expect(age_in_years).to be(1)
       end
       it 'can accept date_time object' do
-        str_date  = in_pst(5.years.ago).to_datetime
+        str_date  = 5.years.ago.to_date.to_datetime
         str_date2 = 4.years.ago.to_datetime
         age_in_years = time_calc_obj.date_diff_in_years(str_date, str_date2)
         expect(age_in_years).to be(1)
       end
       it 'can accept time object' do
-        str_date  = in_pst(5.years.ago)
+        str_date  = 5.years.ago.to_date
         str_date2 = 4.years.ago.to_time
         age_in_years = time_calc_obj.date_diff_in_years(str_date, str_date2)
         expect(age_in_years).to be(1)
@@ -152,7 +152,7 @@ RSpec.describe TimeCalc do
   describe '#date_diff_in_months' do
     context 'with only one input date' do
       it 'defaults date 2 to Date.today' do
-        input_date = in_pst(2.months.ago.to_date)
+        input_date = 2.months.ago.to_date
         age_in_months = time_calc_obj.date_diff_in_months(input_date)
         expect(age_in_months).to be(2)
       end
@@ -239,7 +239,7 @@ RSpec.describe TimeCalc do
   describe '#date_diff_in_weeks' do
     context 'with only one input date' do
       it 'defaults date 2 to Date.today' do
-        input_date = in_pst(1.month.ago)
+        input_date = 1.month.ago.to_date
         diff_in_weeks = time_calc_obj.date_diff_in_weeks(input_date)
         expect(diff_in_weeks).to be(4)
       end
@@ -360,7 +360,7 @@ RSpec.describe TimeCalc do
   describe '#detailed_date_diff' do
     context 'with only one input date' do
       it 'defaults date 2 to Date.today' do
-        input_date = in_pst(1.month.ago)
+        input_date = 1.month.ago.to_date
         detailed_date_diff = time_calc_obj.detailed_date_diff(input_date)
         expect(detailed_date_diff).to eq('0y, 1m, 0w')
       end

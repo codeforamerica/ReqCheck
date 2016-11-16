@@ -15,19 +15,19 @@ RSpec.describe DoseCountEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient_with_profile)
+    test_patient = FactoryGirl.create(:patient)
     # These vaccines are will evaluate to valid dose to skip as it is past
     # 4 years and the interval is more than 6 months as noted in
     # conditional_skip_set set_description
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 5.years)
     )
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 6.years)
     )
@@ -47,7 +47,7 @@ RSpec.describe DoseCountEvaluation do
           :vaccine_dose,
           (index + 1),
           vaccine_code: vax_code,
-          patient_profile: test_patient.patient_profile
+          patient: test_patient
         )
       end
       vaccine_doses.flatten
@@ -102,7 +102,7 @@ RSpec.describe DoseCountEvaluation do
           :vaccine_dose,
           (index + 1),
           vaccine_code: vax_code,
-          patient_profile: test_patient.patient_profile
+          patient: test_patient
         )
       end
       vaccine_doses.flatten
@@ -128,13 +128,13 @@ RSpec.describe DoseCountEvaluation do
       begin_age_date = patient.dob + 3.years - 4.days
       test_vaccine_doses = [FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (patient.dob + 4.years)
       )]
       test_vaccine_doses << FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (patient.dob + 2.years)
       )
@@ -152,19 +152,19 @@ RSpec.describe DoseCountEvaluation do
       end_age_date = patient.dob + 4.years
       test_vaccine_doses = [FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (patient.dob + 5.years)
       )]
       test_vaccine_doses << FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (patient.dob + 2.years)
       )
       test_vaccine_doses << FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (patient.dob + 3.years)
       )
@@ -181,19 +181,19 @@ RSpec.describe DoseCountEvaluation do
       start_date = Date.today - 3.months
       test_vaccine_doses = [FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (Date.today - 2.months)
       )]
       test_vaccine_doses << FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (Date.today - 4.months)
       )
       test_vaccine_doses << FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (Date.today - 6.months)
       )
@@ -210,19 +210,19 @@ RSpec.describe DoseCountEvaluation do
       end_date = Date.today - 3.months
       test_vaccine_doses = [FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (Date.today - 2.months)
       )]
       test_vaccine_doses << FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (Date.today - 4.months)
       )
       test_vaccine_doses << FactoryGirl.create(
         :vaccine_dose_by_cvx,
-        patient_profile: patient.patient_profile,
+        patient: patient,
         cvx_code: 10,
         date_administered: (Date.today - 6.months)
       )

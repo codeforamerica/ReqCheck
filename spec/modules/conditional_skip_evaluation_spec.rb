@@ -74,19 +74,19 @@ RSpec.describe ConditionalSkipEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient_with_profile)
+    test_patient = FactoryGirl.create(:patient)
     # These vaccines are will evaluate to valid dose to skip as it is past
     # 4 years and the interval is more than 6 months as noted in
     # conditional_skip_set set_description
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 5.years)
     )
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 6.years)
     )

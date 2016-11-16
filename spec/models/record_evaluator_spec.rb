@@ -172,18 +172,18 @@ end
 
 
 # context 'with a child aged < 1 years' do
-#   let(:test_patient_baby) { FactoryGirl.create(:patient_with_profile, dob: 10.months.ago) }
+#   let(:test_patient_baby) { FactoryGirl.create(:patient, dob: 10.months.ago) }
 
 # end
 # context 'with a child aged ~= 5 years' do
-#   let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 58.months.ago) }
+#   let(:test_patient_child) { FactoryGirl.create(:patient, dob: 58.months.ago) }
 
 # end
 # context 'with a child aged ~= 12 years' do
-#   let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 12.years.ago) }
+#   let(:test_patient_child) { FactoryGirl.create(:patient, dob: 12.years.ago) }
 
 # end
 # context 'with a child aged ~= 18 years' do
-#   let(:test_patient_child) { FactoryGirl.create(:patient_with_profile, dob: 12.years.ago) }
+#   let(:test_patient_child) { FactoryGirl.create(:patient, dob: 12.years.ago) }
 
 # end

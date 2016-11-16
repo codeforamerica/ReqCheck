@@ -1,5 +1,17 @@
 # To be Addressed
 
+
+## README
+# To be done:
+#     How to import a new group antigen import requirements
+#         Delete old ones
+#         Import new ones
+#         Run all the tests
+#     Overview of 3 separate components (api, algorithm, kcmohd frontend)
+#     Explanation of the database component (getting data out of the application)
+
+
+
 # Dtap - if too old, need to switch to a series that the person qualifies for
 
 # CDC Question

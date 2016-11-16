@@ -1,4 +1,6 @@
 class PatientsController < InheritedResources::Base
+  before_action :authenticate_user!
+
   def index
     @patients = []
     if params[:search]

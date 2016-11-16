@@ -11,11 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161006233720) do
+ActiveRecord::Schema.define(version: 20161013230026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "antigen_series", force: :cascade do |t|
     t.integer  "antigen_id"
@@ -139,14 +154,22 @@ ActiveRecord::Schema.define(version: 20161006233720) do
 
   create_table "data_import_errors", force: :cascade do |t|
     t.string   "object_class_name"
-    t.string   "import_id"
     t.string   "error_message"
     t.jsonb    "raw_hash",          default: {}
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.integer  "data_import_id"
   end
 
+  add_index "data_import_errors", ["data_import_id"], name: "index_data_import_errors_on_data_import_id", using: :btree
   add_index "data_import_errors", ["raw_hash"], name: "index_data_import_errors_on_raw_hash", using: :btree
+
+  create_table "data_imports", force: :cascade do |t|
+    t.string   "type"
+    t.text     "updated_patient_numbers", default: [],              array: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   create_table "intervals", force: :cascade do |t|
     t.integer  "antigen_series_dose_id"
@@ -164,10 +187,12 @@ ActiveRecord::Schema.define(version: 20161006233720) do
     t.integer  "target_dose_number"
   end
 
-  create_table "patient_profiles", force: :cascade do |t|
-    t.uuid     "patient_id",           null: false
+  create_table "patients", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "first_name",           null: false
+    t.string   "last_name",            null: false
     t.integer  "patient_number",       null: false
     t.date     "dob",                  null: false
+    t.string   "email"
     t.string   "address"
     t.string   "address2"
     t.string   "city"
@@ -177,26 +202,43 @@ ActiveRecord::Schema.define(version: 20161006233720) do
     t.string   "home_phone"
     t.string   "race"
     t.string   "ethnicity"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "gender"
     t.datetime "hd_mpfile_updated_at"
     t.integer  "family_number"
+    t.text     "notes"
   end
 
-  add_index "patient_profiles", ["patient_id"], name: "index_patient_profiles_on_patient_id", unique: true, using: :btree
-  add_index "patient_profiles", ["patient_number"], name: "index_patient_profiles_on_patient_number", unique: true, using: :btree
+  add_index "patients", ["patient_number"], name: "index_patients_on_patient_number", unique: true, using: :btree
 
-  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "first_name", null: false
-    t.string   "last_name",  null: false
-    t.string   "email"
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "role"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.integer  "failed_attempts",        default: 0,  null: false
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "vaccine_doses", force: :cascade do |t|
     t.string   "vaccine_code"
-    t.integer  "patient_profile_id"
+    t.integer  "patient_number"
     t.date     "date_administered",                           null: false
     t.string   "hd_description"
     t.boolean  "history_flag",         default: false,        null: false
@@ -209,12 +251,18 @@ ActiveRecord::Schema.define(version: 20161006233720) do
     t.string   "vfc_code"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.integer  "patients_id"
     t.integer  "cvx_code",                                    null: false
+    t.string   "trade_name"
     t.string   "vfc_description"
     t.string   "given_by"
     t.string   "injection_site"
     t.string   "hd_imfile_updated_at"
+    t.text     "comments"
   end
+
+  add_index "vaccine_doses", ["patient_number"], name: "index_vaccine_doses_on_patient_number", using: :btree
+  add_index "vaccine_doses", ["patients_id"], name: "index_vaccine_doses_on_patients_id", using: :btree
 
   create_table "vaccine_infos", force: :cascade do |t|
     t.string   "short_description"
@@ -235,5 +283,6 @@ ActiveRecord::Schema.define(version: 20161006233720) do
   add_foreign_key "conditional_skip_conditions", "conditional_skip_sets"
   add_foreign_key "conditional_skip_sets", "conditional_skips"
   add_foreign_key "conditional_skips", "antigen_series_doses"
-  add_foreign_key "vaccine_doses", "patient_profiles"
+  add_foreign_key "data_import_errors", "data_imports"
+  add_foreign_key "vaccine_doses", "patients", column: "patient_number", primary_key: "patient_number"
 end

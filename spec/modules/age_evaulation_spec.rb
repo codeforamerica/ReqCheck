@@ -19,16 +19,16 @@ RSpec.describe AgeEvaluation do
   end
 
   let(:test_patient) do
-    test_patient = FactoryGirl.create(:patient_with_profile)
+    test_patient = FactoryGirl.create(:patient)
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 7.weeks)
     )
     FactoryGirl.create(
       :vaccine_dose,
-      patient_profile: test_patient.patient_profile,
+      patient: test_patient,
       vaccine_code: 'IPV',
       date_administered: (test_patient.dob + 11.weeks)
     )

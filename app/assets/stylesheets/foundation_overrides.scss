@@ -1,12 +1,5 @@
 $primary-color: green;
-.callout {
-	border:none;
-	border-top-right-radius: 2px;
-	border-top-left-radius: 2px;
-    margin: 0 -15px;
-}
 
-.card.callout {padding:0px;}
 
 .card {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -17,39 +10,63 @@ $primary-color: green;
 	padding: 1rem;
 }
 
-.callout {color: white;}
-.callout.success {background-color: #2b840a;} 
-.callout.warning {background-color: #F3D812; color:black;} 
-.callout.alert {background-color: #af0216;}
-.callout svg {float:left; margin-right:1rem;}
-.callout .explanation {margin-left:4rem;}
-
+.callout {
+	color: white;
+	border:none;
+	svg {float:left; margin-right:1rem;}
+	.explanation {margin-left:4rem;}
+}
+.callout.success {background-color: #2b840a; margin: 0 -15px;} 
+.callout.warning {background-color: #F3D812; color:black; margin: 0 -15px;} 
+.callout.alert {background-color: #af0216; margin: 0 -15px;}
 
 .patient-info {
 	table tbody {border:none;}
+	table {margin-bottom: 0;}
 	thead {
 		background-color: white;  
 		border-width: 0 0 1px 0;
 		border-color: $kc-grey;
 	}
 	thread {border:none;}
-	p {display: none;}
 }
 
-.pink {background-color: pink;}
+.pink {
+	background-color: pink;
+	border:1px solid red;
+	img {height: 40px;}
+}
+.green {background-color: green; border:2px solid yellow;}
 
 h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 
-.top-bar {margin-bottom: 1rem; 
+.header {
+	margin-bottom: 1rem; 
+	padding:1rem 0;
 	background-color: $kc-grey; 
 	color:white; 
-	min-height: 72px;
 }
+
+.avatar {
+	&:hover {background-color:transparent;}
+	margin-left:1rem;
+	img {
+	height: 40px;
+	width: 40px;
+	}
+}
+
 .top-bar .button {margin-bottom: 0px;}
 
 .top-bar-title  {
+	float: left;
 	img {height: 40px;}
 	a:hover {background: none;}
+}
+
+.top-bar-right {
+	float: right;
+	margin-bottom: 0;
 }
 
 .button {
@@ -69,25 +86,32 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	&:hover, &:focus {
 		background-color:#D2D2D2;
 	}
-	
 }
 
 .vaccine-record .vax-name {
 	background-color:$kc-grey; 
 	color:white; 
-	border-color: $kc-grey;
+	border: 1px solid $kc-grey;
 	width:200px;
+	font-size: 1rem;
 }
 .vaccine-record tbody {border-color: $kc-grey;}
 .vaccine-record thead {border: none;}
-.vaccine-record thead th {min-height: 60px;}
+.vaccine-record thead th {min-height: 60px; font-size:13px;}
+.vaccine-record td {font-size: 13px;}
 
+.no-dose {
+		border:1px solid $kc-grey;
+		font-weight: normal;
+		font-style:italic; 	
+	}
 
 #callout-patient {
 	padding-bottom: 0;
 	padding-top: 0;
 	padding-left: 10px;
 	padding-right: 10px;
+	p {margin-bottom: 10px;}
 }
 
 
@@ -114,5 +138,9 @@ h1, h2, h3, h4, h5, h6 {font-weight: bold;}
 	}
 	
 }
-.footer a.button {text-decoration: none;}
 
+.varicella-history {display: none;}
+.footer a.button {text-decoration: none;}
+@media print {
+	thead {background-color: #e6e6e6!important;background: #e6e6e6!important;}
+}

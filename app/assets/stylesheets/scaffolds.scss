@@ -3,7 +3,7 @@ body {
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 1rem;
-  line-height: 18px;
+  line-height: 1.2;
   height: auto !important;
   display: flex;
   min-height: 100vh;
@@ -12,12 +12,6 @@ body {
 
 .container {
   flex: 1 0;
-}
-
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
 }
 
 pre {
@@ -43,10 +37,6 @@ div {
   &.field, &.actions {
     margin-bottom: 10px;
   }
-}
-
-#notice {
-  color: green;
 }
 
 .field_with_errors {

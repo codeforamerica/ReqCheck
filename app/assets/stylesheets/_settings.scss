@@ -51,9 +51,9 @@ $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #0269c4,
   secondary: #595959,
-  success: #3adb76,
+  success: #2b840a,
   warning: #ffae00,
-  alert: #ec5840,
+  alert: #af0216,
 );
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
@@ -116,12 +116,12 @@ $header-sizes: (
     'h6': 16,
   ),
   medium: (
-    'h1': 48,
-    'h2': 40,
-    'h3': 31,
-    'h4': 25,
-    'h5': 20,
-    'h6': 16,
+    'h1': 2rem,
+    'h2': 1.5rem,
+    'h3': 1.17rem,
+    'h4': 1rem,
+    'h5': .83rem,
+    'h6': .67rem,
   ),
 );
 $header-color: inherit;
@@ -184,10 +184,10 @@ $stat-font-size: 2.5rem;
 
 $abide-inputs: true;
 $abide-labels: true;
-$input-background-invalid: map-get($foundation-palette, alert);
+/*$input-background-invalid: map-get($foundation-palette, alert);
 $form-label-color-invalid: map-get($foundation-palette, alert);
 $input-error-color: map-get($foundation-palette, alert);
-$input-error-font-size: rem-calc(12);
+*/$input-error-font-size: rem-calc(12);
 $input-error-font-weight: $global-weight-bold;
 
 // 7. Accordion
@@ -261,7 +261,7 @@ $buttongroup-expand-max: 6;
 // -----------
 
 $callout-background: $white;
-$callout-background-fade: 85%;
+$callout-background-fade: 0%;
 $callout-border: 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;
 $callout-padding: 1rem;
@@ -335,7 +335,7 @@ $input-prefix-background: $light-gray;
 $input-prefix-border: 1px solid $medium-gray;
 $input-prefix-padding: 1rem;
 $form-label-color: $black;
-$form-label-font-size: rem-calc(14);
+$form-label-font-size: 1rem;
 $form-label-font-weight: $global-weight-normal;
 $form-label-line-height: 1.8;
 $select-background: $white;
@@ -362,7 +362,7 @@ $input-radius: $global-radius;
 
 $label-background: $primary-color;
 $label-color: foreground($label-background);
-$label-font-size: 0.8rem;
+$label-font-size: 1rem;
 $label-padding: 0.33333rem 0.5rem;
 $label-radius: $global-radius;
 
