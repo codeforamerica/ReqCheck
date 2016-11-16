@@ -95,13 +95,20 @@ If the patient has satisfied the target dose, it is market 'satisfied'. If not, 
 ###### Individual Evaluation Process
 The evaluations of 'Age', 'Interval', 'Vaccine Administered' and 'Gender' follow similar paths.
 
-    1. The CDC logic stored in the Target Dose is used to create patient specific 'attributes'
-        * Patient specfic attributes often times are age/date based.
-        * An example is that if Target Dose has a minimum_age of '8 months', the attribute 'minimum_age_date' will be the patients date of birth plus 8 months
-    2. 
+####### Build Attibutes
+The CDC logic stored in the Target Dose is used to build patient specific 'attributes', which are stored in a hash.
+    
+    * Patient specfic attributes often times are age/date based.
+    * An example is that if Target Dose has a minimum_age of '8 months', the attribute 'minimum_age_date' will be the patients date of birth plus 8 months
 
+####### Analyze Attributes
+The attributes are then analyzed against the data from the Vaccine Dose that was administered to the patient.
+    * An example is that if attribute 'minimum_age_date' is December 13, 2015 and the Vaccine Dose Date is December 18, 2015, the analysis of 'minimum_age_date' will be `true`
 
-
+####### Get Evaluation
+The attribute analyses are then evaluated against the different evaluation statuses. If the evaluation is `not_satisfied` for any reason, the specific reason will be given as an `evaluation_reason`.
+    * If the 'minimum_age_date' is `false`, then the `evaluation_reason` could be `too_young`
+    * If the 'maximum_age_date' is `false`, then the `evaluation_reason` could be `too_old`
 
 #### Step 4
 Each antigen is evaluated based on the most complete patient series. If there is a patient series that is either 'completed' or ??'up to date'??, then the antigen is evaluated to be 'completed' or ??'up to date'??.
