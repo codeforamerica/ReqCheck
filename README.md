@@ -56,10 +56,10 @@ Evaluation of the patient serieses against the antigen administered records
     1. Each antigen passes the patient and antigen specific 'antigen administered records' to each patient series
     2. The patient series lines each 'antigen administered record' up to each target dose
     3. The patient series loops through the target doses
-        * If the target dose is *NOT* able to be evaluated:
+        * If the target dose is *NOT* able to be evaluated (for example, sometimes the patient is not old enough):
             * It is dropped aside
-        * If the target dose is able to be evaluated (for example, sometimes the patient is not old enough):
-            * The target dose is evaluated using its specified logic against the next antigen administered record in line
+        * If the target dose is able to be evaluated:
+            * The target dose is evaluated using its specified logic against the next antigen administered record in line*
             * If the target dose is satisfied:
                 * The target dose is marked 'satisfied'
             * If the target dose is not satisfied (due to invalid age, invalid interval from the previous antigen administered record):
@@ -69,6 +69,40 @@ Evaluation of the patient serieses against the antigen administered records
                 * If there are no more antigen administered records:
                     * The target dose is marked 'not_satisfied'
     4. After all target doses have been evaluated, the patient series is evaluated based on the individual statuses of each target dose and the patient series logic. The patient series is given an evaluation status.
+
+##### *Evaluating the Target Dose
+
+###### Order of Evaluation
+The target dose is evaluated in the following order or requirements:
+    
+    1. Evaluate Dose Administered Condition
+        * Was the dose expired when given?
+    1. Evaluate Conditional Skip
+        * Is there a reason the dose can be skipped, such as if the patient has had a certain number of doses before a certain age?
+    1. Evaluate Age
+        * Did the patient receive the dose at the correct age?
+    1. Evaluate Interval
+        * Did enough time pass since the previous dose?
+    1. Evaluate Vaccine Administered
+        * Is the dose given listed amongst allowable or preferrable vaccines?
+    1. Evaluate Gender
+        * Is the patient the correct gender for the target dose?
+    1. Satisfy Target Dose 
+        * Were all the requirements satisfied
+
+If the patient has satisfied the target dose, it is market 'satisfied'. If not, it is marked 'not_satisfied' and given a reason as to why.
+
+###### Individual Evaluation Process
+The evaluations of 'Age', 'Interval', 'Vaccine Administered' and 'Gender' follow similar paths.
+
+    1. The CDC logic stored in the Target Dose is used to create patient specific 'attributes'
+        * Patient specfic attributes often times are age/date based.
+        * An example is that if Target Dose has a minimum_age of '8 months', the attribute 'minimum_age_date' will be the patients date of birth plus 8 months
+    2. 
+
+
+
+
 #### Step 4
 Each antigen is evaluated based on the most complete patient series. If there is a patient series that is either 'completed' or ??'up to date'??, then the antigen is evaluated to be 'completed' or ??'up to date'??.
 
