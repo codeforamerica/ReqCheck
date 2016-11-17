@@ -40,74 +40,94 @@ For a visual representation of how they work together, please see [this diagram]
 The algorithm is broken into many parts and runs through many different processes. All of the information from the CDC has been imported into the Postgres Database. It is then used to build patient specific requirements to check against the patient's vaccine record.
 
 #### Step 1
-All of the patient's vaccine doses administered are taken and used to create antigen administered records.
-A vaccine dose administered with multiple antigens creates multiple antigen administered records.
-The antigen administered records are then split into groups based on the specific Antigen they address.
+All of the patient's vaccine doses administered are taken and used to create antigen administered records. A vaccine dose administered with multiple antigens creates multiple antigen administered records. The antigen administered records are then split into groups based on the specific Antigen they address.
 
 #### Step 2
-Each antigen has multiple antigen series. Each antigen series has many antigen series doses. This information is necessary to create ***PATIENT SPECIFIC*** information, used to evaluate the patient's vaccine record.
+Each antigen has multiple antigen series ('paths' to immunization, as defined by the CDC). Each antigen series has many antigen series doses. This information is necessary to create ***PATIENT SPECIFIC*** information, used to evaluate the patient's vaccine record.
 
-    1. Each antigen combines the individual patient's information with each antigen series, creating many patient series nested below it
-    2. Each patient series passes the patient information to each antigen series dose, creating the target doses nested below it
+1. Each antigen combines the individual patient's information with each antigen series, creating many patient series nested below it
+2. Each patient series passes the patient information to each antigen series dose, creating the target doses nested below it
 
 #### Step 3
 Evaluation of the patient serieses against the antigen administered records
 
-    1. Each antigen passes the patient and antigen specific 'antigen administered records' to each patient series
-    2. The patient series lines each 'antigen administered record' up to each target dose
-    3. The patient series loops through the target doses
-        * If the target dose is *NOT* able to be evaluated (for example, sometimes the patient is not old enough):
-            * It is dropped aside
-        * If the target dose is able to be evaluated:
-            * The target dose is evaluated using its specified logic against the next antigen administered record in line*
-            * If the target dose is satisfied:
-                * The target dose is marked 'satisfied'
-            * If the target dose is not satisfied (due to invalid age, invalid interval from the previous antigen administered record):
-                * The antigen administered record is removed
-                * If there are more antigen administered records left to evaluate:
-                    * The next antigen administered record is evaluated against the target dose
-                * If there are no more antigen administered records:
-                    * The target dose is marked 'not_satisfied'
-    4. After all target doses have been evaluated, the patient series is evaluated based on the individual statuses of each target dose and the patient series logic. The patient series is given an evaluation status.
+1. Each antigen passes the patient and antigen specific 'antigen administered records' to each patient series
+2. The patient series lines each 'antigen administered record' up to each target dose
+3. The patient series loops through the target doses
+    * If the target dose is *NOT* able to be evaluated (for example, sometimes the patient is not old enough):
+        * It is dropped aside
+    * If the target dose is able to be evaluated:
+        * The target dose is evaluated using its specified logic against the next antigen administered record in line*
+        * If the target dose is satisfied:
+            * The target dose is marked 'satisfied'
+        * If the target dose is not satisfied (due to invalid age, invalid interval from the previous antigen administered record):
+            * The antigen administered record is removed
+            * If there are more antigen administered records left to evaluate:
+                * The next antigen administered record is evaluated against the target dose
+            * If there are no more antigen administered records:
+                * The target dose is marked 'not_satisfied'
+4. After all target doses have been evaluated, the patient series is evaluated based on the individual statuses of each target dose and the patient series logic. The patient series is given an evaluation status.
 
-##### *Evaluating the Target Dose
+***
 
-###### Order of Evaluation
+##### Evaluating the Target Dose & Order of Evaluation
 The target dose is evaluated in the following order or requirements:
     
-    1. Evaluate Dose Administered Condition
-        * Was the dose expired when given?
-    1. Evaluate Conditional Skip
-        * Is there a reason the dose can be skipped, such as if the patient has had a certain number of doses before a certain age?
-    1. Evaluate Age
-        * Did the patient receive the dose at the correct age?
-    1. Evaluate Interval
-        * Did enough time pass since the previous dose?
-    1. Evaluate Vaccine Administered
-        * Is the dose given listed amongst allowable or preferrable vaccines?
-    1. Evaluate Gender
-        * Is the patient the correct gender for the target dose?
-    1. Satisfy Target Dose 
-        * Were all the requirements satisfied
+1. Evaluate Dose Administered Condition
+    * Was the dose expired when given?
+1. Evaluate Conditional Skip
+    * Is there a reason the dose can be skipped, such as if the patient has had a certain number of doses before a certain age?
+1. Evaluate Age
+    * Did the patient receive the dose at the correct age?
+1. Evaluate Interval
+    * Did enough time pass since the previous dose?
+1. Evaluate Vaccine Administered
+    * Is the dose given listed amongst allowable or preferrable vaccines?
+1. Evaluate Gender
+    * Is the patient the correct gender for the target dose?
+1. Satisfy Target Dose 
+    * Were all the requirements satisfied
 
 If the patient has satisfied the target dose, it is market 'satisfied'. If not, it is marked 'not_satisfied' and given a reason as to why.
 
-###### Individual Evaluation Process
-The evaluations of 'Age', 'Interval', 'Vaccine Administered' and 'Gender' follow similar paths.
+***
 
-    1. The CDC logic stored in the Target Dose is used to create patient specific 'attributes'
-        * Patient specfic attributes often times are age/date based.
-        * An example is that if Target Dose has a minimum_age of '8 months', the attribute 'minimum_age_date' will be the patients date of birth plus 8 months
-    2. 
+##### Individual Evaluation Process
+The evaluations of 'Age', 'Interval', 'Vaccine Administered' and 'Gender' follow similar paths, and done by 'Evaluator' objects. This is the series of events.
 
+###### Build Attibutes
+The CDC logic stored in the Target Dose is used to build patient specific 'attributes', which are stored in a hash.
+    
+* Patient specfic attributes often times are age/date based.
+* An example is that if Target Dose has a minimum_age of '8 months', the attribute 'minimum_age_date' will be the patients date of birth plus 8 months
 
+###### Analyze Attributes
+The attributes are then analyzed against the data from the Vaccine Dose that was administered to the patient.
 
+* An example is that if attribute 'minimum_age_date' is December 13, 2015 and the Vaccine Dose Date is December 18, 2015, the analysis of 'minimum_age_date' will be `true`
+
+###### Get Evaluation
+The attribute analyses are then evaluated against the different evaluation statuses. If the evaluation is `not_satisfied` for any reason, the specific reason will be given as an `evaluation_reason`.
+
+* If the 'minimum_age_date' is `false`, then the `evaluation_reason` could be `too_young`
+* If the 'maximum_age_date' is `false`, then the `evaluation_reason` could be `too_old`
+
+***
 
 #### Step 4
-Each antigen is evaluated based on the most complete patient series. If there is a patient series that is either 'completed' or ??'up to date'??, then the antigen is evaluated to be 'completed' or ??'up to date'??.
+Each antigen is evaluated based on the most complete patient series. If there is a patient series that is either 'complete' or 'immune', then the antigen is evaluated to be 'complete' or 'immune'.
 
-If there is no series that is 'up to date', then the Antigen is marked 'not complete'.
+Do note that 'immune' takes presidence over 'complete', as 'immune' means there is no more target doses (all satisfied), where 'complete' is only if the patient is up to date (but will need more vaccine doses in the future).
 
+If there is no series that is 'complete', then the Antigen is marked 'not complete'.
+
+#### Step 5
+All of the Antigen Evaluations are then grouped into 'Vaccine Groups', as defined by the CDC in the structured data. Vaccine groups are how medical professionals categorize vaccines (instead of by antigen).
+
+Each vaccine group is then evaluated for the antigen 'completeness'. If all antigen's are 'complete' or 'immune', then that status is given to the vaccine group. If an antigen has a 'not_complete' evaluation status, then the Vaccine Group is given an evaluation status of 'not_complete'.
+
+#### Step 6
+The entire record is then evaluated by required vaccine groups. **This information has specifically been hard coded to fit the Kansas City, Missouri Health Department.** If all required vaccine groups are 'complete' or 'immune', then the record is marked as 'comlete'. Otherwise, it is 'not_complete'.
 
 
 ## Getting Started
@@ -220,7 +240,11 @@ The development specifics can be found in the following files:
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ### Features Needed
-    We have  a few features that need to be implemented. A high priority would be an admin panel to upload new CDC requirements and delete past ones, followed by running all the tests to see if they still pass.
+We have many features that need to be implemented. A high priority would be:
+
+* Ability to forecast next vaccines
+* Upload feature in the admin panel to upload new CDC requirements and delete past ones, followed by running tests to see if they all still pass
+* HIPAA compliance auditing in the admin panel
 
 ## Authors
 
